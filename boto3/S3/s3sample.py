@@ -10,6 +10,8 @@ for bucket in s3.buckets.all():
     print(bucket.name)
 
 # Upload a new file
-data = open('/Users/hukanege/Google Drive/VSCode/AWS-Templates/boto3/vesika.jpg', 'rb')
+data = open('/Users/hukanege/Google Drive/VSCode/AWS-Templates/boto3/S3/vesika.jpg', 'rb')
 s3.Bucket('gokhantopcu-test').put_object(Key='vesika.jpg', Body=data)
+
+print("Upload successfull")
 
