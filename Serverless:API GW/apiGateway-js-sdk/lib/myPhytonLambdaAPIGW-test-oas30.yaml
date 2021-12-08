@@ -1,0 +1,25 @@
+openapi: "3.0.1"
+info:
+  title: "myPhytonLambdaAPIGW"
+  description: "myPhytonLambdaAPIGW"
+  version: "2021-12-08T18:44:08Z"
+servers:
+- url: "https://p7qloeawpg.execute-api.eu-west-1.amazonaws.com/{basePath}"
+  variables:
+    basePath:
+      default: "/test"
+paths:
+  /customers:
+    get:
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+components:
+  schemas:
+    Empty:
+      title: "Empty Schema"
+      type: "object"
