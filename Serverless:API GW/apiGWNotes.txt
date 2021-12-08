@@ -1,0 +1,12 @@
+
+API Key & Usage Plan Authorizer (header: x-api-key)
+https://www.youtube.com/watch?v=V-ac_ZvdAW4
+
+Lambda Authorizer
+https://www.youtube.com/watch?v=al5I9v5Y-kA
+
+Secure your API Gateway with Amazon Cognito User Pools
+https://www.youtube.com/watch?v=oFSU6rhFETk
+
+Best Practices for Building Enterprise Grade APIs with Amazon API Gateway
+https://www.youtube.com/watch?v=9ElpSPXk-g8

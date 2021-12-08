@@ -1,8 +1,0 @@
-
-Lambda Authorizer
-https://www.youtube.com/watch?v=al5I9v5Y-kA
-
-Secure your API Gateway with Amazon Cognito User Pools
-https://www.youtube.com/watch?v=oFSU6rhFETk
-
-
