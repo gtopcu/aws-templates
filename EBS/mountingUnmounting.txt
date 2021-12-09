@@ -1,0 +1,15 @@
+Adding new EBS Disc To Linux:
+Create & attach new EBS to EC2 instance
+lsblk (list disks, / means root disk)
+file -s  /dev/xvdf (data means initial, no data)
+mkfs -t ext4 /dev/xvdf (create ext4 fs)
+cd / (go to root dir)
+mkdir filesystem (make new folder)
+mount /dev/xvdf /filesystem (mount filesystem dir to new disk)
+cd filesystem
+echo "Hello Hukanege" > hello.txt
+
+Unmounting:
+cd / (go to root dir)
+umount -d /dev/xvdf 
+lsblk (list disks, / means root disk)
