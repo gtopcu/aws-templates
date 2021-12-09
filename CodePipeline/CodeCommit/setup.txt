@@ -1,0 +1,18 @@
+
+git clone https://git-codecommit.us-east-2.amazonaws.com/v1/repos/MyDemoRepo my-demo-repo
+git clone ssh://git-codecommit.eu-west-1.amazonaws.com/v1/repos/testRepo testRepo
+
+Connecting to CodeCommit usign SSH:
+https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-ssh-windows.html
+
+Git Bash
+ssh-keygen ( -t rsa -b 4096 )
+notepad ~/.ssh/config
+
+config file content:
+Host git-codecommit.*.amazonaws.com
+  User APKAQ7A6ZVC7GWIP325L
+  IdentityFile ~/.ssh/id_rsa
+
+ssh git-codecommit.eu-west-1.amazonaws.com
+ssh -v git-codecommit.eu-west-1.amazonaws.com
