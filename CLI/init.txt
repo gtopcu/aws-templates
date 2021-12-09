@@ -1,0 +1,82 @@
+
+------------------------------------------------------------------------------------
+SSH Connection:
+------------------------------------------------------------------------------------
+
+chmod 400 gt-key.pem
+ssh -i "gt-key.pem" ec2-user@54.78.7.114
+
+
+------------------------------------------------------------------------------------
+Install CLI 
+------------------------------------------------------------------------------------
+
+https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
+sudo installer -pkg AWSCLIV2.pkg -target /
+
+CLI Doc:
+https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html
+https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html
+
+sh-3.2# ls -l
+sh-3.2# sudo chown -R hukanege /Users/hukanege/.aws/
+sh-3.2# sudo chown -R hukanege /Users/hukanege/.aws/credentials
+sh-3.2# sudo chown -R hukanege /Users/hukanege/.aws/config
+
+(~/.aws/credentials file (C:\Users\USER_NAME\.aws\credentials file for Windows users)
+
+apt install awscli
+
+/root/.aws - AWS config dir
+cd ~
+cd .aws
+
+aws configure
+aws configure list
+aws configure list-profiles
+aws configure set region us-west-2 --profile myProfile
+aws configure import --csv file://credentials.csv
+aws iam get-user
+which aws
+
+------------------------------------------------------------------------------------
+S3:
+https://docs.aws.amazon.com/cli/latest/userguide/cli-services-s3-commands.html
+------------------------------------------------------------------------------------
+
+aws s3 ls
+aws s3 mb s3://gokhantopcu-clitest
+aws s3 rb s3://gokhantopcu-clitest
+aws s3 cp <file> s3://<s3path>
+aws s3 sync <dir> s3://<s3path>
+aws s3 sync --delete <dir> s3://<s3path>
+aws s3api list-objects --bucket <YOUR_BUCKET_NAME> --page-size 5 (default: 1000)
+aws s3api list-objects --bucket <YOUR_BUCKET_NAME> --max-items 1
+
+
+------------------------------------------------------------------------------------
+EC2:
+https://docs.aws.amazon.com/cli/latest/userguide/cli-services-ec2.html
+------------------------------------------------------------------------------------
+
+uptime - Shows the uptime since the last boot
+aws ec2 describe-instances
+aws ec2 stop-instances --instance-ids i-0744af96f9e05dfe5
+aws ec2 create-snapshot
+
+Display EC2 user & metada:
+------------------------------------------------------------
+curl http://169.254.169.254/latest/user-data
+curl http://169.254.169.254/latest/meta-data
+curl http://169.254.169.254/latest/meta-data/local-hostname
+curl http://169.254.169.254/latest/meta-data/public-ipv4
+...
+
+
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
