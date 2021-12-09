@@ -2,6 +2,13 @@
 API Key & Usage Plan Authorizer (header: x-api-key)
 https://www.youtube.com/watch?v=V-ac_ZvdAW4
 
+AWS re:Invent 2020: Serverless API authentication for HTTP APIs on AWS
+https://www.youtube.com/watch?v=AW4kvUkUKZ0
+
+REST vs HTTP APIs in API Gateway
+https://www.youtube.com/watch?v=5VikkwAxr-E
+https://www.youtube.com/watch?v=M91vXdjve7A
+
 Lambda Authorizer
 https://www.youtube.com/watch?v=al5I9v5Y-kA
 
@@ -10,3 +17,6 @@ https://www.youtube.com/watch?v=oFSU6rhFETk
 
 Best Practices for Building Enterprise Grade APIs with Amazon API Gateway
 https://www.youtube.com/watch?v=9ElpSPXk-g8
+
+Custom Domain Name with AWS API Gateway
+https://www.youtube.com/watch?v=ESei6XQ7dMg
