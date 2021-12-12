@@ -1,4 +1,4 @@
-A large collection of AWS resources for my personal use - also includes official AWS SDK & Serverless examples
+My AWS repo for personal notes & code samples - also includes official AWS SDK & Serverless examples
 
 echo "# aws-templates" >> README.md
 git init
