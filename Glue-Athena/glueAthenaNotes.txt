@@ -10,3 +10,5 @@ https://www.youtube.com/watch?v=8VOf1PUFE0I
 Working with AWS Glue DataBrew to prepare data without writing code
 https://www.youtube.com/watch?v=QLealnfNErs&list=RDCMUCd6MoB9NC6uYN2grvUNT-Zg&index=3
 
+How to Query AWS Athena from a Lambda Function
+https://www.youtube.com/watch?v=a_Og1t3ULOI

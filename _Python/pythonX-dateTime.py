@@ -15,3 +15,9 @@ print(day)
 print(hour)
 print(minute)
 print(datetime.timezone.utc)
+
+
+import time
+
+time.sleep(1)
+print(time.daylight)
