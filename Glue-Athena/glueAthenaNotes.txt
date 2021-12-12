@@ -1,0 +1,12 @@
+
+AWS: Working with AWS Glue Studio
+https://www.youtube.com/watch?v=KkN8lQ-jr58
+https://www.youtube.com/watch?v=pnWdkKl2hZw
+https://www.youtube.com/watch?v=o7ZoigUcu1M
+
+AWS Athena Tutorial l Athena Hands On LAB | Athena + Glue + S3 Data Lake
+https://www.youtube.com/watch?v=8VOf1PUFE0I
+
+Working with AWS Glue DataBrew to prepare data without writing code
+https://www.youtube.com/watch?v=QLealnfNErs&list=RDCMUCd6MoB9NC6uYN2grvUNT-Zg&index=3
+
