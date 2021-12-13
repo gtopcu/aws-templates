@@ -28,7 +28,13 @@ sam init - initialize SAM app
 sam build - build the app
 sam package - package the app
 sam deploy (--guided)
-sam local start-api (uses docker to run the SAM app)
+
+Run Lambda locally:
+sam local invoke -e ./lambda/lambda_event.json LambdaDemoFunction
+
+Run API GW locally:
+sam local invoke -e ./apigateway/apigateway_event.json APIGatewayFunction
+sam local start-api 
 
 ---------------------------------------------------------------------------------------------
 
