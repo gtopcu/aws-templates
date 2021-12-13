@@ -1,0 +1,9 @@
+
+AWS DynamoDB Tutorial For Beginners
+https://www.youtube.com/watch?v=2k2GINpO308
+
+AWS re:Invent 2018: Amazon DynamoDB Under the Hood: How We Built a Hyper-Scale Database (DAT321)
+https://www.youtube.com/watch?v=yvBR71D0nAQ
+
+AWS re:Invent 2018: Amazon DynamoDB Deep Dive: Advanced Design Patterns for DynamoDB (DAT401)
+https://www.youtube.com/watch?v=HaEPXoXVf2k
