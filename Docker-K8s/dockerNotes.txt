@@ -1,0 +1,168 @@
+
+https://hub.docker.com/
+https://docs.docker.com/
+https://labs.play-with-docker.com/
+
+docker --version
+docker ps
+docker image ls
+docker history myApp:10
+
+docker build -t getting-started .
+docker run --name getting-started
+docker run -d -p 80:80 getting-started
+docker run -dp 3000:3000 gtopcu/getting-started
+
+docker stop <the-container-id>
+docker rm <the-container-id>
+docker rm -f <the-container-id>
+docker image rm -f<the-image-id>
+
+docker tag getting-started gtopcu/getting-started
+docker push gtopcu/getting-started:tagname
+
+docker cp
+docker start/stop/kill
+docker exec <container-id> cat /data.txt
+docker logs -f
+docker login -u gtopcu
+docker scan getting-started
+docker image history
+
+Named Volume
+docker volume create todo-db
+docker run -dp 3000:3000 -v todo-db:/etc/todos getting-started
+docker volume inspect todo-db
+
+Bind Mounts
+docker run -dp 3000:3000 `
+    -w /app -v "$(pwd):/app" `
+    node:12-alpine `
+    sh -c "yarn install && yarn run dev"
+
+Network
+docker network create todo-app
+docker run -d \
+    --network todo-app --network-alias mysql \
+    -v todo-mysql-data:/var/lib/mysql \
+    -e MYSQL_ROOT_PASSWORD=secret \
+    -e MYSQL_DATABASE=todos \
+    mysql:5.7
+docker exec -it <mysql-container-id> mysql -p
+mysql> SHOW DATABASES;
+
+docker run -it --network todo-app nicolaka/netshoot
+dig mysql
+
+Ubuntu
+docker pull ubuntu
+
+---
+Docker-Compose
+docker-compose version
+docker-compose up -d
+docker-compose down
+docker-compose logs -f
+
+docker-compose.yml
+version: "3.7"
+services:
+  app:
+    image: node:12-alpine
+    command: sh -c "yarn install && yarn run dev"
+    ports:
+      - 3000:3000
+    working_dir: /app
+    volumes:
+      - ./:/app
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: secret
+      MYSQL_DB: todos
+
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - todo-mysql-data:/var/lib/mysql
+    environment: 
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: todos
+
+volumes:
+  todo-mysql-data:
+
+
+Dockerfiles
+---
+
+```
+FROM ubuntu
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update
+RUN apt-get install apache2 -y
+RUN apt-get install apache2-utils -y
+RUN apt-get clean
+EXPOSE 8080
+CMD ["apache2ctl","-D","FOREGROUND"]
+```
+
+docker build -t testdockerrepo .
+docker run -dp 8080:8080 testdockerrepo
+
+---
+
+FROM ubuntu:12.04
+# Install dependencies
+RUN apt-get update -y
+RUN apt-get install -y apache2
+
+# Install apache and write hello world message
+RUN echo "Hello Cloud Gurus!!!! This web page is running in a Docker container!" > /var/www/index.html
+
+# Configure apache
+RUN a2enmod rewrite
+RUN chown -R www-data:www-data /var/www
+ENV APACHE_RUN_USER www-data
+ENV APACHE_RUN_GROUP www-data
+ENV APACHE_LOG_DIR /var/log/apache2
+
+EXPOSE 8080
+
+CMD ["/usr/sbin/apache2", "-D",  "FOREGROUND"]
+
+---
+
+FROM node:12-alpine
+WORKDIR /app
+COPY . .
+RUN yarn install --production
+CMD ["node", "src/index.js"]
+
+--
+
+docker build -t testdockerrepo .
+docker run -dp 3000:3000 testdockerrepo
+
+---
+
+FROM python:2.7
+
+# Add sample application
+ADD application.py /tmp/application.py
+
+EXPOSE 8080
+
+# Run it
+ENTRYPOINT ["python", "/tmp/application.py"]
+
+--
+
+docker build -t testdockerrepo .
+docker run -dp 8080:8080 testdockerrepo
+
+---
+
+Top 8 Docker Best Practices for using Docker in Production
+https://www.youtube.com/watch?v=8vXoMqWgbQQ
+
