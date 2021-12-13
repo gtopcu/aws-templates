@@ -1,0 +1,10 @@
+
+AWS Redshift Service Overview
+https://www.youtube.com/watch?v=IAagaCN4CIk
+
+Getting Started with Amazon Redshift - AWS Online Tech Talks
+https://www.youtube.com/watch?v=dfo4J5ZhlKI
+
+Deep Dive on Amazon Redshift - AWS Online Tech Talks
+https://www.youtube.com/watch?v=Hur-p3kGDTA
+
