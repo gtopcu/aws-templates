@@ -1,0 +1,96 @@
+
+
+Linux Commands:
+------------------------------------------------------------
+sudo su
+clear
+history
+pwd
+ls -l -a
+man <command>
+cd ..
+cd ~ (go to /root)
+cd / (go to root)
+mkdir <dirname>
+rmdir <dirname>
+rm <file>
+rm chunk* (all files starting with chunk)
+rm -r <dirname> 
+mv <source> <target>
+cp <source> <target>
+cp -r ./Green ./White  (Copy Dir)
+ln -s ./Downloads/exec.sh (Symbolic Link)
+find conten*
+chmod u-x <filename.txt>
+chmod u+rw <filename.txt>
+chown -R hukanege /Users/hukanege/.aws/ (recursive for dir)
+VARIABLE=123456, ref by $VARIABLE
+
+
+touch <filename.txt>
+nano <filename.txt>
+vi <filename.txt> (YY, P, U, :(w)q!)
+cat <filename.txt>
+cat hash1 hash2 > hash12
+dd if=/dev/urandom of=largefile bs=3145728 count=1 (create large file)
+
+wget <link>
+curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
+sudo installer -pkg AWSCLIV2.pkg -target /
+tar -xzf <filename.txt>
+
+lsblk: list disks, / means root disk
+df -h : free disk space
+free : free memory
+ps aux: running apps
+shutdown -h now
+
+apt(-get) install aptitude
+apt(-get) update
+apt(-get) ugrade
+apt(-get) remove
+
+aptitude install
+aptitude upgrade
+aptitude search xx
+
+yum update -y
+yum install httpd -y
+
+service httpd start
+chkconfig httpd on
+
+while true; do echo; done
+
+nc 54.78.7.114 22
+curl 54.78.7.114:22
+ssh -vT git@github.com
+nslookup google.com
+dig google.com
+
+telnet 54.78.7.114:22
+ipconfig -a
+netstat -all
+
+sudo swapoff -a
+sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+
+sudo hostnamectl set-hostname k8s-control
+sudo nano /etc/hosts
+sudo vi /etc/hosts
+(w):q!
+
+##
+# Host Database
+#
+# localhost is used to configure the loopback interface
+# when the system is booting.  Do not change this entry.
+##
+127.0.0.1       localhost
+255.255.255.255 broadcasthost
+::1             localhost
+# Added by Docker Desktop
+# To allow the same kube context to work on the host and the container:
+127.0.0.1 kubernetes.docker.internal
+# End of section
+
