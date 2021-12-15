@@ -2,9 +2,16 @@
 # Python Cheatsheet - GT
 # https://python-course.eu/python-tutorial/
 
+# Install
+# https://www.python.org/downloads/
+# curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+# python3 get-pip.py
+# quit()
+# 
 # *********************************************************************************************************
 # SHELL
 # *********************************************************************************************************
+# 
 # python3
 # python3 myProgram.py
 # python3 + TAB: shows installed modules
