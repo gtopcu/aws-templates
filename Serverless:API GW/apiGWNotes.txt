@@ -20,3 +20,6 @@ https://www.youtube.com/watch?v=9ElpSPXk-g8
 
 Custom Domain Name with AWS API Gateway
 https://www.youtube.com/watch?v=ESei6XQ7dMg
+
+AWS re:Invent 2019: [REPEAT 2] I didn’t know Amazon API Gateway did that (SVS212-R2)
+https://www.youtube.com/watch?v=yfJZc3sJZ8E
