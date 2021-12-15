@@ -101,7 +101,7 @@ print(t[0])
 # OUTPUT: TypeError: 'tuple' object does not support item assignment
 
 
-# git Slicing
+# Slicing
 slogan = "Python is great"
 first_six = slogan[0:6]
 print(first_six)

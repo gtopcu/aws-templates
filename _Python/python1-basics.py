@@ -7,6 +7,9 @@
 # curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 # python3 get-pip.py
 # quit()
+#
+# Install Jupyter
+# pip install -U jupyter
 # 
 # *********************************************************************************************************
 # SHELL
@@ -19,6 +22,10 @@
 
 # Terminal: "Hello World"
 print("Hello World")
+
+# Input
+# color = input("Which colour?\n")
+# print(color)
 
 # 4.567 * 8.323 * 17 -> _
 # The most recent output value is automatically stored by the interpreter in a special variable with 
