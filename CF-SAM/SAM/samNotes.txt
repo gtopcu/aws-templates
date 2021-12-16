@@ -36,6 +36,9 @@ Run API GW locally:
 sam local invoke -e ./apigateway/apigateway_event.json APIGatewayFunction
 sam local start-api 
 
+Generate Event
+sam local generate-event
+
 ---------------------------------------------------------------------------------------------
 
 1) Create an S3 bucket: 

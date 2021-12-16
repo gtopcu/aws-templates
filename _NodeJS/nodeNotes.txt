@@ -1,0 +1,29 @@
+
+***************************************************************************************************
+INSTALL - for MacOS
+***************************************************************************************************
+
+https://www.tutorialspoint.com/nodejs/nodejs_environment_setup.htm
+https://nodejs.org/download/
+https://nodejs.org/download/release/latest/
+https://nodejs.org/download/release/latest-v16.x/node-v16.13.1-darwin-x64.tar.gz
+node-v16.13.1-darwin-x64.tar.gz
+
+1. Download
+cd /tmp
+wget https://nodejs.org/download/release/latest-v16.x/node-v16.13.1-darwin-x64.tar.gz
+(curl "https://nodejs.org/download/release/latest-v16.x/node-v16.13.1-darwin-x64.tar.gz" -o "node-v16.13.1-darwin-x64.tar.gz")
+tar xvfz node-v16.13.1-darwin-x64.tar.gz
+mkdir -p /usr/local/nodejs
+mv node-v16.13.1-darwin-x64/* /usr/local/nodejs
+
+2. Add to Path
+export PATH=$PATH:/usr/local/nodejs/bin
+
+3. Run
+node index.js
+
+
+***************************************************************************************************
+NOTES
+***************************************************************************************************
