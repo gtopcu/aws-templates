@@ -24,8 +24,8 @@ https://docs.github.com/en/authentication/troubleshooting-ssh/error-permission-d
 https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
 https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account
 
-```
-# !!! ~ installs into /var/root for all users, replace with /Users/hukanege 
+!!! chown must be hukanege for public  & private key & config, not root!
+!!! ~ install into /var/root for all users
 # list all SSH keys
 $ ls -al /Users/hukanege/.ssh
 # start the ssh-agent in the background
