@@ -82,5 +82,9 @@ git pull-request
 
 ---
 
+Ignoring files
 https://www.atlassian.com/git/tutorials/saving-changes/gitignore#git-ignore-patterns
 git rm --cached debug.log
+
+Enforcing commit message/format
+https://code-maven.com/enforcing-commit-message-format-in-git

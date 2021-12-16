@@ -2,6 +2,9 @@
 
 Linux Commands:
 ------------------------------------------------------------
+
+**************************** General ****************************
+
 sudo su
 clear
 history
@@ -21,30 +24,75 @@ cp <source> <target>
 cp -r ./Green ./White  (Copy Dir)
 ln -s ./Downloads/exec.sh (Symbolic Link)
 find conten*
-chmod u-x <filename.txt>
-chmod u+rw <filename.txt>
-chown -R hukanege /Users/hukanege/.aws/ (recursive for dir)
-VARIABLE=123456, ref by $VARIABLE
 
+chown -R hukanege /Users/hukanege/.aws/ (recursive for dir)
+
+chmod u-x <filename>
+chmod u+rw <filename>
+chmod 777 <filename>:   Set rwx permission for owner, group, world
+chmod 755 <filename>:   Set rwx permission for owner, rx for group, world
+chmod 400 <filename>:   Allow read by owner
+chmod 200 <filename>:   Allow write by owner
+chmod 100 <filename>:   For files, allow execution by owner
+                        For directories, allow the owner to search in the directory
+chmod 040 <filename>:   Allow read by group members.
+
+**************************** System ****************************
+
+uname -a : System Info
+uname -r
+uptime
+last reboot
+date
+cal
+id
+last
+w
+who
+finger user
+hostname
+hostname -i
+hostnamectl set-hostname k8s-control
+lsblk: list disks, / means root disk
+df -h : free disk space
+free -m : free memory
+ps aux: running apps
+kill <pid>
+shutdown -h now
+sudo swapoff -a
+sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+
+************************** Terminal ****************************
+
+VARIABLE=123456, ref by $VARIABLE
+dd if=/dev/urandom of=largefile bs=3145728 count=1 (create large file)
+
+***************************** Files ****************************
 
 touch <filename.txt>
 nano <filename.txt>
 vi <filename.txt> (YY, P, U, :(w)q!)
 cat <filename.txt>
 cat hash1 hash2 > hash12
-dd if=/dev/urandom of=largefile bs=3145728 count=1 (create large file)
+tail -f <filename.txt>
+
+************************** Curl/Tar ***************************
 
 wget <link>
 curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
 sudo installer -pkg AWSCLIV2.pkg -target /
-tar -xzf <filename.txt>
 
-lsblk: list disks, / means root disk
-df -h : free disk space
-free : free memory
-ps aux: running apps
-shutdown -h now
+tar -xzf filename.tar.gz
+tar -xf zipped.tar
+tar -cf zipped.tar picture.png
+tar -cf zippeddir.tar directory 
+tar -czf zipped.tar.gz picture.png
+tar -tf zipped.tar: list contents
+gzip filename.tar: compress & add .gz to the filename 
 
+************************** apt-get/yum ***************************
+
+--Ubuntu
 apt(-get) install aptitude
 apt(-get) update
 apt(-get) ugrade
@@ -54,31 +102,47 @@ aptitude install
 aptitude upgrade
 aptitude search xx
 
+--Amzn Linux2
 yum update -y
 yum install httpd -y
-
 service httpd start
 chkconfig httpd on
 
-while true; do echo; done
+**************************** Network ****************************
 
+ping 127.0.0.1
 nc 54.78.7.114 22
 curl 54.78.7.114:22
 ssh -vT git@github.com
 nslookup google.com
 dig google.com
+dig -x google.com: reverse lookup
+host google.com: list nameservers
+whois google.com
+ip addr show
+ip address add 192.0.0.1 dev eth0
+ethtool eth0
+netstat -tupl
+
+sudo nano /etc/hosts
+sudo vi /etc/hosts
+(w):q!
 
 telnet 54.78.7.114:22
 ipconfig -a
 netstat -all
 
-sudo swapoff -a
-sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+**************************** Other ****************************
 
-sudo hostnamectl set-hostname k8s-control
-sudo nano /etc/hosts
-sudo vi /etc/hosts
-(w):q!
+#HardLink - only for files in the same fileystem
+ln ~/bin/topprocs.sh tp
+ln /Users/hukanege/Downloads/macKeyboard.png macKeysHard.png
+
+#SymbolicLink - a link to any file/directory
+ln -s ~/bin/topprocs.sh tps.sh 
+ln -s /Users/hukanege/Downloads/macKeyboard.png macKeysSymb
+
+**************************** Other ****************************
 
 ##
 # Host Database

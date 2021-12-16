@@ -9,7 +9,8 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
 # Handler 
-LOG_FILE = '/tmp/sample-app/sample-app.log'
+#LOG_FILE = '/tmp/sample-app/sample-app.log'
+LOG_FILE = '/tmp/pythonapp.log'
 handler = logging.handlers.RotatingFileHandler(LOG_FILE, maxBytes=1048576, backupCount=5)
 handler.setLevel(logging.INFO)
 
@@ -159,6 +160,6 @@ class ThreadingWSGIServer(ThreadingMixIn, WSGIServer):
     pass
 
 if __name__ == '__main__':
-    httpd = make_server('', 8000, application, ThreadingWSGIServer)
-    print "Serving on port 8000..."
+    httpd = make_server('', 80, application, ThreadingWSGIServer)
+    print("Serving on port 80")
     httpd.serve_forever()
