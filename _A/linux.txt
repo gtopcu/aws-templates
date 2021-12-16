@@ -104,7 +104,7 @@ tar -cf zipped.tar picture.png
 tar -cf zippeddir.tar directory 
 tar -czf zipped.tar.gz picture.png
 tar -tf zipped.tar: list contents
-gzip filename.tar: compress & add .gz to the filename 
+gzip filename.tar: gzip & rename to filename.tar.gz 
 
 struct timespec st_atim;  /* time of last access */
 struct timespec st_mtim;  /* time of last modification */
