@@ -1,7 +1,23 @@
 
 
 Linux Commands:
-------------------------------------------------------------
+
+**************************** Cron ****************************
+
+https://crontab.guru/
+*	any value
+,	value list separator
+-	range of values
+/	step values
+
+48 5 1-6 1,12 0,3   : Run on everyday on 1th & 6th of January & December Sunday-Wednesday at 05:48AM
+*/2 * * * *         : Run every second minute - 00:00, 00:02, etc
+*/30 * * * *        : Run every 30 minutes - 00:00, 00:30, etc
+
+crontab –l
+crontab –e
+crontab –u other_username –e
+* 2 0 * 4 /root/backup.sh
 
 **************************** General ****************************
 
@@ -89,6 +105,10 @@ tar -cf zippeddir.tar directory
 tar -czf zipped.tar.gz picture.png
 tar -tf zipped.tar: list contents
 gzip filename.tar: compress & add .gz to the filename 
+
+struct timespec st_atim;  /* time of last access */
+struct timespec st_mtim;  /* time of last modification */
+struct timespec st_ctim;  /* time of last status change */
 
 ************************** apt-get/yum ***************************
 
