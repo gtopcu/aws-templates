@@ -5,6 +5,8 @@
 # remove(obj)
 # index(x, {start}, {end})
 # insert(index, obj)
+# sort(reverse=True)
+# reverse()
 
 # append()  Put a new object to the end of the list, returns None
 #

@@ -7,10 +7,14 @@
 # curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 # python3 get-pip.py
 # quit()
-#
+
+# #!/usr/bin/env python3 (linux) 
+# #!/usr/bin python3 (mac)
+# #!/usr/bin/python3 (dir)
+
 # Install Jupyter
 # pip install -U jupyter
-# 
+
 # *********************************************************************************************************
 # SHELL
 # *********************************************************************************************************
@@ -36,10 +40,7 @@ print("Hello World")
 # *********************************************************************************************************
 # Variables
 # *********************************************************************************************************
-# It's simple to use variables in the Python shell. If you are an absolute beginner and if you don't 
-# know anything about variables, please refer to our chapter about variables and data types. 
-# Values can be saved in variables. Variable names don't require any special tagging, like they do in Perl, 
-# where you have to use dollar signs, percentage signs and at signs to tag variables:
+
 maximal = 124
 width = 94
 print(maximal - width)
@@ -57,6 +58,14 @@ for char in l:
 # Strings are immutable. In other words, once defined, they cannot be changed. 
 print("Hello" + " " + "World")
 
+myStr = "one sentence one man"
+print(myStr.upper())
+print(myStr.capitalize())
+print(myStr.title())
+print(myStr.find("t"))
+print(myStr.index("t"))
+print(myStr.count("o"))
+
 # A string in triple quotes can span several lines without using the escape character:
 # city = """
 # ... Toronto is the largest city in Canada 
@@ -70,31 +79,3 @@ print("Hello" + " " + "World")
 # ".-." * 4
 # OUTPUT:
 # '.-..-..-..-.'
-
-
-# *********************************************************************************************************
-# Runnable scripts under Linux
-# *********************************************************************************************************
-
-# A Python script can also be started like any other script under Linux, e.g. Bash scripts. Two steps are 
-# necessary for this purpose: the shebang line #!/usr/bin/env python3 has to be added as the first line 
-# of your Python code file. Alternatively, this line can be #!/usr/bin/python3, if this is the location 
-# of your Python interpreter. Instead using env as in the first shebang line, the interpreter is searched 
-# for and located at the time the script is run. This makes the script more portable. 
-# Yet, it also suffers from the same problem: The path to env may also be different on a per-machine basis. 
-# The file has to be made executable: The command "chmod +x scriptname" has to be executed on a Linux shell, 
-# e.g. bash. "chmod 755 scriptname" can also be used to make your file executable. In our example:
-# $ chmod +x my_first_simple_program.py
-
-# We illustrate this in a bash session:
-# bernd@marvin:~$ more my_first_simple_script.py 
-# !/usr/bin/env python3
-# print("My first simple Python script!")
-# bernd@marvin:~$ ls -ltr my_first_simple_script.py 
-# -rw-r--r-- 1 bernd bernd 63 Nov  4 21:17 my_first_simple_script.py
-# bernd@marvin:~$ chmod +x my_first_simple_script.py 
-# bernd@marvin:~$ ls -ltr my_first_simple_script.py 
-# -rwxr-xr-x 1 bernd bernd 63 Nov  4 21:17 my_first_simple_script.py
-# bernd@marvin:~$ ./my_first_simple_script.py 
-# My first simple Python script!
-

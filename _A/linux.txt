@@ -26,6 +26,7 @@ clear
 history
 pwd
 ls -l -a
+ls -ltr pythonX-bash.py
 man <command>
 cd ..
 cd ~ (go to /root)
@@ -46,12 +47,28 @@ chown -R hukanege /Users/hukanege/.aws/ (recursive for dir)
 chmod u-x <filename>
 chmod u+rw <filename>
 chmod 777 <filename>:   Set rwx permission for owner, group, world
-chmod 755 <filename>:   Set rwx permission for owner, rx for group, world
+chmod 755 <filename>:   Set rwx permission for owner, rx for group, x for world
 chmod 400 <filename>:   Allow read by owner
 chmod 200 <filename>:   Allow write by owner
 chmod 100 <filename>:   For files, allow execution by owner
                         For directories, allow the owner to search in the directory
-chmod 040 <filename>:   Allow read by group members.
+chmod 040 <filename>:   Allow read by group members
+
+**************************** GREP ****************************
+
+https://www.cyberciti.biz/faq/howto-use-grep-command-in-linux-unix/
+-i: ignore case
+-r: recursive, for directory scan
+-c: total count of occurence
+
+grep "for" bash0.sh
+grep -i "FOR" bash0.sh
+zgrep "for" bash0.sh.gzip
+grep -r "$" .
+grep -r -c "$" .
+grep -r -h "$" .
+cat /etc/passwd | grep -i "boo"
+
 
 **************************** System ****************************
 
@@ -91,6 +108,7 @@ vi <filename.txt> (YY, P, U, :(w)q!)
 cat <filename.txt>
 cat hash1 hash2 > hash12
 tail -f <filename.txt>
+more <filename.txt>
 
 ************************** Curl/Tar ***************************
 

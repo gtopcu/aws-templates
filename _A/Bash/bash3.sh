@@ -1,8 +1,8 @@
 #!/bin/bash
 
-num=0
+num=$1
 
-for ((i=1; i<=2; i++)); do
+for ((i=1; i<=10; i++)); do
     num=$((num+i))
 done
 
