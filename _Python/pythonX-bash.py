@@ -16,4 +16,4 @@ import os
 os.system("clear") # Linux - OSX
 #os.system("cls") # Windows
 
-print("Congrats, I'm running as a bash!")
+print("Congrats, I'm running as bash!")

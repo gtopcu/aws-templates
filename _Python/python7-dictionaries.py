@@ -20,7 +20,10 @@ city_population = {
 print(city_population)
 
 # Getting an item by key
-print(city_population["New York City"])
+try:
+    print(city_population["New York City"])
+except KeyError:
+    print("Key not found")
 
 # Adding new keys
 city_population["Halifax"] = 390096
@@ -28,7 +31,7 @@ print(city_population)
 
 # Operations
 del city_population["Los Angeles"]
-popped = city_population.pop("İstanbul")
+popped = city_population.pop("İstanbul", 0)
 (city, population) = city_population.popitem()
 print(city, population)
 print(city_population)
@@ -44,19 +47,6 @@ ages["Gökhan"] = 36
 ages["Göknur"] = 31
 print(ages)
 
-# Copy - Deep Copy: Same as lists
-ages2 = ages.copy()
-print(ages2)
-from copy import deepcopy
-ages3 = deepcopy(ages)
-print(ages)
-
-# Merging
-knowledge = {"Frank": {"Perl"}, "Monica":{"C","C++"}}
-knowledge2 = {"Guido":{"Python"}, "Frank":{"Perl", "Python"}}
-knowledge.update(knowledge2)
-print(knowledge)
-
 # Loops
 for key in ages:
     print(key)
@@ -67,11 +57,55 @@ for value in ages.values():
 for key, value in ages.items():
     print(key, value)
 
+# Merging
+knowledge = {"Frank": {"Perl"}, "Monica":{"C","C++"}}
+knowledge2 = {"Guido":{"Python"}, "Frank":{"Perl", "Python"}}
+knowledge.update(knowledge2)
+print(knowledge)
+
+# Copy - Deep Copy: Same as lists
+ages2 = ages.copy()
+print(ages2)
+from copy import deepcopy
+ages3 = deepcopy(ages)
+print(ages)
+
+
+# Converting dictionaries & lists
+myDict = { 
+            "Gökhan": 36, 
+            "Nurhan": 60
+        }
+
+myList = list(myDict)
+print(myList)
+
+myList2 = []
+for key, value in myDict.items():
+    myList2.append(key + "-" + str(value))
+print(myList2)
+
+dishes = ["pizza", "sauerkraut", "paella", "hamburger"]
+countries = ["Italy", "Germany", "Spain", "USA"," Switzerland"]
+country_specialities = list(zip(countries, dishes))
+country_specialities_dict = dict(country_specialities)
+print(country_specialities_dict)
+
+iterable = zip(countries, dishes)
+for country, dish in iterable:
+    print(country, dish)
+
+l1 = ["a","b","c"]
+l2 = [1,2,3]
+c = zip(l1, l2)
+for i in c:
+    print(i)
+    
 
 
 """
 
-Like lists, they can be easily changed, can be shrunk and grown ad libitum at run time. 
+Like lists, dictionaries can be easily changed, can be shrunk and grown ad libitum at run time. 
 They shrink and grow without the necessity of making copies. Dictionaries can be contained 
 in lists and vice versa.
 
@@ -564,6 +598,7 @@ to write a function doing this. But Python wouldn't be Python, if it didn't prov
 If we have a dictionary
 
 D = {"list": "Liste", "dictionary": "Wörterbuch", "function": "Funktion"}
+
 we could turn this into a list with two-tuples:
 
 L = [("list", "Liste"), ("dictionary", "Wörterbuch"), ("function", "Funktion")]
@@ -593,6 +628,7 @@ print(keys)
 values_view = w.values()
 values = list(values_view)
 print(values)
+
 
 """
 If we apply the method items() to a dictionary, we don't get a list back, 

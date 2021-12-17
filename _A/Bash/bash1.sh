@@ -1,7 +1,27 @@
-#!/bin/sh
-total=0
-for var in "$@"
+#!/bin/bash
+
+num=$1
+a=1
+b=2
+c=$((a+b))
+c=$((c+1))
+echo $c
+
+for var in "$*"
 do
-    $total=$total+$var
+    echo "$var"
 done
-echo $total
+
+for ((i=1; i<=10; i++)); 
+do
+    num=$((num+i))
+    c=$((c+1))
+done
+
+
+while true; do echo; done
+
+echo "$num"
+
+
+

@@ -62,7 +62,58 @@ print(myStr.title())
 print(myStr.find("t"))
 print(myStr.index("t"))
 print(myStr.count("o"))
+
+print(1 is not 1)
+print('c' is 'C')
+print("b" in "book")
+
+myList2 = [1, 2, 3]
+check = 1 in myList2
+print(check)
+
+if(2 in myList2):
+    print(True)
+
+myTuple = (1, 2, 3)
+print(myTuple.count(0))
+print(myTuple.index(3))
+print(myTuple[2])
+
+# Converting dictionaries & lists
+myDict = { 
+            "Gökhan": 36, 
+            "Nurhan": 60
+        }
+
+myList = list(myDict)
+print(myList)
+
+myList2 = []
+for key, value in myDict.items():
+    myList2.append(key + "-" + str(value))
+print(myList2)
+
+dishes = ["pizza", "sauerkraut", "paella", "hamburger"]
+countries = ["Italy", "Germany", "Spain", "USA"," Switzerland"]
+country_specialities = list(zip(countries, dishes))
+country_specialities_dict = dict(country_specialities)
+print(country_specialities_dict)
+
+iterable = zip(countries, dishes)
+for country, dish in iterable:
+    print(country, dish)
+
+l1 = ["a","b","c"]
+l2 = [1,2,3]
+c = zip(l1, l2)
+for i in c:
+    print(i)
+
 """
+
+
+
+
 
 
 

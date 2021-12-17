@@ -55,6 +55,7 @@ print(s_bytes)
 # They are arbitrarily nestable, i.e. they can contain other lists as sublists
 # Variable size
 # They are mutable, i.e. the elements of a list can be changed
+
 arbitraryList = [42, "What's the question?", 3.1415]
 print(arbitraryList)
 

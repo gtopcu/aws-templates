@@ -7,6 +7,8 @@
 # insert(index, obj)
 # sort(reverse=True)
 # reverse()
+# copy()
+# deepcopy
 
 # append()  Put a new object to the end of the list, returns None
 #
@@ -148,7 +150,7 @@ Find the Position of an Element in a List
 """
 
 # index(x, {start}, {end}): Can be used to find the position of an element within a list
-#                       start & end optional    
+#                           start & end optional    
 
 """
 s.index(x[, i[, j]]) 

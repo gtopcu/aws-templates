@@ -1,9 +1,18 @@
-#!/bin/sh
+#!/bin/bash
+#sh bash.sh 1 2 3
 
-echo Input1 is $1
+# [A-Z]:        Uppercase characters through A to Z
+# [^a-zA-Z0-9]: Aynthing except these
 
-a=1
-b=2
-c=$((a+b))
-
-echo $a $b $c
+count=0
+for var in "$@": 
+do
+    echo $count $var
+    if [[ $var =~ [A-Z] ]]
+    then
+        echo "match!"
+        ((count++))
+        count=$((count+1))
+    fi
+done
+echo $count

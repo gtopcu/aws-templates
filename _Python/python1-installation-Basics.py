@@ -26,6 +26,12 @@
 
 # Terminal: "Hello World"
 print("Hello World")
+print(1, "b", sep=":", end="\n")
+
+# output into sys.stderr & sys.stdout:
+import sys
+print("Error output", file=sys.stderr)
+print("Standard output", file=sys.stdout)
 
 # Input
 # color = input("Which colour?\n")
@@ -65,6 +71,10 @@ print(myStr.title())
 print(myStr.find("t"))
 print(myStr.index("t"))
 print(myStr.count("o"))
+
+s = "Glückliche Fügung"
+s_bytes = s.encode('utf-8') 
+print(s_bytes)
 
 # A string in triple quotes can span several lines without using the escape character:
 # city = """

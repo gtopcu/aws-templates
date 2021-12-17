@@ -18,9 +18,21 @@ print("a = \n", a)
 print("a", 1, "b", 2, sep=":", end="")
 
 
+#%%timeit  
+d = {"a":123, "b":34, "c":304, "d":99}
+for key in d.keys():
+    x = d[key]
+#%%timeit  
+d = {"a":123, "b":34, "c":304, "d":99}
+for value in d.values():
+    x = value
+#%%timeit  
+
+
 def function(l, r):
     # Write your code here
     print("running")
 
 if __name__ == '__main__':
+    n = int(input().strip())
     print("running")

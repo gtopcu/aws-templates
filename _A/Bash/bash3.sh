@@ -1,14 +1,19 @@
 #!/bin/bash
+#sh bash.sh 1 2 3
 
-num=$1
+typeset -i int=3 #same as declare -> defines integer constant
+echo $int
 
-for ((i=1; i<=10; i++)); do
-    num=$((num+i))
-done
+func1 () { echo "1"; }
 
-while true; do echo; done
+func2 ()
+{
+  echo $1 $2 #function arguments
+}
 
-echo "$num"
+func1
+func2 10 11
 
+echo "Done"
 
 
