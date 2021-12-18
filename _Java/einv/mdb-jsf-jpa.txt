@@ -1,0 +1,74 @@
+http://GOKHAN-DELL7000:8080/ClientEInvoiceServices/ClientEInvoiceServicesPortImplBean
+asadmin set "server.java-config.java-home=C:\Program Files\Java\jdk1.8.0_45"
+
+${com.sun.aas.javaRoot}
+C:\Program Files\Java\jdk1.8.0_45
+C:\PROGRA~1\Java\JDK18~1.0_4\
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>EINV_WEB_ADMIN_15</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>Faces Servlet</servlet-name>
+    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Faces Servlet</servlet-name>
+    <url-pattern>/faces/*</url-pattern>
+  </servlet-mapping>
+</web-app>
+
+
+@EJB
+private ESGeneric<BaseEntity> esBaseEntity;
+
+List<Object[]> resultList = esBaseEntity.findByNamedQuery(Object[].class, "ENTInvICWsClientAccess.getClientAccessDetails", Integer.MAX_VALUE, date);
+for (Object[] result : resultList) {
+	int x = 0;
+	WSAccess wsAccess = new WSAccess();
+	wsAccess.setCnt(((Number) result[x++]).intValue());
+	wsAccess.setIdentifier((String) result[x++]);
+	wsAccess.setId((String) result[x++]);
+	wsAccess.setMethod((String) result[x++]);
+	wsAccess.setIpAddress((String) result[x++]);
+	wsAccess.setSource((String) result[x++]);
+	wsAccess.setTitle((String) result[x++]);
+	wsAccessList.add(wsAccess);
+}
+
+
+List<Object[]> resultList = new ArrayList<Object[]>();
+
+resultList = esENTInvInEnv.findByNamedQuery(Object[].class, "ENTInvInEnv.getDesEnvByReceiver", Integer.MAX_VALUE, identifier, VKN_TCKN, fromDate, toDate);
+for (Object[] result : resultList) {
+	GetDesUBLListResponseType respType = new GetDesUBLListResponseType();
+	respType.setUUID((String) result[0]);
+	respType.setIdentifier((String) result[1]);
+	respType.setVKNTCKN((String) result[2]);
+	respType.setEnvType((String) result[3]);
+	respType.setEnvElementType((String) result[4]);
+	gc.setTime((Date) result[5]);
+	respType.setInsertDateTime(DatatypeFactory.newInstance().newXMLGregorianCalendar(gc));
+	response.getResponse().add(respType);
+}
+
+
+@Resource
+private UserTransaction utx;
+
+
+utx.commit();
+utx.rollback();
+UtilsIO.handleTrivialException(ScheduledInboundProcessorBean.class, e1);
+

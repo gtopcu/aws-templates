@@ -1,4 +1,5 @@
 
+which git
 git config --list
 git config --global user.name "S. Gokhan Topcu"
 git config --global user.email "gtopcu@gmail.com"

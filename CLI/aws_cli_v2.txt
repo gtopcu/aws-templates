@@ -60,7 +60,6 @@ EC2:
 https://docs.aws.amazon.com/cli/latest/userguide/cli-services-ec2.html
 ------------------------------------------------------------------------------------
 
-uptime - Shows the uptime since the last boot
 aws ec2 describe-instances
 aws ec2 stop-instances --instance-ids i-0744af96f9e05dfe5
 aws ec2 create-snapshot
@@ -75,7 +74,11 @@ curl http://169.254.169.254/latest/meta-data/public-ipv4
 
 
 ------------------------------------------------------------------------------------
+Lambda
 ------------------------------------------------------------------------------------
+
+aws lambda list-functions --function-version ALL --region <REGION> --output text --query "Functions[?Runtime=='<RUNTIME>'].FunctionArn"
+
 ------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------
