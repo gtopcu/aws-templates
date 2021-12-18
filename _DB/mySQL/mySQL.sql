@@ -28,12 +28,14 @@ CREATE INDEX `idx_myTable_name` ON `myaurorasql`.`myTable`
 COMMENT '' 
 ALGORITHM DEFAULT LOCK DEFAULT
 
-SELECT id, name FROM mytable limit 100;
+SELECT id, name FROM myTable 
+WHERE name LIKE '%B'
+limit 100;
 
 INSERT INTO `myaurorasql`.`myTable`
 (id, name)
 VALUES
-(4, 'FR');
+(6, 'GB');
 
 
 /* Procedure */
