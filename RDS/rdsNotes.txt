@@ -1,2 +1,9 @@
-!! Always use custom endpoints & attach to DB endpoint DNS address & failover-change without no URL change
 
+1. Always use custom endpoints(readers, writers, region etc) & attach to DB endpoint DNS address so that you do 
+failover and node change without changing the primary URL apps use to access the DB
+2. Always use Systems Manager Parameter Store & Secrets Manager for DB DNS address, user & pw. Environment variables
+or worse - embedded 
+3. Always enable both password & IAM authentication with cross referencing security groups (i.e. for EC2 & DB) 
+cluster and strict IAM policies & NACLs
+4. Usually a very bad idea to have the DBs in the same subnets with other stuff like EC2, ECS, Lamda etc
+5. Needless to say but had to say, never launch a database in a public subnet =)

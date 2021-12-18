@@ -1,0 +1,5 @@
+Aurora Global Tables
+https://www.youtube.com/watch?v=1vFg1z-2E7Y
+mysql:
+SET aurora_replica_read_consistency=SESSION; (EVENTUAL, SESSION, GLOBAL)
+

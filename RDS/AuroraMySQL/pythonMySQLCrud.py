@@ -1,4 +1,5 @@
 
+# https://www.mysql.com/downloads/
 # https://www.c-sharpcorner.com/blogs/crud-operations-in-python-using-mysql-database
 # pip install mysql-connector-python
 

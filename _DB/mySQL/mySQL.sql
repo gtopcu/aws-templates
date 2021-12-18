@@ -1,6 +1,8 @@
 /*---------------------------------------------------------------------------------------
 MySQL DB notes - S. Gökhan Topçu
+https://www.mysql.com/downloads/
 --------------------------------------------------------------------------------------- */
+
 
 /*-------------------------------------------
 Parameter Group:
@@ -33,10 +35,10 @@ WHERE name LIKE '%B'
 limit 100;
 
 INSERT INTO `myaurorasql`.`myTable`
-(id, name)
-VALUES
-(6, 'GB');
+(id, name) VALUES (6, 'GB');
 
+INSERT INTO `myaurorasql`.`events`
+(event_id, event_date) VALUES (1, now());
 
 /* Procedure */
 
