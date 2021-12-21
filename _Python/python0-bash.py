@@ -10,10 +10,17 @@
 # verify by: ls -ltr scriptname.py
 
 # 3. Run:
-# ./scriptname.py
+# ./scriptname.py 1 2
 
 import os
+import sys
+
 os.system("clear") # Linux - OSX
 #os.system("cls") # Windows
 
 print("Congrats, I'm running as bash!")
+
+print(sys.argv[0])
+for eachArg in sys.argv:   
+        print(eachArg)
+        

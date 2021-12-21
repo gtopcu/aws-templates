@@ -1,4 +1,5 @@
 # https://python-course.eu/python-tutorial/dictionaries.php
+# https://python-course.eu/python-tutorial/working-with-dictionaries-and-while-loops.php
 
 # Dictionaries:     Elements can only be accessed via their keys and not via their position
 #                   map-value like HashMap in Java, no duplicates for the same key (also like Set)

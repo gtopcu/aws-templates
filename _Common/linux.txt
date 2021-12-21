@@ -95,10 +95,23 @@ shutdown -h now
 sudo swapoff -a
 sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
 
-************************** Terminal ****************************
+************************** Variables & Env. Variables ****************************
 
-VARIABLE=123456, ref by $VARIABLE
-dd if=/dev/urandom of=largefile bs=3145728 count=1 (create large file)
+Variables
+* VARIABLE=123456, ref by $VARIABLE
+
+Env Variables
+$ export GT_ENV_CODE=991453
+* printenv  – Print all or part of environment
+* env       – Display all exported environment or run a program in a modified environment
+* set       – List the name and value of each shell variable.
+
+To make an environment persistent for a user's environment, export the variable from the user's profile script.
+1. Open the current user's profile into a text editor:
+$ vi ~/.bash_profile.
+2. Add the export command for every environment variable you want to persist 
+$ export JAVA_HOME=/opt/openjdk11.
+Save your changes.
 
 ***************************** Files ****************************
 
@@ -109,6 +122,9 @@ cat <filename.txt>
 cat hash1 hash2 > hash12
 tail -f <filename.txt>
 more <filename.txt>
+
+Create large file
+dd if=/dev/urandom of=largefile bs=3145728 count=1 (create large file)
 
 ************************** Curl/Tar ***************************
 

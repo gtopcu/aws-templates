@@ -24,6 +24,9 @@
 # python3 + TAB: shows installed modules
 # exit() or Ctrl-D (i.e. EOF) to exit
 
+# Environment:
+# PYTHONPATH
+
 # Terminal: "Hello World"
 print("Hello World")
 print(1, "b", sep=":", end="\n")
@@ -34,8 +37,11 @@ print("Error output", file=sys.stderr)
 print("Standard output", file=sys.stdout)
 
 # Input
-# color = input("Which colour?\n")
-# print(color)
+color = input("Which colour?\n")
+print(color)
+
+age = eval(input("Age?:"))
+print(age)
 
 # 4.567 * 8.323 * 17 -> _
 # The most recent output value is automatically stored by the interpreter in a special variable with 
