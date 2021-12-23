@@ -35,6 +35,7 @@ sam local invoke -e ./lambda/lambda_event.json LambdaDemoFunction
 Run API GW locally:
 sam local invoke -e ./apigateway/apigateway_event.json APIGatewayFunction
 sam local start-api 
+sam local start-api --template-file cloudformation.yml
 
 Generate Event
 sam local generate-event

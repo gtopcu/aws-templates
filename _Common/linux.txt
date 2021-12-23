@@ -122,6 +122,7 @@ cat <filename.txt>
 cat hash1 hash2 > hash12
 tail -f <filename.txt>
 more <filename.txt>
+yum install / apt get install xclip
 
 Create large file
 dd if=/dev/urandom of=largefile bs=3145728 count=1 (create large file)
@@ -132,6 +133,9 @@ wget <link>
 curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
 sudo installer -pkg AWSCLIV2.pkg -target /
 
+zip -rq dist-latest.zip src package.json 
+zipinfo dist-latest.zip
+unzip filename.zip
 tar -xzf filename.tar.gz
 tar -xf zipped.tar
 tar -cf zipped.tar picture.png
@@ -167,6 +171,7 @@ chkconfig httpd on
 ping 127.0.0.1
 nc 54.78.7.114 22
 curl 54.78.7.114:22
+curl -d '{}' https://o55ybz0sc5.execute-api.us-east-1.amazonaws.com/v1/graphql (Post with data)
 ssh -vT git@github.com
 nslookup google.com
 dig google.com
@@ -211,4 +216,3 @@ ln -s /Users/hukanege/Downloads/macKeyboard.png macKeysSymb
 # To allow the same kube context to work on the host and the container:
 127.0.0.1 kubernetes.docker.internal
 # End of section
-

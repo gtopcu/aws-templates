@@ -3,8 +3,7 @@ MySQL DB notes - S. Gökhan Topçu
 https://www.mysql.com/downloads/
 --------------------------------------------------------------------------------------- */
 
-
-/*-------------------------------------------
+/*-----------------------------------------------------
 Parameter Group:
 version:8.0.23 / Aurora3.0
 Port:3306 
@@ -14,7 +13,13 @@ maxConnections:16000
 max_user_connections:4294967295
 baseDir:/rdsdbbin/oscar
 binlog_format:ROW, STATEMENT, MIXED, OFF
---------------------------------------------*/
+--------------------------------------------------------
+CLI
+mysql -h<mysqldbaddress> -u$DBUSER -p"$DBPASS" mylab;
+show tables;
+desc <table_name>;
+------------------------------------------------------*/
+
 
 CREATE DATABASE `myaurorasql` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 SELECT * FROM sys.sys_config limit 100;

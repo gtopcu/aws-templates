@@ -1,0 +1,16 @@
+
+touch cloudformation.yml
+
+aws cloudformation deploy \
+  --template-file ./cloudformation.yml \
+  --stack-name apollo-server-lambda-nodejs \
+  --parameter-overrides BucketName=lambda-deploy-asln Version=latest \
+  --capabilities CAPABILITY_IAM
+
+aws cloudformation describe-stacks \
+--stack-name=apollo-server-lambda-nodejs \
+--query "Stacks[0].Outputs[?OutputKey=='ApiUrl'].OutputValue" \
+--output text
+
+curl -d '{}' https://o55ybz0sc5.execute-api.us-east-1.amazonaws.com/v1/graphql
+
