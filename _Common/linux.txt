@@ -88,8 +88,10 @@ hostname -i
 hostnamectl set-hostname k8s-control
 lsblk: list disks, / means root disk
 df -h : free disk space
+du: file sizes
 free -m : free memory
 ps aux: running apps
+htop: system monitor
 kill <pid>
 shutdown -h now
 sudo swapoff -a
