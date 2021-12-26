@@ -1,6 +1,7 @@
 # https://python-course.eu/python-tutorial/sets-and-frozen-sets.php
 
 # Sets:     Contains an unordered collection of unique and immutable objects - Like HashSet
+#           Thus cannot contain lists or dictionaries as elements
 #           Unlike lists or tuples can't have multiple occurrences of the same element
 #
 #           add(e)

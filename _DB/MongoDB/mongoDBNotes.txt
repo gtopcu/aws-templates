@@ -2,6 +2,7 @@
 https://docs.mongodb.com/
 https://www.mongodb.com/developer/quickstart/cheat-sheet/
 
+16MB max per Doc!
 
 mongo # connects to mongodb://127.0.0.1:27017 by default
 mongo --host <host> --port <port> -u <user> -p <pwd> # omit the password if you want a prompt

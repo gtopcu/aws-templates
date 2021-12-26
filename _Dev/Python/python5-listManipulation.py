@@ -4,6 +4,7 @@
 # extend(obj)
 # remove(obj)
 # index(x, {start}, {end})
+# count(obj) -> int
 # insert(index, obj)
 # sort(reverse=True)
 # reverse()
