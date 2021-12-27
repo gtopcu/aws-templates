@@ -21,7 +21,8 @@ crontab –u other_username –e
 
 **************************** General ****************************
 
-sudo su
+sudo !! - execute previous command with sudo
+sudo su - execute all with sudo
 clear
 history
 pwd

@@ -24,9 +24,12 @@ Upgrade/Uninstall
 brew upgrade aws-sam-cli
 brew uninstall aws-sam-cli
 
-sam init - initialize SAM app
-sam build - build the app
-sam package - package the app
+!! Need to install AWS CLI, SAM CLI + Docker Desktop first & Configure AWS Credentials !!
+
+sam -h      :   List Commands
+sam init    :   Initialize SAM app
+sam build   :   Build the app
+sam package :   Package the app
 sam deploy (--guided)
 
 Run Lambda locally:
