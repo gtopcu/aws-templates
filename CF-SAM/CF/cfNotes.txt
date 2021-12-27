@@ -12,5 +12,5 @@ aws cloudformation describe-stacks \
 --query "Stacks[0].Outputs[?OutputKey=='ApiUrl'].OutputValue" \
 --output text
 
-curl -d '{}' https://o55ybz0sc5.execute-api.us-east-1.amazonaws.com/v1/graphql
+aws cloudformation delete-stack --stack-name=apollo-server-lambda-nodejs
 
