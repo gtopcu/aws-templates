@@ -27,6 +27,9 @@
 # Environment:
 # PYTHONPATH
 
+# Linting
+# https://github.com/marketplace/actions/pylinter
+
 # Terminal: "Hello World"
 print("Hello World")
 print(1, "b", sep=":", end="\n")
