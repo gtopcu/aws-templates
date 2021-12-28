@@ -28,7 +28,6 @@ print(maximum_speed)
 
 
 # While
-
 counter = 0
 while counter in range(0, 3):
     print(counter, sep=":", end=" ")
