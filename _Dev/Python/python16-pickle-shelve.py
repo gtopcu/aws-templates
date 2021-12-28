@@ -2,11 +2,9 @@
 # https://python-course.eu/python-tutorial/file-management.php
 
 """
-Python offers a module for this purpose, which is called "pickle". With the algorithms of the pickle module 
-we can serialize and de-serialize Python object structures. "Pickling" denotes the process which converts a 
-Python object hierarchy into a byte stream, and "unpickling" on the other hand is the inverse operation, i.e. 
-the byte stream is converted back into an object hierarchy. What we call pickling (and unpickling) is also known 
-as "serialization" or "flattening" a data structure.
+"Pickling" denotes the process which converts a Python object hierarchy into a byte stream, 
+and "unpickling" on the other hand is the inverse operation, i.e. the byte stream is converted back into an 
+object hierarchy - "serialization" or "flattening" a data structure.
 
 An object can be dumped with the dump method of the pickle module:
 

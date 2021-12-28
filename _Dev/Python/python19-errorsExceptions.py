@@ -33,4 +33,3 @@ if text:
 # The main difference is that in the first case, all statements of the try block can lead to the same 
 # # error message "cannot open ...", which is wrong, if fh.close() or fh.readlines() raise an error.
 
-

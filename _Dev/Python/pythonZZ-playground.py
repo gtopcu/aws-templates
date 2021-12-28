@@ -109,6 +109,15 @@ c = zip(l1, l2)
 for i in c:
     print(i)
 
+def myfunc(name="s") -> str:
+    return "Hello" + str
+    
+# Custom exceptions
+class MyException(Exception):
+    pass
+
+raise MyException("An exception doesn't always prove the rule!")
+
 """
 
 
