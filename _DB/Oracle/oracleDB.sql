@@ -2,6 +2,10 @@
 Oracle DB notes - S. Gökhan Topçu
 --------------------------------------------------------------------------------------- */
 
+sqlplus / as sysdba
+
+SELECT * FROM $V_SQL
+
 select * from table(dbms_xplan.display)
 explain plan for
 SELECT IDX, IDENTIFIER, TITLE
