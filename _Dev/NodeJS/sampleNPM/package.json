@@ -1,0 +1,20 @@
+{
+  "name": "samplenpm",
+  "version": "1.0.0",
+  "description": "my sample npm app",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon index.js"
+  },
+  "keywords": [
+    "npm",
+    "nodemon",
+    "nodejs"
+  ],
+  "author": "hukanege",
+  "license": "MIT",
+  "dependencies": {
+    "moment": "^2.29.1",
+    "uniq": "^1.0.1"
+  }
+}
