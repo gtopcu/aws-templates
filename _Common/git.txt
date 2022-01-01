@@ -60,16 +60,16 @@ $ pbcopy < /Users/hukanege/.ssh/id_ed25519.pub
 
 ---
 
+git init
 git status
 git log
-
-git init
-git add readme.txt / git add .
+git add readme.txt
+git add .
 git commit -a -m "initial"
 git checkout master / branch / b6d7c45539810e73dbaf4871b05ca2c8c4440a60
-git switch -c bugFixBranch
 git branch 
 git branch featureBranch
+git switch -c bugFixBranch
 git checkout master
 git merge featureBranch
 
