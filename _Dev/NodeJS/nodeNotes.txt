@@ -38,10 +38,14 @@ NPM
 npm -v
 npm init
 npm run
+npm install (in package directory, no arguments - Installs the dependencies in the local node_modules folder)
+npm install --production (do not install modules listed in devDependencies)
+npm install express --save-dev (updates package.json, saves as dev dependency)
+npm uninstall express --save
+
 npm install -g browserify (-g global install)
 npm i --global browserify
-npm uninstall browserify
-npm uninstall browserify --save (updates package.json)
+
 npm shrinkwrap
 
 
@@ -64,14 +68,16 @@ npm i moment (datetime pretty print - momentjs.com)
 
 
 ***************************************************************************************************
-Yarn
+Yarn - updates package.json automatically, offline package caching
 ***************************************************************************************************
 
 https://www.youtube.com/watch?v=7n467QmiANM
 
 npm install -g yarn
-yarn add express
+yarn install
+yarn add express 
+yarn add express --dev
+yarn remove express
+yarn why express (shows package dependencies)
 yarn ls
 yarn cache ls
-
-

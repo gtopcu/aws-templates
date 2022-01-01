@@ -1,4 +1,6 @@
-var port = 80;
+
+var PORT = 8080;
+
 var http = require("http");
 http.createServer(function (request, response) {
     
@@ -13,7 +15,7 @@ http.createServer(function (request, response) {
     // Send the response body as "Hello World"
     response.end('Hello World\n');
 
- }).listen(port);
+ }).listen(PORT);
  
  // Console will print the message
- console.log('Server running at http://localhost:' + port);
+ console.log('Server running at http://localhost:' + PORT);
