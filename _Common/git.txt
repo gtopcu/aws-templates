@@ -54,15 +54,12 @@ $ pbcopy < /Users/hukanege/.ssh/id_ed25519.pub
 # Add key: https://github.com/settings/keys
 ```
 
-```
-
-```
-
 ---
 
 git init
 git status
 git log
+git diff
 git add readme.txt
 git add .
 git commit -a -m "initial"
@@ -70,16 +67,17 @@ git checkout master / branch / b6d7c45539810e73dbaf4871b05ca2c8c4440a60
 git branch 
 git branch featureBranch
 git switch -c bugFixBranch
-git checkout master
 git merge featureBranch
 
 git clone https://github.com/hukanege.git
-git remote add <name> <url>
-git push <name>
-git pull <remote> <branch>
+git remote add <name><url>
+git push -u origin main
+git fetch <remote><branch> (download only, do not merge) 
+git pull <remote><branch> (fetch + merge)
 git fork
 git pull-request
-
+git reset --soft/mixed/hard
+git rebase
 
 ---
 
