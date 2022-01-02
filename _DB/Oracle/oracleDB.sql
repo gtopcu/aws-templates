@@ -3,6 +3,8 @@ Oracle DB notes - S. Gökhan Topçu
 --------------------------------------------------------------------------------------- */
 
 sqlplus / as sysdba
+startup
+shutdown immediate
 
 SELECT * FROM $V_SQL
 
