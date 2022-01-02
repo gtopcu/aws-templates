@@ -1,0 +1,22 @@
+
+https://aws.amazon.com/blogs/aws/announcing-aws-cloud-control-api/
+
+aws cloudcontrol get-resource        \
+    --type-name AWS::Kinesis::Stream \
+    --identifier NewsBlogDemo
+{
+   "TypeName": "AWS::Kinesis::Stream",
+   "ResourceDescription": {
+      "Identifier": "NewsBlogDemo",
+      "Properties": "{\"Arn\":\"arn:aws:kinesis:us-west-2:486652066693:stream/NewsBlogDemo\",\"RetentionPeriodHours\":168,\"Name\":\"NewsBlogDemo\",\"ShardCount\":3}"
+   }
+}	
+
+aws cloudcontrol create-resource    \
+   --type-name AWS::Kinesis::Stream \
+   --desired-state "{"Name": "NewsBlogDemo","RetentionPeriodHours":168, "ShardCount":3}"
+
+aws cloudcontrol create-resource          \
+       --type-name AWS::Lambda::Function   \
+       --desired-state '{"Code":{"S3Bucket":"private-bucket-seb","S3Key":"index.zip"},"Role":"arn:aws:iam::0123456789:role/lambda_basic_execution","Runtime":"python3.9","Handler":"index.lambda_handler"}' \
+       --client-token 123

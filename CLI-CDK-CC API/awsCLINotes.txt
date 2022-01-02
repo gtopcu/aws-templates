@@ -77,7 +77,13 @@ curl http://169.254.169.254/latest/meta-data/public-ipv4
 Lambda
 ------------------------------------------------------------------------------------
 
-aws lambda list-functions --function-version ALL --region <REGION> --output text --query "Functions[?Runtime=='<RUNTIME>'].FunctionArn"
+aws lambda list-functions --function-version ALL --region <REGION> \
+    --output text --query "Functions[?Runtime=='<RUNTIME>'].FunctionArn"
+
+aws lambda invoke \
+    --function-name ukjfq7sqG15LvfC30hwbRAMfR-96K3UNUCxNd9 \
+    out.txt && cat out.txt && rm out.txt 
+
 
 ------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------
