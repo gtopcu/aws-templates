@@ -37,16 +37,22 @@ NPM
 
 npm -v
 npm init
-npm run
 npm install (in package directory, no arguments - Installs the dependencies in the local node_modules folder)
 npm install --production (do not install modules listed in devDependencies)
-npm install express --save-dev (updates package.json, saves as dev dependency)
-npm uninstall express --save
-
 npm install -g browserify (-g global install)
 npm i --global browserify
-
+npm install express --save-dev (updates package.json, saves as dev dependency)
+npm uninstall express --save
 npm shrinkwrap
+
+npm install        install all the dependencies in your project
+npm install <foo>  add the <foo> dependency to your project
+npm test           run this project's tests
+npm run <foo>      run the script named <foo>
+npm <command> -h   quick help on <command>
+npm -l             display usage info for all commands
+npm help <term>    search for help on <term>
+npm help npm       more involved overview
 
 
 --Nice Packages

@@ -3,7 +3,6 @@
 https://apis.guru/graphql-apis/
 https://graphql-weather-api.herokuapp.com/graphQL
 
-
 query getCityByNameQuery{
   getCityByName(name:"Istanbul") {
     id
@@ -15,7 +14,6 @@ query getCityByNameQuery{
 {
   "cityName": "Istanbul"
 }
-
 
 directive @cacheControl(
   maxAge: Int
@@ -52,55 +50,8 @@ type Coordinates {
 }
 
 enum Language {
-  af
-  al
-  ar
-  az
-  bg
-  ca
-  cz
-  da
-  de
-  el
-  en
-  eu
-  fa
-  fi
-  fr
-  gl
-  he
-  hi
-  hr
-  hu
-  id
-  it
-  ja
-  kr
-  la
-  lt
-  mk
-  no
-  nl
-  pl
-  pt
-  pt_br
-  ro
   ru
-  sv
-  se
-  sk
-  sl
-  sp
-  es
-  sr
-  th
   tr
-  ua
-  uk
-  vi
-  zh_cn
-  zh_tw
-  zu
 }
 
 type Query {
