@@ -3,6 +3,7 @@
     /usr/local/bin/node
     /usr/local/bin/npm
     /usr/local/bin/npm-modules
+    export PATH=$PATH:/usr/local/nodejs/bin
 
     node index.js
     nodemon index.js
@@ -11,13 +12,7 @@
     - Async, non-blocking architecture based on C++ wrapper around Google v8 Engine
     - Single threaded - distributes events - checks the event queue for new events
     - Perfect for IO intensive apps (file, network, DB) but not for CPU intensive apps (i.e. video encoding)
-
 */
-
-//import delay from './delay'
-//delay(10)
-
-//
 
 var myDate = new Date();
 console.log(myDate);
@@ -31,10 +26,12 @@ console.log(array);
 
 function add(a, b) {
     if(a <= 0 || b <= 0) throw new Error("Input values should be > 0");
-    return a + b;
+    console.log(a + b);
 }
+console.log(add(0+2));
 
-var result = await add(0+2);
-console.log(result);
-console.log("hello");
+function sayHello(name) {
+    console.log("Hello " + name);
+}
+sayHello("Gokhan");
 
