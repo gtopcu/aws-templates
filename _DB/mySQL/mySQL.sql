@@ -15,7 +15,8 @@ baseDir:/rdsdbbin/oscar
 binlog_format:ROW, STATEMENT, MIXED, OFF
 --------------------------------------------------------
 CLI
-mysql -h<mysqldbaddress> -u$DBUSER -p"$DBPASS" mylab;
+mysql -h <mysqldbaddress> -u <user> -p <pass>;
+mysql -h 127.0.0.1 -u admin -p gt123456
 show tables;
 desc <table_name>;
 ------------------------------------------------------*/
