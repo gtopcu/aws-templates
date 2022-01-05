@@ -4,17 +4,16 @@
 class MyException(Exception):
     pass
 
-raise MyException("An exception doesn't always prove the rule!")
+#raise MyException("An exception doesn't always prove the rule!")
 
-# finally
 try:
     x = float(input("Your number: "))
     inverse = 1.0 / x
+except Exception as e:
+    print("Exception: " + str(e))
 finally:
-    print("There may or may not have been an exception.")
-print("The inverse: ", inverse)
-
-
+    print("Finally executed")
+    
 # The try ... except statement has an optional else clause. An else block has to be positioned after all 
 # the except clauses. An else clause will be executed if the try clause doesn't raise an exception
 import sys

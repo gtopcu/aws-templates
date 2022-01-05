@@ -64,37 +64,3 @@ print(maximal - width)
 l = ["A", 42, 78, "Just a String"]
 for char in l:
      print(char)
-
-# *********************************************************************************************************
-# Strings
-# *********************************************************************************************************
-# Strings are created by putting a sequence of characters in quotes. Strings can be surrounded by 
-# single quotes, double quotes or triple quotes, which are made up of three single or three double quotes. 
-# Strings are immutable. In other words, once defined, they cannot be changed. 
-print("Hello" + " " + "World")
-
-myStr = "one sentence one man"
-print(myStr.upper())
-print(myStr.capitalize())
-print(myStr.title())
-print(myStr.find("t"))
-print(myStr.index("t"))
-print(myStr.count("o"))
-
-s = "Glückliche Fügung"
-s_bytes = s.encode('utf-8') 
-print(s_bytes)
-
-# A string in triple quotes can span several lines without using the escape character:
-# city = """
-# ... Toronto is the largest city in Canada 
-# ... and the provincial capital of Ontario. 
-# ... It is located in Southern Ontario on the 
-# ... northwestern shore of Lake Ontario.
-# ... """
-# print(city)
-
-# Multiplication on strings is defined, which is essentially a multiple concatenation:
-# ".-." * 4
-# OUTPUT:
-# '.-..-..-..-.'
