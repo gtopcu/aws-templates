@@ -1,5 +1,7 @@
 /*
     nodejs.org
+    https://nodejs.org/dist/latest-v16.x/docs/api/
+
     /usr/local/bin/node
     /usr/local/bin/npm
     /usr/local/bin/npm-modules
@@ -7,11 +9,15 @@
 
     node index.js
     nodemon index.js
-    Start quokka on existing file: Command+K -> Q 
+    jshint index.js
+    Quokka: Command+K -> Q 
     
     - Async, non-blocking architecture based on C++ wrapper around Google v8 Engine
     - Single threaded - distributes events - checks the event queue for new events
     - Perfect for IO intensive apps (file, network, DB) but not for CPU intensive apps (i.e. video encoding)
+
+    https://www.youtube.com/watch?v=TlB_eWDSMt4
+    https://codewithmosh.com/p/the-complete-node-js-course
 */
 
 var myDate = new Date();

@@ -10,7 +10,6 @@ nodemon index.js
 npm i -g browserify
 npm i uniq
 
-browserify index.js -o bundle.js
 */
 
 var author = "hukanege";

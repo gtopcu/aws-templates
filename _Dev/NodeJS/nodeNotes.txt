@@ -65,13 +65,15 @@ Quokka VSCode Extension - Live Playground
 sudo su
 npm install -g browserify (require packages in browsers - browserify.org)
 browserify index.js -o bundle.js
+webpack
 watchify
 tinyify
-(Check out webpack too)
 
 npm i uniq (removes duplicates)
 npm i moment (datetime pretty print - momentjs.com)
 
+npm i -g jshint (shows errors)
+jshint index.js
 
 ***************************************************************************************************
 Yarn - updates package.json automatically, offline package caching

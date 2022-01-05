@@ -1,0 +1,19 @@
+{
+  "name": "restapiwithswagger",
+  "version": "1.0.0",
+  "description": "Sample NodeJS app with swagger-ui",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "keywords": [
+    "node",
+    "api",
+    "swagger"
+  ],
+  "author": "hukanege",
+  "license": "MIT",
+  "dependencies": {
+    "swagger-ui": "^4.1.3"
+  }
+}
