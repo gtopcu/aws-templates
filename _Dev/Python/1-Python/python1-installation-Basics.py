@@ -12,6 +12,10 @@
 # #!/usr/bin python3 (mac)
 # #!/usr/bin/python3 (dir)
 
+# pip install <package>
+# pip uninstall <package>
+# pip list
+
 # Install Jupyter
 # pip install -U jupyter
 

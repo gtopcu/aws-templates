@@ -1,14 +1,55 @@
+"""
+x = [ "2", "1" , "-1"]
+y = sorted(x)
+print(y)
 
+sortme = "heey sort me"
+print(sortme)
+
+say = "helloooo"
+for c in (enumerate)(say):
+    print(c)
+
+print(say[::-1])
+print("%d" %(42.565512))
+
+joined = " / ".join(x)
+print(joined)
+
+x = 10 ** 2
+print(x)
+x = 10 // 3
+print(x)
+x = 10 / 3
+print(x)
+print(f"hey! {x}")
+
+z = 10
+def f1():
+    z = 11
+    def f2():
+        #global z
+        z=12
+        print(z)
+    f2()
+f1()
+print(z)
+
+def funx(x, y, z=1):
+    print(str(x) + " " + str(y) + " " + str(z))
+funx(1, 2)
+funx(y=5, x=10)
+#funx(y=3, 6, x=9) will give error
+
+def funy(func, *arg):
+    func(*arg)
+funy(funx, 1, 2, 3)
+
+from urllib import *
 import datetime
 import time
 import uuid
 import math
-import random
-import os
-import sys
-
-for arg in sys.argv:
-    print(arg)
 
 now = datetime.datetime.now()
 print(now.year)
@@ -27,7 +68,6 @@ if __name__ == '__main__':
     n = int(input().strip())
 
 fizzBuzz(n)
-
 
 # Arbitrary Number of Parameters
 def sumAll(*x):
@@ -54,5 +94,10 @@ print("%d" %(42.565512))
 x = lambda a, b : a * b
 print(x(5, 6))
 
+q = queue.Queue()
 
+def f():
+    print("hola")
 
+threading.Thread(target=f).start()
+"""

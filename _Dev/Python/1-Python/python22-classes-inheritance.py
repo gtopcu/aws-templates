@@ -1,6 +1,16 @@
 
 # https://www.w3schools.com/python/python_classes.asp
 
+"""
+Python is one of the few modern programming languages that supports multiple inheritance. 
+Multiple inheritance is the ability to derive a class from multiple base classes at the same time.
+
+Python doesn't directly support abstract classes. But it does offer a module that allows you to define 
+abstract classes. To define an abstract class, you use the abc (abstract base class) module
+
+Python does not support interfaces
+"""
+
 class MyClass:
   x = 5
 
