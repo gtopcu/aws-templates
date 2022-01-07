@@ -1,6 +1,8 @@
 
 https://www.youtube.com/watch?v=ZqW8JT1gt4U - Helpful extensions
-General: Material Theme, CodeSnap, RestClient, Thunder Client, Database Client, Marquee, Code Time
+General: 
+Material Theme, CodeSnap, RestClient, Thunder Client, Database Client, Marquee, Code Time
+Prettier: ⌥ + ⇧ + f 
 JS: Quokka, Import Cost
 
 Command + Shift + P or F1 then type Shell in command palette 

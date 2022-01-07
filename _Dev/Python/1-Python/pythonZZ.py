@@ -102,6 +102,4 @@ def f():
 threading.Thread(target=f).start()
 """
 
-x = 9
-y = 10
 
