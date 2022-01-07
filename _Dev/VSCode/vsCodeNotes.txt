@@ -1,17 +1,18 @@
 
 https://www.youtube.com/watch?v=ZqW8JT1gt4U - Helpful extensions
+General: Material Theme, CodeSnap, RestClient, Thunder Client, Database Client, Marquee, Code Time
+JS: Quokka, Import Cost
 
 Command + Shift + P or F1 then type Shell in command palette 
 Select -> Install code in PATH 
 $code .
-
 ⌃ + F5              -> Run without debugging
 F5                  -> Start debugging
 ⌘K                  -> Clear Terminal
 ⌘ + B               -> Show/Hide Explorer
 ⌘K + Z              -> ZEN Mode
 ⌘ + P               -> Open file
-⌘ + ⇧ + P           -> Execute command
+⌘ + ⇧ + P / F1      -> Execute command
 ⌘ + ⇧ + U           -> Output
 ⌘ + ⇧ + Y           -> Debug Console
 ⌘ + ⇧ + M           -> Problems
@@ -19,4 +20,6 @@ F5                  -> Start debugging
 ⌥ + Down Arrow      -> Move line up
 ⌘ + ⌥ + Up Arrow    -> Add cursor above
 ⌘ + ⌥ + Down Arrow  -> Add cursor below
+⌘ + ⇧ + 7           -> Toggle Line Comment
+⌥ + ⇧ + A           -> Toggle Block Comment
 

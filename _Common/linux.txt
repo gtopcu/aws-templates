@@ -47,6 +47,8 @@ chown -R hukanege /Users/hukanege/.aws/ (recursive for dir)
 
 chmod u-x <filename>
 chmod u+rw <filename>
+chmod +x  <dir      :   Allow cd on dir 
+chmod 777 -R <dir   :   Recursive
 chmod 777 <filename>:   Set rwx permission for owner, group, world
 chmod 755 <filename>:   Set rwx permission for owner, rx for group, x for world
 chmod 400 <filename>:   Allow read by owner
@@ -54,6 +56,9 @@ chmod 200 <filename>:   Allow write by owner
 chmod 100 <filename>:   For files, allow execution by owner
                         For directories, allow the owner to search in the directory
 chmod 040 <filename>:   Allow read by group members
+
+umask: default roles for new files
+inode: data structure holding file data, has integer number, holds file size, UID, bin data ref etc
 
 **************************** GREP ****************************
 
@@ -173,11 +178,6 @@ chkconfig httpd on
 
 ping 127.0.0.1
 nc 54.78.7.114 22
-curl 54.78.7.114:22
-curl -v google.com (GET & show response)
-curl -v -X POST google.com -F "user='<script><alert>Alert me</alert></script>'" (CSS attack)
-curl -v -X POST google.com -F "user='AND 1=1'" (SQL Injection attack)
-curl -d '{}' https://o55ybz0sc5.execute-api.us-east-1.amazonaws.com/v1/graphql (Post with data)
 ssh -vT git@github.com
 nslookup google.com
 dig google.com
@@ -188,6 +188,18 @@ ip addr show
 ip address add 192.0.0.1 dev eth0
 ethtool eth0
 netstat -tupl
+
+curl 54.78.7.114:22
+curl -X GET http://api.com/customers/1000
+curl -X POST -H "Content-Type: application/json" -d '{ "username":"gokhan", "age":36 }' http://api.com/customers
+curl -X DELETE http://api.com/customers/1000
+
+curl -v google.com (GET & show response)
+curl -v -X POST google.com -F "user='<script><alert>Alert me</alert></script>'" (CSS attack)
+curl -v -X POST google.com -F "user='AND 1=1'" (SQL Injection attack)
+curl -d '{}' https://o55ybz0sc5.execute-api.us-east-1.amazonaws.com/v1/graphql (Post with data)
+
+nano /var/logs 
 
 sudo nano /etc/hosts
 sudo vi /etc/hosts

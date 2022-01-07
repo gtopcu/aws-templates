@@ -1,0 +1,23 @@
+
+@API_URL = http://localhost:80/users/1
+
+GET {{API_URL}}
+
+###
+POST http://localhost:80/users/1
+Content-Type: application/json
+Authorization: Bearer A912j34sAIDjknln29NKS
+
+{
+    "user" : "Gokhan",
+    "age"  : 36
+}
+
+###
+HEAD http://google.com
+
+###
+OPTIONS http://google.com
+
+
+
