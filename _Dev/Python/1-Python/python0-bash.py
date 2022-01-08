@@ -15,6 +15,8 @@
 import os
 import sys
 
+exitFlag = 0
+
 os.system("clear") # Linux - OSX
 #os.system("cls") # Windows
 
