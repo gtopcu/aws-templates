@@ -100,6 +100,11 @@ def f():
     print("hola")
 
 threading.Thread(target=f).start()
+
+x = 20.5
+print(type(x))
+
 """
+
 
 

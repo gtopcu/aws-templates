@@ -7,27 +7,31 @@
 
 # !! Avoid changing the list in the loop body - work on a copy instead !!
 
-# If
-person = "Nationality?"
-if person == "french" or person == "French":
-    print("Préférez-vous parler français?")
-elif person == "italian" or person == "Italian":
-    print("Preferisci parlare italiano?")
-else:
-    print("You are neither French nor Italian.")
+# if-elif-else
+if 5 == 10 or 4 == 4:
+    print("At least we got one right")
 
+if 5 == 5 and 6 == 6:
+  print("Hello")
+
+if 5 > 2: print("Five is greater than two!")
+print("Yes") if 5 > 2 else print("No") # Ternary If
+
+inside_city_limits = True
+maximum_speed = 50 if inside_city_limits else 100 
+print(maximum_speed)
+
+
+# for
 for i in range(0, 10):
     print(i)
     if(i == 5):
         break
 
-# Ternary If
-inside_city_limits = True
-maximum_speed = 50 if inside_city_limits else 100
-print(maximum_speed)
 
+# while - else
+# continue break
 
-# While
 counter = 0
 while counter in range(0, 3):
     print(counter, sep=":", end=" ")
@@ -49,13 +53,13 @@ to_be_guessed = random.randint(lower_bound, upper_bound)
 guess = 0
 while guess != to_be_guessed:
     guess = int(input("Guess the number: "))
+    if guess < 0: continue
     if guess > 0:
         if guess > to_be_guessed:
             print("Number too large")
         elif guess < to_be_guessed:
             print("Number too small")
     else:
-        # 0 means giving up
         print("Sorry that you're giving up!")
         break   # break out of a loop, don't execute "else"
 else:

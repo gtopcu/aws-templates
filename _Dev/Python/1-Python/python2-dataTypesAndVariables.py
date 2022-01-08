@@ -15,6 +15,8 @@ i = 42          # data type is implicitly set to integer
 i = 42 + 0.11   # data type is changed to float
 i = "forty"     # and now it will be a string 
 
+x = 20.5
+print(type(x))
 
 # *********************************************************************************************************
 # Object References

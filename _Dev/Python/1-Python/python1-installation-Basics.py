@@ -28,6 +28,9 @@
 # python3 + TAB: shows installed modules
 # exit() or Ctrl-D (i.e. EOF) to exit
 
+# Run module:
+# python -m unittest
+
 # Environment:
 # PYTHONPATH
 

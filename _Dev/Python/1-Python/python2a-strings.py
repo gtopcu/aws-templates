@@ -8,6 +8,8 @@
 
 print("Hello" + " " + "World")
 
+x = y = z = "Orange"
+
 a = "Hello, World!"
 print(len(a))
 
