@@ -10,6 +10,8 @@ https://www.youtube.com/watch?v=AUQRyl1SNcU
 Mastering the AWS Serverless Application Model (AWS SAM) - AWS Online Tech Talks
 https://www.youtube.com/watch?v=QBBewrKR1qg
 
+Creating a CI/CD deployment pipeline for GitHub Actions with AWS SAM Pipelines
+https://www.youtube.com/watch?v=sQrdfhGsW6w
 
 ---------------------------------------------------------------------------------------------
 
@@ -31,6 +33,9 @@ sam init    :   Initialize SAM app
 sam build   :   Build the app
 sam package :   Package the app
 sam deploy (--guided)
+
+sam pipeline init --bootstrap: Create a SAM Pipeline - Deploy to dev & prod from GitHub, GitLab & Jenkins
+https://www.youtube.com/watch?v=sQrdfhGsW6w
 
 Run Lambda locally:
 sam local invoke -e ./lambda/lambda_event.json LambdaDemoFunction
