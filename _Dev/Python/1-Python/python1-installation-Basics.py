@@ -13,6 +13,7 @@
 # #!/usr/bin/python3 (dir)
 
 # pip install <package>
+# pip install -t $PWD pymysql
 # pip uninstall <package>
 # pip list
 
