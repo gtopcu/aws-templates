@@ -2,7 +2,7 @@
 # https://www.youtube.com/watch?v=vyLvmPkQZkI
 # pip install -t $PWD pymysql
 
-import pymysql
+# import pymysql
 
 # 1. Install pymysql to local directory
 # pip install -t $PWD pymysql
