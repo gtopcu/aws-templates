@@ -31,6 +31,8 @@ CREATE TABLE `myaurorasql`.`myTable` (
   `name` VARCHAR(1000) NULL,
   PRIMARY KEY (`id`));
 
+DESC `myaurorasql`.`myTable`
+
 CREATE INDEX `idx_myTable_name` ON `myaurorasql`.`myTable` 
 (name) 
 COMMENT '' 

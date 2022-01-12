@@ -10,6 +10,9 @@ https://www.youtube.com/watch?v=AUQRyl1SNcU
 Mastering the AWS Serverless Application Model (AWS SAM) - AWS Online Tech Talks
 https://www.youtube.com/watch?v=QBBewrKR1qg
 
+AWS re:Invent 2021 - What’s new in serverless
+https://www.youtube.com/watch?v=_8mbJ3PGVUk
+
 Creating a CI/CD deployment pipeline for GitHub Actions with AWS SAM Pipelines
 https://www.youtube.com/watch?v=sQrdfhGsW6w
 
@@ -28,14 +31,21 @@ brew uninstall aws-sam-cli
 
 !! Need to install AWS CLI, SAM CLI + Docker Desktop first & Configure AWS Credentials !!
 
-sam -h      :   List Commands
-sam init    :   Initialize SAM app
-sam build   :   Build the app
-sam package :   Package the app
-sam deploy (--guided)
+sam -h              List Commands
+sam init            Initialize SAM app
+sam validate        Validate an AWS SAM template
+sam build           Build the app
+sam package         Package the app
+sam deploy --guided
+sam sync --watch
+sam delete          Delete an AWS SAM application and the artifacts created by sam deploy
+sam logs --tail     Fetch logs for a function
+sam publish         Publish a packaged AWS SAM template to the AWS Serverless Application Repository
+sam traces          Fetch AWS X-Ray traces
 
-sam pipeline init --bootstrap: Create a SAM Pipeline - Deploy to dev & prod from GitHub, GitLab & Jenkins
-https://www.youtube.com/watch?v=sQrdfhGsW6w
+sam pipeline bootstrap			Creates all of the environment resources, permission, authentication
+sam pipeline init				Creates the pipeline for your CI/CD system
+sam pipeline init --bootstrap	Entire bootstrap and initialization process
 
 Run Lambda locally:
 sam local invoke -e ./lambda/lambda_event.json LambdaDemoFunction
