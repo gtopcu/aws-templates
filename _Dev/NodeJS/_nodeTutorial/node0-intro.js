@@ -16,6 +16,7 @@
     - Single threaded - distributes events - checks the event queue for new events
     - Perfect for IO intensive apps (file, network, DB) but not for CPU intensive apps (i.e. video encoding)
 
+    https://www.w3schools.com/nodejs/default.asp
     https://www.youtube.com/watch?v=TlB_eWDSMt4
     https://codewithmosh.com/p/the-complete-node-js-course
 */

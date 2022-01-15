@@ -59,8 +59,9 @@ npm help npm       more involved overview
 
 npm install -g nodemon (live output)
 nodemon index.js
-
 Quokka VSCode Extension - Live Playground
+npm i -g jshint (shows errors)
+jshint index.js
 
 sudo su
 npm install -g browserify (require packages in browsers - browserify.org)
@@ -69,11 +70,20 @@ webpack
 watchify
 tinyify
 
-npm i uniq (removes duplicates)
-npm i moment (datetime pretty print - momentjs.com)
+uniq            - removes duplicates
+dayjs           - date/time format
+moment          - datetime pretty print - momentjs.com - Large package, do not use)
+axios           - rest client
+body-parser     - JSON parser
+express         - rest/graphQL server
+apollo          - rest/graphQL server
+jsonwebtoken    - JWT generation
+faker           - generates fake data
+blintz          - ?
+qs              - ?
 
-npm i -g jshint (shows errors)
-jshint index.js
+
+
 
 ***************************************************************************************************
 Yarn - updates package.json automatically, offline package caching
@@ -89,3 +99,5 @@ yarn remove express
 yarn why express (shows package dependencies)
 yarn ls
 yarn cache ls
+yarn test test.js
+
