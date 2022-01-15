@@ -70,19 +70,24 @@ webpack
 watchify
 tinyify
 
+mysql           - MySQL
+mongodb         - MongoDB
+mongoose        - MongoDB
+
 uniq            - removes duplicates
 dayjs           - date/time format
-moment          - datetime pretty print - momentjs.com - Large package, do not use)
+moment          - date/time pretty print - Large package, do not use
 axios           - rest client
 body-parser     - JSON parser
 express         - rest/graphQL server
 apollo          - rest/graphQL server
 jsonwebtoken    - JWT generation
+socket.io       - WebSockets
 faker           - generates fake data
+formidable      - file upload 
+nodemailer      - send email
 blintz          - ?
 qs              - ?
-
-
 
 
 ***************************************************************************************************
