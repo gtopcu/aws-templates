@@ -4,6 +4,9 @@ https://www.mongodb.com/developer/quickstart/cheat-sheet/
 
 16MB max per Doc!
 
+export PATH=$PATH:/Users/hukanege/Downloads/_Backup/mongodb-macos-x86_64-5.0.5/bin
+$mongod --dbpath ./data/db
+
 mongo # connects to mongodb://127.0.0.1:27017 by default
 mongo --host <host> --port <port> -u <user> -p <pwd> # omit the password if you want a prompt
 mongo "mongodb://192.168.1.1:27017"
@@ -19,9 +22,11 @@ use <database_name>
 Show Collections
 show collections
 
+Create Collection
+db.createCollection("coll")
+
 Run JavaScript File
 load("myScript.js")
-
 
 Create
 db.coll.insertOne({name: "Max"})
@@ -221,6 +226,27 @@ db.coll.unhideIndex("name_1")
 Handy commands
 use admin
 db.createUser({"user": "root", "pwd": passwordPrompt(), "roles": ["root"]})
+db.createUser({"user": "node", "pwd": "gt123456", 
+"roles" : [ 
+        {
+            "role" : "read",
+            "db" : "node-rest"
+        }, 
+        {
+            "role" : "readWrite",
+            "db" : "node-rest"
+        }, 
+        {
+            "role" : "dbAdmin",
+            "db" : "node-rest"
+        }
+    ],
+    "mechanisms" : [ 
+        "SCRAM-SHA-1", 
+        "SCRAM-SHA-256"
+    ]
+})
+
 db.dropUser("root")
 db.auth( "user", passwordPrompt() )
 use test

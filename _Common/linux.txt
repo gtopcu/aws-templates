@@ -109,7 +109,9 @@ Variables
 * VARIABLE=123456, ref by $VARIABLE
 
 Env Variables
+$ export PATH=$PATH:/usr/local/nodejs/bin
 $ export GT_ENV_CODE=991453
+
 * printenv  – Print all or part of environment
 * env       – Display all exported environment or run a program in a modified environment
 * set       – List the name and value of each shell variable.

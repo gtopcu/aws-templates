@@ -45,14 +45,17 @@ npm install express --save-dev (updates package.json, saves as dev dependency)
 npm uninstall express --save
 npm shrinkwrap
 
-npm install        install all the dependencies in your project
-npm install <foo>  add the <foo> dependency to your project
-npm test           run this project's tests
-npm run <foo>      run the script named <foo>
-npm <command> -h   quick help on <command>
 npm -l             display usage info for all commands
+npm <command> -h   quick help on <command>
 npm help <term>    search for help on <term>
 npm help npm       more involved overview
+
+npm install        install all the dependencies in your project
+npm install <foo>  add the <foo> dependency to your project
+npm start          starts the app specified in package.json
+npm stop           starts the app specified in package.json
+npm run <foo>      run the script named <foo>
+npm test           run this project's tests
 
 
 --Nice Packages
@@ -70,17 +73,19 @@ webpack
 watchify
 tinyify
 
+uniq            - removes duplicates
+dayjs           - date/time format         
+moment          - date/time pretty print - Large package, do not use
+dotenv          - Store vars in .env file
 mysql           - MySQL
 mongodb         - MongoDB
 mongoose        - MongoDB
-
-uniq            - removes duplicates
-dayjs           - date/time format
-moment          - date/time pretty print - Large package, do not use
-axios           - rest client
-body-parser     - JSON parser
 express         - rest/graphQL server
 apollo          - rest/graphQL server
+axios           - rest client
+body-parser     - JSON parser
+cors            - CORS handler
+node-fetch      - ?
 jsonwebtoken    - JWT generation
 socket.io       - WebSockets
 faker           - generates fake data

@@ -1,0 +1,25 @@
+{
+  "name": "restapiwithexpressmongo",
+  "version": "1.0.0",
+  "description": "rest API with Express & MongoDB",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "npm run tests.js"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "mongodb"
+  ],
+  "author": "hukanege",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "cors": "^2.8.5",
+    "dotenv": "^12.0.4",
+    "express": "^4.17.2",
+    "mongoose": "^6.1.6",
+    "nodemon": "^2.0.15"
+  }
+}
