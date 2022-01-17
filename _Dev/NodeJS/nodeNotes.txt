@@ -85,7 +85,7 @@ apollo          - rest/graphQL server
 axios           - rest client
 body-parser     - JSON parser
 cors            - CORS handler
-node-fetch      - ?
+node-fetch      - same as browser fetch/get
 jsonwebtoken    - JWT generation
 socket.io       - WebSockets
 faker           - generates fake data

@@ -7,3 +7,25 @@ exports.handler = (event, context, callback) => {
     callback(null, event.key1);  // Echo back the first key value
     //callback('Something went wrong');
 };
+
+const json = { name:"john", age:32, languages:["en", "fr"] }
+console.log(json);
+
+var jsonStr = JSON.stringify(json);
+var jsonObj = JSON.parse(jsonStr);
+
+
+var userJSON = {
+    "userId": 1,
+    "id": 1,
+    "title": "delectus aut autem",
+    "completed": false
+  };
+  JSON.stringify(userJSON);
+
+
+
+
+
+
+

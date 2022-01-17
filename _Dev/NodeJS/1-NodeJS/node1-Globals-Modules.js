@@ -36,6 +36,8 @@ console.log(logger.endpoint);
 //const logger2 = require("./logger");
 //logger2("loaded as a function");
 
+//import fetch from 'node-fetch';
+
 //Module Wrapper Function
 //function(exports, require, module, __filename, __dirname) { }
 console.log(__filename);
