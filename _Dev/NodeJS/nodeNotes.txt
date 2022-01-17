@@ -76,7 +76,7 @@ tinyify
 uniq            - removes duplicates
 dayjs           - date/time format         
 moment          - date/time pretty print - Large package, do not use
-dotenv          - Store vars in .env file
+dotenv          - Sets vars in .env file as env variables i.e process.env.PORT
 mysql           - MySQL
 mongodb         - MongoDB
 mongoose        - MongoDB
