@@ -42,3 +42,6 @@ function sayHello(name) {
 }
 sayHello("Gokhan");
 
+//export PORT = 8080
+process.env.PORT
+
