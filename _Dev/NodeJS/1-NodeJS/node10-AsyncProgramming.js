@@ -84,8 +84,8 @@ getFruits().then(res => console.log(res));
 //Execute in parallel
 async function getFruitsParallel() {
 	try {
-		let f1 = await getFruit('banana');
-		let f2 = await getFruit('apple');
+		let f1 = getFruit('banana');
+		let f2 = getFruit('apple');
 		//throw 'boo';
 		return Promise.all([f1, f2]); //waits for all tasks to finish
 		return Promise.race([f1, f2]); //first one to finish returns

@@ -30,19 +30,26 @@ npm -v
 5. Add NPM modules to Path
 export PATH=$PATH:/usr/local/nodejs/bin/node_modules
 
+node index.js
+nodemon index.js
+jshint index.js
+eslint
+prettier
+Quokka: Command+K -> Q 
+
 
 ***************************************************************************************************
 NPM
 ***************************************************************************************************
 
 npm -v
-npm init
+npm init -y
 npm install (in package directory, no arguments - Installs the dependencies in the local node_modules folder)
 npm install --production (do not install modules listed in devDependencies)
 npm install -g browserify (-g global install)
 npm i --global browserify
 npm install express --save-dev (updates package.json, saves as dev dependency)
-npm uninstall express --save
+npm uninstall express --save (save no longer required)
 npm shrinkwrap
 
 npm -l             display usage info for all commands
@@ -74,18 +81,23 @@ watchify
 tinyify
 
 uniq            - removes duplicates
-dayjs           - date/time format         
-moment          - date/time pretty print - Large package, do not use
+luxon           - date/time
+dayjs           - date/time
+moment          - (deprecated)date/time pretty print - Large package, do not use
+lodash          - string manipulation
+ramda           - string manipulation
 dotenv          - Sets vars in .env file as env variables i.e process.env.PORT
+
 mysql           - MySQL
 mongodb         - MongoDB
 mongoose        - MongoDB
 express         - rest/graphQL server
 apollo          - rest/graphQL server
 axios           - rest client
+node-fetch      - same as browser fetch/get
 body-parser     - JSON parser
 cors            - CORS handler
-node-fetch      - same as browser fetch/get
+query-string    - parses query strings incl. arrays
 jsonwebtoken    - JWT generation
 socket.io       - WebSockets
 faker           - generates fake data
@@ -94,6 +106,15 @@ nodemailer      - send email
 blintz          - ?
 qs              - ?
 
+Swagger
+  https://editor.swagger.io/
+  https://www.npmjs.com/package/swagger-ui
+  https://www.npmjs.com/package/swagger-jsdoc
+  https://www.npmjs.com/package/swagger-ui-express
+  npm i swagger-ui
+  npm i swagger-jsdoc
+  npm i swagger-ui-express
+  
 
 ***************************************************************************************************
 Yarn - updates package.json automatically, offline package caching

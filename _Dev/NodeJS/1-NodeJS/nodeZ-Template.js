@@ -18,12 +18,12 @@
 
     npm install -g jshint
     jshint index.js
+    eslint
+    prettier
+    Quokka: Command+K -> Q 
 
     npm install -g browserify
     browserify index.js -o bundle.js
 
-    https://www.npmjs.com/package/swagger-ui
-    https://editor.swagger.io/
-    npm i swagger-ui
 */
 

@@ -12,6 +12,14 @@
     npm install cors
     
     npm start/stop
+
+    https://editor.swagger.io/
+    https://www.npmjs.com/package/swagger-ui
+    https://www.npmjs.com/package/swagger-jsdoc
+    https://www.npmjs.com/package/swagger-ui-express
+    npm i swagger-ui
+    npm i swagger-jsdoc
+    npm i swagger-ui-express
 */
 
 require('dotenv/config') //Sets environment vars from .env file
@@ -50,6 +58,67 @@ app.get('/', (req, resp) => {
         resp.send("Home Dir");
     }
 );
+
+
+//Swagger - Auto-generating OpenAPI 3.0 doc example
+/**
+ * @openapi
+ * /:
+ *   get:
+ *     description: Welcome to swagger-jsdoc!
+ *     responses:
+ *       200:
+ *         description: Returns a mysterious string.
+ */
+app.get('/api', (req, resp) => {
+        resp.send("Swagger enabled API!");
+    }
+);
+
+//Swagger sample - jsDoc creates OpenAPI 3.0 spec
+//import swaggerJsdoc from 'swagger-jsdoc';
+const swaggerJsdoc = require('swagger-jsdoc');
+
+async function surveSwaggerSpecification(req, res) {
+  // Swagger definition
+  // You can set every attribute except paths and swagger
+  // https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md
+  const swaggerDefinition = {
+    info: {
+      // API informations (required)
+      title: 'Hello World', // Title (required)
+      version: '1.0.0', // Version (required)
+      description: 'A sample API', // Description (optional)
+    },
+    //host: `localhost:${PORT}`, // Host (optional)
+    basePath: '/', // Base path (optional)
+  };
+  // Options for the swagger docs
+  const options = {
+    // Import swaggerDefinitions
+    swaggerDefinition,
+    // Path to the API docs
+    // Note that this path is relative to the current directory from which the Node.js is ran, not the application itself.
+    //apis: [`${__dirname}/routes*.js`, `${__dirname}/parameters.yaml`],
+    apis: [`${__dirname}/app.js`, ],
+  };
+  const swaggerSpec = await swaggerJsdoc(options);
+
+  // And here we go, we serve it.
+  res.setHeader('Content-Type', 'application/json');
+  res.send(swaggerSpec);
+}
+app.get('/api-docs.json', surveSwaggerSpecification);
+
+/*
+//Serve using express
+//https://www.npmjs.com/package/swagger-ui-express
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+*/
+
+
 /*
 router.get('/customer', (req, resp) => {
     resp.send("Get customers");

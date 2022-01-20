@@ -10,6 +10,8 @@
     node index.js
     nodemon index.js
     jshint index.js
+    eslint
+    prettier
     Quokka: Command+K -> Q 
     
     - Async, non-blocking architecture based on C++ wrapper around Google v8 Engine
