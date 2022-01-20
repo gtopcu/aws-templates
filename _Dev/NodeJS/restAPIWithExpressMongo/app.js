@@ -10,6 +10,8 @@
     npm install dotenv
     npm install body-parser
     npm install cors
+
+    npm build 
     
     npm start/stop
 

@@ -76,7 +76,7 @@ jshint index.js
 sudo su
 npm install -g browserify (require packages in browsers - browserify.org)
 browserify index.js -o bundle.js
-webpack
+webpack/snowpack
 watchify
 tinyify
 
@@ -114,7 +114,7 @@ Swagger
   npm i swagger-ui
   npm i swagger-jsdoc
   npm i swagger-ui-express
-  
+
 
 ***************************************************************************************************
 Yarn - updates package.json automatically, offline package caching
