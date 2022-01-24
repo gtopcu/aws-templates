@@ -1,3 +1,4 @@
+
 const myFunc = function () {
 	console.log("in function 1");
 };

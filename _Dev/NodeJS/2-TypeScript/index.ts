@@ -4,7 +4,7 @@ https://www.youtube.com/watch?v=ahCwqrYpIuM
 npm i -g typescript
 
 tsc --version - 4.5.4
-tsc index.ts - convert to js
+tsc index.ts -> converts to js
 touch tsconfig.json + tcs
 */
 
