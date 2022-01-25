@@ -7,6 +7,9 @@ os.system("clear") # Linux - OSX
 # Get Environmental Variable
 print(os.getenv("python3"))
 
+# Get All Environmental Variables as dict
+print(os.environ)
+
 # List files and directories
 path = '.'
 print(os.listdir(path))
