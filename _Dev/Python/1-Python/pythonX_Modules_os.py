@@ -1,5 +1,6 @@
 
 import os
+import json
 
 os.system("clear") # Linux - OSX
 #os.system("cls") # Windows
@@ -8,7 +9,7 @@ os.system("clear") # Linux - OSX
 print(os.getenv("python3"))
 
 # Get All Environmental Variables as dict
-print(os.environ)
+print(json.dumps(dict(**os.environ)))
 
 # List files and directories
 path = '.'
