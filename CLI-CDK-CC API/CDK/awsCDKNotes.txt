@@ -1,8 +1,24 @@
 
 https://github.com/aws/aws-cdk
 https://docs.aws.amazon.com/cdk/v2/guide/home.html
+https://docs.aws.amazon.com/cdk/v2/guide/cli.html
 https://constructs.dev/packages/cdk-spot-one/v/1.0.17?lang=typescript
 https://constructs.dev/
+
+npm install -g aws-cdk             # install latest version
+npm install -g aws-cdk@8.4.0       # install specific version
+
+cdk init -> Creates a new CDK project in the current directory from a specified template
+cdk list (ls) -> Lists the stacks in the app
+cdk synthesize (synth) -> Synthesizes and prints the CloudFormation template for the specified stack(s)
+cdk bootstrap -> Deploys the CDK Toolkit staging stack; see Bootstrapping
+cdk deploy -> Deploys the specified stack(s)
+cdk destroy -> Destroys the specified stack(s)
+cdk diff -> Compares the specified stack with the deployed stack or a local CloudFormation template
+cdk metadata -> Displays metadata about the specified stack
+cdk context -> Manages cached context values
+cdk docs (doc) -> Opens the CDK API reference in your browser
+cdk doctor -> Checks your CDK project for potential problems
 
 class MyEcsConstructStack(Stack):
 
