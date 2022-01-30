@@ -108,11 +108,13 @@ sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
 Variables
 * VARIABLE=123456, ref by $VARIABLE
 
-Env Variables
+PATH
 $ echo $PATH
+$ which node
 $ export PATH=$PATH:/usr/local/nodejs/bin
 $ export GT_ENV_CODE=991453
 
+ENV
 * printenv  – Print all or part of environment
 * env       – Display all exported environment or run a program in a modified environment
 * set       – List the name and value of each shell variable.
@@ -138,10 +140,8 @@ yum install / apt get install xclip
 Create large file
 dd if=/dev/urandom of=largefile bs=3145728 count=1 (create large file)
 
-************************** Curl/Tar ***************************
+************************** Tar/Zip ***************************
 
-wget <link>
-curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
 sudo installer -pkg AWSCLIV2.pkg -target /
 
 zip -rq dist-latest.zip src package.json 
@@ -192,7 +192,9 @@ ip address add 192.0.0.1 dev eth0
 ethtool eth0
 netstat -tupl
 
+wget <link>
 curl 54.78.7.114:22
+curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
 curl -X GET http://api.com/customers/1000
 curl -X POST -H "Content-Type: application/json" -d '{ "username":"gokhan", "age":36 }' http://api.com/customers
 curl -X DELETE http://api.com/customers/1000
@@ -203,7 +205,6 @@ curl -v -X POST google.com -F "user='AND 1=1'" (SQL Injection attack)
 curl -d '{}' https://o55ybz0sc5.execute-api.us-east-1.amazonaws.com/v1/graphql (Post with data)
 
 nano /var/logs 
-
 sudo nano /etc/hosts
 sudo vi /etc/hosts
 (w):q!
