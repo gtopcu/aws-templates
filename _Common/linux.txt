@@ -109,6 +109,7 @@ Variables
 * VARIABLE=123456, ref by $VARIABLE
 
 Env Variables
+$ echo $PATH
 $ export PATH=$PATH:/usr/local/nodejs/bin
 $ export GT_ENV_CODE=991453
 
