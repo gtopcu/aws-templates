@@ -39,18 +39,22 @@ rm chunk* (all files starting with chunk)
 rm -r <dirname> 
 mv <source> <target>
 cp <source> <target>
-cp -r ./Green ./White  (Copy Dir)
-ln -s ./Downloads/exec.sh (Symbolic Link)
+cp -r ./Green ./White
+cp/COPY --chown=www-data . . 
+ln -s ./Downloads/exec.sh 
 find conten*
 
 chown -R hukanege /Users/hukanege/.aws/ (recursive for dir)
+chown -R www-data /tmp
 
 chmod u-x <filename>
 chmod u+rw <filename>
 chmod +x  <dir      :   Allow cd on dir 
 chmod 777 -R <dir   :   Recursive
-chmod 777 <filename>:   Set rwx permission for owner, group, world
-chmod 755 <filename>:   Set rwx permission for owner, rx for group, x for world
+chmod 777 <filename>:   Set rwx for owner, group, world
+chmod 755 <filename>:   Set rwx for owner, rx for group, x for world
+chmod 600 <filename>:   Set rwx for owner, no other user can access the file
+chmod 644 <filename>:   Set rwx for owner, r for group members and other users on the system
 chmod 400 <filename>:   Allow read by owner
 chmod 200 <filename>:   Allow write by owner
 chmod 100 <filename>:   For files, allow execution by owner
@@ -162,6 +166,10 @@ struct timespec st_ctim;  /* time of last status change */
 ************************** apt-get/yum ***************************
 
 --Ubuntu
+apt-get update && apt-get install --no-install-recommends --no-install-suggests -y \
+             php7.4-fpm \
+             php7.4-xmlwriter \
+             ..
 apt(-get) install aptitude
 apt(-get) update
 apt(-get) ugrade

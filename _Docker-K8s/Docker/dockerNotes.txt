@@ -16,7 +16,9 @@ docker run -dp 3000:3000 gtopcu/getting-started
 docker stop <the-container-id>
 docker rm <the-container-id>
 docker rm -f <the-container-id>
-docker image rm -f<the-image-id>
+docker rm -f $(docker ps -a -q)   : Remove all containers
+docker image rm -f <the-image-id>
+docker builder prune -f -a        : Clear image cache
 
 docker tag getting-started gtopcu/getting-started
 docker push gtopcu/getting-started:tagname

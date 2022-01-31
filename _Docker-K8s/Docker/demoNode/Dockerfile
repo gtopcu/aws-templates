@@ -12,6 +12,16 @@ WORKDIR /app
 #COPY yarn.lock .
 #RUN yarn install --production
 
+#Set hosts file
+#RUN echo "127.0.0.1 localhost" >> /etc/hosts
+#RUN cat /etc/hosts
+
+#Set SSH access
+#COPY ./ssh/id_rsa /root/.ssh/id_rsa
+#RUN ssh-keyscan bitbucket.org > /root/.ssh/known_hosts
+#RUN chmod 600 /root/.ssh/id_rsa
+
+#Use docker image caching, complete rebuild only when package.json is changed
 #ADD /app /app
 COPY /app /app
 
