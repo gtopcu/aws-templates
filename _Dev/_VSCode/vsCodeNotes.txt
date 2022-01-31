@@ -4,6 +4,7 @@ General:
 Material Theme, CodeSnap, RestClient, Thunder Client, Database Client, Marquee, Code Time
 Prettier: ⌥ + ⇧ + f 
 JS: Quokka, Import Cost
+Snyk: snyk monitor
 
 Command + Shift + P or F1 then type Shell in command palette 
 Select -> Install code in PATH 
@@ -19,7 +20,7 @@ F5                  -> Start debugging
 ⌘ + ⇧ + Y           -> Debug Console
 ⌘ + ⇧ + M           -> Problems
 ⌥ + Up Arrow        -> Move line up
-⌥ + Down Arrow      -> Move line up
+⌥ + Down Arrow      -> Move line down
 ⌘ + ⌥ + Up Arrow    -> Add cursor above
 ⌘ + ⌥ + Down Arrow  -> Add cursor below
 ⌘ + ⇧ + 7           -> Toggle Line Comment
