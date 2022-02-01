@@ -27,7 +27,7 @@ clear
 history
 pwd
 ls -l -a
-ls -a | grep D
+ls -a | grep -i Doc
 ls -ltr pythonX-bash.py
 man <command>
 cd ..
