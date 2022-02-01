@@ -1,12 +1,29 @@
 
 import datetime
+from re import A
 import time
 import math
 import random
+import sys
 
 import os
 os.system("clear") # Linux - OSX
 #os.system("cls") # Windows
+
+def add(*x) -> int:
+    var = 0
+    for v in x:
+        var += v
+    return var
+
+print(add(1, 2, 3))
+
+mylambda = lambda a : a*a
+print(mylambda(9))
+
+a = b = 1
+
+
 
 """
 x = 10
