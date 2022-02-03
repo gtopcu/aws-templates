@@ -4,15 +4,18 @@
 
 # Install
 # https://www.python.org/downloads/
-# curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-# python3 get-pip.py
-# quit()
-
 # #!/usr/bin/env python3 (linux) 
 # #!/usr/bin python3 (mac)
 # #!/usr/bin/python3 (dir)
 
+# PIP
+# curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+# sudo python3 get-pip.py
+# quit()
+# sudo python3 -m pip install --upgrade pip
+
 # pip install <package>
+# pip install -r requirements.txt -t lib
 # pip install -t $PWD pymysql
 # pip uninstall <package>
 # pip list
