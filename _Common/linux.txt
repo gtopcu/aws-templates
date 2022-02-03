@@ -150,6 +150,8 @@ dd if=/dev/urandom of=largefile bs=3145728 count=1 (create large file)
 sudo installer -pkg AWSCLIV2.pkg -target /
 
 zip -rq dist-latest.zip src package.json 
+zip -r9 ../deployment_package.zip .
+zip -g deployment_package.zip lambda_function.py
 zipinfo dist-latest.zip
 unzip filename.zip
 tar -xzf filename.tar.gz

@@ -49,7 +49,9 @@ aws s3 ls
 aws s3 mb s3://gokhantopcu-clitest
 aws s3 rb s3://gokhantopcu-clitest
 aws s3 cp <file> s3://<s3path>
+aws s3 cp s3://gokhantopcu .
 aws s3 sync <dir> s3://<s3path>
+aws s3 sync . s3://gokhantopcu
 aws s3 sync --delete <dir> s3://<s3path>
 aws s3api list-objects --bucket <YOUR_BUCKET_NAME> --page-size 5 (default: 1000)
 aws s3api list-objects --bucket <YOUR_BUCKET_NAME> --max-items 1
@@ -84,6 +86,7 @@ aws lambda invoke \
     --function-name ukjfq7sqG15LvfC30hwbRAMfR-96K3UNUCxNd9 \
     out.txt && cat out.txt && rm out.txt 
 
+aws lambda update-function-code --function-name pythonLambda --zip-file fileb://deployment_package.zip
 
 ------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------
