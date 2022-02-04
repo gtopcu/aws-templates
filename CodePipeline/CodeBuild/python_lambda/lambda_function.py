@@ -1,19 +1,19 @@
 
-# https://www.youtube.com/watch?v=AmHZxULclLQ
+# Build & Deploy lambda from GitHub repo with CodeBuild: https://www.youtube.com/watch?v=AmHZxULclLQ
+# Deploy lambda with CodeDeploy: https://www.youtube.com/watch?v=mYcRPKeCPXc
 
-# put pandas==1.2.1 in requirements.txt
+# put requests==2.27.1 in requirements.txt
 
-import json
-#import pandas as pd
+import time
+import requests
 
 def lambda_handler(event, context):
 
-    # d = { "col1":[1,2], "col2":[3,4] }
-    # df = pd.DataFrame(data=d)
-    # print(df)
-    # print("Done v1.0!")
-
-    return {
-        'statusCode': 200,
-        'body': json.dumps('Hello from Lambda v1.6!')
-    }
+    now = time.time()
+    x = requests.get('https://w3schools.com/python/demopage.htm')
+    print("Req time: " + str(time.time() - now))
+    print("Status Code: " + str(x.status_code))
+    #print("Headers:")
+    #print(x.headers)
+    #print("Body:")
+    #print(x.text)

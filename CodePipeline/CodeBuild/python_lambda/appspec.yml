@@ -1,0 +1,9 @@
+version: 0.0
+Resources:
+  - python_lambda:
+      Type: AWS::Lambda::Function
+      Properties:
+        Name: "python_lambda"
+        Alias: "alias"
+        CurrentVersion: "1"
+        TargetVersion: "2"
