@@ -14,14 +14,14 @@
 # quit()
 # sudo python3 -m pip install --upgrade pip
 
-# pip install <package>
-# pip install -r requirements.txt -t lib
-# pip install -t $PWD pymysql
-# pip uninstall <package>
-# pip list
+# pip3 install <package>
+# pip3 install -r requirements.txt -t lib
+# pip3 install -t $PWD pymysql
+# pip3 uninstall <package>
+# pip3 list
 
 # Install Jupyter
-# pip install -U jupyter
+# pip3 install -U jupyter
 
 # *********************************************************************************************************
 # SHELL
