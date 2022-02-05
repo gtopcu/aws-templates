@@ -10,19 +10,33 @@ put(url, data, args)	Sends a PUT request to the specified url
 request(method, url, args)	Sends a request of the specified method to the specified url
 """
 
+
 import time
 import requests
 
 now = time.time()
-x = requests.get('https://w3schools.com/python/demopage.htm')
+r = requests.get('https://w3schools.com/python/demopage.htm')
 print("Req time: " + str(time.time() - now))
-print("Status Code: " + str(x.status_code))
+print("Status Code: " + str(r.status_code))
 print("Headers:")
-print(x.headers)
+print(r.headers)
 print("Body:")
-print(x.text)
+print(r.text)
+
+"""
+payload = {
+    "form": {
+        "key1": "value1",
+        "key2": "value2"
+        },
+}
+r = requests.post('https://httpbin.org/post', data=payload)
+print("Status Code: " + str(r.status_code))
+print("Body:")
+print(r.text)
 
 
+"""
 """
 Requests HTTP Library
 ~~~~~~~~~~~~~~~~~~~~~
