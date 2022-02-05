@@ -4,12 +4,6 @@ AttributeName=Id,AttributeType=N --key-schema \
 AttributeName=Id,KeyType=HASH \
 --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5
 
-Windows - Replace \ with ^ (Shift+6)
-aws dynamodb create-table --table-name ProductCatalog --attribute-definitions ^
-AttributeName=Id,AttributeType=N --key-schema ^
-AttributeName=Id,KeyType=HASH ^
---provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5
-
 2) Populate:
 aws dynamodb batch-write-item --request-items file://items.json
 
