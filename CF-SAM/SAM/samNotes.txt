@@ -47,16 +47,16 @@ sam pipeline bootstrap			Creates all of the environment resources, permission, a
 sam pipeline init				Creates the pipeline for your CI/CD system
 sam pipeline init --bootstrap	Entire bootstrap and initialization process
 
-Run Lambda locally:
-sam local invoke -e ./lambda/lambda_event.json LambdaDemoFunction
+Invoke:
+sam local invoke -e ./events/lambda_event.json samFunction
 
-Run API GW locally:
-sam local invoke -e ./apigateway/apigateway_event.json APIGatewayFunction
-sam local start-api 
+Start:
+sam local start-lambda
+sam local start-api
 sam local start-api --template-file cloudformation.yml
 
 Generate Event
-sam local generate-event
+sam local generate-event sqs ...
 
 ---------------------------------------------------------------------------------------------
 
