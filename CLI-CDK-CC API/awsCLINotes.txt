@@ -2,15 +2,12 @@
 ------------------------------------------------------------------------------------
 SSH Connection:
 ------------------------------------------------------------------------------------
-
 chmod 400 gt-key.pem
 ssh -i "gt-key.pem" ec2-user@54.78.7.114
-
 
 ------------------------------------------------------------------------------------
 Install CLI 
 ------------------------------------------------------------------------------------
-
 https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
 curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
 sudo installer -pkg AWSCLIV2.pkg -target /
@@ -19,20 +16,15 @@ CLI Doc:
 https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html
 https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html
 
-sh-3.2# ls -l
-sh-3.2# sudo chown -R hukanege /Users/hukanege/.aws/
-sh-3.2# sudo chown -R hukanege /Users/hukanege/.aws/credentials
-sh-3.2# sudo chown -R hukanege /Users/hukanege/.aws/config
-
-(~/.aws/credentials file (C:\Users\USER_NAME\.aws\credentials file for Windows users)
+sudo chown -R hukanege /Users/hukanege/.aws/
+/.aws/credentials
+/.aws/config
+(C:\Users\USER_NAME\.aws\)
 
 apt install awscli
 
-/root/.aws - AWS config dir
-cd ~
-cd .aws
-
 aws configure
+aws configure [--profile profile-name]
 aws configure list
 aws configure list-profiles
 aws configure set region us-west-2 --profile myProfile
