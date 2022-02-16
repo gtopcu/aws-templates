@@ -1,0 +1,23 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: SAM Demo App
+Globals:
+  Function:
+    Timeout: 10
+Resources:
+  samFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      MemorySize: 128
+      Timeout: 10
+      CodeUri: s3://gtopcu-sam/cd8e4d0863230de72753cd0f208a213f
+      Handler: app.lambda_handler
+      Runtime: python3.9
+      Architectures:
+      - x86_64
+      Events:
+        samAPI:
+          Type: Api
+          Properties:
+            Path: /hello
+            Method: get
