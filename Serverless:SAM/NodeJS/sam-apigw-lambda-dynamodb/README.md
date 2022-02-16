@@ -3,6 +3,8 @@
 https://www.youtube.com/watch?v=-ALooNnddOE
 https://github.com/mavi888/sam-test-basic-project
 
+https://www.youtube.com/watch?v=0OF5EhxyeQk
+
 
 ### To build, package and deploy this project follow this steps
 
