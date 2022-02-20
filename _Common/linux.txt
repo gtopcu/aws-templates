@@ -206,6 +206,8 @@ netstat -tupl
 wget <link>
 curl 54.78.7.114:22
 curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
+curl --create-dirs "https://packages.sury.org/php/apt.gpg" -o "/etc/apk/trusted.gpg.d/php.gpg"
+
 curl -X GET http://api.com/customers/1000
 curl -X POST -H "Content-Type: application/json" -d '{ "username":"gokhan", "age":36 }' http://api.com/customers
 curl -X DELETE http://api.com/customers/1000
