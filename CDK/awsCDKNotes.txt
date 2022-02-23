@@ -9,6 +9,7 @@ npm install -g aws-cdk             # install latest version
 npm install -g aws-cdk@8.4.0       # install specific version
 
 cdk init -> Creates a new CDK project in the current directory from a specified template
+cdk init --language python
 cdk list (ls) -> Lists the stacks in the app
 cdk synthesize (synth) -> Synthesizes and prints the CloudFormation template for the specified stack(s)
 cdk bootstrap -> Deploys the CDK Toolkit staging stack; see Bootstrapping
