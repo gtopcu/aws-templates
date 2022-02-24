@@ -1,0 +1,71 @@
+.github/workflows/aws.yml
+
+name: Deploy to AWS ECR
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+
+env:
+  AWS_REGION: us-east-2
+  ECR_REPOSITORY: spiky-hello-world
+  S3_ML_MODELS_BUCKET: platform-ml-infra-models-dev
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-20.04
+    permissions:
+      packages: write
+      contents: read
+
+    steps:
+      - name: Set ENV variables for main
+        if: endsWith(github.ref, '/main')
+        run:
+          echo "QUEUE_NAME=sddg-queue-prod" >> "$GITHUB_ENV"
+          echo "ENV=main" >> "$GITHUB_ENV"
+
+      - name: Set ENV variables for dev
+        if: endsWith(github.ref, '/dev')
+        run:
+          echo "QUEUE_NAME=sddg-queue-dev" >> "$GITHUB_ENV"
+          echo "ENV=dev" >> "$GITHUB_ENV"
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to AWS ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push image to AWS ECR
+        id: build-image
+
+        env:
+          ECR-REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: sdgfg-latest-${{ env.ENV }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+        run: |
+          # Build a docker container and push it to ECR
+          echo $QUEUE_NAME
+          echo $IMAGE_TAG
+          export DOCKER_BUILDKIT=1
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --secret id=AWS_ACCESS_KEY_ID --secret id=AWS_SECRET_ACCESS_KEY --build-arg queue_name=$QUEUE_NAME --build-arg s3_ml_models_bucket=$S3_ML_MODELS_BUCKET .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
