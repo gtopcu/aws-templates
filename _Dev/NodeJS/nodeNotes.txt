@@ -51,6 +51,7 @@ npm i --global browserify
 npm install express --save-dev (updates package.json, saves as dev dependency)
 npm uninstall express --save (save no longer required)
 npm shrinkwrap
+npm audit - scans packages for vulnerabilities
 
 npm -l             display usage info for all commands
 npm <command> -h   quick help on <command>
