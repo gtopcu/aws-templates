@@ -1,0 +1,6 @@
+{
+    "TableName": "Comment-gkyef3d5qrfxfcoyt76zuf7n4i-dev",
+    "PointInTimeRecoverySpecification": {
+        "PointInTimeRecoveryEnabled": true
+    }
+}

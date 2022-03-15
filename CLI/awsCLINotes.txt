@@ -16,6 +16,9 @@ CLI Doc:
 https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html
 https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html
 
+CLI Skeleton:
+https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-skeleton.html
+
 sudo chown -R hukanege /Users/hukanege/.aws/
 /.aws/credentials
 /.aws/config
@@ -27,10 +30,36 @@ aws configure
 aws configure [--profile profile-name]
 aws configure list
 aws configure list-profiles
-aws configure set region us-west-2 --profile myProfile
+aws configure set region us-east-2 --profile spiky
 aws configure import --csv file://credentials.csv
 aws iam get-user
 which aws
+
+------------------------------------------------------------------------------------
+DynamoDB:
+https://docs.aws.amazon.com/cli/latest/userguide/cli-services-s3-commands.html
+------------------------------------------------------------------------------------
+
+aws dynamodb list-tables \
+    --profile spiky \
+    --generate-cli-skeleton input > tables.json 
+
+aws dynamodb describe-continuous-backups \
+    --table-name Blog-gkyef3d5qrfxfcoyt76zuf7n4i-dev \
+    --profile spiky
+
+aws dynamodb update-continuous-backups \
+    --table-name Blog-gkyef3d5qrfxfcoyt76zuf7n4i-dev \
+    --point-in-time-recovery-specification PointInTimeRecoveryEnabled=true \
+    --profile spiky
+
+aws dynamodb update-continuous-backups \
+    --generate-cli-skeleton input > tablesSkeleton.json
+
+aws dynamodb update-continuous-backups \
+    --profile spiky \
+    --cli-input-json file://tables.json
+
 
 ------------------------------------------------------------------------------------
 S3:
@@ -57,6 +86,7 @@ https://docs.aws.amazon.com/cli/latest/userguide/cli-services-ec2.html
 aws ec2 describe-instances
 aws ec2 stop-instances --instance-ids i-0744af96f9e05dfe5
 aws ec2 create-snapshot
+aws ec2 run-instances --cli-input-json file://ec2runinst.json
 
 Display EC2 user & metada:
 ------------------------------------------------------------
