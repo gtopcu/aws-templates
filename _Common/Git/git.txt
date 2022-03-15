@@ -65,7 +65,7 @@ git add readme.txt
 git add .
 git commit -am "initial"
 git checkout master / branch / b6d7c45539810e73dbaf4871b05ca2c8c4440a60
-git branch 
+git branch -a
 git branch featureBranch
 git branch -l
 git branch -d featureBranch
