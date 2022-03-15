@@ -37,7 +37,7 @@ which aws
 
 ------------------------------------------------------------------------------------
 DynamoDB:
-https://docs.aws.amazon.com/cli/latest/userguide/cli-services-s3-commands.html
+https://docs.aws.amazon.com/cli/latest/reference/dynamodb/index.html#cli-aws-dynamodb
 ------------------------------------------------------------------------------------
 
 aws dynamodb list-tables \
