@@ -76,6 +76,8 @@ aws s3 sync . s3://gokhantopcu
 aws s3 sync --delete <dir> s3://<s3path>
 aws s3api list-objects --bucket <YOUR_BUCKET_NAME> --page-size 5 (default: 1000)
 aws s3api list-objects --bucket <YOUR_BUCKET_NAME> --max-items 1
+aws s3api put-bucket-versioning --bucket DOC-EXAMPLE-BUCKET1 &&
+    --versioning-configuration Status=Enabled,MFADelete=Enabled --mfa "SERIAL 123456"
 
 
 ------------------------------------------------------------------------------------
