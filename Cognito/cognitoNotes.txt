@@ -1,0 +1,5 @@
+
+https://www.youtube.com/watch?v=o7OHogUcRmI
+
+API GW Cognito Auth Address:
+https://cognito-idp.us-east-2.amazonaws.com/us-east-2_Qtr4N1yVw

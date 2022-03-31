@@ -1,0 +1,19 @@
+
+https://stackoverflow.com/questions/37941780/what-is-the-rest-or-cli-api-for-logging-in-to-amazon-cognito-user-pools
+
+curl -X POST --data @aws-auth-data.json \
+-H 'X-Amz-Target: AWSCognitoIdentityProviderService.InitiateAuth' \
+-H 'Content-Type: application/x-amz-json-1.1' \
+https://cognito-idp.us-east-2.amazonaws.com/
+
+Where aws-auth-data.json is:
+{
+   "AuthParameters" : {
+      "USERNAME" : "yourusername@example.com",
+      "PASSWORD" : "yourpassword"
+   },
+   "AuthFlow" : "USER_PASSWORD_AUTH",
+   "ClientId" : "75........................"
+}
+The user pool client must allow USER_PASSWORD_AUTH for this to work - that's an AWS-side setting.
+

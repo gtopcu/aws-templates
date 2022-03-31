@@ -217,6 +217,22 @@ curl -v -X POST google.com -F "user='<script><alert>Alert me</alert></script>'" 
 curl -v -X POST google.com -F "user='AND 1=1'" (SQL Injection attack)
 curl -d '{}' https://o55ybz0sc5.execute-api.us-east-1.amazonaws.com/v1/graphql (Post with data)
 
+curl -X POST --data @aws-auth-data.json \
+-H 'X-Amz-Target: AWSCognitoIdentityProviderService.InitiateAuth' \
+-H 'Content-Type: application/x-amz-json-1.1' \
+https://cognito-idp.us-east-2.amazonaws.com/
+
+curl --request GET \
+  --url https://izb9erxhx4.execute-api.us-east-2.amazonaws.com/00_infraops_donotdelete \
+  --header 'Authorization: Bearer eyJraWQiOiJhR0F1aDdraVNzMEt5XC9YeHp1VXN6eGgrSEZ0WkZ1SHFLQXBWdlkxOUU1ND0iLCJhbGciOiJSUzI1NiJ9.eyJvcmlnaW5fanRpIjoiNDVhMTA5MDgtYzgxYi00NTlmLTlmYjQtY2Y5NGY2YTkyYzRkIiwic3ViIjoiYmMxMDU5NWQtZGQ4Ni00ZGIwLTkzODQtM2MxM2M5NDEzMTgwIiwiZXZlbnRfaWQiOiI3ZGFhYTIwMy00MDNhLTRjZjEtYTVhNS1mZDFlMjdhMWVjMjEiLCJ0b2tlbl91c2UiOiJhY2Nlc3MiLCJzY29wZSI6ImF3cy5jb2duaXRvLnNpZ25pbi51c2VyLmFkbWluIiwiYXV0aF90aW1lIjoxNjQ4MDM1OTQ2LCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0yLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMl9RdHI0TjF5VnciLCJleHAiOjE2NDgwNzE5NDYsImlhdCI6MTY0ODAzNTk0NiwianRpIjoiMzI1OGZjM2ItOWU0Ny00YWI2LThkOTUtZjNiMzgxOTRiNTMxIiwiY2xpZW50X2lkIjoiNm1uOXJlMXZtazRrYTJvNGwzMXJ1anE4N2giLCJ1c2VybmFtZSI6ImJjMTA1OTVkLWRkODYtNGRiMC05Mzg0LTNjMTNjOTQxMzE4MCJ9.YKGjnFbegY2Y92WN3WfiR_O5k9RCn5dJJpf-FJj6m6MyVhVQD-rFjWx46ks8D8hYmf21wGbwraN16n4Q44aZ0QRtdsF1Br8t9J7vtONRWUVsRnN1mqvmbIEz4XiYNkC9zZfSealFtpDu95Ri382tJX8QJ5EIzrFYxfo1HDLAjvfaZnmxJxNSTdAvpeVoXBDOgo-HEBvd_HHzkvHDR0rv-mXEc1rydqH2zW0i9J0Wgfrb-YthqZaO0EO_qwCmwU1qs0Wn4-Sw2_wSftX4R1kEQ3smUpMUfFwy3Y0iTOFT5gJcUMfijkq4lhFJK0jg9dq9op8ZbT1GPvfMJnoAPG8LSQ'
+
+curl https://izb9erxhx4.execute-api.us-east-2.amazonaws.com/00_infraops_donotdelete
+CSS attack:
+curl -v POST https://izb9erxhx4.execute-api.us-east-2.amazonaws.com/00_infraops_donotdelete -F "user='<script><alert>Alert me</alert></script>'"
+SQL Injection attack:
+curl -v POST https://izb9erxhx4.execute-api.us-east-2.amazonaws.com/00_infraops_donotdelete -F "user='AND 1=1'" 
+
+
 nano /var/logs 
 sudo nano /etc/hosts
 sudo vi /etc/hosts
