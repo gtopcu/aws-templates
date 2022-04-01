@@ -1,4 +1,4 @@
-//https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.html
+// https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.html
 {
     "Version":"2012-10-17",
     "Statement":[
@@ -11,3 +11,17 @@
       }
     ]
   }
+
+{
+  "Version":"2012-10-17",
+  "Statement":[
+    {
+      "Sid":"PublicRead",
+      "Effect":"Allow",
+      "Principal": "*",
+      "Action":["s3:GetObject","s3:GetObjectVersion"],
+      "Resource":["arn:aws:s3:::wealt.co-cf/*"]
+    }
+  ]
+}
+
