@@ -1,10 +1,14 @@
 [
     {
         "AllowedHeaders": [
-            "Authorization"
+            "*"
         ],
         "AllowedMethods": [
-            "GET"
+            "GET",
+            "HEAD",
+            "PUT",
+            "POST",
+            "DELETE"
         ],
         "AllowedOrigins": [
             "*"
