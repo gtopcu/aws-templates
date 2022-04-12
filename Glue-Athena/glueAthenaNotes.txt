@@ -12,3 +12,6 @@ https://www.youtube.com/watch?v=QLealnfNErs&list=RDCMUCd6MoB9NC6uYN2grvUNT-Zg&in
 
 How to Query AWS Athena from a Lambda Function
 https://www.youtube.com/watch?v=a_Og1t3ULOI
+
+Analyze Cost and Usage Reports using Amazon Athena
+https://www.youtube.com/watch?v=KEeJEZTYE8E
