@@ -1,0 +1,14 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "s3-cw-all",
+            "Effect": "Allow",
+            "Action": [
+                "cloudwatch:*",
+                "s3:*"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
