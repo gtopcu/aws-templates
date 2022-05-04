@@ -4,16 +4,20 @@ https://docs.aws.amazon.com/cdk/v2/guide/home.html
 https://docs.aws.amazon.com/cdk/v2/guide/cli.html
 https://constructs.dev/packages/cdk-spot-one/v/1.0.17?lang=typescript
 https://constructs.dev/
+https://constructs.dev/packages/@aws-cdk/aws-servicecatalog/v/1.154.0?lang=typescript
+https://www.youtube.com/watch?v=_kf4ajni3Qk
 
 npm install -g aws-cdk             # install latest version
 npm install -g aws-cdk@8.4.0       # install specific version
 
 cdk init -> Creates a new CDK project in the current directory from a specified template
 cdk init --language python
+cdk init app --language typescript
 cdk list (ls) -> Lists the stacks in the app
 cdk synthesize (synth) -> Synthesizes and prints the CloudFormation template for the specified stack(s)
 cdk bootstrap -> Deploys the CDK Toolkit staging stack; see Bootstrapping
 cdk deploy -> Deploys the specified stack(s)
+cdk watch -> Watch for changes
 cdk destroy -> Destroys the specified stack(s)
 cdk diff -> Compares the specified stack with the deployed stack or a local CloudFormation template
 cdk metadata -> Displays metadata about the specified stack

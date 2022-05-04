@@ -2,7 +2,7 @@
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "s3-cw-all",
+            "Sid": "policy01",
             "Effect": "Allow",
             "Action": [
                 "cloudwatch:*",

@@ -1,0 +1,40 @@
+Account:
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "102224384400"
+            },
+            "Action": "sts:AssumeRole"
+        }
+    ]
+}
+Root User:
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Effect": "Allow",
+			"Principal": {
+				"AWS": "arn:aws:iam::102224384400:root"
+			},
+			"Action": "sts:AssumeRole"
+		}
+	]
+}
+
+User:
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Effect": "Allow",
+			"Principal": {
+				"AWS": "arn:aws:iam::102224384400:user/gtopcu"
+			},
+			"Action": "sts:AssumeRole"
+		}
+	]
+}
