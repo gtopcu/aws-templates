@@ -12,13 +12,17 @@ sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-config-wizard
 **** Monitor /var/log/messages ****
 
 3. cd /opt/aws/amazon-cloudwatch-agent/bin
-   /opt/aws/amazon-cloudwatch-agent/bin/config.json is the config file
+/opt/aws/amazon-cloudwatch-agent/bin/config.json is the config file
 
 4. Start the CloudWatch Agent
 sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/bin/config.json
 
-5. Generate some activity on our system by installing stress - it’s in the Extra Packages for Enterprise Linux (EPEL) repository, so first we'll install the epel repository, then we'll install stress:
+5. Generate some activity on our system by installing stress - it’s in the Extra Packages for 
+Enterprise Linux (EPEL) repository, so first we'll install the epel repository, then we'll install stress:
 
 sudo amazon-linux-extras install epel -y
 sudo yum install stress -y
 stress --cpu 1
+
+6. Push custom metrics
+https://aws.amazon.com/premiumsupport/knowledge-center/cloudwatch-push-custom-metrics/

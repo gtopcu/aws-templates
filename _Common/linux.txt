@@ -101,9 +101,13 @@ lsblk: list disks, / means root disk
 df -h : free disk space
 du: file sizes
 free -m : free memory
+top: CPU usage
+htop: system monitor (sudo yum install htop -y)
+vm stat
+echo "CPU Usage: "$[100-$(vmstat 1 2|tail -1|awk '{print $15}')]"%"
 ps aux: running apps
-htop: system monitor
 kill <pid>
+cat /proc/cpuinfo |grep core
 shutdown -h now
 sudo swapoff -a
 sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
@@ -138,7 +142,7 @@ nano <filename.txt>
 vi <filename.txt> (YY, P, U, :(w)q!)
 cat <filename.txt>
 cat hash1 hash2 > hash12
-tail -f <filename.txt>
+tail -f <filename.txt> (-n / --lines, -c / --bytes)
 more <filename.txt>
 yum install / apt get install xclip
 
@@ -202,6 +206,10 @@ ip addr show
 ip address add 192.0.0.1 dev eth0
 ethtool eth0
 netstat -tupl
+total_conn=$(netstat -an | grep <port> | wc -l) 
+netstat -all
+telnet 54.78.7.114:22
+ipconfig -a
 
 wget <link>
 curl 54.78.7.114:22
@@ -232,15 +240,11 @@ curl -v POST https://izb9erxhx4.execute-api.us-east-2.amazonaws.com/00_infraops_
 SQL Injection attack:
 curl -v POST https://izb9erxhx4.execute-api.us-east-2.amazonaws.com/00_infraops_donotdelete -F "user='AND 1=1'" 
 
-
 nano /var/logs 
 sudo nano /etc/hosts
 sudo vi /etc/hosts
 (w):q!
 
-telnet 54.78.7.114:22
-ipconfig -a
-netstat -all
 
 **************************** Other ****************************
 
