@@ -1,5 +1,6 @@
 #!/bin/bash
 #sh bash.sh 1 2 3
+set -e
 while :
 do
   load15M=$(uptime | awk -F'[a-z]:' '{ print $2}'| tail -c 5)
@@ -12,5 +13,5 @@ do
     break
   else echo "Instance in usage, will not shut down"
   fi
-  sleep 60
+  sleep 300
 done
