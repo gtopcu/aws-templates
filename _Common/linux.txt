@@ -18,6 +18,7 @@ crontab –l
 crontab –e
 crontab –u other_username –e
 * 2 0 * 4 /root/backup.sh
+(crontab -l ; echo "*/1 * * * * if (( $(uptime | tail -c 5 | cut -d. -f1  ) < 10 )); then sudo shutdown fi") 2>&1 | grep -v "no crontab" | sort | uniq | crontab -
 
 **************************** General ****************************
 
