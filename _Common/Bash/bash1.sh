@@ -20,7 +20,7 @@ do
 done
 
 
-while true; do echo; done
+while true; do echo "hola"; done
 
 echo "$num"
 
