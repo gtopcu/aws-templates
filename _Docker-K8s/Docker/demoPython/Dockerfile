@@ -1,3 +1,4 @@
+#Works only with Python 2
 FROM python:2.7
 
 # Add sample application
