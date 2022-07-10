@@ -10,6 +10,7 @@ print(now.year)
 
 print(time.time())
 print(uuid.UUID)
+
 print(int(math.sqrt(9)))
 print(random.randint(0, 5))
 

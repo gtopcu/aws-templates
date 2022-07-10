@@ -60,7 +60,7 @@ ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFDkMhzmoRjPZUUTN7sqBRcPpqJ+wPklx3YNE2C/d6O7
 
 git init
 git status
-git log
+git log (--oneline)
 git diff
 git add readme.txt
 git add .
@@ -83,7 +83,12 @@ git fetch <remote><branch> (download only, do not merge)
 git pull <remote><branch> (fetch + merge)
 git fork
 git pull-request
+
+https://opensource.com/article/18/6/git-reset-revert-rebase-commands
 git reset --soft/mixed/hard
+git reset 9ef9173
+git reset current~2
+git revert HEAD
 git rebase
 
 ---
