@@ -12,3 +12,35 @@
 		}
 	]
 }
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket"
+            ],
+            "Resource": [
+                "arn:aws:s3:::platform-ml-infra-ml-pipeline-debug-files",
+                "arn:aws:s3:::robert-videos-trial",
+                "arn:aws:s3:::platform-ml-infra-models-dev",
+                "arn:aws:s3:::platform-ml-files"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:PutObject",
+                "s3:GetObject",
+                "s3:DeleteObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::platform-ml-infra-ml-pipeline-debug-files/*",
+                "arn:aws:s3:::robert-videos-trial/*",
+                "arn:aws:s3:::platform-ml-infra-models-dev/*",
+                "arn:aws:s3:::platform-ml-files/*"
+            ]
+        }
+    ]
+}

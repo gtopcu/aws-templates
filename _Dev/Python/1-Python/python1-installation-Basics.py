@@ -20,6 +20,10 @@
 # pip3 uninstall <package>
 # pip3 list
 
+#virtualenv
+# python3 -m pip install --upgrade virtualenv
+# python -m pip install -e . (creates a virtual env)
+
 # Install Jupyter
 # pip3 install -U jupyter
 
@@ -54,8 +58,12 @@ print("Standard output", file=sys.stdout)
 color = input("Which colour?\n")
 print(color)
 
+myInt = int(input("Gimme an integer please"))
+print(myInt)
+
 age = eval(input("Age?:"))
 print(age)
+
 
 # 4.567 * 8.323 * 17 -> _
 # The most recent output value is automatically stored by the interpreter in a special variable with 

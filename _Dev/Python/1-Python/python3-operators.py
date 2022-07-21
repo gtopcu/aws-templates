@@ -1,8 +1,18 @@
 
-#   Operator	        Description	                Example
-#   +, -	            Addition, Subtraction	    10 - 3
-#   *                   Multiplication
-#   %	                Modulo	                    27 % 7 =6
+#   Operator	            Description	                        Example
+#   +, -	                Addition, Subtraction	            10 - 3
+#   *                       Multiplication                      2 * 2
+#   **                      Power                               2 ** 3 = 8
+#   /                       Natural divide(float)               3 / 2 = 1.5
+#   //                      Floor divide(int)                   3 / 2 = 1
+#   %	                    Modulo	                            27 % 7 = 6
+#   <, <=, >, >=, !=, ==	The usual comparison operators
+
+print(3 / 2)
+print(3 // 2)
+print(2 ** 3)
+print(19 % 3)
+
 
 #   /	Division
 #   This operation brings about different results for Python 2.x (like floor division) and Python 3.x	Python3:
