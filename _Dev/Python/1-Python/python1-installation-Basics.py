@@ -24,6 +24,8 @@
 # python3 -m pip install --upgrade virtualenv
 # python -m pip install -e . (creates a virtual env)
 
+# pip install pip-tools
+
 # Install Jupyter
 # pip3 install -U jupyter
 

@@ -1,3 +1,9 @@
+
+CW Unified Agent:
+https://www.youtube.com/watch?v=1Ta1PMgMie0
+https://www.youtube.com/watch?v=enNnT5Tcim4
+
+
 1. Bootstrap script: 
 #!/bin/bash
 yum update -y
