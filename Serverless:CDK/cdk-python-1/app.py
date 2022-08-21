@@ -8,10 +8,8 @@
 # https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html
 # python -m pip install aws-cdk-lib
 
-# cdk init app --language python
 # source .venv/bin/activate
 # pip install -r requirements.txt
-
 # export CDK_DEFAULT_ACCOUNT=12312312321
 # export CDK_DEFAULT_REGION=us-east-2
 
@@ -28,6 +26,9 @@ cdk metadata -> Displays metadata about the specified stack
 cdk context -> Manages cached context values
 cdk docs (doc) -> Opens the CDK API reference in your browser
 cdk doctor -> Checks your CDK project for potential problems
+
+# export CDK_DEFAULT_ACCOUNT=12312312321
+# export CDK_DEFAULT_REGION=us-east-2
 """
 
 import os
