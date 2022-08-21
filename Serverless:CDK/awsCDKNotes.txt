@@ -10,11 +10,19 @@ https://www.youtube.com/watch?v=_kf4ajni3Qk
 npm install -g aws-cdk             # install latest version
 npm install -g aws-cdk@8.4.0       # install specific version
 
+
+# python -m pip install aws-cdk-lib
+
+# export CDK_DEFAULT_ACCOUNT=12312312321
+# export CDK_DEFAULT_REGION=us-east-2
+
+cdk bootstrap aws://102224384400/us-east-2
+
+cdk --version
 cdk init -> Creates a new CDK project/lib in the current directory from a specified template
 cdk init app --language python
-cdk list (ls) -> Lists the stacks in the app
-cdk synthesize (synth) -> Synthesizes 
-and prints the CloudFormation template for the specified stack(s)
+cdk ls -> Lists the stacks in the app
+cdk synth -> Synthesizes and prints the CloudFormation template for the specified stack(s)
 cdk bootstrap -> Deploys the CDK Toolkit staging stack; see Bootstrapping
 cdk deploy (-all) -> Deploys the specified stack(s)
 cdk watch -> Watch for changes

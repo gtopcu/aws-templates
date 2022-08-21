@@ -1,0 +1,13 @@
+version: 2
+updates:
+  - package-ecosystem: "pip"
+    directory: "/requirements"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "Asia/Istanbul"
+    target-branch: "dev"
+    labels:
+      - "dependencies"
+    reviewers:
+      - "gunduzhuseyn"

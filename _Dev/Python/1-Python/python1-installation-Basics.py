@@ -9,22 +9,38 @@
 # #!/usr/bin/python3 (dir)
 
 # PIP
+# https://packaging.python.org/en/latest/tutorials/installing-packages/
 # curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 # sudo python3 get-pip.py
 # quit()
 # sudo python3 -m pip install --upgrade pip
+# python3 -m pip install --upgrade pip setuptools wheel
 
 # pip3 install <package>
-# pip3 install -r requirements.txt -t lib
-# pip3 install -t $PWD pymysql
-# pip3 uninstall <package>
-# pip3 list
+# python3 -m pip install "SomeProject==1.4"
+# python3 -m pip install --user SomeProject
+# python3 -m pip install --index-url http://my.package.repo/simple/ SomeProject
+# pip install -r requirements.txt -t lib
+# pip install --upgrade -r requirements.txt
+# pip install -t $PWD pymysql
+# pip uninstall <package>
+# pip list
+# pip freeze
 
-#virtualenv
+# virtualenv/venv
+# https://packaging.python.org/en/latest/tutorials/installing-packages/#creating-virtual-environments
+# python3 -m venv .venv
+# source .venv/bin/activate
 # python3 -m pip install --upgrade virtualenv
 # python -m pip install -e . (creates a virtual env)
 
+
+# piptools
+# https://pypi.org/project/pip-tools/
 # pip install pip-tools
+# pip-compile requirements/base-requirements.in
+# pip-compile requirements/dev-requirements.in
+# pip-compile --upgrade-package requests==2.0.0
 
 # Install Jupyter
 # pip3 install -U jupyter
