@@ -37,11 +37,12 @@
       "aws-cn"
     ],
     "prefix": "cdk-lambda-canary-stack",
+    "environmentType": "qa",
     "qa": {
       "region": "us-east-2",
       "lambda": {
         "name": "cdk-lambda-canary-function-qa",
-        "alias": "live",
+        "alias": "qa",
         "stage": "qa"
       },
       "tags": {
