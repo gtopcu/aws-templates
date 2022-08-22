@@ -33,7 +33,7 @@ variable, i.e. as soon as we assign a new object to it, Python "switches" to cal
 variable x will be created and the value of the global variable x will be copied into it.
 
 
-ide effects
+Side effects
 A function is said to have a side effect, if, in addition to producing a return value, it modifies the caller's environment in other ways. For example, a function might modify a global or static variable, modify one of its arguments, raise an exception, write data to a display or file etc.
 
 There are situations, in which these side effects are intended, i.e. they are part of the function's specification. But in other cases, they are not wanted , they are hidden side effects. In this chapter, we are only interested in the side effects that change one or more global variables, which have been passed as arguments to a function. Let's assume, we are passing a list to a function. We expect the function not to change this list. First, let's have a look at a function which has no side effects. As a new list is assigned to the parameter list in func1(), a new memory location is created for list and list becomes a local variable.

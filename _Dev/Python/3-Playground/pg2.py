@@ -9,7 +9,7 @@ now = datetime.datetime.now()
 print(now.year)
 
 print(time.time())
-print(uuid.UUID)
+print(uuid.uuid4())
 
 print(int(math.sqrt(9)))
 print(random.randint(0, 5))

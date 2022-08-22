@@ -1,12 +1,13 @@
 
-
+import datetime
 import time
+import timeit
 
 print(time.ctime())
 start_time = time.time()
 time.sleep(1)
 
-import datetime
+start_time = timeit.default_timer()
 
 now = datetime.datetime.now()
 year = now.year
@@ -21,3 +22,21 @@ print(day)
 print(hour)
 print(minute)
 print(datetime.timezone.utc)
+
+now = datetime.datetime.now() # current date and time
+print(now)
+
+year = now.strftime("%Y")
+print("year:", year)
+
+month = now.strftime("%m")
+print("month:", month)
+
+day = now.strftime("%d")
+print("day:", day)
+
+time = now.strftime("%H:%M:%S")
+print("time:", time)
+
+date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
+print("date and time:",date_time)	
