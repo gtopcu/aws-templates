@@ -19,6 +19,7 @@ print(os.listdir(path))
 
 # Current working dir
 print(os.getcwd())
+print(os.path.dirname(__file__))
 
 # Print the metadeta
 # of source file

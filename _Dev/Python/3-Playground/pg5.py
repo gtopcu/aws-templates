@@ -15,7 +15,7 @@ print("hi")
 #print(os.environ)
 
 print(os.getcwd())
-print(os.path. dirname(__file__),
+print(os.path.dirname(__file__))
 
 """
 now = datetime.datetime.now() # current date and time
