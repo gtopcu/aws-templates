@@ -18,6 +18,16 @@ cdk doctor -> Checks your CDK project for potential problems
 # pip install -r requirements.txt
 # export CDK_DEFAULT_ACCOUNT=12312312321
 # export CDK_DEFAULT_REGION=us-east-2
+
+export REGION=us-east-2
+export PROFILE=default
+export ACCOUNT=$(aws sts get-caller-identity --profile $PROFILE)
+cdk bootstrap aws://$ACCOUNT/$REGION -c account=$ACCOUNT -c environmentType=qa --profile $PROFILE
+#export ACCOUNT=$(aws sts get-caller-identity --profile $PROFILE) | jq -r .Account)
+#cdk bootstrap aws://$ACCOUNT/$REGION -c account=$ACCOUNT -c environmentType=qa --profile $PROFILE
+cdk bootstrap aws://102224384400/us-east-2 -c environmentType=qa --profile default
+
+https://catalog.us-east-1.prod.workshops.aws/workshops/5195ab7c-5ded-4ee2-a1c5-775300717f42/en-US/first-cdk-project/adding-app-configuration
 """
 
 from datetime import datetime
@@ -35,10 +45,11 @@ class CdkWorkshopStack(Stack):
 
         environment_type = self.node.try_get_context("environmentType")
         context = self.node.try_get_context(environment_type)
+        
         self.alias_name = context["lambda"]["alias"]
         self.stage_name = context["lambda"]["stage"]
         current_date =  datetime.today().strftime('%d-%m-%Y')
-
+    
         my_lambda = Function(
             scope = self,
             id = "MyFunction",
@@ -87,4 +98,5 @@ class CdkWorkshopStack(Stack):
             deployment_config = LambdaDeploymentConfig.CANARY_10_PERCENT_5_MINUTES,
             alarms = [failure_alarm]
         )
+        
 

@@ -36,17 +36,17 @@
       "aws",
       "aws-cn"
     ],
-    "prefix": "cdk-lambda-canary-stack",
+    "prefix": "cdk-workshop-stack",
     "environmentType": "qa",
     "qa": {
       "region": "us-east-2",
       "lambda": {
-        "name": "cdk-lambda-canary-function-qa",
+        "name": "cdk-workshop-function-qa",
         "alias": "qa",
         "stage": "qa"
       },
       "tags": {
-        "App":"cdk-lambda-canary",
+        "App":"ccdk-workshop",
         "Environment": "QA",
         "IaC": "CDK"
       }
