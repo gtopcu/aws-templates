@@ -17,6 +17,9 @@ json.dumps(dict(**os.environ))
 path = '.'
 print(os.listdir(path))
 
+# Current working dir
+print(os.getcwd())
+
 # Print the metadeta
 # of source file
 metadata = os.stat("/Users/hukanege/Google Drive/VSCode/aws-templates/_Dev/Python/1-Python/pythonX_Modules_os.py")

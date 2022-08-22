@@ -14,6 +14,9 @@ print("hi")
 #print(dict(os.environ))
 #print(os.environ)
 
+print(os.getcwd())
+
+"""
 now = datetime.datetime.now() # current date and time
 print(now)
 
@@ -49,4 +52,4 @@ print(myDict)
 for key, value in myDict.items():
     print(key, value)
 
-
+"""
