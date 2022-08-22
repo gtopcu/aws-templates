@@ -32,6 +32,8 @@ from aws_cdk.aws_apigateway import LambdaRestApi, StageOptions
 from aws_cdk.aws_cloudwatch import Alarm, ComparisonOperator
 from aws_cdk.aws_codedeploy import LambdaDeploymentGroup, LambdaDeploymentConfig
 
+DIRNAME = os.path.dirname(__file__)
+
 class CdkLambdaCanaryStack(Stack):
 
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
