@@ -1,10 +1,12 @@
-
 https://github.com/aws/aws-cdk
 https://docs.aws.amazon.com/cdk/v2/guide/home.html
 https://docs.aws.amazon.com/cdk/v2/guide/cli.html
+https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-cdk-testing.html
 https://constructs.dev/packages/cdk-spot-one/v/1.0.17?lang=typescript
 https://constructs.dev/
 https://constructs.dev/packages/@aws-cdk/aws-servicecatalog/v/1.154.0?lang=typescript
+https://docs.aws.amazon.com/cdk/api/v2/docs/aws-construct-library.html
+https://serverlessland.com/patterns/
 https://www.youtube.com/watch?v=_kf4ajni3Qk
 
 npm install -g aws-cdk             # install latest version
