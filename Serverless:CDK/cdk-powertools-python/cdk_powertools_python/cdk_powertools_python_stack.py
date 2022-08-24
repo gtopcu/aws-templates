@@ -1,5 +1,8 @@
 
 # https://www.youtube.com/watch?v=Tke8YTHqEbQ
+# https://awslabs.github.io/aws-lambda-powertools-python/latest/
+
+# as lambda layer: arn:aws:lambda:us-east-2:017000801446:layer:AWSLambdaPowertoolsPython:29
 
 # cdk init app --language python
 # source .venv/bin/activate
@@ -21,6 +24,13 @@ class CdkPowertoolsPythonStack(Stack):
         super().__init__(scope, construct_id, **kwargs)
 
         current_date =  datetime.datetime.today().strftime('%d-%m-%Y')
+
+
+        powertools_layer = _lambda.LayerVersion.from_layer_version_arn(
+            self,
+            id="lambda-powertools",
+            layer_version_arn=f"arn:aws:lambda:us-east-2:017000801446:layer:AWSLambdaPowertoolsPython:29"
+        )
         
         # Create Lambda function
         lambda_fn = _lambda.Function(
@@ -28,6 +38,7 @@ class CdkPowertoolsPythonStack(Stack):
             runtime=_lambda.Runtime.PYTHON_3_9,
             handler="ptLambda.handler",
             code=_lambda.Code.from_asset("lambda_fns"),
+            layers=[powertools_layer],
             current_version_options = VersionOptions(
                 description = f'Version deployed on {current_date}',
                 removal_policy = RemovalPolicy.RETAIN

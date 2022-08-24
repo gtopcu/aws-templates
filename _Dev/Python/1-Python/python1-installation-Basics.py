@@ -35,7 +35,6 @@
 # python3 -m pip install --upgrade virtualenv
 # python -m pip install -e . (creates a virtual env)
 
-
 # piptools
 # https://pypi.org/project/pip-tools/
 # pip install pip-tools
