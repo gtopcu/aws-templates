@@ -25,7 +25,6 @@ class CdkPowertoolsPythonStack(Stack):
 
         current_date =  datetime.datetime.today().strftime('%d-%m-%Y')
 
-
         powertools_layer = _lambda.LayerVersion.from_layer_version_arn(
             self,
             id="lambda-powertools",
