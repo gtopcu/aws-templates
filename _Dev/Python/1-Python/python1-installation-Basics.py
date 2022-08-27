@@ -23,7 +23,7 @@
 # pip install -r requirements.txt -t lib
 # pip install --upgrade -r requirements.txt
 # pip install -t $PWD pymysql
-# pip install pre-commit -> https://www.youtube.com/watch?v=psjz6rwzMdk
+# pip install pre-commit -> https://www.youtube.com/watch?v=psjz6rwzMdk / pre-commit install
 # pip uninstall <package>
 # pip list
 # pip freeze
