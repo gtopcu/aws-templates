@@ -10,3 +10,17 @@ https://www.youtube.com/watch?v=yvBR71D0nAQ
 
 AWS re:Invent 2018: Amazon DynamoDB Deep Dive: Advanced Design Patterns for DynamoDB (DAT401)
 https://www.youtube.com/watch?v=HaEPXoXVf2k
+
+
+
+aws dynamodb create-table --table-name ProductCatalog --attribute-definitions \
+AttributeName=Id,AttributeType=N --key-schema \
+AttributeName=Id,KeyType=HASH \
+--provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5
+
+aws dynamodb describe-table
+aws dynamodb update-table
+aws dynamodb batch-write-item --request-items file://items.json
+aws dynamodb batch-get-items
+aws dynamodb get-item --table-name ProductCatalog --region eu-west-1  --key '{"Id":{"N":"403"}}'
+
