@@ -5,7 +5,6 @@ Unlimited table size, 400KB item size
 1 WCU: 1KB write, 0.5KB transactional write
 Max 5 LSI, 20 GSI
 
-
 AWS DynamoDB Tutorial For Beginners
 https://www.youtube.com/watch?v=2k2GINpO308
 
@@ -20,6 +19,20 @@ https://www.youtube.com/watch?v=HaEPXoXVf2k
 
 
 https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/SQLtoNoSQL.WriteData.html
+https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Programming.LowLevelAPI.html
+S – String
+N – Number
+B – Binary
+BOOL – Boolean
+NULL – Null
+M – Map
+L – List
+SS – String Set
+NS – Number Set
+BS – Binary Set
+
+Accessing lists, maps, sets using ExpressionAttributes
+https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Attributes.html
 
 aws dynamodb create-table
 aws dynamodb describe-table --table-name Music | grep TableStatusaws dynamodb describe-table --table-name Music | grep IndexStatus

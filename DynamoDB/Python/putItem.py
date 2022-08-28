@@ -52,7 +52,7 @@ ERROR_HELP_STRINGS = {
 #def create_dynamodb_client(region):
 #    return boto3.client("dynamodb", region_name="localhost", endpoint_url="http://localhost:8000", aws_access_key_id="access_key_id", aws_secret_access_key="secret_access_key")
 
-def create_dynamodb_client(region="us-east-1"):
+def create_dynamodb_client(region):
     return boto3.client("dynamodb", region_name=region)
 
 
@@ -69,8 +69,7 @@ def create_put_item_input():
 def execute_put_item(dynamodb_client, input):
     try:
         response = dynamodb_client.put_item(**input)
-        print("Successfully put item.")
-        # Handle response
+        print("Successfully put the item")
     except ClientError as error:
         handle_error(error)
     except BaseException as error:
@@ -80,9 +79,7 @@ def execute_put_item(dynamodb_client, input):
 def handle_error(error):
     error_code = error.response['Error']['Code']
     error_message = error.response['Error']['Message']
-
     error_help_string = ERROR_HELP_STRINGS[error_code]
-
     print('[{error_code}] {help_string}. Error message: {error_message}'
           .format(error_code=error_code,
                   help_string=error_help_string,
@@ -91,7 +88,7 @@ def handle_error(error):
 
 def main():
     # Create the DynamoDB Client with the region you want
-    dynamodb_client = create_dynamodb_client(region="eu-west-1")
+    dynamodb_client = create_dynamodb_client("eu-west-1")
 
     # Create the dictionary containing arguments for put_item call
     put_item_input = create_put_item_input()

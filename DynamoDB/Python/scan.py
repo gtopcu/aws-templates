@@ -49,39 +49,32 @@ ERROR_HELP_STRINGS = {
 def create_dynamodb_client(region="us-east-1"):
     return boto3.client("dynamodb", region_name=region)
 
-
 def create_scan_input():
     return {
         "TableName": "sessions"
     }
 
-
 def execute_scan(dynamodb_client, input):
     try:
         response = dynamodb_client.scan(**input)
-        print("Scan successful.")
-        # Handle response
+        print("Scan successful")
     except ClientError as error:
         handle_error(error)
     except BaseException as error:
         print("Unknown error while scanning: " + error.response['Error']['Message'])
 
-
 def handle_error(error):
     error_code = error.response['Error']['Code']
     error_message = error.response['Error']['Message']
-
     error_help_string = ERROR_HELP_STRINGS[error_code]
-
     print('[{error_code}] {help_string}. Error message: {error_message}'
           .format(error_code=error_code,
                   help_string=error_help_string,
                   error_message=error_message))
 
-
 def main():
     # Create the DynamoDB Client with the region you want
-    dynamodb_client = create_dynamodb_client(region="eu-west-1")
+    dynamodb_client = create_dynamodb_client("eu-west-1")
 
     # Create the dictionary containing arguments for scan call
     scan_input = create_scan_input()
