@@ -2,6 +2,9 @@
 Boto3 - AWS Python SDK
 https://www.python.org/downloads/
 https://boto3.amazonaws.com/v1/documentation/api/latest/guide/quickstart.html#installation
+https://docs.aws.amazon.com/pythonsdk/
+https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/python
+
 
 python3
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py

@@ -1,4 +1,11 @@
 
+
+Unlimited table size, 400KB item size
+1 RCU: 8KB eventually consistent read, 4KB strongly consistent read, 2KB transactional read
+1 WCU: 1KB write, 0.5KB transactional write
+Max 5 LSI, 20 GSI
+
+
 AWS DynamoDB Tutorial For Beginners
 https://www.youtube.com/watch?v=2k2GINpO308
 
@@ -12,15 +19,229 @@ AWS re:Invent 2018: Amazon DynamoDB Deep Dive: Advanced Design Patterns for Dyna
 https://www.youtube.com/watch?v=HaEPXoXVf2k
 
 
+https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/SQLtoNoSQL.WriteData.html
 
+aws dynamodb create-table
+aws dynamodb describe-table --table-name Music | grep TableStatusaws dynamodb describe-table --table-name Music | grep IndexStatus
+aws dynamodb update-table
+aws dynamodb delete-table
+aws dynamodb list-tables --endpoint-url http://localhost:8000
+
+aws dynamodb get-item
+aws dynamodb put-item
+aws dynamodb update-item (upsert)
+aws dynamodb delete-item
+aws dynamodb batch-get-item (up to 100 records)
+aws dynamodb batch-write-item --request-items file://items.json
+
+
+//create table
 aws dynamodb create-table --table-name ProductCatalog --attribute-definitions \
 AttributeName=Id,AttributeType=N --key-schema \
 AttributeName=Id,KeyType=HASH \
 --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5
 
-aws dynamodb describe-table
-aws dynamodb update-table
-aws dynamodb batch-write-item --request-items file://items.json
-aws dynamodb batch-get-items
-aws dynamodb get-item --table-name ProductCatalog --region eu-west-1  --key '{"Id":{"N":"403"}}'
+aws dynamodb create-table \
+    --table-name Music \
+    --attribute-definitions \
+        AttributeName=Artist,AttributeType=S \
+        AttributeName=SongTitle,AttributeType=S \
+    --key-schema AttributeName=Artist,KeyType=HASH AttributeName=SongTitle,KeyType=RANGE \
+    --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1 \
+    --table-class STANDARD
 
+get-item
+aws dynamodb get-item --table-name ProductCatalog --region eu-west-1  --key '{"Id":{"N":"403"}}'
+{
+    TableName: "Music",
+    Key: {
+        "Artist": "No One You Know",
+        "SongTitle": "Call Me Today"
+    },
+    "ProjectionExpression": "AlbumTitle, Year, Price"
+}
+//strongly consistent read
+aws dynamodb get-item --consistent-read \
+    --table-name Music \
+    --key '{ "Artist": {"S": "Acme Band"}, "SongTitle": {"S": "Happy Day"}}'
+
+//put-item
+aws dynamodb put-item --table-name Songs
+{
+    TableName: "Music",
+    Item: {
+        "Artist": "The Acme Band",
+        "SongTitle": "Look Out, World",
+        "AlbumTitle":"The Buck Starts Here",
+        "Price": 0.99,
+        "Genre": "Rock"
+    }
+}
+aws dynamodb put-item \
+    --table-name Music \
+    --item \
+        '{"Artist": {"S": "No One You Know"}, "SongTitle": {"S": "Call Me Today"}, "AlbumTitle": {"S": "Somewhat Famous"}}' \
+    --return-consumed-capacity TOTAL  
+
+aws dynamodb put-item \
+    --table-name Music \
+    --item '{ \
+        "Artist": {"S": "Acme Band"}, \
+        "SongTitle": {"S": "Happy Day"}, \
+        "AlbumTitle": {"S": "Songs About Life"} }' \
+    --return-consumed-capacity TOTAL
+
+PartiQL
+ExecuteStatement retrieves a single or multiple items from a table
+BatchExecuteStatement retrieves multiple items from different tables in a single operation
+With PartiQL, you use the ExecuteStatement operation to add an item to a table
+INSERT into Music value {  
+    'Artist': 'No One You Know',
+    'SongTitle': 'Call Me Today',
+    'AlbumTitle': 'Somewhat Famous',
+    'Year' : '2015',
+    'Genre' : 'Acme'
+}
+
+query
+The KeyConditionExpression parameter specifies the key values that you want to query. You can use an optional 
+FilterExpression to remove certain items from the results before they are returned to you.
+In DynamoDB, you must use ExpressionAttributeValues as placeholders in expression parameters (such as 
+KeyConditionExpression and FilterExpression). This is analogous to the use of bind variables in relational databases
+{
+    TableName: "Music",
+    KeyConditionExpression: "Artist = :a and SongTitle = :t",
+    ExpressionAttributeValues: {
+        ":a": "No One You Know",
+        ":t": "Call Me Today"
+    }
+}
+
+//query with external json file
+aws dynamodb query --table-name Music --key-conditions file://key-conditions.json
+{
+    "Artist": {
+        "AttributeValueList": [
+            {   
+                "S": "No One You Know"
+            }   
+        ],  
+        "ComparisonOperator": "EQ"
+    },  
+    "SongTitle": {
+        "AttributeValueList": [
+            {   
+                "S": "Call Me Today"
+            }   
+        ],  
+        "ComparisonOperator": "EQ"
+    }
+}
+
+scan
+// Return all of the data in the table
+{
+    TableName:  "Music"
+}
+// Return all of the values for Artist and Title
+{
+    TableName:  "Music",
+    ProjectionExpression: "Artist, Title"
+}
+
+
+update indexes
+DynamoDB ensures that the data in a secondary index is eventually consistent with its table. You can request strongly 
+consistent Query or Scan actions on a table or a local secondary index. However, global secondary indexes support only 
+eventual consistency. You can add a global secondary index to an existing table, using the UpdateTable action and 
+specifying GlobalSecondaryIndexUpdates.
+{
+    TableName: "Music",
+    AttributeDefinitions:[
+        {AttributeName: "Genre", AttributeType: "S"},
+        {AttributeName: "Price", AttributeType: "N"}
+    ],
+    GlobalSecondaryIndexUpdates: [
+        {
+            Create: {
+                IndexName: "GenreAndPriceIndex",
+                KeySchema: [
+                    {AttributeName: "Genre", KeyType: "HASH"}, //Partition key
+                    {AttributeName: "Price", KeyType: "RANGE"}, //Sort key
+                ],
+                Projection: {
+                    "ProjectionType": "ALL"
+                },
+                ProvisionedThroughput: {                                // Only specified if using provisioned mode
+                    "ReadCapacityUnits": 1,"WriteCapacityUnits": 1
+                }
+            }
+        }
+    ]
+}
+
+//create a new global index
+aws dynamodb update-table \
+    --table-name Music \
+    --attribute-definitions AttributeName=AlbumTitle,AttributeType=S \
+    --global-secondary-index-updates \
+        "[{\"Create\":{\"IndexName\": \"AlbumTitle-index\",\"KeySchema\":[{\"AttributeName\":\"AlbumTitle\",\"KeyType\":\"HASH\"}], \
+        \"ProvisionedThroughput\": {\"ReadCapacityUnits\": 10, \"WriteCapacityUnits\": 5      },\"Projection\":{\"ProjectionType\":\"ALL\"}}}]"
+ aws dynamodb describe-table --table-name Music | grep IndexStatus
+
+querying an index
+{
+    TableName: "Music",
+    IndexName: "GenreAndPriceIndex",
+    KeyConditionExpression: "Genre = :genre and Price < :price",
+    ExpressionAttributeValues: {
+        ":genre": "Country",
+        ":price": 0.50
+    },
+    ProjectionExpression: "Artist, SongTitle, Price"
+};
+
+update-item (upsert)
+{
+    TableName: "Music",
+    Key: {
+        "Artist":"No One You Know",
+        "SongTitle":"Call Me Today"
+    },
+    UpdateExpression: "SET RecordLabel = :label",
+    ConditionExpression: "Price >= :p",
+    ExpressionAttributeValues: {
+        ":label": "Global Records",
+        ":p": 2.00
+    }
+}
+
+//increment counters
+//https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/SQLtoNoSQL.UpdateData.html
+{
+    TableName: "Music",
+    Key: {
+        "Artist":"No One You Know",
+        "SongTitle":"Call Me Today"
+    },
+    UpdateExpression: "SET Plays = Plays + :incr",
+    ExpressionAttributeValues: {
+        ":incr": 1
+    },
+    ReturnValues: "UPDATED_NEW"
+}
+
+//delete-item
+{
+    TableName: "Music",
+    Key: {
+        Artist: "The Acme Band",
+        SongTitle: "Look Out, World"
+    },
+   ConditionExpression: "attribute_exists(RecordLabel)"
+}
+
+//delete-table
+{
+    TableName: "Music"
+}
