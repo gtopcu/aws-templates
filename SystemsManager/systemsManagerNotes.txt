@@ -1,0 +1,8 @@
+
+https://docs.aws.amazon.com/systems-manager/latest/userguide/quick-setup-getting-started.html
+https://docs.aws.amazon.com/systems-manager/latest/userguide/ami-preinstalled-agent.html
+sudo systemctl status amazon-ssm-agent (agent v2)
+sudo systemctl status ssm-agent-worker (agent v3)
+
+SessionManager requires managed policy: AmazonSSMManagedInstanceCore
+
