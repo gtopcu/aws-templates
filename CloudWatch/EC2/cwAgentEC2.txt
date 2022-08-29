@@ -1,5 +1,6 @@
 
 CW Unified Agent:
+https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Install-CloudWatch-Agent.html
 https://www.youtube.com/watch?v=1Ta1PMgMie0
 https://www.youtube.com/watch?v=enNnT5Tcim4
 
