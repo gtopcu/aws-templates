@@ -1,4 +1,5 @@
 
+from multiprocessing.sharedctypes import Value
 import os
 import sys
 import datetime
@@ -54,3 +55,23 @@ for key, value in myDict.items():
     print(key, value)
 
 """
+
+#print(__name__)
+#print(__file__)
+#print(__package__)
+#print(__path__)
+#print(__doc__)
+
+def getMe(**kwargs):
+    #pass
+    #for (key, value) in kwargs:
+    #    print(key)
+    print(kwargs)
+
+if __name__ == "__main__":
+    myDict = {}
+    myDict["name"] = "gökhan"
+    myDict["age"] = 37
+    getMe(myDict)
+
+

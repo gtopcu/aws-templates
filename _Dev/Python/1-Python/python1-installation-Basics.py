@@ -67,6 +67,12 @@
 print("Hello World")
 print(1, "b", sep=":", end="\n")
 
+#print(__name__)
+#print(__file__)
+#print(__package__)
+#print(__path__)
+#print(__doc__)
+
 # output into sys.stderr & sys.stdout:
 import sys
 print("Error output", file=sys.stderr)
