@@ -36,3 +36,20 @@ q.pop()
 q.popleft()
 # 0
 # deque([10, 20, 30, 40])
+
+
+# Usually, a Python dictionary throws a KeyError if you try to get an item with a key that is not currently 
+# in the dictionary. The defaultdict in contrast will simply create any items that you try to access 
+# (provided of course they do not exist yet). To create such a "default" item, it calls the function object 
+# that you pass to the constructor (more precisely, it's an arbitrary "callable" object, which includes function 
+# and type objects). do not forget to freeze the defaultdict for read-only use by setting its 
+# default_factory = None after you've finished populating the defaultdict.
+
+from collections import defaultdict
+
+s = 'mississippi'
+d = defaultdict(int)
+for k in s:
+    d[k] += 1
+d.items()
+[('i', 4), ('p', 2), ('s', 4), ('m', 1)]
