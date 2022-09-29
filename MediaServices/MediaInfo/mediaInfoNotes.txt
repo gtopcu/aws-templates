@@ -1,3 +1,4 @@
+https://pymediainfo.readthedocs.io/en/stable/pymediainfo.html
 https://aws.amazon.com/blogs/media/running-mediainfo-as-an-aws-lambda-function/
 https://github.com/iandow/mediainfo_aws_lambda
 
