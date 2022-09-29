@@ -1,0 +1,23 @@
+https://aws.amazon.com/blogs/media/running-mediainfo-as-an-aws-lambda-function/
+https://github.com/iandow/mediainfo_aws_lambda
+
+
+# Create a role with S3 and Lambda exec access
+ROLE_NAME=lambda-MediaInfo_study
+aws iam create-role --role-name $ROLE_NAME --assume-role-policy-document '{"Version":"2012-10-17","Statement":{"Effect":"Allow","Principal":{"Service":"lambda.amazonaws.com"},"Action":"sts:AssumeRole"}}'
+aws iam attach-role-policy --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess --role-name $ROLE_NAME
+aws iam attach-role-policy --policy-arn arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole --role-name $ROLE_NAME
+
+# Step 1: Build MediaInfo for AWS Lambda (build in a lowercase path)
+git clone https://github.com/iandow/mediainfo_aws_lambda
+cd mediainfo_aws_lambda
+docker build --tag=pymediainfo-layer-factory:latest .
+docker run --rm -it -v $(pwd):/data pymediainfo-layer-factory cp /packages/pymediainfo-python38.zip /data
+
+# Step 2: Publish MediaInfo as an AWS Lambda Layer
+ACCOUNT_ID=$(aws sts get-caller-identity | jq -r ".Account")
+LAMBDA_LAYERS_BUCKET=00-infraops-lambda-layers
+LAYER_NAME=pymediainfo38
+#aws s3 mb s3://$LAMBDA_LAYERS_BUCKET
+aws s3 cp pymediainfo-python38.zip s3://$LAMBDA_LAYERS_BUCKET
+aws lambda publish-layer-version --layer-name $LAYER_NAME --description "pymediainfo" --content S3Bucket=$LAMBDA_LAYERS_BUCKET,S3Key=pymediainfo-python38.zip --compatible-runtimes python3.8

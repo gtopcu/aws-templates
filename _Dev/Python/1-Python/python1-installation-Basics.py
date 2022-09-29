@@ -17,6 +17,7 @@
 # python3 -m pip install --upgrade pip setuptools wheel
 
 # pip3 install <package>
+# pip3 install requests -t .
 # python3 -m pip install "SomeProject==1.4"
 # python3 -m pip install --user SomeProject
 # python3 -m pip install --index-url http://my.package.repo/simple/ SomeProject
