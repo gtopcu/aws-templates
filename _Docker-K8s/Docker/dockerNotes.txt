@@ -13,6 +13,10 @@ docker run --name getting-started
 docker run -d -p 80:80 getting-started
 docker run -dp 3000:3000 gtopcu/getting-started
 
+docker create -> create a container without starting it
+doccker run -rm [image] -> create & start a container & remove after it stops
+doccker run -it [image] -> create & start a container & run a command on it
+
 docker stop <the-container-id>
 docker rm <the-container-id>
 docker rm -f <the-container-id>

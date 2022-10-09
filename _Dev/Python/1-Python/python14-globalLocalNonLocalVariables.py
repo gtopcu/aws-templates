@@ -2,28 +2,10 @@
 # https://python-course.eu/python-tutorial/global-local-variables-namespaces.php
 
 """
-The way Python uses global and local variables is maverick. While in many or most other programming languages 
-variables are treated as global if not declared otherwise, Python deals with variables the other way around. 
-They are local, if not otherwise declared. The driving reason behind this approach is that global variables 
-are generally bad practice and should be avoided. In most cases where you are tempted to use a global variable, 
-it is better to utilize a parameter for getting a value into a function or return a value to get it out. 
-Like in many other program structures, Python also imposes good programming habit by design.
-
-So when you define variables inside a function definition, they are local to this function by default. 
-That is, anything you will do to such a variable in the body of the function will have no effect on other 
-variables outside of the function, even if they have the same name. In other words, the function body is 
-the scope of such a variable, i.e. the enclosing context where this name is associated with its values.
+When you define variables inside a function definition, they are local to this function by default. 
 
 All variables have the scope of the block, where they are declared and defined. They can only be used after the 
 point of their declaration.
-
-Just to make things clear: Variables don't have to be and can't be declared in the way they are declared in 
-programming languages like Java or C. Variables in Python are implicitly declared by defining them, i.e. 
-the first time you assign a value to a variable, this variable is declared and has automatically the data 
-type of the object which has to be assigned to it. 
-
-Global and local Variables in Functions
-In the following example, we want to demonstrate, how global values can be used inside the body of a function:
 
 def f(): 
     print(s) 

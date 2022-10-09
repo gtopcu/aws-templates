@@ -11,4 +11,17 @@ logger.setLevel(logging.INFO)
 
 logger.info('File successfully uploaded')
 logger.error("Houston, we have a %s", "major problem", exc_info=1)
-        
+
+
+#############################
+
+logger = logging.getLogger()
+formatter = logging.Formatter(
+    "[%(asctime)s] %(name)s {%(pathname)s:%(lineno)d} %(levelname)s -"
+    " %(message)s",
+    "%d-%m %H:%M:%S",
+)
+console_handler = logging.StreamHandler()
+console_handler.setFormatter(formatter)
+logger.addHandler(console_handler)
+logger.setLevel(logging.INFO)

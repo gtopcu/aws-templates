@@ -59,7 +59,7 @@ print(person1)
 ########################################################################################
 
 count = 2
-while(count > 0):
+while count > 0:
     print("counting..")
     count = count-1
 
