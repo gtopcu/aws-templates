@@ -36,9 +36,16 @@ docker scan getting-started
 docker image history
 
 Named Volume
+docker volume -help
+docker volume ls
+docker volume inspect
+docker volume rm
+docker volume prune
 docker volume create todo-db
-docker run -dp 3000:3000 -v todo-db:/etc/todos getting-started
+docker run --name volumetest -itdp 3000:3000 -v todo-db:/etc/todos alpine
+docker exec -it volumetest sh
 docker volume inspect todo-db
+
 
 Bind Mounts
 docker run -dp 3000:3000 `

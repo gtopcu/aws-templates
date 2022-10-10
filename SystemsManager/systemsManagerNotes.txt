@@ -4,5 +4,6 @@ https://docs.aws.amazon.com/systems-manager/latest/userguide/ami-preinstalled-ag
 sudo systemctl status amazon-ssm-agent (agent v2)
 sudo systemctl status ssm-agent-worker (agent v3)
 
+SSM Policy For EC2: AmazonEC2RoleforSSM
 SessionManager requires managed policy: AmazonSSMManagedInstanceCore
 

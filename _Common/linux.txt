@@ -194,6 +194,12 @@ chkconfig httpd on
 
 **************************** Network ****************************
 
+whatis ip
+cat /etc/resolv.conf -> DNS config
+ip route show
+ip addr
+ip addr show
+ip address add 192.0.0.1 dev eth0
 ping 127.0.0.1
 nc 54.78.7.114 22
 ssh -vT git@github.com
@@ -202,10 +208,9 @@ dig google.com
 dig -x google.com: reverse lookup
 host google.com: list nameservers
 whois google.com
-ip addr show
-ip address add 192.0.0.1 dev eth0
 ethtool eth0
 netstat -tupl
+netstat -r
 total_conn=$(netstat -an | grep <port> | wc -l) 
 netstat -all
 telnet 54.78.7.114:22

@@ -4,6 +4,28 @@ https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Install-CloudWatc
 https://www.youtube.com/watch?v=1Ta1PMgMie0
 https://www.youtube.com/watch?v=enNnT5Tcim4
 
+-> Need to create a role with CloudWatchAgentAdmin/ServerPolicy & attach to EC2 
+
+#!/bin/bash
+# install the agent
+wget https://s3.amazonaws.com/amazoncloudwatch-agent/amazon_linux/amd64/latest/amazon-cloudwatch-agent.rpm 
+sudo rpm -U ./amazon-cloudwatch-agent.rpm
+# run the wizard
+sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-config-wizard
+
+# collectd is not installed by default, so will not use.
+# but if will be used, need to create some missing files
+# sudo mkdir -p /usr/share/collectd
+# sudo touch /usr/share/collectd/types.db
+
+# options:
+# 1. Fetch config from SSM (for using single config stored in SSM in many instances)
+sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -c ssm:AmazonCloudWatch-linux -s
+# 2. Fetch config from file
+sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -c file:/opt/aws/amazon-cloudwatch-agent/bin/config.json -s
+
+
+********************************
 
 1. Bootstrap script: 
 #!/bin/bash
