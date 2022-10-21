@@ -198,7 +198,7 @@ whatis ip
 cat /etc/resolv.conf -> DNS config
 ip route show
 ip addr
-ip addr show
+ip addr show -> list network interfaces
 ip address add 192.0.0.1 dev eth0
 ping 127.0.0.1
 nc 54.78.7.114 22
@@ -247,8 +247,9 @@ curl -v POST https://izb9erxhx4.execute-api.us-east-2.amazonaws.com/00_infraops_
 
 nano /var/logs 
 sudo nano /etc/hosts
-sudo vi /etc/hosts
-(w):q!
+sudo nano /etc/route.conf -> DNS config
+
+vi (w):q!
 
 
 **************************** Other ****************************

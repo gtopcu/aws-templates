@@ -5,5 +5,5 @@ sudo systemctl status amazon-ssm-agent (agent v2)
 sudo systemctl status ssm-agent-worker (agent v3)
 
 SSM Policy For EC2: AmazonEC2RoleforSSM
-SessionManager requires managed policy: AmazonSSMManagedInstanceCore
+SessionManager Policy: AmazonSSMManagedInstanceCore
 

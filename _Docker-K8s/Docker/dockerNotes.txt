@@ -2,6 +2,9 @@
 https://hub.docker.com/
 https://docs.docker.com/
 https://labs.play-with-docker.com/
+https://www.youtube.com/watch?v=bKFMS5C4CG0
+
+sudo apt install docker.io -y
 
 docker --version
 docker ps
@@ -10,12 +13,12 @@ docker history myApp:10
 
 docker build -t getting-started .
 docker run --name getting-started
-docker run -d -p 80:80 getting-started
+docker run -d -p 80:80 getting-startedrm
 docker run -dp 3000:3000 gtopcu/getting-started
 
 docker create -> create a container without starting it
 doccker run -rm [image] -> create & start a container & remove after it stops
-doccker run -it [image] -> create & start a container & run a command on it
+doccker run -it [image] -> create & start a container in interactive mode
 
 docker stop <the-container-id>
 docker rm <the-container-id>
@@ -29,6 +32,7 @@ docker push gtopcu/getting-started:tagname
 
 docker cp
 docker start/stop/kill
+docker exec -it <container-id> sh 
 docker exec <container-id> cat /data.txt
 docker logs -f
 docker login -u gtopcu
@@ -47,22 +51,31 @@ docker exec -it volumetest sh
 docker volume inspect todo-db
 
 
-Bind Mounts
+Binding Mount Points:
 docker run -dp 3000:3000 `
     -w /app -v "$(pwd):/app" `
     node:12-alpine `
     sh -c "yarn install && yarn run dev"
 
-Network
-docker network create todo-app
+Networking
+docker network ls
+docker network rm <network_name>
+
+1. Default networking is bridge if you don't specify anything
+
+2. User-defined bridge network
+docker network create todo-app-network 
 docker run -d \
-    --network todo-app --network-alias mysql \
+    --network todo-app-network --network-alias mysql \
     -v todo-mysql-data:/var/lib/mysql \
     -e MYSQL_ROOT_PASSWORD=secret \
     -e MYSQL_DATABASE=todos \
     mysql:5.7
 docker exec -it <mysql-container-id> mysql -p
 mysql> SHOW DATABASES;
+
+3. Use host networking:
+docker run -itd -rm --network host --name stormbreaker nginx
 
 docker run -it --network todo-app nicolaka/netshoot
 dig mysql
