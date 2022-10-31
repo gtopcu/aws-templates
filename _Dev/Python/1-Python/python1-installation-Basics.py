@@ -43,6 +43,9 @@
 # pip-compile requirements/dev-requirements.in
 # pip-compile --upgrade-package requests==2.0.0
 
+# pyproject.toml
+# run python -m pip install .
+
 # Install Jupyter
 # pip3 install -U jupyter
 
