@@ -3,3 +3,52 @@ https://www.youtube.com/watch?v=o7OHogUcRmI
 
 API GW Cognito Auth Address:
 https://cognito-idp.us-east-2.amazonaws.com/us-east-2_Qtr4N1yVw
+
+
+Cognito OAuth Flows:
+https://aws.amazon.com/blogs/mobile/understanding-amazon-cognito-user-pool-oauth-2-0-grants/
+
+Implicit Grant Flow uses URL Fragment (#token) to return the ID Token
+
+Authorization Grant Flow step is 2-fold. In the first step, the authorization_code is received 
+which can then be used to request the Access Token, Refresh Token as well as ID Token.
+
+To use the Authorization Grant Flow with Cognito, the following steps were used:
+To get the authorization token, two ways can be explored.
+Redirecting the user to the Cognito Hosted UI which is at the https://AUTH_DOMAIN/login endpoint and returns the 
+code as a query parameter which can then be extracted.
+Performing a GET request to the https://AUTH_DOMAIN/oauth2/authorize endpoint which in the case that Cognito is 
+the identity provider will be redirected to the https://AUTH_DOMAIN/login endpoint. Both of these steps return the authorization_code
+
+Important to keep it mind is that if the Hosted UI is used, no parameters or setup is needed, the user only needs 
+to be redirected to the Hosted UI page. In the case of the GET request, the following parameters need to be provided.
+
+response_type -> set to "code"
+client_id -> gotten from Cognito User Pool
+redirect_uri -> needs to be the same as the one which the bot is listening to for incoming requests.
+
+Once the code has been returned to the endpoint that the bot is listening on for incoming requests, the code can be extracted and then a POST request can be used to the https://AUTH_DOMAIN/oauth2/token endpoint to receive the token. The following parameters need to be added to the body for a successful request.
+
+grant_type -> set to "authorization_code"
+code -> received in the previous step
+client_id -> gotten from Cognito User Pool
+redirect_uri
+
+After these steps, the bot receives the following tokens on the port it is listening on, which in this case is the localhost:
+
+Access Token
+Refresh Token
+ID Token
+expires_in
+token_type -> set to "Bearer"
+
+Access Token and ID Token are different but can both be used to gain access to AWS resources as I tried out. ID Tokens 
+contain more information about the user such as username, email address, phone number, whereas Access Token contains 
+information about the scope of the Token and what the user can do with the current Access Token
+
+Authorization must be set to "Bearer: Access Token" in order to get access to authorized AWS resources. In this case, 
+it was  a API Gateway GET Route connected to a lambda function
+
+The authentication scope of the MS teams has changed and for the time-being, it will be processed via Direct Message 
+in MS Teams Bot Chat.
+The username and password will be extracted from the bot chat and then verified from Cognito Identity Pools. 
