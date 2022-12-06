@@ -1,0 +1,149 @@
+{
+    "level": "INFO",
+    "location": "handler:94",
+    "message": {
+        "resource": "/ms-teams/{proxy+}",
+        "path": "/ms-teams/meetings",
+        "httpMethod": "POST",
+        "headers": {
+            "Accept": "*/*",
+            "Accept-Encoding": "gzip, deflate",
+            "Authorization": "Bearer eyJraWQiOiJJc2tSVWkyZ1wvcXpGQ0VCTldXQVQ2d2w0NW56VnhRRTA2OEhnVlBqTkgzND0iLCJhbGciOiJSUzI1NiJ9.eyJhdF9oYXNoIjoidDQydmV5bHE1LS1zWjBMa05tQk00USIsInN1YiI6ImI3OTM0OTEzLTZmNTYtNDMzOC05YWM3LTkyZTBlOWI3OTFjNSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0yLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMl9RdHI0TjF5VnciLCJjb2duaXRvOnVzZXJuYW1lIjoiYjc5MzQ5MTMtNmY1Ni00MzM4LTlhYzctOTJlMGU5Yjc5MWM1Iiwib3JpZ2luX2p0aSI6IjM4NzY0MTllLTIxMjgtNDhhZi04Njg0LTczMjEyMGYyNTFiOCIsImF1ZCI6IjdiazV1cmtraGoyOWgxOTI2c3Fyam01ZHA2IiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE2NzAzNTY2MzYsImV4cCI6MTY3MDM2MDIzNiwiaWF0IjoxNjcwMzU2NjM3LCJqdGkiOiI2NWZiZTcxNC03NzdjLTQ5NzktYTZjNS01MzA1ZGIzMzYwZjYiLCJlbWFpbCI6Iml6YWFuQHNwaWt5LmFpIn0.Bo-2yQzbLTTFUZuiIWmyH5V4aI3iHbFpJWFkNViSB4-4v57ClzGl8KzMM1Apgs2_Hg01lunYBqMoBupT5G9ZKHAzsK3gOLueNezPXB_3TWFAOwTwWQwu3o4ysZuSGNTRre1tQrM_T_2YMNuePSp1Y7Rz4-DS0WRuKt4fOjRs6jaqVfeD78j8MniGSANWJYFIoDibqznZ0WwDMUCfC2s7zDk38teFfV5LatuaFQQP6vQCly7mTV-bFfTwBQfSBtqmope4b7ppS76wZ0a-LiQOLyhGz7LaSMv_FvZ5lymMYYdjG3HezEkXvTsLe2OAtbz3O0yC7BCjoh8KfJxWaL7Udw",
+            "CloudFront-Forwarded-Proto": "https",
+            "CloudFront-Is-Desktop-Viewer": "true",
+            "CloudFront-Is-Mobile-Viewer": "false",
+            "CloudFront-Is-SmartTV-Viewer": "false",
+            "CloudFront-Is-Tablet-Viewer": "false",
+            "CloudFront-Viewer-ASN": "8466",
+            "CloudFront-Viewer-Country": "TR",
+            "Host": "y7ekiowaa1.execute-api.us-east-2.amazonaws.com",
+            "User-Agent": "python-requests/2.28.1",
+            "Via": "1.1 49140b838a62cd29e30f20e39a82dad0.cloudfront.net (CloudFront)",
+            "X-Amz-Cf-Id": "GI7ApzHILLMqE3DGE6icqqy-FC2DPs5UwZ5ffnqQ5YBg6Mvl2JvOZA==",
+            "X-Amzn-Trace-Id": "Root=1-638f9ebf-07fa0c0600dabe5c166a0ad9",
+            "X-Forwarded-For": "139.179.206.208, 70.132.34.71",
+            "X-Forwarded-Port": "443",
+            "X-Forwarded-Proto": "https"
+        },
+        "multiValueHeaders": {
+            "Accept": [
+                "*/*"
+            ],
+            "Accept-Encoding": [
+                "gzip, deflate"
+            ],
+            "Authorization": [
+                "Bearer eyJraWQiOiJJc2tSVWkyZ1wvcXpGQ0VCTldXQVQ2d2w0NW56VnhRRTA2OEhnVlBqTkgzND0iLCJhbGciOiJSUzI1NiJ9.eyJhdF9oYXNoIjoidDQydmV5bHE1LS1zWjBMa05tQk00USIsInN1YiI6ImI3OTM0OTEzLTZmNTYtNDMzOC05YWM3LTkyZTBlOWI3OTFjNSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0yLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMl9RdHI0TjF5VnciLCJjb2duaXRvOnVzZXJuYW1lIjoiYjc5MzQ5MTMtNmY1Ni00MzM4LTlhYzctOTJlMGU5Yjc5MWM1Iiwib3JpZ2luX2p0aSI6IjM4NzY0MTllLTIxMjgtNDhhZi04Njg0LTczMjEyMGYyNTFiOCIsImF1ZCI6IjdiazV1cmtraGoyOWgxOTI2c3Fyam01ZHA2IiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE2NzAzNTY2MzYsImV4cCI6MTY3MDM2MDIzNiwiaWF0IjoxNjcwMzU2NjM3LCJqdGkiOiI2NWZiZTcxNC03NzdjLTQ5NzktYTZjNS01MzA1ZGIzMzYwZjYiLCJlbWFpbCI6Iml6YWFuQHNwaWt5LmFpIn0.Bo-2yQzbLTTFUZuiIWmyH5V4aI3iHbFpJWFkNViSB4-4v57ClzGl8KzMM1Apgs2_Hg01lunYBqMoBupT5G9ZKHAzsK3gOLueNezPXB_3TWFAOwTwWQwu3o4ysZuSGNTRre1tQrM_T_2YMNuePSp1Y7Rz4-DS0WRuKt4fOjRs6jaqVfeD78j8MniGSANWJYFIoDibqznZ0WwDMUCfC2s7zDk38teFfV5LatuaFQQP6vQCly7mTV-bFfTwBQfSBtqmope4b7ppS76wZ0a-LiQOLyhGz7LaSMv_FvZ5lymMYYdjG3HezEkXvTsLe2OAtbz3O0yC7BCjoh8KfJxWaL7Udw"
+            ],
+            "CloudFront-Forwarded-Proto": [
+                "https"
+            ],
+            "CloudFront-Is-Desktop-Viewer": [
+                "true"
+            ],
+            "CloudFront-Is-Mobile-Viewer": [
+                "false"
+            ],
+            "CloudFront-Is-SmartTV-Viewer": [
+                "false"
+            ],
+            "CloudFront-Is-Tablet-Viewer": [
+                "false"
+            ],
+            "CloudFront-Viewer-ASN": [
+                "8466"
+            ],
+            "CloudFront-Viewer-Country": [
+                "TR"
+            ],
+            "Host": [
+                "y7ekiowaa1.execute-api.us-east-2.amazonaws.com"
+            ],
+            "User-Agent": [
+                "python-requests/2.28.1"
+            ],
+            "Via": [
+                "1.1 49140b838a62cd29e30f20e39a82dad0.cloudfront.net (CloudFront)"
+            ],
+            "X-Amz-Cf-Id": [
+                "GI7ApzHILLMqE3DGE6icqqy-FC2DPs5UwZ5ffnqQ5YBg6Mvl2JvOZA=="
+            ],
+            "X-Amzn-Trace-Id": [
+                "Root=1-638f9ebf-07fa0c0600dabe5c166a0ad9"
+            ],
+            "X-Forwarded-For": [
+                "139.179.206.208, 70.132.34.71"
+            ],
+            "X-Forwarded-Port": [
+                "443"
+            ],
+            "X-Forwarded-Proto": [
+                "https"
+            ]
+        },
+        "queryStringParameters": null,
+        "multiValueQueryStringParameters": null,
+        "pathParameters": {
+            "proxy": "meetings"
+        },
+        "stageVariables": null,
+        "requestContext": {
+            "resourceId": "irj5wt",
+            "authorizer": {
+                "claims": {
+                    "at_hash": "t42veylq5--sZ0LkNmBM4Q",
+                    "sub": "b7934913-6f56-4338-9ac7-92e0e9b791c5",
+                    "email_verified": "true",
+                    "iss": "https://cognito-idp.us-east-2.amazonaws.com/us-east-2_Qtr4N1yVw",
+                    "cognito:username": "b7934913-6f56-4338-9ac7-92e0e9b791c5",
+                    "origin_jti": "3876419e-2128-48af-8684-732120f251b8",
+                    "aud": "7bk5urkkhj29h1926sqrjm5dp6",
+                    "token_use": "id",
+                    "auth_time": "1670356636",
+                    "exp": "Tue Dec 06 20:57:16 UTC 2022",
+                    "iat": "Tue Dec 06 19:57:17 UTC 2022",
+                    "jti": "65fbe714-777c-4979-a6c5-5305db3360f6",
+                    "email": "izaan@spiky.ai"
+                }
+            },
+            "resourcePath": "/ms-teams/{proxy+}",
+            "httpMethod": "POST",
+            "extendedRequestId": "cvW9-G0hiYcFXpg=",
+            "requestTime": "06/Dec/2022:19:57:51 +0000",
+            "path": "/prod/ms-teams/meetings",
+            "accountId": "102224384400",
+            "protocol": "HTTP/1.1",
+            "stage": "prod",
+            "domainPrefix": "y7ekiowaa1",
+            "requestTimeEpoch": 1670356671669,
+            "requestId": "95774fcf-d0f5-4617-aa1c-0aaec1472a9e",
+            "identity": {
+                "cognitoIdentityPoolId": null,
+                "accountId": null,
+                "cognitoIdentityId": null,
+                "caller": null,
+                "sourceIp": "139.179.206.208",
+                "principalOrgId": null,
+                "accessKey": null,
+                "cognitoAuthenticationType": null,
+                "cognitoAuthenticationProvider": null,
+                "userArn": null,
+                "userAgent": "python-requests/2.28.1",
+                "user": null
+            },
+            "domainName": "y7ekiowaa1.execute-api.us-east-2.amazonaws.com",
+            "apiId": "y7ekiowaa1"
+        },
+        "body": "{\"meetings\": [{\"@microsoft.graph.downloadUrl\": \"https://spikyai-my.sharepoint.com/personal/admin_spikyai_onmicrosoft_com/_layouts/15/download.aspx?UniqueId=4f020524-f2af-4fee-add8-6dd08fbaf1cb&Translate=false&tempauth=eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJhdWQiOiIwMDAwMDAwMy0wMDAwLTBmZjEtY2UwMC0wMDAwMDAwMDAwMDAvc3Bpa3lhaS1teS5zaGFyZXBvaW50LmNvbUBlODkxMjQ2My01MjliLTRiNmItYTJiOC1jOTgwMjhmNWMwMjMiLCJpc3MiOiIwMDAwMDAwMy0wMDAwLTBmZjEtY2UwMC0wMDAwMDAwMDAwMDAiLCJuYmYiOiIxNjcwMzU2NjcwIiwiZXhwIjoiMTY3MDM2MDI3MCIsImVuZHBvaW50dXJsIjoib0NIcXVxNDZpdnNqVWcxYjc4NGNjUWptV3hFUnNOYTZBNUVhYnNYa2o1cz0iLCJlbmRwb2ludHVybExlbmd0aCI6IjE2MCIsImlzbG9vcGJhY2siOiJUcnVlIiwiY2lkIjoiTVdZelptWXdPV0l0TkdJME1DMDBObUl4TFdJeVptWXRNekZtT0RZMU9ERmtOakE1IiwidmVyIjoiaGFzaGVkcHJvb2Z0b2tlbiIsInNpdGVpZCI6Ik16STJaV016WW1ZdE1HRXpNaTAwTVRjd0xUbGpaamN0WkRWbVpqRmxNekUwTURJNSIsImFwcF9kaXNwbGF5bmFtZSI6IlByb2QtU3Bpa3ktQXBwIiwiZ2l2ZW5fbmFtZSI6Ik1hdHRoZXciLCJmYW1pbHlfbmFtZSI6IlRpZXJzZW4iLCJzaWduaW5fc3RhdGUiOiJbXCJrbXNpXCJdIiwiYXBwaWQiOiI0N2FlY2I2Ni04NTgzLTQ0NDQtYjc0Yi1hY2Q0Y2QzMDM4ZjQiLCJ0aWQiOiJlODkxMjQ2My01MjliLTRiNmItYTJiOC1jOTgwMjhmNWMwMjMiLCJ1cG4iOiJhZG1pbkBzcGlreWFpLm9ubWljcm9zb2Z0LmNvbSIsInB1aWQiOiIxMDAzMjAwMUVEMjA3OTY1IiwiY2FjaGVrZXkiOiIwaC5mfG1lbWJlcnNoaXB8MTAwMzIwMDFlZDIwNzk2NUBsaXZlLmNvbSIsInNjcCI6Im15ZmlsZXMucmVhZCBhbGxmaWxlcy5yZWFkIGFsbHByb2ZpbGVzLnJlYWQiLCJ0dCI6IjIiLCJ1c2VQZXJzaXN0ZW50Q29va2llIjpudWxsLCJpcGFkZHIiOiIyMC4xOTAuMTYwLjI2In0.RnNyT1ZYOWlKcHNTS0FNVTRGc2VPNDNPRlB0VXNLenFnVDVyNGIrMkw2RT0&ApiVersion=2.0\", \"createdDateTime\": \"2022-10-11T18:45:20Z\", \"id\": \"01Y7E5VJREAUBE7L7S5ZH23WDN2CH3V4OL\", \"name\": \"Onedrive Meeting URL Time-20221011_214515-Meeting Recording.mp4\"}, {\"@microsoft.graph.downloadUrl\": \"https://spikyai-my.sharepoint.com/personal/admin_spikyai_onmicrosoft_com/_layouts/15/download.aspx?UniqueId=bc221095-e64c-450a-8196-95dc7f6c9a5a&Translate=false&tempauth=eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJhdWQiOiIwMDAwMDAwMy0wMDAwLTBmZjEtY2UwMC0wMDAwMDAwMDAwMDAvc3Bpa3lhaS1teS5zaGFyZXBvaW50LmNvbUBlODkxMjQ2My01MjliLTRiNmItYTJiOC1jOTgwMjhmNWMwMjMiLCJpc3MiOiIwMDAwMDAwMy0wMDAwLTBmZjEtY2UwMC0wMDAwMDAwMDAwMDAiLCJuYmYiOiIxNjcwMzU2NjcwIiwiZXhwIjoiMTY3MDM2MDI3MCIsImVuZHBvaW50dXJsIjoiWGNBeDNrdW55a2xITGliWVFDZFJBWmFkcTk0RGZmTDB2VUFDWURXSGErST0iLCJlbmRwb2ludHVybExlbmd0aCI6IjE2MCIsImlzbG9vcGJhY2siOiJUcnVlIiwiY2lkIjoiTVdZelptWXdPV0l0TkdJME1DMDBObUl4TFdJeVptWXRNekZtT0RZMU9ERmtOakE1IiwidmVyIjoiaGFzaGVkcHJvb2Z0b2tlbiIsInNpdGVpZCI6Ik16STJaV016WW1ZdE1HRXpNaTAwTVRjd0xUbGpaamN0WkRWbVpqRmxNekUwTURJNSIsImFwcF9kaXNwbGF5bmFtZSI6IlByb2QtU3Bpa3ktQXBwIiwiZ2l2ZW5fbmFtZSI6Ik1hdHRoZXciLCJmYW1pbHlfbmFtZSI6IlRpZXJzZW4iLCJzaWduaW5fc3RhdGUiOiJbXCJrbXNpXCJdIiwiYXBwaWQiOiI0N2FlY2I2Ni04NTgzLTQ0NDQtYjc0Yi1hY2Q0Y2QzMDM4ZjQiLCJ0aWQiOiJlODkxMjQ2My01MjliLTRiNmItYTJiOC1jOTgwMjhmNWMwMjMiLCJ1cG4iOiJhZG1pbkBzcGlreWFpLm9ubWljcm9zb2Z0LmNvbSIsInB1aWQiOiIxMDAzMjAwMUVEMjA3OTY1IiwiY2FjaGVrZXkiOiIwaC5mfG1lbWJlcnNoaXB8MTAwMzIwMDFlZDIwNzk2NUBsaXZlLmNvbSIsInNjcCI6Im15ZmlsZXMucmVhZCBhbGxmaWxlcy5yZWFkIGFsbHByb2ZpbGVzLnJlYWQiLCJ0dCI6IjIiLCJ1c2VQZXJzaXN0ZW50Q29va2llIjpudWxsLCJpcGFkZHIiOiIyMC4xOTAuMTYwLjI2In0.MVc0VmsxQWtVUzFYMFdwYjhxMXdzVEdCS2ZjSm9tTFA3MGtVUE9ZZUNQdz0&ApiVersion=2.0\", \"createdDateTime\": \"2022-10-12T21:10:58Z\", \"id\": \"01Y7E5VJUVCARLYTHGBJCYDFUV3R7WZGS2\", \"name\": \"Spiky App Demo-20221013_001054-Meeting Recording.mp4\"}, {\"@microsoft.graph.downloadUrl\": \"https://spikyai-my.sharepoint.com/personal/admin_spikyai_onmicrosoft_com/_layouts/15/download.aspx?UniqueId=6a6e01db-7c04-4e32-832e-0260e23dac6b&Translate=false&tempauth=eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJhdWQiOiIwMDAwMDAwMy0wMDAwLTBmZjEtY2UwMC0wMDAwMDAwMDAwMDAvc3Bpa3lhaS1teS5zaGFyZXBvaW50LmNvbUBlODkxMjQ2My01MjliLTRiNmItYTJiOC1jOTgwMjhmNWMwMjMiLCJpc3MiOiIwMDAwMDAwMy0wMDAwLTBmZjEtY2UwMC0wMDAwMDAwMDAwMDAiLCJuYmYiOiIxNjcwMzU2NjcwIiwiZXhwIjoiMTY3MDM2MDI3MCIsImVuZHBvaW50dXJsIjoiYTBkUi9sb01ZUlh3cWhweUdSVWRoRHdrRlo4anFpa29wa1I3TEdraDltZz0iLCJlbmRwb2ludHVybExlbmd0aCI6IjE2MCIsImlzbG9vcGJhY2siOiJUcnVlIiwiY2lkIjoiTVdZelptWXdPV0l0TkdJME1DMDBObUl4TFdJeVptWXRNekZtT0RZMU9ERmtOakE1IiwidmVyIjoiaGFzaGVkcHJvb2Z0b2tlbiIsInNpdGVpZCI6Ik16STJaV016WW1ZdE1HRXpNaTAwTVRjd0xUbGpaamN0WkRWbVpqRmxNekUwTURJNSIsImFwcF9kaXNwbGF5bmFtZSI6IlByb2QtU3Bpa3ktQXBwIiwiZ2l2ZW5fbmFtZSI6Ik1hdHRoZXciLCJmYW1pbHlfbmFtZSI6IlRpZXJzZW4iLCJzaWduaW5fc3RhdGUiOiJbXCJrbXNpXCJdIiwiYXBwaWQiOiI0N2FlY2I2Ni04NTgzLTQ0NDQtYjc0Yi1hY2Q0Y2QzMDM4ZjQiLCJ0aWQiOiJlODkxMjQ2My01MjliLTRiNmItYTJiOC1jOTgwMjhmNWMwMjMiLCJ1cG4iOiJhZG1pbkBzcGlreWFpLm9ubWljcm9zb2Z0LmNvbSIsInB1aWQiOiIxMDAzMjAwMUVEMjA3OTY1IiwiY2FjaGVrZXkiOiIwaC5mfG1lbWJlcnNoaXB8MTAwMzIwMDFlZDIwNzk2NUBsaXZlLmNvbSIsInNjcCI6Im15ZmlsZXMucmVhZCBhbGxmaWxlcy5yZWFkIGFsbHByb2ZpbGVzLnJlYWQiLCJ0dCI6IjIiLCJ1c2VQZXJzaXN0ZW50Q29va2llIjpudWxsLCJpcGFkZHIiOiIyMC4xOTAuMTYwLjI2In0.VFJwVEdLempmbFRhS3Bpc1o2cnBFN1N1dkUvdC9KVk9KVVZXTnMyK1V1dz0&ApiVersion=2.0\", \"createdDateTime\": \"2022-08-19T12:38:51Z\", \"id\": \"01Y7E5VJW3AFXGUBD4GJHIGLQCMDRD3LDL\", \"name\": \"Test Meeting 2-20220819_173842-Meeting Recording.mp4\"}, {\"@microsoft.graph.downloadUrl\": \"https://spikyai-my.sharepoint.com/personal/admin_spikyai_onmicrosoft_com/_layouts/15/download.aspx?UniqueId=897e4f0e-246e-46a9-ac96-410dda84213d&Translate=false&tempauth=eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJhdWQiOiIwMDAwMDAwMy0wMDAwLTBmZjEtY2UwMC0wMDAwMDAwMDAwMDAvc3Bpa3lhaS1teS5zaGFyZXBvaW50LmNvbUBlODkxMjQ2My01MjliLTRiNmItYTJiOC1jOTgwMjhmNWMwMjMiLCJpc3MiOiIwMDAwMDAwMy0wMDAwLTBmZjEtY2UwMC0wMDAwMDAwMDAwMDAiLCJuYmYiOiIxNjcwMzU2NjcwIiwiZXhwIjoiMTY3MDM2MDI3MCIsImVuZHBvaW50dXJsIjoiSmNyc0NhT2lEZE1JWWNvQk9XdW5WWk1pdlpKWE1OdDJkQlBUdDFuQ3BCOD0iLCJlbmRwb2ludHVybExlbmd0aCI6IjE2MCIsImlzbG9vcGJhY2siOiJUcnVlIiwiY2lkIjoiTVdZelptWXdPV0l0TkdJME1DMDBObUl4TFdJeVptWXRNekZtT0RZMU9ERmtOakE1IiwidmVyIjoiaGFzaGVkcHJvb2Z0b2tlbiIsInNpdGVpZCI6Ik16STJaV016WW1ZdE1HRXpNaTAwTVRjd0xUbGpaamN0WkRWbVpqRmxNekUwTURJNSIsImFwcF9kaXNwbGF5bmFtZSI6IlByb2QtU3Bpa3ktQXBwIiwiZ2l2ZW5fbmFtZSI6Ik1hdHRoZXciLCJmYW1pbHlfbmFtZSI6IlRpZXJzZW4iLCJzaWduaW5fc3RhdGUiOiJbXCJrbXNpXCJdIiwiYXBwaWQiOiI0N2FlY2I2Ni04NTgzLTQ0NDQtYjc0Yi1hY2Q0Y2QzMDM4ZjQiLCJ0aWQiOiJlODkxMjQ2My01MjliLTRiNmItYTJiOC1jOTgwMjhmNWMwMjMiLCJ1cG4iOiJhZG1pbkBzcGlreWFpLm9ubWljcm9zb2Z0LmNvbSIsInB1aWQiOiIxMDAzMjAwMUVEMjA3OTY1IiwiY2FjaGVrZXkiOiIwaC5mfG1lbWJlcnNoaXB8MTAwMzIwMDFlZDIwNzk2NUBsaXZlLmNvbSIsInNjcCI6Im15ZmlsZXMucmVhZCBhbGxmaWxlcy5yZWFkIGFsbHByb2ZpbGVzLnJlYWQiLCJ0dCI6IjIiLCJ1c2VQZXJzaXN0ZW50Q29va2llIjpudWxsLCJpcGFkZHIiOiIyMC4xOTAuMTYwLjI2In0.WmR2REdVV3dxcTVDU1p2dTFDWHBoMmZLVktLV3FSWFFiUkhZUHdoTXdFZz0&ApiVersion=2.0\", \"createdDateTime\": \"2022-11-11T15:25:19Z\", \"id\": \"01Y7E5VJQOJ57IS3REVFDKZFSBBXNIIIJ5\", \"name\": \"Transcription Check with Burak-20221111_182516-Meeting Recording.mp4\"}]}",
+        "isBase64Encoded": false
+    },
+    "timestamp": "2022-12-06 19:57:52,506+0000",
+    "service": "service_undefined",
+    "cold_start": true,
+    "function_name": "mizbahIntegrationStack6E3-msteamsIntegrationIntegr-fyEyjo3KQxXD",
+    "function_memory_size": "128",
+    "function_arn": "arn:aws:lambda:us-east-2:102224384400:function:mizbahIntegrationStack6E3-msteamsIntegrationIntegr-fyEyjo3KQxXD",
+    "function_request_id": "3dc819d1-2f3e-42b7-b185-efb7768e1e15",
+    "correlation_id": "95774fcf-d0f5-4617-aa1c-0aaec1472a9e",
+    "xray_trace_id": "1-638f9ebf-07fa0c0600dabe5c166a0ad9"
+  }
