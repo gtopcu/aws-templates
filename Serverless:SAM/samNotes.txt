@@ -40,11 +40,18 @@ sam validate        Validate an AWS SAM template
 sam build           Build the app
 sam package         Package the app
 sam deploy --guided
-sam sync --stack-name blog --watch
 sam delete          Delete an AWS SAM application and the artifacts created by sam deploy
 sam logs --tail     Fetch logs for a function
 sam publish         Publish a packaged AWS SAM template to the AWS Serverless Application Repository
 sam traces          Fetch AWS X-Ray traces
+
+SAM Accelerate -> https://aws.amazon.com/blogs/compute/accelerating-serverless-development-with-aws-sam-accelerate/
+sam build --cached
+sam sync --stack-name <project name> --watch
+sam sync --stack-name <project name> --watch --code 
+sam sync --stack-name <project name> --code --resource AWS::Serverless::Function
+sam sync --stack-name <project name> --code --resource-id HelloWorldFunction
+sam logs --stack-name <project name> --include-traces --tail
 
 sam pipeline bootstrap			Creates all of the environment resources, permission, authentication
 sam pipeline init				Creates the pipeline for your CI/CD system
