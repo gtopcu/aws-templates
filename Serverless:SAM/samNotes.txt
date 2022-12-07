@@ -16,6 +16,9 @@ https://www.youtube.com/watch?v=_8mbJ3PGVUk
 Creating a CI/CD deployment pipeline for GitHub Actions with AWS SAM Pipelines
 https://www.youtube.com/watch?v=sQrdfhGsW6w
 
+SAM Accelerate
+https://www.youtube.com/watch?v=oZNC9mLA_PM
+
 ---------------------------------------------------------------------------------------------
 
 Installation & Commands:
