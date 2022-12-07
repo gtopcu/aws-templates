@@ -59,7 +59,7 @@ sam local start-api
 sam local start-api --template-file cloudformation.yml
 
 Generate Event
-sam local generate-event sqs ...
+sam local generate-event sqs ... >> ./events.event.json
 
 ---------------------------------------------------------------------------------------------
 
