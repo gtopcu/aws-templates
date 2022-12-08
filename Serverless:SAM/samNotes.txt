@@ -19,6 +19,9 @@ https://www.youtube.com/watch?v=sQrdfhGsW6w
 SAM Accelerate
 https://www.youtube.com/watch?v=oZNC9mLA_PM
 
+SAM Connectors
+https://www.youtube.com/watch?v=1GoShapTxH0
+
 ---------------------------------------------------------------------------------------------
 
 Installation & Commands:
