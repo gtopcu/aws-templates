@@ -1,0 +1,4 @@
+sam local invoke \
+-t ./../../../../../cdk.out/GunduzCorePlatformStack20E2D759.template.json MeetingAnalysisHandler \
+--parameter-overrides 'ParameterKey=layerarnparameterParameter,ParameterValue=arn:aws:lambda:us-east-2:102224384400:layer:powertoolslayer3C266359:110' \
+-e ./event.json
