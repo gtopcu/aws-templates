@@ -1,0 +1,56 @@
+name: Build and Deploy to ECR
+
+on:
+  push:
+    branches: [ main ]
+
+env:
+  ECR_REGION: <ECR_REGION>
+  ECR_REPOSITORY: <ECR_REPOSITORY>
+  SLACK_WEBHOOK: <SLACK_WEBHOOK>
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ env.ECR_REGION }}
+
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+
+    - name: Build and tag Docker image
+      id: build-image
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: false
+        tags: ${{ env.ECR_REPOSITORY }}:${{ github.sha }}
+
+    - name: Push Docker image to Amazon ECR
+      id: push-image
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: true
+        tags: ${{ env.ECR_REPOSITORY }}:${{ github.sha }}
+        registry: ${{ steps.login-ecr.outputs.registry }}
+
+    - name: Send Slack notification
+      if: always()
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_WEBHOOK: ${{ env.SLACK_WEBHOOK }}
+        SLACK_ICON_EMOJI: ':rocket:'
+        SLACK_MESSAGE: 'A new Docker image has been pushed to ECR!'
+        SLACK_TITLE: 'Docker Image Pushed'
+        SLACK_COLOR: '#36a64f'

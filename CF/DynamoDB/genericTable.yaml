@@ -1,0 +1,29 @@
+AWSTemplateFormatVersion: "2010-09-09" 
+
+Description: Create a DynamoDB table 
+
+Parameters: 
+  TableName: 
+    Type: String 
+    Description: Name of the DynamoDB table
+  AttributeDefinitions:
+    Type: List 
+    Description: Attributes to be defined
+    Value:
+      - AttributeName: 
+        AttributeType: String
+  KeySchema: 
+    Type: List 
+    Description: The primary key of the DynamoDB table
+    Value:
+      - AttributeName: 
+        KeyType: HASH
+
+Resources: 
+  MyDynamoTable: 
+    Type: "AWS::DynamoDB::Table"
+    Properties: 
+      TableName: !Ref TableName
+      AttributeDefinitions: !Ref AttributeDefinitions
+      KeySchema: !Ref KeySchema
+      BillingMode: PAY_PER_REQUEST
