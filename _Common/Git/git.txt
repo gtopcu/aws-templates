@@ -3,7 +3,6 @@ which git
 git config --list
 git config --global user.name "S. Gokhan Topcu"
 git config --global user.email "gtopcu@gmail.com"
-git config --global user.email "gtopcu@gmail.com"
 
 git config --global credential.helper cache
 git config --global credential.helper 'store --file ~/.my-credentials'
