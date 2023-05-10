@@ -3,6 +3,7 @@ which git
 git config --list
 git config --global user.name "S. Gokhan Topcu"
 git config --global user.email "gtopcu@gmail.com"
+git config --global user.email "gtopcu@gmail.com"
 
 git config --global credential.helper cache
 git config --global credential.helper 'store --file ~/.my-credentials'
@@ -14,7 +15,7 @@ git init
 git add README.md
 git commit -m "first commit"
 git branch -M main
-git remote add origin git@github.com:gtopcu/testdockerrepo.git
+git remote add origin git@github.com:gtopcu/aws-templates.git
 git remote add origin https://github.com/gtopcu/python_lambda
 git push -u origin main
 ```
@@ -29,30 +30,31 @@ https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a
 !!! chown must be hukanege for public  & private key & config, not root!
 !!! ~ install into /var/root for all users
 # list all SSH keys
-$ ls -al /Users/hukanege/.ssh
+$ ls -al /Users/gtopcu/.ssh
 # start the ssh-agent in the background
 $ eval "$(ssh-agent -s)"
 > Agent pid 59566
 $ ssh-add -l -E sha256
-> 2048 SHA256:274ffWxgaxq/tSINAykStUL7XWyRNcRTlcST1Ei7gBQ /Users/hukanege/.ssh/id_rsa (RSA)
+> 2048 SHA256:274ffWxgaxq/tSINAykStUL7XWyRNcRTlcST1Ei7gBQ /Users/gtopcu/.ssh/id_rsa (RSA)
 
 # if key value doesn't exist:
 $ ssh-keygen -t ed25519 -C "gtopcu@gmail.com"
-$ open /Users/hukanege/.ssh/config
+$ open /Users/gtopcu/.ssh/config
 
 # if config doesn't exist:
-$ touch /Users/hukanege/.ssh/config
+$ touch /Users/gtopcu/.ssh/config
 Host *
   AddKeysToAgent yes
   UseKeychain yes
-  IdentityFile /Users/hukanege/.ssh/id_ed25519
-$ ssh-add --apple-use-keychain /Users/hukanege/.ssh/id_ed25519
+  IdentityFile /Users/gtopcu/.ssh/id_ed25519
+$ ssh-add --apple-use-keychain /Users/gtopcu/.ssh/id_ed25519
 $ ssh-add -K ~/.ssh/id_ed25519 (for older macs)
 
 # Add new key to GitHub
 # Copies the contents of the id_ed25519.pub file to your clipboard
-$ pbcopy < /Users/hukanege/.ssh/id_ed25519.pub
-ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFDkMhzmoRjPZUUTN7sqBRcPpqJ+wPklx3YNE2C/d6O7 gtopcu@gmail.com
+$ pbcopy < /Users/gtopcu/.ssh/id_ed25519.pub
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPenYHBDr7gp996CswqDf1mj6XuuRGo+Xn+F8dp9yv14 gtopcu@gmail.com
+
 # Add key: https://github.com/settings/keys
 ```
 
@@ -60,7 +62,7 @@ ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFDkMhzmoRjPZUUTN7sqBRcPpqJ+wPklx3YNE2C/d6O7
 
 git init
 git status
-git log (--oneline)
+git log
 git diff
 git add readme.txt
 git add .
@@ -83,12 +85,7 @@ git fetch <remote><branch> (download only, do not merge)
 git pull <remote><branch> (fetch + merge)
 git fork
 git pull-request
-
-https://opensource.com/article/18/6/git-reset-revert-rebase-commands
 git reset --soft/mixed/hard
-git reset 9ef9173
-git reset current~2
-git revert HEAD
 git rebase
 
 ---
