@@ -7,6 +7,9 @@ https://www.youtube.com/watch?v=MipjLaTp5nA
 How To Test your AWS Lambda Locally with SAM
 https://www.youtube.com/watch?v=AUQRyl1SNcU
 
+Lamba Testing Remove Invoke
+https://www.youtube.com/watch?v=0rhJD9rl1co
+
 Mastering the AWS Serverless Application Model (AWS SAM) - AWS Online Tech Talks
 https://www.youtube.com/watch?v=QBBewrKR1qg
 
