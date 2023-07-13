@@ -50,6 +50,7 @@ sam traces          Fetch AWS X-Ray traces
 
 SAM Accelerate -> https://aws.amazon.com/blogs/compute/accelerating-serverless-development-with-aws-sam-accelerate/
 sam build --cached
+sam sync --watch
 sam sync --stack-name <project name> --watch
 sam sync --stack-name <project name> --watch --code 
 sam sync --stack-name <project name> --code --resource AWS::Serverless::Function
