@@ -62,6 +62,7 @@ sam pipeline init --bootstrap	Entire bootstrap and initialization process
 
 Invoke:
 sam local invoke -e ./events/lambda_event.json samFunction
+sam remote invoke
 
 Start:
 sam local start-lambda
