@@ -48,6 +48,7 @@
 # pip-compile --upgrade-package requests==2.0.0
 
 # pyproject.toml
+# https://pip.pypa.io/en/stable/reference/build-system/pyproject-toml/
 # run python -m pip install .
 
 # Install Jupyter
