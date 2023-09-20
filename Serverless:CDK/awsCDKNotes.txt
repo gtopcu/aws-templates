@@ -27,6 +27,7 @@ cdk ls -> Lists the stacks in the app
 cdk synth -> Synthesizes and prints the CloudFormation template for the specified stack(s)
 cdk bootstrap -> Deploys the CDK Toolkit staging stack; see Bootstrapping
 cdk deploy (-all) -> Deploys the specified stack(s)
+cdk deploy --hotswap -> Will try hotswap deployment first
 cdk watch -> Watch for changes
 cdk destroy -> Destroys the specified stack(s)
 cdk diff -> Compares the specified stack with the deployed stack or a local CloudFormation template
