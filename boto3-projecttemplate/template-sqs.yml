@@ -1,0 +1,45 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: SAM template
+
+Globals:
+  Function:
+    Timeout: 5
+    MemorySize: 256
+    Runtime: python3.11
+    Tracing: Active
+    Environment:
+      Variables:
+        LOG_LEVEL: INFO
+        #POWERTOOLS_LOGGER_SAMPLE_RATE: 0.1
+        POWERTOOLS_LOGGER_LOG_EVENT: true
+        POWERTOOLS_SERVICE_NAME: service1
+
+Resources:
+  HelloWorldFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: lambda_handler_handler
+      CodeUri: app/
+      Policies:
+        - SQSPollerPolicy:
+            QueueName: !GetAtt SampleQueue.QueueName
+      Events:
+        Batch:
+          Type: SQS
+          Properties:
+            Queue: !GetAtt SampleQueue.Arn
+            FunctionResponseTypes:
+              - ReportBatchItemFailures
+
+  SampleDLQ:
+    Type: AWS::SQS::Queue
+
+  SampleQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      VisibilityTimeout: 30 # Fn timeout * 6
+      SqsManagedSseEnabled: true
+      RedrivePolicy:
+        maxReceiveCount: 2
+        deadLetterTargetArn: !GetAtt SampleDLQ.Arn
