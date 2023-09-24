@@ -10,6 +10,11 @@ dynamodb = boto3.resource('dynamodb')
 #                          region_name=region,
 #                          endpoint_url='http://localhost:8000')
 
+# client = boto3.client('dynamodb',
+#                       aws_access_key_id='yyyy',
+#                       aws_secret_access_key='xxxx',
+#                       region_name='us-east-1')
+
 def getItem(tableName, primaryKeyName, primary_key, sortKeyName, sort_key):
     table = dynamodb.Table(tableName)
     response = table.get_item(Key={
