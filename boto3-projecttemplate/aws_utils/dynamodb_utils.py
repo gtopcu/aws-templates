@@ -77,9 +77,12 @@ def updateItem(tableName, key, updateExpression, expressionAttributeValues):
     )
     """
 
-def deleteItem(tableName, key):
+def deleteItem(tableName, primaryKeyName, primary_key, sortKeyName, sort_key):
     table = dynamodb.Table(tableName)
-    response = table.delete_item(Key=key)
+    response = table.delete_item(Key={
+        primaryKeyName: primary_key,
+        sortKeyName: sort_key
+    })
     return response
 
 def query(tableName, keyConditionExpression, expressionAttributeValues):
@@ -110,3 +113,14 @@ def scan(tableName):
     table = dynamodb.Table(tableName)
     response = table.scan()
     return response
+    
+    """
+    1MB limit on scan
+
+    response = table.scan(FilterExpression=Attr('country').eq('US') & Attr('city').eq('NYC'))
+    data = response['Items']
+    while 'LastEvaluatedKey' in response:
+        response = table.scan(ExclusiveStartKey=response['LastEvaluatedKey'])
+        data.extend(response['Items'])
+
+    """
