@@ -1,6 +1,5 @@
 import boto3
 import json
-import requests
 
 from aws_lambda_powertools.utilities.typing import LambdaContext
 from aws_lambda_powertools import Logger
@@ -8,6 +7,7 @@ from aws_lambda_powertools.logging import correlation_paths
 from aws_lambda_powertools import Metrics
 from aws_lambda_powertools.metrics import MetricUnit
 from aws_lambda_powertools.utilities import parameters
+from aws_lambda_powertools.event_handler import APIGatewayRestResolver
 from aws_lambda_powertools.utilities.data_classes import event_source, APIGatewayProxyEvent
 
 """
@@ -22,6 +22,12 @@ except ClientError as e:
 logger = Logger(log_uncaught_exceptions=False)
 #metrics = Metrics(capture_cold_start_metric=True)
 #metrics.set_default_dimensions(environment=STAGE, another="one")
+app = APIGatewayRestResolver()
+
+#@tracer.capture_method
+@app.get("/test")
+def handler_get(event: APIGatewayProxyEvent):
+    return None
 
 #@tracer.capture_lambda_handler
 #@metrics.log_metrics  # ensures metrics are flushed upon request completion/failure
@@ -30,15 +36,23 @@ logger = Logger(log_uncaught_exceptions=False)
                               correlation_id_path=correlation_paths.API_GATEWAY_REST)
 @event_source(data_class=APIGatewayProxyEvent)
 def handler(event: APIGatewayProxyEvent, context: LambdaContext) -> dict:
+
+    #return app.resolve(event, context)
+    
     print(event)
     #input = json.loads(json_string)
     #indented = json.dumps(json_input, indent=2)
     print(event['Input'][0]['Text'])
 
-    print(context.aws_request_id)
-    # print("request_id: " + (str)context.aws_request_id +
-    #       " remaining_time: " + (str)context.get_remaining_time_in_millis() 
-    # )
+    req_id = context.aws_request_id
+    remaining_time = context.get_remaining_time_in_millis()
+    memory_limit = context.memory_limit_in_mb
+
+    if "path" in event.path and event.http_method == "GET":
+        request_context = event.request_context
+        identity = request_context.identity
+        user = identity.user
+        print(event.json_body)
     
     #logger.append_keys(order_id=order_id)
     #logger.info("Collecting payment", order_id=order_id)
