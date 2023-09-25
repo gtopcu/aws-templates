@@ -18,9 +18,6 @@ except ClientError as e:
     logging.warning(f"Error: {e}")
 """
 
-current_event: APIGatewayProxyEvent = None
-current_context : LambdaContext = None
-
 #tracer = Tracer()
 logger = Logger(log_uncaught_exceptions=False)
 #metrics = Metrics(capture_cold_start_metric=True)
@@ -35,6 +32,7 @@ app = APIGatewayRestResolver()
 def handler_get(todo_id: str):
     data: dict = app.current_event.json_body 
     #app.lambda_context
+    #todo_id: str = app.current_event.get_query_string_value(name="id", default_value="")
     return None
 
 #@tracer.capture_lambda_handler
