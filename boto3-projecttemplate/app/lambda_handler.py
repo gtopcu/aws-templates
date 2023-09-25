@@ -32,6 +32,7 @@ app = APIGatewayRestResolver()
 def handler_get(todo_id: str):
     data: dict = app.current_event.json_body 
     #app.lambda_context
+    #api_key: str = app.current_event.get_header_value(name="X-Api-Key", case_sensitive=True, default_value="")
     #todo_id: str = app.current_event.get_query_string_value(name="id", default_value="")
     return None
 
