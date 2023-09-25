@@ -7,7 +7,18 @@ from aws_lambda_powertools.logging import correlation_paths
 from aws_lambda_powertools import Metrics
 from aws_lambda_powertools.metrics import MetricUnit
 from aws_lambda_powertools.utilities import parameters
-from aws_lambda_powertools.event_handler import APIGatewayRestResolver
+from aws_lambda_powertools.event_handler import (
+    APIGatewayRestResolver,
+    Response,
+    content_types,
+)
+from aws_lambda_powertools.event_handler.exceptions import (
+    BadRequestError,
+    InternalServerError,
+    NotFoundError,
+    ServiceError,
+    UnauthorizedError,
+)
 from aws_lambda_powertools.utilities.data_classes import event_source, APIGatewayProxyEvent
 
 """
@@ -34,7 +45,14 @@ def handler_get(todo_id: str):
     #app.lambda_context
     #api_key: str = app.current_event.get_header_value(name="X-Api-Key", case_sensitive=True, default_value="")
     #todo_id: str = app.current_event.get_query_string_value(name="id", default_value="")
+    #raise BadRequestError("Missing required parameter")  # HTTP  400
     return None
+
+@app.not_found
+#@tracer.capture_method
+def handle_not_found_errors(exc: NotFoundError) -> Response:
+    logger.info(f"Not found route: {app.current_event.path}")
+    return Response(status_code=404, content_type=content_types.TEXT_PLAIN, body="Not found")
 
 #@tracer.capture_lambda_handler
 #@metrics.log_metrics  # ensures metrics are flushed upon request completion/failure
