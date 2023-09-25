@@ -18,6 +18,9 @@ except ClientError as e:
     logging.warning(f"Error: {e}")
 """
 
+current_event: APIGatewayProxyEvent = None
+current_context : LambdaContext = None
+
 #tracer = Tracer()
 logger = Logger(log_uncaught_exceptions=False)
 #metrics = Metrics(capture_cold_start_metric=True)
@@ -25,8 +28,13 @@ logger = Logger(log_uncaught_exceptions=False)
 app = APIGatewayRestResolver()
 
 #@tracer.capture_method
-@app.get("/test")
-def handler_get(event: APIGatewayProxyEvent):
+@app.get("/todos/<todo_id>")
+#@app.get(".+")
+#@app.post("/todos")
+#@app.route("/todos", method=["PUT", "POST"])
+def handler_get(todo_id: str):
+    data: dict = app.current_event.json_body 
+    #app.lambda_context
     return None
 
 #@tracer.capture_lambda_handler
@@ -36,23 +44,23 @@ def handler_get(event: APIGatewayProxyEvent):
                               correlation_id_path=correlation_paths.API_GATEWAY_REST)
 @event_source(data_class=APIGatewayProxyEvent)
 def handler(event: APIGatewayProxyEvent, context: LambdaContext) -> dict:
-
-    #return app.resolve(event, context)
     
-    print(event)
+    return app.resolve(event, context)
+    
+    #print(event)
     #input = json.loads(json_string)
     #indented = json.dumps(json_input, indent=2)
-    print(event['Input'][0]['Text'])
+    #print(event['Input'][0]['Text'])
 
-    req_id = context.aws_request_id
-    remaining_time = context.get_remaining_time_in_millis()
-    memory_limit = context.memory_limit_in_mb
+    # req_id = context.aws_request_id
+    # remaining_time = context.get_remaining_time_in_millis()
+    # memory_limit = context.memory_limit_in_mb
 
-    if "path" in event.path and event.http_method == "GET":
-        request_context = event.request_context
-        identity = request_context.identity
-        user = identity.user
-        print(event.json_body)
+    # if "path" in event.path and event.http_method == "GET":
+    #     request_context = event.request_context
+    #     identity = request_context.identity
+    #     user = identity.user
+    #     print(event.json_body)
     
     #logger.append_keys(order_id=order_id)
     #logger.info("Collecting payment", order_id=order_id)
@@ -65,10 +73,10 @@ def handler(event: APIGatewayProxyEvent, context: LambdaContext) -> dict:
     # api_key: Any = parameters.get_secret("/lambda-powertools/api-key")
     # headers: dict = {"X-API-Key": api_key}
 
-    if 'order_id' in event.path and event.http_method == 'GET':
-        print(event.body)
+    # if 'order_id' in event.path and event.http_method == 'GET':
+    #     print(event.body)
 
-    return {"statusCode": 200, "body": "success"}
+    # return {"statusCode": 200, "body": "success"}
 
     """
 	transactionId = event['queryStringParameters']['transactionId']
