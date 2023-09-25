@@ -11,12 +11,12 @@ def sleep(seconds: int):
 def generate_uuid():
     return str(uuid.uuid4())
 
-def request(endpoint_url: str):
+def request(endpoint_url: str, headers: dict, timeout: int = 30) -> requests.Response:
     if endpoint_url is None:
-        endpoint_url = "http://httpbin.org/status/500"
+        endpoint_url = "http://httpbin.org/status/200"
     try:
-        resp = requests.get(endpoint_url)
+        resp = requests.get(endpoint_url, headers=headers, timeout=timeout)
         resp.raise_for_status()
         return resp
     except requests.HTTPError as e:
-        raise RuntimeError(f"Received a HTTP 5xx error: {e}") from e
+        raise RuntimeError(f"Received a HTTP 5xx error: {e}")

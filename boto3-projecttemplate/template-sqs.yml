@@ -4,16 +4,20 @@ Description: SAM template
 
 Globals:
   Function:
-    Timeout: 5
-    MemorySize: 256
+    Timeout: 30
+    MemorySize: 128
     Runtime: python3.11
-    Tracing: Active
+    #Tracing: Active
     Environment:
       Variables:
-        LOG_LEVEL: INFO
-        #POWERTOOLS_LOGGER_SAMPLE_RATE: 0.1
-        POWERTOOLS_LOGGER_LOG_EVENT: true
         POWERTOOLS_SERVICE_NAME: service1
+        POWERTOOLS_TRACE_DISABLED: true
+        LOG_LEVEL: INFO
+        POWERTOOLS_LOGGER_LOG_EVENT: true
+        #POWERTOOLS_LOGGER_SAMPLE_RATE: 0.1
+        #POWERTOOLS_METRICS_NAMESPACE: service1
+        #POWERTOOLS_PARAMETERS_MAX_AGE: 60 #seconds
+        #POWERTOOLS_PARAMETERS_SSM_DECRYPT: true
     Layers:
       # Find the latest Layer version in the official documentation
       # https://docs.powertools.aws.dev/lambda/python/latest/#lambda-layer
@@ -23,8 +27,8 @@ Resources:
   HelloWorldFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: lambda_handler_handler
-      CodeUri: app/
+      Handler: sqs_handler_handler
+      CodeUri: lambdas/
       Policies:
         - SQSPollerPolicy:
             QueueName: !GetAtt SampleQueue.QueueName
@@ -36,9 +40,6 @@ Resources:
             FunctionResponseTypes:
               - ReportBatchItemFailures
 
-  SampleDLQ:
-    Type: AWS::SQS::Queue
-
   SampleQueue:
     Type: AWS::SQS::Queue
     Properties:
@@ -47,3 +48,6 @@ Resources:
       RedrivePolicy:
         maxReceiveCount: 2
         deadLetterTargetArn: !GetAtt SampleDLQ.Arn
+  
+   SampleDLQ:
+    Type: AWS::SQS::Queue

@@ -1,5 +1,7 @@
 import boto3
 import json
+from http import HTTPStatus
+from uuid import uuid4
 
 from aws_lambda_powertools.utilities.typing import LambdaContext
 from aws_lambda_powertools import Logger
@@ -20,6 +22,7 @@ from aws_lambda_powertools.event_handler.exceptions import (
     UnauthorizedError,
 )
 from aws_lambda_powertools.utilities.data_classes import event_source, APIGatewayProxyEvent
+from aws_lambda_powertools.shared.cookies import Cookie
 
 """
 from botocore.exceptions import ClientError
@@ -30,29 +33,61 @@ except ClientError as e:
 """
 
 #tracer = Tracer()
-logger = Logger(log_uncaught_exceptions=False)
+logger = Logger(log_uncaught_exceptions=True)
 #metrics = Metrics(capture_cold_start_metric=True)
 #metrics.set_default_dimensions(environment=STAGE, another="one")
-app = APIGatewayRestResolver()
+app = APIGatewayRestResolver(debug=True)
+# https://docs.powertools.aws.dev/lambda/python/latest/core/event_handler/api_gateway/#custom-domain-api-mappings
+# app = APIGatewayRestResolver(strip_prefixes=["/customdomain"]) 
+# CORS will match when Origin is only https://www.example.com
+# cors_config = CORSConfig(allow_origin="https://www.example.com", max_age=300)
+# app = APIGatewayRestResolver(cors=cors_config)
 
 #@tracer.capture_method
-@app.get("/todos/<todo_id>")
+@app.not_found
+def handle_not_found_errors(exc: NotFoundError) -> Response:
+    logger.info(f"Route not found: {app.current_event.path}")
+    return Response(status_code=404, content_type=content_types.TEXT_PLAIN, body="Not found")
+
+@app.exception_handler(ValueError)
+def handle_invalid_limit_qs(ex: ValueError):  # receives exception raised
+    metadata = {"path": app.current_event.path, "query_strings": app.current_event.query_string_parameters}
+    logger.error(f"Malformed request: {ex}", extra=metadata)
+    return Response(
+        status_code=400,
+        content_type=content_types.TEXT_PLAIN,
+        body="Invalid request parameters",
+    )
+
+#@tracer.capture_method
+@app.get("/todos/<todo_id>", compress=True)
 #@app.get(".+")
 #@app.post("/todos")
 #@app.route("/todos", method=["PUT", "POST"])
 def handler_get(todo_id: str):
-    data: dict = app.current_event.json_body 
     #app.lambda_context
+
     #api_key: str = app.current_event.get_header_value(name="X-Api-Key", case_sensitive=True, default_value="")
     #todo_id: str = app.current_event.get_query_string_value(name="id", default_value="")
+    data: dict = app.current_event.json_body  # deserialize json str to dict
+    
+    # app.current_event.http_method == "GET":
+    # app.current_event.request_context.account_id
+    # app.current_event.request_context.api_id
+    # app.current_event.request_context.authorizer
+    # app.current_event.request_context.identity
+    
     #raise BadRequestError("Missing required parameter")  # HTTP  400
-    return None
 
-@app.not_found
-#@tracer.capture_method
-def handle_not_found_errors(exc: NotFoundError) -> Response:
-    logger.info(f"Not found route: {app.current_event.path}")
-    return Response(status_code=404, content_type=content_types.TEXT_PLAIN, body="Not found")
+    custom_headers = {"X-Transaction-Id": [f"{uuid4()}"]}
+    return Response(
+        status_code=HTTPStatus.OK.value,  # 200
+        headers=custom_headers,
+        content_type=content_types.APPLICATION_JSON,
+        body={"result": "success"},
+        
+        cookies=[Cookie(name="session_id", value="12345")],
+    )
 
 #@tracer.capture_lambda_handler
 #@metrics.log_metrics  # ensures metrics are flushed upon request completion/failure

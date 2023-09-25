@@ -3,6 +3,7 @@ Transform: AWS::Serverless-2016-10-31
 Description: Event handler API Gateway
 
 # https://docs.powertools.aws.dev/lambda/python/2.23.0/core/event_handler/api_gateway/#event-resolvers
+# https://aws.amazon.com/pt/blogs/opensource/create-restful-apis-on-aws-with-openapi-specification-with-no-coding/
 
 Globals:
   Api:
@@ -16,45 +17,52 @@ Globals:
     #TracingEnabled: false
     #AccessLogSetting: 
     #CanarySetting:
-    #OpenApiVersion: 3.0 
+    #OpenApiVersion: 3.0.3 
     #CacheClusterEnabled: false
     #CacheClusterSize: 
     #BinaryMediaTypes: # see Binary responses section
     #  - "*~1*" # converts to */* for any binary type
   Function:
     Timeout: 30
+    MemorySize: 128
     Runtime: python3.11
     #Tracing: Active
     Environment:
       Variables:
         POWERTOOLS_SERVICE_NAME: service1
-        #POWERTOOLS_TRACE_DISABLED: true
+        POWERTOOLS_TRACE_DISABLED: true
         #POWERTOOLS_TRACER_CAPTURE_RESPONSE: false
         #POWERTOOLS_TRACER_CAPTURE_ERROR: false
         LOG_LEVEL: INFO
         POWERTOOLS_LOGGER_LOG_EVENT: true
         #POWERTOOLS_LOGGER_SAMPLE_RATE: 0.1
         #POWERTOOLS_METRICS_NAMESPACE: service1
-        POWERTOOLS_PARAMETERS_MAX_AGE: 60 #seconds
+        #POWERTOOLS_PARAMETERS_MAX_AGE: 60 #seconds
         #POWERTOOLS_PARAMETERS_SSM_DECRYPT: true
     Layers:
       # Find the latest Layer version in the official documentation
       # https://docs.powertools.aws.dev/lambda/python/latest/#lambda-layer
       - !Sub arn:aws:lambda:${AWS::Region}:017000801446:layer:AWSLambdaPowertoolsPythonV2:45
 
+# Parameters:
+#   environment:
+#     Type: "String"
+#     Default: dev
+#   ipAddressWhiteList:
+#     Type: "CommaDelimitedList"
+#     Default: "myIpAddress/32"
+
 Resources:
   ApiFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: lambda_handler.handler
-      CodeUri: app/
+      Handler: apigw_handler.handler
+      CodeUri: lambdas/
       Description: API handler function
       Events:
         AnyApiEvent:
           Type: Api
           Properties:
-            # NOTE: this is a catch-all rule to simplify the documentation.
-            # explicit routes and methods are recommended for prod instead (see below)
             Path: /{proxy+} # Send requests on any path to the lambda function
             Method: ANY # Send requests using any http method to the lambda function
 
