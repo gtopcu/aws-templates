@@ -23,6 +23,7 @@ def getItem(tableName, primaryKeyName, primary_key, sortKeyName, sort_key):
     })
     return response
 
+# 16MB and 100 items limit
 def batchGetItems():
     response = dynamodb.batch_get_item(
         RequestItems={
@@ -85,6 +86,7 @@ def deleteItem(tableName, primaryKeyName, primary_key, sortKeyName, sort_key):
     })
     return response
 
+# 1MB limit
 def query(tableName, keyConditionExpression, expressionAttributeValues):
     table = dynamodb.Table(tableName)
     response = table.query(
@@ -97,8 +99,8 @@ def query(tableName, keyConditionExpression, expressionAttributeValues):
     while 'LastEvaluatedKey' in response:
         response = table.query(ExclusiveStartKey=response['LastEvaluatedKey'])
         data.update(response['Items'])
-
-        return response
+    
+    return response
     """
     response = table.query(
         KeyConditionExpression=Key('id').eq(1)
@@ -109,14 +111,13 @@ def query(tableName, keyConditionExpression, expressionAttributeValues):
         print(i['title'], ":", i['description'])
     """
 
+# 1MB limit
 def scan(tableName):
     table = dynamodb.Table(tableName)
     response = table.scan()
     return response
     
     """
-    1MB limit on scan
-
     response = table.scan(FilterExpression=Attr('country').eq('US') & Attr('city').eq('NYC'))
     data = response['Items']
     while 'LastEvaluatedKey' in response:
