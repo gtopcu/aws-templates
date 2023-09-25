@@ -123,5 +123,6 @@ def scan(tableName):
     while 'LastEvaluatedKey' in response:
         response = table.scan(ExclusiveStartKey=response['LastEvaluatedKey'])
         data.extend(response['Items'])
-
+    
+    return data
     """

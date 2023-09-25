@@ -2,9 +2,9 @@ version = 0.1
 [default]
 [default.deploy]
 [default.deploy.parameters]
-stack_name = "samstack"
+stack_name = "samstack1"
 s3_bucket = "aws-samsourcebucket-dcrze8n5ompk"
-s3_prefix = "samstack"
+s3_prefix = "samstack1"
 region = "eu-west-1"
 confirm_changeset = true
 capabilities = "CAPABILITY_IAM"

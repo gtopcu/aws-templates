@@ -14,6 +14,10 @@ Globals:
         #POWERTOOLS_LOGGER_SAMPLE_RATE: 0.1
         POWERTOOLS_LOGGER_LOG_EVENT: true
         POWERTOOLS_SERVICE_NAME: service1
+    Layers:
+      # Find the latest Layer version in the official documentation
+      # https://docs.powertools.aws.dev/lambda/python/latest/#lambda-layer
+      - !Sub arn:aws:lambda:${AWS::Region}:017000801446:layer:AWSLambdaPowertoolsPythonV2:45
 
 Resources:
   HelloWorldFunction:
