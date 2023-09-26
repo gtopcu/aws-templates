@@ -59,6 +59,8 @@ Resources:
       Handler: apigw_handler.handler
       CodeUri: lambdas/
       Description: API handler function
+      # https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-policy-templates.html
+      Policies: AmazonDynamoDBReadOnlyAccess 
       Events:
         AnyApiEvent:
           Type: Api
