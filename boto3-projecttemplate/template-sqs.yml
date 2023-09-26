@@ -49,5 +49,5 @@ Resources:
         maxReceiveCount: 2
         deadLetterTargetArn: !GetAtt SampleDLQ.Arn
   
-   SampleDLQ:
+  SampleDLQ:
     Type: AWS::SQS::Queue
