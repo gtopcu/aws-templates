@@ -10,10 +10,11 @@ def generate_context() -> LambdaContext:
     context._function_name = "func"
     return context
 
-
 def generate_api_gw_event(
-    body: Optional[Dict[str, Any]] = None, authorized: Optional[bool] = True
-) -> Dict[str, Any]:
+        body: Optional[Dict[str, Any]] = None, 
+        authorized: Optional[bool] = True
+    ) -> Dict[str, Any]:
+    
     return {
         "version": "1.0",
         "resource": "/my/path",
