@@ -40,19 +40,18 @@ brew uninstall aws-sam-cli
 
 !! Need to install AWS CLI, SAM CLI + Docker Desktop first & Configure AWS Credentials !!
 
-sam -h              List Commands
-sam init            Initialize SAM app
-sam validate        Validate an AWS SAM template
-sam build           Build the app
-sam package         Package the app
-sam deploy --guided
-sam delete          Delete an AWS SAM application and the artifacts created by sam deploy
-sam logs --tail     Fetch logs for a function
-sam publish         Publish a packaged AWS SAM template to the AWS Serverless Application Repository
-sam traces          Fetch AWS X-Ray traces
+sam -h                          List Commands
+sam init                        Initialize SAM app
+sam validate                    Validate an AWS SAM template
+sam build —-parallel --cached   Build the app
+sam package                     Package the app
+sam deploy --guided             Deploy the app
+sam delete                      Delete an AWS SAM application and the artifacts created by sam deploy
+sam logs --tail                 Fetch logs for a function
+sam publish                     Publish a packaged AWS SAM template to the AWS Serverless Application Repository
+sam traces                      Fetch AWS X-Ray traces
 
 SAM Accelerate -> https://aws.amazon.com/blogs/compute/accelerating-serverless-development-with-aws-sam-accelerate/
-sam build --cached
 sam sync --watch
 sam sync --stack-name <project name> --watch
 sam sync --stack-name <project name> --watch --code 
@@ -74,7 +73,9 @@ sam local start-api
 sam local start-api --template-file cloudformation.yml
 
 Generate Event
-sam local generate-event sqs ... >> ./events.event.json
+https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/using-sam-cli-local-generate-event.html
+sam local generate-event apigateway aws-proxy >> apigw-proxy.json 
+sam local generate-event apigateway sqs receive-message/s3 put/sns notification
 
 ---------------------------------------------------------------------------------------------
 
