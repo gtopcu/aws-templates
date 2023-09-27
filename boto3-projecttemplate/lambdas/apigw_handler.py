@@ -85,7 +85,6 @@ def handler_get(todo_id: str):
         headers=custom_headers,
         content_type=content_types.APPLICATION_JSON,
         body={"result": "success"},
-        
         cookies=[Cookie(name="session_id", value="12345")],
     )
 

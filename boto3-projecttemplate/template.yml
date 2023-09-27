@@ -60,13 +60,20 @@ Resources:
       CodeUri: lambdas/
       Description: API handler function
       # https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-policy-templates.html
-      #Policies: AmazonDynamoDBReadOnlyAccess  
-      Policies:
-        - DynamoDBReadPolicy:
-            TableName: !Ref DynamoDBTable1
       Environment:
         Variables:
           TABLE_NAME: !Ref DynamoDBTable1
+      AutoPublishAlias: live
+      # https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/automating-updates-to-serverless-apps.html
+      # DeploymentPreference:
+      #   Type: Canary10Percent10Minutes 
+      #   Alarms:
+      #     - !Ref AliasErrorMetricGreaterThanZeroAlarm
+      #     - !Ref LatestVersionErrorMetricGreaterThanZeroAlarm
+      #   Hooks:
+      #     # Validation Lambda functions that are run before & after traffic shifting
+      #     PreTraffic: !Ref PreTrafficLambdaFunction
+      #     PostTraffic: !Ref PostTrafficLambdaFunction
       Events:
         AnyApiEvent:
           Type: Api
@@ -88,12 +95,18 @@ Resources:
             #   Properties:
             #     Path: /todos
             #     Method: POST
-    # Connectors:
-    #   DynamoDBConn:
-    #     Properties: 
-    #     Destination:
-    #       Id: DynamoDBTable1
-    #       Permissions:
-    #           - Read
+      #Policies: AmazonDynamoDBReadOnlyAccess  
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref DynamoDBTable1
+    Connectors:
+      DynamoDBConn:
+        Properties: 
+          Destination:
+            Id: DynamoDBTable1
+          Permissions:
+              - Write
+          #SourceReference: SourceReference
+
   DynamoDBTable1:
     Type: AWS::Serverless::SimpleTable

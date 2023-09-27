@@ -13,6 +13,7 @@ import boto3
 from botocore.config import Config
 from botocore import UNSIGNED
 
+print("Invoking lambda..")
 lambda_client = boto3.client('lambda',
                              endpoint_url="http://127.0.0.1:3001",
                              use_ssl=False,
@@ -22,6 +23,6 @@ lambda_client = boto3.client('lambda',
                                            retries={'max_attempts': 0}
                                            )
                             )
-lambda_client.invoke(FunctionName="HelloWorldFunction")
+lambda_client.invoke(FunctionName="ApiFunction")
 
 
