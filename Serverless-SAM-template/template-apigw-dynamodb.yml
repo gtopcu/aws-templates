@@ -5,6 +5,14 @@ Description: Event handler API Gateway
 # https://docs.powertools.aws.dev/lambda/python/2.23.0/core/event_handler/api_gateway/#event-resolvers
 # https://aws.amazon.com/pt/blogs/opensource/create-restful-apis-on-aws-with-openapi-specification-with-no-coding/
 
+# Parameters:
+#   environment:
+#     Type: "String"
+#     Default: dev
+#   ipAddressWhiteList:
+#     Type: "CommaDelimitedList"
+#     Default: "myIpAddress/32"
+
 Globals:
   Api:
     Cors:
@@ -43,14 +51,6 @@ Globals:
       # Find the latest Layer version in the official documentation
       # https://docs.powertools.aws.dev/lambda/python/latest/#lambda-layer
       - !Sub arn:aws:lambda:${AWS::Region}:017000801446:layer:AWSLambdaPowertoolsPythonV2:45
-
-# Parameters:
-#   environment:
-#     Type: "String"
-#     Default: dev
-#   ipAddressWhiteList:
-#     Type: "CommaDelimitedList"
-#     Default: "myIpAddress/32"
 
 Resources:
   ApiFunction:
