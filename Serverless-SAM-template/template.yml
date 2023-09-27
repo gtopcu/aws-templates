@@ -125,8 +125,12 @@ Resources:
       AttributeDefinitions: 
         - AttributeName: PK
           AttributeType: S
+        - AttributeName: SK
+          AttributeType: N
       KeySchema: 
         - AttributeName: PK
-          KeyType: HASH #RANGE
+          KeyType: HASH 
+        - AttributeName: SK
+          KeyType: RANGE
       # StreamSpecification:
       #   StreamViewType: NEW_IMAGE
