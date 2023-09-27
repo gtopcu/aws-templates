@@ -66,7 +66,7 @@ Resources:
             TableName: !Ref DynamoDBTable1
       Environment:
         Variables:
-          SAMPLE_TABLE: !Ref DynamoDBTable1
+          TABLE_NAME: !Ref DynamoDBTable1
       Events:
         AnyApiEvent:
           Type: Api
@@ -88,12 +88,12 @@ Resources:
             #   Properties:
             #     Path: /todos
             #     Method: POST
-    Connectors:
-      DynamoDBConn:
-        Properties: 
-        Destination:
-          Id: DynamoDBTable1
-          Permissions:
-              - Read
+    # Connectors:
+    #   DynamoDBConn:
+    #     Properties: 
+    #     Destination:
+    #       Id: DynamoDBTable1
+    #       Permissions:
+    #           - Read
   DynamoDBTable1:
     Type: AWS::Serverless::SimpleTable
