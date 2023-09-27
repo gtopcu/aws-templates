@@ -109,4 +109,24 @@ Resources:
           #SourceReference: SourceReference
 
   DynamoDBTable1:
-    Type: AWS::Serverless::SimpleTable
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: sam-table1
+      #PointInTimeRecoverySpecification:
+      #  PointInTimeRecoveryEnabled: True
+      #DeletionProtectionEnabled: True
+      #ContributorInsightsSpecification: 
+      #  Enabled: True
+      #ProvisionedThroughput: 
+      #  ReadCapacityUnits: 10
+      #  WriteCapacityUnits: 5
+      #SSESpecification: 
+      #  SSEEnabled: True
+      AttributeDefinitions: 
+        - AttributeName: PK
+          AttributeType: S
+      KeySchema: 
+        - AttributeName: PK
+          KeyType: HASH #RANGE
+      # StreamSpecification:
+      #   StreamViewType: NEW_IMAGE
