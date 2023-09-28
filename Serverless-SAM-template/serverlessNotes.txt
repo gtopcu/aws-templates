@@ -1,5 +1,11 @@
 Serverless Notes
 
+General:
+- Enable CloudTrail management & data events(i.e.S3 put)
+- Enable IAM AccessAdvisor 
+- Utilize orgs, identitiy center, config, control tower, inspector, detective, guardduty, securityhub, codeguru, devopsguru
+- Utilize metric filters & alerts
+
 Lambda:
 - Lambda 128MB-10GB memory, 256kb async/6MB sync payload, 15min timeout
 - Lambda 128MB-> 0.5vCPU, 1.5GB 2vCPU, 10GB 6vCPU
@@ -10,11 +16,16 @@ DynamoDB:
 - Dynamo 400kb max item size, 2KB for PK 1KB for SK, String, Number. Binary, Boolean, List, Map, Set
 - DynamoDB global indexes -> Key does not have to be unique
 - Dynamo IA -> %60 cheaper on storage, %25 more expensive on reads & writes
+- Enable CW ContributorInsights for throttling & monitoring & hot PKs
 
 API GW:
-- API GW 10k req/s 30sec 10MB max
-- API GW returns request ID
-- API GW -> SQS -> MessageID -> can be tracked by client
+- API GW 10k req/s 30sec 10MB max, billed by request & cache size
+- API GW direct service integration -> returns request_id for tracking
+- API GW -> SQS -> SQS message_id -> can be tracked by client
+- API GW SDK generation, OIDC authentication, canary deployments per stage
+- Use resource policies to restrict access to AWS accounts, IPs etc
+- Documentation, API keys, testing, monitization -> apiable.com, AWS DataExchange
+
 
 SQS:
 - SQS Batching works in 5 concurrent lambdas max
@@ -24,11 +35,13 @@ SQS:
 SNS: 
 - SNS can filter/retry to 3rd party HTTP
 - SNS ->  Lambda retries 3 times for execution errors. Invocation errors: 6 hours default 
-(not enough concurrency/throttling/large size/timeout etc). Performs 3 immediate tries, 2 at 1 second apart, 
-10 backing off from 1 second to 20 seconds, and 100,000 at 20 seconds apart
+(not enough concurrency/throttling/large size/timeout etc). Performs 3 immediate tries, 2 at 1 second apart, 10 backing off from 
+1 second to 20 seconds, and 100,000 at 20 seconds apart
+- Can filter PII data
 
 EventBridge:
-- EventBridge can better filter & transform S3 events but more expensive
+- 400ms latency avg, 24 hour retry, 1$ per 1 million events, free delivery to AWS services
+- Use EventBridge scheduler & pipes as necessary
 
 StepFunctions:
 - StepFunctions StartExecution, WaitForCallback, retry jitter, wait(sleep), intrinsic functions
@@ -36,8 +49,16 @@ StepFunctions:
 - StepFunctions choice states do not have catch/retry
 
 Kinesis:
-- Kinesis DataStreams PartitionKey & SequenceNumber(unique per partition), ordered, exactly once, replays, multiple consumers, errors block the shard
+- Kinesis DataStreams PartitionKey & SequenceNumber(unique per partition), ordered, exactly once, replays, multiple consumers, errors 
+block the shard until record duration
 - Kinesis DataStreams Write 1000 records/sec & 1MB/sec, Read 5t/sec 2MB/sec per shard, can use enhanced fan-out for more consumers
 - Kinesis DataStreams - 1 day duraction default. Errors -> iterator age, bisect batch, max retry, max record age, on-failure destination
 - Kinesis DataStreams aggregation to send/receive multiple records per record -> Kinesis Aggregation Library for Lambda
 - Kinesis Firehose -> S3, OpenSearch, buffers, transform/filter/enrich, no order guarantee, at least once, single target, does 3 retries
+
+S3:
+- CloudTrail
+- EventBridge can better filter & transform S3 events but more expensive
+
+Redis: 
+- Great for real-time leaderboards
