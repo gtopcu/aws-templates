@@ -8,9 +8,9 @@ WAF, FirewallManager, ServiceQuotas, Health, Budgets, SavingPlans, ResourceExplo
 - Utilize metric filters & alerts
 
 Lambda:
-- 128MB-10GB memory, 256kb async/6MB sync payload, 15min timeout
+- 128MB-10GB memory, 256kb async/6MB sync payload, 15min timeout, /tmp 10GB ephemeral storage
 - More memory = more vCPU + IO. 128MB-> 0.5vCPU, 256GB 1vCPU, 10GB 6vCPU, 1000 max concurrency limit per region
-- 1 million requests & 400.000GB free
+- 1 million requests & 400.000GB free. Pricing: number of requests & duration. Use Lambda Power Tuning SF to tune
 - Invocations -> sync: API GW, Cognito, async: S3, EventBridge, SNS, polling: SQS, Kinesis/Dynamo Streams
 - Lambda destinations -> success & fail for async, fail for polling
 - Use reserved & provisioned concurrency as necessary. 3000 immediate, 500 burst concurrency per minute per region

@@ -43,6 +43,11 @@ app = APIGatewayRestResolver(debug=True)
 # cors_config = CORSConfig(allow_origin="https://www.example.com", max_age=300)
 # app = APIGatewayRestResolver(cors=cors_config)
 
+# Initialize outside the handler & reuse although they provide caching
+# Get a single parameter from SSM
+# endpoint_url: str = parameters.get_parameter("/lambda-powertools/endpoint_url")
+# api_key: Any = parameters.get_secret("/lambda-powertools/api-key")
+
 #@tracer.capture_method
 @app.not_found
 def handle_not_found_errors(exc: NotFoundError) -> Response:
@@ -119,9 +124,6 @@ def handler(event: APIGatewayProxyEvent, context: LambdaContext) -> dict:
     #metrics.add_dimension(name="environment", value=STAGE)
     #metrics.add_metric(name="SuccessfulRuns", unit=MetricUnit.Count, value=1, resolution=MetricResolution.High)
 
-    # Get a single parameter from SSM
-    # endpoint_url: str = parameters.get_parameter("/lambda-powertools/endpoint_url")
-    # api_key: Any = parameters.get_secret("/lambda-powertools/api-key")
     # headers: dict = {"X-API-Key": api_key}
 
     # if 'order_id' in event.path and event.http_method == 'GET':
