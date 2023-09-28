@@ -4,19 +4,25 @@ General:
 - Enable CloudTrail management & data events(i.e.S3 put)
 - Enable IAM AccessAdvisor 
 - Utilize orgs, identitiy center, config, control tower, inspector, detective, guardduty, securityhub, codeguru, devopsguru
+WAF, FirewallManager, ServiceQuotas, Health, Budgets, SavingPlans, ResourceExplorer
 - Utilize metric filters & alerts
 
 Lambda:
 - Lambda 128MB-10GB memory, 256kb async/6MB sync payload, 15min timeout
-- Lambda 128MB-> 0.5vCPU, 1.5GB 2vCPU, 10GB 6vCPU
+- Lambda 128MB-> 0.5vCPU, 1.5GB 2vCPU, 10GB 6vCPU, 1000 max concurrency limit per region
+- 1 million requests & 400.000GB free
 - Lambda sync: API GW, Cognito, async: S3, EventBridge, SNS, polling: SQS, Kinesis/Dynamo Streams
 - Lambda destinations -> success & fail for async, fail for polling
+- Use reserved & provisioned concurrency as necessary. 500 added concurrency per minute per region
+- Use CW application insights
+- IAM PassRole -> Trust Policiy -> STS assumeRole
 
 DynamoDB:
 - Dynamo 400kb max item size, 2KB for PK 1KB for SK, String, Number. Binary, Boolean, List, Map, Set
-- DynamoDB global indexes -> Key does not have to be unique
-- Dynamo IA -> %60 cheaper on storage, %25 more expensive on reads & writes
+- DynamoDB global secondary indexes -> Key does not have to be unique
 - Enable CW ContributorInsights for throttling & monitoring & hot PKs
+- Use Global Tables, TTL expiration, streams as necessary
+- Dynamo IA -> %60 cheaper on storage, %25 more expensive on reads & writes
 
 API GW:
 - API GW 10k req/s 30sec 10MB max, billed by request & cache size
@@ -26,26 +32,24 @@ API GW:
 - Use resource policies to restrict access to AWS accounts, IPs etc
 - Documentation, API keys, testing, monitization -> apiable.com, AWS DataExchange
 
-
 SQS:
 - SQS Batching works in 5 concurrent lambdas max
 - SQS FIFO can deduplicate by deduplicationID, order guaranteed for groupID
 - SQS errors -> ApproximateAgeOfOldestMessage CloudWatch Metric + Alarm, queue redrive + event forking pipeline
 
 SNS: 
-- SNS can filter/retry to 3rd party HTTP
+- SNS can filter/retry to 3rd party HTTP. Fan-out to multiple SQS, FIFO can deliver to non-FIFO, can filter PII data
 - SNS ->  Lambda retries 3 times for execution errors. Invocation errors: 6 hours default 
 (not enough concurrency/throttling/large size/timeout etc). Performs 3 immediate tries, 2 at 1 second apart, 10 backing off from 
 1 second to 20 seconds, and 100,000 at 20 seconds apart
-- Can filter PII data
 
 EventBridge:
 - 400ms latency avg, 24 hour retry, 1$ per 1 million events, free delivery to AWS services
 - Use EventBridge scheduler & pipes as necessary
 
 StepFunctions:
-- StepFunctions StartExecution, WaitForCallback, retry jitter, wait(sleep), intrinsic functions
-- StepFunctions Standard billed per transitions, express billed by  duration, 256KB max
+- StepFunctions StartExecution, WaitForCallback, retry/catch(States.ALL), retry jitter, wait(sleep), intrinsic functions
+- StepFunctions Standard billed per transitions, express billed by duration, 256KB max
 - StepFunctions choice states do not have catch/retry
 
 Kinesis:
@@ -57,8 +61,11 @@ block the shard until record duration
 - Kinesis Firehose -> S3, OpenSearch, buffers, transform/filter/enrich, no order guarantee, at least once, single target, does 3 retries
 
 S3:
-- CloudTrail
-- EventBridge can better filter & transform S3 events but more expensive
+- StorageLens, AccessPoints, S3 Select, Athena/Glue usefull stuff
+- EventBridge can better filter & transform S3 events but more expensive (enable CloudTrail data events)
+
+Cognito:
+- OpenID providers, sync lambda triggers, AI powered fraud detection
 
 Redis: 
 - Great for real-time leaderboards

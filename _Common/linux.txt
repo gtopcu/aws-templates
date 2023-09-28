@@ -251,6 +251,16 @@ sudo nano /etc/route.conf -> DNS config
 
 vi (w):q!
 
+----------------------------------------------------------------
+Install UFW firewall
+----------------------------------------------------------------
+sudo apt-get install ufw
+By default, UFW is set to block all incoming connections
+sudo ufw allow ssh
+sudo ufw allow http
+sudo ufw allow https
+sudo ufw enable
+
 
 **************************** Other ****************************
 
