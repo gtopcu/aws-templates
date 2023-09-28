@@ -1,4 +1,4 @@
-Serverless Notes
+# Serverless Notes
 
 General:
 - Enable CloudTrail management & data events(i.e.S3 put)
