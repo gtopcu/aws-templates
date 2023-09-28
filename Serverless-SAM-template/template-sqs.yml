@@ -43,7 +43,7 @@ Resources:
   SampleQueue:
     Type: AWS::SQS::Queue
     Properties:
-      VisibilityTimeout: 30 # Fn timeout * 6
+      VisibilityTimeout: 30 #Fn timeout*6, 12 hours max
       SqsManagedSseEnabled: true
       RedrivePolicy:
         maxReceiveCount: 2
