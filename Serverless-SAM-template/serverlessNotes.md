@@ -19,20 +19,22 @@ Lambda:
 
 DynamoDB:
 - 400kb max item size, 2KB for PK 1KB for SK, String, Number. Binary, Boolean, List, Map, Set
+- on-Demand can scale x2 previous read/write peaks within 30 minutes. Provisioned can use auto-scaling
 - DynamoDB global secondary indexes -> Key does not have to be unique
 - Enable CW ContributorInsights for throttling & monitoring & hot PKs
-- Use Global Tables, TTL expiration, streams as necessary
+- Use Global Tables, TTL expiration, streams, DeletionProtection, LeadingKeys IAM action on PKs for owner access
 - Dynamo IA -> %60 cheaper on storage, %25 more expensive on reads & writes
 
 API GW:
 - 10k req/s 30sec 10MB max, billed by request & cache size
-- Regional, EdgeOptimized, Private(VPC endpoints)
+- Regional, EdgeOptimized(CloudFront provides DDoS protection), Private(VPC endpoints)
 - Direct service integration -> returns request_id for tracking
 - API GW -> SQS -> SQS message_id -> can be tracked by client
-- API Keys & usage plans, throttling/caching, SDK generation, OIDC authentication, canary deployments per stage
+- API Keys & usage plans, logging, request validaton,throttling/caching, SDK generation, OIDC authentication, canary deployments per stage
 - Use resource policies to restrict access to AWS accounts, IPs etc
 - Documentation, API keys, testing, monitization -> apiable.com, AWS DataExchange
 - Lambda Authorizer uses lambda concurrency, use auth caching - 5 min to 1 hour
+- IAM auth useful for internal APIs
 
 SQS:
 - 256KBs, 1-14 days storage, visibility timeout 30sec default - 12 hours max (set 6 x Lambda timeout)
@@ -42,7 +44,6 @@ SQS:
 (up to 1000 baches max, increases 60 parallel pollers per min)
 - SQS FIFO can deduplicate by deduplication_id, order guaranteed within the same group_id
 - SQS errors -> ApproximateAgeOfOldestMessage CloudWatch Metric + Alarm, queue redrive + event forking pipeline
-
 
 SNS: 
 - Can filter/retry to 3rd party HTTP. Fan-out to multiple SQS, FIFO can deliver to non-FIFO, can filter PII data
@@ -55,15 +56,16 @@ EventBridge:
 - Use EventBridge scheduler & pipes as necessary
 
 StepFunctions:
-- StartExecution, WaitForCallback, retry/catch(States.ALL), retry jitter, wait(sleep), intrinsic functions
-- Standard billed per transitions, express billed by duration, 256KB max
+- StartExecution, WaitForCallback, retry/catch(States.ALL), retry jitter, no default timeout, wait(sleep), intrinsic functions
+- Standard billed per no. of state transitions, express billed by duration. 256KB max payload limit
 - Choice states do not have catch/retry
 - Use SFs if cannot guarantee idempotent lambdas
 
 Kinesis:
 - DataStreams PartitionKey & SequenceNumber(unique per partition), ordered, exactly once, replays, multiple consumers, errors 
 block the shard until record duration
-- DataStreams Write 1000 records/sec & 1MB/sec, Read 5t/sec 2MB/sec per shard, can use enhanced fan-out for more consumers
+- DataStreams Write 1000 RPS & 1MB/sec, Read GetRecords 5t/sec 2MB per request (shared between consumers)
+- Enhanced fan-out - more consumers, push instead of pull, each consumer gets 2MB, 50-70 milisecs latency, 5min timeout max, uses HTTP/2
 - DataStreams - 1 day duraction default. Errors -> iterator age, bisect batch, max retry, max record age, on-failure destination
 - DataStreams aggregation to send/receive multiple records per record -> Kinesis Aggregation Library for Lambda
 - Firehose -> S3, OpenSearch, buffers, transform/filter/enrich, no order guarantee, at least once, single target, does 3 retries
