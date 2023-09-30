@@ -28,13 +28,15 @@ DynamoDB:
 API GW:
 - 10k req/s 30sec 10MB max, billed by request & cache size
 - Regional, EdgeOptimized(CloudFront provides DDoS protection), Private(VPC endpoints)
+- Log request_ids in your clients
 - Direct service integration -> returns request_id for tracking
 - API GW -> SQS -> SQS message_id -> can be tracked by client
-- API Keys & usage plans, logging, request validaton,throttling/caching, SDK generation, OIDC authentication, canary deployments per stage
+- API Keys & usage plans, access logging, request validaton, throttling/caching, SDK generation, OIDC authentication, canary deployments per stage
+- Set CW alarmm using custom metrics & CW logs metric filters, utilize CW log insights, dashboards
 - Use resource policies to restrict access to AWS accounts, IPs etc
 - Documentation, API keys, testing, monitization -> apiable.com, AWS DataExchange
 - Lambda Authorizer uses lambda concurrency, use auth caching - 5 min to 1 hour
-- IAM auth useful for internal APIs
+- IAM auth useful for internal APIs, use WAF for public APIs
 
 SQS:
 - 256KBs, 1-14 days storage, visibility timeout 30sec default - 12 hours max (set 6 x Lambda timeout)
