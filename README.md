@@ -3,8 +3,8 @@
 General:
 - Enable CloudTrail management & data events(i.e.S3 put)
 - Enable IAM AccessAdvisor & CloudTrail(90 days default) -> CW/S3 & Insights
-- Utilize orgs, identitiy center, config, control tower, inspector, detective, guardduty, securityhub, codeguru, devopsguru
-WAF, FirewallManager, ServiceQuotas, Health, Budgets, SavingPlans, ResourceExplorer
+- Utilize orgs, identitiy center, control tower, config, inspector, detective, guardduty, securityhub, codeguru, devopsguru
+WAF & FirewallManager, ServiceQuotas, Health, Budgets, SavingPlans, Backup, ResourceExplorer
 - Utilize metric filters & alerts
 
 Lambda:
@@ -18,7 +18,7 @@ Lambda:
 - IAM PassRole -> Trust Policiy -> STS assumeRole
 
 API GW:
-- 10k req/s 30sec 10MB max, billed by request & cache size
+- 10k req/s 30sec 10MB max. Billed by million requests & cache size x hour, 1 million calls free every month for 12 months
 - Regional, EdgeOptimized(CloudFront provides DDoS protection), Private(VPC endpoints)
 - Log request_ids in your clients
 - Direct service integration -> returns request_id for tracking
@@ -29,6 +29,13 @@ API GW:
 - Documentation, API keys, testing, monitization -> apiable.com, AWS DataExchange
 - Lambda Authorizer uses lambda concurrency, use auth caching - 5 min to 1 hour
 - IAM auth useful for internal APIs, use WAF for public APIs
+- HTTP APIs: Up to %60 faster, cheaper compared to Rest APIs. OIDC/OAuth2 & Lambda Auth. Lambda & HTTP integration, no WAF etc
+- WebSocket APIs: One Way or Bidiractional. Routes, Stages, API Key auth. Lambda, HTTP & AWS Service Integration (i.e. Kinesis)
+- Edge-Optimized: Not charged separately for CloudFront
+- Private APIs: Can only be deployed to a single VPC. No data out charge, but charged for PrivateLink
+- Caching: Charged per hour/GB, not per how many responses are stored. So track CloudWatch Metrics CacheHitCount and CacheMissCount. Create a timestamp and include it in your API response.
+- Mock integration: For hardcoded responses - i.e. healthchecks. No backend integration invoked
+- Creating resources with path param: https://api_id.execute-API.region-id.amazon.com/stage/mypetapi/pets/{petName} (or /{proxy+})
 
 DynamoDB:
 - 400kb max item size, 2KB for PK 1KB for SK, String, Number. Binary, Boolean, List, Map, Set

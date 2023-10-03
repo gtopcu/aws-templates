@@ -42,11 +42,14 @@ brew uninstall aws-sam-cli
 
 sam -h                                      List Commands
 sam init                                    Initialize SAM app
+sam --config-env                            Specify the environment to use
 sam validate                                Validate an AWS SAM template
-sam build —-parallel --cached               Build the app
-sam package                                 Package the app
+sam build —-parallel --cached               Build the app (parallel/cached specified in samconfig.toml)
+sam package                                 Package the app (sam deploy packages, no need)
+
 sam deploy --guided                         Deploy the app
-sam deploy -t template.yml stack-name xxx 
+sam deploy -t template.yml stack-name xxx --config-file myconfig.yaml
+
 sam delete                                  Delete an AWS SAM application and the artifacts created by sam deploy
 sam logs --tail                             Fetch logs for a function
 sam publish                                 Publish a packaged AWS SAM template to the AWS Serverless Application Repository
