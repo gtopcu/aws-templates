@@ -37,6 +37,7 @@ DynamoDB:
 - Enable CW ContributorInsights for throttling & monitoring & hot PKs
 - Use Global Tables, TTL expiration, streams, DeletionProtection, LeadingKeys IAM action on PKs for owner access
 - Dynamo IA -> %60 cheaper on storage, %25 more expensive on reads & writes
+- Consider Redis for sorted sets (i.e. realtime leaderboard), OpenSearch for TextSearch
 
 SQS:
 - 256KBs, 1-14 days storage, visibility timeout 30sec default - 12 hours max (set 6 x Lambda timeout)

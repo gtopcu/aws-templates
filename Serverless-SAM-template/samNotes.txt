@@ -40,16 +40,17 @@ brew uninstall aws-sam-cli
 
 !! Need to install AWS CLI, SAM CLI + Docker Desktop first & Configure AWS Credentials !!
 
-sam -h                          List Commands
-sam init                        Initialize SAM app
-sam validate                    Validate an AWS SAM template
-sam build —-parallel --cached   Build the app
-sam package                     Package the app
-sam deploy --guided             Deploy the app
-sam delete                      Delete an AWS SAM application and the artifacts created by sam deploy
-sam logs --tail                 Fetch logs for a function
-sam publish                     Publish a packaged AWS SAM template to the AWS Serverless Application Repository
-sam traces                      Fetch AWS X-Ray traces
+sam -h                                      List Commands
+sam init                                    Initialize SAM app
+sam validate                                Validate an AWS SAM template
+sam build —-parallel --cached               Build the app
+sam package                                 Package the app
+sam deploy --guided                         Deploy the app
+sam deploy -t template.yml stack-name xxx 
+sam delete                                  Delete an AWS SAM application and the artifacts created by sam deploy
+sam logs --tail                             Fetch logs for a function
+sam publish                                 Publish a packaged AWS SAM template to the AWS Serverless Application Repository
+sam traces                                  Fetch AWS X-Ray traces
 
 SAM Accelerate -> https://aws.amazon.com/blogs/compute/accelerating-serverless-development-with-aws-sam-accelerate/
 sam sync --watch
@@ -59,6 +60,7 @@ sam sync --stack-name <project name> --code --resource AWS::Serverless::Function
 sam sync --stack-name <project name> --code --resource-id HelloWorldFunction
 sam logs --stack-name <project name> --include-traces --tail
 
+https://explore.skillbuilder.aws/learn/course/12836/play/51248/deploying-serverless-applications;lp=92
 sam pipeline bootstrap			Creates all of the environment resources, permission, authentication
 sam pipeline init				Creates the pipeline for your CI/CD system
 sam pipeline init --bootstrap	Entire bootstrap and initialization process
