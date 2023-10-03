@@ -43,9 +43,16 @@ API GW:
 - Stage variables: $stageVariables.[variable name]  -> i.e. Lambda Integration function name: ${stageVariables.lambdaFn}
 - Map lambda aliases with stage variables to API GW stages -> Weighted traffic
 - Can import existing OpenAPI 3.0.3 into SAM template
-
-
-
+https://explore.skillbuilder.aws/learn/course/52/play/41664/amazon-api-gateway-for-serverless-applications;lp=92
+- IAM Auth: Access key/secret access key must be in the header computed using SigV4 to compute a HMAC signature using SHA256
+  IAM user / assume an IAM role
+- Lambda Authorizer: Token (oauth, bearer) or Request(query strings, path param, method, headers, http method etch)
+- API keys: x-API-key header
+- Usage plans:  API Key Throttling per second and burst
+                API Key Quota by day, week, or month
+                API Key Usage by daily usage records
+- Who can invoke the API: To call a deployed API, or refresh the API caching, the caller needs the execute-api permission
+- Who can manage the API: To create, deploy, and manage an API in API Gateway, the API developer needs the apigateway permission
 
 DynamoDB:
 - 400kb max item size, 2KB for PK 1KB for SK, String, Number. Binary, Boolean, List, Map, Set
