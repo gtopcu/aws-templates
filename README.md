@@ -31,11 +31,21 @@ API GW:
 - IAM auth useful for internal APIs, use WAF for public APIs
 - HTTP APIs: Up to %60 faster, cheaper compared to Rest APIs. OIDC/OAuth2 & Lambda Auth. Lambda & HTTP integration, no WAF etc
 - WebSocket APIs: One Way or Bidiractional. Routes, Stages, API Key auth. Lambda, HTTP & AWS Service Integration (i.e. Kinesis)
-- Edge-Optimized: Not charged separately for CloudFront
-- Private APIs: Can only be deployed to a single VPC. No data out charge, but charged for PrivateLink
+- Edge-Optimized: Not charged separately for CloudFront - managed by API GW
+- Private APIs: Can only be deployed to a single VPC. No data out charge, but charged for PrivateLink. Cannot convert to edge
 - Caching: Charged per hour/GB, not per how many responses are stored. So track CloudWatch Metrics CacheHitCount and CacheMissCount. Create a timestamp and include it in your API response.
 - Mock integration: For hardcoded responses - i.e. healthchecks. No backend integration invoked
-- Creating resources with path param: https://api_id.execute-API.region-id.amazon.com/stage/mypetapi/pets/{petName} (or /{proxy+})
+- Creating resources with path param: https://api_id.execute-API.region-id.amazon.com/stage/mypetapi/pets/{petName}
+ (or /{proxy+} -> creates HTTP method ANY)
+- API GW -> VPC Link -> Network Load Balancer -> EC2 in private subnet
+- When testing from console, API calls are real, but CW logs are simulated, no logs written
+- Stages: Catching, throttling & usage plans. SDK generation & export OpenAPI definition, canary deployments
+- Stage variables: $stageVariables.[variable name]  -> i.e. Lambda Integration function name: ${stageVariables.lambdaFn}
+- Map lambda aliases with stage variables to API GW stages -> Weighted traffic
+- Can import existing OpenAPI 3.0.3 into SAM template
+
+
+
 
 DynamoDB:
 - 400kb max item size, 2KB for PK 1KB for SK, String, Number. Binary, Boolean, List, Map, Set
