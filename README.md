@@ -6,6 +6,7 @@ General:
 - Utilize orgs, identitiy center, control tower, config, inspector, detective, guardduty, securityhub, codeguru, devopsguru
 WAF & FirewallManager, ServiceQuotas, Health, Budgets, SavingPlans, Backup, ResourceExplorer
 - Utilize metric filters & alerts
+- Lambda env vars, Dynamo, S3 - secure with own KMS keys
 
 Lambda:
 - 128MB-10GB memory, 256kb async/6MB sync payload, 15min timeout, /tmp 10GB ephemeral storage
