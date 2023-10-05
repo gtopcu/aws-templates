@@ -4,7 +4,7 @@ General:
 - Enable CloudTrail management & data events(i.e.S3 put)
 - Enable IAM AccessAdvisor & CloudTrail(90 days default) -> CW/S3 & Insights
 - Utilize orgs, identitiy center, control tower, config, inspector, detective, guardduty, securityhub, codeguru, devopsguru
-WAF & FirewallManager, ServiceQuotas, Health, Budgets, SavingPlans, ComputeOptimizer, Backup, ResourceExplorer
+WAF & FirewallManager, ServiceQuotas, Health, Budgets, SavingPlans, ComputeOptimizer, Backup, Sys/Secrets Mgr, ResourceExplorer
 - Utilize metric filters & alerts
 - Lambda env vars, Dynamo, S3 - secure with own KMS keys
 
@@ -55,6 +55,21 @@ https://explore.skillbuilder.aws/learn/course/52/play/41664/amazon-api-gateway-f
                 API Key Usage by daily usage records
 - Who can invoke the API: To call a deployed API, or refresh the API caching, the caller needs the execute-api permission
 - Who can manage the API: To create, deploy, and manage an API in API Gateway, the API developer needs the apigateway permission
+- CloudTrail captures all API calls for API Gateway as events. IP address, requester, and time of request are included.
+  Event history can be reviewed. Create a trail to send events to a S3 bucket.
+- Transformations(mapping templates, can now be in JS):
+    $input: Body, json, params, path
+    $stageVariables
+    $util: escapeJavaScript(), parseJson(), urlEncode/Decode(), base64Encode/Decode()
+- Gateway responses for invalid requests can be modified: Change HTTP status code. modify body content, add headers
+  Can also customize specific responses or modify the default 4xx or 5xx error response.
+- Request validation: can check required request parameters in the URL, query string, and headers are present
+  Can also check the applicable request payload adheres to the configured JSON request model of the method
+
+
+bullet
+The applicable request payload adheres to the configured JSON request model of the method.
+
 
 DynamoDB:
 - 400KB max item size, 2KB for PK 1KB for SK, String, Number. Binary, Boolean, List, Map, Set
@@ -94,7 +109,7 @@ StepFunctions:
 - Use SFs if cannot guarantee idempotent lambdas
 
 Kinesis:
-- DataStreams PartitionKey & SequenceNumber(unique per partition), ordered, exactly once, replays, errors 
+- DataStreams PartitionKey & SequenceNumber(unique per partition), ordered, exactly once, replays, errors. Data is base64 encoded 
   block the shard until record duration. 1-365 days storage, now supports serverless & multiple consumers per shard
 - DataStreams Write 1000 RPS & 1MB/sec, Read GetRecords 5t/sec 2MB/sec total per shard (shared between consumers)
 - Enhanced fan-out - more consumers, push instead of pull, each consumer gets 2MB/s, 50-70 milisecs latency, 5min timeout max, uses HTTP/2
