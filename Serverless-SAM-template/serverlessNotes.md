@@ -126,9 +126,10 @@ Cognito:
 
 Redis: 
 - Key/Value, Sets, SortedSets great for real-time leaderboards, Geolocation, Multi-AZ
+
  
 
-- # General AWS Best Practices
+# General AWS Best Practices
 - 
 Security
 - Enable password rotation/policies & MFA for root & save the QR code. - IAM supports PCI DSS
