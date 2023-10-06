@@ -194,6 +194,7 @@ chkconfig httpd on
 
 **************************** Network ****************************
 
+sudo sysctl network restart
 whatis ip
 cat /etc/resolv.conf -> DNS config
 ip route show
