@@ -4,7 +4,7 @@ General:
 - Enable CloudTrail management & data events(i.e.S3 put)
 - Enable IAM AccessAdvisor & CloudTrail(90 days default) -> CW/S3 & Insights
 - Utilize orgs, identitiy center, control tower, config, inspector, detective, guardduty, securityhub, codeguru, devopsguru
-WAF & FirewallManager, ServiceQuotas, Health, Budgets, SavingPlans, ComputeOptimizer, Backup, Sys/Secrets Mgr, ResourceExplorer
+WAF & FirewallManager, ServiceQuotas, Health, Budgets, SavingPlans, ComputeOptimizer, Backup, Sys/Secrets Mgr, TrustedAdvisor, ResourceExplorer
 - Utilize metric filters & alerts
 - Lambda env vars, Dynamo, S3 - secure with own KMS keys
 
@@ -13,10 +13,13 @@ Lambda:
 - More memory = more vCPU + IO. 128MB-> 0.5vCPU, 256GB 1vCPU, 10GB 6vCPU, 1000 max concurrency limit per region
 - 1 million requests & 400.000GB free. Pricing: number of requests & duration. Use Lambda Power Tuning SF to tune
 - Invocations -> sync: API GW, Cognito, async: S3, EventBridge, SNS, polling: SQS, Kinesis/Dynamo Streams
-- Lambda destinations -> success & fail for async, fail for polling
+- Lambda destinations -> success & fail for async, failures for polling (preferred now over of DLQs)
 - Use reserved & provisioned concurrency as necessary. 3000 immediate, 500 burst concurrency per minute per region
 - Use CW application insights & lambda insights (extension) for overall picture
 - IAM PassRole -> Trust Policiy -> STS assumeRole
+- Utilize lambda layers for NPM/pip packages (50MB compressed, 256MB uncompressed limit)
+- Set provisioned concurrency for lambda to avoid cold starts. Define DB conn. etc outside handler method, re-use between invocations
+- Use the latest Lambda PowerTools as a layer
 
 API GW:
 - 10k req/s 30sec 10MB max. Billed by million requests & cache size x hour, 1 million calls free every month for 12 months
@@ -30,7 +33,7 @@ API GW:
 - Documentation, API keys, testing, monitization -> apiable.com, AWS DataExchange
 - Lambda Authorizer uses lambda concurrency, use auth caching - 5 min to 1 hour
 - IAM auth useful for internal APIs, use WAF for public APIs
-- HTTP APIs: Up to %60 faster, cheaper compared to Rest APIs. OIDC/OAuth2 & Lambda Auth. Lambda & HTTP integration, no WAF etc
+- HTTP APIs: Up to %40 faster & %30 cheaper compared to Rest APIs. OIDC/OAuth2 & Lambda Auth. Lambda & HTTP integration, no WAF etc
 - WebSocket APIs: One Way or Bidiractional. Routes, Stages, API Key auth. Lambda, HTTP & AWS Service Integration (i.e. Kinesis)
 - Edge-Optimized: Not charged separately for CloudFront - managed by API GW
 - Private APIs: Can only be deployed to a single VPC. No data out charge, but charged for PrivateLink. Cannot convert to edge
@@ -65,11 +68,6 @@ https://explore.skillbuilder.aws/learn/course/52/play/41664/amazon-api-gateway-f
   Can also customize specific responses or modify the default 4xx or 5xx error response.
 - Request validation: can check required request parameters in the URL, query string, and headers are present
   Can also check the applicable request payload adheres to the configured JSON request model of the method
-
-
-bullet
-The applicable request payload adheres to the configured JSON request model of the method.
-
 
 DynamoDB:
 - 400KB max item size, 2KB for PK 1KB for SK, String, Number. Binary, Boolean, List, Map, Set
@@ -127,4 +125,73 @@ Cognito:
 - OpenID providers, sync lambda triggers, AI powered fraud detection
 
 Redis: 
-- Great for real-time leaderboards
+- Key/Value, Sets, SortedSets great for real-time leaderboards, Geolocation, Multi-AZ
+ 
+
+- # General AWS Best Practices
+- 
+Security
+- Enable password rotation/policies & MFA for root & save the QR code. - IAM supports PCI DSS
+- Delete root user access keys & create custom login alias URL
+- Enable IAM Identity Center(formerly SSO), Identity Federation thru Octa/Oauth/AD etc
+- Set up Organization & Service Control Policies, TagPolicies & BackupPolicies per account
+- Enable ControlTower on the Organization account & use account factory
+- Deploy Landing Zone Accelerator to configure the new accounts
+- Enable CloudTrail for all accounts for management events & put logs to CW & S3
+- Use PowerUserAccess role for admins instead of Administrator (no IAM/org/account)
+- Setup CW Subscription Filters -> Kinesis->S3/ES/Lambda & CloudTrail Lake or Organization access
+- Organization account Security Hub -> Enable SecurityHub, GuardDuty, Detective, Macie, ControlTower, Config etc (https://youtube.com/watch?v=jPGERcPM5G4)
+- Enable AWS Chatbot to receive SecurityHub/CW Alert etc notifications in Slack/Chime
+- To detect PII data, use Macie for S3 buckets, and Comprehend/Glue Studio transform for anything else
+- AWS Artifact & Landing Zone Accelerator for PCI/HIPAA etc certifications & improve overall architectural security
+- Setup conformance packs (PCI-DSS etc) in AWS Config
+- Setup log & trail collection & S3 buckets replication to security account CW & S3
+- Create a custom KMS key for encryption - use for S3, RDS, EBS backups etc
+- Enable IAM Access Advisor & Analyzer on all accounts
+- Enable VPC flow logs, CF/API GW/ELB/S3 access logs on all VPCs on all accounts
+- Set up Systems Manager Parameter Store & Secrets Manager with rotation windows
+- No public buckets - use bucket policies, not IAM
+- Check insecure API GW endpoints
+- Check public EC2 / RDS access
+- Encrypt & TLS
+- Use Inspector for EC2/ECR scans, CodeWhisperer, CodeGuru & Lambda Extensions with Sync-SQ/Github actions
+- Use WAF with API GW & AppSync & ELB. Use AWS Firewall Manager for multi-account
+- CloudOps
+- Use Proton & ServiceCatalog for pre-defined provisioning
+- AWS Backup - backup DBs, S3
+- Enable AWS Health to see multi-account service status
+- Add Route53 healthchecks
+- Add synthetic canaries & RUM
+- Set alerts for HTTP 500, 429 etc errors on API GW, CloudFront etc
+- Enable monitoring on all required components: X-Ray, API GW logs & metrics, etc
+- Enable X-Ray on Lambda & Application-Lambda-Container Insights
+- Enable DevOps Guru Serverless for Lambda concurrency & DynamoDB throttling
+- Enable ResillienceHub to meet RTO-RPO requirements
+- Stream metrics to managed Prometheus & display on Grafana
+- Kinesis Firehose 1 day persistence, process using lambda, can directly stream to S3, Redshift, ES, Splunk, Datadog etc
+- Kinesis Analytics can query data in streams & firehose using SQL realtime
+- Utilize metric filters from CW logs to get alerts from the logs
+- Create CW alarms for any CW metric needed
+- Enable & use Container Insights to track ECS/Fargate utilization
+
+RDS
+- Use RDS Proxy with IAM authentication (Aurora MySQL, PostreSQL)
+- Use custom RDS endpoints
+- Launch DB clusters in separate, dedicated VPCs
+
+Costs:
+- Set up budgets, cost anomaly detection, saving plans & billing alarm
+- Use reserved instances if needed / spot instances & fleets as necessary
+- Set up Compute Optimizer - analysis EC2, EBS, Lambda & generates recommendations
+- Set up Costs Usage Report with Athena & Glue
+- Check unused RDS - use provisioned instead of on-demand
+- Check unused EC2, block storage, backups
+- Check S3 storage lens, utilize lifecycle rules & glacier
+- Check use of public IPs & unused elastic IPs
+- Check multi-az communication (free for ALB, costs for NLB)
+- Check network out data
+- Check unused ELBs
+- Check content serving out of S3
+- Check cloudFront origin retrieval
+- Use graviton2 based Lambda & ECS-Fargate
+- Use spot instances with EC2 & Fargate (no GPU instances, containerD. ECS=uses EC2 & ECS agent & can SSH)
