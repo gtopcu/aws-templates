@@ -45,6 +45,7 @@ sam init                                    Initialize SAM app
 sam --config-env                            Specify the environment to use
 sam validate                                Validate an AWS SAM template
 sam build —-parallel --cached               Build the app (parallel/cached specified in samconfig.toml)
+                                            Do not need build if you don't have anything in requirements.txt(everything is present in lambda runtime)
 sam package                                 Package the app (sam deploy packages, no need)
 
 sam deploy --guided                         Deploy the app
