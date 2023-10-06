@@ -70,13 +70,17 @@ https://explore.skillbuilder.aws/learn/course/52/play/41664/amazon-api-gateway-f
   Can also check the applicable request payload adheres to the configured JSON request model of the method
 
 DynamoDB:
-- 400KB max item size, 2KB for PK 1KB for SK, String, Number. Binary, Boolean, List, Map, Set
+- 400KB max item size, 2KB for PK & 1KB for SK, String, Number. Binary, Boolean, List, Map, Set
+- 2 x 4KB Reads per RCU (eventually consistent), 1 x 1KB Write per RCU (%50 capacity for consistent reads & transactions)
 - on-Demand can scale x2 previous read/write peaks within 30 minutes. Provisioned can use auto-scaling
 - DynamoDB global secondary indexes -> Key does not have to be unique
 - Enable CW ContributorInsights for throttling & monitoring & hot PKs
 - Use Global Tables, TTL expiration, streams, DeletionProtection
 - LeadingKeys IAM action on PKs for owner access
 - Dynamo IA -> %60 cheaper on storage, %25 more expensive on reads & writes
+- 3,000 RCU and 1,000 WCU max per partition per table (max limit) - burst capacity preserved for up to 5mins
+- Items in a table and its local secondary indexes that have the same partition key cannot exceed 10GB
+- Avoid hot partitions, utilize write sharding, 
 - Consider Redis for sorted sets (i.e. realtime leaderboard), OpenSearch for TextSearch
 
 SQS:
