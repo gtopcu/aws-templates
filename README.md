@@ -119,6 +119,7 @@ Kinesis:
 - ParallelizationFactor(default 1 - max 10) setting defines number of batches to process concurrently from each shard
 - DataStreams aggregation to send/receive multiple records per record -> Kinesis Aggregation Library for Lambda
 - Firehose -> S3, OpenSearch, buffers, transform/filter/enrich, no order guarantee, at least once, single target, does 3 retries
+- Firehose write to S3: 1 to 15 minutes, or 1GBB to 128GBs
 - Track Lambda IterationAge metric to see how far behing the processing is
 
 S3:
