@@ -137,7 +137,7 @@ Redis:
 
 # General AWS Best Practices
 
-Security
+Security & Ops
 - Enable password rotation/policies & MFA for root & save the QR code. - IAM supports PCI DSS
 - Delete root user access keys & create custom login alias URL
 - Enable IAM Identity Center(formerly SSO), Identity Federation thru Octa/Oauth/AD etc
