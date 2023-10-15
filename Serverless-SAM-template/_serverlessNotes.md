@@ -4,13 +4,13 @@ General:
 - Enable CloudTrail management & data events(i.e.S3 put)
 - Enable IAM AccessAdvisor & CloudTrail(90 days default) -> CW/S3 & Insights
 - Utilize orgs, identitiy center, control tower, config, inspector, detective, guardduty, securityhub, codeguru, devopsguru
-WAF & FirewallManager, ServiceQuotas, Health, Budgets, SavingPlans, ComputeOptimizer, Backup, Sys/Secrets Mgr, TrustedAdvisor, ResourceExplorer
+WAF & FirewallManager, ServiceQuotas, Health, Budgets, SavingPlans, ComputeOptimizer, Backup, Sys/Secrets Mgr, TrustedAdvisor, ResourceExplorer, TagEditor
 - Utilize metric filters & alerts
 - Lambda env vars, Dynamo, S3 - secure with own KMS keys
 
 Lambda:
 - 128MB-10GB memory, 256kb async/6MB sync payload, 15min timeout, /tmp 10GB ephemeral storage
-- More memory = more vCPU + IO. 128MB-> 0.5vCPU, 256GB 1vCPU, 10GB 6vCPU, 1000 max concurrency limit per region
+- More memory = more vCPU + IO. 128MB-> 0.5vCPU, 256GB 1vCPU, multi-core after 1.8GB, 10GB 6vCPU, 1000 max concurrency per region
 - 1 million requests & 400.000GB free. Pricing: number of requests & duration. Use Lambda Power Tuning SF to tune
 - Invocations -> sync: API GW, Cognito, async: S3, EventBridge, SNS, polling: SQS, Kinesis/Dynamo Streams
 - Lambda destinations -> success & fail for async, failures for polling (preferred now over of DLQs)
