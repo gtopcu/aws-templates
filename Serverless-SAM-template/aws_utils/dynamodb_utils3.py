@@ -1,9 +1,8 @@
 import boto3
 
 from aws_enums import AwsServices
-from core.requests.requests import send_aws_http_request
 
-
+"""
 class AwsDynamoDBClient:
     def __init__(self, aws_region: str = "us-east-2"):
         self._service = AwsServices.DYNAMODB
@@ -63,10 +62,6 @@ class AwsDynamoDBClient:
             *create_args,
             **create_kwargs,
         )
-import boto3
-
-from spikyai_aws_libs.core.enums import AwsServices
-from spikyai_aws_libs.core.requests.requests import send_aws_http_request
 
 
 class AwsDynamodbClient:
@@ -128,3 +123,4 @@ class AwsDynamodbClient:
             *create_args,
             **create_kwargs,
         )
+"""

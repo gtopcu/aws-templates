@@ -131,10 +131,21 @@ def handler(event: APIGatewayProxyEvent, context: LambdaContext) -> dict:
 
     # return {"statusCode": 200, "body": "success"}
 
+
+
     """
 	transactionId = event['queryStringParameters']['transactionId']
 	print('transactionId=' + transactionId)
 	transactionResponse['message'] = 'Hello from Lambda land'
+
+    logger.info(
+            {
+                "operation": "scrape_website",
+                "request_id": context.aws_request_id,
+                "remaining_time": context.get_remaining_time_in_millis(),
+                "comments": comments.json()[:2],
+            },
+        )
 
 	responseObject = {}
 	responseObject['statusCode'] = 200
