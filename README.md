@@ -19,6 +19,8 @@ Lambda:
 - IAM PassRole -> Trust Policiy -> STS assumeRole
 - Utilize lambda layers for NPM/pip packages (50MB compressed, 256MB uncompressed limit)
 - Set provisioned concurrency for lambda to avoid cold starts. Define DB conn. etc outside handler method, re-use between invocations
+- Event Source Mapping: Retry attempts 0-10000 (default 1), max record age 1 min to 7 days (default 1), can filter unwanted messages
+  bisect batch on failure, return partial success, use SQS/SNS as failure destination
 - Use the latest Lambda PowerTools as a layer
 
 API GW:
@@ -111,15 +113,17 @@ StepFunctions:
 - Use SFs if cannot guarantee idempotent lambdas
 
 Kinesis:
-- DataStreams PartitionKey & SequenceNumber(unique per partition), ordered, exactly once, replays, errors. Data is base64 encoded 
-  block the shard until record duration. 1-365 days storage, now supports serverless & multiple consumers per shard
+- DataStreams PartitionKey & SequenceNumber(unique per partition), ordered & at least once(idempotency!), replays, errors, base64 encoded 
+- 1-365 days storage, now supports serverless & multiple consumers per shard
 - DataStreams Write 1000 RPS & 1MB/sec, Read GetRecords 5t/sec 2MB/sec total per shard (shared between consumers)
 - Enhanced fan-out - more consumers, push instead of pull, each consumer gets 2MB/s, 50-70 milisecs latency, 5min timeout max, uses HTTP/2
 - DataStreams on-Demand can scale x2 the 30 last 30 days peak, will throttle >x2 spikes in less than 15 mins
 - DataStream errors -> iterator age, bisect batch, max retry, max record age, on-failure destination
 - Automatic retries for HTTP 5xx errors up to 3 times with exponential backoff, 2 min timeout default
-- AWS SDK putRecords(params, callback) up to 500 records / 5MiB
-- ParallelizationFactor(default 1 - max 10) setting defines number of batches to process concurrently from each shard
+- AWS SDK putRecords(params, callback) up to 500 records / 5MiB. Handle partial failures!
+- Lamda Event Source Mapping: 1 batch = 1 lambda instance. Batch size 1-10000 records, window 1 sec up to 5 min, 6MB payload limit 
+- 1 shard = 1 concurrent lambda default -> can be up to 10 by setting ParallelizationFactor. Defines number of batches to process concurrently from each shard
+- Lambda retries the entire batch until success or data expiration(at least 1 day!) No other batches are processed (poison pill)
 - DataStreams aggregation to send/receive multiple records per record -> Kinesis Aggregation Library for Lambda
 - DataStreams pricing based on storage duraction, no of open shards & data size. on-Demand up to %300 more expensive than Previsioned
 - Firehose -> S3, OpenSearch, buffers, transform/filter/enrich, no order guarantee, at least once, single target, does 3 retries
@@ -195,14 +199,13 @@ Costs:
 - Use reserved instances if needed / spot instances & fleets as necessary
 - Set up Compute Optimizer - analysis EC2, EBS, Lambda & generates recommendations
 - Set up Costs Usage Report with Athena & Glue
+- API GW cache costs based on total size, not utilization
 - Check unused RDS - use provisioned instead of on-demand
 - Check unused EC2, block storage, backups
-- Check S3 storage lens, utilize lifecycle rules & glacier
+- Check S3 storage lens, utilize lifecycle rules & glacier, content serving out of S3
 - Check use of public IPs & unused elastic IPs
-- Check multi-az communication (free for ALB, costs for NLB)
+- Check unused ELBs & multi-az communication (free for ALB, costs for NLB)
 - Check network out data
-- Check unused ELBs
-- Check content serving out of S3
 - Check cloudFront origin retrieval
 - Use graviton2 based Lambda & ECS-Fargate
 - Use spot instances with EC2 & Fargate (no GPU instances, containerD. ECS=uses EC2 & ECS agent & can SSH)
