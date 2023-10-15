@@ -180,7 +180,7 @@ Security & Ops
 - Set alerts for HTTP 500, 429 etc errors on API GW, CloudFront etc
 - Enable monitoring on all required components: X-Ray, API GW logs & metrics, etc
 - Enable X-Ray on Lambda & Application-Lambda-Container Insights
-- Enable DevOps Guru Serverless for Lambda concurrency & DynamoDB throttling
+- Enable DevOps Guru Serverless for Lambda concurrency & DynamoDB throttling (along with CW Contributor Insights)
 - Enable ResillienceHub to meet RTO-RPO requirements
 - Stream metrics to managed Prometheus & display on Grafana
 - Kinesis Firehose 1 day persistence, process using lambda, can directly stream to S3, Redshift, ES, Splunk, Datadog etc
