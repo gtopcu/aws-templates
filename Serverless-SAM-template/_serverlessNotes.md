@@ -115,9 +115,13 @@ Kinesis:
   block the shard until record duration. 1-365 days storage, now supports serverless & multiple consumers per shard
 - DataStreams Write 1000 RPS & 1MB/sec, Read GetRecords 5t/sec 2MB/sec total per shard (shared between consumers)
 - Enhanced fan-out - more consumers, push instead of pull, each consumer gets 2MB/s, 50-70 milisecs latency, 5min timeout max, uses HTTP/2
+- DataStreams on-Demand can scale x2 the 30 last 30 days peak, will throttle >x2 spikes in less than 15 mins
 - DataStream errors -> iterator age, bisect batch, max retry, max record age, on-failure destination
+- Automatic retries for HTTP 5xx errors up to 3 times with exponential backoff, 2 min timeout default
+- AWS SDK putRecords(params, callback) up to 500 records / 5MiB
 - ParallelizationFactor(default 1 - max 10) setting defines number of batches to process concurrently from each shard
 - DataStreams aggregation to send/receive multiple records per record -> Kinesis Aggregation Library for Lambda
+- DataStreams pricing based on storage duraction, no of open shards & data size. on-Demand up to %300 more expensive than Previsioned
 - Firehose -> S3, OpenSearch, buffers, transform/filter/enrich, no order guarantee, at least once, single target, does 3 retries
 - Firehose write to S3: 1 to 15 minutes, or 1GBB to 128GBs
 - Track Lambda IterationAge metric to see how far behing the processing is
