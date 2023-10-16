@@ -77,37 +77,41 @@ DynamoDB:
 - PutItem, UpdateItem, DeleteItem, GetItem, Query, Scan, BatchGetItems, BatchWriteItems, TransactWriteItems
 - LocalSecondaryIndexes (5 max per table): 
     * Index is local to a partition key
-    * Allows you to query items with the same partition key – specified with the query. All the items with a particular partition key in the table and the items in the corresponding local secondary index (together known as an item collection) are stored on the same partition. The total size of an item collection cannot exceed 10 GB.
+    * Allows you to query items with the same partition key – specified with the query. All the items with a particular partition key in the table and the items in the corresponding local secondary index (together known as an item collection) are stored on the same partition. The total size of an item collection cannot exceed 10 GB 
     * The partition key is the same as the table’s partition key. The sort key can be any scalar attribute.
     * Can only be created when a table is created and cannot be deleted
     * Supports eventual consistency and strong consistency
-    * Does not have its own provisioned throughput, uses tables'
+    * Uses table's provisioned throughput- so do not project all attributes also 10GB limit!
     * Queries can return attributes that are not projected into the index
 - GlobalSecondaryIndexes (20 max per table):
-    * Index is across all partition keys
+    * Index is across all partition keys. Same design principles apply as a regular table (hot partitions etc)
     * Allows you to query over the entire table, across all partitions
     * Can have a partition key and optional sort key that are different from the partition key and sort key of the original table
     * Key values do not need to be unique
     * Can be created when a table is created or can be added to an existing table and it can be deleted
     * Supports eventual consistency only
-    * Has its own provisioned throughput settings for read and write operations
+    * Has its own provisioned throughput settings for read and write operations 
+      -> Too high WCU will throttle the base table ! But reads do not affect, so can be used for heavy reads/scans
     * Queries only return attributes that are projected into the index
-- On Prod: 
-  * Always use PIT recovery(any second within 35 days, no CUs) on prod
-  * on-Demand(almost instant, no CUs) 
-  * DeletionProtection on prod
+- On Prod:
+  * Enable DynamoDB control API operations using CloudTrail
+  * Log AWS error codes to CW logs
+  * Enable CW ContributorInsights & CW alarms based on DynamoDB metrics for throttling & monitoring & hot PKs
+  * Always use PIT recovery(any second within 35 days, no CUs used)
+  * on-Demand Backup(almost instant, for >35 days, no CUs used), Restore(up to 12 hours)
+  * Enable DeletionProtection for tables
 - on-Demand can scale x2 previous read/write peaks within 30 minutes
 - Provisioned can use auto-scaling, manages RCU/WCU separately both for table/GSIs based on CloudWatch metrics, can schedule
-- Enable CW ContributorInsights for throttling & monitoring & hot PKs
 - DynamoDB Streams(stays for 24 hours)
 - Global Tables(%99.999 SLA instead of %99.99), only eventually consistent if not writing to same region, need to handle all writes
 - 3,000 RCU and 1,000 WCU max per partition per table (max limit) - burst capacity preserved for up to 5mins
-- Avoid hot partitions, utilize write sharding, sparse indexes, STD, etc
 - Dynamo IA -> %60 cheaper on storage, %25 more expensive on reads & writes
 - TTL expiration(can be any attribute, must be epoch time, may take 1-2 days) - can also use Streams->Lambda->Firehose->S3
 - LeadingKeys IAM action on PKs for owner access
-- Partial failures: BatchGetItem(GetItem): Unprocessed Keys and BatchWriteItem(PutItem, DeleteItem): Unprocessed Items 
+- Handle partial failures: BatchGetItem(GetItem): Unprocessed Keys and BatchWriteItem(PutItem, DeleteItem): Unprocessed Items
 - Utilize VPC endpoints, DAX(only in same VPC & write thru)
+- Design considerations: Avoid hot partitions, only use indexes if must, utilize write sharding, separate hot/cold tabbles, scatter/gather for large items, sparse indexes, STD, one-to-many(for many attributes), separate table for frequently used attributes(varied access pattern), optimistic locking(update ConditionExpression:versionNo=1) etc
+
 
 SQS:
 - 256KBs, 1-14 days storage, visibility timeout 30sec default - 12 hours max (set 6 x Lambda timeout)
