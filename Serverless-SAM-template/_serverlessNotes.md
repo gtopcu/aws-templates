@@ -74,16 +74,40 @@ https://explore.skillbuilder.aws/learn/course/52/play/41664/amazon-api-gateway-f
 DynamoDB:
 - 400KB max item size, 2KB for PK & 1KB for SK, String, Number. Binary, Boolean, List, Map, Set
 - 2 x 4KB Reads per RCU (eventually consistent), 1 x 1KB Write per RCU (%50 capacity for consistent reads & transactions)
-- on-Demand can scale x2 previous read/write peaks within 30 minutes. Provisioned can use auto-scaling
-- DynamoDB global secondary indexes -> Key does not have to be unique
+- PutItem, UpdateItem, DeleteItem, GetItem, Query, Scan, BatchGetItems, BatchWriteItems, TransactWriteItems
+- LocalSecondaryIndexes (5 max per table): 
+    * Index is local to a partition key
+    * Allows you to query items with the same partition key – specified with the query. All the items with a particular partition key in the table and the items in the corresponding local secondary index (together known as an item collection) are stored on the same partition. The total size of an item collection cannot exceed 10 GB.
+    * The partition key is the same as the table’s partition key. The sort key can be any scalar attribute.
+    * Can only be created when a table is created and cannot be deleted
+    * Supports eventual consistency and strong consistency
+    * Does not have its own provisioned throughput, uses tables'
+    * Queries can return attributes that are not projected into the index
+- GlobalSecondaryIndexes (20 max per table):
+    * Index is across all partition keys
+    * Allows you to query over the entire table, across all partitions
+    * Can have a partition key and optional sort key that are different from the partition key and sort key of the original table
+    * Key values do not need to be unique
+    * Can be created when a table is created or can be added to an existing table and it can be deleted
+    * Supports eventual consistency only
+    * Has its own provisioned throughput settings for read and write operations
+    * Queries only return attributes that are projected into the index
+- On Prod: 
+  * Always use PIT recovery(any second within 35 days, no CUs) on prod
+  * on-Demand(almost instant, no CUs) 
+  * DeletionProtection on prod
+- on-Demand can scale x2 previous read/write peaks within 30 minutes
+- Provisioned can use auto-scaling, manages RCU/WCU separately both for table/GSIs based on CloudWatch metrics, can schedule
 - Enable CW ContributorInsights for throttling & monitoring & hot PKs
-- Use Global Tables, TTL expiration, streams, DeletionProtection
-- LeadingKeys IAM action on PKs for owner access
-- Dynamo IA -> %60 cheaper on storage, %25 more expensive on reads & writes
+- DynamoDB Streams(stays for 24 hours)
+- Global Tables(%99.999 SLA instead of %99.99), only eventually consistent if not writing to same region, need to handle all writes
 - 3,000 RCU and 1,000 WCU max per partition per table (max limit) - burst capacity preserved for up to 5mins
-- Items in a table and its local secondary indexes that have the same partition key cannot exceed 10GB
-- Avoid hot partitions, utilize write sharding, 
-- Consider Redis for sorted sets (i.e. realtime leaderboard), OpenSearch for TextSearch
+- Avoid hot partitions, utilize write sharding, sparse indexes, STD, etc
+- Dynamo IA -> %60 cheaper on storage, %25 more expensive on reads & writes
+- TTL expiration(can be any attribute, must be epoch time, may take 1-2 days) - can also use Streams->Lambda->Firehose->S3
+- LeadingKeys IAM action on PKs for owner access
+- Partial failures: BatchGetItem(GetItem): Unprocessed Keys and BatchWriteItem(PutItem, DeleteItem): Unprocessed Items 
+- Utilize VPC endpoints, DAX(only in same VPC & write thru)
 
 SQS:
 - 256KBs, 1-14 days storage, visibility timeout 30sec default - 12 hours max (set 6 x Lambda timeout)
