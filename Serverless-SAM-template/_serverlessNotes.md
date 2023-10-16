@@ -3,8 +3,7 @@
 General:
 - Enable CloudTrail management & data events(i.e.S3 put)
 - Enable IAM AccessAdvisor & CloudTrail(90 days default) -> CW/S3 & Insights
-- Utilize orgs, identitiy center, control tower, config, inspector, detective, guardduty, securityhub, codeguru, devopsguru
-WAF & FirewallManager, ServiceQuotas, Health, Budgets, SavingPlans, ComputeOptimizer, Backup, Sys/Secrets Mgr, TrustedAdvisor, ResourceExplorer, TagEditor
+- Utilize organanizations(with SCPs & Backup Policies()) & identitiy center, control tower, config, inspector, detective, guardduty, securityhub, codeguru, devopsguru, WAF & FirewallManager, ServiceQuotas, Health, Budgets, SavingPlans, ComputeOptimizer, Backup, Sys/Secrets Mgr, TrustedAdvisor, ResourceExplorer, TagEditor
 - Utilize metric filters & alerts
 - Lambda env vars, Dynamo, S3 - secure with own KMS keys
 
@@ -72,7 +71,7 @@ https://explore.skillbuilder.aws/learn/course/52/play/41664/amazon-api-gateway-f
   Can also check the applicable request payload adheres to the configured JSON request model of the method
 
 DynamoDB:
-- 400KB max item size, 2KB for PK & 1KB for SK, String, Number. Binary, Boolean, List, Map, Set
+- 400KB max item size, 2KB for PK & 1KB for SK, String, Number. Binary, Boolean or List, Map, Set (these can be 32 levels deep)
 - 2 x 4KB Reads per RCU (eventually consistent), 1 x 1KB Write per RCU (%50 capacity for consistent reads & transactions)
 - PutItem, UpdateItem, DeleteItem, GetItem, Query, Scan, BatchGetItems, BatchWriteItems, TransactWriteItems
 - LocalSecondaryIndexes (5 max per table): 
@@ -102,11 +101,11 @@ DynamoDB:
   * Enable DeletionProtection for tables
 - on-Demand can scale x2 previous read/write peaks within 30 minutes
 - Provisioned can use auto-scaling, manages RCU/WCU separately both for table/GSIs based on CloudWatch metrics, can schedule
-- DynamoDB Streams(exactly once, ordered by key, stays for 24 hours, subsecond delivery)
+- DynamoDB Streams(exactly once but with lambda at least once, ordered by key, stays for 24 hours, subsecond delivery)
 - Global Tables(%99.999 SLA instead of %99.99), only eventually consistent if not writing to same region, need to handle all writes
 - 3,000 RCU and 1,000 WCU max per partition per table (max limit) - burst capacity preserved for up to 5mins
 - Dynamo IA -> %60 cheaper on storage, %25 more expensive on reads & writes
-- TTL expiration(can be any attribute, must be epoch time, may take 1-2 days) - can also use Streams->Lambda->Firehose->S3
+- TTL expiration(can be any attribute, must be epoch time, may take 1-2 days, does not use CUs) -> or Streams->Lambda->Firehose->S3
 - LeadingKeys IAM action on PKs for owner access
 - Handle partial failures: BatchGetItem(GetItem): Unprocessed Keys and BatchWriteItem(PutItem, DeleteItem): Unprocessed Items
 - Utilize VPC endpoints, DAX(only in same VPC & write thru)
