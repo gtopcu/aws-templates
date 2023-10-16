@@ -102,7 +102,7 @@ DynamoDB:
   * Enable DeletionProtection for tables
 - on-Demand can scale x2 previous read/write peaks within 30 minutes
 - Provisioned can use auto-scaling, manages RCU/WCU separately both for table/GSIs based on CloudWatch metrics, can schedule
-- DynamoDB Streams(stays for 24 hours)
+- DynamoDB Streams(exactly once, ordered by key, stays for 24 hours, subsecond delivery)
 - Global Tables(%99.999 SLA instead of %99.99), only eventually consistent if not writing to same region, need to handle all writes
 - 3,000 RCU and 1,000 WCU max per partition per table (max limit) - burst capacity preserved for up to 5mins
 - Dynamo IA -> %60 cheaper on storage, %25 more expensive on reads & writes
@@ -142,7 +142,7 @@ StepFunctions:
 
 Kinesis:
 - DataStreams PartitionKey & SequenceNumber(unique per partition), ordered & at least once(idempotency!), replays, errors, base64 encoded 
-- 1-365 days storage, now supports serverless & multiple consumers per shard
+- 1-365 days storage, now supports serverless & multiple consumers per shard, ~50$ per shard
 - DataStreams Write 1000 RPS & 1MB/sec, Read GetRecords 5t/sec 2MB/sec total per shard (shared between consumers)
 - Enhanced fan-out - more consumers, push instead of pull, each consumer gets 2MB/s, 50-70 milisecs latency, 5min timeout max, uses HTTP/2
 - DataStreams on-Demand can scale x2 the 30 last 30 days peak, will throttle >x2 spikes in less than 15 mins
