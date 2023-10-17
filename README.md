@@ -6,24 +6,24 @@ General:
 - Utilize organanizations & identitiy center, control tower, config, inspector, detective, guardduty, securityhub, codeguru, devopsguru, WAF & FirewallManager, ServiceQuotas, Health, Budgets, SavingPlans, ComputeOptimizer, Backup, Sys/Secrets Mgr, TrustedAdvisor, ResourceExplorer, TagEditor
 
 Lambda:
-- 128MB-10GB memory, 256kb async/6MB sync payload, 15min timeout, /tmp 10GB ephemeral storage
+- 128MB-10GB memory, 256kb async/6MB sync payload, 15min timeout, /tmp 10GB ephemeral storage(durable & shared until cold start)
 - More memory = more vCPU + IO. 128MB-> 0.5vCPU, 256GB 1vCPU, multi-core after 1.8GB, 10GB 6vCPU, 1000 max concurrency per region
 - 1 million requests & 400.000GB free. Pricing: number of requests & duration. Use Lambda PowerTuning SF to tune
-- Invocations -> sync: API GW, Lambda, Cognito, async: S3, EventBridge, SNS, polling: SQS, Kinesis/Dynamo Streams
-- Set provisioned concurrency for lambda to avoid cold starts. Define DB conn. etc outside handler method, re-use between invocations
-- 2 type of errors: 
-  * Invocation errors(throttles, large size, permissions - for async retries 2 times max 6 hours) 
+- Invocations Types -> sync: API GW, Lambda, Cognito, async: S3, EventBridge, SNS, polling: SQS, streaming: Kinesis/Dynamo Streams
+- To avoid cold starts: use min libs, set provisioned concurrency if necessary, define DB conn. etc outside handler method
+- Type of errors: 
+  * Invocation errors(throttles, large size, permissions - for async invocations, retries 2 times for max 6 hours by default) 
   * Function errors(function error, timeout)
 - For invocation errors, can use Lambda DLQ or destinations(preferred, contains more data) (errors are delivered after all retries)
-   -> success & fail for async(SQS, SNS, EventBridge, Lambda), fail only for streaming(SQS/SNS)
-- For polling errors(SQS), refer to SQS notes
+   -> success & fail for async(targets: SQS, SNS, EventBridge, Lambda), fails only for streaming(targets: SQS/SNS)
 - Use reserved & provisioned concurrency as necessary. 3000 immediate, 500 burst concurrency per minute per region
 - Use CW application insights & lambda insights (extension) for overall picture
 - IAM PassRole -> Trust Policiy -> STS assumeRole
 - Utilize lambda layers for NPM/pip packages (50MB compressed, 256MB uncompressed limit)
 - Use the latest Lambda PowerTools as a layer
 - Can filter messages(no charge)
-- Event Source Mapping(Kinesis/DynamoDB Streams) -> refer to Kinesis for error handling 
+- For polling errors(SQS) -> refer to SQS notes
+- For streaming errors(Kinesis/DynamoDB Streams) -> refer to Kinesis notes
 
 API GW:
 - 10k req/s 30sec 10MB max. Billed by million requests & cache size x hour, 1 million calls free every month for 12 months
