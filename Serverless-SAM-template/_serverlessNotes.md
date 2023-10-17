@@ -121,6 +121,7 @@ SQS:
 - 256KB max msg size, 1-14 days storage, visibility timeout 30sec default - 12 hours max (set 6 x Lambda timeout)
 - SQS FIFO can deduplicate by deduplication_id, order only guaranteed within the same group_id
 - Only use MaximumConcurrency setting on the queue with lambda, do not use ReservedConcurrency(leads to overpolling)
+- Delete each message as it is successfully processed by Lambda (check PowerTools batch)
 - Lambda Batching:
   * Lambda timeout = batch size x avg message processing time
   * 10 messages max per batch(default 5)
