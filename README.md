@@ -10,17 +10,26 @@ General:
 Lambda:
 - 128MB-10GB memory, 256kb async/6MB sync payload, 15min timeout, /tmp 10GB ephemeral storage
 - More memory = more vCPU + IO. 128MB-> 0.5vCPU, 256GB 1vCPU, multi-core after 1.8GB, 10GB 6vCPU, 1000 max concurrency per region
-- 1 million requests & 400.000GB free. Pricing: number of requests & duration. Use Lambda Power Tuning SF to tune
-- Invocations -> sync: API GW, Cognito, async: S3, EventBridge, SNS, polling: SQS, Kinesis/Dynamo Streams
-- Lambda destinations -> success & fail for async, failures for polling (preferred now over of DLQs)
+- 1 million requests & 400.000GB free. Pricing: number of requests & duration. Use Lambda PowerTuning SF to tune
+- Invocations -> sync: API GW, Lambda, Cognito, async: S3, EventBridge, SNS, polling: SQS, Kinesis/Dynamo Streams
+- Set provisioned concurrency for lambda to avoid cold starts. Define DB conn. etc outside handler method, re-use between invocations
+- 2 type of errors: 
+  * Invocation errors(throttles, large size, permissions - for async retries 2 times max 6 hours) 
+  * Function errors(function error, timeout)
+- For invocation errors, can use Lambda DLQ or destinations(preferred) 
+   -> success & fail for async(SQS, SNS, EventBridge, Lambda), failures only for streaming(SQS/SNS)
 - Use reserved & provisioned concurrency as necessary. 3000 immediate, 500 burst concurrency per minute per region
 - Use CW application insights & lambda insights (extension) for overall picture
 - IAM PassRole -> Trust Policiy -> STS assumeRole
 - Utilize lambda layers for NPM/pip packages (50MB compressed, 256MB uncompressed limit)
-- Set provisioned concurrency for lambda to avoid cold starts. Define DB conn. etc outside handler method, re-use between invocations
-- Event Source Mapping: Retry attempts 0-10000 (default 1), max record age 1 min to 7 days (default 1), can filter unwanted messages
-  bisect batch on failure, return partial success, use SQS/SNS as failure destination
 - Use the latest Lambda PowerTools as a layer
+- Event Source Mapping(SQS/Kinesis/DynamoDB Streams) 
+  * Ordered processing, so will stop processing on errors for that shard(until success or expiry):
+  * Can filter messages(no charge)
+  * Error handling for streaming events: bisect batch, max retry attempts(0-1000, default 1), max record age 1 min(default) up to 7 days
+    on-failure destination: can use SQS/SNS as failure destination
+    check Iterator-Age metric
+    Can return partial success using PowerTools
 
 API GW:
 - 10k req/s 30sec 10MB max. Billed by million requests & cache size x hour, 1 million calls free every month for 12 months
@@ -142,7 +151,7 @@ StepFunctions:
 Kinesis:
 - DataStreams PartitionKey & SequenceNumber(unique per partition), ordered & at least once(idempotency!), replays, errors, base64 encoded 
 - 1-365 days storage, now supports serverless & multiple consumers per shard, ~50$ per shard
-- DataStreams Write 1000 RPS & 1MB/sec, Read GetRecords 5t/sec 2MB/sec total per shard (shared between consumers)
+- DataStreams Write 1000RPS & 1MB/sec, Read 10kRPS 5t/sec 2MB/sec total per shard (shared between consumers)
 - Enhanced fan-out - more consumers, push instead of pull, each consumer gets 2MB/s, 50-70 milisecs latency, 5min timeout max, uses HTTP/2
 - DataStreams on-Demand can scale x2 the 30 last 30 days peak, will throttle >x2 spikes in less than 15 mins
 - DataStream errors -> iterator age, bisect batch, max retry, max record age, on-failure destination
