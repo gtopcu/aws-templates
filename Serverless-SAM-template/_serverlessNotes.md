@@ -16,20 +16,16 @@ Lambda:
 - 2 type of errors: 
   * Invocation errors(throttles, large size, permissions - for async retries 2 times max 6 hours) 
   * Function errors(function error, timeout)
-- For invocation errors, can use Lambda DLQ or destinations(preferred) 
-   -> success & fail for async(SQS, SNS, EventBridge, Lambda), failures only for streaming(SQS/SNS)
+- For invocation errors, can use Lambda DLQ or destinations(preferred, contains more data) (errors are delivered after all retries)
+   -> success & fail for async(SQS, SNS, EventBridge, Lambda), fail only for streaming(SQS/SNS)
+- For polling errors(SQS), refer to SQS notes
 - Use reserved & provisioned concurrency as necessary. 3000 immediate, 500 burst concurrency per minute per region
 - Use CW application insights & lambda insights (extension) for overall picture
 - IAM PassRole -> Trust Policiy -> STS assumeRole
 - Utilize lambda layers for NPM/pip packages (50MB compressed, 256MB uncompressed limit)
 - Use the latest Lambda PowerTools as a layer
-- Event Source Mapping(SQS/Kinesis/DynamoDB Streams) 
-  * Ordered processing, so will stop processing on errors for that shard(until success or expiry):
-  * Can filter messages(no charge)
-  * Error handling for streaming events: bisect batch, max retry attempts(0-1000, default 1), max record age 1 min(default) up to 7 days
-    on-failure destination: can use SQS/SNS as failure destination
-    check Iterator-Age metric
-    Can return partial success using PowerTools
+- Can filter messages(no charge)
+- Event Source Mapping(Kinesis/DynamoDB Streams) -> refer to Kinesis for error handling 
 
 API GW:
 - 10k req/s 30sec 10MB max. Billed by million requests & cache size x hour, 1 million calls free every month for 12 months
@@ -78,6 +74,7 @@ https://explore.skillbuilder.aws/learn/course/52/play/41664/amazon-api-gateway-f
   Can also customize specific responses or modify the default 4xx or 5xx error response.
 - Request validation: can check required request parameters in the URL, query string, and headers are present
   Can also check the applicable request payload adheres to the configured JSON request model of the method
+- No error handling for lambda(sync) -> Generate SDK from the API stage, and use the backoff and retry mechanisms it provides
 
 DynamoDB:
 - 400KB max item size, 2KB for PK & 1KB for SK, String, Number. Binary, Boolean or List, Map, Set (these can be 32 levels deep)
@@ -120,22 +117,29 @@ DynamoDB:
 - Utilize VPC endpoints, DAX(only in same VPC & write thru)
 - Design considerations: Avoid hot partitions, only use indexes if must, utilize write sharding, separate hot/cold tabbles, scatter/gather for large items, sparse indexes, STD, one-to-many(for many attributes), separate table for frequently used attributes(varied access pattern), optimistic locking(update ConditionExpression:versionNo=1) etc
 
-
 SQS:
-- 256KBs, 1-14 days storage, visibility timeout 30sec default - 12 hours max (set 6 x Lambda timeout)
-- maxReceiveCount 1-1000(default 2), 10 messages max per batch(default 5)
-- Only use MaximumConcurrency setting on the queue with lambda, do not use ReservedConcurrency(leads to overpolling)
-- Lambda timeout = batch size x avg message processing time
-- SQS Batching works in 5 concurrent lambdas max, scales down in case of errors, scales up if more messages
-(up to 1000 baches max, increases 60 parallel pollers per min)
+- 256KB max msg size, 1-14 days storage, visibility timeout 30sec default - 12 hours max (set 6 x Lambda timeout)
 - SQS FIFO can deduplicate by deduplication_id, order only guaranteed within the same group_id
-- SQS errors -> ApproximateAgeOfOldestMessage CloudWatch Metric + Alarm, queue redrive + event forking pipeline
+- Only use MaximumConcurrency setting on the queue with lambda, do not use ReservedConcurrency(leads to overpolling)
+- Lambda Batching:
+  * Lambda timeout = batch size x avg message processing time
+  * 10 messages max per batch(default 5)
+  * Starts with 5 concurrent lambdas max, scales down in case of errors, scales up if more messages
+    (up to 1000 batches max, increases 60 parallel pollers per min)
+- Error Handling:
+    * If an invocation fails or times out, message is available again when the visibility timeout period expires
+    * Lambda retries until successful or the queue’s maxReceiveCount(1-1000, default 2) limit has been exceeded
+    * Define the DLQ on SQS, not Lambda
+    * ApproximateAgeOfOldestMessage CloudWatch Metric + Alarm, queue redrive + event forking pipeline
 
 SNS: 
 - Can filter/retry, filter PII data. Supports 3rd party HTTP. Fan-out to multiple SQS. FIFO can now deliver to non-FIFO
-- SNS ->  Lambda retries 3 times for execution errors. Invocation errors: 6 hours default 
-(not enough concurrency/throttling/large size/timeout etc). Performs 3 immediate tries, 2 at 1 second apart, 10 backing off from 
-1 second to 20 seconds, and 100,000 at 20 seconds apart
+- Supports millions of subscribers with small latency (<100ms)
+- Async event sources(SNS, S3, EventBridge) do not wait for callback from lambda(no timeout), passes it to the lambda handler
+- Lambda invocation errors(throttling/large size/timeout): 
+    * Retries 2 times defeault (RetryAttempts) for max of 6 hours default (Maximum Event Age)
+    * Performs 3 immediate tries, 2 at 1 second apart, 10 backing off from 1 second to 20 seconds, and 100,000 at 20 seconds apart
+    * Can also define DLQ on the topic
 
 EventBridge:
 - 400ms latency avg, 24 hour retry, 1$ per 1 million events, free delivery to AWS services
@@ -154,17 +158,22 @@ Kinesis:
 - DataStreams Write 1000RPS & 1MB/sec, Read 10kRPS 5t/sec 2MB/sec total per shard (shared between consumers)
 - Enhanced fan-out - more consumers, push instead of pull, each consumer gets 2MB/s, 50-70 milisecs latency, 5min timeout max, uses HTTP/2
 - DataStreams on-Demand can scale x2 the 30 last 30 days peak, will throttle >x2 spikes in less than 15 mins
-- DataStream errors -> iterator age, bisect batch, max retry, max record age, on-failure destination
 - Automatic retries for HTTP 5xx errors up to 3 times with exponential backoff, 2 min timeout default
 - AWS SDK putRecords(params, callback) up to 500 records / 5MiB. Handle partial failures!
 - Lamda Event Source Mapping: 1 batch = 1 lambda instance. Batch size 1-10000 records, window 1 sec up to 5 min, 6MB payload limit 
-- 1 shard = 1 concurrent lambda default -> can be up to 10 by setting ParallelizationFactor. Defines number of batches to process concurrently from each shard
-- Lambda retries the entire batch until success or data expiration(at least 1 day!) No other batches are processed (poison pill)
+- 1 shard = 1 concurrent lambda -> can be up to 10 by setting ParallelizationFactor(no of batches to processed concurrently per shard)
 - DataStreams aggregation to send/receive multiple records per record -> Kinesis Aggregation Library for Lambda
 - DataStreams pricing based on storage duraction, no of open shards & data size. on-Demand up to %300 more expensive than Previsioned
 - Firehose -> S3, OpenSearch, buffers, transform/filter/enrich, no order guarantee, at least once, single target, does 3 retries
 - Firehose write to S3: 1 to 15 minutes, or 1GBB to 128GBs
-- Track Lambda IterationAge metric to see how far behing the processing is
+- Lambda Erorrs: 
+  * Lambda retries the entire batch until success or data expiration(at least 1 day!) No other batches are processed (poison pill)
+  * BisectBatchOnFunctionError, MaximumRetryAttempts(0-1000, default 1), MaximumRecordAge 1 min(default) up to 7 days
+  * on-failure destination: can use SQS/SNS as failure destination
+  * Configure an OnFailure destination on Lambda so that when a data record reaches the MaximumRetryAttempts or MaximumRecordAge, 
+    you can send its metadata, such as shard ID and stream ARN to SQS/SNS
+  * Check Iterator-Age metric for oldest messages
+  * Can return partial success - check PowerTools batching
 
 S3:
 - StorageLens, AccessPoints, 2-buckets multi-region APs, S3 Select, Athena/Glue usefull stuff
