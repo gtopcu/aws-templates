@@ -3,9 +3,7 @@
 General:
 - Enable CloudTrail management & data events(i.e.S3 put)
 - Enable IAM AccessAdvisor & CloudTrail(90 days default) -> CW/S3 & Insights
-- Utilize organanizations(with SCPs & Backup Policies()) & identitiy center, control tower, config, inspector, detective, guardduty, securityhub, codeguru, devopsguru, WAF & FirewallManager, ServiceQuotas, Health, Budgets, SavingPlans, ComputeOptimizer, Backup, Sys/Secrets Mgr, TrustedAdvisor, ResourceExplorer, TagEditor
-- Utilize metric filters & alerts
-- Lambda env vars, Dynamo, S3 - secure with own KMS keys
+- Utilize organanizations & identitiy center, control tower, config, inspector, detective, guardduty, securityhub, codeguru, devopsguru, WAF & FirewallManager, ServiceQuotas, Health, Budgets, SavingPlans, ComputeOptimizer, Backup, Sys/Secrets Mgr, TrustedAdvisor, ResourceExplorer, TagEditor
 
 Lambda:
 - 128MB-10GB memory, 256kb async/6MB sync payload, 15min timeout, /tmp 10GB ephemeral storage
@@ -121,6 +119,7 @@ SQS:
 - 256KB max msg size, 1-14 days storage, visibility timeout 30sec default - 12 hours max (set 6 x Lambda timeout)
 - SQS FIFO can deduplicate by deduplication_id, order only guaranteed within the same group_id
 - Only use MaximumConcurrency setting on the queue with lambda, do not use ReservedConcurrency(leads to overpolling)
+- Delete each message as it is successfully processed by Lambda (check PowerTools batch)
 - Lambda Batching:
   * Lambda timeout = batch size x avg message processing time
   * 10 messages max per batch(default 5)
@@ -216,7 +215,6 @@ Security & Ops
 - Encrypt & TLS
 - Use Inspector for EC2/ECR scans, CodeWhisperer, CodeGuru & Lambda Extensions with Sync-SQ/Github actions
 - Use WAF with API GW & AppSync & ELB. Use AWS Firewall Manager for multi-account
-- CloudOps
 - Use Proton & ServiceCatalog for pre-defined provisioning
 - AWS Backup - backup DBs, S3
 - Enable AWS Health to see multi-account service status
@@ -228,9 +226,8 @@ Security & Ops
 - Enable DevOps Guru Serverless for Lambda concurrency & DynamoDB throttling (along with CW Contributor Insights)
 - Enable ResillienceHub to meet RTO-RPO requirements
 - Stream metrics to managed Prometheus & display on Grafana
-- Kinesis Firehose 1 day persistence, process using lambda, can directly stream to S3, Redshift, ES, Splunk, Datadog etc
-- Kinesis Analytics can query data in streams & firehose using SQL realtime
 - Utilize metric filters from CW logs to get alerts from the logs
+- Lambda env vars, Dynamo, S3 - secure with own KMS keys
 - Create CW alarms for any CW metric needed
 - Enable & use Container Insights to track ECS/Fargate utilization
 

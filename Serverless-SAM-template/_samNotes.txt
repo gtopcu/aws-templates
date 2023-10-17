@@ -40,21 +40,20 @@ brew uninstall aws-sam-cli
 
 !! Need to install AWS CLI, SAM CLI + Docker Desktop first & Configure AWS Credentials !!
 
-sam -h                                      List Commands
-sam init                                    Initialize SAM app
-sam --config-env                            Specify the environment to use
-sam validate                                Validate an AWS SAM template
-sam build —-parallel --cached               Build the app (parallel/cached specified in samconfig.toml)
-                                            Do not need build if you don't have anything in requirements.txt(everything is present in lambda runtime)
-sam package                                 Package the app (sam deploy packages, no need)
-
-sam deploy --guided                         Deploy the app
+sam -h                                  List Commands
+sam init                                Initialize SAM app
+sam --config-env                        Specify the environment to use
+sam validate                            Validate an AWS SAM template
+sam build —-parallel --cached           Build the app (parallel/cached specified in samconfig.toml)
+                                        No need to build if all used libs are present in Lambda runtime such as boto3
+sam package                             Package the app (sam deploy packages too, so no need)
+sam deploy --guided                     Deploy the app
 sam deploy -t template.yml stack-name xxx --config-file myconfig.yaml
 
-sam delete                                  Delete an AWS SAM application and the artifacts created by sam deploy
-sam logs --tail                             Fetch logs for a function
-sam publish                                 Publish a packaged AWS SAM template to the AWS Serverless Application Repository
-sam traces                                  Fetch AWS X-Ray traces
+sam delete                              Delete an AWS SAM application and the artifacts created by sam deploy
+sam logs --tail                         Fetch logs for a function
+sam publish                             Publish a packaged AWS SAM template to the AWS Serverless Application Repository
+sam traces                              Fetch AWS X-Ray traces
 
 SAM Accelerate -> https://aws.amazon.com/blogs/compute/accelerating-serverless-development-with-aws-sam-accelerate/
 sam sync --watch
