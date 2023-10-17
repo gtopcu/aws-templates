@@ -22,8 +22,8 @@ Lambda:
 - Utilize lambda layers for NPM/pip packages (50MB compressed, 256MB uncompressed limit)
 - Use the latest Lambda PowerTools as a layer
 - Can filter messages(no charge)
-- For polling errors(SQS) -> refer to SQS notes
-- For streaming errors(Kinesis/DynamoDB Streams) -> refer to Kinesis notes
+- FunctionURLs are new, supports IAM or no auth
+- For polling errors(SQS) -> refer to SQS notes, for streaming errors(Kinesis/DynamoDB Streams) -> refer to Kinesis notes
 
 API GW:
 - 10k req/s 30sec 10MB max. Billed by million requests & cache size x hour, 1 million calls free every month for 12 months
@@ -116,18 +116,23 @@ DynamoDB:
 - Design considerations: Avoid hot partitions, only use indexes if must, utilize write sharding, separate hot/cold tabbles, scatter/gather for large items, sparse indexes, STD, one-to-many(for many attributes), separate table for frequently used attributes(varied access pattern), optimistic locking(update ConditionExpression:versionNo=1) etc
 
 SQS:
-- 256KB max msg size, 1-14 days storage, visibility timeout 30sec default - 12 hours max (set 6 x Lambda timeout)
-- SQS FIFO can deduplicate by deduplication_id, order only guaranteed within the same group_id
+- max message size(1 - 256KB, 256KB default), retention(1 min - 14 days, 4 days default)
+- visibility timeout(0 sec - 12 hours max, 30sec default (set 6 x Lambda timeout)
+- delivery delay(0 - 15 mins), receive message wait time(0 - 20 secs)
+- SQS FIFO long polls, requires MessageGroupId, can deduplicate by MessageDeduplicationId, order guaranteed within the same group
 - Only use MaximumConcurrency setting on the queue with lambda, do not use ReservedConcurrency(leads to overpolling)
-- Delete each message as it is successfully processed by Lambda (check PowerTools batch)
-- Lambda Batching:
-  * Lambda timeout = batch size x avg message processing time
+- Batching:
+  * Lambda timeout = no of messages (batch size) x avg message processing time
+  * 10 messages max per batch(default)
+  * Can set up batch window in seconds(max wait time for messages)
+- Concurrent Batches per Shard:
   * 10 messages max per batch(default 5)
   * Starts with 5 concurrent lambdas max, scales down in case of errors, scales up if more messages
     (up to 1000 batches max, increases 60 parallel pollers per min)
-- Error Handling:
+- Error Handling(batchItemFailures -> check PowerTools batch):
     * If an invocation fails or times out, message is available again when the visibility timeout period expires
     * Lambda retries until successful or the queue’s maxReceiveCount(1-1000, default 2) limit has been exceeded
+    * Can splitBatchOnError, maxAgeOfRecord (check Kinesis)
     * Define the DLQ on SQS, not Lambda
     * ApproximateAgeOfOldestMessage CloudWatch Metric + Alarm, queue redrive + event forking pipeline
 
@@ -164,7 +169,7 @@ Kinesis:
 - DataStreams aggregation to send/receive multiple records per record -> Kinesis Aggregation Library for Lambda
 - DataStreams pricing based on storage duraction, no of open shards & data size. on-Demand up to %300 more expensive than Previsioned
 - Firehose -> S3, OpenSearch, buffers, transform/filter/enrich, no order guarantee, at least once, single target, does 3 retries
-- Firehose write to S3: 1 to 15 minutes, or 1GBB to 128GBs
+- Firehose -> S3 batching: 1 to 15 minutes, or 1GBB to 128GBs
 - Lambda Erorrs: 
   * Lambda retries the entire batch until success or data expiration(at least 1 day!) No other batches are processed (poison pill)
   * BisectBatchOnFunctionError, MaximumRetryAttempts(0-1000, default 1), MaximumRecordAge 1 min(default) up to 7 days
