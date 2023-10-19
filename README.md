@@ -189,8 +189,7 @@ Cognito:
 Redis: 
 - Key/Value, Sets, SortedSets great for real-time leaderboards, Geolocation, Multi-AZ
 
-
-
+<br/>
 
 # General AWS Best Practices
 
