@@ -20,3 +20,11 @@ def request(endpoint_url: str, headers: dict, timeout: int = 30) -> requests.Res
         return resp
     except requests.HTTPError as e:
         raise RuntimeError(f"Received a HTTP 5xx error: {e}")
+
+def writeFile(filename, content):
+    with open(filename, "w") as file:
+        file.write(content)
+
+def readFile(filename):
+    with open(filename, "r") as file:
+        return file.read()

@@ -1,9 +1,14 @@
+import os
 import json
 from dataclasses import dataclass
 from pathlib import Path
-
 import pytest
 from getting_started_with_test_app import lambda_handler, processor
+
+
+@pytest.fixture
+def lambda_environment():
+    os.environ[lambda_handler.ENV_TABLE_NAME] = "TABLE_NAME"
 
 
 def load_event(path: Path):
