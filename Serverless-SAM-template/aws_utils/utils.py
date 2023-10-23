@@ -15,17 +15,21 @@ def generate_uuid():
 def requests_get(endpoint_url: str, headers: dict, timeout: int = 30) -> requests.Response:
     try:
         resp = requests.get(endpoint_url, headers=headers, timeout=timeout)
-        resp.raise_for_status()
+        httpError = resp.raise_for_status()
         return resp
     except requests.HTTPError as e:
         raise RuntimeError(f"Received a HTTP error: {e}")
 
 def requests_put(endpoint_url: str, payload: str, timeout: int = 30) -> requests.Response:
-    payload = {
-        "user_id": "1000",
-        "isActive": True
-    }
-    requests.put(endpoint_url, json=payload)
+    # payload = {
+    #     "user_id": "1000",
+    #     "isActive": True
+    # }
+    response = requests.put(endpoint_url, json=payload)
+    #status_code = response.status_code
+    #response_body = response.json()
+    return response
+
 
 def writeFile(filename, content):
     with open(filename, "w") as file:
