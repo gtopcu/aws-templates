@@ -1,5 +1,6 @@
 import uuid
 import requests
+import json
 import datetime, time
 
 def get_current_datetime():
@@ -11,15 +12,16 @@ def sleep(seconds: int):
 def generate_uuid():
     return str(uuid.uuid4())
 
-def request(endpoint_url: str, headers: dict, timeout: int = 30) -> requests.Response:
-    if endpoint_url is None:
-        endpoint_url = "http://httpbin.org/status/200"
+def requests_get(endpoint_url: str, headers: dict, timeout: int = 30) -> requests.Response:
     try:
         resp = requests.get(endpoint_url, headers=headers, timeout=timeout)
         resp.raise_for_status()
         return resp
     except requests.HTTPError as e:
-        raise RuntimeError(f"Received a HTTP 5xx error: {e}")
+        raise RuntimeError(f"Received a HTTP error: {e}")
+
+def requests_put(endpoint_url: str, payload: json, timeout: int = 30) -> requests.Response
+    requests.put(endpoint_url, json=payload)
 
 def writeFile(filename, content):
     with open(filename, "w") as file:

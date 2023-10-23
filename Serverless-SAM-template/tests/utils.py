@@ -8,6 +8,7 @@ def generate_context() -> LambdaContext:
     context = LambdaContext()
     context._aws_request_id = "111111"
     context._function_name = "func"
+    context.memory_limit_in_mb = 128
     return context
 
 def generate_api_gw_event(
