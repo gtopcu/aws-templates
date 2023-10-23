@@ -20,7 +20,11 @@ def requests_get(endpoint_url: str, headers: dict, timeout: int = 30) -> request
     except requests.HTTPError as e:
         raise RuntimeError(f"Received a HTTP error: {e}")
 
-def requests_put(endpoint_url: str, payload: json, timeout: int = 30) -> requests.Response
+def requests_put(endpoint_url: str, payload: str, timeout: int = 30) -> requests.Response:
+    payload = {
+        "user_id": "1000",
+        "isActive": True
+    }
     requests.put(endpoint_url, json=payload)
 
 def writeFile(filename, content):
