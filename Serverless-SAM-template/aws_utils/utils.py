@@ -18,7 +18,10 @@ def requests_get(endpoint_url: str, headers: dict, timeout: int = 30) -> request
         httpError = resp.raise_for_status()
         return resp
     except requests.HTTPError as e:
-        raise RuntimeError(f"Received a HTTP error: {e}")
+        raise RuntimeError(f"HTTP error: {e}")
+    except requests.exceptions.ConnectionError as e:
+        raise RuntimeError(f"Connection error: {e}")
+        #raise SystemExit(err)
 
 def requests_put(endpoint_url: str, payload: str, timeout: int = 30) -> requests.Response:
     # payload = {
