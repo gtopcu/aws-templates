@@ -117,9 +117,9 @@ DynamoDB:
 
 SQS:
 - max message size(1 - 256KB, 256KB default), retention(1 min - 14 days, 4 days default)
-- visibility timeout(0 sec - 12 hours max, 30sec default (set 6 x Lambda timeout)
+- visibility timeout(0 sec - 12 hours max, 30sec default . Set 6 x Lambda timeout)
 - delivery delay(0 - 15 mins), receive message wait time(0 - 20 secs)
-- SQS FIFO long polls, requires MessageGroupId, can deduplicate by MessageDeduplicationId, order guaranteed within the same group
+- SQS FIFO 1800TPS, long polls, requires MessageGroupId, can deduplicate by MessageDeduplicationId, order guaranteed within group
 - Only use MaximumConcurrency setting on the queue with lambda, do not use ReservedConcurrency(leads to overpolling)
 - Batching:
   * Lambda timeout = no of messages (batch size) x avg message processing time
@@ -128,7 +128,7 @@ SQS:
 - Concurrent Batches per Shard:
   * 10 messages max per batch(default 5)
   * Starts with 5 concurrent lambdas max, scales down in case of errors, scales up if more messages
-    (up to 1000 batches max, increases 60 parallel pollers per min)
+    (up to 1000 batches max, increases 300 parallel pollers per min)
 - Error Handling(batchItemFailures -> check PowerTools batch):
     * If an invocation fails or times out, message is available again when the visibility timeout period expires
     * Lambda retries until successful or the queue’s maxReceiveCount(1-1000, default 2) limit has been exceeded
@@ -137,7 +137,8 @@ SQS:
     * ApproximateAgeOfOldestMessage CloudWatch Metric + Alarm, queue redrive + event forking pipeline
 
 SNS: 
-- Can filter/retry, filter PII data. Supports 3rd party HTTP. Fan-out to multiple SQS. FIFO can now deliver to non-FIFO
+- Can filter/retry, filter PII data. Supports 3rd party HTTP. Fan-out to multiple SQS. 
+- FIFO can now deliver to non-FIFO, and support archiving & replays
 - Supports millions of subscribers with small latency (<100ms)
 - Async event sources(SNS, S3, EventBridge) do not wait for callback from lambda(no timeout), passes it to the lambda handler
 - Lambda invocation errors(throttling/large size/timeout): 
