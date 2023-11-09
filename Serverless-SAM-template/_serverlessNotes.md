@@ -7,8 +7,9 @@ General:
 
 Lambda:
 - 128MB-10GB memory, 256kb async/6MB sync payload, 15min timeout, /tmp 10GB ephemeral storage(durable & shared until cold start)
-- More memory = more vCPU + IO. 128MB-> 0.5vCPU, 256GB 1vCPU, multi-core after 1.8GB, 10GB 6vCPU, 1000 max concurrency per region
+- More memory = more vCPU + IO. 128MB -> 0.5vCPU, 1.8GB -> 1vCPU, 10GB -> 6vCPU, 1000 max concurrency per region
 - 1 million requests & 400.000GB free. Pricing: number of requests & duration. Use Lambda PowerTuning SF to tune
+- 50MB zipped 250MB unzipped including layers
 - Invocations Types -> sync: API GW, Lambda, Cognito, async: S3, EventBridge, SNS, polling: SQS, streaming: Kinesis/Dynamo Streams
 - To avoid cold starts: use min libs, set provisioned concurrency if necessary, define DB conn. etc outside handler method
 - Type of errors: 
