@@ -6,7 +6,7 @@ General:
 - Utilize organanizations & identitiy center, control tower, config, inspector, detective, guardduty, securityhub, codeguru, devopsguru, WAF & FirewallManager, ServiceQuotas, Health, Budgets, SavingPlans, ComputeOptimizer, Backup, Sys/Secrets Mgr, TrustedAdvisor, ResourceExplorer, TagEditor
 
 Lambda:
-- 128MB-10GB memory, 256kb async/6MB sync payload, 15min timeout, /tmp 10GB ephemeral storage(durable & shared until cold start)
+- 128MB-10GB memory, 256kb async/6MB sync/20MB streaming payload, 15m timeout, /tmp 10GB ephemeral(durable & shared until cold)
 - More memory = more vCPU + IO. 128MB -> 0.5vCPU, 1.8GB -> 1vCPU, 10GB -> 6vCPU, 1000 max concurrency per region
 - 1 million requests & 400.000GB free. Pricing: number of requests & duration. Use Lambda PowerTuning SF to tune
 - 50MB zipped 250MB unzipped including layers
