@@ -120,7 +120,7 @@ SQS:
 - max message size(1 - 256KB, 256KB default), retention(1 min - 14 days, 4 days default)
 - visibility timeout(0 sec - 12 hours max, 30sec default . Set 6 x Lambda timeout)
 - delivery delay(0 - 15 mins), receive message wait time(0 - 20 secs)
-- SQS FIFO 1800TPS, long polls, requires MessageGroupId, can deduplicate by MessageDeduplicationId, order guaranteed within group
+- SQS FIFO (1800TPS), long polls, requires MessageGroupId, can deduplicate by MessageDeduplicationId, order guaranteed within group
 - Only use MaximumConcurrency setting on the queue with lambda, do not use ReservedConcurrency(leads to overpolling)
 - Batching:
   * Lambda timeout = no of messages (batch size) x avg message processing time
@@ -139,7 +139,7 @@ SQS:
 
 SNS: 
 - Can filter/retry, filter PII data. Supports 3rd party HTTP. Fan-out to multiple SQS. 
-- FIFO can now deliver to non-FIFO, and support archiving & replays
+- FIFO (3000TPS) can now deliver to non-FIFO, and support archiving & replays
 - Supports millions of subscribers with small latency (<100ms)
 - Async event sources(SNS, S3, EventBridge) do not wait for callback from lambda(no timeout), passes it to the lambda handler
 - Lambda invocation errors(throttling/large size/timeout): 
