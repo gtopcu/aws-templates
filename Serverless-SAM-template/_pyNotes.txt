@@ -11,3 +11,14 @@ deactivate
 
 pytest --cov (include code coverage) -v(verbose) -s(prints outputs)
 pytest::test_function
+
+pip install poetry
+poetry init (creates pyproject.toml + poetry.lock)
+poetry config virtualenvs.in-project true
+poetry install (also creates venv)
+poetry env info -p
+sudo poetry shell / exit / deactivate
+poetry env list
+
+poetry add requests
+poetry remove requests
