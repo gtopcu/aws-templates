@@ -17,7 +17,7 @@ poetry init (creates pyproject.toml + poetry.lock)
 poetry config virtualenvs.in-project true
 poetry install (also creates venv)
 poetry env info -p
-sudo poetry shell / exit / deactivate
 poetry env list
+sudo poetry shell / exit / deactivate
 poetry add requests
 poetry remove requests
