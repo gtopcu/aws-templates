@@ -12,6 +12,15 @@ from datetime import date, datetime, time, timezone
 from inspect import istraceback
 from typing import Dict, List, Tuple, Union
 
+def setBasicConfig() -> None:
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s %(levelname)-8s %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S",
+        filename="basic.log"   
+    )
+    #logger = logging.getLogger()
+
 # skip natural LogRecord attributes
 # http://docs.python.org/library/logging.html#logrecord-attributes
 RESERVED_ATTRS: Tuple[str, ...] = (
@@ -288,3 +297,4 @@ def delete_fields(logger: logging.Logger, keys: List):
     """
     filter = _get_filter(logger)
     filter.delete_fields(keys)
+
