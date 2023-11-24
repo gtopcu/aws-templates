@@ -64,6 +64,20 @@ Resources:
         Variables:
           TABLE_NAME: !Ref DynamoDBTable1
       AutoPublishAlias: live
+      # https://aws.amazon.com/blogs/compute/introducing-advanced-logging-controls-for-aws-lambda-functions/?s=08
+      # Policies:
+      #     Statement:
+      #       - Sid: CloudWatchLogGroup
+      #         Action: 
+      #           - logs:CreateLogStream
+      #           - logs:PutLogEvents
+      #         Resource: !GetAtt CloudWatchLogGroup.Arn
+      #         Effect: Allow
+      # LoggingConfig:
+      #   LogFormat: JSON 
+      #   ApplicationLogLevel: DEBUG 
+      #   SystemLogLevel: INFO 
+      #   LogGroup: !Ref CloudWatchLogGroup 
       # https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/automating-updates-to-serverless-apps.html
       # DeploymentPreference:
       #   Type: Canary10Percent10Minutes 
@@ -99,6 +113,7 @@ Resources:
       Policies:
         - DynamoDBReadPolicy:
             TableName: !Ref DynamoDBTable1
+
     Connectors:
       DynamoDBConn:
         Properties: 

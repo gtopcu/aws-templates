@@ -6,12 +6,11 @@ import datetime, time
 from pathlib import Path
 
 def osGetCwd() -> str:
-    return os.getcwd()
+    os.getcwd()
+    #Path().absolute()
 
 def osListCurrentDir() -> list[str]:
     return os.listdir('.')
-
-os.listdir('.')
 
 def get_current_datetime():
     return datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
