@@ -1,0 +1,25 @@
+.PHONY: dev deps dep-update
+
+dev:
+	pip install --upgrade pip pre-commit poetry
+	make deps
+	pre-commit install
+	poetry shell
+
+deps:
+	poetry export --only=dev --without-hashes --format=requirements.txt > dev_requirements.txt
+	poetry export --without=dev --without-hashes --format=requirements.txt > prod_requirements.txt
+
+build:
+	make deps
+	mkdir -p .build/lambdas ; cp -r service .build/lambdas
+	mkdir -p .build/common_layer ; poetry export --without=dev --without-hashes --format=requirements.txt > .build/common_layer/requirements.txt
+
+unit:
+	pytest tests/unit
+
+integration:
+	pytest tests/integration
+
+dep-update:
+	poetry update -vvv

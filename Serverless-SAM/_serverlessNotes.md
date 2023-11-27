@@ -17,7 +17,7 @@ Lambda:
   * Function errors(function error, timeout)
 - For invocation errors, can use Lambda DLQ or destinations(preferred, contains more data) (errors are delivered after all retries)
    -> success & fail for async(targets: SQS, SNS, EventBridge, Lambda), fails only for streaming(targets: SQS/SNS)
-- Use reserved & provisioned concurrency as necessary. 3000 immediate, 500 burst concurrency per minute per region
+- Use reserved & provisioned concurrency as necessary. +1000 concurrency per 10seconds
 - Use CW application insights & lambda insights (extension) for overall picture
 - IAM PassRole -> Trust Policiy -> STS assumeRole
 - Utilize lambda layers for NPM/pip packages (50MB compressed, 256MB uncompressed limit)
