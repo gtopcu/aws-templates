@@ -9,7 +9,8 @@ Lambda:
 - 128MB-10GB memory, 256kb async/6MB sync/20MB streaming payload, 15m timeout, /tmp 10GB ephemeral(durable & shared until cold)
 - More memory = more vCPU + IO. 128MB -> 0.5vCPU, 1.8GB -> 1vCPU, 10GB -> 6vCPU, 1000 max concurrency per region
 - 1 million requests & 400.000GB free. Pricing: number of requests & duration. Use Lambda PowerTuning SF to tune
-- 50MB zipped 250MB unzipped including layers
+- 50MB zipped 250MB unzipped including layers. 3MB console max, 10GB uncompressed for container lambdas. 10 extensions max
+- Concurrency = RPS x duration in seconds
 - Invocations Types -> sync: API GW, Lambda, Cognito, async: S3, EventBridge, SNS, polling: SQS, streaming: Kinesis/Dynamo Streams
 - To avoid cold starts: use min libs, set provisioned concurrency if necessary, define DB conn. etc outside handler method
 - Type of errors: 
@@ -24,6 +25,7 @@ Lambda:
 - Use the latest Lambda PowerTools as a layer
 - Can filter messages(no charge)
 - FunctionURLs are new, supports IAM or no auth
+- SnapStart -> Java(available in Java 11/17) Spring Boot over 10sec init, lowers to <1 sec. beforeCheckpoint/afterRestore hooks
 - For polling errors(SQS) -> refer to SQS notes, for streaming errors(Kinesis/DynamoDB Streams) -> refer to Kinesis notes
 
 API GW:
@@ -120,11 +122,12 @@ SQS:
 - max message size(1 - 256KB, 256KB default), retention(1 min - 14 days, 4 days default)
 - visibility timeout(0 sec - 12 hours max, 30sec default . Set 6 x Lambda timeout)
 - delivery delay(0 - 15 mins), receive message wait time(0 - 20 secs)
-- SQS FIFO (1800TPS), long polls, requires MessageGroupId, can deduplicate by MessageDeduplicationId, order guaranteed within group
+- SQS FIFO 70kTPS, 700k with batching, now also supports redrive
+- Long polls, requires MessageGroupId, can deduplicate by MessageDeduplicationId, order guaranteed within group
 - Only use MaximumConcurrency setting on the queue with lambda, do not use ReservedConcurrency(leads to overpolling)
 - Batching:
   * Lambda timeout = no of messages (batch size) x avg message processing time
-  * 10 messages max per batch(default)
+  * 10 messages max per batch(default), max 256kb total
   * Can set up batch window in seconds(max wait time for messages)
 - Concurrent Batches per Shard:
   * 10 messages max per batch(default 5)
