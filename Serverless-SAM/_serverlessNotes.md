@@ -246,11 +246,12 @@ RDS
 - Launch DB clusters in separate, dedicated VPCs
 
 Costs:
-- Set up budgets, cost anomaly detection, saving plans & billing alarm
-- Use reserved instances if needed / spot instances & fleets as necessary
-- Set up Compute Optimizer - analysis EC2, EBS, Lambda & generates recommendations
+- Set up budgets, check new savings advisor & saving plans. Set up billing alarms & cost anomaly detection
+- Set up Compute Optimizer - analyses EC2, EBS, Lambda & generates recommendations
+- Use reserved / spot instances & fleets as necessary
 - Set up Costs Usage Report with Athena & Glue
 - API GW cache costs based on total size, not utilization
+- Use ELB/functionURL instead of API GW if possible for lambda for high TPS, much cheaper
 - Check unused RDS - use provisioned instead of on-demand
 - Check unused EC2, block storage, backups
 - Check S3 storage lens, utilize lifecycle rules & glacier, content serving out of S3
