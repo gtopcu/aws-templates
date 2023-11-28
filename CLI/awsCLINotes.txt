@@ -106,13 +106,12 @@ Lambda
 aws lambda list-functions --function-version ALL --region <REGION> \
     --output text --query "Functions[?Runtime=='<RUNTIME>'].FunctionArn"
 
-aws lambda invoke \
-    --function-name ukjfq7sqG15LvfC30hwbRAMfR-96K3UNUCxNd9 \
-    out.txt && cat out.txt && rm out.txt 
+aws lambda invoke --function-name error-example outfile.txt    
 
 aws lambda update-function-code --function-name pythonLambda --zip-file fileb://deployment_package.zip
 
-aws lambda publish-layer-version --layer-name $LAYER_NAME --description "pymediainfo" --content S3Bucket=$LAMBDA_LAYERS_BUCKET,S3Key=pymediainfo-python38.zip --compatible-runtimes python3.8
+aws lambda publish-layer-version --layer-name $LAYER_NAME --description "pymediainfo" \
+    --content S3Bucket=$LAMBDA_LAYERS_BUCKET,S3Key=pymediainfo-python38.zip --compatible-runtimes python3.8
 
 ------------------------------------------------------------------------------------
 ECS

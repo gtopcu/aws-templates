@@ -252,6 +252,7 @@ Costs:
 - Set up Costs Usage Report with Athena & Glue
 - API GW cache costs based on total size, not utilization
 - Use ELB/functionURL instead of API GW if possible for lambda for high TPS, much cheaper
+  (1MB request limit -> 413 Request Entity Too Large)
 - Check unused RDS - use provisioned instead of on-demand
 - Check unused EC2, block storage, backups
 - Check S3 storage lens, utilize lifecycle rules & glacier, content serving out of S3
