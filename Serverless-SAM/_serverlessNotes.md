@@ -185,7 +185,7 @@ Kinesis:
   * Can return partial success - check PowerTools batching
 
 S3:
-- StorageLens, AccessPoints, 2-buckets multi-region APs, S3 Select, Athena/Glue usefull stuff
+- StorageLens, AccessPoints, 2-buckets multi-region APs, S3 Select/Express/MountPoints, Athena/Glue Databew
 - EventBridge can better filter & transform S3 events but more expensive (enable CloudTrail data events)
 
 Cognito:
