@@ -153,13 +153,18 @@ SNS:
 EventBridge:
 - 400ms latency avg, 24 hour retry, 1$ per 1 million events, free delivery to AWS services
 - Use EventBridge scheduler & pipes as necessary
+- Use versions in events & schema registry
+- Use open source EventBridge Atlas for visualization
+- In dev/test, use archive/replay for live events. Send to CW logs & tail logs for debugging
 
 StepFunctions:
 - StartExecution, WaitForCallback, retry/catch(States.ALL), retry jitter, no default timeout, wait(sleep), intrinsic functions
-- Standard billed per no. of state transitions, express billed by duration. 256KB max payload limit
-- Sync/Async execution, Map & DistributedMap for parallel data processing
+- 256KB max payload limit. Map & DistributedMap for parallel data processing
 - Choice states do not have catch/retry
+- Standard: 1 year max, async, exactly once. Express: 5 min max, sync/async execution, at least once
+- Standard billed per no. of state transitions($25/million), express billed by duration($1/million + $0.000001/5GB-s)
 - Use SFs if cannot guarantee idempotent lambdas
+- Call express workflows from standard workflows for high speed/data processing/callback etc
 
 Kinesis:
 - DataStreams PartitionKey & SequenceNumber(unique per partition), ordered & at least once(idempotency!), replays, errors, base64 encoded 
