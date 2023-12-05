@@ -120,10 +120,9 @@ DynamoDB:
 
 SQS:
 - max message size(1 - 256KB, 256KB default), retention(1 min - 14 days, 4 days default)
-- visibility timeout(0 sec - 12 hours max, 30sec default . Set 6 x Lambda timeout)
-- delivery delay(0 - 15 mins), receive message wait time(0 - 20 secs)
-- SQS FIFO 70kTPS, 700k with batching, now also supports redrive, 5 min idempotency
-- Long polls, requires MessageGroupId, can deduplicate by MessageDeduplicationId, order guaranteed within group
+- visibility timeout(0 sec - 12 hours max, 30sec default. Set 6 x Lambda timeout)
+- delivery delay(0 - 15 mins), receive message wait time(0 - 20 secs), long polling
+- SQS FIFO 70kTPS, 700k with batching, now also supports redrive, requires MessageGroupId, can deduplicate by MessageDeduplicationId(5 min idempotency), order guaranteed within group
 - Only use MaximumConcurrency setting on the queue with lambda, do not use ReservedConcurrency(leads to overpolling)
 - Use correlationID & return address to track the message on the sender
 - Batching:
@@ -160,7 +159,7 @@ EventBridge:
 - EventBridge Pipes: set MaxRetryAttempt for polling (default: -1 inifinite!), backs of 1 retry per minute
 
 StepFunctions:
-- Request-response, WaitForCallback(.waitForTaskToken), RunJob(.sync). 90 day idempotency
+- Request-response, WaitForCallback(.waitForTaskToken - Standard only), RunJob(.sync). 90 day idempotency
   https://www.youtube.com/watch?v=SbL3a9YOW7s
 - StartExecution API, retry/catch(States.ALL), retry jitter, no default timeout, wait(sleep), intrinsic functions
 - 256KB max payload limit. Map & DistributedMap for parallel data processing
