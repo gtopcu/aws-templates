@@ -122,9 +122,10 @@ SQS:
 - max message size(1 - 256KB, 256KB default), retention(1 min - 14 days, 4 days default)
 - visibility timeout(0 sec - 12 hours max, 30sec default . Set 6 x Lambda timeout)
 - delivery delay(0 - 15 mins), receive message wait time(0 - 20 secs)
-- SQS FIFO 70kTPS, 700k with batching, now also supports redrive
+- SQS FIFO 70kTPS, 700k with batching, now also supports redrive, 5 min idempotency
 - Long polls, requires MessageGroupId, can deduplicate by MessageDeduplicationId, order guaranteed within group
 - Only use MaximumConcurrency setting on the queue with lambda, do not use ReservedConcurrency(leads to overpolling)
+- Use correlationID & return address to track the message on the sender
 - Batching:
   * Lambda timeout = no of messages (batch size) x avg message processing time
   * 10 messages max per batch(default), max 256kb total
@@ -142,7 +143,7 @@ SQS:
 
 SNS: 
 - Can filter/retry, filter PII data. Supports 3rd party HTTP. Fan-out to multiple SQS. 
-- FIFO (3000TPS) can now deliver to non-FIFO, and support archiving & replays
+- FIFO (3000TPS) can now deliver to non-FIFO, now support archiving & replays , 5 min idempotency
 - Supports millions of subscribers with small latency (<100ms)
 - Async event sources(SNS, S3, EventBridge) do not wait for callback from lambda(no timeout), passes it to the lambda handler
 - Lambda invocation errors(throttling/large size/timeout): 
@@ -151,14 +152,17 @@ SNS:
     * Can also define DLQ on the topic
 
 EventBridge:
-- 400ms latency avg, 24 hour retry, 1$ per 1 million events, free delivery to AWS services
+- 70ms latency avg, 24 hour retry, 1$ per 1 million events, free delivery to AWS services
 - Use EventBridge scheduler & pipes as necessary
 - Use versions in events & schema registry
 - Use open source EventBridge Atlas for visualization
-- In dev/test, use archive/replay for live events. Send to CW logs & tail logs for debugging
+- In dev/test, use archive/replay for live events(replays get new messageID!). Send to CW logs & tail logs for debugging
+- EventBridge Pipes: set MaxRetryAttempt for polling (default: -1 inifinite!), backs of 1 retry per minute
 
 StepFunctions:
-- StartExecution, WaitForCallback, retry/catch(States.ALL), retry jitter, no default timeout, wait(sleep), intrinsic functions
+- Request-response, WaitForCallback(.waitForTaskToken), RunJob(.sync). 90 day idempotency
+  https://www.youtube.com/watch?v=SbL3a9YOW7s
+- StartExecution API, retry/catch(States.ALL), retry jitter, no default timeout, wait(sleep), intrinsic functions
 - 256KB max payload limit. Map & DistributedMap for parallel data processing
 - Choice states do not have catch/retry
 - Standard: 1 year max, async, exactly once. Express: 5 min max, sync/async execution, at least once
@@ -192,6 +196,12 @@ Kinesis:
 S3:
 - StorageLens, AccessPoints, 2-buckets multi-region APs, S3 Select/Express/MountPoints, Athena/Glue Databew
 - EventBridge can better filter & transform S3 events but more expensive (enable CloudTrail data events)
+- Use multi-part uploads & byte range fetches for efficiency
+- Ideal object size: 12-16MB
+- 3500TPS PUT/POST/DELETE vs 5000TPS HEAD/GET. 100K TPS for Express One Zone
+
+Cloud Formation:
+- Utilize rollback config based on CW alarms
 
 Cognito:
 - OpenID providers, sync lambda triggers, AI powered fraud detection
