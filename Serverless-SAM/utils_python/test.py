@@ -4,10 +4,11 @@ import json
 from pathlib import Path
 import pydantic
 from pydantic import BaseModel
-from typing import List, Dict, Optional
+from typing import List, Dict, Optional, Any
 
 
-
+def getData(key: Optional[str], default: Any):
+    pass
 
 
 def main() -> None:
