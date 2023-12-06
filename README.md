@@ -152,11 +152,16 @@ SNS:
 
 EventBridge:
 - 70ms latency avg, 24 hour retry max, 256KB max 1$ per 1 million events, free delivery to AWS services
-- EventBridge scheduler
 - Use versions in events & schema registry
 - Use open source EventBridge Atlas for visualization
 - In dev/test, use archive/replay for live events(replays get new messageID!). Send to CW logs & tail logs for debugging
-- EventBridge Pipes: maintains order set MaxRetryAttempt for polling (default: -1 inifinite!), backs of 1 retry per minute
+- EventBridge scheduler: 1 time or recurring, timezone support, start/end time, flexible window
+- EventBridge Pipes: 
+  - 1 to 1 mapping, source -> target only. Supports all integrations as the EB
+  - Maintains message order - uses event source mapping underneath 
+  - Set MaxRetryAttempt for polling (default: -1 inifinite!)
+  - Set batch size(10 default), batch window(5 sec default), no of concurrent batches per shard, on error config for polling
+  - Backs of 1 retry per minute
 
 StepFunctions:
 - Request-response, WaitForCallback(.waitForTaskToken $$.Task.Token - Standard only), RunJob(.sync). 90 day idempotency
