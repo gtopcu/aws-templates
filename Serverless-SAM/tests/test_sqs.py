@@ -46,5 +46,6 @@ def test_app_batch_partial_response(sqs_event, lambda_context):
 
     # THEN
     assert ret == expected_response
+    assert isinstance(ret, str)
     assert len(processor_result.fail_messages) == 1
     assert processor_result.success_messages[0] == successful_record

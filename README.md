@@ -30,25 +30,23 @@ Lambda:
 
 API GW:
 - 10k req/s 30sec 10MB max. Billed by million requests & cache size x hour, 1 million calls free every month for 12 months
-- Regional, EdgeOptimized(CloudFront provides DDoS protection), Private(VPC endpoints)
-- Log request_ids in your clients
-- Direct service integration -> returns request_id for tracking
-- API GW -> SQS -> SQS message_id -> can be tracked by client
+- Regional, EdgeOptimized(CloudFront is free & provides DDoS protection, no caching), Private(VPC endpoints)
+- Private APIs: Can only be deployed to a single VPC. No data out charge, but charged for PrivateLink. Cannot convert to edge
+- HTTP APIs: Up to %40 faster & %30 cheaper compared to Rest APIs. OIDC/OAuth2 & Lambda Auth. Lambda & HTTP integration, no WAF etc
+  Direct integration to AppConfig, EventBridge, StepFunctions & Kinesis
+- WebSocket APIs: One Way or Bidiractional. Routes, Stages, API Key auth. Lambda, HTTP & AWS Service Integration (i.e. Kinesis)
+- Direct service integration -> returns request_id for tracking. API GW -> SQS -> SQS message_id -> can be tracked by client
 - API Keys & usage plans, access logging, request validaton, throttling/caching, SDK generation, OIDC authentication, canary deployments per stage
 - Set CW alarms using custom metrics & metric filters, utilize CW log insights & dashboards and X-Ray for tracing
 - Use resource policies to restrict access to AWS accounts/users, VPCs, IPs etc
 - Documentation, API keys, testing, monitization -> apiable.com, AWS DataExchange
-- Lambda Authorizer uses lambda concurrency, use auth caching - 5 min to 1 hour
 - IAM auth useful for internal APIs, use WAF for public APIs
-- HTTP APIs: Up to %40 faster & %30 cheaper compared to Rest APIs. OIDC/OAuth2 & Lambda Auth. Lambda & HTTP integration, no WAF etc
-- WebSocket APIs: One Way or Bidiractional. Routes, Stages, API Key auth. Lambda, HTTP & AWS Service Integration (i.e. Kinesis)
-- Edge-Optimized: Not charged separately for CloudFront - managed by API GW
-- Private APIs: Can only be deployed to a single VPC. No data out charge, but charged for PrivateLink. Cannot convert to edge
 - Caching: Charged per hour/GB, not per how many responses are stored. So track CloudWatch Metrics CacheHitCount and CacheMissCount
   Create a timestamp and include it in your API response.
 - Mock integration: For hardcoded responses - i.e. healthchecks. No backend integration invoked
 - Creating resources with path param: https://api_id.execute-API.region-id.amazon.com/stage/mypetapi/pets/{petName}
   (or /{proxy+} -> creates HTTP method ANY)
+- Lambda proxy integration: Rest & HTTP payload v1 returns response as is inc. headers, HTTP payload v2 generates headers
 - API GW -> VPC Link -> Network Load Balancer -> EC2 in private subnet
 - When testing from console, API calls are real, but CW logs are simulated, no logs written
 - Stages: Catching, throttling & usage plans. SDK generation, import/export OpenAPI definition, canary deployments
@@ -59,6 +57,7 @@ https://explore.skillbuilder.aws/learn/course/52/play/41664/amazon-api-gateway-f
 - IAM Auth: Access key/secret access key must be in the header computed using SigV4 to compute a HMAC signature using SHA256
   IAM user / assume an IAM role
 - Lambda Authorizer: Token (oauth, bearer) or Request(query strings, path param, method, headers, http method etch)
+  Uses lambda concurrency, use auth caching - 5 min to 1 hour
 - API keys: x-API-key header
 - Usage plans:  API Key Throttling per second and burst
                 API Key Quota by day, week, or month
@@ -204,14 +203,6 @@ S3:
 - Ideal object size: 12-16MB
 - 3500TPS PUT/POST/DELETE vs 5000TPS HEAD/GET. 100K TPS for Express One Zone
 
-Cloud Formation:
-- Utilize rollback config based on CW alarms
-
-Cognito:
-- OpenID providers, sync lambda triggers, AI powered fraud detection
-
-Redis: 
-- Key/Value, Sets, SortedSets great for real-time leaderboards, Geolocation, Multi-AZ
 
 <br/>
 
@@ -258,6 +249,15 @@ Security & Ops
 - Lambda env vars, Dynamo, S3 - secure with own KMS keys
 - Create CW alarms for any CW metric needed
 - Enable & use Container Insights to track ECS/Fargate utilization
+
+CloudFormation:
+- Utilize rollback config based on CW alarms
+
+Cognito:
+- OpenID providers, sync lambda triggers, AI powered fraud detection
+
+Redis: 
+- Key/Value, Sets, SortedSets great for real-time leaderboards, Geolocation, Multi-AZ
 
 RDS
 - Use RDS Proxy with IAM authentication (Aurora MySQL, PostreSQL)
