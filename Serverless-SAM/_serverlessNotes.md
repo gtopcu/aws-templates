@@ -32,7 +32,7 @@ API GW:
 - 10k req/s 30sec 10MB max. Billed by million requests & cache size x hour, 1 million calls free every month for 12 months
 - Regional, EdgeOptimized(CloudFront is free & provides DDoS protection, no caching), Private(VPC endpoints)
 - Private APIs: Can only be deployed to a single VPC. No data out charge, but charged for PrivateLink. Cannot convert to edge
-- HTTP APIs: Up to %40 faster & %30 cheaper compared to Rest APIs. OIDC/OAuth2 & Lambda Auth. Lambda & HTTP integration, no WAF etc
+- HTTP APIs: Up to %40 faster & %30 cheaper compared to Rest APIs. Lambda & HTTP integration, no WAF etc
   Direct integration to AppConfig, EventBridge, StepFunctions & Kinesis
 - WebSocket APIs: One Way or Bidiractional. Routes, Stages, API Key auth. Lambda, HTTP & AWS Service Integration (i.e. Kinesis)
 - Direct service integration -> returns request_id for tracking. API GW -> SQS -> SQS message_id -> can be tracked by client
@@ -43,18 +43,20 @@ API GW:
 - IAM auth useful for internal APIs, use WAF for public APIs
 - Caching: Charged per hour/GB, not per how many responses are stored. So track CloudWatch Metrics CacheHitCount and CacheMissCount
   Create a timestamp and include it in your API response.
-- Mock integration: For hardcoded responses - i.e. healthchecks. No backend integration invoked
+- Throttling: can apply to stage, resource/method. Cannot override account/region limit
+- Mock integration: For hardcoded responses - i.e. healthchecks. Used for preflight(options). No backend integration invoked
 - Creating resources with path param: https://api_id.execute-API.region-id.amazon.com/stage/mypetapi/pets/{petName}
   (or /{proxy+} -> creates HTTP method ANY)
 - Lambda proxy integration: Rest & HTTP payload v1 returns response as is inc. headers, HTTP payload v2 generates headers
 - API GW -> VPC Link -> Network Load Balancer -> EC2 in private subnet
 - When testing from console, API calls are real, but CW logs are simulated, no logs written
-- Stages: Catching, throttling & usage plans. SDK generation, import/export OpenAPI definition, canary deployments
+- Stages: Catching, throttling & usage plans. SDK generation, import/export swagger & OpenAPI definition, canary deployments
 - Stage variables: $stageVariables.[variable name]  -> i.e. Lambda Integration function name: ${stageVariables.lambdaFn}
 - Map lambda aliases with stage variables to API GW stages -> Weighted traffic
 - Can import existing OpenAPI 3.0.3 into SAM template
 https://explore.skillbuilder.aws/learn/course/52/play/41664/amazon-api-gateway-for-serverless-applications;lp=92
-- IAM Auth: Access key/secret access key must be in the header computed using SigV4 to compute a HMAC signature using SHA256
+- REST supports open, IAM, cognito, API Key & lambda auth. HTTP supports open, IAM, JWT(OIDC & OAuth2.0) & lambda auth
+- IAM Auth: Service to service. Access key/secret access key must be in header computed w/ SigV4 -> HMAC signature using SHA256
   IAM user / assume an IAM role
 - Lambda Authorizer: Token (oauth, bearer) or Request(query strings, path param, method, headers, http method etch)
   Uses lambda concurrency, use auth caching - 5 min to 1 hour
