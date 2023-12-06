@@ -151,15 +151,15 @@ SNS:
     * Can also define DLQ on the topic
 
 EventBridge:
-- 70ms latency avg, 24 hour retry, 1$ per 1 million events, free delivery to AWS services
-- Use EventBridge scheduler & pipes as necessary
+- 70ms latency avg, 24 hour retry max, 256KB max 1$ per 1 million events, free delivery to AWS services
+- EventBridge scheduler
 - Use versions in events & schema registry
 - Use open source EventBridge Atlas for visualization
 - In dev/test, use archive/replay for live events(replays get new messageID!). Send to CW logs & tail logs for debugging
-- EventBridge Pipes: set MaxRetryAttempt for polling (default: -1 inifinite!), backs of 1 retry per minute
+- EventBridge Pipes: maintains order set MaxRetryAttempt for polling (default: -1 inifinite!), backs of 1 retry per minute
 
 StepFunctions:
-- Request-response, WaitForCallback(.waitForTaskToken - Standard only), RunJob(.sync). 90 day idempotency
+- Request-response, WaitForCallback(.waitForTaskToken $$.Task.Token - Standard only), RunJob(.sync). 90 day idempotency
   https://www.youtube.com/watch?v=SbL3a9YOW7s
 - StartExecution API, retry/catch(States.ALL), retry jitter, no default timeout, wait(sleep), intrinsic functions
 - 256KB max payload limit. Map & DistributedMap for parallel data processing
