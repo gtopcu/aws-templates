@@ -156,6 +156,7 @@ EventBridge:
 - Use versions in events & schema registry
 - Use open source EventBridge Atlas for visualization
 - In dev/test, use archive/replay for live events(replays get new messageID!). Send to CW logs & tail logs for debugging
+- API Destinations 5sec max timeout(60 for SF HTTP endpoints)
 - EventBridge scheduler: 1 time or recurring, timezone support, start/end time, flexible window
 - EventBridge Pipes: 
   - 1 to 1 mapping, source -> target only. Supports all integrations as the EB
