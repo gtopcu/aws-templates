@@ -1,4 +1,7 @@
 
+https://www.youtube.com/watch?v=52W3Qyg242Y
+https://github.com/squidfunk/mkdocs-material
+
 python3 -m venv venv
 source venv/bin/activate
 pip install boto3
