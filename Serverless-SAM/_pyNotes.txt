@@ -1,6 +1,7 @@
 
 https://www.youtube.com/watch?v=52W3Qyg242Y
 https://github.com/squidfunk/mkdocs-material
+https://github.com/ran-isenberg/aws-lambda-handler-cookbook/blob/main/app.py
 
 python3 -m venv venv
 source venv/bin/activate
