@@ -11,7 +11,7 @@ def generate_context() -> LambdaContext:
     context.memory_limit_in_mb = 128
     return context
 
-def generate_api_gw_event(
+def generate_api_gw_rest_event(
         body: Optional[Dict[str, Any]] = None, 
         authorized: Optional[bool] = True
     ) -> Dict[str, Any]:
