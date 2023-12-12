@@ -206,8 +206,14 @@ S3:
 - Ideal object size: 12-16MB
 - 3500TPS PUT/POST/DELETE vs 5000TPS HEAD/GET. 100K TPS for Express One Zone
 
+OpenSearch:
+- OpenSearch Serverless w/ 2 indexing CUs & 2 search/query CUs -> 4 nodes -> $700/month
+
 Aurora
-- Aurora Serverless v2 0.5 capacity units minimum -> 45$/month
+- Aurora Serverless v2 0.5 CUs minimum -> $45/month
+
+Redshift
+- Redshift Serverless 8 CUs minimum w/16GB RAM, 1 hour per day -> $88/month
 
 
 <br/>
