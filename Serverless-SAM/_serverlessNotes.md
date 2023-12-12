@@ -32,17 +32,16 @@ API GW:
 - 10k req/s 30sec 10MB max. Billed by million requests & cache size x hour, 1 million calls free every month for 12 months
 - Regional, EdgeOptimized(CloudFront is free & provides DDoS protection, no caching), Private(VPC endpoints)
 - Private APIs: Can only be deployed to a single VPC. No data out charge, but charged for PrivateLink. Cannot convert to edge
-- HTTP APIs: Up to %40 faster & %30 cheaper compared to Rest APIs. Lambda & HTTP integration, no WAF etc
+- HTTP APIs: Up to %40 faster & %30 cheaper compared to Rest APIs. Lambda & HTTP integration, no WAF/API Keys/Usage Plans
   Direct integration to AppConfig, EventBridge, StepFunctions & Kinesis
 - WebSocket APIs: One Way or Bidiractional. Routes, Stages, API Key auth. Lambda, HTTP & AWS Service Integration (i.e. Kinesis)
 - Direct service integration -> returns request_id for tracking. API GW -> SQS -> SQS message_id -> can be tracked by client
-- API Keys & usage plans, access logging, request validaton, throttling/caching, SDK generation, OIDC authentication, canary deployments per stage
+- API Keys & usage plans, access logging, request validaton, throttling/caching, SDK generation, OIDC/OAuth2.0, canary deploy
 - Set CW alarms using custom metrics & metric filters, utilize CW log insights & dashboards and X-Ray for tracing
 - Use resource policies to restrict access to AWS accounts/users, VPCs, IPs etc
 - Documentation, API keys, testing, monitization -> apiable.com, AWS DataExchange
 - IAM auth useful for internal APIs, use WAF for public APIs
-- Caching: Charged per hour/GB, not per how many responses are stored. So track CloudWatch Metrics CacheHitCount and CacheMissCount
-  Create a timestamp and include it in your API response.
+- Caching: Charged per hour/GB, not per how many responses are stored. So track CloudWatch Metrics CacheHitCount & CacheMissCount. Create a timestamp and include it in your API response.
 - Throttling: can apply to stage, resource/method. Cannot override account/region limit
 - Mock integration: For hardcoded responses - i.e. healthchecks. Used for preflight(options). No backend integration invoked
 - Creating resources with path param: https://api_id.execute-API.region-id.amazon.com/stage/mypetapi/pets/{petName}
