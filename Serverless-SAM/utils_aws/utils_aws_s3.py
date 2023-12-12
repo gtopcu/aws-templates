@@ -3,6 +3,7 @@ import boto3
 
 s3 = boto3.client('s3')
 
+# Use multi-part upload / byte range fetches for anything larger than a few GBs
 def uploadToS3(local_file, bucket, s3_file) -> None:
     try:
         s3.upload_file(local_file, bucket, s3_file)

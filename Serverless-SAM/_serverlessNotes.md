@@ -206,6 +206,9 @@ S3:
 - Ideal object size: 12-16MB
 - 3500TPS PUT/POST/DELETE vs 5000TPS HEAD/GET. 100K TPS for Express One Zone
 
+Aurora
+- Aurora Serverless v2 0.5 capacity units minimum -> 45$/month
+
 
 <br/>
 
