@@ -1,0 +1,77 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Serverless patterns - simple HTTP API to Lambda function using python3.11
+
+Globals:
+  Function:
+    Timeout: 28
+    MemorySize: 128
+    Environment:
+      Variables:
+        LOG_LEVEL: INFO
+        POWERTOOLS_SERVICE_NAME: http-api
+        POWERTOOLS_TRACE_DISABLED: true
+        #POWERTOOLS_TRACER_CAPTURE_RESPONSE: false
+        #POWERTOOLS_TRACER_CAPTURE_ERROR: false
+        POWERTOOLS_LOGGER_LOG_EVENT: true
+        #POWERTOOLS_LOGGER_SAMPLE_RATE: 0.1
+        #POWERTOOLS_METRICS_NAMESPACE: service1
+        #POWERTOOLS_PARAMETERS_MAX_AGE: 60 #seconds
+        #POWERTOOLS_PARAMETERS_SSM_DECRYPT: true
+    Layers:
+      # https://docs.powertools.aws.dev/lambda/python/latest/#lambda-layer
+      - !Sub arn:aws:lambda:${AWS::Region}:017000801446:layer:AWSLambdaPowertoolsPythonV2:45
+
+Resources:
+
+  HttpApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      Auth: 
+        # https://www.youtube.com/watch?v=lrIwPL6JpeI - i.e. Auth0
+        DefaultAuthorizer: jwtAuthorizer
+        Authorizers: 
+          jwtAuthorizer:
+            JwtConfiguration:
+              issuer: https://dev-xx.us.auth0.com/
+              audience: https://myapi.example.com
+            IdentitySource: $request.header.Authorization
+    DefinitionBody:
+        openapi: '3.0'
+        info: {}
+        paths:
+          /products:
+            get:
+              x-amazon-apigateway-integration:
+                httpMethod: GET
+                type: aws_proxy
+                uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${ApiFunction.Arn}/invocations
+              responses: {}
+
+  # Lambda function
+  ApiFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Events:
+        ApiEvent:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref HttpApi
+            Path: /products
+            Method: GET
+          DefinitionBody:
+            openapi: '3.0'
+            info: {}
+      Handler: apigwhttp_handler.handler
+      CodeUri: lambdas/
+      Runtime: python3.11
+      Description: API handler function
+      # https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-policy-templates.html
+      #Environment:
+      #  Variables:
+      #    TABLE_NAME: !Ref DynamoDBTable1
+
+Outputs:
+  HttpApiEndpoint:
+    Value: !Ref HttpApi
+
