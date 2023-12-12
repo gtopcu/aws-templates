@@ -124,7 +124,7 @@ SQS:
 - delivery delay(0 - 15 mins), receive message wait time(0 - 20 secs), long polling
 - SQS FIFO 70kTPS, 700k with batching, now also supports redrive, requires MessageGroupId, can deduplicate by MessageDeduplicationId(5 min idempotency), order guaranteed within group
 - Only use MaximumConcurrency setting on the queue with lambda, do not use ReservedConcurrency(leads to overpolling)
-- Use correlationID & return address to track the message on the sender
+- Use correlationID, messageID & return address to track the message on the sender
 - Batching:
   * Lambda timeout = no of messages (batch size) x avg message processing time
   * 10 messages max per batch(default), max 256kb total
@@ -151,7 +151,7 @@ SNS:
     * Can also define DLQ on the topic
 
 EventBridge:
-- 70ms latency avg, 24 hour retry max, 256KB max 1$ per 1 million events, free delivery to AWS services
+- 70ms latency avg, 24 hour retry max, 256KB max, 1$ per 1 million events, free delivery to AWS services
 - Use versions in events & schema registry
 - Use open source EventBridge Atlas for visualization
 - In dev/test, use archive/replay for live events(replays get new messageID!). Send to CW logs & tail logs for debugging
