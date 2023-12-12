@@ -206,6 +206,17 @@ S3:
 - Ideal object size: 12-16MB
 - 3500TPS PUT/POST/DELETE vs 5000TPS HEAD/GET. 100K TPS for Express One Zone
 
+Cognito:
+- OpenID providers, sync lambda triggers, AI powered fraud detection
+  - ID Tokens:
+      - JWT, audience: user. Comes from OpenID Connect
+      - Meant for verifying user is authenticated/logged in
+      - Not meant for authorization(does not contain any auth data), should not be sent to an API
+  - Access Tokens:
+      - Usually JWT but can be a string, audience: client app. Comes from OAuth2.0
+      - Meant for authorization & accessing resources on any outside API/data (i.e. linkedin -> twitter)
+      - Does not mean the user is logged in currently
+
 OpenSearch:
 - OpenSearch Serverless w/ 2 indexing CUs & 2 search/query CUs -> 4 nodes -> $700/month
 
@@ -264,9 +275,6 @@ Security & Ops
 
 CloudFormation:
 - Utilize rollback config based on CW alarms
-
-Cognito:
-- OpenID providers, sync lambda triggers, AI powered fraud detection
 
 Redis: 
 - Key/Value, Sets, SortedSets great for real-time leaderboards, Geolocation, Multi-AZ
