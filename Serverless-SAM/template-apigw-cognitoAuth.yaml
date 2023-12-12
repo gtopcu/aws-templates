@@ -1,0 +1,91 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: SAM template
+Globals:
+  Function:
+    Timeout: 30
+    MemorySize: 128
+    Runtime: python3.11
+    Environment:
+      Variables:
+        POWERTOOLS_SERVICE_NAME: service1
+        POWERTOOLS_TRACE_DISABLED: false
+        LOG_LEVEL: INFO
+        POWERTOOLS_LOGGER_LOG_EVENT: false
+    # Layers:
+    #  - !Sub arn:aws:lambda:${AWS::Region}:017000801446:layer:AWSLambdaPowertoolsPythonV2:45
+Resources:
+  productsAPIUserPool:
+    Type: AWS::Cognito::UserPool
+    Properties:
+      AdminCreateUserConfig:
+        AllowAdminCreateUserOnly: false
+      AliasAttributes:
+        - email
+        - preferred_username
+      UserPoolName: !Sub ${AWS::StackName}-productsAPIUserPool
+      AutoVerifiedAttributes:
+        - email
+  ProductsApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: !Sub
+        - ${ResourceName} From Stack ${AWS::StackName}
+        - ResourceName: ProductsApi
+      StageName: dev
+      DefinitionBody:
+        openapi: '3.0'
+        info: {}
+        paths:
+          /products:
+            x-amazon-apigateway-any-method:
+              x-amazon-apigateway-integration:
+                httpMethod: POST
+                type: aws_proxy
+                uri: !Sub arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${ProductsAPIFunctionAliaslive}/invocations
+              responses: {}
+      EndpointConfiguration: REGIONAL
+      TracingEnabled: false
+      Auth:
+        Authorizers:
+          cognitoAuthorizer:
+            UserPoolArn: !GetAtt productsAPIUserPool.Arn
+        DefaultAuthorizer: cognitoAuthorizer
+      Cors:
+        AllowOrigin: '''*'''
+        AllowHeaders: '''*'''
+        AllowMethods: '''*'''
+        MaxAge: 5
+  ProductsAPIFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Description: !Sub
+        - Stack ${AWS::StackName} Function ${ResourceName}
+        - ResourceName: ProductsAPIFunction
+      CodeUri: src/productsAPIHandler.py
+      Handler: handler.handler
+      Runtime: python3.11
+      MemorySize: 128
+      Timeout: 60
+      Tracing: Active
+      Events:
+        ProductsApiANYproducts:
+          Type: Api
+          Properties:
+            Path: /products
+            Method: ANY
+            RestApiId: !Ref ProductsApi
+      Layers:
+        - !Sub arn:aws:lambda:${AWS::Region}:017000801446:layer:AWSLambdaPowertoolsPythonV2:45
+      AutoPublishAlias: dev
+      DeploymentPreference:
+        Type: AllAtOnce
+      Environment:
+        Variables:
+          DYNAMODB_TABLE_NAME: INSERT_TABLE_NAME
+  ProductsAPIFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    UpdateReplacePolicy: Retain
+    DeletionPolicy: Retain
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${ProductsAPIFunction}
