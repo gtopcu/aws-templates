@@ -192,7 +192,7 @@ Kinesis:
 - Lambda Erorrs: 
   * Lambda retries the entire batch until success or data expiration(at least 1 day!) No other batches are processed (poison pill)
   * BisectBatchOnFunctionError, MaximumRetryAttempts(0-1000, default 1), MaximumRecordAge 1 min(default) up to 7 days
-  * on-failure destination: can use SQS/SNS as failure destination
+  * on-failure destination: can use SQS/SNS as failure destination - does not contain original event!!
   * Configure an OnFailure destination on Lambda so that when a data record reaches the MaximumRetryAttempts or MaximumRecordAge, 
     you can send its metadata, such as shard ID and stream ARN to SQS/SNS
   * Check Iterator-Age metric for oldest messages
