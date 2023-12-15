@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 import pydantic
 from pydantic import BaseModel
+import pytest
 from typing import List, Dict, Optional
 #from aws_lambda_powertools.utilities.data_classes import APIGatewayProxyEvent
 
@@ -49,7 +50,15 @@ def main() -> None:
             #print(parsedEvent.headers)
         except Exception as e:
             print(e)
+    
+    with(pytest.raises(pydantic.ValidationError)):
+        parsedEvent = APIGWEvent(**event)
+        #print(parsedEvent.headers)
+        return parsedEvent.model_dump()
+
+    
     print(f"Time: {time.perf_counter() - start}")
+    
 
 if __name__ == "__main__":
     main()

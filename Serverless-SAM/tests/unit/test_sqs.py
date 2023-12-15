@@ -35,15 +35,14 @@ def sqs_event():
 
 
 def test_app_batch_partial_response(sqs_event, lambda_context):
-    # GIVEN
+    
     processor_result = processor  # access processor for additional assertions
     successful_record = sqs_event["Records"][0]
     failed_record = sqs_event["Records"][1]
     expected_response = {"batchItemFailures": [{"itemIdentifier": failed_record["messageId"]}]}
 
-    # WHEN
     ret = lambda_handler(sqs_event, lambda_context)
-
+    
     # THEN
     assert ret == expected_response
     assert isinstance(ret, str)
