@@ -170,6 +170,18 @@ struct timespec st_atim;  /* time of last access */
 struct timespec st_mtim;  /* time of last modification */
 struct timespec st_ctim;  /* time of last status change */
 
+********************** Amazon Linux 2023 *************************
+https://aws.amazon.com/blogs/compute/python-3-12-runtime-now-available-in-aws-lambda/
+https://www.youtube.com/watch?v=VRqazCsTbZk
+AWS CLI, SELinux, IMDs v2, CW/SystemsMgr/Inspector agents, Perl/Python/Ruby/Java
+rpm -q system-release
+dnf upgrade/update -y (replaces yum)
+dnf upgrade --releasever=2023.2.20231030 (locks system to specific version)
+dnf check-update --releasever=latest --security
+microdnf update -y
+curl-minimal
+gnupg2-minimal
+
 ************************** apt-get/yum ***************************
 
 --Ubuntu
