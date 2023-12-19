@@ -43,7 +43,7 @@ brew uninstall aws-sam-cli
 sam -h                                  List Commands
 sam init                                Initialize SAM app
 sam --config-env                        Specify the environment to use
-sam validate                            Validate an AWS SAM template
+sam validate --lint                     Validate an AWS SAM template (optional: cfnlint)
 sam build —-parallel --cached           Build the app (parallel/cached specified in samconfig.toml)
                                         No need to build if all used libs are present in Lambda runtime such as boto3
 sam package                             Package the app (sam deploy packages too, so no need)
