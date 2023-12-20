@@ -9,7 +9,7 @@ import requests
 
 logger = Logger()
 #logger = Logger(level="DEBUG INFO WARNING ERROR CRITICAL")
-logger = Logger(serialize_stacktrace=True)
+#logger = Logger(serialize_stacktrace=True)
 
 
 ENDPOINT = "http://httpbin.org/status/500"
