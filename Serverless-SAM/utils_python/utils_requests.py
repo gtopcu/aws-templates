@@ -28,3 +28,7 @@ def requests_put(endpoint_url: str, payload: str, timeout: int = 30) -> Any:
     #response_body = response.json()
     return response.json()
 
+# Session reuses the same connection, much faster
+def requests_get_with_session(session: requests.Session) ->:
+    response = session.get("XXXXXXXXXXXXXXXXXXXXXXX")
+    return response.json()
