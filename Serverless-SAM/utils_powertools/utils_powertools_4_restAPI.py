@@ -86,8 +86,6 @@ def lambda_handler(event: APIGatewayProxyEvent, context) -> dict:
                 "remaining_time": context.get_remaining_time_in_millis()
             },
         )
-    
-
 
     return app.resolve(event, context)
 
