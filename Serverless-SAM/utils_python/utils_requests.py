@@ -65,3 +65,5 @@ async def httpx_get() -> None:
         tasks = [ httpxget(client, "XXXXXXXXXXXXXXXXXXXXXXX") for _ in range(10) ]
         #tasks = [ httpxget(client, "http://url1.com"), httpxget(client, "http://url2.com") ]
         results = await asyncio.gather(*tasks)
+    for result in results:
+        print(result)
