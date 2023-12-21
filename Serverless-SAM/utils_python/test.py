@@ -1,5 +1,5 @@
 import os
-import time
+import time, datetime
 import json
 from pathlib import Path
 import pydantic
@@ -14,8 +14,9 @@ def getData(key: Optional[str], default: Any):
 def main() -> None:
     #print(os.getcwd())
     #print(os.listdir('.'))
-    mypath = Path().absolute()
-    print(mypath)
+    print(Path().absolute())
+    print(datetime.datetime.now())
+    
 
 if __name__ == "__main__":
     main()
