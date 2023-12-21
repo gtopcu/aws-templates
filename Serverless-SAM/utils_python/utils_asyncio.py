@@ -4,28 +4,36 @@
 import asyncio
 import time
 
-def brewCoffee():
+async def brewCoffee():
     print("Start brewCoffee")
-    time.sleep(3)
+    await asyncio.sleep(3)
     print("End brewCoffee")
     return "Coffee ready"
 
-def toastBagel():
+async def toastBagel():
     print("Start toastBagel")
-    time.sleep(2)
+    await asyncio.sleep(2)
     print("End toastBagel")
     return "Bagel ready"
     
 
-def main() -> None:
+async def main() -> None:
 
-    start = time.perf_counter
+    start = time.perf_counter()
 
-    brewCoffee()
-    toastBagel()
+    #batch = asyncio.gather(brewCoffee(), toastBagel())
+    #result_coffee, result_bagel = await batch
 
+    coffee_task = asyncio.create_task(brewCoffee())
+    bagel_task = asyncio.create_task(toastBagel())
+
+    result_coffee = await coffee_task
+    result_bagel = await bagel_task
+
+    print(f"Result of brewCoffee: {result_coffee}")
+    print(f"Result of toastBagel: {result_bagel}")
     print(f"Time: {time.perf_counter() - start:.2f}")
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())

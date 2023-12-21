@@ -40,10 +40,10 @@ def requests_get_with_session(session: requests.Session) ->:
 
 def main() -> None:
 
-    start = time.perf_counter
+    start = time.perf_counter()
     with requests.Session() as session:
         response = requests_get_with_session(session)
-    end = time.perf_counter
+    end = time.perf_counter()
     print(f"Time elapsed: {end - start:.2f}")
 
 # aiohttp - supports concurrency
