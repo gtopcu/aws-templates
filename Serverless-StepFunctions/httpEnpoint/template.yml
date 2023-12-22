@@ -1,0 +1,72 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Parameters:
+  Email:
+    Type: String
+    Default: ''
+  Endpoint:
+    Type: String
+    Default: ''
+Resources:
+  APIConnection:
+    Type: AWS::Events::Connection
+    Properties:
+      AuthorizationType: BASIC
+      Description: Connection with an username and password
+      AuthParameters:
+        BasicAuthParameters:
+          Password: fakepasswordtest
+          Username: test
+  NotificationTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      Subscription:
+        - Endpoint: !Ref Email
+          Protocol: email
+  HttpEndpointStateMachine:
+    Type: AWS::Serverless::StateMachine
+    Properties:
+      DefinitionSubstitutions:
+        ApiEndpoint: !Ref Endpoint
+        ConnectionARN: !GetAtt APIConnection.Arn
+        NotificationTopic: !Ref NotificationTopic
+      Tracing:
+        Enabled: true
+      Policies:
+        - SNSPublishMessagePolicy:
+            TopicName: !GetAtt NotificationTopic.TopicName
+        - CloudWatchPutMetricPolicy: {}
+        - Version: 2012-10-17
+          Statement:
+            - Sid: XrayAccessPolicy
+              Effect: Allow
+              Action:
+                - xray:PutTraceSegments
+                - xray:PutTelemetryRecords
+                - xray:GetSamplingRules
+                - xray:GetSamplingTargets
+                - xray:GetSamplingStatisticSummaries
+              Resource: '*'
+            - Sid: InvokeHttpEndpointPolicy
+              Effect: Allow
+              Action: states:InvokeHTTPEndpoint
+              Resource: '*'
+            - Sid: GetSecretPolicy
+              Effect: Allow
+              Action:
+                - secretsmanager:GetSecretValue
+                - secretsmanager:DescribeSecret
+              Resource: arn:aws:secretsmanager:*:*:secret:events!connection/*
+            - Sid: RetrieveConnectionDetailsPolicy
+              Effect: Allow
+              Action:
+                - events:RetrieveConnectionCredentials
+              Resource: !GetAtt APIConnection.Arn
+      DefinitionUri: statemachine.asl.yml
+Outputs:
+  ConnectionName:
+    Value: !Ref APIConnection
+  ConnectionArn:
+    Value: !GetAtt APIConnection.Arn
+  NotificationTopicArn:
+    Value: !Ref NotificationTopic
