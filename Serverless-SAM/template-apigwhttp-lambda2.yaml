@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: Serverless patterns - simple HTTP API to Lambda function using python3.11
+Description: Simple HTTP API to Lambda function using python3.12
 
 Globals:
   Function:

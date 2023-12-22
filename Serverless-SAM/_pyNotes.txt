@@ -12,6 +12,7 @@ pip install python-dotenv (for .env files to work)
 pip freeze
 pip freeze > requirements.txt
 pip install -r requirements.txt
+precommit install
 deactivate
 
 pytest -cov (include code coverage) -v(verbose) -s(prints outputs)
