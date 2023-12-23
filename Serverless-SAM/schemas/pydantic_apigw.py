@@ -9,6 +9,8 @@ from typing import List, Dict, Optional
 #from aws_lambda_powertools.utilities.data_classes import APIGatewayProxyEvent
 
 # https://www.youtube.com/watch?v=Vj-iU-8_xLs
+# https://docs.pydantic.dev/latest/integrations/datamodel_code_generator/
+
 class APIGWEvent(BaseModel):
     body: Optional[str]
     headers: dict
