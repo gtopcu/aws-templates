@@ -16,6 +16,7 @@ def main() -> None:
     #print(os.listdir('.'))
     print(Path().absolute())
     print(datetime.datetime.now())
+    print(dir(int))
     
 
 if __name__ == "__main__":

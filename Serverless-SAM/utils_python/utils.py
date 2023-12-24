@@ -31,3 +31,6 @@ def readFile(filename):
     with open(filename, "r") as file:
         return file.read()
     
+def parsedJSON(dict: object) -> str:
+    return json.dumps(object, indent=4, sort_keys=True, separators=(". ", " = "))
+    
