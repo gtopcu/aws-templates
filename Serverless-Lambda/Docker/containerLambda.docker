@@ -1,6 +1,28 @@
-# https://aws.amazon.com/blogs/aws/amazon-linux-2023-a-cloud-optimized-linux-distribution-with-long-term-support/
-# https://aws.amazon.com/blogs/compute/python-3-12-runtime-now-available-in-aws-lambda/
+https://aws.amazon.com/blogs/aws/amazon-linux-2023-a-cloud-optimized-linux-distribution-with-long-term-support/
+https://aws.amazon.com/blogs/compute/python-3-12-runtime-now-available-in-aws-lambda/
+
 FROM public.ecr.aws/lambda/python:3.12
 # Copy function code
 COPY lambda_handler.py ${LAMBDA_TASK_ROOT}
+
+----------------------------------------------------------------------------------------------------------------------
+
+https://aws.amazon.com/blogs/compute/introducing-the-amazon-linux-2023-runtime-for-aws-lambda/
+
+# Use the Amazon Linux 2023 Lambda base image
+FROM public.ecr.aws/lambda/provided.al2023
+
+# Install the required Python version
+RUN dnf install -y python3
+
+----------------------------------------------------------------------------------------------------------------------
+
+SAM:
+Resources:
+  HelloWorldFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: hello-world/
+      Handler: my.bootstrap.file
+      Runtime: provided.al2023
 

@@ -1,0 +1,19 @@
+
+https://aws.amazon.com/blogs/aws/amazon-linux-2023-a-cloud-optimized-linux-distribution-with-long-term-support/
+
+Images are available from Amazon ECR and from DockerHub
+
+$ aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
+Login Succeeded
+
+~ docker run --rm -it public.ecr.aws/amazonlinux/amazonlinux:2023 /bin/bash
+Unable to find image 'public.ecr.aws/amazonlinux/amazonlinux:2023' locally
+2023: Pulling from amazonlinux/amazonlinux
+b4265814d5cf: Pull complete 
+Digest: sha256:bbd7a578cff9d2aeaaedf75eb66d99176311b8e3930c0430a22e0a2d6c47d823
+Status: Downloaded newer image for public.ecr.aws/amazonlinux/amazonlinux:2023
+bash-5.2# uname -a 
+Linux 9d5b45e9f895 5.15.49-linuxkit #1 SMP PREEMPT Tue Sep 13 07:51:32 UTC 2022 aarch64 aarch64 aarch64 GNU/Linux
+bash-5.2# exit 
+
+When pulling from Docker Hub, you can use this command to pull the image: docker pull amazonlinux:2023

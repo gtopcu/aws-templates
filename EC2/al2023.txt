@@ -1,0 +1,67 @@
+
+https://aws.amazon.com/blogs/aws/amazon-linux-2023-a-cloud-optimized-linux-distribution-with-long-term-support/
+
+dnf list
+dnf install httpd
+dnf install -y python3
+dnf check-release-update
+dnf upgrade --releasever=2023.0.20230308
+dnf check-update --releasever=2023.0.20230308
+
+$ which yum
+/usr/bin/yum
+$ ls -al /usr/bin/yum
+lrwxrwxrwx. 1 root root 5 Jun 19 18:06 /usr/bin/yum -> dnf-3
+
+AL2 came with Python2.7, AL2023 does not come with Python installed
+
+AL2023 AMIs use gp3 volumes by default. Gp3 provides 20 percent lower storage costs compared to gp2. 
+Gp3 volumes deliver a baseline performance of 3,000 IOPS and 125MB/s at any volume size. 
+
+To retrieve the latest AMI ID for a specific Region, you can use AWS Systems Manager get-parameter API 
+and query the /aws/service/ami-amazon-linux-latest/<alias> parameter
+
+Be sure to replace <alias> with one of the four aliases available:
+
+For arm64 architecture (standard AMI): al2023-ami-kernel-default-arm64
+For arm64 architecture (minimal AMI): al2023-ami-minimal-kernel-default-arm64
+For x86_64 architecture (standard AMI): al2023-ami-kernel-default-x86_64
+For x86_64 architecture (minimal AMI): al2023-ami-minimal-kernel-default-x86_64
+
+For example, to search for the latest Arm64 full distribution AMI ID, I open a terminal and enter:
+aws ssm get-parameters --region us-east-2 --names /aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-arm64
+{
+    "Parameters": [
+        {
+            "Name": "/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-arm64",
+            "Type": "String",
+            "Value": "ami-02f9b41a7af31dded",
+            "Version": 1,
+            "LastModifiedDate": "2023-02-24T22:54:56.940000+01:00",
+            "ARN": "arn:aws:ssm:us-east-2::parameter/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-arm64",
+            "DataType": "text"
+        }
+    ],
+    "InvalidParameters": []
+}
+
+To launch an instance, use the run-instances API. Systems Manager used to dynamically lookup the AMI ID from the CLI:
+aws ec2 run-instances                                                                            \
+       --image-id resolve:ssm:/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-arm64  \
+       --key-name my_ssh_key_name                                                                   \
+       --instance-type c6g.medium                                                                   \
+       --region us-east-2 
+{
+    "Groups": [],
+    "Instances": [
+        {
+          "AmiLaunchIndex": 0,
+          "ImageId": "ami-02f9b41a7af31dded",
+          "InstanceId": "i-0740fe8e23f903bd2",
+          "InstanceType": "c6g.medium",
+          "KeyName": "my_ssh_key_name",
+          "LaunchTime": "2023-02-28T14:12:34+00:00",
+
+...(redacted for brevity)
+}
+
