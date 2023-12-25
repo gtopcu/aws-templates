@@ -6,10 +6,10 @@ import datetime, time
 
 def osGetCwd() -> str:
     os.getcwd()
-    #Path().absolute()
-
-def osListCurrentDir() -> list[str]:
-    return os.listdir('.')
+    #os.listdir('.')
+    #print(__file__)
+    #print(Path().absolute())
+    #print(pathlib.Path(__file__).parent / "examples")
 
 def get_current_datetime():
     return datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -28,7 +28,7 @@ def writeFile(filename, content):
         file.write(content)
 
 def readFile(filename):
-    with open(filename, "r") as file:
+    with open(filename, "r", encoding="utf-8") as file:
         return file.read()
     
 def parsedJSON(dict: object) -> str:
