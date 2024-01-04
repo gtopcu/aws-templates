@@ -61,11 +61,11 @@ Resources:
             Path: /products
             Method: GET
           DefinitionBody:
-            openapi: '3.0'
+            openapi: '3.0.3'
             info: {}
       Handler: apigwhttp_handler.handler
       CodeUri: lambdas/
-      Runtime: python3.11
+      Runtime: python3.12
       Description: API handler function
       # https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-policy-templates.html
       #Environment:

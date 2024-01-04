@@ -30,7 +30,7 @@ Resources:
     Properties:
       Handler: apigwhttp_handler.handler
       CodeUri: lambdas/
-      Runtime: python3.11
+      Runtime: python3.12
       Description: API handler function
       Events:
         ApiEvent:
@@ -40,7 +40,7 @@ Resources:
             Path: /testPath
             Method: ANY #GET
           #DefinitionBody:
-          #  openapi: '3.0'
+          #  openapi: '3.0.3'
           #  info: {}
       #https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-policy-templates.html
       #Environment:

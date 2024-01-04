@@ -1,0 +1,156 @@
+# https://aws.amazon.com/blogs/opensource/create-restful-apis-on-aws-with-openapi-specification-with-no-coding/
+# https://editor-next.swagger.io/
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: Sports Equipment API
+Globals:
+  Api:
+    OpenApiVersion: 3.0.3
+
+Parameters:
+  environment:
+    Type: "String"
+    Default: dev
+  ipAddressWhiteList:
+    Type: "CommaDelimitedList"
+    Default: "myIpAddress/32"
+
+Resources:
+
+  apiGateway:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: "sports-equipment"
+      StageName: !Sub "${environment}"
+      DefinitionBody:
+        x-amazon-apigateway-request-validators:
+          all:
+            validateRequestBody: true
+            validateRequestParameters: true
+        x-amazon-apigateway-request-validator: all      
+        x-amazon-apigateway-policy:
+          Version: 2012-10-17
+          Statement:
+            - Effect: Allow
+              Principal: "*"
+              Action: execute-api:Invoke
+              Resource:
+                - arn:aws:execute-api:*:*:*/*/PATCH/*
+                - arn:aws:execute-api:*:*:*/*/POST/*
+                - arn:aws:execute-api:*:*:*/*/PUT/*
+                - arn:aws:execute-api:*:*:*/*/OPTIONS/*
+                - arn:aws:execute-api:*:*:*/*/GET/*
+                - arn:aws:execute-api:*:*:*/*/DELETE/*
+              Condition:
+                IpAddress:
+                  aws:SourceIp: !Ref ipAddressWhiteList
+                        
+        #OPENAPI SPECIFICATION HERE
+        openapi: 3.0.3
+
+        info:
+          title: My Sports Equipment API
+          description: API operations of cataloging my sports equipment
+          version: v1.0
+  
+        paths:
+        
+          /equipment:
+          
+            get:
+              summary: List all my sports equipment
+              responses:
+                '200':
+                  description: Successful operation
+                  content:
+                    application/json:
+                      schema:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Item'
+              # responses:
+              #   x-amazon-apigateway-integration:
+              #   type: mock
+              #   requestTemplates:
+              #       application/json: |
+              #       {
+              #           "statusCode" : 200
+              #       }
+              #   passthroughBehavior: "when_no_templates"
+              #   responses:
+              #       "default":
+              #       statusCode: "200"
+              #       responseTemplates:
+              #           application/json: '{"message": "mock response"}'
+                  
+            post:
+              summary: Add a new equipment item to the catalog    
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/Item'
+                '200':
+                  description: Successful operation
+                '400':
+                  description: Invalid request
+          
+          /equipment/{itemId}:
+  
+            put:
+              summary: Update an equipment item to the catalog    
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ItemData'
+              responses:
+                '200':
+                  description: Successful operation
+                '400':
+                  description: Invalid request
+                '404':
+                  description: Not Found
+          
+            delete:
+              summary: Delete an equipment item from the catalog
+              responses:
+                '200':
+                  description: Successful operation
+                '404':
+                  description: Not Found
+
+        components:
+          schemas:
+            ItemData:
+              type: object
+              required:
+                - name
+                - condition
+                - price
+              properties:
+                name:
+                  type: string
+                  example: rubber basketball
+                condition:
+                  type: string
+                  example: good
+                price:
+                  type: number
+                  format: currency
+                  example: 5.99
+            Item:
+              allOf:
+                - type: object
+                  required:
+                    - id
+                  properties:
+                    id:
+                      type: string
+                      example: 1
+                - $ref: '#/components/schemas/ItemData'
+        
+Outputs:
+  ApiGatewayEndpoint:
+    Description: "API Gateway endpoint URL"
+    Value: !Sub "https://${apiGateway}.execute-api.${AWS::Region}.amazonaws.com/${environment}

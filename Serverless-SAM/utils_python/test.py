@@ -5,7 +5,7 @@ from pathlib import Path
 import pathlib
 import pydantic
 from pydantic import BaseModel
-from typing import Set, List, Dict, Union, Optional, Any
+from typing import Set, List, Dict, Union, Optional, Any #not necessary after Python 3.9
 
 
 # list | None
