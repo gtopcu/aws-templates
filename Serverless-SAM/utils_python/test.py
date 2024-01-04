@@ -5,7 +5,7 @@ from pathlib import Path
 import pathlib
 import pydantic
 from pydantic import BaseModel
-from typing import List, Dict, Optional, Any
+from typing import Set, List, Dict, Union, Optional, Any
 
 
 # list | None
@@ -13,6 +13,11 @@ from typing import List, Dict, Optional, Any
 def getData(default: Any, key: Optional[dict] = None):
     pass
 
+def myUnion(input: Union[str, int]) -> None:
+    print(input)
+
+def myUtil(mylist: str | None=None) -> None:
+    return mylist
 
 def main() -> None:
     print(os.getcwd())
