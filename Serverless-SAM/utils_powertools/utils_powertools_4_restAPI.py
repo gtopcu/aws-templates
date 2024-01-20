@@ -65,7 +65,7 @@ def create_todo():
                               clear_state=True, #logger is global scope
                               correlation_id_path=correlation_paths.API_GATEWAY_REST)
 
-@event_source(data_class=APIGatewayProxyEvent)
+@event_source(data_class=APIGatewayProxyEvent) 
 def lambda_handler(event: APIGatewayProxyEvent, context) -> dict:
 
     # event.path
