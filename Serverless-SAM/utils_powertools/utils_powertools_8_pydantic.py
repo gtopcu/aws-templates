@@ -1,7 +1,7 @@
 # https://docs.powertools.aws.dev/lambda/python/2.29.1/utilities/parser/#event_parser-decorator
 # https://github.com/koxudaxi/datamodel-code-generator
 
-from aws_lambda_powertools.utilities.parser import event_parser, BaseModel, parse, validator, root_validator
+from aws_lambda_powertools.utilities.parser import event_parser, BaseModel, ValidationError, parse, validator, root_validator
 from aws_lambda_powertools.utilities.typing import LambdaContext
 from typing import List, Optional
 
@@ -49,7 +49,17 @@ def handler(event: Order, context: LambdaContext):
     print(event.items)
 
     order_items = [item for item in event.items]
-    ...
+    
+    def my_function():
+        try:
+            parsed_payload: Order = parse(event=payload, model=Order)
+            # payload dict is now parsed into our model
+            return parsed_payload.items
+        except ValidationError:
+            return {
+                "status_code": 400,
+                "message": "Invalid order"
+            }
 
 payload = {
     "id": 10876546789,
