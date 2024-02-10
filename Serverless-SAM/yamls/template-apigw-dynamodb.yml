@@ -36,12 +36,12 @@ Globals:
     Runtime: python3.12
     #Tracing: Active
     Environment:
-      Variables:
-        POWERTOOLS_LOG_LEVEL: INFO
+      Variables:        
         POWERTOOLS_SERVICE_NAME: service1
         POWERTOOLS_TRACE_DISABLED: true
         #POWERTOOLS_TRACER_CAPTURE_RESPONSE: false
         #POWERTOOLS_TRACER_CAPTURE_ERROR: false
+        POWERTOOLS_LOG_LEVEL: INFO
         POWERTOOLS_LOGGER_LOG_EVENT: false
         #POWERTOOLS_LOGGER_SAMPLE_RATE: 0.1
         #POWERTOOLS_METRICS_NAMESPACE: service1metrics

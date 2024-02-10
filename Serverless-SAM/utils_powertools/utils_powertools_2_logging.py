@@ -10,7 +10,11 @@ import requests
 logger = Logger()
 #logger = Logger(level="DEBUG INFO WARNING ERROR CRITICAL")
 #logger = Logger(serialize_stacktrace=True)
+#logger = Logger(log_uncaught_exceptions=True)
 
+#logger = Logger(service="payment", use_rfc3339=True)
+#date_format = "%m/%d/%Y %I:%M:%S %p"
+#logger_custom_format = Logger(service="loyalty", datefmt=date_format)
 
 ENDPOINT = "http://httpbin.org/status/500"
 
@@ -59,7 +63,6 @@ def lambda_handler(event: dict, context: LambdaContext) -> str:
 #         aws_request_id: str = "52fdfc07-2182-154f-163f-5f0f9a621d72"
 
 #     return LambdaContext()
-
 
 # def test_lambda_handler(lambda_context):
 #     test_event = {"test": "event"}
