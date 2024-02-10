@@ -1,6 +1,7 @@
 import dataclasses
-from dataclasses import dataclass, field, astuple, asdict
+from dataclasses import asdict, astuple, dataclass, field
 from datetime import datetime
+
 
 @dataclass(frozen=True, #generates __hash__
            order=True) #generates __eq__ __lt__ __gt__ etc
