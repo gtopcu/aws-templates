@@ -2,7 +2,7 @@ import dataclasses
 from dataclasses import dataclass, field, astuple, asdict
 from datetime import datetime
 
-@dataclass(frozen=True #generates __hash__
+@dataclass(frozen=True, #generates __hash__
            order=True) #generates __eq__ __lt__ __gt__ etc
 class Employee:
     id: int
