@@ -21,7 +21,7 @@ Globals:
         #POWERTOOLS_DEV: false
     Layers:
       # https://docs.powertools.aws.dev/lambda/python/latest/#lambda-layer
-      - !Sub arn:aws:lambda:${AWS::Region}:017000801446:layer:AWSLambdaPowertoolsPythonV2:45
+      - !Sub arn:aws:lambda:${AWS::Region}:017000801446:layer:AWSLambdaPowertoolsPythonV2:61
 
 Resources:
   # Lambda function

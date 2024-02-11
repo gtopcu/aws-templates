@@ -20,7 +20,7 @@ Globals:
         #POWERTOOLS_PARAMETERS_SSM_DECRYPT: true
         #POWERTOOLS_DEV: false
     Layers:
-      - !Sub arn:aws:lambda:${AWS::Region}:017000801446:layer:AWSLambdaPowertoolsPythonV2:45
+      - !Sub arn:aws:lambda:${AWS::Region}:017000801446:layer:AWSLambdaPowertoolsPythonV2:61
 Resources:
   Api:
     Type: AWS::Serverless::Api
