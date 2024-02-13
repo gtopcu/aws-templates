@@ -119,7 +119,8 @@ DynamoDB:
 - Design considerations: Avoid hot partitions, only use indexes if must, utilize write sharding, separate hot/cold tabbles, scatter/gather for large items, sparse indexes, STD, one-to-many(for many attributes), separate table for frequently used attributes(varied access pattern), optimistic locking(update ConditionExpression:versionNo=1) etc
 
 SQS:
-- max message size(1 - 256KB, 256KB default), retention(1 min - 14 days, 4 days default)
+- max message size(1 - 256KB, 256KB default. Up to 2GB with Extended Client Library for Python/Java) 
+- retention(1 min - 14 days, 4 days default)
 - visibility timeout(0 sec - 12 hours max, 30sec default. Set 6 x Lambda timeout)
 - delivery delay(0 - 15 mins), receive message wait time(0 - 20 secs), long polling
 - SQS FIFO 70kTPS, 700k with batching, now also supports redrive, requires MessageGroupId, can deduplicate by MessageDeduplicationId(5 min idempotency), order guaranteed within group
