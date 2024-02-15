@@ -1,6 +1,10 @@
 [tool.ruff]
 # https://www.youtube.com/watch?v=bcAqceZkZRQ
 
+# ruff linter
+# ruff check test.py
+# ruff check test.py --fix
+
 # settings.json
 #   "[python]": {
 #     "editor.formatOnType": false,
@@ -11,9 +15,6 @@
 #       "source.organizeImports": false
 #     }
 #   },
-
-# ruff check test.py
-# ruff check test.py --fix
 
 # extend-select = ["C4", "SIM", "TCH"]
 # ignore = []
