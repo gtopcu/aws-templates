@@ -1,0 +1,19 @@
+# ruff check test.py
+# ruff check test.py --fix
+[tool.ruff]
+
+# Ignore Dirs
+# exclude = [
+#   ".ruff_cache",
+#   ".git",
+#   ".venv",
+#   "venv",
+#   "build",
+#   "dist"
+# ]
+
+# Ignore Files
+#per-file-ignores = {}
+
+# Same as Black
+# line-length = 88
