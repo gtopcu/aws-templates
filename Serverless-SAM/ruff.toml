@@ -1,6 +1,16 @@
 [tool.ruff]
 # https://www.youtube.com/watch?v=bcAqceZkZRQ
 
+# settings.json
+#   "[python]": {
+#     "editor.formatOnType": false,
+#     "editor.formatOnSave": false,
+#     "editor.defaultFormatter": "charliermarsh.ruff",
+#     "editor.codeActionsOnSave": {
+#       "source.fixAll": false,
+#       "source.organizeImports": false
+#     }
+#   },
 
 # ruff check test.py
 # ruff check test.py --fix
