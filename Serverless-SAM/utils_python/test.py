@@ -30,6 +30,8 @@ def main() -> None:
     #print(pathlib.Path(__file__).parent / "examples")
     x, y = 3, 4
     print(x, y)
+    nums = [x for x in range(10) if x % 2 == 0]
+    print(nums)
 
 if __name__ == "__main__":
     main()

@@ -1,8 +1,15 @@
+[tool.ruff]
+# https://www.youtube.com/watch?v=bcAqceZkZRQ
+
+
 # ruff check test.py
 # ruff check test.py --fix
-[tool.ruff]
 
-# Ignore Dirs
+# extend-select = ["C4", "SIM", "TCH"]
+# ignore = []
+# show-fixes = true
+# target-version = "py312"
+
 # exclude = [
 #   ".ruff_cache",
 #   ".git",
@@ -12,8 +19,9 @@
 #   "dist"
 # ]
 
-# Ignore Files
 #per-file-ignores = {}
 
 # Same as Black
 # line-length = 88
+
+# [tool.ruff.isort]
