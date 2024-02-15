@@ -39,7 +39,6 @@ def requests_get_with_session(session: requests.Session) ->:
     return response.json()
 
 def main() -> None:
-
     start = time.perf_counter()
     with requests.Session() as session:
         response = requests_get_with_session(session)
