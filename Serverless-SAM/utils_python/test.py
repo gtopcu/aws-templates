@@ -1,11 +1,13 @@
 import os
 import time
+from timeit import timeit
 import datetime
 import json
 from pathlib import Path
 import pathlib
 import pydantic
 from pydantic import BaseModel
+import typing
 from typing import Set, List, Dict, Union, Optional, Any #not necessary after Python 3.9
 
 
@@ -20,6 +22,11 @@ def myUnion(input: Union[str, int]) -> None:
 def myUtil(mylist: str | None=None) -> None:
     return mylist
 
+def time_this() -> None:
+    time.sleep(2)
+    for i in range(100000):
+        i += 1
+
 def main() -> None:
     print(os.getcwd())
     print(os.listdir('.'))
@@ -32,6 +39,19 @@ def main() -> None:
     print(x, y)
     nums = [x for x in range(10) if x % 2 == 0]
     print(nums)
+    print(typing.TYPE_CHECKING)
+
+    #total_time = timeit(time_this())
+    #print(f"Total time: {total_time:.3f}")    
+
+    char = "c"
+    match char:
+        case "a":
+            print("a")
+        case "b":
+            print("b")
+        case _:
+            print("default")
 
 if __name__ == "__main__":
     main()

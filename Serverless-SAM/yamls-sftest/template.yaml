@@ -1,0 +1,37 @@
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  StateMachine:
+    Type: AWS::Serverless::StateMachine
+    Properties:
+      Logging:
+        Level: ALL
+        IncludeExecutionData: true
+        Destinations:
+          - CloudWatchLogsLogGroup:
+              LogGroupArn: !GetAtt StateMachineLogGroup.Arn
+      Policies:
+        - AWSXrayWriteOnlyAccess
+        - Statement:
+            - Effect: Allow
+              Action:
+                - logs:CreateLogDelivery
+                - logs:GetLogDelivery
+                - logs:UpdateLogDelivery
+                - logs:DeleteLogDelivery
+                - logs:ListLogDeliveries
+                - logs:PutResourcePolicy
+                - logs:DescribeResourcePolicies
+                - logs:DescribeLogGroups
+              Resource: '*'
+      Tracing:
+        Enabled: true
+      Type: STANDARD
+      DefinitionSubstitutions:
+        LambdaFunction1: !Ref AWS::NoValue
+      DefinitionUri: stateMachine.asl.yaml
+  StateMachineLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub
+        - /aws/vendedlogs/states/${AWS::StackName}-${ResourceId}-Logs
+        - ResourceId: StateMachine

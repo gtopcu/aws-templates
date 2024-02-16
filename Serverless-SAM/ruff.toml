@@ -1,7 +1,6 @@
-[tool.ruff]
+
 # https://www.youtube.com/watch?v=bcAqceZkZRQ
 
-# ruff linter
 # ruff check test.py
 # ruff check test.py --fix
 
@@ -16,7 +15,10 @@
 #     }
 #   },
 
-# extend-select = ["C4", "SIM", "TCH"]
+# [tool.ruff]
+# ruff linter
+# extend-select = ["W", "B", "I", "N", ""C4", "EM", "G", "T20", "SIM", "TCH", "LOG"]
+
 # ignore = []
 # show-fixes = true
 # target-version = "py312"
@@ -30,7 +32,7 @@
 #   "dist"
 # ]
 
-#per-file-ignores = {}
+# per-file-ignores = {}
 
 # Same as Black
 # line-length = 88
