@@ -20,15 +20,13 @@ async def asyncfunc(number: int) -> None:
 
 async def main() -> None:
     async with asyncio.TaskGroup as tg:
-        tg.create_task(asyncfunc(1))
+        task1 = tg.create_task(asyncfunc(1))
         print(task1)
-    #     task2 = tg.create_task(asyncfunc(2))
-    #     print(task2)
+        task2 = tg.create_task(asyncfunc(2))
+        print(task2)
     print("Both tasks have been completed")
     
-asyncio.run(main())
-# if __name__ == "__main__":
-#     #main()
+if __name__ == "__main__":
+    asyncio.run(main())
     
-
 ####################################################################################################

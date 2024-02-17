@@ -12,7 +12,7 @@ from datetime import date, datetime, time, timezone
 from inspect import istraceback
 from typing import Dict, List, Tuple, Union
 
-def setBasicConfig() -> None:
+def set_basic_config() -> None:
     logging.basicConfig(
         level=logging.INFO,
         format="%(asctime)s %(levelname)-8s %(message)s",

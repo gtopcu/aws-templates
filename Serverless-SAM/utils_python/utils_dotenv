@@ -1,3 +1,0 @@
-import dotenv
-
-dotenv_load_dotenv()
