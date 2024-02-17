@@ -15,16 +15,16 @@ dynamodb = boto3.resource('dynamodb')
 #                       aws_secret_access_key='xxxx',
 #                       region_name='us-east-1')
 
-def getItem(tableName, primaryKeyName, primary_key, sortKeyName, sort_key):
-    table = dynamodb.Table(tableName)
+def get_item(table_name, primary_key_name, primary_key, sort_key_name, sort_key):
+    table = dynamodb.Table(table_name)
     response = table.get_item(Key={
-        primaryKeyName: primary_key,
-        sortKeyName: sort_key
+        primary_key_name: primary_key,
+        sort_key_name: sort_key
     })
     return response
 
 # 16MB and 100 items limit
-def batchGetItems():
+def batch_get_items():
     response = dynamodb.batch_get_item(
         RequestItems={
             'my-table': {
@@ -43,8 +43,8 @@ def batchGetItems():
     )
     return response
 
-def putItem(tableName, item):
-    table = dynamodb.Table(tableName)
+def put_item(table_name, item):
+    table = dynamodb.Table(table_name)
     table.put_item(Item=item)
     """
     response = table.put_item(
@@ -56,8 +56,8 @@ def putItem(tableName, item):
     )
     """
 
-def updateItem(tableName, key, updateExpression, expressionAttributeValues):
-    table = dynamodb.Table(tableName)
+def update_item(table_name, key, updateExpression, expressionAttributeValues):
+    table = dynamodb.Table(table_name)
     response = table.update_item(
         Key=key,
         UpdateExpression=updateExpression,
@@ -78,17 +78,17 @@ def updateItem(tableName, key, updateExpression, expressionAttributeValues):
     )
     """
 
-def deleteItem(tableName, primaryKeyName, primary_key, sortKeyName, sort_key):
-    table = dynamodb.Table(tableName)
+def delete_item(table_name, primary_key_ame, primary_key, sort_key_name, sort_key):
+    table = dynamodb.Table(table_name)
     response = table.delete_item(Key={
-        primaryKeyName: primary_key,
-        sortKeyName: sort_key
+        primary_key_ame: primary_key,
+        sort_key_name: sort_key
     })
     return response
 
 # 1MB limit
-def query(tableName, keyConditionExpression, expressionAttributeValues):
-    table = dynamodb.Table(tableName)
+def query(table_name, keyConditionExpression, expressionAttributeValues):
+    table = dynamodb.Table(table_name)
     response = table.query(
         KeyConditionExpression=keyConditionExpression,
         ExpressionAttributeValues=expressionAttributeValues
@@ -112,8 +112,8 @@ def query(tableName, keyConditionExpression, expressionAttributeValues):
     """
 
 # 1MB limit
-def scan(tableName):
-    table = dynamodb.Table(tableName)
+def scan(table_name):
+    table = dynamodb.Table(table_name)
     response = table.scan()
     return response
     

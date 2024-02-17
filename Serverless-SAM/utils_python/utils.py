@@ -6,6 +6,9 @@ import time
 import pathlib
 #from pathlib import Path
 
+def return_docstring() -> str:
+    return __doc__
+    
 def os_get_cwd() -> str:
     os.getcwd()
     #os.listdir('.')

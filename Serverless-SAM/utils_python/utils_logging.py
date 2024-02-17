@@ -12,6 +12,13 @@ from datetime import date, datetime, time, timezone
 from inspect import istraceback
 from typing import Dict, List, Tuple, Union
 
+def get_logger() -> logging.Logger:
+    logging.basicConfig(level=logging.INFO)
+    logger = logging.getLogger(__name__)
+    # if logger.isEnabledFor(logging.DEBUG):
+    #     logger.debug("Debugger logger created")
+    return logger
+
 def set_basic_config() -> None:
     logging.basicConfig(
         level=logging.INFO,
@@ -19,7 +26,6 @@ def set_basic_config() -> None:
         datefmt="%Y-%m-%d %H:%M:%S",
         filename="basic.log"   
     )
-    #logger = logging.getLogger()
 
 # skip natural LogRecord attributes
 # http://docs.python.org/library/logging.html#logrecord-attributes

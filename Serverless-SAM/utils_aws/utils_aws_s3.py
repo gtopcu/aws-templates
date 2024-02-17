@@ -1,24 +1,17 @@
 # Code whisperer: Option + C
 import boto3
 
-s3 = boto3.client('s3')
 
-# Use multi-part upload / byte range fetches for anything larger than a few GBs
-def uploadToS3(local_file, bucket, s3_file) -> None:
-    try:
-        s3.upload_file(local_file, bucket, s3_file)
-    except Exception as e:
-        raise Exception(f"S3 Upload Error: {e}")
-
-"""
-# upload file to s3 bucket
-def uploadToS3(bucketName, fileName, filePath):
+def upload_to_S3(bucketName, fileName, filePath):
     s3 = boto3.client('s3')
-    s3.upload_file(filePath, bucketName, fileName)
-"""
+    try:
+        s3.upload_file(filePath, bucketName, fileName)
+    except Exception as e:
+        raise (f"S3 Upload Error: {e}")
 
-def downloadFromS3(bucketName, fileName, filePath) -> None:
+def download_from_S3(bucketName, fileName, filePath) -> None:
+    s3 = boto3.client('s3')
     try:
         s3.download_file(bucketName, fileName, filePath)
     except Exception as e:
-        raise(f"S3 Download Error: {e}")
+        raise (f"S3 Download Error: {e}")

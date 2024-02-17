@@ -1,7 +1,3 @@
-import boto3
-
-from aws_enums import AwsServices
-
 """
 class AwsDynamoDBClient:
     def __init__(self, aws_region: str = "us-east-2"):

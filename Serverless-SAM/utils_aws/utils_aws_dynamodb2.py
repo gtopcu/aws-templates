@@ -5,17 +5,17 @@ dynamodb = boto3.resource('dynamodb')
 
 # https://dynobase.dev/dynamodb-python-with-boto3/#get-item
 
-def getItem(tableName, key):
-    table = dynamodb.Table(tableName)
+def get_item(table_name, key):
+    table = dynamodb.Table(table_name)
     response = table.get_item(Key=key)
     return response
 
-def putItem(tableName, item):
-    table = dynamodb.Table(tableName)
+def put_item(table_name, item):
+    table = dynamodb.Table(table_name)
     table.put_item(Item=item)
 
-def updateItem(tableName, key, updateExpression, expressionAttributeValues):
-    table = dynamodb.Table(tableName)
+def update_item(table_name, key, updateExpression, expressionAttributeValues):
+    table = dynamodb.Table(table_name)
     response = table.update_item(
         Key=key,
         UpdateExpression=updateExpression,
@@ -23,20 +23,20 @@ def updateItem(tableName, key, updateExpression, expressionAttributeValues):
     )
     return response
 
-def deleteItem(tableName, key):
-    table = dynamodb.Table(tableName)
+def delete_item(table_name, key):
+    table = dynamodb.Table(table_name)
     response = table.delete_item(Key=key)
     return response
 
-def query(tableName, keyConditionExpression, expressionAttributeValues):
-    table = dynamodb.Table(tableName)
+def query(table_name, keyConditionExpression, expressionAttributeValues):
+    table = dynamodb.Table(table_name)
     response = table.query(
         KeyConditionExpression=keyConditionExpression,
         ExpressionAttributeValues=expressionAttributeValues
     )
     return response
 
-def scan(tableName):
-    table = dynamodb.Table(tableName)
+def scan(table_name):
+    table = dynamodb.Table(table_name)
     response = table.scan()
     return response

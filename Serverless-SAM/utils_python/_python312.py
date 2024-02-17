@@ -20,9 +20,11 @@
 ####################################################################################################
 # 2 - TypedDict
 
+# https://peps.python.org/pep-0589/
+
 # from typing import TypedDict, Unpack
 
-# class Movie(TypedDict):
+# class Movie(TypedDict, total=False)):
 #     name: str
 #     year: int
 
