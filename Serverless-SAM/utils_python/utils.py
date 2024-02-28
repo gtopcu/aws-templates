@@ -13,6 +13,9 @@ def os_get_cwd() -> str:
     os.getcwd()
     #os.listdir('.')
 
+def os_join_path(current_path:str, filename:str) -> str:
+    return os.path.join(current_path, filename)
+
 def get_current_path() -> pathlib.Path: 
     return pathlib.Path(__file__)
     #print(__file__)
