@@ -1,5 +1,6 @@
 
 from collections import deque
+import time
 
 def main() -> None:
     
@@ -27,6 +28,8 @@ def main() -> None:
 
     x = (12 * 3) if True else 6
     print(x)
+
+    print(time.time())
 
     print("Done")
 
