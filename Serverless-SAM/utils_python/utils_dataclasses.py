@@ -8,7 +8,7 @@ from datetime import datetime
 class Employee:
     id: int
     #id2 : int = field()
-    name: str 
+    name: str
     #name2: str = field(default="GT")
     date: datetime
     addresses: list[str] = field(default_factory=list, compare=False, hash=False, repr=False)

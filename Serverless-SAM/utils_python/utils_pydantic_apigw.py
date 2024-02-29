@@ -5,7 +5,7 @@ from pathlib import Path
 import pydantic
 from pydantic import BaseModel
 import pytest
-from typing import List, Dict, Optional
+from typing import Optional
 #from aws_lambda_powertools.utilities.data_classes import APIGatewayProxyEvent
 
 # https://www.youtube.com/watch?v=Vj-iU-8_xLs

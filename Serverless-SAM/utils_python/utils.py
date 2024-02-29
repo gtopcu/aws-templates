@@ -18,20 +18,20 @@ def os_get_cwd() -> str:
     os.getcwd()
     #os.listdir('.')
 
-def os_join_path(current_path:str, filename:str) -> str:
+def os_path_join(current_path:str, filename:str) -> str:
     return os.path.join(current_path, filename)
 
-def os_is_path(path: str) -> bool:
+def os_path_isdir(path: str) -> bool:
         return os.path.isdir(path)
 
-def get_current_path() -> pathlib.Path: 
+def pathlib_current_path() -> pathlib.Path: 
     return pathlib.Path(__file__)
     #print(__file__)
     #print(Path().absolute())
     #print(pathlib.Path(__file__).parent / "events.json")
 
-def get_current_datetime():
-    return datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
+def datetime_now(format: str = "%Y-%m-%dT%H:%M:%SZ"):
+    return datetime.now().strftime(format)
 
 def sleep(seconds: int) -> None:
     time.sleep(seconds)
