@@ -137,6 +137,7 @@ Resources:
     # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html
     Properties:
       TableName: !Sub "{ddb_tablename}"
+      # https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html
       AttributeDefinitions: 
         - AttributeName: PK
           AttributeType: S

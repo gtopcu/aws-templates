@@ -4,6 +4,12 @@
 # https://dynobase.dev/dynamodb-python-with-boto3/
 
 import boto3
+from boto3.dynamodb.conditions import Key, Attr
+# from boto3.dynamodb.types import STRING
+from boto3.dynamodb.types import TypeSerializer, TypeDeserializer
+
+# import botocore
+# from botocore.exceptions import ClientError
 
 dynamodb = boto3.resource('dynamodb')
 
@@ -18,6 +24,28 @@ dynamodb = boto3.resource('dynamodb')
 #                       aws_access_key_id='yyyy',
 #                       aws_secret_access_key='xxxx',
 #                       region_name='us-east-1')
+
+# from botocore.config import Config
+# my_config = Config(
+#    connect_timeout = 1.0,
+#    read_timeout = 1.0
+# )
+# dynamodb = boto3.resource('dynamodb', config=my_config)
+
+# https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/programming-with-python.html
+def dynamo_to_python(dynamo_object: dict) -> dict:
+    deserializer = TypeDeserializer()
+    return {
+        k: deserializer.deserialize(v) 
+        for k, v in dynamo_object.items()
+    }  
+  
+def python_to_dynamo(python_object: dict) -> dict:
+    serializer = TypeSerializer()
+    return {
+        k: serializer.serialize(v)
+        for k, v in python_object.items()
+    }
 
 def get_item(table_name, key):
     """ Key={"id": id} """
@@ -55,7 +83,7 @@ def update_item(table_name, key, updateExpression, expressionAttributeValues):
     )
     return response
 
-def delete_item(table_name, key):
+def delete_item(table_name, key: Key):
     table = dynamodb.Table(table_name)
     response = table.delete_item(Key=key)
     return response
