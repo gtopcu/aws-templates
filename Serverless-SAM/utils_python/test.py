@@ -1,5 +1,6 @@
 
 from collections import deque
+import datetime
 import time
 import os
 
@@ -27,10 +28,12 @@ def main() -> None:
     my_deque = deque(my_list, maxlen=5)    
     print(my_deque)
 
-    x = (12 * 3) if True else 6
-    print(x)
+    print( (12 * 3) if True else 6 )
+    
+    #print(time.time())
+    print()
 
-    print(time.time())
+    
 
     print("Done")
 

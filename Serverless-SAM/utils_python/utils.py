@@ -22,7 +22,7 @@ def os_path_join(current_path:str, filename:str) -> str:
     return os.path.join(current_path, filename)
 
 def os_path_isdir(path: str) -> bool:
-        return os.path.isdir(path)
+    return os.path.isdir(path)
 
 def pathlib_current_path() -> pathlib.Path: 
     return pathlib.Path(__file__)
@@ -31,7 +31,9 @@ def pathlib_current_path() -> pathlib.Path:
     #print(pathlib.Path(__file__).parent / "events.json")
 
 def datetime_now(format: str = "%Y-%m-%dT%H:%M:%SZ"): #ISO8601 
-    return datetime.now().strftime(format)
+    return datetime.datetime.now().strftime(format)
+    datetime.datetime(2020, 5, 17) hour, minute, second, microsecond, tzone=None
+    # datetime.datetime.now() + datetime.timedelta(days=1, hours=2)
 
 def sleep(seconds: int) -> None:
     time.sleep(seconds)

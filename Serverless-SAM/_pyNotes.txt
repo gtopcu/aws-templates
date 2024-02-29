@@ -26,6 +26,7 @@ poetry install (also creates venv)
 poetry env info -p
 poetry env list
 sudo poetry shell / exit / deactivate
+poetry add "aws-lambda-powertools[aws-sdk]" --group dev
 poetry add requests
 poetry update requests
 poetry remove requests
