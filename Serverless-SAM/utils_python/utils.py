@@ -5,9 +5,14 @@ import datetime
 import time
 import pathlib
 #from pathlib import Path
+from dotenv import load_dotenv
 
-def return_docstring() -> str:
-    return __doc__
+def load_dotenv() -> None:
+    # Imports .env file
+    load_dotenv()
+
+def get_env(env_name: str, default:str) -> str:
+    return os.getenv(env_name, str)    
     
 def os_get_cwd() -> str:
     os.getcwd()
@@ -15,6 +20,9 @@ def os_get_cwd() -> str:
 
 def os_join_path(current_path:str, filename:str) -> str:
     return os.path.join(current_path, filename)
+
+def os_is_path(path: str) -> bool:
+        return os.path.isdir(path)
 
 def get_current_path() -> pathlib.Path: 
     return pathlib.Path(__file__)

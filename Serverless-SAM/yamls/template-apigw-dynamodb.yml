@@ -1,17 +1,22 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
-Description: Event handler API Gateway
+Description: Event handler API Gateway with DynamoDB
 
 # https://docs.powertools.aws.dev/lambda/python/2.23.0/core/event_handler/api_gateway/#event-resolvers
 # https://aws.amazon.com/pt/blogs/opensource/create-restful-apis-on-aws-with-openapi-specification-with-no-coding/
 
-# Parameters:
-#   environment:
-#     Type: "String"
-#     Default: dev
-#   ipAddressWhiteList:
-#     Type: "CommaDelimitedList"
-#     Default: "myIpAddress/32"
+Parameters:
+  environment:
+    Type: "String"
+    Default: dev
+    AllowedValues:
+      - dev
+      - prod
+  ddb_tablename: 
+    Type: "String"
+    Default: sam-table1
+    # '{{resolve:ssm-secure:IAMUserPassword:10}}'
+    # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html
 
 Globals:
   Api:
@@ -42,7 +47,7 @@ Globals:
         #POWERTOOLS_TRACER_CAPTURE_RESPONSE: false
         #POWERTOOLS_TRACER_CAPTURE_ERROR: false
         POWERTOOLS_LOG_LEVEL: INFO
-        POWERTOOLS_LOGGER_LOG_EVENT: false
+        POWERTOOLS_LOGGER_LOG_EVENT: true
         #POWERTOOLS_LOGGER_SAMPLE_RATE: 0.1
         #POWERTOOLS_METRICS_NAMESPACE: service1metrics
         #POWERTOOLS_PARAMETERS_MAX_AGE: 60 #seconds
@@ -51,7 +56,7 @@ Globals:
     Layers:
       # Find the latest Layer version in the official documentation
       # https://docs.powertools.aws.dev/lambda/python/latest/#lambda-layer
-      - !Sub arn:aws:lambda:${AWS::Region}:017000801446:layer:AWSLambdaPowertoolsPythonV2:61
+      - !Sub arn:aws:lambda:${AWS::Region}:017000801446:layer:AWSLambdaPowertoolsPythonV2:65
 
 Resources:
   ApiFunction:
@@ -63,7 +68,7 @@ Resources:
       # https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-policy-templates.html
       Environment:
         Variables:
-          TABLE_NAME: !Ref DynamoDBTable1
+          DDB_TABLE_NAME: !Ref DynamoDBTable1 #!Sub "{ddb_tablename}"
       AutoPublishAlias: live
       # https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/automating-updates-to-serverless-apps.html
       # DeploymentPreference:
@@ -78,6 +83,7 @@ Resources:
       Events:
         AnyApiEvent:
           Type: Api
+          StageName: !Sub "${environment}"
           Properties:
             Path: /{proxy+} # Send requests on any path to the lambda function
             Method: ANY # Send requests using any http method to the lambda function
@@ -96,33 +102,47 @@ Resources:
             #   Properties:
             #     Path: /todos
             #     Method: POST
-      #Policies: AmazonDynamoDBReadOnlyAccess  
-      Policies:
-        - DynamoDBReadPolicy:
-            TableName: !Ref DynamoDBTable1
-    Connectors:
-      DynamoDBConn:
-        Properties: 
-          Destination:
-            Id: DynamoDBTable1
-          Permissions:
-              - Write
+
+          #HTTP API
+          # GetAllItems:
+          #   Type: HttpApi
+          #   Properties:
+          #     Path: /items
+          #     Method: GET
+          # GetAnItem:
+          #   Type: HttpApi
+          #   Properties:
+          #     Path: /items/{id}
+          #     Method: GET
+          # DeleteAnItem:
+          #   Type: HttpApi
+          #   Properties:
+          #     Path: /items/{id}
+          #     Method: DELETE
+          # CreateOrUpdateItem:
+          #   Type: HttpApi
+          #   Properties:
+          #     Path: /items
+          #     Method: PUT
+    Policies:
+      - DynamoDBReadPolicy:
+          TableName: !Ref DynamoDBTable1
+    # Connectors:
+    #   DynamoDBConn:
+    #     Properties: 
+    #       Destination:
+    #         Id: DynamoDBTable1
+    #       Permissions:
+    #           - Write
           #SourceReference: SourceReference
 
   DynamoDBTable1:
     Type: AWS::DynamoDB::Table
+    DeletionPolicy: Retain #RetainExceptOnCreate/Retain/Snapshot/Delete
+    UpdateReplacePolicy: Retain
+    # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html
     Properties:
-      TableName: sam-table1
-      #PointInTimeRecoverySpecification:
-      #  PointInTimeRecoveryEnabled: True
-      #DeletionProtectionEnabled: True
-      #ContributorInsightsSpecification: 
-      #  Enabled: True
-      #ProvisionedThroughput: 
-      #  ReadCapacityUnits: 10
-      #  WriteCapacityUnits: 5
-      #SSESpecification: 
-      #  SSEEnabled: True
+      TableName: !Sub "{ddb_tablename}"
       AttributeDefinitions: 
         - AttributeName: PK
           AttributeType: S
@@ -133,5 +153,22 @@ Resources:
           KeyType: HASH 
         - AttributeName: SK
           KeyType: RANGE
+      BillingMode: PAY_PER_REQUEST
+      # BillingMode: PROVISIONED
+      # ProvisionedThroughput: 
+      #   ReadCapacityUnits: 10
+      #   WriteCapacityUnits: 5
       # StreamSpecification:
-      #   StreamViewType: NEW_IMAGE
+      #    StreamViewType: KEYS_ONLY/NEW_IMAGE/OLD_IMAGE/NEW_AND_OLD_IMAGES
+      # PointInTimeRecoverySpecification:
+      #  PointInTimeRecoveryEnabled: True
+      # DeletionProtectionEnabled: True
+      # ContributorInsightsSpecification: 
+      #   Enabled: True
+      # SSESpecification: 
+      #   SSEEnabled: True
+
+Outputs:
+  ApiGatewayEndpoint:
+    Description: "API Gateway endpoint URL"
+    Value: !Sub "https://${apiGateway}.execute-api.${AWS::Region}.amazonaws.com/${environment}
