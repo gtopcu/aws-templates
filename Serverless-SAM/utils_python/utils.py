@@ -30,7 +30,7 @@ def pathlib_current_path() -> pathlib.Path:
     #print(Path().absolute())
     #print(pathlib.Path(__file__).parent / "events.json")
 
-def datetime_now(format: str = "%Y-%m-%dT%H:%M:%SZ"):
+def datetime_now(format: str = "%Y-%m-%dT%H:%M:%SZ"): #ISO8601 
     return datetime.now().strftime(format)
 
 def sleep(seconds: int) -> None:

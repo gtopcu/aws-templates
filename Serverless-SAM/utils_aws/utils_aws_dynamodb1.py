@@ -1,4 +1,8 @@
+
 # Code whisperer: Option + C
+# https://www.youtube.com/watch?v=twxM7WTfhGs
+# https://dynobase.dev/dynamodb-python-with-boto3/
+
 import boto3
 
 dynamodb = boto3.resource('dynamodb')
@@ -15,58 +19,25 @@ dynamodb = boto3.resource('dynamodb')
 #                       aws_secret_access_key='xxxx',
 #                       region_name='us-east-1')
 
-def get_item(table_name, primary_key_name, primary_key, sort_key_name, sort_key):
+def get_item(table_name, key):
+    """ Key={"id": id} """
     table = dynamodb.Table(table_name)
-    response = table.get_item(Key={
-        primary_key_name: primary_key,
-        sort_key_name: sort_key
-    })
-    return response
-
-# 16MB and 100 items limit
-def batch_get_items():
-    response = dynamodb.batch_get_item(
-        RequestItems={
-            'my-table': {
-                'Keys': [
-                    {
-                        'id': 1
-                    },
-                    {
-                        'id': 2
-                    },
-                ],
-                'ConsistentRead': True
-            }
-        },
-        ReturnConsumedCapacity='TOTAL'
-    )
+    response = table.get_item(Key=key) 
     return response
 
 def put_item(table_name, item):
     table = dynamodb.Table(table_name)
-    table.put_item(Item=item)
+    return table.put_item(Item=item)
     """
-    response = table.put_item(
-        Item={
-            'id': 1,
-            'title': 'my-document-title',
-            'content': 'some-content',
-        }
-    )
+    Item={
+        'id': 1,
+        'title': 'my-document-title',
+        'content': 'some-content',
+    }
     """
-
 def update_item(table_name, key, updateExpression, expressionAttributeValues):
-    table = dynamodb.Table(table_name)
-    response = table.update_item(
-        Key=key,
-        UpdateExpression=updateExpression,
-        ExpressionAttributeValues=expressionAttributeValues
-    )
-    return response
     """
-    response = table.update_item(
-        Key={
+    Key={
             'id': '894673'
         },
         UpdateExpression='SET country = :newCountry",
@@ -75,15 +46,18 @@ def update_item(table_name, key, updateExpression, expressionAttributeValues):
             ':newCountry': "Canada"
         },
         ReturnValues="UPDATED_NEW"
-    )
     """
-
-def delete_item(table_name, primary_key_ame, primary_key, sort_key_name, sort_key):
     table = dynamodb.Table(table_name)
-    response = table.delete_item(Key={
-        primary_key_ame: primary_key,
-        sort_key_name: sort_key
-    })
+    response = table.update_item(
+        Key=key,
+        UpdateExpression=updateExpression,
+        ExpressionAttributeValues=expressionAttributeValues
+    )
+    return response
+
+def delete_item(table_name, key):
+    table = dynamodb.Table(table_name)
+    response = table.delete_item(Key=key)
     return response
 
 # 1MB limit
@@ -126,3 +100,23 @@ def scan(table_name):
     
     return data
     """
+
+# 16MB and 100 items limit
+def batch_get_items():
+    response = dynamodb.batch_get_item(
+        RequestItems={
+            'my-table': {
+                'Keys': [
+                    {
+                        'id': 1
+                    },
+                    {
+                        'id': 2
+                    },
+                ],
+                'ConsistentRead': True
+            }
+        },
+        ReturnConsumedCapacity='TOTAL'
+    )
+    return response
