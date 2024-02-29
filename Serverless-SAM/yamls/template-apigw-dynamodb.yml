@@ -87,43 +87,37 @@ Resources:
           Properties:
             Path: /{proxy+} # Send requests on any path to the lambda function
             Method: ANY # Send requests using any http method to the lambda function
-            # GetAllTodos:
+            # getAllTodos:
             #   Type: Api
             #   Properties:
             #     Path: /todos
             #     Method: GET
-            # GetTodoById:
+            # getTodoById:
             #   Type: Api
             #   Properties:
             #     Path: /todos/{todo_id}
             #     Method: GET
-            # CreateTodo:
+            # createTodo:
             #   Type: Api
             #   Properties:
             #     Path: /todos
             #     Method: POST
 
-          #HTTP API
-          # GetAllItems:
-          #   Type: HttpApi
-          #   Properties:
-          #     Path: /items
-          #     Method: GET
-          # GetAnItem:
-          #   Type: HttpApi
-          #   Properties:
-          #     Path: /items/{id}
-          #     Method: GET
-          # DeleteAnItem:
-          #   Type: HttpApi
-          #   Properties:
-          #     Path: /items/{id}
-          #     Method: DELETE
-          # CreateOrUpdateItem:
-          #   Type: HttpApi
-          #   Properties:
-          #     Path: /items
-          #     Method: PUT
+            # getAllTodos:
+            #   Type: HttpApi
+            #   Properties:
+            #     Path: /todos
+            #     Method: GET
+            # getTodoById:
+            #   Type: HttpApi
+            #   Properties:
+            #     Path: /todos/{todo_id}
+            #     Method: GET
+            # createTodo:
+            #   Type: HttpApi
+            #   Properties:
+            #     Path: /todos
+            #     Method: POST
     Policies:
       - DynamoDBReadPolicy:
           TableName: !Ref DynamoDBTable1
