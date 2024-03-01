@@ -3,14 +3,15 @@ https://www.youtube.com/watch?v=52W3Qyg242Y
 https://github.com/squidfunk/mkdocs-material
 https://github.com/ran-isenberg/aws-lambda-handler-cookbook/blob/main/app.py
 
+where | which python/pip
 python3 -m venv venv
 source venv/bin/activate
-pip install boto3
+pip list | freeze
+pip install boto3 + botocore
 pip install aws_lambda_powertools
 pip install requests-aws4auth
 pip install python-dotenv (for .env files to work)
 pip install ruff
-pip freeze
 pip freeze > requirements.txt
 pip install -r requirements.txt
 precommit install
@@ -20,16 +21,21 @@ pytest -cov (include code coverage) -v(verbose) -s(prints outputs)
 pytest::test_function
 
 pip install poetry
-poetry init (creates pyproject.toml + poetry.lock)
+poetry init (creates pyproject.toml + poetry.lock) | poetry new myproject
 poetry config virtualenvs.in-project true
 poetry install (also creates venv)
 poetry env info -p
 poetry env list
-sudo poetry shell / exit / deactivate
-#https://docs.powertools.aws.dev/lambda/python/2.34.2/#extra-dependencies
+poetry env use {pythonInstallationDir}
+sudo poetry shell / exit / deactivate / activate
 poetry add "aws-lambda-powertools[aws-sdk]" --group dev 
-poetry add boto3
-poetry add botocore
+poetry add boto3 -G dev
+poetry add -D botocore
 poetry add requests
 poetry update requests
 poetry remove requests
+poetry show --tree
+poetry build (for dist & wheel) + publish(to pypi.org)
+
+pip install -e .
+pip install -e .[dev]

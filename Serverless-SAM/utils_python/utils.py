@@ -1,3 +1,4 @@
+import sys
 import os
 import uuid
 import json
@@ -6,6 +7,8 @@ import time
 import pathlib
 #from pathlib import Path
 from dotenv import load_dotenv
+
+# sys.argv
 
 def load_dotenv() -> None:
     # Imports .env file
@@ -49,8 +52,11 @@ def write_file(filename, content):
         file.write(content)
 
 def read_file(filename):
-    with open(filename, "r", encoding="utf-8") as file:
-        return file.read()
+    try: 
+        with open(filename, "r", encoding="utf-8") as file:
+            return file.read()
+    except FileNotFoundError as e:
+        raise e
     
 def parsed_JSON(dict: object) -> str:
     return json.dumps(object, indent=4, sort_keys=True, separators=(". ", " = "))
