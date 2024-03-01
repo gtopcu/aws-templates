@@ -4,6 +4,7 @@
 # https://dynobase.dev/dynamodb-python-with-boto3/
 # https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb.html
 # https://boto3.amazonaws.com/v1/documentation/api/latest/reference/customizations/dynamodb.html
+# https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb/service-resource/tables.html 
 
 
 import boto3
