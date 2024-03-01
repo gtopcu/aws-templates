@@ -2,6 +2,9 @@
 # Code whisperer: Option + C
 # https://www.youtube.com/watch?v=twxM7WTfhGs
 # https://dynobase.dev/dynamodb-python-with-boto3/
+# https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb.html
+# https://boto3.amazonaws.com/v1/documentation/api/latest/reference/customizations/dynamodb.html
+
 
 import boto3
 from boto3.dynamodb.conditions import Key, Attr
