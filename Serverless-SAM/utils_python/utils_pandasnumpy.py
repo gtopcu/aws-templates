@@ -10,5 +10,13 @@ from scipy import stats
 # print(np.median(speed))
 # print(stats.mode(speed))
 
-df = pd.read_csv("data.csv")
+series = pd.Series(np.random.randn(4), name="PD Series'")
+print(series)
+print(np.abs(series))
+print(series * 100)
+print(series.describe())
+
+
+# df = pd.read_csv("data.csv")
+# df.iloc[2:4, 1:3]
 

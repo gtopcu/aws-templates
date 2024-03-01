@@ -2,12 +2,12 @@
 ####################################################################################################
 # 1 - Multiple Except
 
-# def main() -> None:
-#     try:
-#         x = 0 / 3
-#         print("Division: " + x)
-#     except* (KeyError, ValueError) as e:
-#        print(e)
+def main() -> None:
+    try:
+        x = 0 / 3
+        print("Division: " + x)
+    except (KeyError, ValueError) as e:
+       print(e)
 
 ####################################################################################################
 # 2 - asyncio TaskGroups instead of gather

@@ -23,7 +23,7 @@
 
 # https://dev.to/decorator_factory/type-hints-in-python-tutorial-3pel
 
-# from typing import Optional, Union
+# from typing import Any, Optional, Union
 
 # def optional_union(input: str) -> Union[str, None] #Optional[str]
 #     return None
