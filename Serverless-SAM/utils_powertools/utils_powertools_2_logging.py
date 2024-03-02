@@ -10,6 +10,7 @@ import requests
 # Logs all boto3 messages to stdout
 # https://docs.powertools.aws.dev/lambda/python/2.34.2/core/logger/#faq
 # import boto3
+
 # boto3.set_stream_logger()
 # boto3.set_stream_logger("botocore")
 
@@ -26,9 +27,8 @@ ENDPOINT = "http://httpbin.org/status/500"
 
 @logger.inject_lambda_context(log_event=True, #beware of sensitive data!
                               clear_state=True, #logger is global scope
-                              correlation_id_path=correlation_paths.API_GATEWAY_REST)
+                              correlation_id_path=correlation_paths.API_GATEWAY_)
 def lambda_handler(event: dict, context: LambdaContext) -> str:
-    
 
     #request = APIGatewayProxyEvent(event)
     #logger.set_correlation_id(request.request_context.request_id)
