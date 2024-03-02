@@ -7,6 +7,12 @@ from aws_lambda_powertools.utilities.data_classes import APIGatewayProxyEvent
 
 import requests
 
+# Logs all boto3 messages to stdout
+# https://docs.powertools.aws.dev/lambda/python/2.34.2/core/logger/#faq
+# import boto3
+# boto3.set_stream_logger()
+# boto3.set_stream_logger("botocore")
+
 logger = Logger()
 #logger = Logger(level="DEBUG INFO WARNING ERROR CRITICAL")
 #logger = Logger(serialize_stacktrace=True)
@@ -45,11 +51,8 @@ def lambda_handler(event: dict, context: LambdaContext) -> str:
     return "hello world"
 
 
-# When unit testing your code that makes use of inject_lambda_context decorator, you need to pass a dummy Lambda Context, 
-# or else Logger will fail. This is a Pytest sample that provides the minimum information necessary for Logger to succeed:
+# UNIT TESTING
 
-# from dataclasses import dataclass
-# import fake_lambda_context_for_logger_module  # sample module for completeness
 # import pytest
 # from dataclasses import dataclass
 
