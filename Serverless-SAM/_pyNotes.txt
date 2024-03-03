@@ -18,9 +18,6 @@ pip install -r requirements.txt
 precommit install
 deactivate
 
-pytest -cov (include code coverage) -v(verbose) -s(prints outputs)
-pytest::test_function
-
 pip install poetry
 poetry config virtualenvs.in-project true
 poetry new myproject (for existing projects: poetry init -> creates pyproject.toml + poetry.lock) 
