@@ -18,6 +18,7 @@ pip install -r requirements.txt
 precommit install
 deactivate
 
+# https://python-poetry.org/docs/cli/#export
 pip install poetry
 poetry config virtualenvs.in-project true
 poetry new myproject (for existing projects: poetry init -> creates pyproject.toml + poetry.lock) 
@@ -33,9 +34,10 @@ poetry add "aws-lambda-powertools[aws-sdk]" --group dev
 poetry add boto3 --group dev
 poetry add botocore -G dev
 poetry add requests
-poetry update requests
+poetry update | requests 
 poetry remove requests
 poetry show --tree
+poetry check
 poetry build (for dist & wheel)
 poetry publish (to pypi.org)
 pip install -e .

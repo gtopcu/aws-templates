@@ -1,3 +1,0 @@
-[flake8]
-exclude = .eggs, setup.py, example, .cdk,out, .git, dist, *.md, *.yaml, *.txt, *.ini
-max-line-length = 120
