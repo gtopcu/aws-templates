@@ -39,6 +39,13 @@ def main() -> None:
     # #print(time.time())
     # print("Done")
 
+    # myint = 10
+    # myfloat = float(myint)
+    # print(type(myfloat))
+
+    # tuple1 = (1, )
+    # print(type(tuple1))
+
     # list = [x for x in range(0, 10, 2)]
     # list2 = [x*x for x in range(0, 10) if x%2==1]
     # print(list.count(2))
@@ -51,13 +58,15 @@ def main() -> None:
     # print(list)
     # for i, j in enumerate(list):
     #     print(i, j)
-
     # for filtered in filter(lambda x: x % 4 == 0, list):
     #     print(filtered)
     # for mapped in map(lambda x: x * x, list):
     #     print(mapped)
+    # iterator = iter(list)
+    # while iterator:
+    #     print(next(iterator))
 
-    # dict = {x: x**2 for x in range(0, 10)}
+    dict = {x: x**2 for x in range(0, 10)}
     # print(dict.popitem())
     # print(dict.pop(0))
     # print(dict.get(10, 100))
@@ -68,7 +77,8 @@ def main() -> None:
     # dict.update(dict2)
     # print(dict)
     # print(dict.setdefault(9, 81))
-    # print(dict)
+    del dict[9]
+    print(dict)
 
     # Student = namedtuple('Student', ['name', 'age', 'DOB'])
     # S = Student('Nandini', '19', '2541997')
