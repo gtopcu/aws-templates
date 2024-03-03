@@ -4,6 +4,7 @@ https://github.com/squidfunk/mkdocs-material
 https://github.com/ran-isenberg/aws-lambda-handler-cookbook/blob/main/app.py
 
 where | which python/pip
+python --version
 python3 -m venv venv
 source venv/bin/activate
 pip list | freeze
@@ -21,16 +22,17 @@ pytest -cov (include code coverage) -v(verbose) -s(prints outputs)
 pytest::test_function
 
 pip install poetry
-poetry init (creates pyproject.toml + poetry.lock) | poetry new myproject
 poetry config virtualenvs.in-project true
+poetry new myproject | poetry init (creates pyproject.toml + poetry.lock) 
 poetry install (also creates venv)
 poetry env info -p
 poetry env list
+poetry env remove {env}
 poetry env use {pythonInstallationDir}
 sudo poetry shell / exit / deactivate / activate
 poetry add "aws-lambda-powertools[aws-sdk]" --group dev 
-poetry add boto3 -G dev
-poetry add -D botocore
+poetry add boto3 --group dev
+poetry add botocore -G dev
 poetry add requests
 poetry update requests
 poetry remove requests
