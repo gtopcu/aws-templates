@@ -1,4 +1,4 @@
-# from collections import deque, defaultdict, namedtuple
+from collections import deque, defaultdict, namedtuple, ChainMap
 # #import frozenset
 # import datetime
 # import time
@@ -8,9 +8,8 @@
 
 
 def main() -> None:
-    # x, y = 3, 4
-    # print(x, y)
 
+    # time = time.perf_counter
     # print(f"Total time: {total_time:.3f}")
 
     # char = "c"
@@ -35,9 +34,9 @@ def main() -> None:
     # my_defaultdict = defaultdict(int)
     # print(my_defaultdict["NoKeyError"])
 
-    # print( (12 * 3) if True else 6 )
+    # x, y = 1, 2
+    # x = (12 * 3) if True else 6
     # #print(time.time())
-    # print(BIG_CONSTANT)
     # print("Done")
 
     # list = [x for x in range(0, 10, 2)]
@@ -50,10 +49,52 @@ def main() -> None:
     # print(list.reverse())
     # list.sort(reverse=True)
     # print(list)
+    # for i, j in enumerate(list):
+    #     print(i, j)
 
-    dict = {x: x**2 for x in range(0, 10)}
-    print(dict)
-    print()
+    # for filtered in filter(lambda x: x % 4 == 0, list):
+    #     print(filtered)
+    # for mapped in map(lambda x: x * x, list):
+    #     print(mapped)
+
+    # dict = {x: x**2 for x in range(0, 10)}
+    # print(dict.popitem())
+    # print(dict.pop(0))
+    # print(dict.get(10, 100))
+    # print(dict[2])
+    # print(dict)
+    # dict2 = dict.fromkeys([1, 2, 3], 0)
+    # print(dict2)
+    # dict.update(dict2)
+    # print(dict)
+    # print(dict.setdefault(9, 81))
+    # print(dict)
+
+    # Student = namedtuple('Student', ['name', 'age', 'DOB'])
+    # S = Student('Nandini', '19', '2541997')
+    # print(S[1])
+    # print(S.name)
+    
+    # d1 = {'a': 1, 'b': 2}  
+    # d2 = {'c': 3, 'd': 4}  
+    # chain = ChainMap(d1, d2)
+    # print (chain.maps) 
+    # print (list(chain.keys())) 
+    # print (list(chain.values())) 
+
+    #defined_kwargs(arg1=1, arg2=2)
+    
+
+    
+    print("done")
+
+# def int_or_none() -> int | None:
+#     return None
+    
+# def defined_kwargs(**kwargs):
+#     for key, value in kwargs.items():
+#         print(type(key))
+#         print(key, value)
 
 
 if __name__ == "__main__":
