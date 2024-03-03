@@ -30,8 +30,7 @@ def main() -> None:
     my_defaultdict = defaultdict(lambda: "default")    
     print(my_defaultdict["NoKeyError"])
 
-    print( (12 * 3) if True else 6 )
-    
+    print( (12 * 3) if True else 6 )    
     #print(time.time())
     print()
     print("Done")
