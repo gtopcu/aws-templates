@@ -32,9 +32,6 @@ def main() -> None:
     
     #print(time.time())
     print()
-
-    
-
     print("Done")
 
 if __name__ == "__main__":

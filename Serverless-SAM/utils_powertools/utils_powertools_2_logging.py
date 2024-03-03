@@ -14,10 +14,10 @@ import requests
 # boto3.set_stream_logger()
 # boto3.set_stream_logger("botocore")
 
-logger = Logger()
-#logger = Logger(level="DEBUG INFO WARNING ERROR CRITICAL")
-#logger = Logger(serialize_stacktrace=True)
-#logger = Logger(log_uncaught_exceptions=True)
+# logger = Logger()
+# logger = Logger(level="DEBUG INFO WARNING ERROR CRITICAL")
+# logger = Logger(serialize_stacktrace=True)
+logger = Logger(log_uncaught_exceptions=True)
 
 #logger = Logger(service="payment", use_rfc3339=True)
 #date_format = "%m/%d/%Y %I:%M:%S %p"
@@ -30,7 +30,7 @@ ENDPOINT = "http://httpbin.org/status/500"
                               correlation_id_path=correlation_paths.API_GATEWAY_)
 def lambda_handler(event: dict, context: LambdaContext) -> str:
 
-    #request = APIGatewayProxyEvent(event)
+    request = APIGatewayProxyEvent(event)
     #logger.set_correlation_id(request.request_context.request_id)
     logger.debug(f"Correlation ID => {logger.get_correlation_id()}")
     
@@ -45,7 +45,7 @@ def lambda_handler(event: dict, context: LambdaContext) -> str:
         resp.raise_for_status()
     except requests.HTTPError as e:
         #logger.exception(e)
-        logger.exception("Received a HTTP 5xx error")
+        logger.exception("Received a HTTP 5xx error: " + e)
         raise RuntimeError("Unable to fullfil request") from e
 
     return "hello world"
