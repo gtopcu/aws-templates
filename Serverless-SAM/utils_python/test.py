@@ -28,6 +28,7 @@ def main() -> None:
     my_deque = deque(my_list, maxlen=5)
     print(my_deque)
     my_defaultdict = defaultdict(lambda: "default")    
+    my_defaultdict = defaultdict(int)    
     print(my_defaultdict["NoKeyError"])
 
     print( (12 * 3) if True else 6 )    
