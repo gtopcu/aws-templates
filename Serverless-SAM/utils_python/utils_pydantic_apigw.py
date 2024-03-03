@@ -58,7 +58,6 @@ def main() -> None:
         #print(parsedEvent.headers)
         return parsedEvent.model_dump()
 
-    
     print(f"Time: {time.perf_counter() - start}")
     
 
