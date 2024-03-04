@@ -7,6 +7,7 @@ pydantic.dataclasses.dataclass — a wrapper around standard dataclasses which p
 
 """
 
+import os
 from datetime import datetime
 from typing import Any, Optional, TypedDict
 # from typing import Dict, List, Tuple
@@ -28,7 +29,7 @@ from pydantic import (
 
 class User(BaseModel):
     #uuid: UUID = "12345678-1234-1234-1234-123456789012"
-    id: int = Field(strict=True)
+    id_: Optional[int] = Field(alias="id", default=None, strict=True)
     name: Optional[str] = "default"
     age: PositiveInt
     email: EmailStr
@@ -49,13 +50,15 @@ class User(BaseModel):
 
 def main() -> None:
     
+    os.system("clear")
+    
     try:
         user1 = User(id=1, age=30, name="GT", email="john@example.com", registration='2020-01-02T03:04:05Z',
                      weight=80, props={"foobar" : [(1, True, 0.1)]})
         
-        print(user1.model_dump())
-        #print(user1.model_dump(mode="json", include="color", exclude_unset=True, exclude_defaults=True, exclude_none=True))
-        #print(user1.model_dump_json())
+        # print(user1.model_dump())
+        # print(user1.model_dump(mode="json", include="color", exclude_unset=True, exclude_defaults=True, exclude_none=True))
+        # print(user1.model_dump_json())
         # user1.id
         # user1.name
         # user1.age
@@ -63,9 +66,11 @@ def main() -> None:
         # Generates JSON Schema version 2020-12 - the latest version compatible with OpenAPI 3.1
         #print(user1.model_json_schema())
 
-        # user1.model_validate(...)
-        # user1.model_validate_json("", strict=True))
+        user2 = User.model_validate(user1)
+        # user3 = User.model_validate_json("", strict=True)
         
+        print("Done")
+
     except ValidationError as e:
         print(f"Pydantic validation failed: {e}")
 
