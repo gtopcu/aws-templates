@@ -66,7 +66,7 @@ def main() -> None:
     # while iterator:
     #     print(next(iterator))
 
-    dict = {x: x**2 for x in range(0, 10)}
+    # dict = {x: x**2 for x in range(0, 10)}
     # print(dict.popitem())
     # print(dict.pop(0))
     # print(dict.get(10, 100))
@@ -77,8 +77,8 @@ def main() -> None:
     # dict.update(dict2)
     # print(dict)
     # print(dict.setdefault(9, 81))
-    del dict[9]
-    print(dict)
+    # del dict[9]
+    # print(dict)
 
     # Student = namedtuple('Student', ['name', 'age', 'DOB'])
     # S = Student('Nandini', '19', '2541997')
@@ -92,18 +92,25 @@ def main() -> None:
     # print (list(chain.keys())) 
     # print (list(chain.values())) 
 
+    # mydict = {"a": 1, "b": 2}
+    # defined_kwargs(**mydict)
+    defined_kwargs(**{"a": 1, "b": 2})
     #defined_kwargs(arg1=1, arg2=2)
     
-    print("done")
+    print("done", end="\n")
 
 # def int_or_none() -> int | None:
 #     return None
     
-# def defined_kwargs(**kwargs):
-#     for key, value in kwargs.items():
-#         print(type(key))
-#         print(key, value)
+def defined_kwargs(**kwargs):
+    print(kwargs)
+    for key, value in kwargs.items():
+        # print(type(key))
+        print(key, value)
 
+# https://docs.python.org/3/tutorial/controlflow.html#more-on-defining-functions
+def combined_example(pos_only, /, standard, *, kwd_only):
+    print(pos_only, standard, kwd_only)
 
 if __name__ == "__main__":
     main()
