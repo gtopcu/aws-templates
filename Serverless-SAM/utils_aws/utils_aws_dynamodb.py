@@ -18,6 +18,7 @@ from boto3.dynamodb.types import TypeSerializer, TypeDeserializer
 dynamodb = boto3.resource('dynamodb')
 # table.item_count
 # table.table_size_bytes
+# table.creation_date_time 
 
 # https://dynobase.dev/dynamodb-python-with-boto3/#get-item
 

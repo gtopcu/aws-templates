@@ -79,7 +79,6 @@ try:
 
 except botocore.exceptions.ClientError as err:
     if err.response['Error']['Code'] == 'InternalError': # Generic error
-        # We grab the message, request ID, and HTTP code to give to customer support
         print('Error Message: {}'.format(err.response['Error']['Message']))
         print('Request ID: {}'.format(err.response['ResponseMetadata']['RequestId']))
         print('Http code: {}'.format(err.response['ResponseMetadata']['HTTPStatusCode']))
