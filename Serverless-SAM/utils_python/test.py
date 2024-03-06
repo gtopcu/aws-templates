@@ -94,10 +94,12 @@ def main() -> None:
 
     # mydict = {"a": 1, "b": 2}
     # defined_kwargs(**mydict)
-    defined_kwargs(**{"a": 1, "b": 2})
-    #defined_kwargs(arg1=1, arg2=2)
+    # defined_kwargs(**{"a": 1, "b": 2})
+    # defined_kwargs(arg1=1, arg2=2)
     
-    print("done", end="\n")
+    defined_args(arg1=1, arg2=True, arg3=3)
+
+    # print("done", end="\n")
 
 # def int_or_none() -> int | None:
 #     return None
@@ -107,6 +109,9 @@ def defined_kwargs(**kwargs):
     for key, value in kwargs.items():
         # print(type(key))
         print(key, value)
+
+def defined_args(arg1:str, arg2:str, arg3=None):
+    print(arg1, arg2, arg3)
 
 # https://docs.python.org/3/tutorial/controlflow.html#more-on-defining-functions
 def combined_example(pos_only, /, standard, *, kwd_only):
