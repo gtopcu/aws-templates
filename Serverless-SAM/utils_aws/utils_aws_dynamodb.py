@@ -2,10 +2,10 @@
 # Code whisperer: Option + C
 # https://www.youtube.com/watch?v=twxM7WTfhGs
 # https://dynobase.dev/dynamodb-python-with-boto3/
+# https://boto3.amazonaws.com/v1/documentation/api/latest/guide/dynamodb.html
 # https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb.html
 # https://boto3.amazonaws.com/v1/documentation/api/latest/reference/customizations/dynamodb.html
 # https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb/service-resource/tables.html 
-
 
 import boto3
 from boto3.dynamodb.conditions import Key, Attr
@@ -16,6 +16,8 @@ from boto3.dynamodb.types import TypeSerializer, TypeDeserializer
 # from botocore.exceptions import ClientError
 
 dynamodb = boto3.resource('dynamodb')
+# table.item_count
+# table.table_size_bytes
 
 # https://dynobase.dev/dynamodb-python-with-boto3/#get-item
 
@@ -29,14 +31,20 @@ dynamodb = boto3.resource('dynamodb')
 #                       aws_secret_access_key='xxxx',
 #                       region_name='us-east-1')
 
+# # https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/programming-with-python.html
 # from botocore.config import Config
 # my_config = Config(
-#    connect_timeout = 1.0,
-#    read_timeout = 1.0
+#     connect_timeout = 5,
+#     read_timeout = 10,
+#     tcp_keepalive = True
+#     retries = {
+#      'mode': 'standard',
+#      'total_max_attempts': 3
+#    }
+#    max_pool_connections = 20, # default 10 for Session
 # )
 # dynamodb = boto3.resource('dynamodb', config=my_config)
 
-# https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/programming-with-python.html
 def dynamo_to_python(dynamo_object: dict) -> dict:
     deserializer = TypeDeserializer()
     return {
@@ -58,18 +66,19 @@ def get_item(table_name, key):
     return response
 
 def put_item(table_name, item):
+    """
+        Item={
+            'id': 1,
+            'title': 'my-document-title',
+            'content': 'some-content',
+        }
+    """
     table = dynamodb.Table(table_name)
     return table.put_item(Item=item)
-    """
-    Item={
-        'id': 1,
-        'title': 'my-document-title',
-        'content': 'some-content',
-    }
-    """
+
 def update_item(table_name, key, updateExpression, expressionAttributeValues):
     """
-    Key={
+        Key={
             'id': '894673'
         },
         UpdateExpression='SET country = :newCountry",
@@ -107,31 +116,12 @@ def query(table_name, keyConditionExpression, expressionAttributeValues):
         data.update(response['Items'])
     
     return response
-    """
-    response = table.query(
-        KeyConditionExpression=Key('id').eq(1)
-        IndexName: 'GSI1'
-        ScanIndexForward=False # true = ascending, false = descending
-    )
-    for i in response['Items']:
-        print(i['title'], ":", i['description'])
-    """
 
 # 1MB limit
 def scan(table_name):
     table = dynamodb.Table(table_name)
     response = table.scan()
     return response
-    
-    """
-    response = table.scan(FilterExpression=Attr('country').eq('US') & Attr('city').eq('NYC'))
-    data = response['Items']
-    while 'LastEvaluatedKey' in response:
-        response = table.scan(ExclusiveStartKey=response['LastEvaluatedKey'])
-        data.extend(response['Items'])
-    
-    return data
-    """
 
 # 16MB and 100 items limit
 def batch_get_items():
@@ -152,3 +142,62 @@ def batch_get_items():
         ReturnConsumedCapacity='TOTAL'
     )
     return response
+
+
+    """
+    response = client.query(
+        TableName='YourTableName',
+        KeyConditionExpression='pk = :pk_val AND begins_with(sk, :sk_val)',
+        FilterExpression='#name = :name_val',
+        ExpressionAttributeValues={
+            ':pk_val': {'S': 'id#1'},
+            ':sk_val': {'S': 'cart#'},
+            ':name_val': {'S': 'SomeName'},
+        },
+        ExpressionAttributeNames={
+            '#name': 'name',
+        }
+    )
+    Same using Resource:
+    response = table.query(
+        KeyConditionExpression=Key('pk').eq('id#1') & Key('sk').begins_with('cart#'),
+        FilterExpression=Attr('name').eq('SomeName'),
+        'Limit': 100
+    )
+
+    response = table.query(
+        KeyConditionExpression=Key('id').eq(1)
+        IndexName: 'GSI1'
+        ScanIndexForward=False # true = ascending, false = descending
+    )
+    for i in response['Items']:
+        print(i['title'], ":", i['description'])
+
+    response = table.scan(FilterExpression=Attr('country').eq('US') & Attr('city').eq('NYC'))
+    data = response['Items']
+    while 'LastEvaluatedKey' in response:
+        response = table.scan(ExclusiveStartKey=response['LastEvaluatedKey'])
+        data.extend(response['Items'])
+    return data
+
+    response = table.scan(
+        FilterExpression=Attr('first_name').begins_with('J') & Attr('account_type').eq('super_user')
+    )
+    items = response['Items']
+    print(items)
+
+    # Nested attribute
+    response = table.scan(
+        FilterExpression=Attr('address.state').eq('CA')
+    )
+
+
+    https://www.dynamodbguide.com/expression-basics
+    attribute_exists(): Check for existence of an attribute
+    attribute_not_exists(): Check for non-existence of an attribute
+    attribute_type(): Check if an attribute is of a certain type
+    begins_with(): Check if an attribute begins with a particular substring
+    contains(): Check if a String attribute contains a particular substring or a Set attribute contains a particular element
+    size(): Returns a number indicating the size of an attribute
+
+    """
