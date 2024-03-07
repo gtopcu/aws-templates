@@ -46,13 +46,15 @@ dynamodb = boto3.resource('dynamodb')
 # )
 # dynamodb = boto3.resource('dynamodb', config=my_config)
 
+@staticmethod
 def dynamo_to_python(dynamo_object: dict) -> dict:
     deserializer = TypeDeserializer()
     return {
         k: deserializer.deserialize(v) 
         for k, v in dynamo_object.items()
     }  
-  
+
+@staticmethod
 def python_to_dynamo(python_object: dict) -> dict:
     serializer = TypeSerializer()
     return {
@@ -111,7 +113,6 @@ def query(table_name, keyConditionExpression, expressionAttributeValues):
     )
 
     data = response['Items']
-    # LastEvaluatedKey indicates that there are more results
     while 'LastEvaluatedKey' in response:
         response = table.query(ExclusiveStartKey=response['LastEvaluatedKey'])
         data.update(response['Items'])
@@ -143,6 +144,10 @@ def batch_get_items():
         ReturnConsumedCapacity='TOTAL'
     )
     return response
+
+# 16MB and 25 items limit
+def batch_write_items():
+    pass
 
 
     """

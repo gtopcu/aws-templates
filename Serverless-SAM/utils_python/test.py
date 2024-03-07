@@ -6,7 +6,6 @@ from collections import deque, defaultdict, namedtuple, ChainMap
 
 # BIG_CONSTANT: int = 10000000
 
-
 def main() -> None:
 
     # time = time.perf_counter
