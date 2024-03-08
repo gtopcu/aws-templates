@@ -126,6 +126,7 @@ def scan(table_name):
     return response
 
 # 16MB and 100 items limit
+# can read or write items from one or more tables
 # Partial Errors: UnprocessedKeys
 def batch_get_items():
     response = dynamodb.batch_get_item(
