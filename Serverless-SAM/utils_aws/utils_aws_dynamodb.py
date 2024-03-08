@@ -126,6 +126,7 @@ def scan(table_name):
     return response
 
 # 16MB and 100 items limit
+# Partial Errors: UnprocessedKeys
 def batch_get_items():
     response = dynamodb.batch_get_item(
         RequestItems={
@@ -146,6 +147,7 @@ def batch_get_items():
     return response
 
 # 16MB and 25 items limit
+# Partial Errors: UnprocessedItems
 def batch_write_items():
     pass
 
