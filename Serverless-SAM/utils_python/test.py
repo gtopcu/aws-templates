@@ -1,8 +1,11 @@
 from collections import deque, defaultdict, namedtuple, ChainMap
+from typing import Any, Optional, TypedDict, TypeVar, Self, Iterable, Callable
+from typing import Dict, Set, FrozenSet, Tuple, NamedTuple, OrderedDict
 # #import frozenset
 # import datetime
 # import time
 # import os
+from sys import getsizeof
 
 # BIG_CONSTANT: int = 10000000
 
@@ -95,13 +98,30 @@ def main() -> None:
     # defined_kwargs(**mydict)
     # defined_kwargs(**{"a": 1, "b": 2})
     # defined_kwargs(arg1=1, arg2=2)
-    
-    defined_args(arg1=1, arg2=True, arg3=3)
+    # defined_args(arg1=1, arg2=True, arg3=3)
 
+    # my_range = range(10 ** 6)
+    # print(getsizeof(my_range), "bytes", sep="-")
+    # my_list: list[int] = list(my_range)
+    # print(getsizeof(my_list), "bytes", sep="-")
+    # map/filter/reduce = iterators so also low memory
+
+    # mylist1 = list(range(4))
+    # mylist2 = [4,5,6]
+    # print(mylist1 + mylist2)
+    # print(slice(None, 5).indices)
+
+    myset1 = { x for x in range(0, 5) }
+    myset2 = { x for x in range(5, 10) }
+    #print(myset1 | myset2)
+    # myset1.update(myset2)
+    # print(myset1)
+    # print(myset1.union(myset2))
+    
     # print("done", end="\n")
 
-# def int_or_none() -> int | None:
-#     return None
+def int_or_none() -> int | None:
+    return None
     
 def defined_kwargs(**kwargs):
     print(kwargs)

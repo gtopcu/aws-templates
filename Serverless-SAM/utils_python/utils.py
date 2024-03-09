@@ -1,4 +1,5 @@
 import sys
+from sys import getsizeof
 import os
 import uuid
 import json
