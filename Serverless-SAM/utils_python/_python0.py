@@ -9,15 +9,24 @@
 
 ####################################################################################################
 
-# from enum import Enum
+# https://docs.python.org/3/library/enum.html
+from enum import Enum
+from enum import auto, IntEnum, StrEnum, IntFlag
+class Color(Enum):
+    RED = 1
+    GREEN = 2
+    BLUE = 3
 
-# class Color(Enum):
-#     RED = 1
-#     GREEN = 2
-#     BLUE = 3
+    def __repr__(self):
+        return "<%s.%s>" % (self.__class__.__name__, self._name_)
 
 # functional syntax
 # Color = Enum('Color', ['RED', 'GREEN', 'BLUE'])
+class Role(IntFlag):
+    AUTHOR = auto() #or object()
+    EDITOR = auto()
+    VIEWER = auto()
+    ADMIN = AUTHOR | EDITOR | VIEWER
 
 ####################################################################################################
 

@@ -1,0 +1,39 @@
+# https://www.w3schools.com/python/python_regex.asp
+import re
+
+txt = "The rain in Spain"
+x = re.search("^The.*Spain$", txt)
+print(x)
+
+x = re.search("\s", txt)
+print("The first white-space character is located in position:", x.start())
+
+x = re.split("\s", txt, 2)
+print(x)
+
+x = re.findall("ai", txt)
+print(x)
+
+x = re.sub("\s", "9", txt, 3)
+print(x)
+
+REGEX_EMAIL = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+email_pattern = re.compile(REGEX_EMAIL)
+
+REGEX_NAME = r"^[a-zA-Z]+$"
+name_pattern = re.compile(REGEX_NAME)
+if not name_pattern.match("Test input"):
+    raise ValueError("Invalid name")
+
+
+"""
+    The Match object has properties and methods used to retrieve information about the search, and the result:
+    .span() returns a tuple containing the start-, and end positions of the match.
+    .string returns the string passed into the function
+    .group() returns the part of the string where there was a match
+"""
+
+x = re.search(r"\bS\w+", txt) #search for uppercase S
+print(x.span())
+print(x.string)
+print(x.group())
