@@ -5,7 +5,7 @@ import json
 from datetime import datetime, date, time
 import time
 import pathlib
-#from pathlib import Path
+from pathlib import Path
 from dotenv import load_dotenv
 
 # sys.argv
@@ -23,6 +23,7 @@ def os_get_cwd() -> str:
 
 def os_path_join(current_path:str, filename:str) -> str:
     return os.path.join(current_path, filename)
+    # Path.joinpath(current_path, filename)
 
 def os_path_isdir(path: str) -> bool:
     return os.path.isdir(path)
