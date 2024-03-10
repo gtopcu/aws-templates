@@ -110,23 +110,31 @@ def main() -> None:
     # mylist1 = list(range(4))
     # mylist2 = [4,5,6]
     # print(mylist1 + mylist2)
+    # mylist1.extend(mylist2)
+    # print(mylist1)
     # print(slice(None, 5).indices)
 
     # myset1 = { x for x in range(0, 5) }
     # myset2 = { x for x in range(5, 10) }
-    #print(myset1 | myset2)
+    # print(myset1 | myset2)
     # myset1.update(myset2)
     # print(myset1)
     # print(myset1.union(myset2))
-    
 
-    print("Output: " + str(f(1, 2, 3, a=4, b=5)))
+    # dict1 = { 0: 'A', 1: 'B', 2: 'C' }
+    # dict2 = { 2: 'D', 4: 'E', 5: 'F' }
+    # dict1 |= dict2
+    # print(dict1)
+    # dict1.update(dict2)
+    # print(dict1)
+    
     print("done", end="\n")
 
 def int_or_none(danger: list[str] = None) -> int | None:
     danger = [] if danger is None else danger
     return None
 
+# print("Output: " + str(f(1, 2, 3, a=4, b=5)))
 # func_wrapper(f)()
 def func_wrapper(func):
     def wrapper(*args, **kwargs):
