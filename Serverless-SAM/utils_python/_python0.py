@@ -22,11 +22,15 @@ class Color(Enum):
 
 # functional syntax
 # Color = Enum('Color', ['RED', 'GREEN', 'BLUE'])
-class Role(IntFlag):
+class Role(IntEnum): #or IntFlag
     AUTHOR = auto() #or object()
     EDITOR = auto()
     VIEWER = auto()
     ADMIN = AUTHOR | EDITOR | VIEWER
+
+class StringEnum(StrEnum):
+    str1 = "str1"
+    str2 = "str2"
 
 ####################################################################################################
 

@@ -1,4 +1,5 @@
 from collections import deque, defaultdict, namedtuple, ChainMap
+from collections.abc import Callable
 from typing import Any, Optional, TypedDict, TypeVar, Self, Iterable, Callable
 from typing import Dict, Set, FrozenSet, Tuple, NamedTuple, OrderedDict
 # #import frozenset
@@ -111,26 +112,43 @@ def main() -> None:
     # print(mylist1 + mylist2)
     # print(slice(None, 5).indices)
 
-    myset1 = { x for x in range(0, 5) }
-    myset2 = { x for x in range(5, 10) }
+    # myset1 = { x for x in range(0, 5) }
+    # myset2 = { x for x in range(5, 10) }
     #print(myset1 | myset2)
     # myset1.update(myset2)
     # print(myset1)
     # print(myset1.union(myset2))
     
-    # print("done", end="\n")
 
-def int_or_none() -> int | None:
+    print("Output: " + str(f(1, 2, 3, a=4, b=5)))
+    print("done", end="\n")
+
+def int_or_none(danger: list[str] = None) -> int | None:
+    danger = [] if danger is None else danger
     return None
-    
-def defined_kwargs(**kwargs):
-    print(kwargs)
-    for key, value in kwargs.items():
-        # print(type(key))
-        print(key, value)
 
-def defined_args(arg1:str, arg2:str, arg3=None):
-    print(arg1, arg2, arg3)
+# func_wrapper(f)()
+def func_wrapper(func):
+    def wrapper(*args, **kwargs):
+        print("starting..")
+        val = func(*args, **kwargs)
+        print("ended")
+        return val
+    return wrapper
+
+@func_wrapper
+def f(*args: int, **kwargs: int):
+    print(":".join([str(arg) for arg in args]))
+    #print("args:", args, "kwargs: ", kwargs)
+    return sum(args) + sum(kwargs.values())
+
+# f2(f1)
+# def f1():
+#     print("f1")
+# def f2(func: Callable[[Any], Any]):
+#     func()
+# def callable(callable: Callable[[int, int], int], a: int, b: int) -> int:
+#     return callable(a, b)
 
 # https://docs.python.org/3/tutorial/controlflow.html#more-on-defining-functions
 def combined_example(pos_only, /, standard, *, kwd_only):
