@@ -4,7 +4,7 @@ from typing import Any, Optional, TypedDict, TypeVar, Self, Iterable, Callable
 from typing import Dict, Set, FrozenSet, Tuple, NamedTuple, OrderedDict
 # #import frozenset
 # import datetime
-# import time
+import time
 # import os
 from sys import getsizeof
 
@@ -127,6 +127,8 @@ def main() -> None:
     # print(dict1)
     # dict1.update(dict2)
     # print(dict1)
+
+    print("Output: " + str(f(1, 2, 3, a=4, b=5)))
     
     print("done", end="\n")
 
@@ -138,9 +140,10 @@ def int_or_none(danger: list[str] = None) -> int | None:
 # func_wrapper(f)()
 def func_wrapper(func):
     def wrapper(*args, **kwargs):
+        start = time.perf_counter_ns()
         print("starting..")
         val = func(*args, **kwargs)
-        print("ended")
+        print("ended in: ", (time.perf_counter_ns() - start) / 1000000, "ms") 
         return val
     return wrapper
 
