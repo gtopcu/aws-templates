@@ -10,17 +10,19 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 # sys.argv
+# sys.path.insert(0, '/tmp/mydir')
 
 def load_dotenv() -> None:
     # Imports .env file
     load_dotenv()
 
-def get_env(env_name: str, default:str) -> str:
+def get_env(env_name: str, default:str | None) -> str | None:
     return os.getenv(env_name, str)    
     
 def os_get_cwd() -> str:
     os.getcwd()
-    #os.listdir('.')
+    # os.listdir('.')
+    # os.path.dirname(__file__)
 
 def os_path_join(current_path:str, filename:str) -> str:
     return os.path.join(current_path, filename)
@@ -45,6 +47,7 @@ def sleep(seconds: int) -> None:
 
 def get_perf_counter() -> float:
     return time.perf_counter
+    # time.perf_counter_ns()
 
 def generate_uuid():
     return str(uuid.uuid4())

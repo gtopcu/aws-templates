@@ -1,0 +1,35 @@
+FROM python:3.8-slim-bullseye
+
+RUN apt update && apt install -y libsndfile1 ffmpeg
+
+WORKDIR /home
+
+COPY . ./app/
+
+# create and activate virtual environment
+ENV VIRTUAL_ENV=/home/venv
+RUN python3 -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
+# install requirements
+RUN pip install -U pip
+RUN cd app/requirements && pip install -r deployment-requirements.txt
+
+ARG queue_name
+ARG s3_ml_bucket_name
+
+ENV AWS_DEFAULT_REGION=us-east-2
+ENV QUEUE_NAME=${queue_name}
+ENV S3_ML_BUCKET_NAME=${s3_ml_bucket_name}
+ENV INPUT_SOURCE=S3
+ENV OUTPUT_SOURCE=S3
+
+RUN cd app/src && python -m utils.create_local_folders
+RUN --mount=type=secret,id=AWS_ACCESS_KEY_ID --mount=type=secret,id=AWS_SECRET_ACCESS_KEY \
+    export AWS_ACCESS_KEY_ID=$(cat /run/secrets/AWS_ACCESS_KEY_ID) &&\
+    export AWS_SECRET_ACCESS_KEY=$(cat /run/secrets/AWS_SECRET_ACCESS_KEY) &&\
+    cd app/src &&\
+    python -m utils.download_ml_files &&\
+    python -m generation.utils.download_ml_files
+
+ENTRYPOINT cd ./app/src && python -m prod_on_start

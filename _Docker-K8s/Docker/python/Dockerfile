@@ -1,36 +1,27 @@
-FROM python:3.8-slim-bullseye
+# https://hub.docker.com/_/python
+FROM python:3.12.2
 
-RUN apt update && apt install -y libsndfile1 ffmpeg
+COPY requirements.txt ./
+RUN pip install -r requirements.txt
+COPY . ./
 
-WORKDIR /home
+CMD [ "python3", "process.py" ]
 
-COPY . ./app/
+# -----------------------------------------------------------------
 
-# create and activate virtual environment
-ENV VIRTUAL_ENV=/home/venv
-RUN python3 -m venv $VIRTUAL_ENV
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+FROM python:3
 
-# install requirements
-RUN pip install -U pip
-RUN cd app/requirements && pip install -r deployment-requirements.txt
+WORKDIR /usr/src/app
 
-ARG queue_name
-ARG s3_ml_bucket_name
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
 
-ENV AWS_DEFAULT_REGION=us-east-2
-ENV QUEUE_NAME=${queue_name}
-ENV S3_ML_BUCKET_NAME=${s3_ml_bucket_name}
-ENV INPUT_SOURCE=S3
-ENV OUTPUT_SOURCE=S3
+COPY . .
 
-RUN cd app/src && python -m spikyai_sd_voice_speech_data_generation.utils.create_local_folders
-RUN cd app/src && python -m spikyai_sd_voice_nlp_data_generation.utils.create_local_folders
-RUN --mount=type=secret,id=AWS_ACCESS_KEY_ID --mount=type=secret,id=AWS_SECRET_ACCESS_KEY \
-    export AWS_ACCESS_KEY_ID=$(cat /run/secrets/AWS_ACCESS_KEY_ID) &&\
-    export AWS_SECRET_ACCESS_KEY=$(cat /run/secrets/AWS_SECRET_ACCESS_KEY) &&\
-    cd app/src &&\
-    python -m spikyai_sd_voice_speech_data_generation.utils.download_ml_files &&\
-    python -m spikyai_sd_voice_nlp_data_generation.utils.download_ml_files
+CMD [ "python", "./your-daemon-or-script.py" ]
 
-ENTRYPOINT cd ./app/src && python -m prod_on_start
+# docker build -t my-python-app .
+# docker run -it --rm --name python-app python-app
+
+# Run script in Docker directly without dockerfile:
+# docker run -it --rm --name running-script -v "$PWD":/usr/src/myapp -w /usr/src/myapp python:3 python script.py

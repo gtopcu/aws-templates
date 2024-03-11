@@ -2,11 +2,11 @@ from collections import deque, defaultdict, namedtuple, ChainMap
 from collections.abc import Callable
 from typing import Any, Optional, TypedDict, TypeVar, Self, Iterable, Callable
 from typing import Dict, Set, FrozenSet, Tuple, NamedTuple, OrderedDict
-# #import frozenset
-# import datetime
+import datetime
 import time
-# import os
+import os
 from sys import getsizeof
+import atexit
 
 # BIG_CONSTANT: int = 10000000
 
@@ -72,7 +72,7 @@ def main() -> None:
     # dict = {x: x**2 for x in range(0, 10)}
     # print(dict.popitem())
     # print(dict.pop(0))
-    # print(dict.get(10, 100))
+    # print(dict.get(10, 100)) # Returns None instead of KeyError
     # print(dict[2])
     # print(dict)
     # dict2 = dict.fromkeys([1, 2, 3], 0)
@@ -115,11 +115,14 @@ def main() -> None:
     # print(slice(None, 5).indices)
 
     # myset1 = { x for x in range(0, 5) }
-    # myset2 = { x for x in range(5, 10) }
+    # myset2 = { x for x in range(3, 7) }
     # print(myset1 | myset2)
     # myset1.update(myset2)
     # print(myset1)
     # print(myset1.union(myset2))
+    # print(myset1 - myset2)
+    # print(myset1 & myset2) #intersection
+    # print(myset1 ^ myset2) #unique elements(symmetric difference)
 
     # dict1 = { 0: 'A', 1: 'B', 2: 'C' }
     # dict2 = { 2: 'D', 4: 'E', 5: 'F' }
@@ -128,9 +131,30 @@ def main() -> None:
     # dict1.update(dict2)
     # print(dict1)
 
-    print("Output: " + str(f(1, 2, 3, a=4, b=5)))
-    
+    # print(__file__)
+    # print(os.path.dirname(__file__))
+
+    # numbers: list[int] = list(range(10))
+    # print(numbers[::-2])
+    # reversed = slice(None, None, -2)
+    # print(numbers[reversed])
+
+    # myfloat: float = 123.1234
+    # print(f"{myfloat:.2f}")
+
+    # users: dict[int, str] = { 1: "Joe", 2: "Mary" }
+    # if user := users.get(0): #walrus operator
+    #     print(user)
+    # else:
+    #     print("Not found!")
+    # print(user)
+
+    #atexit.unregister(func_exit)
     print("done", end="\n")
+
+@atexit.register
+def func_exit() -> None:
+    print("exiting..")
 
 def int_or_none(danger: list[str] = None) -> int | None:
     danger = [] if danger is None else danger
