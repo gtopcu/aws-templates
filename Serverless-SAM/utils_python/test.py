@@ -6,6 +6,7 @@ import datetime
 import time
 import os
 from sys import getsizeof
+from timeit import timeit, repeat
 import atexit
 
 # BIG_CONSTANT: int = 10000000
@@ -138,6 +139,8 @@ def main() -> None:
     # print(numbers[::-2])
     # reversed = slice(None, None, -2)
     # print(numbers[reversed])
+    # numbers: list[int] = [*range(10)]
+    # print(numbers)
 
     # myfloat: float = 123.1234
     # print(f"{myfloat:.2f}")
@@ -150,6 +153,8 @@ def main() -> None:
     # print(user)
 
     #atexit.unregister(func_exit)
+    
+
     print("done", end="\n")
 
 @atexit.register

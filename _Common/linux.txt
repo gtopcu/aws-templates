@@ -1,6 +1,10 @@
 
 Linux Commands:
 https://www.xmind.net/m/WwtB/#
+
+echo $PATH
+export PATH=$PATH:/usr/local/go/bin
+
 **************************** Cron ****************************
 
 https://crontab.guru/
@@ -181,6 +185,7 @@ dnf check-update --releasever=latest --security
 microdnf update -y
 curl-minimal
 gnupg2-minimal
+dnf install node
 
 ************************** apt-get/yum ***************************
 

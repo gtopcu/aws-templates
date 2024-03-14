@@ -10,14 +10,13 @@ def main() -> None:
     # print(factorial.cache_info())
 
     function(1, 2, 3)
-
     print("done")
+    
 
-
-# @cache
-# # @lru_cache(maxsize=128, typed=False) #maxsize=None 
-# def factorial(n):
-#     return n * factorial(n-1) if n else 1
+@cache
+# @lru_cache(maxsize=128, typed=False) #maxsize=None 
+def factorial(n):
+    return n * factorial(n-1) if n else 1
 
 def func_wrapper_with_args(arg1: int):
     print("Decorator arg: ", arg1)

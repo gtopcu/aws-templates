@@ -1,0 +1,187 @@
+# https://dev.to/aws-builders/powering-aws-fargate-with-iac-aws-cloudformation-3n99
+AWSTemplateFormatVersion: 2010-09-09
+Description: An example CloudFormation template for Fargate.
+Parameters:
+  VPC:
+    Type: String
+    Default: <VPC_ID_HERE>
+  SubnetPublicA:
+    Type: String
+    Default: <PUBLIC_SUBNET_A>
+  SubnetPublicB:
+    Type: String
+    Default: <PUBLIC_SUBNET_B>
+  SubnetPublicC:
+    Type: String
+    Default: <PUBLIC_SUBNET_C>
+  Image:
+    Type: String
+    Default: <ACCOUNT_ID>.dkr.ecr.eu-central-1.amazonaws.com/nginx:latest
+  ClusterName:
+    Type: String
+    Description: ECS_CLUSTER_NAME here
+    Default: <ECS_CLUSTER_NAME>   
+  ServiceName:
+    Type: String
+    Description: ECS_SERVICE_NAME here
+    Default: "API_NAME-prod-svc"
+  TaskDefinitionName: 
+    Type: String
+    Description: Task Definition Name
+    Default: "API_NAME-prod-fargate"
+  ContainerPort:
+    Type: Number
+    Default: 3000
+  ContainerSecurityGroup:
+    Type: String
+    Description: api-container-sec-rules    
+    Default: <SECURITY_GROUP_ID>
+  ELBListenerArn:
+    Type: String
+    Default: <ELB_LISTENER_ARN>
+
+
+Resources:
+  TaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      # Name of the task definition.
+      Family: !Ref TaskDefinitionName
+      NetworkMode: awsvpc
+      RequiresCompatibilities:
+        - FARGATE
+      # 1024 (1 vCPU) - Available memory values: 2GB, 3GB, 4GB, 5GB, 6GB, 7GB, 8GB
+      Cpu: 1024
+      # 2GB, 3GB, 4GB, 5GB, 6GB, 7GB, 8GB - Available cpu values: 1024 (1 vCPU)
+      Memory: 3GB
+      # "The ARN of the task execution role that containers in this task can assume. All containers in this task are granted the permissions that are specified in this role."
+      ExecutionRoleArn: !GetAtt ExecutionRole.Arn
+      # "The (ARN) of an IAM role that grants containers in the task permission to call AWS APIs on your behalf."
+      TaskRoleArn: !Ref TaskRole
+      ContainerDefinitions:
+        - Name: API_NAME
+          Image: !Ref Image
+          Cpu: 0
+          Essential: true
+          PortMappings:
+            - ContainerPort: !Ref ContainerPort
+              Protocol: tcp
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-region: !Ref AWS::Region
+              awslogs-group: !Ref LogGroup
+              awslogs-stream-prefix: ecs              
+
+  LogGroup:
+    Type: AWS::Logs::LogGroup   
+    Properties:
+      LogGroupName: !Join  ['', [/ecs/, !Ref TaskDefinitionName]]
+      RetentionInDays: 14
+
+  # A role needed by ECS
+  ExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Join ['', [!Ref ServiceName, "ECSExecutionRole"]]
+      AssumeRolePolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ecs-tasks.amazonaws.com
+            Action: 'sts:AssumeRole'
+      ManagedPolicyArns:
+        - 'arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy'
+        -'arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly'
+
+  # A role for the containers
+  TaskRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Join ['', [!Ref ServiceName, "ECSTaskRole"]]
+      AssumeRolePolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ecs-tasks.amazonaws.com
+            Action: 'sts:AssumeRole'
+      ManagedPolicyArns:
+        - 'arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy'
+        - 'arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly'
+
+
+  Service:
+    Type: AWS::ECS::Service
+    DependsOn:
+      - LoadBalancerListenerRule    
+    Properties: 
+      ServiceName: !Ref ServiceName
+      Cluster: !Ref ClusterName
+      TaskDefinition: !Ref TaskDefinition
+      DeploymentConfiguration:
+        MinimumHealthyPercent: 100
+        MaximumPercent: 200
+      DesiredCount: 1
+      HealthCheckGracePeriodSeconds: 120
+      CapacityProviderStrategy:
+        - CapacityProvider: FARGATE_SPOT
+          Base: 0
+          Weight: 1      
+      NetworkConfiguration: 
+        AwsvpcConfiguration:
+          AssignPublicIp: ENABLED
+          Subnets:
+            - !Ref SubnetPublicA
+            - !Ref SubnetPublicB
+            - !Ref SubnetPublicC
+          SecurityGroups:
+            - !Ref ContainerSecurityGroup
+      LoadBalancers:
+        - ContainerName: API_NAME
+          ContainerPort: !Ref ContainerPort
+          TargetGroupArn: !Ref TargetGroup
+
+  TargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      HealthCheckIntervalSeconds: 30
+      HealthCheckPath: /API_NAME/health
+      HealthCheckTimeoutSeconds: 5
+      UnhealthyThresholdCount: 2
+      HealthyThresholdCount: 3
+      TargetType: ip
+      Name: !Ref ServiceName
+      Port: !Ref ContainerPort
+      Protocol: HTTP
+      TargetGroupAttributes:
+        - Key: deregistration_delay.timeout_seconds
+          Value: 30  #default 300 seconds
+      VpcId: !Ref VPC
+
+  LambdaDescribeELBListenerPriority:
+    Type: 'Custom::LambdaDescribeELBListenerPriority'
+    Properties:
+      ServiceToken: 'arn:aws:lambda:eu-central-1:759518442456:function:DescribeELBListener'
+
+  LoadBalancerListenerRule:
+    Type: AWS::ElasticLoadBalancingV2::ListenerRule
+    #DependsOn: GetListenerRulesLambdaFunction
+    Properties:
+      Actions:
+        - Type: forward
+          TargetGroupArn: !Ref TargetGroup
+      Conditions:
+        - Field: host-header
+          HostHeaderConfig:
+            Values:
+              - "api.example.com"
+        - Field: path-pattern
+          PathPatternConfig:
+            Values:
+              - "/API_NAME*"
+      ListenerArn: !Ref ELBListenerArn
+      Priority: !GetAtt LambdaDescribeELBListenerPriority.NextPriorityValue
+
+Outputs:
+  NextPriorityValue:
+    Value: !GetAtt LambdaDescribeELBListenerPriority.NextPriorityValue      

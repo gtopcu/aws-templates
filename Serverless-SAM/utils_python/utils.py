@@ -56,13 +56,22 @@ def write_file(filename, content):
     with open(filename, "w") as file:
         file.write(content)
 
-def read_file(filename):
+def read_file(filename) -> str:
     try: 
         with open(filename, "r", encoding="utf-8") as file:
             return file.read()
-    except FileNotFoundError as e:
+    except IOError as e:
         raise e
+    # try:
+    #     file = open(file=filename, mode="r", encoding="UTF-8")
+    # except IOError as e:
+    #     raise e
+    # else:
+    #     return file.read()
+    # finally:
+    #     if file is not None:
+    #         file.close()
     
-def parsed_JSON(dict: object) -> str:
+def dump_JSON(dict: object) -> str:
     return json.dumps(object, indent=4, sort_keys=True, separators=(". ", " = "))
     

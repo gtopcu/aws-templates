@@ -1,0 +1,66 @@
+variables:
+  API: nginx
+  REGISTRY: "<your_aws_account_number_here>.dkr.ecr.eu-central-1.amazonaws.com"
+  ECS_CLUSTER_NAME: "YOUR_ECS_CLUSTER_NAME"
+  ECS_SERVICE_NAME: "${API}-prod-svc"
+  ECS_TASK_FAMILY: "${API}-prod-fargate"
+  CF_STACK_NAME: '${API}-cf-template-${CI_PIPELINE_IID}'  
+
+stages:
+  - build
+  - deploy
+  - update
+
+before_script:
+  - echo "Build Name:" "$CI_JOB_NAME"
+  - echo "Branch:" "$CI_COMMIT_REF_NAME"
+  - echo "Build Stage:" "$CI_JOB_STAGE"
+
+
+build:
+  stage: build
+  script:
+    - $(aws ecr get-login --no-include-email --region eu-central-1)
+    - VER=$(cat ${PWD}/package.json | jq --raw-output '.version')
+    - echo $VER    
+    - docker build -t ${API} .
+    - docker tag ${API} ${REGISTRY}/${API}:${VER}-${CI_ENVIRONMENT_NAME}-${CI_PIPELINE_IID}
+    - docker push ${REGISTRY}/${API}:${VER}-${CI_ENVIRONMENT_NAME}-${CI_PIPELINE_IID}
+  environment:
+    name: prod
+
+
+deploy_cloudformation:
+  stage: deploy
+  when: manual
+  image:
+    name: amazon/aws-cli:latest
+    entrypoint: ['']
+  rules:
+    - if: $API != "null" && $CI_COMMIT_BRANCH == "master"
+  script:
+    - echo "Deploying your IaC CloudFormation..."
+    - yum install jq -y
+    - jq -Version
+    - VER=$(cat ${PWD}/package.json | jq --raw-output '.version')
+    - echo $VER
+    - echo "API Name ----> ${API} <----"
+    - echo "ECS FARGATE Cluster is = ${ECS_CLUSTER_NAME}"
+    - sed -i 's/API_NAME/'"${API}"'/g' deploy-fargate.yaml #replace API_NAME placeholder with the container that we want to run on AWS Fargate.
+    - cat deploy-fargate.yaml
+    - |
+      aws cloudformation create-stack \
+        --stack-name $CF_STACK_NAME \
+        --template-body file://deploy-fargate.yaml \
+        --capabilities CAPABILITY_NAMED_IAM \
+        --parameters \
+      ParameterKey=Image,ParameterValue=${REGISTRY}/${API}:${VER}-${CI_ENVIRONMENT_NAME}-${CI_PIPELINE_IID}
+    - echo "Visit https://api.example.com to see changes"
+  needs:
+    - job: build
+      optional: true
+  tags:
+    - gitlab-dind-runner
+  environment:
+    name: prod
+    url: https://api.example.com
