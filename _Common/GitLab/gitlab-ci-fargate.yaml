@@ -1,3 +1,4 @@
+# https://dev.to/aws-builders/powering-aws-fargate-with-iac-aws-cloudformation-3n99
 variables:
   API: nginx
   REGISTRY: "<your_aws_account_number_here>.dkr.ecr.eu-central-1.amazonaws.com"

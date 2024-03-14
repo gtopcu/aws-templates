@@ -12,6 +12,13 @@ from dotenv import load_dotenv
 # sys.argv
 # sys.path.insert(0, '/tmp/mydir')
 
+def get_docstring(input1: int) -> str
+    """
+    :param input1: Input integer
+    :return: Returns docstring 
+    """
+    return __doc__
+
 def load_dotenv() -> None:
     # Imports .env file
     load_dotenv()
