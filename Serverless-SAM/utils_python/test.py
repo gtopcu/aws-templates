@@ -172,6 +172,7 @@ def main() -> None:
     # print(f"{var = }")
 
     # now: datetime = datetime.now()
+    # print(f"{now:%Y-%m-%dT%H:%M:%SZ}") #ISO8601 
     # print(f"{now:%d/%m/%y (%H:%M:%S)}")
     # print(f"{now:%c}") #local
     # print(f"{now:%I%p}") #AM/PM
