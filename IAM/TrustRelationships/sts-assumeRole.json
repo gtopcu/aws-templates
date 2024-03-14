@@ -1,3 +1,18 @@
+Service:
+{ 
+	"Version": "2012-10-17", 
+	"Statement": [ 
+		{ 
+			"Effect": "Allow", 
+			"Principal": { 
+				"Service": "lambda.amazonaws.com" 
+				//"cloudwatch.amazonaws.com"
+			}, 
+			"Action": "sts:AssumeRole" 
+		} 
+	]
+}
+
 Account:
 {
     "Version": "2012-10-17",
@@ -11,6 +26,7 @@ Account:
         }
     ]
 }
+
 Root User:
 {
 	"Version": "2012-10-17",
@@ -39,25 +55,3 @@ User:
 	]
 }
 
-Everyone:
-{
-	"Id": "BlockNonSSLAccess",
-	"Version": "2012-10-17",
-	"Statement": [
-	  {
-		"Sid": "AllowSSLRequestsOnly",
-		"Action": "s3:*",
-		"Effect": "Deny",
-		"Resource": [
-			"arn:aws:s3:::config-bucket-001134395538",
-			"arn:aws:s3:::config-bucket-001134395538/*"
-		],
-		"Condition": {
-		  "Bool": {
-			"aws:SecureTransport": "false"
-		  }
-		},
-		"Principal": "*"
-	  }
-	]
-}

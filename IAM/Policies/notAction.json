@@ -1,0 +1,39 @@
+//https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_notaction.html
+
+{
+    "Sid": "notAction",
+    "Effect": "Allow",
+    "NotAction": [
+        "s3:DeleteBucket"
+    ],
+    "Resource": "arn:aws:s3:::*"
+}
+
+{
+    "Sid": "notAction",
+    "Effect": "Allow",
+    "NotAction": [
+        "iam:*"
+    ],
+    "Resource": "*"
+}
+
+{
+    "Sid": "notAction",
+    "Effect": "Deny",
+    "NotAction": [
+        "iam:*"
+    ],
+    "Resource": "*"
+}
+
+{
+    "Version": "2012-10-17",
+    "Statement": [{
+        "Sid": "DenyAllUsersNotUsingMFA",
+        "Effect": "Deny",
+        "NotAction": "iam:*",
+        "Resource": "*",
+        "Condition": {"BoolIfExists": {"aws:MultiFactorAuthPresent": "false"}}
+    }]
+}
