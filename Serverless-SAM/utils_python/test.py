@@ -2,7 +2,7 @@ from collections import deque, defaultdict, namedtuple, ChainMap
 from collections.abc import Callable
 from typing import Any, Optional, TypedDict, TypeVar, Self, Iterable, Callable
 from typing import Dict, Set, FrozenSet, Tuple, NamedTuple, OrderedDict
-import datetime
+from datetime import datetime
 import time
 import os
 from sys import getsizeof
@@ -152,10 +152,32 @@ def main() -> None:
     #     print("Not found!")
     # print(user)
 
-    #atexit.unregister(func_exit)
-    
+    # n: int = 1_000_000_000
+    # print(f"{n:_}")
+    # print(f"{n:,}")
+    # var: str = "hello"
+    # print(f"{var:>20}:")
+    # print(f"{var:20}:")
+    # print(f"{var:#^20}:")
+
+    # n: float = 1e9
+    # n: float = 12345.6789
+    # print(round(n, 2))
+    # print(f"{n:,.3f}")
+
+    # print(f"{2 + 3}")
+    # print(f"{2 + 3 = }")
+    # print(f"{bool(0) = }")
+    # var: str = "hello"
+    # print(f"{var = }")
+
+    # now: datetime = datetime.now()
+    # print(f"{now:%d/%m/%y (%H:%M:%S)}")
+    # print(f"{now:%c}") #local
+    # print(f"{now:%I%p}") #AM/PM
 
     print("done", end="\n")
+    #atexit.unregister(func_exit)
 
 @atexit.register
 def func_exit() -> None:

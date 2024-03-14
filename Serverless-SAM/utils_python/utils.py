@@ -14,8 +14,10 @@ from dotenv import load_dotenv
 
 def get_docstring(input1: int) -> str
     """
+    Sample function docstring
+
     :param input1: Input integer
-    :return: Returns docstring 
+    :return: Returns docstring as str
     """
     return __doc__
 
