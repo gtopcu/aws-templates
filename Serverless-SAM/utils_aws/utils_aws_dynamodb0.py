@@ -11,6 +11,16 @@ table = dynamodb.Table("table-1")
 docker pull amazon/dynamodb-local
 docker run -p 8000:8000 amazon/dynamodb-local
 http://localhost:8000
+
+# For a Boto3 client.
+ddb = boto3.client('dynamodb', endpoint_url='http://localhost:8000')
+response = ddb.list_tables()
+print(response)
+
+# For a Boto3 service resource
+ddb = boto3.resource('dynamodb', endpoint_url='http://localhost:8000')
+print(list(ddb.tables.all()))
+
 """
 # inputItems = json.loads("""
 # [
