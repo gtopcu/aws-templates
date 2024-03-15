@@ -1,6 +1,8 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
-Description: Event handler API Gateway
+
+# https://aws.amazon.com/blogs/devops/infrastructure-as-code-development-with-amazon-codewhisperer/
+Description: Rest API Gateway with Python Lambda Handler and DynamoDB table
 
 # https://docs.powertools.aws.dev/lambda/python/2.23.0/core/event_handler/api_gateway/#event-resolvers
 # https://aws.amazon.com/pt/blogs/opensource/create-restful-apis-on-aws-with-openapi-specification-with-no-coding/
@@ -32,7 +34,7 @@ Globals:
     #  - "*~1*" # converts to */* for any binary type
   Function:
     Timeout: 30
-    MemorySize: 128
+    MemorySize: 1796 #1 vCPU
     Runtime: python3.12
     #Tracing: Active
     Environment:
