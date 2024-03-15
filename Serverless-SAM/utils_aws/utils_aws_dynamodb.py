@@ -7,6 +7,11 @@ from boto3.dynamodb.conditions import Key, Attr
 dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table("table-1")
 
+"""
+docker pull amazon/dynamodb-local
+docker run -p 8000:8000 amazon/dynamodb-local
+http://localhost:8000
+"""
 # inputItems = json.loads("""
 # [
 #   {
