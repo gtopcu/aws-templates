@@ -10,8 +10,7 @@
 ####################################################################################################
 
 # https://docs.python.org/3/library/enum.html
-from enum import Enum
-from enum import auto, IntEnum, StrEnum, IntFlag
+from enum import Enum, auto, IntEnum, StrEnum, IntFlag
 class Color(Enum):
     RED = 1
     GREEN = 2

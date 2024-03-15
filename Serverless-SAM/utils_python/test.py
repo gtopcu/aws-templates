@@ -184,7 +184,7 @@ def main() -> None:
 def func_exit() -> None:
     print("exiting..")
 
-def int_or_none(danger: list[str] = None) -> int | None:
+def int_or_none(danger: list[dict] = None) -> int | None:
     danger = [] if danger is None else danger
     return None
 

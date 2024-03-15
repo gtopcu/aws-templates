@@ -38,7 +38,22 @@ for key, value in sorted(botocore.exceptions.__dict__.items()):
     if isinstance(value, type):
         print(key)
 
+"""
+{
+    'Error': {
+        'Code': 'SomeServiceException',
+        'Message': 'Details/context around the exception or error'
+    },
+    'ResponseMetadata': {
+        'RequestId': '1234567890ABCDEF',
+        'HostId': 'host ID data will appear here as a hash',
+        'HTTPStatusCode': 400,
+        'HTTPHeaders': {'header metadata key/values will appear here'},
+        'RetryAttempts': 0
+    }
+}
 
+"""
 # caching exceptions with Client
 client = boto3.client('aws_service_name')
 try:

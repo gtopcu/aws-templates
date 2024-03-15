@@ -1,5 +1,7 @@
 # Code whisperer: Option + C
 import boto3
+import botocore
+from boto3.dynamodb.conditions import Key, Attr
 
 dynamodb = boto3.resource('dynamodb')
 
