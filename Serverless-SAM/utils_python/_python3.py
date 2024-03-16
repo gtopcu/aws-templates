@@ -187,7 +187,6 @@ def main() -> None:
     # sys.exit(0) - Raises SystemExit exception, finally & cleanups run
     # os._exit(0) - Immediate kill, no finals/cleanups run. Only POSIX files are closed
 
-
     print("done", end="\n")
     #atexit.unregister(func_exit)
 
