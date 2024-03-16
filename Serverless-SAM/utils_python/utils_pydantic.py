@@ -49,10 +49,12 @@ class User(BaseModel):
     }
     uuid: UUID4 = Field(default_factory=uuid4) #"12345678-1234-1234-1234-123456789012"
     other_uuids: list[UUID4] = Field(default_factory=list)
-    id_: Optional[int] = Field(alias="id", default=None, strict=True, frozen=True, kw_only=False)
-    name: Optional[str] = "default"
+    id_: int = Field(alias="id", default=None, gt=0, strict=True, frozen=True, kw_only=False)
+    name: str = "default"
+    last_name: str = Field(exclude=True, pattern=NAME_REGEX)
     age: PositiveInt
     email: EmailStr | None
+    title: Optional[str] = Field(default="Mr.", min_length=1, max_length=10)
     birthday: datetime = Field(default_factory=datetime.now)
     color: Literal['red', 'green', 'blue'] = 'red',
     weight: Annotated[float, Gt(0), Le(200)]
