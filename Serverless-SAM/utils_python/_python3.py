@@ -4,7 +4,7 @@ from typing import Any, Optional, TypedDict, TypeVar, Self, Iterable, Callable
 from typing import Dict, Set, FrozenSet, Tuple, NamedTuple, OrderedDict
 from datetime import datetime
 import time
-import os
+import os, sys
 from sys import getsizeof
 from timeit import timeit, repeat
 import atexit
@@ -181,12 +181,26 @@ def main() -> None:
     # print(f"{now:%c}") #local
     # print(f"{now:%I%p}") #AM/PM
 
+    #input_none()
+
+    # print(issubclass(Exception, BaseException))
+    # sys.exit(0) - Raises SystemExit exception, finally & cleanups run
+    # os._exit(0) - Immediate kill, no finals/cleanups run. Only POSIX files are closed
+
+
     print("done", end="\n")
     #atexit.unregister(func_exit)
+
+    route add default gw 192.168.1.1
+    
 
 @atexit.register
 def func_exit() -> None:
     print("exiting..")
+
+def input_none(input:str | None=None):
+    print(input)
+    return print("Returning")
 
 def int_or_none(danger: list[dict] = None) -> int | None:
     danger = [] if danger is None else danger

@@ -11,6 +11,8 @@ from dotenv import load_dotenv
 
 # sys.argv
 # sys.path.insert(0, '/tmp/mydir')
+# sys.exit(0) - Raises SystemExit exception, finally & cleanups run
+# os._exit(0) - Immediate kill, no finals/cleanups run. Only POSIX files are closed
 
 def get_docstring(input1: int) -> str
     """
@@ -50,6 +52,13 @@ def datetime_now(format: str = "%Y-%m-%dT%H:%M:%SZ"): #ISO8601
     return datetime.datetime.now().strftime(format)
     datetime.datetime(2020, 5, 17) hour, minute, second, microsecond, tzone=None
     # datetime.datetime.now() + datetime.timedelta(days=1, hours=2)
+    # print(now.isoformat())
+    # print(now.strftime("%Y-%m-%d %H:%M:%S"))
+    # print(now.astimezone())
+    # print(f"{now:%Y-%m-%dT%H:%M:%SZ}") #ISO8601 
+    # print(f"{now:%d/%m/%y (%H:%M:%S)}")
+    # print(f"{now:%c}") #local
+    # print(f"{now:%I%p}") #AM/PM
 
 def sleep(seconds: int) -> None:
     time.sleep(seconds)

@@ -106,6 +106,11 @@ def lambda_handler(event, context):
     # else:
     #     print("Not found: ", my_id)
     
+    # if item := response.get('Item'): #walrus operator
+    #    print("Item: ", item)
+    # else:
+    #     print("Not found!")
+
     # response = table.query(
     #     KeyConditionExpression=Key('id').eq('001')
     # )
