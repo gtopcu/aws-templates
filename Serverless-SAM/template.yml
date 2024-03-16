@@ -36,7 +36,20 @@ Globals:
     Timeout: 30
     MemorySize: 1796 #1 vCPU
     Runtime: python3.12
+    Architectures:
+    - x86_64
+    # EphemeralStorage:
+    #   Size: 512
     #Tracing: Active
+    # EventInvokeConfig:
+    #     MaximumEventAgeInSeconds: 21600
+    #     MaximumRetryAttempts: 2
+    # FunctionUrlConfig:
+    #   AuthType: NONE
+    #   InvokeMode: BUFFERED
+    Layers:
+    # https://docs.powertools.aws.dev/lambda/python/latest/#lambda-layer
+      - !Sub arn:aws:lambda:${AWS::Region}:017000801446:layer:AWSLambdaPowertoolsPythonV2:65
     Environment:
       Variables:
         POWERTOOLS_LOG_LEVEL: INFO
@@ -50,13 +63,9 @@ Globals:
         #POWERTOOLS_PARAMETERS_MAX_AGE: 60 #seconds
         #POWERTOOLS_PARAMETERS_SSM_DECRYPT: true
         #POWERTOOLS_DEV: false
-    Layers:
-      # Find the latest Layer version in the official documentation
-      # https://docs.powertools.aws.dev/lambda/python/latest/#lambda-layer
-      - !Sub arn:aws:lambda:${AWS::Region}:017000801446:layer:AWSLambdaPowertoolsPythonV2:61
 
 Resources:
-  ApiFunction:
+  LambdaFunction:
     Type: AWS::Serverless::Function
     Properties:
       Handler: apigw_handler.handler
@@ -66,16 +75,33 @@ Resources:
       Environment:
         Variables:
           TABLE_NAME: !Ref DynamoDBTable1
-      AutoPublishAlias: live
+      # AutoPublishAlias: live
       # https://aws.amazon.com/blogs/compute/introducing-advanced-logging-controls-for-aws-lambda-functions/?s=08
-      # Policies:
-      #     Statement:
-      #       - Sid: CloudWatchLogGroup
-      #         Action: 
-      #           - logs:CreateLogStream
-      #           - logs:PutLogEvents
-      #         Resource: !GetAtt CloudWatchLogGroup.Arn
-      #         Effect: Allow
+      Policies:
+        Statement:
+          - Sid: CloudWatchLogGroupPolicy
+            Effect: Allow
+            Action: 
+              - logs:CreateLogGroup
+              - logs:CreateLogStream
+              - logs:PutLogEvents
+            Resource: '*' #!GetAtt CloudWatchLogGroup.Arn
+
+        # - Statement:
+        #     - Effect: Allow
+        #       Action:
+        #         - dynamodb:*
+        #       Resource: '*'
+        #     - Effect: Allow
+        #       Action:
+        #         - logs:*
+        #         - xray:*
+        #       Resource: '*'
+        # - DynamoDBReadPolicy:
+        #   TableName: !Ref DynamoDBTable1
+        # - DynamoDBCrudPolicy:
+        #     TableName: !Ref DynamoDBTable1
+        #  Policies: AmazonDynamoDBReadOnlyAccess  
       # LoggingConfig:
       #   LogFormat: JSON 
       #   ApplicationLogLevel: DEBUG 
@@ -112,24 +138,30 @@ Resources:
             #   Properties:
             #     Path: /todos
             #     Method: POST
-      #Policies: AmazonDynamoDBReadOnlyAccess  
-      Policies:
-        - DynamoDBReadPolicy:
-            TableName: !Ref DynamoDBTable1
 
-    Connectors:
-      DynamoDBConn:
-        Properties: 
-          Destination:
-            Id: DynamoDBTable1
-          Permissions:
-              - Write
-          #SourceReference: SourceReference
+  # CloudWatchLogGroup:
+  #   Type: AWS::Logs::LogGroup
+  #   UpdateReplacePolicy: Retain
+  #   DeletionPolicy: Retain
+  #   Properties:
+  #     LogGroupName: !Sub /aws/lambda/${LambdaFunction}
+
+    # Connectors:
+    #   DynamoDBConn:
+    #     Properties: 
+    #       Destination:
+    #         Id: DynamoDBTable1
+    #       Permissions:
+    #           - Write
+    #       #SourceReference: SourceReference
 
   DynamoDBTable1:
     Type: AWS::DynamoDB::Table
+    UpdateReplacePolicy: Retain
+    DeletionPolicy: Retain
     Properties:
-      TableName: sam-table1
+      TableName: sam-ddb-table1
+      BillingMode: PROVISIONED
       #PointInTimeRecoverySpecification:
       #  PointInTimeRecoveryEnabled: True
       #DeletionProtectionEnabled: True
@@ -152,3 +184,5 @@ Resources:
           KeyType: RANGE
       # StreamSpecification:
       #   StreamViewType: NEW_IMAGE
+
+      
