@@ -5,7 +5,11 @@
 # Formalized & multi-line f-strings
 # Better error descriptions
 # Union types str | int
-# from typing import Type
+
+from typing import Type
+type myTypeAlias = list[str]
+def myfunc(arg: myTypeAlias):
+    pass
 
 # https://docs.python.org/3/library/typing.html#typing.Self
 # from typing import Self, reveal_type

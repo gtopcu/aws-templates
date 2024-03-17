@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Please input a number between 5 and 10:</p>
+
+<input id="demo" type="text"/>
+<button type="button" onclick="myFunction()">Test Input</button>
+<p id="p01"></p>
+<p id="pLocation"></p>
+
+<script>
+
+  function myFunction() {
+    console.log("Ran!")
+    const message = document.getElementById("p01");
+    let x = document.getElementById("demo").value;
+    try {
+      if(x.trim() == "") throw "empty";
+      if(isNaN(x)) throw "not a number";
+      x = Number(x);
+      if(x < 5) throw "too low";
+      if(x > 10) throw "too high";
+
+      message.innerHTML = x;
+    }
+    catch(err) {
+      message.innerHTML = "Input is " + err;
+    }
+  }
+
+  const loc = document.getElementById("pLocation");
+  function getLocation() {
+    console.log("getting location..")
+    loc.innerHTML = "getting location..";
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+      loc.innerHTML = "Geolocation is not supported by this browser.";
+    }
+  }
+  function showPosition(position) {
+    loc.innerHTML = "Latitude: " + position.coords.latitude +
+    "<br>Longitude: " + position.coords.longitude;
+  }
+  getLocation();
+
+  /*
+  https://www.w3schools.com/js/js_api_fetch.asp
+
+  JavaScript has 8 Datatypes
+  https://www.w3schools.com/js/js_datatypes.asp
+    1. String
+    2. Number
+    3. Bigint
+    4. Boolean
+    5. Undefined
+    6. Null
+    7. Symbol
+    8. Object
+
+    The object data type can contain:
+    1. An object
+    2. An array
+    3. A date
+
+  let x = true;
+  const p = { firstName:"John", lastName:"Doe" };
+  const person = new Object();
+  person.firstName = "John";
+  person.lastName = "Doe";
+
+  let bigOne = BigInt(999999999999999);
+  let type = typeof bigOne;
+  const letters = new Set(["a","b","c"]);
+  const fruits = new Map([
+    ["apples", 500],
+    ["bananas", 300],
+    ["oranges", 200]
+  ]);
+  fruits.set("apples", 500);
+
+  let text = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  let length = text.length;
+  text.charAt(3)
+  text.concat("other")
+  text.endsWith("...")
+  text.substr(4, 50)
+  text.indexOf("fr")
+  text.includes("gt")
+  text.trim()
+
+  const d1 = new Date();
+  const d2 = new Date("2022-03-25");
+  const fruits = ["Banana", "Orange", "Apple", "Mango"];
+  fruits.sort();
+  const sorted = months.toSorted();
+  fruits.reverse();
+  const reversed = months.toReversed();
+  const points = [40, 100, 1, 5, 25, 10];
+  points.sort(function(a, b){return a - b});
+  for (let x in array) {}
+  numbers.forEach(myFunction);
+  function myFunction(value, index, array) {}
+
+  setTimeout(myFunction, 3000);
+  setInterval(myFunction, 1000);
+
+  const x = function myFunction(a, b = 2) { 
+    return a * b; 
+  }
+  function sum(...args) { 
+    let sum = 0;
+    for (let arg of args) sum += arg;
+    return sum;
+  }
+  */
+
+  /*
+  let myPromise = new Promise(function(resolve, reject) {
+      //...
+      resolve("Success"); // when successful
+      reject("Fail");  // when error
+  }).then(
+    function(value) { },
+    function(error) { }
+  );
+  async function myFunction() {
+    let value = await promise;
+    return "Hello";
+  }
+  function myFunction() {
+    return Promise.resolve("Hello");
+  }
+  myFunction().then(
+    function(value) { },
+    function(error) { }
+  );
+  */
+
+/*
+In JSON, keys must be strings, written with double quotes
+In JavaScript, keys can be strings, numbers, or identifier names
+
+In JSON, values must be one of the following data types:
+  - string
+  - number
+  - object
+  - array
+  - boolean
+  - null
+In JavaScript values can be all of the above, plus:
+  - function
+  - date
+  - undefined
+
+  In JSON, array values must be of type string, number, object, array, boolean or null
+  In JavaScript, array values can be all of the above, plus functions, dates, and undefined
+
+  */
+
+  /*
+  json = JSON.parse("{ 'input' : 5 }");
+  console.log(JSON.stringify(json.input));
+
+  const obj = {name: "John", today: new Date(), city : "New York"};
+  const x = obj["name"];
+  const myJSON = JSON.stringify(obj);
+  for (const x in obj) {
+    console.log(x + ": " + obj[x]);
+  }
+
+  myJSONArray = '["Ford", "BMW", "Fiat"]';
+  myArray = JSON.parse(myJSONArray);
+  const first = myJSONArray[0]
+
+  const text = '{"name":"John", "birth":"1986-12-14", "city":"New York"}';
+  const objDate = JSON.parse(text, function (key, value) {
+    if (key == "birth") {
+      return new Date(value);
+    } else {
+      return value;
+    }
+  });
+
+  class Car {
+    constructor(name, year) {
+      this.name = name;
+      this.year = year;
+    }
+    age(x) {
+      return x - this.year;
+    }
+  }
+  
+  // Create an object:
+  const person = {
+    firstName: "John",
+    lastName: "Doe",
+    language: "en",
+    get lang() {
+      return this.language.toUpperCase();
+    }
+  };
+
+  let myFunction = (a, b) => a * b;
+  hello = () => {
+    return "Hello World!";
+  }
+  hello = () => "Hello World!";
+  hello = (val) => "Hello " + val;
+  hello = val => "Hello " + val;
+
+  fetch("google.com")
+    .then(x => x.text())
+    .then(y => myDisplay(y));
+  
+  async function getText(file) {
+    let x = await fetch(file);
+    let y = await x.text();
+    myDisplay(y);
+  }
+  
+  //LiveServer:
+  //Command O + Command L
+  //Command + Option + I
+  
+  fetch("https://get.geojs.io/v1/ip/country.json?ip=8.8.8.8")
+    .then(    //resp.json()
+      resp => { resp.text().text().then(body => console.log("Fetch Response: " + body )); },
+      err =>  { console.log("Error Fetching: " + err); }
+    );
+
+  fetch("http://example.com/api/endpoint/", {
+      method: "post",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+
+      //make sure to serialize your JSON body
+      body: JSON.stringify({
+        name: myName,
+        password: myPassword
+      })
+    })
+    .then( (response) => { 
+      //do something awesome that makes the world a better place
+    });
+
+  /*
+  // Returns a random integer from 0 to 9:
+  Math.floor(Math.random() * 10);
+
+  switch (new Date().getDay()) {
+    case 6:
+      text = "Today is Saturday";
+      break;
+    default:
+      text = "Looking forward to the Weekend";
+  }
+
+  https://www.w3schools.com/js/js_typeof.asp
+  typeof "John"                 // Returns "string"
+  typeof 3.14                   // Returns "number"
+  typeof NaN                    // Returns "number"
+  typeof false                  // Returns "boolean"
+  typeof [1,2,3,4]              // Returns "object"
+  typeof {name:'John', age:34}  // Returns "object"
+  typeof new Date()             // Returns "object"
+  typeof function () {}         // Returns "function"
+  typeof myCar                  // Returns "undefined" *
+  typeof null                   // Returns "object"
+
+  The data type of NaN is number
+  The data type of an array is object
+  The data type of a date is object
+  The data type of null is object
+  The data type of an undefined variable is undefined 
+  The data type of a variable that has not been assigned a value is also undefined 
+  You cannot use typeof to determine if a JavaScript object is an array (or a date)
+  
+  person = null;    // Now value is null, but type is still an object
+  You can also empty an object by setting it to undefined:
+  person = undefined;   // Now both value and type is undefined
+  
+  import { name, myFunc } from "./person.js";
+  export const name = "Jesse";
+  export const myFunc = (a, b) => a * b;
+  
+  const PI = 3.14;
+  export default PI;
+  import PI from "./pi.js";
+
+
+</script>
+
+</body>
+</html>
+

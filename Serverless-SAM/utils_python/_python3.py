@@ -1,13 +1,17 @@
 from collections import deque, defaultdict, namedtuple, ChainMap
-from collections.abc import Callable
-from typing import Any, Optional, TypedDict, TypeVar, Self, Iterable, Callable
+from collections.abc import Callable, Iterable, Iterator, Generator, Container, Self
+from collections.abc import Sized, Hashable, Sequence, Mapping, MutableSequence, MutableMapping
+from collections.abc import Set, MutableSet, MappingView, KeysView, ItemsView, ValuesView
+from typing import Any, Optional, TypedDict, TypeVar, Self
 from typing import Dict, Set, FrozenSet, Tuple, NamedTuple, OrderedDict
 from datetime import datetime
 import time
 import os, sys
 from sys import getsizeof
 from timeit import timeit, repeat
+import random
 import atexit
+
 
 # BIG_CONSTANT: int = 10000000
 
@@ -181,7 +185,8 @@ def main() -> None:
     # print(f"{now:%c}") #local
     # print(f"{now:%I%p}") #AM/PM
 
-    #input_none()
+    # rand_int = random.randint(0, 10)
+    # rand_flt = random.random()
 
     # print(issubclass(Exception, BaseException))
     # sys.exit(0) - Raises SystemExit exception, finally & cleanups run
@@ -189,9 +194,6 @@ def main() -> None:
 
     print("done", end="\n")
     #atexit.unregister(func_exit)
-
-    route add default gw 192.168.1.1
-    
 
 @atexit.register
 def func_exit() -> None:
