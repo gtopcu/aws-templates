@@ -1,5 +1,7 @@
 //https://www.w3schools.com/typescript/typescript_intro.php
 
+let myInt:number = 5;
+
 /* 
 
 17-03-2024
