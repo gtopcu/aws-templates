@@ -1,9 +1,9 @@
 from collections import deque, defaultdict, namedtuple, ChainMap
-from collections.abc import Callable, Iterable, Iterator, Generator, Container, Self
+from collections.abc import Callable, Iterable, Iterator, Generator, Container
 from collections.abc import Sized, Hashable, Sequence, Mapping, MutableSequence, MutableMapping
 from collections.abc import Set, MutableSet, MappingView, KeysView, ItemsView, ValuesView
 from typing import Any, Optional, TypedDict, TypeVar, Self
-from typing import Dict, Set, FrozenSet, Tuple, NamedTuple, OrderedDict
+from typing import Dict, Set, FrozenSet, Tuple, NamedTuple, OrderedDict, Self
 from datetime import datetime
 import time
 import os, sys
@@ -11,7 +11,8 @@ from sys import getsizeof
 from timeit import timeit, repeat
 import random
 import atexit
-
+import glob
+import pickle
 
 # BIG_CONSTANT: int = 10000000
 
@@ -136,9 +137,6 @@ def main() -> None:
     # dict1.update(dict2)
     # print(dict1)
 
-    # print(__file__)
-    # print(os.path.dirname(__file__))
-
     # numbers: list[int] = list(range(10))
     # print(numbers[::-2])
     # reversed = slice(None, None, -2)
@@ -187,6 +185,26 @@ def main() -> None:
 
     # rand_int = random.randint(0, 10)
     # rand_flt = random.random()
+
+    # print(os.getcwd())
+    # print(os.listdir('.'))
+    # print(__file__)
+    # print(os.path.dirname(__file__))
+    
+    # print(glob.glob("?????.py")
+    # print(glob.glob("*.py"))
+    # print(glob.glob("*.*"))
+    # print(glob.glob("[abc]*.py")) #[] first char should be a or
+    # # print(glob.glob("[!abc]*.py")) #[] first char should NOT be a or b
+    # globs = glob.iglob("**/utils_*.py", root_dir="/Users/gtopcu/", recursive=True, include_hidden=True)
+    # print(globs.__next__())
+    # for i, cglob in enumerate(globs, 1):
+    #     print(i, cglob, sep=":")
+    
+    # with open("fruit.pickle", "wb") as file:
+    #     pickle.dump(fruit, file)
+    # with open("fruit.pickle", "rb") as file:
+    #     fruit:Fruit = pickle.load(f)
 
     # print(issubclass(Exception, BaseException))
     # sys.exit(0) - Raises SystemExit exception, finally & cleanups run
