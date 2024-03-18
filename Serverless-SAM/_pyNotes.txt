@@ -8,6 +8,7 @@ python --version
 python3 -m venv venv
 source venv/bin/activate
 pip list | freeze
+pip install --target ./package requests
 pip install boto3 + botocore
 pip install aws_lambda_powertools
 pip install requests-aws4auth
