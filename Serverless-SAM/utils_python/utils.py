@@ -3,7 +3,8 @@ from sys import getsizeof
 import os
 import uuid
 import json
-from datetime import datetime, date, time
+from datetime import datetime, date, time, UTC
+import dateutil
 import time
 import pathlib
 from pathlib import Path
@@ -11,6 +12,7 @@ from dotenv import load_dotenv
 
 # sys.argv
 # sys.path.insert(0, '/tmp/mydir')
+# sys.path.append(os.path.abspath(module_path))
 # sys.exit(0) - Raises SystemExit exception, finally & cleanups run
 # os._exit(0) - Immediate kill, no finals/cleanups run. Only POSIX files are closed
 
@@ -29,11 +31,13 @@ def load_dotenv() -> None:
 
 def get_env(env_name: str, default:str | None) -> str | None:
     return os.getenv(env_name, str)    
+    #os.environ.get(env_name, default)
     
 def os_get_cwd() -> str:
     os.getcwd()
     # os.listdir('.')
     # os.path.dirname(__file__)
+    # os.makedirs("data", exist_ok=True)
 
 def os_path_join(current_path:str, filename:str) -> str:
     return os.path.join(current_path, filename)
@@ -49,16 +53,23 @@ def pathlib_current_path() -> pathlib.Path:
     #print(pathlib.Path(__file__).parent / "events.json")
 
 def datetime_now(format: str = "%Y-%m-%dT%H:%M:%SZ"): #ISO8601 
+    
     return datetime.datetime.now().strftime(format)
-    datetime.datetime(2020, 5, 17) hour, minute, second, microsecond, tzone=None
+    # datetime.datetime(2020, 5, 17, tzinfo=UTC) # hour, minute, second, microsecond, tzone=None
     # datetime.datetime.now() + datetime.timedelta(days=1, hours=2)
     # print(now.isoformat())
     # print(now.strftime("%Y-%m-%d %H:%M:%S"))
+    # print(now.strftime("%A %x %X"))
     # print(now.astimezone())
     # print(f"{now:%Y-%m-%dT%H:%M:%SZ}") #ISO8601 
     # print(f"{now:%d/%m/%y (%H:%M:%S)}")
     # print(f"{now:%c}") #local
     # print(f"{now:%I%p}") #AM/PM
+    # date = dateutil.parser.parse("2022-01-01")
+    # print(date.date())
+    # print(date.strftime('%d/%m/%Y'))
+    # print(time.strftime('%d/%m/%Y'))
+    # time.gmtime()
 
 def sleep(seconds: int) -> None:
     time.sleep(seconds)

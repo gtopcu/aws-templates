@@ -1,8 +1,9 @@
 
 # https://boto3.amazonaws.com/v1/documentation/api/latest/guide/error-handling.html
 
-import botocore
 import boto3
+import botocore
+import botocore.exceptions.ClientError
 import boto3.session
 import logging
 
@@ -30,6 +31,21 @@ my_config = Config(
     }
 )
 client = boto3.client('kinesis', config=my_config)
+
+
+# Session - not thread safe, create new one per thread
+
+my_session = boto3.session.Session()
+# aws_access_key_id
+# aws_secret_access_key
+# region_name
+# profile_name
+
+
+# Now we can create low-level clients or resource clients from our custom session
+sqs = my_session.client('sqs')
+s3 = my_session.resource('s3')
+
 
 # Catch exceptions through ClientError and parse error codes for all service-side exceptions and errors
 
@@ -113,17 +129,7 @@ except client.meta.client.exceptions.BucketAlreadyExists as err:
     raise err
 
 
-# Session - not thread safe, create new one per thread
 
-my_session = boto3.session.Session()
-# aws_access_key_i
-# aws_secret_access_key
-# region_name
-# profile_name
-
-# Now we can create low-level clients or resource clients from our custom session
-sqs = my_session.client('sqs')
-s3 = my_session.resource('s3')
 
 
 

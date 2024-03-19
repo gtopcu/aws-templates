@@ -3,8 +3,8 @@ from collections.abc import Callable, Iterable, Iterator, Generator, Container
 from collections.abc import Sized, Hashable, Sequence, Mapping, MutableSequence, MutableMapping
 from collections.abc import Set, MutableSet, MappingView, KeysView, ItemsView, ValuesView
 from typing import Any, Optional, TypedDict, TypeVar, Self
-from typing import Dict, Set, FrozenSet, Tuple, NamedTuple, OrderedDict, Self
-from datetime import datetime
+from typing import Dict, Set, FrozenSet, Tuple, NamedTuple, OrderedDict
+from datetime import datetime, UTC
 import time
 import os, sys
 from sys import getsizeof
@@ -182,6 +182,9 @@ def main() -> None:
     # print(f"{now:%d/%m/%y (%H:%M:%S)}")
     # print(f"{now:%c}") #local
     # print(f"{now:%I%p}") #AM/PM
+    # print(time.strftime('%d/%m/%Y'))
+    # time.gmtime()
+    # print(datetime.now().strftime("%A %x %X"))
 
     # rand_int = random.randint(0, 10)
     # rand_flt = random.random()
@@ -205,6 +208,17 @@ def main() -> None:
     #     pickle.dump(fruit, file)
     # with open("fruit.pickle", "rb") as file:
     #     fruit:Fruit = pickle.load(f)
+
+    # def tuple_returning_func(): 
+    #     return "str", 3, { 1, 2 } # Returns tuple, we could also write (x, y) 
+    # x, y, z = tuple_returning_func() 
+
+    # print(chr(12), " - ", ord('A'))
+    # my_int = 5
+    # print("here is: {}".format(my_int))
+
+    # for item in reversed(range(0, 10)):
+    #     print(item)
 
     # print(issubclass(Exception, BaseException))
     # sys.exit(0) - Raises SystemExit exception, finally & cleanups run
