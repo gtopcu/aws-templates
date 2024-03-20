@@ -19,7 +19,6 @@ pip install -r requirements.txt
 precommit install
 deactivate
 
-# https://python-poetry.org/docs/cli/#export
 pip install poetry
 poetry config virtualenvs.in-project true
 poetry new myproject (for existing projects: poetry init -> creates pyproject.toml + poetry.lock) 
@@ -41,6 +40,10 @@ poetry show --tree
 poetry check
 poetry build (for dist & wheel)
 poetry publish (to pypi.org)
+
+# https://python-poetry.org/docs/cli/#export
+poetry export (--only|--with|without dev) --without-hashes -f requirements.txt -o requirements.txt
+
 pip install -e .
 pip install -e .[dev]
 

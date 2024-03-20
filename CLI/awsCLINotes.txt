@@ -72,7 +72,12 @@ aws s3 rb s3://gokhantopcu-clitest
 aws s3 cp <file> s3://<s3path>
 aws s3 cp s3://gokhantopcu .
 aws s3 sync <dir> s3://<s3path>
-aws s3 sync . s3://gokhantopcu
+
+BUCKET = gokhantopcu
+PREFIX = myfiles
+aws s3 sync . s3://$BUCKET/$PREFIX/
+aws s3 sync --exclude="*" --include="[0-9]*.jpg" . s3://$BUCKET/$PREFIX/ 
+
 aws s3 sync --delete <dir> s3://<s3path>
 aws s3api list-objects --bucket <YOUR_BUCKET_NAME> --page-size 5 (default: 1000)
 aws s3api list-objects --bucket <YOUR_BUCKET_NAME> --max-items 1

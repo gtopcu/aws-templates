@@ -6,13 +6,18 @@ from typing import Any, Optional, TypedDict, TypeVar, Self
 from typing import Dict, Set, FrozenSet, Tuple, NamedTuple, OrderedDict
 from datetime import datetime, UTC
 import time
-import os, sys
+import os, sys, shutil
 from sys import getsizeof
 from timeit import timeit, repeat
 import random
 import atexit
 import glob
-import pickle
+import pickle, shelve
+import numbers
+
+from datetime import datetime, UTC
+import time
+from pytz import timezone
 
 # BIG_CONSTANT: int = 10000000
 
@@ -173,26 +178,10 @@ def main() -> None:
     # var: str = "hello"
     # print(f"{var = }")
 
-    # now: datetime = datetime.now()
-    # print(now)
-    # print(now.isoformat())
-    # print(now.strftime("%Y-%m-%d %H:%M:%S"))
-    # print(now.astimezone())
-    # print(f"{now:%Y-%m-%dT%H:%M:%SZ}") #ISO8601 
-    # print(f"{now:%d/%m/%y (%H:%M:%S)}")
-    # print(f"{now:%c}") #local
-    # print(f"{now:%I%p}") #AM/PM
-    # print(time.strftime('%d/%m/%Y'))
-    # time.gmtime()
-    # print(datetime.now().strftime("%A %x %X"))
-
     # rand_int = random.randint(0, 10)
     # rand_flt = random.random()
-
-    # print(os.getcwd())
-    # print(os.listdir('.'))
-    # print(__file__)
-    # print(os.path.dirname(__file__))
+    # random.shuffle(numbers)
+    # random.choice(numbers)
     
     # print(glob.glob("?????.py")
     # print(glob.glob("*.py"))
@@ -209,6 +198,19 @@ def main() -> None:
     # with open("fruit.pickle", "rb") as file:
     #     fruit:Fruit = pickle.load(f)
 
+    # shelve does not load the whole object like pickle
+    # with shelve.open("shelve_file", writeback=True) as db:
+    #     my_dict = { "key1": "value1", "key2": Fruit("apple") } # can store multiple objects
+    #     db.update(my_dict)
+        # print(type(db))
+        # print(dict(db))
+        # key = db.get("key", "default")
+        # key1 = db["key1"]       # retrieve a COPY of the data. if writeback false, not updated
+        # db["key"] = "value"
+        # del db["key"]           # raises KeyError if not present
+        # db.sync()
+        # db.close()
+
     # def tuple_returning_func(): 
     #     return "str", 3, { 1, 2 } # Returns tuple, we could also write (x, y) 
     # x, y, z = tuple_returning_func() 
@@ -220,9 +222,40 @@ def main() -> None:
     # for item in reversed(range(0, 10)):
     #     print(item)
 
-    # print(issubclass(Exception, BaseException))
+
     # sys.exit(0) - Raises SystemExit exception, finally & cleanups run
     # os._exit(0) - Immediate kill, no finals/cleanups run. Only POSIX files are closed
+
+    # sys.argv
+    # sys.path.insert(0, '/tmp/mydir')
+    # sys.path.append(os.path.abspath(module_path))
+
+    # os.getenv(env_name, str)    
+    # os.environ.get(env_name, default)
+
+    # print(os.getcwd())
+    # print(os.listdir('.'))
+    # print(__file__)
+    # print(os.path.dirname(__file__))
+    # os.mkdir()
+    # os.path.join(current_path, filename)
+    # Path.joinpath(current_path, filename)
+
+    # os.path.isdir(path)
+    # pathlib.Path(__file__)
+    # print(__file__)
+    # print(Path().absolute())
+    # print(pathlib.Path(__file__).parent / "events.json")
+
+    try:
+        os.makedirs("os/makedirs", exist_ok=False)
+    except FileExistsError:
+        shutil.rmtree("os/makedirs")
+        # shutil.chown("path", "user", "group")   
+        # shutil.move("/source", "target")      # same as mv
+
+
+    # print(issubclass(Exception, BaseException))
 
     print("done", end="\n")
     #atexit.unregister(func_exit)
