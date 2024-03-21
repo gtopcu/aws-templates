@@ -11,9 +11,14 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 
-def get_docstring(input1: int) -> str
+def get_docstring(input1: int) -> list[str]:
     """
     Sample function docstring
+
+    Args:
+        input1 (int): Input integer
+    Returns:
+        list[str]: Returns response as list of strings
 
     :param input1: Input integer
     :return: Returns docstring as str

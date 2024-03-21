@@ -14,11 +14,12 @@ import random
 import atexit
 import glob
 import pickle, shelve
-import numbers
+import heapq
 
 from datetime import datetime, UTC
 import time
 from pytz import timezone
+import numpy as n
 
 
 # BIG_CONSTANT: int = 10000000
@@ -300,6 +301,49 @@ def main() -> None:
     # for i, cglob in enumerate(globs, 1):
     #     print(i, cglob, sep=":")
 
+
+    # my_tuple_list = [(a, b) for a in range(2) for b in range(5, 7)]
+    # print(my_tuple_list)
+    # my_list = [a*b for a in range(2) for b in range(5, 10) if b % 2 ==0]
+
+    # https://wiki.python.org/moin/TimeComplexity
+    #     
+    # list = array, stack
+    # deque = double-linked list / double-ended queue
+    # dict = hashmap
+
+    # my_list[0] -> Big 0(1)
+    # my_list.insert(5, 3) -> Big O(k)
+    # my_list.pop() -> Big O(1)
+    # my_list.sort() -> Big O(n log n)
+    # dq = deque(range(15), maxlen=10) #
+    # dq[0] -> Big O(1)
+    # dq.rotate(3) -> Big O(k)
+
+    # my_list = [ ("k1","1"), ("k2","2"), (15, 3) ]
+    # print(my_list)
+    # my_dict = dict(my_list) 
+    # dict["key1"] -> Big O(1)
+
+
+    # Heap queue / priority queue. hq[0] is always its smallest element.
+    # Python only allows min heaps
+    # read O(1), add/remove O(log n)
+    # When adding to heap[3], element at heap[3] is sent to the end of the queue
+    # 
+    # heapq.heapify(my_list) # transforms list into a min heap, in-place, in linear time
+    # heapq.heappush(my_list, item) # pushes a new item on the heap
+    # heapq.heappop(my_list) # pops the smallest item from the heap
+    # heapq.heappushpop(my_list, item) # pushes a new item and then returns the smallest item; the heap size is unchanged
+    # heapq.heapreplace(my_list, item) # pops and returns the smallest item; the heap size is unchanged
+    # heapq.merge(iter1, iter2) # merges two sorted lists into one sorted list
+    # heapq.nlargest(n, iter) # returns the n largest elements from the heap
+    # heapq.nsmallest(n, iter) # returns the n smallest elements from the heap
+    
+
+    # print(float("inf"))
+    # print(float("-inf"))
+    # print(iter.next())
     # print(issubclass(Exception, BaseException))
 
     print("done", end="\n")
