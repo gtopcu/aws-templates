@@ -7,6 +7,7 @@ from typing import Dict, Set, FrozenSet, Tuple, NamedTuple, OrderedDict
 from datetime import datetime, UTC
 import time
 import os, sys, shutil
+from pathlib import Path
 from sys import getsizeof
 from timeit import timeit, repeat
 import random
@@ -18,6 +19,7 @@ import numbers
 from datetime import datetime, UTC
 import time
 from pytz import timezone
+
 
 # BIG_CONSTANT: int = 10000000
 
@@ -183,16 +185,6 @@ def main() -> None:
     # random.shuffle(numbers)
     # random.choice(numbers)
     
-    # print(glob.glob("?????.py")
-    # print(glob.glob("*.py"))
-    # print(glob.glob("*.*"))
-    # print(glob.glob("[abc]*.py")) #[] first char should be a or
-    # # print(glob.glob("[!abc]*.py")) #[] first char should NOT be a or b
-    # globs = glob.iglob("**/utils_*.py", root_dir="/Users/gtopcu/", recursive=True, include_hidden=True)
-    # print(globs.__next__())
-    # for i, cglob in enumerate(globs, 1):
-    #     print(i, cglob, sep=":")
-    
     # with open("fruit.pickle", "wb") as file:
     #     pickle.dump(fruit, file)
     # with open("fruit.pickle", "rb") as file:
@@ -233,27 +225,80 @@ def main() -> None:
     # os.getenv(env_name, str)    
     # os.environ.get(env_name, default)
 
-    # print(os.getcwd())
-    # print(os.listdir('.'))
     # print(__file__)
-    # print(os.path.dirname(__file__))
-    # os.mkdir()
+    # os.getcwd())
+    # os.listdir('.')
+    # os.curdir()
+    # os.pardir()
+    # os.mkdir("/dir")
+    # os.makedirs("os/makedirs", exist_ok=False) # FileExistsError:
+    # os.rmdir("dir")
+    # os.remove("file")
+    # os.rename("file1", "file2"))
+    # os.chown("path", userID, groupID, follow_symlinks=False)
+    # os.chmod("file", intMode)
+    # os.getenv("ENV", "default")
+    # os.putenv("ENV", "value")
+    # os.system("clear")
+
     # os.path.join(current_path, filename)
-    # Path.joinpath(current_path, filename)
-
     # os.path.isdir(path)
-    # pathlib.Path(__file__)
-    # print(__file__)
-    # print(Path().absolute())
-    # print(pathlib.Path(__file__).parent / "events.json")
+    # os.path.isfile(path)
+    # os.path.exists(path)
+    # os.path.getsize(path)
+    # os.path.basename(path)
+    # os.path.dirname(__file__)
+    # os.path.abspath(__file__)
+    # os.path.realpath(__file__)
+    # os.path.islink(path)
+    # os.path.expanduser('~') # Path.home()
 
-    try:
-        os.makedirs("os/makedirs", exist_ok=False)
-    except FileExistsError:
-        shutil.rmtree("os/makedirs")
-        # shutil.chown("path", "user", "group")   
-        # shutil.move("/source", "target")      # same as mv
+    # shutil.rmtree("os/makedirs")
+    # shutil.chown("path", "user", "group")   
+    # shutil.move("/source", "target")      # same as mv
+    
 
+    # path = Path.home() 
+    # path            # /Users/gtopcu
+    # path.name       # gtopcu
+    # path.stem       # gtopcu - filename without extension
+    # path.suffix     # .py
+    # path.drive      # empty
+    # path.root       # /
+    # path.anchor     # /
+    
+    # Path.cwd()        # /Users/gtopcu/My Drive/VSCode
+    # Path(__file__)    # doesnt work in .ipynb
+    # Path.parent()
+    # Path.parents[0]   # Nth parent
+    # Path.absolute()
+    # Path.joinpath("Desktop").mkdir(exist_ok=True)
+    # Path.chmod(path, intMode, follow_symlinks=True)
+    # Path.group()
+    # Path.exists()
+    # Path.is_file()
+    # Path.is_dir()
+    # Path.is_symlink()
+    # Path.iterdir()
+    # Path.as_uri(path)
+    # Path.resolve("path", strict=False)
+    # Path.mkdir(Path, mode = 511, parents = False, exist_ok = False)
+    # Path.rmdir(Path) # must be empty
+    # Path.touch(Path, mode = 438, exist_ok = True)
+    # Path.owner(Path)
+    # Path.match("pattern")
+    # Path.glob(Path, pattern="*")
+    # Path.rglob(Path, pattern="*")
+    
+    # print(glob.glob("?????.py")
+    # print(glob.glob("*.py"))
+    # print(glob.glob("*.*"))
+    # print(glob.glob("[abc]*.py")) #[] first char should be a or
+    # # print(glob.glob("[!abc]*.py")) #[] first char should NOT be a or b
+    # globs = glob.iglob("**/utils_*.py", root_dir="/Users/gtopcu/", recursive=True, include_hidden=True)
+    # print(globs.__next__())
+    # for i, cglob in enumerate(globs, 1):
+    #     print(i, cglob, sep=":")
 
     # print(issubclass(Exception, BaseException))
 
