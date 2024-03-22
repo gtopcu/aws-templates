@@ -1,4 +1,5 @@
 # https://www.youtube.com/watch?v=3vfum74ggHE
+# https://www.youtube.com/watch?v=AKQ3XEDI9Mw
 
 # pip install fastapi
 # pip install "uvicorn[standard]"
@@ -9,6 +10,9 @@
 
 # uvicorn fastapiSQLAlchemy:app --reload
 # http://127.0.0.1:8000/docs
+
+from datetime import datetime
+from pathlib import Path
 
 from fastapi import FastAPI, Depends, Request, Form, File, status
 # from fastapi import File, UploadFile, Body, Path, Query, Cookie, Header
@@ -23,26 +27,76 @@ from starlette.responses import RedirectResponse, HTMLResponse, JSONResponse, Pl
 # templates = Jinja2Templates(directory="templates")
 
 
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, ForeignKey, Column, Integer, Float, String, CHAR, Text,  DateTime, Boolean
+# from sqlalchemy import func, sum, min, max, or_, not_
 from sqlalchemy.orm import sessionmaker, Session, declarative_base
-from sqlalchemy import Column, Integer, String, DateTime, Float, Boolean, Text #, func, sum, min, max, or_, not_
 # from sqlalchemy.sql.expression import select, update, union, alias, delete, bindparam, outerjoin
 # from sqlalchemy.sql.functions import concat, count, current_date, current_timestamp, current_time, sysdate
 # from sqlalchemy.sql.schema import Column, ForeignKey, Index, Table, UniqueConstraint
 
-DB_URL = "sqlite:///./db.sqlite"
-engine = create_engine(DB_URL, connect_args={"check_same_thread": False})
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+DB_URL = "sqlite:///" + str(Path(__file__).parent) + "/sqlite.db"
+Path(DB_URL).unlink(missing_ok=True)
+
+engine = create_engine(DB_URL, echo=True, connect_args={"check_same_thread": False})
+SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False)
 
 Base = declarative_base()
+
 class ToDo(Base):
-    __tablename__ = "todo"
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    title = Column(String, index=True, unique=True)
+    """
+    CREATE TABLE todo (
+        _id_ INTEGER NOT NULL, 
+        title VARCHAR NOT NULL, 
+        working BOOLEAN, 
+        updated DATETIME, 
+        PRIMARY KEY (_id_)
+    )
+    CREATE UNIQUE INDEX ix_todo_title ON todo (title)
+    SELECT * FROM todo LIMIT 100
+    """
+    __tablename__ = "todos"
+    id = Column("_id_", Integer, primary_key=True, autoincrement=True)
+    title = Column(String, index=True, unique=True, nullable=False)
     working = Column(Boolean, default=False)
     updated = Column(DateTime)
 
+    def __init__(self, title: str, working: bool = False):
+        self.title = title
+        self.working = working
+        self.updated = datetime.now()
+    def  __repr__(self):
+        return f"<ToDo {self.title}>"
+
+class ToDoNotes(Base):
+    """
+    CREATE TABLE notes (
+        _id_ INTEGER NOT NULL, 
+        todo_id INTEGER NOT NULL, 
+        note VARCHAR NOT NULL, 
+        PRIMARY KEY (_id_), 
+        FOREIGN KEY(todo_id) REFERENCES todos (_id_)
+    )
+    INSERT INTO "notes"("_id_", "todo_id", "note") VALUES(1, 1, 'note');
+    """
+    __tablename__ = "notes"
+    id = Column("_id_", Integer, primary_key=True, autoincrement=True)
+    todo_id = Column(Integer, ForeignKey("todos._id_"), nullable=False)
+    note = Column(String, nullable=False)
+
+    def __init__(self, todo_id: int, note: str):
+        self.todo_id = todo_id
+        self.note = note
+
+
+# Create all tables in the engine. This is equivalent to "Create Table" statements in raw SQL.
 Base.metadata.create_all(bind=engine)
+
+def get_db():
+    db = SessionLocal()
+    try:   
+        yield db
+    finally:
+        db.close()
 
 
 app = FastAPI()
@@ -54,13 +108,6 @@ app = FastAPI()
 # @app.get("/items/{item_id}")
 # async def read_item(item_id: int):
 #     return {"item_id": item_id}
-
-def get_db():
-    db = SessionLocal()
-    try:   
-        yield db
-    finally:
-        db.close()
 
 @app.get("/")
 async def home(request: Request, db: Session = Depends(get_db)):
@@ -74,7 +121,16 @@ async def home(request: Request, db: Session = Depends(get_db)):
     
     todos = db.query(ToDo).all()
     # db.query(ToDo).filter(ToDo.name == "G").count(10)
+    # results = db.query(ToDo).filter(ToDo.id > 3).filter(ToDo.title.like("%An%"))
+    # results = db.query(ToDo).filter(ToDo.title.in_(["gt1", "gt2"]))
+    # for item in results:
+    #     print(item)
     # deleted_count = db.query(ToDo).delete(synchronize_session='evaluate') # auto
+
+    # List[Row[Tuple[ToDo, ToDoNotes]]] 
+    # results = db.query(ToDo, ToDoNotes).filter(ToDo.id == ToDoNotes.todo_id).filter(ToDo.name == "G").all()
+    # for result in results:
+    #     print(result)
 
     # db.begin(nested=False)
     # db.commit() -> flush + commit
@@ -90,12 +146,13 @@ async def post(request: Request, title:str = Form(...), db: Session = Depends(ge
     db.commit()
 
     url = request.url_path_for("home")
-    return RedirectResponse(url=url, status_code=status.HTTP_303_SEE_OTHER)
+    return RedirectResponse(url=url, status_code=status.HTTP_201_CREATED)
 
 @app.put("/item/{todo_id}")
 async def update(request: Request, todo_id: int, db: Session = Depends(get_db)):
     todo = db.query(ToDo).filter(ToDo.id == todo_id).first()
     todo.working = not todo.working
+    todo.updated = datetime.now()
     db.commit()
 
     url = request.url_path_for("home")

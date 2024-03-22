@@ -1,0 +1,67 @@
+
+https://dev.to/aws-builders/accelerate-and-save-cost-for-terraform-deployments-with-aws-codebuilds-lambda-compute-5814
+
+docker pull hashicorp/terraform 
+aws ecr get-login-password --region eu-west-1 --profile cicd | docker login --username AWS --password-stdin 123456789.dkr.ecr.eu-west-1.amazonaws.com
+docker tag hashicorp/terraform 123456789.dkr.ecr.eu-west-1.amazonaws.com/terraform:latest
+docker push 123456789.dkr.ecr.eu-west-1.amazonaws.com/terraform:latest
+
+
+Terraform Template:
+
+terraform {
+  backend "s3" {
+    bucket = "terraform-deployment-test-lambda-compute-backend"
+    region = "eu-west-1"
+    key    = "terraform-deployment.tfstate"
+  }
+}
+
+resource "aws_s3_bucket" "deploy-bucket" {
+  bucket = "test-lambda-compute-backend-test-bucket"
+
+  tags = {
+    Project     = "For CI CD deploy test"
+    Environment = "Dev"
+  }
+}
+
+resource "aws_s3_bucket" "deploy-bucket-two" {
+  bucket = "test-lambda-compute-backend-test-bucket-two"
+
+  tags = {
+    Project     = "For CI CD deploy test"
+    Environment = "Dev"
+  }
+}
+
+
+CodeBuild build commands for Lambda build:
+
+version: 0.2
+phases:
+  build:
+    commands:
+      - terraform init
+      - terraform apply -auto-approve -no-color -input=false
+
+CodeBuild build commands for EC2 build:
+
+version: 0.2
+env:
+  variables:
+    TERRAFORM_VERSION: 1.5.4
+
+phases:
+  install:
+    commands:
+      - echo "======== install terraform ========"
+      - wget --quiet https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+      - unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+      - mv terraform /usr/local/bin/
+
+  build:
+    commands:
+      - terraform init -no-color -input=false
+      - terraform apply -auto-approve -no-color -input=false
+

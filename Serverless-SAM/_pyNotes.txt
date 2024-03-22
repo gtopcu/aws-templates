@@ -9,11 +9,11 @@ python3 -m venv venv
 source venv/bin/activate
 pip list | freeze
 pip install --target ./package requests
+pip install python-dotenv
+pip install ruff
 pip install boto3 + botocore
 pip install aws_lambda_powertools
 pip install requests-aws4auth
-pip install python-dotenv (for .env files to work)
-pip install ruff
 pip freeze > requirements.txt
 pip install -r requirements.txt
 precommit install

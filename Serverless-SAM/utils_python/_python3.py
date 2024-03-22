@@ -215,7 +215,6 @@ def main() -> None:
     # for item in reversed(range(0, 10)):
     #     print(item)
 
-
     # sys.exit(0) - Raises SystemExit exception, finally & cleanups run
     # os._exit(0) - Immediate kill, no finals/cleanups run. Only POSIX files are closed
 
@@ -284,7 +283,8 @@ def main() -> None:
     # Path.as_uri(path)
     # Path.resolve("path", strict=False)
     # Path.mkdir(Path, mode = 511, parents = False, exist_ok = False)
-    # Path.rmdir(Path) # must be empty
+    # Path.rmdir() # must be empty
+    # Path.unlink(missing_ok=True)
     # Path.touch(Path, mode = 438, exist_ok = True)
     # Path.owner(Path)
     # Path.match("pattern")
@@ -308,7 +308,10 @@ def main() -> None:
 
     # https://wiki.python.org/moin/TimeComplexity
     #     
-    # list = array, stack
+    # list = array, stack - LIFO - Big O(1)
+    # push: list.append(item)
+    # pop:  list.pop()
+    # peek: list[-1] 
     # deque = double-linked list / double-ended queue
     # dict = hashmap
 
@@ -316,7 +319,7 @@ def main() -> None:
     # my_list.insert(5, 3) -> Big O(k)
     # my_list.pop() -> Big O(1)
     # my_list.sort() -> Big O(n log n)
-    # dq = deque(range(15), maxlen=10) #
+    # dq = deque(range(15), maxlen=10) 
     # dq[0] -> Big O(1)
     # dq.rotate(3) -> Big O(k)
 
@@ -324,7 +327,6 @@ def main() -> None:
     # print(my_list)
     # my_dict = dict(my_list) 
     # dict["key1"] -> Big O(1)
-
 
     # Heap queue / priority queue. hq[0] is always its smallest element.
     # Python only allows min heaps
@@ -340,7 +342,6 @@ def main() -> None:
     # heapq.nlargest(n, iter) # returns the n largest elements from the heap
     # heapq.nsmallest(n, iter) # returns the n smallest elements from the heap
     
-
     # print(float("inf"))
     # print(float("-inf"))
     # print(iter.next())

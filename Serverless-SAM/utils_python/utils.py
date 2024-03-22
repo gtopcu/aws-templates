@@ -1,14 +1,14 @@
-import sys
-from sys import getsizeof
+
 import os
 import uuid
 import json
-from datetime import datetime, date, time, UTC
-import dateutil
-import time
-import pathlib
-from pathlib import Path
-from dotenv import load_dotenv
+
+
+# pip install python-dotenv
+# from dotenv import load_dotenv, find_dotenv 
+# if not load_dotenv(find_dotenv()):
+#     raise Exception("Failed to load .env file")
+# print(os.getenv('DDB_TABLE'))
 
 
 def get_docstring(input1: int) -> list[str]:
@@ -24,10 +24,6 @@ def get_docstring(input1: int) -> list[str]:
     :return: Returns docstring as str
     """
     return __doc__
-
-def load_dotenv() -> None:
-    # Imports .env file
-    load_dotenv()
 
 def get_env(env_name: str, default:str | None) -> str | None:
     return os.getenv(env_name, str)    
