@@ -11,16 +11,14 @@ from pathlib import Path
 from sys import getsizeof
 from timeit import timeit, repeat
 import random
-import atexit
 import glob
 import pickle, shelve
 import heapq
+import atexit
 
 from datetime import datetime, UTC
 import time
 from pytz import timezone
-import numpy as n
-
 
 # BIG_CONSTANT: int = 10000000
 
@@ -185,7 +183,8 @@ def main() -> None:
     # rand_flt = random.random()
     # random.shuffle(numbers)
     # random.choice(numbers)
-    
+    # random.seed("ABC")
+
     # with open("fruit.pickle", "wb") as file:
     #     pickle.dump(fruit, file)
     # with open("fruit.pickle", "rb") as file:
@@ -350,7 +349,11 @@ def main() -> None:
     # kwargs(name=1234)
     # kwargs(**{"name":1234})
 
-
+    stack = []
+    if not stack:
+        print("empty")
+    else:
+        print("not empty")        
 
     print("done", end="\n")
     #atexit.unregister(func_exit)
