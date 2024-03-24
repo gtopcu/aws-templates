@@ -347,12 +347,23 @@ def main() -> None:
     # print(iter.next())
     # print(issubclass(Exception, BaseException))
 
+    # kwargs(name=1234)
+    # kwargs(**{"name":1234})
+
+
+
     print("done", end="\n")
     #atexit.unregister(func_exit)
 
 @atexit.register
 def func_exit() -> None:
     print("exiting..")
+
+def kwargs(**kwargs):
+    print(type(kwargs))
+    print(kwargs)
+    if value := kwargs.get("name"):
+        print("name found =", value)
 
 def input_none(input:str | None=None):
     print(input)
@@ -376,7 +387,7 @@ def func_wrapper(func):
 @func_wrapper
 def f(*args: int, **kwargs: int):
     print(":".join([str(arg) for arg in args]))
-    #print("args:", args, "kwargs: ", kwargs)
+    # print("args:", args, "kwargs: ", kwargs)
     return sum(args) + sum(kwargs.values())
 
 # f2(f1)
