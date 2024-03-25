@@ -55,10 +55,15 @@ from scipy import stats
 # x = arr.copy()
 # x = arr.view()
 
-# random = np.random.randn(4)
-# y = np.random.randint(0, 100, 10)
-# x = np.arange(0, 10, 1)
-# sorted = np.sort(random)
+# np.sort(random)
+# np.arange(0, 10, 1)
+# np.random.randint(0, 100, 10)
+# np.random.randn(4)
+# np.random.shuffle(lst)
+# np.random.choice(lst)
+# np.random.seed(1)
+# np.random.bytes(32)
+# np.random.normal(loc=mean, scale, size) # gaussian
 
 # print(np.array([0, 6]).mean())
 # speed = [99,86,87,88,111,86,103,87,94,78,77,85,86]

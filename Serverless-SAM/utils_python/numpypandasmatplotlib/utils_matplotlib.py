@@ -17,6 +17,12 @@ ypoints = np.array([3, 10])
 plt.plot(xpoints, ypoints, 'o') # without line
 plt.show()
 
+# plt.grid()
+# plt.legend()
+# plt.pause(0.01)
+# plt.clf()
+# plt.figure(figsize=(8, 4))
+
 #------------------------------------------------------------------------------------------------
 # Line Chart - 2
 
@@ -32,10 +38,7 @@ plt.show()
 
 # plt.title("Matplotlib Chart")
 # plt.bar(x, lst, color='r', label="growth")
-# plt.grid()
-# plt.legend()
 # plt.show()
-# plt.clf()
 
 #-----------------------------------------------------------------------------------------------
 # Pie Chart
@@ -44,17 +47,12 @@ plt.show()
 # labels: Sequence[str] = ["A", "B", "C", "D", "E"] # list/tuple
 
 # plt.pie(lst, labels=labels, autopct="%1.1f%%")
-# plt.figure(figsize=(8, 4))
-# plt.grid()
-# plt.legend()
 # plt.show()
 
 #-----------------------------------------------------------------------------------------------
 # Scatter Plot
 
 # plt.scatter(np.random.randint(0, 100, 50), np.random.randint(0, 100, 50), c=np.random.randint(0, 100, 50), cmap="Blues")
-# plt.grid()
-# plt.legend()
 # plt.show()
 
 #-----------------------------------------------------------------------------------------------

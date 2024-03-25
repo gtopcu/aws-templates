@@ -12,20 +12,43 @@ from datetime import date, datetime, time, timezone
 from inspect import istraceback
 from typing import Dict, List, Tuple, Union
 
+# https://docs.python.org/3/library/logging.html#logrecord-attributes
+
+# does nothing if root logger is already configured
+logging.basicConfig(level=logging.DEBUG,
+                    format="%(asctime)s %(levelname)-8s %(message)s %(name)s",
+                    # %(pathname)s %(module)s %(filename)s %(funcName)s %(lineno)d",
+                    # %(process)d %(processName)s %(thread)d %(threadName)s", # %(taskName)s (asyncio taskName)  
+                    datefmt="%Y-%m-%d %H:%M:%S", # handlers=, force=True
+                )
+x = 10
+logging.debug(f"DEBUG MSG {x}")
+logging.info("INFO MSG %s", x)
+logging.warning("WARNING MSG")
+logging.error("ERROR MSG")
+logging.critical("CRITICAL MSG")
+
 def get_logger() -> logging.Logger:
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(level=logging.WARN,
+                        format="%(asctime)s %(levelname)-8s %(message)s",
+                        datefmt="%Y-%m-%d %H:%M:%S"
+                    )
     logger = logging.getLogger(__name__)
+    # logging.info("INFO", stack_info=True, stacklevel=5)
     # if logger.isEnabledFor(logging.DEBUG):
     #     logger.debug("Debugger logger created")
     return logger
 
-def set_basic_config() -> None:
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s %(levelname)-8s %(message)s",
-        datefmt="%Y-%m-%d %H:%M:%S",
-        filename="basic.log"   
-    )
+def get_file_logger() -> logging.Logger:
+    logging.basicConfig(level=logging.ERROR,
+                        format="%(asctime)s %(levelname)-8s %(message)s",
+                        datefmt="%Y-%m-%d %H:%M:%S",
+                        filename="applog.log",
+                        filemode="w", #default append 'a'
+                        encoding="utf-8"   
+                    )
+    logger = logging.getLogger(__name__)
+    return logger
 
 # skip natural LogRecord attributes
 # http://docs.python.org/library/logging.html#logrecord-attributes

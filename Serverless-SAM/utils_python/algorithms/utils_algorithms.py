@@ -12,28 +12,66 @@ import random
 
 
 #------------------------------------------------------------------------------
+# Dynamic Programming: Recursive, Memoized, Bottom-Up
+# https://www.youtube.com/watch?v=vYquumk4nWw&t=372s
+
+# Fibo
+# 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584...
+
+# 1- Recursive Solution: O(2^n)
+def fibo(x: int) -> int:
+    return x if x < 2 else fibo(x-1) + fibo(x-2)
+# print(fibo(5))
+
+# 2- Memoized Solution: O(n)
+def fibo_mem(x: int) -> int:
+    cache = { 0:0, 1:1}
+    def _fibo(x: int) -> int:
+        if x not in cache:
+            cache[x] = _fibo(x-1) + _fibo(x-2)
+        return cache[x]
+    return _fibo(x)
+# print(fibo_mem(4))
+
+# 3- Bottom-Up Solution: O(n)
+def fibo_bottomup(x: int) -> int:
+    fibo_list = [0] * (x+1)
+    fibo_list[0] = 0
+    fibo_list[1] = 1
+    for i in range(2, x+1):
+        fibo_list[i] = fibo_list[i-1] + fibo_list[i-2]
+    return fibo_list[x]
+# print(fibo_bottomup(6))
+
+# number = 1000
+# start = time.time()
+# print(fibo(1000))
+# print(fibo_mem())
+# print(fibo_bottomup(6))
+# print("Total:", time.time() - start)
+
+#------------------------------------------------------------------------------
 # Bubble Sort
 # Best case O(n) if sorted, worst case 0(n^2) 
 
-COUNT = 10
-MAX = 100
-counter = 0
+# COUNT = 10
+# MAX = 100
 
-lst = np.random.randint(0, MAX, COUNT)
-x = np.arange(0, COUNT, 1)
+# lst = np.random.randint(0, MAX, COUNT)
+# x = np.arange(0, COUNT, 1)
 
-n = len(lst)
-for i in range(n):
-    for j in range(0, n-i-1):
-        print(i, j)
-        counter += 1
-        plt.bar(x, lst, color='r')
-        plt.pause(0.01)
-        plt.show(block=False)
-        plt.clf()
-        if lst[j] > lst[j + 1]:
-            lst[j], lst[j + 1] = lst[j + 1], lst[j]
-print("done:", counter)
+# counter = 0
+# for i in range(COUNT):
+#     for j in range(0, COUNT-i-1):
+#         print(i, j)
+#         counter += 1
+#         plt.bar(x, lst, color='r')
+#         plt.pause(0.1)
+#         plt.show(block=False)
+#         plt.clf()
+#         if lst[j] > lst[j + 1]:
+#             lst[j], lst[j + 1] = lst[j + 1], lst[j]
+# print("done:", counter)
 
 
 #------------------------------------------------------------------------------

@@ -351,6 +351,7 @@ def main() -> None:
     # kwargs(name=1234)
     # kwargs(**{"name":1234})
 
+    # list = [0] * 5
     # stack = []
     # if not stack:
     #     print("empty")
