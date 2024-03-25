@@ -179,6 +179,10 @@ def main() -> None:
     # var: str = "hello"
     # print(f"{var = }")
 
+    # print(f"{number:.2f}")
+    # print(f"Total: {(time.time() - start):.3f}s")
+    # print(f"Total: {(time.perf_counter() - start) * 1000} ms")
+
     # rand_int = random.randint(0, 10)
     # rand_flt = random.random()
     # random.shuffle(numbers)

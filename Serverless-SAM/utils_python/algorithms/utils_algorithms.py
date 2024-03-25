@@ -1,5 +1,6 @@
 
 # https://www.youtube.com/watch?v=IRkvlqPBqNg
+# https://www.youtube.com/watch?v=AAwYzYkjNTg
 
 import pandas as pd
 import numpy as np
@@ -11,6 +12,16 @@ import time
 import random
 
 
+#------------------------------------------------------------------------------
+"""
+
+Binary Trees - O(log n) avg, O(n) worst case
+Breadh-First Search (BFS)
+Depth-First Search (DFS)
+ALV Tables: Self balancing binary search trees, guarantees O(log n) for search, insert, delete
+
+
+"""
 #------------------------------------------------------------------------------
 # Dynamic Programming: Recursive, Memoized, Bottom-Up
 # https://www.youtube.com/watch?v=vYquumk4nWw&t=372s
@@ -43,12 +54,13 @@ def fibo_bottomup(x: int) -> int:
     return fibo_list[x]
 # print(fibo_bottomup(6))
 
-# number = 1000
-# start = time.time()
-# print(fibo(1000))
-# print(fibo_mem())
-# print(fibo_bottomup(6))
-# print("Total:", time.time() - start)
+number = 40
+start = time.time()
+# print(fibo(number))           # 9.224573s  
+# print(fibo_mem(number))       # 0.000022s
+print(fibo_bottomup(number))    # 0.000022s
+print(f"Total: {(time.time() - start):.6f}s")
+# print(f"{number:.5f}")
 
 #------------------------------------------------------------------------------
 # Bubble Sort

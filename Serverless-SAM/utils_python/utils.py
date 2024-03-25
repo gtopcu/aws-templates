@@ -34,6 +34,8 @@ def sleep(seconds: int) -> None:
 
 def get_perf_counter() -> float:
     return time.perf_counter
+    # print(f"Total: {(time.time() - start):.3f}s")
+    # print(f"Total: {(time.perf_counter() - start) * 1000} ms")
     # time.perf_counter_ns()
 
 def generate_uuid():
