@@ -340,23 +340,29 @@ def main() -> None:
     # heapq.merge(iter1, iter2) # merges two sorted lists into one sorted list
     # heapq.nlargest(n, iter) # returns the n largest elements from the heap
     # heapq.nsmallest(n, iter) # returns the n smallest elements from the heap
-    
+
+
     # print(float("inf"))
     # print(float("-inf"))
     # print(iter.next())
+
     # print(issubclass(Exception, BaseException))
 
     # kwargs(name=1234)
     # kwargs(**{"name":1234})
 
-    stack = []
-    if not stack:
-        print("empty")
-    else:
-        print("not empty")        
+    # stack = []
+    # if not stack:
+    #     print("empty")
+    # else:
+    #     print("not empty")        
+    
+    # from . import module
 
     print("done", end="\n")
-    #atexit.unregister(func_exit)
+    # vnenv set python interpreter
+    # Control + L, Command + Click
+    # atexit.unregister(func_exit)
 
 @atexit.register
 def func_exit() -> None:
