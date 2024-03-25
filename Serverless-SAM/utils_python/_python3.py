@@ -188,6 +188,8 @@ def main() -> None:
     # random.shuffle(numbers)
     # random.choice(numbers)
     # random.seed("ABC")
+    # random.randrange(0, 100, 10)
+
 
     # with open("fruit.pickle", "wb") as file:
     #     pickle.dump(fruit, file)

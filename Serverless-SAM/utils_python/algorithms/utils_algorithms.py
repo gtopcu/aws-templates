@@ -1,27 +1,44 @@
 
+# https://www.youtube.com/watch?v=RfXt_qHDEPw
 # https://www.youtube.com/watch?v=IRkvlqPBqNg
 # https://www.youtube.com/watch?v=AAwYzYkjNTg
 
-import pandas as pd
 import numpy as np
-from scipy import stats
-
 import matplotlib.pyplot as plt 
-
 import time
 import random
 
-
 #------------------------------------------------------------------------------
 """
+
+Worst to best:
+-----------------------------------
+O(n!)       -> Factorial
+O(2^n)      -> Exponential
+O(n^2)      -> Quadratic 
+O(n*log(n)) -> Quasilinear
+O(n)        -> Linear
+O(log n)    -> Logarithmic
+O(1)        -> Constant
+-----------------------------------
+
 
 Binary Trees - O(log n) avg, O(n) worst case
 Breadh-First Search (BFS)
 Depth-First Search (DFS)
 ALV Tables: Self balancing binary search trees, guarantees O(log n) for search, insert, delete
+Graphs - O(n)
+
+Simple -> O(n^2) avg/worst (Quadratic Time)
+Selection, Double Selection, Insertion, Binary Insertion, Bubble, Shaker    
+                                                                        
+Divide & Conquer -> O(n*log(n)) (Quasilinear Time)
+Quicksort, Merge Sort, Heapsort, Radix Sort, Bucket Sort, Shell Sort, Tim Sort, Pigeonhole Sort
 
 
 """
+start = time.time()
+
 #------------------------------------------------------------------------------
 # Dynamic Programming: Recursive, Memoized, Bottom-Up
 # https://www.youtube.com/watch?v=vYquumk4nWw&t=372s
@@ -54,13 +71,49 @@ def fibo_bottomup(x: int) -> int:
     return fibo_list[x]
 # print(fibo_bottomup(6))
 
-number = 40
-start = time.time()
+# number = 40
+# start = time.time()
 # print(fibo(number))           # 9.224573s  
 # print(fibo_mem(number))       # 0.000022s
-print(fibo_bottomup(number))    # 0.000022s
-print(f"Total: {(time.time() - start):.6f}s")
+# print(fibo_bottomup(number))    # 0.000022s
+# print(f"Total: {(time.time() - start):.6f}s")
 # print(f"{number:.5f}")
+
+#------------------------------------------------------------------------------
+# Insertion Sort
+# Best case O(n) if sorted, worst case 0(n^2)
+
+# def insertion_sort(lst: list) -> list:
+#     for i in range(1, len(lst)):
+#         key = lst[i]
+#         j = i - 1
+#         while j >= 0 and key < lst[j]:
+#             lst[j+1] = lst[j]
+#             j -= 1
+#         lst[j+1] = key
+#     return lst
+
+# list = [*range(50)]
+# random.shuffle(list)
+# print(insertion_sort(list))
+
+
+#------------------------------------------------------------------------------
+# Selection Sort
+# Best case O(n) if sorted, worst case 0(n^2)
+
+# def selection_sort(lst: list) -> list:
+#     for i in range(len(lst)):
+#         min_index = i
+#         for j in range(i+1, len(lst)):
+#             if lst[j] < lst[min_index]:
+#                 min_index = j
+#         lst[i], lst[min_index] = lst[min_index], lst[i]
+#     return lst
+
+# list = [*range(50)]
+# random.shuffle(list)
+# print(selection_sort(list))
 
 #------------------------------------------------------------------------------
 # Bubble Sort
@@ -145,9 +198,24 @@ print(f"Total: {(time.time() - start):.6f}s")
 
 
 #------------------------------------------------------------------------------
-# Quicksort 
-# Average O(n*log(n)) - quicker than Merge Sort, Bubble Sort, and other sorting algorithms
-# Worst-case time complexity is O(n^2)
+# Quicksort - quicker than Merge Sort, Bubble Sort, and other sorting algorithms
+# Best/avg O(n*log(n)) worst O(n^2)
 # Based on the divide and conquer approach. Works by selecting a pivot element from the array, 
 # partitioning the other elements into two subarrays, and recursively sorting the subarrays.
 
+# Quicksort
+# def quicksort(array):
+#     if len(array) < 2:
+#         return array
+#     else:
+#         pivot = array[0]
+#         less = [i for i in array[1:] if i <= pivot]
+#         greater = [i for i in array[1:] if i > pivot]
+#         return quicksort(less) + [pivot] + quicksort(greater)
+
+# list = [*range(50)]
+# random.shuffle(list)
+# print(quicksort(list))
+
+
+print(f"Total: {(time.time() - start):.6f}s")
