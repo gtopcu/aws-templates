@@ -22,9 +22,11 @@ from datetime import timedelta
 
 def requests_get(endpoint_url, headers=None, auth=None, timeout: int = 30) -> requests.Response:
     response = requests.get(endpoint_url, headers=headers, timeout=timeout)
+    # data:list[str] = requests.get("http://data.csv").content.decode().split("\n")
     httpError = response.raise_for_status()
     # status_code = response.status_code
-    #response_body = response.json()
+    # response_body = response.json()
+    # content = response.content
     return response
     # try:
     #     ...

@@ -42,12 +42,25 @@ def generate_uuid():
     return str(uuid.uuid4())
 
 def write_file(filename, content):
-    with open(filename, "w") as file:
+    with open(filename, "w") as file: # wb
+        # file.writelines(content)
         file.write(content)
+        # file.flush()
 
 def read_file(filename) -> str:
-    with open(filename, "r", encoding="utf-8") as file:
+    with open(filename, "r", encoding="utf-8") as file: # r+ for read/write, rb
+            # file.encoding
+            # file.mode
+            # file.closed
+            # os.rename(filename, "test.txt")
+            # os.remove("test.txt")
+            # os.rmdir()
+            # for line in file:
+            #     print(line)
+            # file.seek(26)
+            # file.tell()
             return file.read()
+
     # try:
     #     file = open(file=filename, mode="r", encoding="UTF-8")
     # except IOError as e:

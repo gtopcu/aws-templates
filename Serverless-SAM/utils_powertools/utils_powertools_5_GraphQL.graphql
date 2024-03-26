@@ -44,3 +44,64 @@ type Merchant {
     description: String
     locations: [Location]
 }
+
+
+------------------------------------------------------------------------------------------------------------
+https://aws.amazon.com/blogs/compute/build-real-time-applications-with-amazon-eventbridge-and-aws-appsync/
+
+type DelayEventInfo implements EventInfo {
+	message: String
+	delayMinutes: Int
+	newDepTime: AWSDateTime
+}
+
+interface EventInfo {
+	message: String
+}
+
+enum StatusEvent {
+	FlightArrived
+	FlightBoarding
+	FlightCancelled
+	FlightDelayed
+	FlightGateChanged
+	FlightLanded
+	FlightPushBack
+	FlightTookOff
+}
+
+type StatusUpdate {
+	num: Int!
+	carrier: String!
+	date: AWSDate!
+	event: StatusEvent!
+	info: EventInfo
+}
+
+input StatusUpdateInput {
+	num: Int!
+	carrier: String!
+	date: AWSDate!
+	event: StatusEvent!
+	message: String
+	extra: AWSJSON
+}
+
+type Mutation {
+	updateFlightStatus(input: StatusUpdateInput!): StatusUpdate!
+}
+
+type Query {
+	listStatusUpdates(by: String): [StatusUpdate]
+}
+
+type Subscription {
+	onFlightStatusUpdate(date: AWSDate, carrier: String): StatusUpdate
+		@aws_subscribe(mutations: ["updateFlightStatus"])
+}
+
+schema {
+	query: Query
+	mutation: Mutation
+	subscription: Subscription
+}
