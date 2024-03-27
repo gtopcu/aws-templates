@@ -9,20 +9,25 @@ python3 -m venv venv
 source venv/bin/activate
 pip list | freeze
 pip install --target ./package requests
-pip install python-dotenv
-pip install ruff
-pip install boto3 + botocore
-pip install aws_lambda_powertools
-pip install requests-aws4auth
+pip install --upgrade python-dotenv
+pip install --upgrade requests
+pip install --upgrade pytest
+pip install --upgrade boto3
+pip install --upgrade botocore
+pip install --upgrade ruff
+pip install --upgrade aws_lambda_powertools
+pip install --upgrade requests-aws4auth
 pip freeze > requirements.txt
 pip install -r requirements.txt
 precommit install
 deactivate
 
-pip install poetry
+# https://www.youtube.com/watch?v=Ji2XDxmXSOM
+python select interpreter: /Users/gtopcu/My Drive/VSCode/aws-templates/Serverless-SAM/.venv
+pip install --upgrade poetry
 poetry config virtualenvs.in-project true
 poetry new myproject (for existing projects: poetry init -> creates pyproject.toml + poetry.lock) 
-poetry install (also creates venv)
+poetry install (if pyproject.toml exists, creates venv) --no-root
 poetry env info -p
 poetry env list
 poetry env remove {env}
@@ -34,12 +39,16 @@ poetry add "aws-lambda-powertools[aws-sdk]" --group dev
 poetry add boto3 --group dev
 poetry add botocore -G dev
 poetry add requests
+poetry add requests@2.31.0  -> exact version 2.31.0
+poetry add requests^2.31.0  -> latest minor version: 2.x.x  (caret) - poetry default
+poetry add requests~2.31.0  -> latest patch version: 2.31.x (tilda)
 poetry update | requests 
 poetry remove requests
-poetry show --tree
+poetry show --tree | --all | --nocache
 poetry check
 poetry build (for dist & wheel)
 poetry publish (to pypi.org)
+poetry version major | minor | patch -> update project version in pyproject.toml
 
 # https://python-poetry.org/docs/cli/#export
 poetry export (--only|--with|without dev) --without-hashes -f requirements.txt -o requirements.txt

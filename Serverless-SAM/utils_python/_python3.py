@@ -15,10 +15,12 @@ import glob
 import pickle, shelve
 import heapq
 import atexit
+import math
 
 from datetime import datetime, UTC
 import time
 from pytz import timezone
+import math
 
 # BIG_CONSTANT: int = 10000000
 
@@ -347,11 +349,23 @@ def main() -> None:
     # heapq.nlargest(n, iter) # returns the n largest elements from the heap
     # heapq.nsmallest(n, iter) # returns the n smallest elements from the heap
 
-
     # print(float("inf"))
     # print(float("-inf"))
-    # print(iter.next())
+    # print(-3 // 2)            # -2
+    # print(int(-3 / 2))        # -1
+    # print(int(-1.9))          # -1
+    # print(int(1.9))           # 1
+    # print(-10 % 3)            # 2
+    # print(math.fmod(-10, 3))  # -1.0
+    # print(math.floor(3/2))    # 1
+    # print(math.ceil(3/2))     # 2
+    # print(math.sqrt(4))       # 2.0
+    # print(math.pow(2, 3))     # 8.0
+    # print(math.pi)            # 3.141592653589793
+    # print(math.e)             # 2.718281828459045
+    # print(math.pow(2, 100) < float("inf")) # True
 
+    # print(iter.next())
     # print(issubclass(Exception, BaseException))
 
     # kwargs(name=1234)
