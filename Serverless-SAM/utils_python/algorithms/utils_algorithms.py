@@ -2,6 +2,10 @@
 # https://www.youtube.com/watch?v=RfXt_qHDEPw
 # https://www.youtube.com/watch?v=IRkvlqPBqNg
 # https://www.youtube.com/watch?v=AAwYzYkjNTg
+# https://www.youtube.com/watch?v=oz9cEqFynHU
+# https://www.youtube.com/watch?v=kp3fCihUXEg
+# https://www.youtube.com/watch?v=cQWr9DFE1ww 
+
 
 import numpy as np
 import matplotlib.pyplot as plt 
@@ -22,17 +26,15 @@ O(log n)    -> Logarithmic
 O(1)        -> Constant
 -----------------------------------
 
-
-Binary Trees - O(log n) avg, O(n) worst case
-Breadh-First Search (BFS)
-Depth-First Search (DFS)
+Binary Search(Trees/Graphs) -> O(log n) avg, O(n) worst case
+Breadh-First Search (BFS)   -> O(n+b) : O(n)
+Depth-First Search (DFS)    -> O(n+b) : O(n)
 ALV Tables: Self balancing binary search trees, guarantees O(log n) for search, insert, delete
-Graphs - O(n)
 
-Simple -> O(n^2) avg/worst (Quadratic Time)
-Selection, Double Selection, Insertion, Binary Insertion, Bubble, Shaker    
+Simple -> O(n) best, O(n^2) avg/worst
+Binary, Binary Insertion, Insertion, Selection, Double Selection, Bubble, Shaker    
                                                                         
-Divide & Conquer -> O(n*log(n)) (Quasilinear Time)
+Divide & Conquer -> O(n*log(n))
 Quicksort, Merge Sort, Heapsort, Radix Sort, Bucket Sort, Shell Sort, Tim Sort, Pigeonhole Sort
 
 
@@ -78,6 +80,29 @@ def fibo_bottomup(x: int) -> int:
 # print(fibo_bottomup(number))    # 0.000022s
 # print(f"Total: {(time.time() - start):.6f}s")
 # print(f"{number:.5f}")
+
+#------------------------------------------------------------------------------
+# Binary Search
+# Avg 0(log n)
+# Collection must be sorted!
+
+def binary_search(lst: list, value: int) -> int:
+    low = 0
+    high = len(lst) - 1
+    while low <= high:
+        mid = (low + high) // 2
+        if lst[mid] == value:
+            return mid
+        elif lst[mid] < value:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return -1
+
+list = [*range(50)]
+# random.shuffle(list)
+print(binary_search(list, 25))
+
 
 #------------------------------------------------------------------------------
 # Insertion Sort

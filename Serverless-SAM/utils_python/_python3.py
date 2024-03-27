@@ -16,11 +16,12 @@ import pickle, shelve
 import heapq
 import atexit
 import math
+from copy import deepcopy
 
 from datetime import datetime, UTC
 import time
 from pytz import timezone
-import math
+from copy import deepcopy
 
 # BIG_CONSTANT: int = 10000000
 
@@ -336,7 +337,7 @@ def main() -> None:
     # dict["key1"] -> Big O(1)
 
     # Heap queue / priority queue. hq[0] is always its smallest element.
-    # Python only allows min heaps
+    # Python only allows min heaps. For max heaps, multiply by -1 at push/pop
     # read O(1), add/remove O(log n)
     # When adding to heap[3], element at heap[3] is sent to the end of the queue
     # 
@@ -349,6 +350,7 @@ def main() -> None:
     # heapq.nlargest(n, iter) # returns the n largest elements from the heap
     # heapq.nsmallest(n, iter) # returns the n smallest elements from the heap
 
+    # print(sys.maxsize)        # 9223372036854775807
     # print(float("inf"))
     # print(float("-inf"))
     # print(-3 // 2)            # -2
@@ -378,7 +380,50 @@ def main() -> None:
     # else:
     #     print("not empty")        
     
+    # list1 = [[1,2,3], *range(5)]
+    # print(list1)
+    # list2 = list1[:]
+    # list2 = list(list1)
+    # list2 = [x for x in list1]
+    # list2 = list1.copy()
+    # list2 = deepcopy(list1)
+    # list1[0] = 11
+    # print(list1)
+    # print(list2)
+
+    # list = [ [x]*4 for x in range(3) ]
+    # print(list)
+    # list = [ [0]*4 ]* 4 # not good, all innter arrays will be same object
+    # print(list)
+    # list = [[1]*4,[2]*4,[3]*4]
+    # print(list)
+    # list = [ {} ]
+    # for i, number in enumerate(range(10)):
+    #     print(i, number)
+    # nums1 = [1, 2, 3]
+    # nums2 = [4, 5, 6]
+    # for i, j in zip(nums1, nums2):
+    #     print(i, j)
+    # custom_sorting = ["This", "is", "a", "number"]
+    # custom_sorting.sort(key=len)
+    # custom_sorting.sort(key=lambda x: len(x))
+    # print(custom_sorting)
+
+    # s = "abc"     # Immutable
+    # s[0] = "d"    # TypeError
+    # s += "def"    # OK, but new object
+    # print(int("123") + int("123")) # 246
+    # print(str(123) + str(123))     # 123123
+    # print(ord("A"), chr(125))
+
+    # LEGB: Local, Enclosing, Global, Built-in
+    # global var
+    # nonlocal var
+
     # from . import module
+
+    # import builtins
+    # print(dir(builtins))
 
     print("done", end="\n")
     # vnenv set python interpreter
@@ -388,6 +433,12 @@ def main() -> None:
 @atexit.register
 def func_exit() -> None:
     print("exiting..")
+
+def outer(val: int, arr: list[int]):
+    def inner():
+        arr[0] = 1      # will modify outer arr
+        nonlocal val    # will modify outer val
+        val *= 2        
 
 def kwargs(**kwargs):
     print(type(kwargs))

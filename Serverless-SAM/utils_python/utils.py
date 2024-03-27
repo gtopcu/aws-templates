@@ -61,6 +61,9 @@ def read_file(filename) -> str:
             # file.tell()
             return file.read()
 
+    # with path.open() as f:
+    #     return json.load(f)
+
     # try:
     #     file = open(file=filename, mode="r", encoding="UTF-8")
     # except IOError as e:
