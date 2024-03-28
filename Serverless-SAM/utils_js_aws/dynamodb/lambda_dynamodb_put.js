@@ -1,4 +1,16 @@
 
+
+// https://medium.com/@engin.linux/how-to-build-a-serverless-backend-api-via-aws-lambda-dynamodb-api-gateway-in-15-minutes-level-24fcff3f113d
+/*
+
+{
+  "body": "{\"mealName\": \"Chicken Salad Sandwich\"}",
+  "resource": "/meal",
+  "path": "/meal",
+  "httpMethod": "POST"
+}
+*/
+
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { DynamoDBDocumentClient, PutCommand } from '@aws-sdk/lib-dynamodb';
 import { randomUUID } from 'crypto';
