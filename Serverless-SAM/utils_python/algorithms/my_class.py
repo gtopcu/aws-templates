@@ -36,3 +36,4 @@ cls = MyClass("John")
 print(cls.get_name())
 print(cls.format_name())
 MyClass.static_method()
+

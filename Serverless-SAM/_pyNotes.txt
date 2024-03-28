@@ -22,6 +22,7 @@ pip install -r requirements.txt
 precommit install
 deactivate
 
+
 # https://www.youtube.com/watch?v=Ji2XDxmXSOM
 python select interpreter: /Users/gtopcu/My Drive/VSCode/aws-templates/Serverless-SAM/.venv
 pip install --upgrade poetry

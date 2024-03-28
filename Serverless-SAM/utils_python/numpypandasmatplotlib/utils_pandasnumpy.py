@@ -67,6 +67,11 @@ import matplotlib.pyplot as plt
 # np.random.bytes(32)
 # np.random.normal(loc=mean, scale, size) # gaussian
 
+# create random data
+# xdata = np.random.random([2, 4])  # 2x4 array
+# xdata1 = xdata[0, :]              # 1st row
+# xdata2 = xdata[1, :]              # 2nd row
+
 # print(np.array([0, 6]).mean())
 # speed = [99,86,87,88,111,86,103,87,94,78,77,85,86]
 # print(np.mean(speed))
@@ -118,7 +123,7 @@ import matplotlib.pyplot as plt
 # Pandas - DataFrame
 
 # pd.core.Frame.DataFrame
-df = pd.DataFrame(np.random.randn(4, 3), columns=["A", "B", "C"])
+# df = pd.DataFrame(np.random.randn(4, 3), columns=["A", "B", "C"])
 # df = pd.DataFrame({ 'month': [1, 4, 7, 10],
 #                     'year': [2012, 2014, 2013, 2014],
 #                     'sale': [55, 40, 84, 31]}
@@ -136,14 +141,14 @@ df = pd.DataFrame(np.random.randn(4, 3), columns=["A", "B", "C"])
 # df.index
 # df.set_index("A", inplace=True)
 
-print(df)
+# print(df)
 # print(df.head(2))
 # df.tail(2)
 # df["D"] = df["A"] * 2 / df["B"]
 # print(df[2:4])            # rows 2:4
 # print(df[["A", "B"]])     # columns A and B
 
-# print(df.iloc[0])         # first row
+# print(df.iloc[0])         # First row
 # print(df.iloc[0:2])       # first two rows
 # print(df.iloc[:3])        # first three rows
 # print(df.iloc[1,2])       # element at row 1 and column 2

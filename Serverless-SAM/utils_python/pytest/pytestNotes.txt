@@ -1,0 +1,17 @@
+
+# https://docs.pytest.org/en/8.0.x/
+pytest -vs
+pytest TestClass.py -v (verbose) -s(show print)
+pytest TestClass.py::test_method
+pytest test_mod.py::TestClass::test_method
+pytest testing/
+pytest --pyargs pkg.testing
+pytest test_unit.py -x (stop after failure) --maxfail=2 (stop after two failures)
+
+pytest --fixtures           -> shows builtin and custom fixtures
+pytest -q                   -> quiet mode
+pytest --runslow            -> run all tests decorated with the @pytest.mark.slow decorator
+pytest -m slow              -> run all tests decorated with the @pytest.mark.slow decorator
+pytest --durations=10 -vv   -> get a list of the slowest 10 test durations
+pytest --durations=10 --durations-min=1.0 -vv -> get a list of the slowest 10 test durations over 1.0s
+
