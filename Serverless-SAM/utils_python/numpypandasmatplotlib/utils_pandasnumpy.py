@@ -72,6 +72,12 @@ import matplotlib.pyplot as plt
 # xdata1 = xdata[0, :]              # 1st row
 # xdata2 = xdata[1, :]              # 2nd row
 
+# Ellipsis: select all first row elements(in case of row-major structure) in the 4th dimension
+# [:, :, :, 0], [ … , 0] and [Ellipsis, 0] are all equivalent.
+# array = np.random.rand(2, 2, 2, 2)
+# print(array[..., 0])
+# print(array[Ellipsis, 0])
+
 # print(np.array([0, 6]).mean())
 # speed = [99,86,87,88,111,86,103,87,94,78,77,85,86]
 # print(np.mean(speed))

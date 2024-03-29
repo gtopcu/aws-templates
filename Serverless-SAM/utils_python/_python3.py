@@ -4,8 +4,8 @@ from collections.abc import Sized, Hashable, Sequence, Mapping, MutableSequence,
 from collections.abc import Set, MutableSet, MappingView, KeysView, ItemsView, ValuesView
 from typing import Any, Optional, TypedDict, TypeVar, Self
 from typing import Dict, Set, FrozenSet, Tuple, NamedTuple, OrderedDict
-from datetime import datetime, UTC
-import time
+import heapq
+
 import os, sys, shutil
 from pathlib import Path
 from sys import getsizeof
@@ -13,7 +13,7 @@ from timeit import timeit, repeat
 import random
 import glob
 import pickle, shelve
-import heapq
+
 import atexit
 import math
 from copy import deepcopy
@@ -21,7 +21,7 @@ from copy import deepcopy
 from datetime import datetime, UTC
 import time
 from pytz import timezone
-from copy import deepcopy
+import copy
 
 # BIG_CONSTANT: int = 10000000
 
@@ -223,14 +223,9 @@ def main() -> None:
     # for item in reversed(range(0, 10)):
     #     print(item)
 
-    # sys.exit(0) - Raises SystemExit exception, finally & cleanups run
-    # os._exit(0) - Immediate kill, no finals/cleanups run. Only POSIX files are closed
-
-    # sys.argv
-    # sys.path.insert(0, '/tmp/mydir')
-    # sys.path.append(os.path.abspath(module_path))
-
-    # os.getenv(env_name, str)    
+    # os.system("clear")
+    # os.getenv("ENV", "default")
+    # os.putenv("ENV", "value")
     # os.environ.get(env_name, default)
 
     # print(__file__)
@@ -245,9 +240,6 @@ def main() -> None:
     # os.rename("file1", "file2"))
     # os.chown("path", userID, groupID, follow_symlinks=False)
     # os.chmod("file", intMode)
-    # os.getenv("ENV", "default")
-    # os.putenv("ENV", "value")
-    # os.system("clear")
 
     # os.path.join(current_path, filename)
     # os.path.isdir(path)
@@ -381,13 +373,15 @@ def main() -> None:
     #     print("not empty")        
     
     # list1 = [[1,2,3], *range(5)]
-    # print(list1)
     # list2 = list1[:]
     # list2 = list(list1)
     # list2 = [x for x in list1]
     # list2 = list1.copy()
-    # list2 = deepcopy(list1)
-    # list1[0] = 11
+    # list2 = copy.copy(list1)
+    # list2 = copy.deepcopy(list1)
+    # list1[0][0] = 0
+    # print(id(list1), id(list2))
+    # print(id(list1[0][0]), list2[0][0])
     # print(list1)
     # print(list2)
 
@@ -421,14 +415,37 @@ def main() -> None:
     # nonlocal var
 
     # from . import module
-
     # import builtins
     # print(dir(builtins))
+    # print(sys.path)       # first checks builtins for imported modules, than sys.path/env vars
+    # PYTHONPATH=usr/users/...
+    # sys.path.append('/usr/bin/lib...') 
+    # sys.path.append(os.path.abspath(module_path))
+
+    # hasattr(object, name)
+    # getattr(object, name) # AttributeError
+
+    # Ellipses
+    # https://www.geeksforgeeks.org/what-is-three-dots-or-ellipsis-in-python3/
+    # def use(handles: int) -> None: ...
+    # def foo(x = ...): # Instead of passing None
+    #     print("x:", x)
+    #     return x
+    # print(foo)
+    # foo(1)
+    # foo()
+
+    # from typing import Callable
+    # def inject(func: Callable[..., str]) -> None: ...
+    # def inject(func: Callable[[str, [int]], str]) -> None: ...
 
     print("done", end="\n")
     # vnenv set python interpreter
     # Control + L, Command + Click
+
     # atexit.unregister(func_exit)
+    # sys.exit(0) - Raises SystemExit exception, finally & cleanups run
+    # os._exit(0) - Immediate kill, no finals/cleanups run. Only POSIX files are closed
 
 @atexit.register
 def func_exit() -> None:

@@ -3,6 +3,7 @@ import os
 import uuid
 import json
 import time
+from typing import Any
 
 # pip install python-dotenv
 # from dotenv import load_dotenv, find_dotenv 
@@ -73,7 +74,25 @@ def read_file(filename) -> str:
     # finally:
     #     if file is not None:
     #         file.close()
+
+def json_load(file) -> Any:
+    with open(file, "r", encoding="utf-8") as f:
+        # (object_hook=None, parse_float=None, parse_int=None, parse_constant=None, object_pairs_hook=None)
+        return json.load(f)
+
+def json_loads(input) -> Any:
+    return json.loads(input)
     
-def dump_JSON(dict: object) -> str:
-    return json.dumps(object, indent=4, sort_keys=True, separators=(". ", " = "))
+def json_dumps(dict: object, formatted: bool) -> str:
+    if formatted:
+        return json.dumps(dict, indent=4, sort_keys=True, separators=(". ", " = "))
+    #allow_nan, default, cls, skip_keys
+    return json.dumps(dict) 
+
+def json_dump(dict: object, file, formatted: bool) -> None:
+    with open(file, "w", encoding="utf-8") as f:
+        if formatted:
+            json.dump(dict, f, indent=4, sort_keys=True, separators=(". ", " = "))
+        else:
+            json.dump(dict, f)
     

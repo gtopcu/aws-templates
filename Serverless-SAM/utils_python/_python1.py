@@ -1,15 +1,4 @@
 
-####################################################################################################
-
-# from abc import ABC, abstractmethod
-
-# class MyAbstract(ABC):
-#     @abstractmethod
-#     def my_abstract_method(self):
-#         pass
-
-####################################################################################################
-
 # https://www.tutorialsteacher.com/python/classmethod-decorator
 
 # class Student:
