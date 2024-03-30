@@ -343,6 +343,7 @@ def main() -> None:
     # heapq.nsmallest(n, iter) # returns the n smallest elements from the heap
 
     # print(sys.maxsize)        # 9223372036854775807
+    # math.inf
     # print(float("inf"))
     # print(float("-inf"))
     # print(-3 // 2)            # -2
@@ -357,7 +358,9 @@ def main() -> None:
     # print(math.pow(2, 3))     # 8.0
     # print(math.pi)            # 3.141592653589793
     # print(math.e)             # 2.718281828459045
+    # print(math.log(math.e))   # 1.0
     # print(math.pow(2, 100) < float("inf")) # True
+    # math.prod(nums[0:i])
 
     # print(iter.next())
     # print(issubclass(Exception, BaseException))
@@ -385,6 +388,7 @@ def main() -> None:
     # print(list1)
     # print(list2)
 
+    # x: list[list[int]]
     # list = [ [x]*4 for x in range(3) ]
     # print(list)
     # list = [ [0]*4 ]* 4 # not good, all innter arrays will be same object
