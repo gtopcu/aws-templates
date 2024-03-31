@@ -1,7 +1,9 @@
 
 # https://docs.pytest.org/en/8.0.x/
+# https://blog.newmathdata.com/advanced-unit-testing-in-aws-a666e787aa99
+
 pytest -vs
-pytest TestClass.py -v (verbose) -s(show print)
+pytest TestClass.py -v (verbose) -s(show print) -c(code coverage)
 pytest TestClass.py::test_method
 pytest test_mod.py::TestClass::test_method
 pytest testing/

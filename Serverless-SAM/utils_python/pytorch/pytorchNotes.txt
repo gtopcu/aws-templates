@@ -8,7 +8,7 @@ TensorFlow
 Keras, Tensorboard
 
 PyTorch
-torch, torchserve
+torch, torchserve, autograd, torchaudio, torchvision, primtorch, torchinductor
 
 activating function, loss
 

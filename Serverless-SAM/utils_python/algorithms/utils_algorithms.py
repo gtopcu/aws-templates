@@ -5,6 +5,7 @@
 # https://www.youtube.com/watch?v=oz9cEqFynHU
 # https://www.youtube.com/watch?v=kp3fCihUXEg
 # https://www.youtube.com/watch?v=cQWr9DFE1ww 
+# https://www.youtube.com/watch?v=Uym4-KhP3Lc
 
 
 import numpy as np
@@ -103,7 +104,6 @@ def binary_search(lst: list, value: int) -> int:
 list = [*range(50)]
 # random.shuffle(list)
 print(binary_search(list, 25))
-
 
 #------------------------------------------------------------------------------
 # Insertion Sort

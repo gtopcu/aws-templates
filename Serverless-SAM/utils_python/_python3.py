@@ -2,7 +2,7 @@ from collections import deque, defaultdict, namedtuple, ChainMap
 from collections.abc import Callable, Iterable, Iterator, Generator, Container
 from collections.abc import Sized, Hashable, Sequence, Mapping, MutableSequence, MutableMapping
 from collections.abc import Set, MutableSet, MappingView, KeysView, ItemsView, ValuesView
-from typing import Any, Optional, TypedDict, TypeVar, Self
+from typing import Any, Optional, TypedDict, TypeVar, Self, Final
 from typing import Dict, Set, FrozenSet, Tuple, NamedTuple, OrderedDict
 import heapq
 
@@ -136,8 +136,9 @@ def main() -> None:
     # print(myset1)
     # print(myset1.union(myset2))
     # print(myset1 - myset2)
-    # print(myset1 & myset2) #intersection
-    # print(myset1 ^ myset2) #unique elements(symmetric difference)
+    # print(myset1 & myset2) # intersection
+    # print(myset1 ^ myset2) # unique elements(symmetric difference)
+    # myset1 = frozenset(myset1)
 
     # dict1 = { 0: 'A', 1: 'B', 2: 'C' }
     # dict2 = { 2: 'D', 4: 'E', 5: 'F' }
@@ -442,6 +443,11 @@ def main() -> None:
     # from typing import Callable
     # def inject(func: Callable[..., str]) -> None: ...
     # def inject(func: Callable[[str, [int]], str]) -> None: ...
+
+    # data: bytes = "adfsdf".encode("utf-8")
+    # decoded = data.decode("utf-8")
+    # dataArray = bytearray(bytes)
+    # dataArray.swapcase()
 
     print("done", end="\n")
     # vnenv set python interpreter
