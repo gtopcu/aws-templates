@@ -11,6 +11,8 @@ def main():
     
     print("------------------------------ main ------------------------------")
 
+    # https://docs.python.org/3/library/os.html
+    
     # os.system("clear")
     # os.getenv("ENV", "default")
     # os.putenv("ENV", "value")
@@ -41,9 +43,34 @@ def main():
     # os.path.realpath(__file__)    # /Users/gtopcu/.../utils/utils.py
     # os.path.expanduser('~')       # Path.home()
 
-    # shutil.rmtree("os/makedirs")
+    # https://docs.python.org/3/library/shutil.html#module-shutil 
+    # High-level file and directory handling
+    # To preserve all file metadata from the original, use copy2() instead.
+    # shutil.copy(src, dst, *, follow_symlinks=True)        # Copies the file src to the file or directory dst
+    # shutil.copyfileobj(fsrc, fdst[, length])              #  
+    # shutil.copyfile(src, dst, *, follow_symlinks=True)    # no metadata
+    # shutil.copymode()
     # shutil.chown("path", "user", "group")   
+    # shutil.rmtree("os/makedirs")
     # shutil.move("/source", "target")      # same as mv
+    # shutil.ignore_patterns(*patterns)     # used in copytree()
+    # shutil.copytree(  src, dst, symlinks=False, ignore=None, copy_function=copy2, 
+    #                   ignore_dangling_symlinks=False, dirs_exist_ok=False)
+    # shutil.disk_usage(path)
+    # ------------------------------------------------------------------------------------------
+    # https://docs.python.org/3/library/shutil.html#shutil.unpack_archive
+    # shutil.get_archive_formats()
+    # shutil.unpack_archive(filename[, extract_dir[, format[, filter]]])
+    # ------------------------------------------------------------------------------------------
+    # from shutil import make_archive
+    # archive_name = os.path.expanduser(os.path.join('~', 'myarchive'))
+    # root_dir = os.path.expanduser(os.path.join('~', '.ssh'))
+    # make_archive(archive_name, 'gztar', root_dir)
+    # ------------------------------------------------------------------------------------------
+    # from shutil import make_archive
+    # archive_name = os.path.expanduser(os.path.join('~', 'myarchive'))
+    # make_archive(archive_name, 'tar', root_dir='tmp/root', base_dir='structure/content')
+
 
     # path = Path()                     # .
     # path = Path.home()                # /Users/gtopcu
