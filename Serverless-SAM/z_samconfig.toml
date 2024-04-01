@@ -7,8 +7,8 @@ version = 0.1
 stack_name = "sam-app"
 
 [default.build.parameters]
-cached = true
-parallel = true
+cached = false
+parallel = false
 
 [default.deploy.parameters]
 capabilities = "CAPABILITY_IAM"
@@ -16,7 +16,7 @@ confirm_changeset = true
 resolve_s3 = true
 
 [default.sync.parameters]
-watch = true
+watch = false
 
 [default.local_start_api.parameters]
 warm_containers = "EAGER"
@@ -25,7 +25,6 @@ warm_containers = "EAGER"
 [prod.sync]
 [prod.sync.parameters]
 watch = false
-
 
 #s3_bucket = "aws-samsourcebucket-sbZze8n5ompk"
 #s3_prefix = "samstack1"

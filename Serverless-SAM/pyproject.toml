@@ -3,7 +3,7 @@ name = "serverless-sam"
 version = "2.8.1"
 description = "AWS SAM Sample Package"
 authors = ["S. Gokhan Topcu <gtopcu@gmail.com>"]
-license = "MIT"
+license = "Apache 2.0"
 readme = "README.md"
 
 [tool.poetry.dependencies]

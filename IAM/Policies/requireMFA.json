@@ -1,0 +1,83 @@
+
+// https://medium.parttimepolymath.net/no-more-aws-access-keys-13a3c3f2337a
+
+{
+    "Statement": [
+        {
+            "Action": [
+                "iam:ResyncMFADevice",
+                "iam:ListVirtualMFADevices",
+                "iam:ListUsers",
+                "iam:ListMFADevices",
+                "iam:EnableMFADevice",
+                "iam:CreateVirtualMFADevice"
+            ],
+            "Condition": {
+                "Bool": {
+                    "aws:MultiFactorAuthPresent": "false"
+                }
+            },
+            "Effect": "Deny",
+            "Resource": "*",
+            "Sid": "RequireMFA"
+        }
+    ],
+    "Version": "2012-10-17"
+}
+
+// ------------------------------------------------------------------------------------------------
+
+{
+    "Statement": [
+        {
+            "Action": [
+                "iam:EnableMFADevice",
+                "iam:CreateVirtualMFADevice"
+            ],
+            "Effect": "Allow",
+            "Resource": [
+                "arn:aws:iam::304388919931:user/${aws:username}",
+                "arn:aws:iam::304388919931:mfa/${aws:username}/*"
+            ],
+            "Sid": "ActivateMFA"
+        },
+        {
+            "Action": [
+                "iam:ResyncMFADevice",
+                "iam:DeleteVirtualMFADevice",
+                "iam:DeactivateMFADevice"
+            ],
+            "Condition": {
+                "Bool": {
+                    "aws:MultiFactorAuthPresent": "true"
+                }
+            },
+            "Effect": "Allow",
+            "Resource": [
+                "arn:aws:iam::304388919931:user/${aws:username}",
+                "arn:aws:iam::304388919931:mfa/${aws:username}/*"
+            ],
+            "Sid": "DeactivateMFA"
+        },
+        {
+            "Action": [
+                "iam:ListVirtualMFADevices",
+                "iam:ListMFADevices",
+                "iam:GetMFADevice",
+                "iam:GetLoginProfile"
+            ],
+            "Condition": {
+                "Bool": {
+                    "aws:MultiFactorAuthPresent": "true"
+                }
+            },
+            "Effect": "Allow",
+            "Resource": [
+                "arn:aws:iam::304388919931:user/${aws:username}",
+                "arn:aws:iam::304388919931:mfa/${aws:username}"
+            ],
+            "Sid": "ListMFA"
+        }
+    ],
+    "Version": "2012-10-17"
+}

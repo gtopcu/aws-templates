@@ -1,0 +1,18 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::304388919931:user/robert"
+                        //"arn:aws:iam::304388919931:mfa/${aws:username}"
+            },
+            "Action": "sts:AssumeRole",
+            "Condition": {
+                "IpAddress": {
+                    "aws:SourceIp": "142.85.240.69"
+                }
+            }
+        }
+    ]
+}

@@ -11,17 +11,15 @@ from pathlib import Path
 from sys import getsizeof
 from timeit import timeit, repeat
 import random
-import glob
 import pickle, shelve
+import copy
 
 import atexit
 import math
-from copy import deepcopy
 
 from datetime import datetime, UTC
 import time
 from pytz import timezone
-import copy
 
 # BIG_CONSTANT: int = 10000000
 
@@ -194,7 +192,6 @@ def main() -> None:
     # random.seed("ABC")
     # random.randrange(0, 100, 10)
 
-
     # with open("fruit.pickle", "wb") as file:
     #     pickle.dump(fruit, file)
     # with open("fruit.pickle", "rb") as file:
@@ -223,85 +220,6 @@ def main() -> None:
 
     # for item in reversed(range(0, 10)):
     #     print(item)
-
-    # os.system("clear")
-    # os.getenv("ENV", "default")
-    # os.putenv("ENV", "value")
-    # os.environ.get(env_name, default)
-
-    # print(__file__)
-    # os.getcwd())
-    # os.listdir('.')
-    # os.curdir()
-    # os.pardir()
-    # os.mkdir("/dir")
-    # os.makedirs("os/makedirs", exist_ok=False) # FileExistsError:
-    # os.rmdir("dir")
-    # os.remove("file")
-    # os.rename("file1", "file2"))
-    # os.chown("path", userID, groupID, follow_symlinks=False)
-    # os.chmod("file", intMode)
-
-    # os.path.join(current_path, filename)
-    # os.path.isdir(path)
-    # os.path.isfile(path)
-    # os.path.exists(path)
-    # os.path.getsize(path)
-    # os.path.basename(path)
-    # os.path.dirname(__file__)
-    # os.path.abspath(__file__)
-    # os.path.realpath(__file__)
-    # os.path.islink(path)
-    # os.path.expanduser('~') # Path.home()
-
-    # shutil.rmtree("os/makedirs")
-    # shutil.chown("path", "user", "group")   
-    # shutil.move("/source", "target")      # same as mv
-    
-
-    # path = Path.home() 
-    # path            # /Users/gtopcu
-    # path.name       # gtopcu
-    # path.stem       # gtopcu - filename without extension
-    # path.suffix     # .py
-    # path.drive      # empty
-    # path.root       # /
-    # path.anchor     # /
-    
-    # Path.cwd()        # /Users/gtopcu/My Drive/VSCode
-    # Path(__file__)    # doesnt work in .ipynb
-    # Path.parent()
-    # Path.parents[0]   # Nth parent
-    # Path.absolute()
-    # Path.joinpath("Desktop").mkdir(exist_ok=True)
-    # Path.chmod(path, intMode, follow_symlinks=True)
-    # Path.group()
-    # Path.exists()
-    # Path.is_file()
-    # Path.is_dir()
-    # Path.is_symlink()
-    # Path.iterdir()
-    # Path.as_uri(path)
-    # Path.resolve("path", strict=False)
-    # Path.mkdir(Path, mode = 511, parents = False, exist_ok = False)
-    # Path.rmdir() # must be empty
-    # Path.unlink(missing_ok=True)
-    # Path.touch(Path, mode = 438, exist_ok = True)
-    # Path.owner(Path)
-    # Path.match("pattern")
-    # Path.glob(Path, pattern="*")
-    # Path.rglob(Path, pattern="*")
-    
-    # print(glob.glob("?????.py")
-    # print(glob.glob("*.py"))
-    # print(glob.glob("*.*"))
-    # print(glob.glob("[abc]*.py")) #[] first char should be a or
-    # # print(glob.glob("[!abc]*.py")) #[] first char should NOT be a or b
-    # globs = glob.iglob("**/utils_*.py", root_dir="/Users/gtopcu/", recursive=True, include_hidden=True)
-    # print(globs.__next__())
-    # for i, cglob in enumerate(globs, 1):
-    #     print(i, cglob, sep=":")
-
 
     # my_tuple_list = [(a, b) for a in range(2) for b in range(5, 7)]
     # print(my_tuple_list)
@@ -448,6 +366,12 @@ def main() -> None:
     # decoded = data.decode("utf-8")
     # dataArray = bytearray(bytes)
     # dataArray.swapcase()
+
+    # BaseException -> 
+    #  Exception -> SystemExit 
+    #               StandardError -> ValueError: int("A"), KeyError: dict['key1'], TypeError: str[0]='a', 
+    #               IndexError, AttributeError, NameError, AssertionError, StopIteration, ArithmeticError, 
+    #               ZeroDivisionError, NotImplementedError, RuntimeError, SystemError
 
     print("done", end="\n")
     # vnenv set python interpreter
