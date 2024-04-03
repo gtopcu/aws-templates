@@ -134,55 +134,58 @@ import matplotlib.pyplot as plt
 #                     'year': [2012, 2014, 2013, 2014],
 #                     'sale': [55, 40, 84, 31]}
 #                 )
-# df = pd.read_csv("data.csv", sep=';')
 
 # data:list[str] = requests.get("http://data.csv").content.decode().split("\n")
-# df = pd.read_csv("data.csv", index_col = 0, parse_dates=True, delimiter=" ",  sep=';')
 
-# df.size
-# df.columns = ["2021", "2022", "2023"]
-# df.dtypes
+df = pd.read_csv("data.csv", sep=';')
+df = pd.read_csv("data.csv", index_col = 0, parse_dates=True, delimiter=" ",  sep=';')
+df
+df.size   
+df.shape  # (16598, 11)
+df.dtypes
+df.values
+df.columns = ["2021", "2022", "2023"]
 
-# print(df.describe())
-# df.index
-# df.set_index("A", inplace=True)
+df.describe()
+df.index
+df.set_index("A", inplace=True)
 
-# print(df)
-# print(df.head(2))
-# df.tail(2)
-# df["D"] = df["A"] * 2 / df["B"]
-# print(df[2:4])            # rows 2:4
-# print(df[["A", "B"]])     # columns A and B
+df.head(2)
+df.tail(2)
+df["D"] = df["A"] * 2 / df["B"]
+df[2:4]             # rows 2:4
+df[["A", "B"]]      # columns A and B
 
-# print(df.iloc[0])         # First row
-# print(df.iloc[0:2])       # first two rows
-# print(df.iloc[:3])        # first three rows
-# print(df.iloc[1,2])       # element at row 1 and column 2
-# print(df.iloc[2:4, 1:3])  # rows 2:4 and columns 1:3
+df.iloc[0]          # First row
+df.iloc[0:2]        # first two rows
+df.iloc[:3]         # first three rows
+df.iloc[1,2]        # element at row 1 and column 2
+df.iloc[2:4, 1:3]   # rows 2:4 and columns 1:3
 
-# print(df.loc[2:4, "B"])                   # rows 2:4 and column B
-# print(df.loc[df.index[1:3], ["C", "B"]])  # rows 1:3 and columns C and B
-# df.loc[df.index[1:3], ["C", "B"]] = 0
-# df.loc[df.index[1:3], ["C", "B"]] = np.random.randn(2, 2)
+df.loc[2:4, "B"]                    # rows 2:4 and column B
+df.loc[df.index[1:3], ["C", "B"]]   # rows 1:3 and columns C and B
+df.loc[df.index[1:3], ["C", "B"]] = 0
+df.loc[df.index[1:3], ["C", "B"]] = np.random.randn(2, 2)
 
-# df = df.sort_values(by="A", ascending=False)
-# df.sort_index(axis=1, ascending=False, inplace=True)
+df = df.sort_values(by="A", ascending=False)
+df.sort_index(axis=1, ascending=False, inplace=True)
+
+df.to_csv("dataframe.csv")
+df.to_excel("dataframe.xlsx")
+df.to_json("dataframe.json")
+df.to_sql("dataframe")
+df.to_numpy()
+
 
 # %matplotlib inline
-# df.plot(title="Plot Data", grid=True, legend=True, subplots=True, logx=False, logy=False) # line plot
-# df["A"].plot(kind="bar") # 'line', 'bar', 'barh', 'hist', 'box', 'kde', 'density', 'area', 'pie', 'scatter', 'hexbin'
-# plt.show()
+df.plot(title="Plot Data", grid=True, legend=True, subplots=True, logx=False, logy=False) # line plot
+df["A"].plot(kind="bar") # 'line', 'bar', 'barh', 'hist', 'box', 'kde', 'density', 'area', 'pie', 'scatter', 'hexbin'
+plt.show()
 
-# df.to_csv("dataframe.csv")
-# df.to_excel("dataframe.xlsx")
-# df.to_json("dataframe.json")
-# df.to_sql("dataframe")
-# df.to_numpy()
-
-# pd.set_option("precision", 1)
-# pd.set_option("display.max_columns", 500)
-# pd.set_option("display.rows", 20)
-# pd.set_option("display.width", 1000)
-# pd.set_option("display.max_colwidth", -1)
+pd.set_option("precision", 1)
+pd.set_option("display.max_columns", 500)
+pd.set_option("display.rows", 20)
+pd.set_option("display.width", 1000)
+pd.set_option("display.max_colwidth", -1)
 
 

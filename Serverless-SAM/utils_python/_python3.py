@@ -20,6 +20,7 @@ import math
 from datetime import datetime, UTC
 import time
 from pytz import timezone
+from functools import reduce
 
 # BIG_CONSTANT: int = 10000000
 
@@ -263,6 +264,8 @@ def main() -> None:
 
     # print(sys.maxsize)        # 9223372036854775807
     # math.inf
+    # math.pi                  # 3.141592653589793
+    # math.e                   # 2.718281828459045
     # print(float("inf"))
     # print(float("-inf"))
     # print(-3 // 2)            # -2
@@ -275,11 +278,9 @@ def main() -> None:
     # print(math.ceil(3/2))     # 2
     # print(math.sqrt(4))       # 2.0
     # print(math.pow(2, 3))     # 8.0
-    # print(math.pi)            # 3.141592653589793
-    # print(math.e)             # 2.718281828459045
     # print(math.log(math.e))   # 1.0
     # print(math.pow(2, 100) < float("inf")) # True
-    # math.prod(nums[0:i])
+    # math.prod(nums[0:10])
 
     # print(iter.next())
     # print(issubclass(Exception, BaseException))
@@ -321,10 +322,20 @@ def main() -> None:
     # nums2 = [4, 5, 6]
     # for i, j in zip(nums1, nums2):
     #     print(i, j)
+    # dict1 = dict(zip(nums1, nums2))
+    # print(dict1)
     # custom_sorting = ["This", "is", "a", "number"]
     # custom_sorting.sort(key=len)
     # custom_sorting.sort(key=lambda x: len(x))
     # print(custom_sorting)
+    # for i in map(print, range(10)):
+    #     pass
+    # map(lambda x: print(x), range(10))
+    # listMap = list(map(lambda x: x * x, range(10)))
+    # listMap = [*map(lambda x: x * x, range(10))]
+    # filter(lambda x: x % 2 == 0, range(10))
+    # reduce(lambda x, y: x + y, range(10))
+
 
     # s = "abc"     # Immutable
     # s[0] = "d"    # TypeError

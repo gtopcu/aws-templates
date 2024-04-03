@@ -4,6 +4,8 @@
 from flask import Flask, jsonify, request, abort, redirect
 import db_sqlite
 
+# Flask-RESTful: Extension for Flask that adds support for quickly building REST APIs
+
 app = Flask(__name__)
 
 # http://127.0.0.1:5000/api/v1/blogs

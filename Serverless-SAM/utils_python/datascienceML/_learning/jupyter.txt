@@ -1,0 +1,14 @@
+
+# https://jupyter.org/
+
+pip install jupyterlab
+brew install jupyterlab
+jupyter lab
+http://localhost:8888/la
+
+pip install notebook
+jupyter notebook
+http://localhost:8888/tree
+
+
+

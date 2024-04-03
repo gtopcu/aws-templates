@@ -1,5 +1,5 @@
 # https://docs.python.org/3/library/functools.html
-from functools import cache, lru_cache, wraps, update_wrapper
+from functools import cache, lru_cache, wraps, update_wrapper, reduce
 import time
 
 def main() -> None:
@@ -12,6 +12,7 @@ def main() -> None:
     function(1, 2, 3)
     print("done")
     
+    reduce(lambda x, y: x + y, range(10))
 
 @cache
 # @lru_cache(maxsize=128, typed=False) #maxsize=None 

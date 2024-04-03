@@ -1,0 +1,89 @@
+
+NumPy: Numerical computing library for arrays, matrices, and mathematical operations.
+pandas: Data manipulation and analysis library, providing data structures like DataFrame.
+Matplotlib: Plotting and visualization library for creating static, animated, and interactive visualizations.
+TensorFlow: Deep learning library developed by Google Brain, providing tools for building and training neural networks.
+scikit-learn: Machine learning library for classical algorithms such as classification, regression, clustering, and dimensionality reduction.
+PyTorch: Deep learning library developed by Facebook AI Research, known for its dynamic computation graph.
+Django: Web framework for building web applications with a focus on simplicity and scalability.
+Flask: Lightweight web framework for building web applications with minimal dependencies.
+Beautiful Soup: Library for web scraping and parsing HTML and XML documents.
+Requests: Library for making HTTP requests and working with APIs.
+SQLAlchemy: SQL toolkit and Object-Relational Mapping (ORM) library for Python.
+Keras: High-level deep learning library that provides a simple interface for building and training neural networks.
+SciPy: Library for scientific computing and technical computing, built on top of NumPy.
+NLTK (Natural Language Toolkit): Library for natural language processing (NLP) tasks such as tokenization, stemming, tagging, and parsing.
+Seaborn: Statistical data visualization library based on Matplotlib, providing a high-level interface for drawing attractive and informative statistical graphics.
+pytest: Testing framework for writing simple and scalable tests in Python.
+OpenCV: Library for computer vision and image processing tasks.
+Twisted: Event-driven networking engine written in Python, supporting various network protocols.
+Pygame: Set of Python modules designed for writing video games and multimedia applications.
+Pillow: Imaging library (formerly known as Python Imaging Library or PIL) for opening, manipulating, and saving many different image file formats.
+PyGTK: Set of Python bindings for the GTK graphical user interface library.
+wxPython: Cross-platform GUI toolkit for the Python programming language.
+pytest-cov: Plugin for pytest that generates coverage reports.
+Flask-RESTful: Extension for Flask that adds support for quickly building REST APIs.
+Click: Command-line interface creation kit for Python, making it easy to build command-line utilities.
+PyQt: Set of Python bindings for the Qt application framework.
+cx_Freeze: Cross-platform Python script freezer, allowing you to convert Python scripts into standalone executables.
+Pygame Zero: Simplified wrapper for Pygame designed for educational purposes.
+PyGTK: Python wrapper for the GTK+ GUI toolkit.
+PyInstaller: Converts Python programs into standalone executables, under Windows, Linux, and Mac OS X.
+MechanicalSoup: Library for automating interaction with websites.
+Fabric: Library and command-line tool for streamlining the use of SSH for application deployment or systems administration tasks.
+NetworkX: Library for creating, manipulating, and studying complex networks and graphs.
+PyPDF2: Library for working with PDF files in Python.
+Django REST Framework: Powerful and flexible toolkit for building Web APIs with Django.
+Pygame: Set of Python modules designed for writing video games and multimedia applications.
+SQLAlchemy: SQL toolkit and Object-Relational Mapping (ORM) library for Python.
+Tweepy: Library for accessing the Twitter API and interacting with Twitter data.
+docopt: Library for parsing command-line arguments based on docstrings.
+PyLint: Tool for checking Python code against a coding standard, looking for programming errors, and enforcing style rules.
+Selenium: Web browser automation tool used for testing web applications.
+plotly: Interactive, web-based plotting library for Python, providing high-quality, interactive visualizations in a browser.
+Bokeh: Interactive visualization library that targets modern web browsers for presentation.
+Scrapy: Fast, high-level web crawling and web scraping framework for Python.
+Celery: Distributed task queue framework for executing tasks asynchronously in Python.
+PyMongo: Python driver for MongoDB, allowing interaction with MongoDB databases from Python applications.
+pytz: World Timezone Definitions for Python.
+pyserial: Python serial port access library.
+geopy: Python client for several popular geocoding web services.
+pyyaml: YAML parser and emitter for Python.
+pytest: Testing framework for writing simple and scalable tests in Python.
+pytest-cov: Plugin for pytest that generates coverage reports.
+pylint: Source code, bug, and quality checker for the Python programming language.
+tox: Generic virtualenv management and test command line tool.
+virtualenv: Tool to create isolated Python environments.
+nose: Extension to the Python unittest module.
+nose2: Next generation of nicer testing for Python.
+pytest-html: Plugin for generating HTML reports for pytest results.
+pytest-xdist: Plugin for distributed testing and loop-on-failing modes.
+Pygments: Syntax highlighting package written in Python.
+Twisted: Asynchronous event-driven network programming framework.
+tqdm: Fast, extensible progress bar for loops and CLI.
+pandas-datareader: Remote data access for pandas.
+psycopg2: PostgreSQL adapter for Python.
+pymysql: Pure-Python MySQL client library.
+python-Levenshtein: Fast computation of Levenshtein distance and string similarity.
+python-memcached: Pure Python memcached client.
+python-openid: OpenID support for servers and consumers.
+python-twitter: Python wrapper for the Twitter API.
+pytz: World Timezone Definitions for Python.
+pyzmq: Python bindings for ZeroMQ.
+qtconsole: Jupyter Qt console.
+QtPy: Abstraction layer for PySide/PyQt4/PyQt5.
+raven: Client for Sentry.
+redis: Python client for Redis.
+regex: Alternative regular expression module, to replace re.
+reportlab: Library to create PDF documents using Python.
+requests: HTTP library for human beings.
+retrying: General-purpose retrying library.
+rope: Library for refactoring code.
+rsa: Pure-Python RSA implementation.
+s3transfer: S3 transfer manager.
+selenium: Python bindings for Selenium WebDriver.
+semver: Semantic version comparison library.
+setuptools: Library to package Python projects.
+simplegeneric: Simple generic functions for Python.
+singledispatch: Generic function support in Python 2.
+sip: SIP, the C++ bindings generator used by PyQt and PyKDE

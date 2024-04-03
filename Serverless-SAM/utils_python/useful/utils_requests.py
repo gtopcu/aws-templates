@@ -9,6 +9,7 @@ import httpx
 import aiohttp
 import asyncio
 import time
+import urllib3
 
 # requests-cache:
 # https://www.youtube.com/watch?v=cJBYGSXcCgQ
@@ -118,3 +119,19 @@ def requests_put(endpoint_url, payload, headers=None, auth=None, timeout: int = 
 #         print(f"{response.status_code} - {e}")
 
 # print("done")
+
+
+# def urllib3_http(url: str) -> Any:
+#     http = urllib3.HTTPConnectionPool
+
+# def urllib3_pool_http(url: str) -> Any:
+#     http = urllib3.PoolManager(num_pools=2)
+
+#     response = http.request("GET", url, fields=None, headers=None, retries=False, redirect=False, 
+#     assert_same_host=True, timeout=None, pool_timeout=None, release_conn=None, preload_content=True, 
+#     decode_content=True, retries=urllib3.Retry(total=5, backoff_factor=0.1)
+
+#     len(manager.pools)
+#     # response.status
+    
+#     return response.data
