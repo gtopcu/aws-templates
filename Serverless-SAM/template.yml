@@ -15,6 +15,11 @@ Description: Rest API Gateway with Python Lambda Handler and DynamoDB table
 #     Type: "CommaDelimitedList"
 #     Default: "myIpAddress/32"
 
+# Metadata:
+#   DockerTag: frontend-function
+#   DockerContext: ./frontend
+#   Dockerfile: Dockerfile
+
 Globals:
   Api:
     Cors:

@@ -12,8 +12,8 @@ python3 -m venv venv
 source venv/bin/activate
 pip list | freeze
 pip install --target ./package requests
-pip install python-dotenv --upgrade --quiet
-pip install requests
+pip install python-dotenv -q -U (--quiet --upgrade --quiet)
+pip install requests 
 pip install pytest
 pip install boto3
 pip install botocore
@@ -24,6 +24,10 @@ pip freeze > requirements.txt
 pip install -r requirements.txt
 precommit install
 deactivate
+
+model
+pip install transformers>=4.39.0
+pip install mamba-ssm causal-conv1d>=1.2.0
 
 
 # https://www.youtube.com/watch?v=Ji2XDxmXSOM
