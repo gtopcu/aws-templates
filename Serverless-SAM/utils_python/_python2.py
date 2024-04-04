@@ -29,7 +29,7 @@
 ####################################################################################################
 # Generics
 
-# class MyClass[T]:
+# class MyClass[T: (int, float)]:
 #     def myFunc(input: T) -> T:
 #         return T
 
@@ -38,6 +38,7 @@
 
 # type Point = tuple[float, float]
 # type Points[T] = tuple[T, T]
+
 
 ####################################################################################################
 # TypedDict

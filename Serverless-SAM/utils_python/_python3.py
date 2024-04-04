@@ -1,9 +1,17 @@
-from collections import deque, defaultdict, namedtuple, ChainMap
-from collections.abc import Callable, Iterable, Iterator, Generator, Container
-from collections.abc import Sized, Hashable, Sequence, Mapping, MutableSequence, MutableMapping
-from collections.abc import Set, MutableSet, MappingView, KeysView, ItemsView, ValuesView
-from typing import Any, Optional, TypedDict, TypeVar, Self, Final
-from typing import Dict, Set, FrozenSet, Tuple, NamedTuple, OrderedDict
+
+# https://stackoverflow.com/questions/52827463/collections-iterable-vs-typing-iterable-in-type-annotation-and-checking-for-iter
+
+# from typing import Any, Optional, TypedDict, TypeVar, Self, Final
+# from typing import Dict, Set, FrozenSet, Tuple, NamedTuple, OrderedDict
+# from typing import Literal, Annotated, LiteralString
+
+# from collections import deque, defaultdict, namedtuple, ChainMap, Counter, OrderedDict, UserDict, UserList, UserString
+# from collections.abc import Callable, Iterable, Iterator, Generator, Container
+# from collections.abc import Sized, Hashable, Sequence, Mapping, MutableSequence, MutableMapping
+# from collections.abc import Set, MutableSet, MappingView, KeysView, ItemsView, ValuesView
+
+from collections.abc import Iterable
+
 import heapq
 
 import os, sys, shutil
@@ -378,6 +386,9 @@ def main() -> None:
     # dataArray = bytearray(bytes)
     # dataArray.swapcase()
 
+    for i in generator_func(10):
+        print(i)
+
     # BaseException -> 
     #  Exception -> SystemExit 
     #               StandardError -> ValueError: int("A"), KeyError: dict['key1'], TypeError: str[0]='a', 
@@ -391,6 +402,16 @@ def main() -> None:
     # atexit.unregister(func_exit)
     # sys.exit(0) - Raises SystemExit exception, finally & cleanups run
     # os._exit(0) - Immediate kill, no finals/cleanups run. Only POSIX files are closed
+
+
+def generator_func(loop_count: int):
+    for i in range(loop_count):
+        yield i
+        time.sleep(1)
+
+def iterate(y:Iterable):
+    for x in y: # it = iter(y)  # y.__iter__()
+        # x = next(y)           # it.__next__() - StopIteration
 
 @atexit.register
 def func_exit() -> None:

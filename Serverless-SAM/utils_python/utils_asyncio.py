@@ -1,10 +1,13 @@
 
 # https://www.youtube.com/watch?v=K56nNuBEd0c 
+# https://www.youtube.com/watch?v=dEZKySL3M9c
 
 import asyncio
 import time
+from collections.abc import Iterable
 
 async def brew_coffee():
+    yield b"yielding"
     print("Start brewCoffee")
     await asyncio.sleep(3)
     print("End brewCoffee")
@@ -15,7 +18,6 @@ async def toast_bagel():
     await asyncio.sleep(2)
     print("End toastBagel")
     return "Bagel ready"
-    
 
 async def main() -> None:
 
@@ -34,6 +36,15 @@ async def main() -> None:
     print(f"Result of toastBagel: {result_bagel}")
     print(f"Time: {time.perf_counter() - start:.2f}")
 
+
+async def read_stream(stream: Iterable) -> None:
+    async for chunk in stream:
+        print(chunk)
+
+async def generator_func(loop_count: int):
+    for i in range(loop_count):
+        yield i
+        await asyncio.sleep(1)
 
 if __name__ == "__main__":
     asyncio.run(main())

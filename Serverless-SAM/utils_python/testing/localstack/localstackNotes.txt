@@ -1,0 +1,76 @@
+
+
+https://app.localstack.cloud/getting-started
+
+Mac:
+brew install localstack/tap/localstack-cli
+export LOCALSTACK_AUTH_TOKEN="ls-XOrI3498-riga-lefe-FuxE-XIfaYoyUsasfdewkj343i24hk3jwbasxm"
+localstack start
+localstack stop
+
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements-dev.txt
+
+awslocal lambda invoke --function-name resize-image --payload file://test.jpg out.txt --log-type Tail --query LogResult --output text | base64 -d
+awslocal lambda create-function --function-name resize-image --runtime python3.12 --handler main.handler --zip-file fileb://function.zip
+(cd lambdas/presign; rm -f lambda.zip; zip lambda.zip handler.py)
+awslocal lambda create-function \
+    --function-name presign \
+    --runtime python3.12 \
+    --timeout 10 \
+    --zip-file fileb://lambdas/presign/lambda.zip \
+    --handler handler.handler \
+    --role arn:aws:iam::000000000000:role/lambda-role \
+    --environment Variables="{STAGE=local}"
+awslocal lambda wait function-active-v2 --function-name presign
+awslocal lambda create-function-url-config \
+    --function-name presign \
+    --auth-type NONE
+awslocal lambda list-function-url-configs --function-name presign | jq -r '.FunctionUrlConfigs[0].FunctionUrl'
+
+cd lambdas/resize
+rm -rf libs lambda.zip
+docker run --platform linux/x86_64 -v "$PWD":/var/task "public.ecr.aws/sam/build-python3.9" /bin/sh -c "pip install -r requirements.txt -t libs; exit"
+cd libs && zip -r ../lambda.zip . && cd ..
+zip lambda.zip handler.py
+rm -rf libs
+cd ../..
+
+https://webapp.s3-website.localhost.localstack.cloud:4566/
+aws s3 mb s3://my-first-bucket --endpoint-url=http://localhost:4566
+awslocal s3 ls s3://localstack-thumbnails-app-images/ --recursive
+awslocal s3 cp test.jpg s3://localstack-thumbnails-app-images/test.jpg 
+awslocal s3 sync --delete ./website s3://webapp
+
+awslocal s3api put-bucket-notification-configuration \
+    --bucket localstack-thumbnails-app-images \
+    --notification-configuration file://config.json
+awslocal s3api put-bucket-notification-configuration \
+    --bucket localstack-thumbnails-app-images \
+    --notification-configuration "{\"LambdaFunctionConfigurations\": [{\"LambdaFunctionArn\": \"$(awslocal lambda get-function --function-name resize | jq -r .Configuration.FunctionArn)\", \"Events\": [\"s3:ObjectCreated:*\"]}]}"
+
+awslocal sns create-topic --name failed-resize-topic
+awslocal sns subscribe \
+    --topic-arn arn:aws:sns:us-east-1:000000000000:failed-resize-topic \
+    --protocol email \
+    --notification-endpoint my-email@example.com
+curl -s http://localhost.localstack.cloud:4566/_aws/ses | jq
+
+awslocal sqs create-queue --queue-name failed-resize-queue
+awslocal sqs get-queue-attributes --queue-url XXXXXX --attribute-names All
+awslocal sqs list-queues
+
+
+
+
+
+
+
+
+awslocal ssm put-parameter \
+    --name /localstack-thumbnail-app/buckets/images \
+    --type "String" \
+    --value "localstack-thumbnails-app-images"
+
+

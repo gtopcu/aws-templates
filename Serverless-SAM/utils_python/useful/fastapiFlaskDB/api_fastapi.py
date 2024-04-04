@@ -60,3 +60,5 @@ async def create_item(request: Request, item: ToDo):
     items.append(item)
     return item
 
+# def main():
+#     import uvicorn

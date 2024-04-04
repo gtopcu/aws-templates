@@ -2,8 +2,16 @@ https://aws.amazon.com/blogs/aws/amazon-linux-2023-a-cloud-optimized-linux-distr
 https://aws.amazon.com/blogs/compute/python-3-12-runtime-now-available-in-aws-lambda/
 
 FROM public.ecr.aws/lambda/python:3.12
-# Copy function code
 COPY lambda_handler.py ${LAMBDA_TASK_ROOT}
+
+----------------------------------------------------------------------------------------------------------------------
+
+FROM --platform=linux/amd64 public.ecr.aws/lambda/python:3.12
+COPY requirements.txt ${LAMBDA_TASK_ROOT}
+RUN pip3 install -r requirements.txt --target "${LAMBDA_TASK_ROOT}" --no-cache-dir
+
+COPY . ${LAMBDA_TASK_ROOT}
+CMD ["app.lambda_handler"]
 
 ----------------------------------------------------------------------------------------------------------------------
 

@@ -19,6 +19,7 @@ from typing import Final
 from dataclasses import dataclass
 from requests_cache import CachedSession
 from datetime import timedelta
+from django.contrib import auth
 
 
 def requests_get(endpoint_url, headers=None, auth=None, timeout: int = 30) -> requests.Response:
@@ -77,15 +78,24 @@ def requests_put(endpoint_url, payload, headers=None, auth=None, timeout: int = 
 
 # ---------------------------------------------------------------------------------------------------------------------
 
-# # httpx - supports concurrency
-# async def httpxget(client: httpx.AsyncClient, url: str) -> Any:
-#     response = await client.get(url)
-#     return response.json()
+# # httpx - supports concurrency & HTTP2 & typed
 
+# async def httpx_get(url: str) -> Any:
+#     async with httpx.AsyncClient() as client:
+#         response = await client.get(url)
+#         # response = client.post(url, json=payload, params=query_params, headers=headers, auth=auth, timeout=timeout)
+#         # response.status_code
+#         # response.headers
+#         # response.encoding
+#         # response.content
+#         # response.text
+#         # data: bytes = response.read()
+#         return response.json()
+        
 # async def httpx_get() -> None:
 #     async with httpx.AsyncClient() as client:
-#         tasks = [ httpxget(client, "XXXXXXXXXXXXXXXXXXXXXXX") for _ in range(10) ]
-#         #tasks = [ httpxget(client, "http://url1.com"), httpxget(client, "http://url2.com") ]
+#         tasks = [ httpx_get(client, "XXXXXXXXXXXXXXXXXXXXXXX") for _ in range(10) ]
+#         # tasks = [ httpx_get(client, "http://url1.com"), httpx_get(client, "http://url2.com") ]
 #         results = await asyncio.gather(*tasks)
 #     for result in results:
 #         print(result)
@@ -120,6 +130,8 @@ def requests_put(endpoint_url, payload, headers=None, auth=None, timeout: int = 
 
 # print("done")
 
+
+# ---------------------------------------------------------------------------------------------------------------------
 
 # def urllib3_http(url: str) -> Any:
 #     http = urllib3.HTTPConnectionPool

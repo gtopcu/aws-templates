@@ -167,3 +167,5 @@ async def delete(request: Request, todo_id: int, db: Session = Depends(get_db)):
     url = request.url_path_for("home")
     return RedirectResponse(url=url, status_code=status.HTTP_302_FOUND)
 
+# def main():
+#     import uvicorn
