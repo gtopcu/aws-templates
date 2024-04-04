@@ -1,0 +1,67 @@
+<!--Install  LiveServer extension / Open with LiveServer --> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mandelbrot Animation</title>
+<style>
+  #mandelbrot {
+    width: 100%;
+    height: 100vh;
+  }
+</style>
+</head>
+<body>
+<canvas id="mandelbrot"></canvas>
+
+<script>
+  var canvas = document.getElementById('mandelbrot');
+  var ctx = canvas.getContext('2d');
+  var width = canvas.width;
+  var height = canvas.height;
+
+  var mandelbrot = function(x, y) {
+    var real = x;
+    var imag = y;
+    var max_iterations = 100;
+    var iteration = 0;
+    while (iteration < max_iterations) {
+      var real_temp = real * real - imag * imag + x;
+      imag = 2 * real * imag + y;
+      real = real_temp;
+      if (real * real + imag * imag > 4) {
+        break;
+      }
+      iteration++;
+    }
+    return iteration;
+  };
+
+  var drawMandelbrot = function() {
+    for (var x = 0; x < width; x++) {
+      for (var y = 0; y < height; y++) {
+        var a = (4 * x - width) / width;
+        var b = (4 * y - height) / height;
+        var iterations = mandelbrot(a, b);
+        var brightness = 255 * Math.sqrt(iterations / 100);
+        ctx.fillStyle = 'rgb(' + brightness + ',' + brightness + ',' + brightness + ')';
+        ctx.fillRect(x, y, 1, 1);
+      }
+    }
+  };
+
+  var switchMandelbrot = function() {
+    setTimeout(function() {
+      ctx.clearRect(0, 0, width, height);
+      drawMandelbrot();
+      switchMandelbrot();
+      console.log("next mandelbrot..")
+    }, 3000);
+  };
+
+  drawMandelbrot();
+  switchMandelbrot();
+</script>
+</body>
+</html>

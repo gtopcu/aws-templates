@@ -35,7 +35,7 @@ from sqlalchemy.orm import sessionmaker, Session, declarative_base
 # from sqlalchemy.sql.schema import Column, ForeignKey, Index, Table, UniqueConstraint
 
 DB_URL = "sqlite:///" + str(Path(__file__).parent) + "/sqlite.db"
-Path(DB_URL).unlink(missing_ok=True)
+# Path(DB_URL).unlink(missing_ok=True)
 
 engine = create_engine(DB_URL, echo=True, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False)
