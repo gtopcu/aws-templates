@@ -1,6 +1,7 @@
 
 
 https://app.localstack.cloud/getting-started
+https://www.youtube.com/watch?v=BP2UZbB8PAI
 
 Mac:
 brew install localstack/tap/localstack-cli
@@ -18,7 +19,8 @@ awslocal lambda create-function --function-name resize-image --runtime python3.1
 awslocal lambda create-function \
     --function-name presign \
     --runtime python3.12 \
-    --timeout 10 \
+    --memory-size 1024 \
+    --timeout 30 \
     --zip-file fileb://lambdas/presign/lambda.zip \
     --handler handler.handler \
     --role arn:aws:iam::000000000000:role/lambda-role \
@@ -50,27 +52,34 @@ awslocal s3api put-bucket-notification-configuration \
     --bucket localstack-thumbnails-app-images \
     --notification-configuration "{\"LambdaFunctionConfigurations\": [{\"LambdaFunctionArn\": \"$(awslocal lambda get-function --function-name resize | jq -r .Configuration.FunctionArn)\", \"Events\": [\"s3:ObjectCreated:*\"]}]}"
 
+awslocal sns-publish \
+    --topic-arn arn:aws:sns:us-east-1:000000000000:failed-resize-topic \
+    --message '{"foo":"bar"}'
 awslocal sns create-topic --name failed-resize-topic
 awslocal sns subscribe \
     --topic-arn arn:aws:sns:us-east-1:000000000000:failed-resize-topic \
     --protocol email \
     --notification-endpoint my-email@example.com
+awslocal sns subscribe \
+    --topic-arn arn:aws:sns:us-east-1:000000000000:failed-resize-topic \
+    --protocal sqs
+    --notification-endpoint arn:aws:sqs:us-east-1:00000000:test-queue
 curl -s http://localhost.localstack.cloud:4566/_aws/ses | jq
 
 awslocal sqs create-queue --queue-name failed-resize-queue
 awslocal sqs get-queue-attributes --queue-url XXXXXX --attribute-names All
 awslocal sqs list-queues
-
-
-
-
-
-
-
+awslocal sqs receive-message \
+    --queue-url arn:aws:sqs:us-east-1:00000000:test-queue
+awslocal sqs set-queue-attributes \
+    --queue-url arn:aws:sqs:us-east-1:00000000:test-queue
+    --attributes file://attributes.json
 
 awslocal ssm put-parameter \
     --name /localstack-thumbnail-app/buckets/images \
     --type "String" \
     --value "localstack-thumbnails-app-images"
 
+awslocal apigateway create-rest-api --name test-api --tags '{"author":"gokhan}'
+awslocal apigateway 
 

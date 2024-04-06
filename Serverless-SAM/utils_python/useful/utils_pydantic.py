@@ -10,7 +10,7 @@ pydantic.dataclasses.dataclass — a wrapper around standard dataclasses which p
 pydantic = {extras = ["email"], version = "^2.6.1"}
 """
 from datetime import datetime
-from typing import Any, Optional, TypedDict, Self
+from typing import Any, TypedDict, Self
 # from typing import Dict, List, Tuple
 from typing import Literal, Annotated
 from annotated_types import Gt, Ge, Le, Lt
@@ -30,6 +30,17 @@ from pydantic import (
     StringConstraints
     #AwareDatetime
 )
+
+# ----------------------------------------------------------------------------------------------------
+
+class MyData(BaseModel):
+    name: str = Field(min_length=1, max_length=10)
+    age: int = Field(ge=0, le=100)
+
+data:MyData = MyData.model_validate(app.current_request.json_body)
+
+# ----------------------------------------------------------------------------------------------------
+
 class Role(IntFlag):
     AUTHOR = auto()
     EDITOR = auto()
@@ -54,7 +65,7 @@ class User(BaseModel):
     last_name: str = Field(exclude=True, pattern=NAME_REGEX)
     age: PositiveInt
     email: EmailStr | None
-    title: Optional[str] = Field(default="Mr.", min_length=1, max_length=10)
+    title: str | None = Field(default="Mr.", min_length=1, max_length=10)
     birthday: datetime = Field(default_factory=datetime.now)
     color: Literal['red', 'green', 'blue'] = 'red',
     weight: Annotated[float, Gt(0), Le(200)]

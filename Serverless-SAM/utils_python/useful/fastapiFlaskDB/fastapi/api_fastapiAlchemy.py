@@ -1,5 +1,9 @@
+
 # https://www.youtube.com/watch?v=3vfum74ggHE
 # https://www.youtube.com/watch?v=AKQ3XEDI9Mw
+
+# https://docs.sqlalchemy.org/en/20/orm/session_basics.html
+# https://docs.pydantic.dev/latest/concepts/models/#orm-mode-aka-arbitrary-class-instances
 
 # pip install fastapi
 # pip install "uvicorn[standard]"
@@ -38,7 +42,7 @@ DB_URL = "sqlite:///" + str(Path(__file__).parent) + "/sqlite.db"
 # Path(DB_URL).unlink(missing_ok=True)
 
 engine = create_engine(DB_URL, echo=True, connect_args={"check_same_thread": False})
-SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False)
+SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False, expire_on_commit=False)
 
 Base = declarative_base()
 
@@ -56,7 +60,7 @@ class ToDo(Base):
     """
     __tablename__ = "todos"
     id = Column("_id_", Integer, primary_key=True, autoincrement=True)
-    title = Column(String, index=True, unique=True, nullable=False)
+    title = Column(String(30), index=True, unique=True, nullable=False)
     working = Column(Boolean, default=False)
     updated = Column(DateTime)
 

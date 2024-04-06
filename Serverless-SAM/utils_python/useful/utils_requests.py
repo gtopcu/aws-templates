@@ -19,16 +19,16 @@ from typing import Final
 from dataclasses import dataclass
 from requests_cache import CachedSession
 from datetime import timedelta
-from django.contrib import auth
 
 
 def requests_get(endpoint_url, headers=None, auth=None, timeout: int = 30) -> requests.Response:
     response = requests.get(endpoint_url, headers=headers, timeout=timeout)
     # data:list[str] = requests.get("http://data.csv").content.decode().split("\n")
-    httpError = response.raise_for_status()
+    # httpError = response.raise_for_status()
     # status_code = response.status_code
     # response_body = response.json()
     # content = response.content
+    # return MyDataClass(**response.json())
     return response
     # try:
     #     ...
@@ -100,7 +100,9 @@ def requests_put(endpoint_url, payload, headers=None, auth=None, timeout: int = 
 #     for result in results:
 #         print(result)
 
+
 # ---------------------------------------------------------------------------------------------------------------------
+# requests_cache
 
 # URL: Final = "https://animechan.vercel.app/api/random"
 # session = CachedSession(cache_name="cache/default_cache", expire_after=10, # expire_after=timedelta(days=1)

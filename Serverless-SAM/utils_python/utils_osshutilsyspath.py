@@ -1,10 +1,10 @@
 
-import os, sys, shutil
+import os, sys, shutil, traceback
 from pathlib import Path # PurePath, PosixPath, WindowsPath
 import glob
 
 # Setup the environment
-!pip install -q -U immutabledict sentencepiece 
+# !pip install -q -U immutabledict sentencepiece 
 
 def get_env(env_name: str, default:str | None) -> str | None:
     return os.getenv(env_name, str)    
@@ -23,7 +23,21 @@ def main():
     # sys.stderr
     # sys.maxsize
     # sys.path
+    # sys.modules
+    # sys.gettrace()
+    # sys.settrace()
+    # sys.exc_info()
+    # sys.exc_type
+    # sys.exc_value
+    # sys.exc_traceback
+    # sys.last_type
     # sys.exit(0)
+
+    # traceback.print_stack()
+    # print(traceback.format_exc())
+    # traceback.print_exc()
+    # traceback.print_exception(*sys.exc_info(), limit, file)'
+    # traceback.print_stack(limit)
 
     # for dirname, dirpath, filename in os.walk('.'): # /dir
     #     for filename in filename:

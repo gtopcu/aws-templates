@@ -11,7 +11,9 @@ python --version
 python3 -m venv venv
 source venv/bin/activate
 pip list | freeze
-pip install --target ./package requests
+pip freeze > requirements.txt
+pip install -r requirements.txt -t dependencies (--target)  
+(cd dependencies ; zip ../aws_lambda_artifact.zip -r . ; zip aws_lambda_artifact.zip -u main.py)
 pip install python-dotenv -q -U (--quiet --upgrade --quiet)
 pip install requests 
 pip install pytest
@@ -20,14 +22,7 @@ pip install botocore
 pip install ruff
 pip install aws_lambda_powertools
 pip install requests-aws4auth
-pip freeze > requirements.txt
-pip install -r requirements.txt
 precommit install
-deactivate
-
-model
-pip install transformers>=4.39.0
-pip install mamba-ssm causal-conv1d>=1.2.0
 
 
 # https://www.youtube.com/watch?v=Ji2XDxmXSOM

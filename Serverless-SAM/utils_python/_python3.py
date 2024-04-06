@@ -4,6 +4,7 @@
 # from typing import Any, Optional, TypedDict, TypeVar, Self, Final
 # from typing import Dict, Set, FrozenSet, Tuple, NamedTuple, OrderedDict
 # from typing import Literal, Annotated, LiteralString
+# from typing_extensions import TypedDict, TypeVar, Literal, Annotated, LiteralString, Any, Optional, Self, Final
 
 # from collections import deque, defaultdict, namedtuple, ChainMap, Counter, OrderedDict, UserDict, UserList, UserString
 # from collections.abc import Callable, Iterable, Iterator, Generator, Container
@@ -28,7 +29,9 @@ import math
 from datetime import datetime, UTC
 import time
 from pytz import timezone
+
 from functools import reduce
+import traceback
 
 # BIG_CONSTANT: int = 10000000
 
@@ -135,6 +138,7 @@ def main() -> None:
     # mylist1.extend(mylist2)
     # print(mylist1)
     # print(slice(None, 5).indices)
+    # mydict = dict(zip(mylist1, mylist2)) # {0: 4, 1: 5, 2: 6}
 
     # myset1 = { x for x in range(0, 5) }
     # myset2 = { x for x in range(3, 7) }
@@ -252,8 +256,9 @@ def main() -> None:
     # dq.rotate(3) -> Big O(k)
 
     # my_list = [ ("k1","1"), ("k2","2"), (15, 3) ]
-    # print(my_list)
+    # print(my_list)                  [('k1', '1'), ('k2', '2'), (15, 3)]
     # my_dict = dict(my_list) 
+    # print(my_dict)                  {'k1': '1', 'k2': '2', 15: 3}
     # dict["key1"] -> Big O(1)
 
     # Heap queue / priority queue. hq[0] is always its smallest element.
@@ -321,7 +326,7 @@ def main() -> None:
     # print(list)
     # list = [ [0]*4 ]* 4 # not good, all innter arrays will be same object
     # print(list)
-    # list = [[1]*4,[2]*4,[3]*4]
+    # list = [ [1]*4,[2]*4,[3]*4 ]
     # print(list)
     # list = [ {} ]
     # for i, number in enumerate(range(10)):
@@ -343,7 +348,6 @@ def main() -> None:
     # listMap = [*map(lambda x: x * x, range(10))]
     # filter(lambda x: x % 2 == 0, range(10))
     # reduce(lambda x, y: x + y, range(10))
-
 
     # s = "abc"     # Immutable
     # s[0] = "d"    # TypeError
@@ -382,12 +386,21 @@ def main() -> None:
     # def inject(func: Callable[[str, [int]], str]) -> None: ...
 
     # data: bytes = "adfsdf".encode("utf-8")
+    # data = b"bytestring"
     # decoded = data.decode("utf-8")
     # dataArray = bytearray(bytes)
     # dataArray.swapcase()
 
-    for i in generator_func(10):
-        print(i)
+    # for i in generator_func(10):
+    #     print(i)
+
+    # name = "gokhan"
+    # print("username_%s" % name)             # string interpolation
+    # print("%s %s" % ("Hello", "World"))
+    # DynamoTable(object):
+
+    traceback.print_stack()
+        
 
     # BaseException -> 
     #  Exception -> SystemExit 
@@ -412,6 +425,7 @@ def generator_func(loop_count: int):
 def iterate(y:Iterable):
     for x in y: # it = iter(y)  # y.__iter__()
         # x = next(y)           # it.__next__() - StopIteration
+        pass
 
 @atexit.register
 def func_exit() -> None:
