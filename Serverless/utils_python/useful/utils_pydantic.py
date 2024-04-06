@@ -27,7 +27,8 @@ from pydantic import (
     SecretStr,
     StrictInt,
     PositiveInt,
-    StringConstraints
+    StringConstraints,
+    HttpUrl
     #AwareDatetime
 )
 
@@ -36,8 +37,10 @@ from pydantic import (
 class MyData(BaseModel):
     name: str = Field(min_length=1, max_length=10)
     age: int = Field(ge=0, le=100)
+    email: EmailStr | None = None
+    url: HttpUrl | None = None = Field(default=None, alias="url_alias")
 
-data:MyData = MyData.model_validate(app.current_request.json_body)
+# data:MyData = MyData.model_validate(app.current_request.json_body)
 
 # ----------------------------------------------------------------------------------------------------
 

@@ -39,7 +39,7 @@ Globals:
     #  - "*~1*" # converts to */* for any binary type
   Function:
     Timeout: 30
-    MemorySize: 1796 #1 vCPU
+    MemorySize: 1769 #1 vCPU
     Runtime: python3.12
     Architectures:
     - x86_64
