@@ -1,0 +1,115 @@
+
+
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: SAM template
+
+# !Sub 
+# ${environment}
+# ${AWS::Region}
+# ${AWS::AccountId}
+# ${AWS::StackName}
+# ${AWS::StackId}
+# ${AWS::URLSuffix}
+# ${AWS::Partition}
+# ${AWS::RequestID}
+
+# Parameters:
+#     environment:
+#       Type: "String"
+#       Default: dev
+#       AllowedValues: ["dev", "prod"]
+#     ddb-tablename:
+#       Type: "String"
+#       Default: "" # #!Sub "{ddb_tablename}"
+#     ipAddressWhiteList:
+#       Type: "CommaDelimitedList"
+#       Default: "myIpAddress/32"
+
+#       https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-policy-templates.html
+#       Policies:
+#         - SQSPollerPolicy:
+#             QueueName: !GetAtt SampleQueue.QueueName
+#         - SQSSendMessagePolicy:
+#             QueueName: !GetAtt SampleQueue.QueueName
+#         - SNSCrudPolicy:
+#             TopicName: !GetAtt SampleTopic.TopicName
+#         - SQSSendMessagePolicy:
+#             QueueName: !GetAtt SampleTopic.TopicName
+#         - SQSSendMessagePolicy:
+#             QueueName: !GetAtt SampleTopic.TopicName
+#         - DynamoDBCrudPolicy:
+#             TableName: !Ref SampleTable
+#         - DynamoDBReadPolicy:
+#             TableName: !Ref SampleTable
+#         - DynamoDBWritePolicy:
+#             TableName: !Ref SampleTable
+
+            # Statement:
+            #     - Sid: CloudWatchLogGroupPolicy
+            #         Effect: Allow
+            #         Action: 
+            #         - logs:CreateLogGroup
+            #         - logs:CreateLogStream
+            #         - logs:PutLogEvents
+            #         Resource: '*' #!GetAtt CloudWatchLogGroup.Arn
+            #     - Sid: LambdaPolicy
+            #         Effect: Allow
+            #             Action:
+            #                 - lambda:*
+            #                 - states:*
+            #                 - dynamodb:*
+            #                 - logs:*
+            #                 - xray:*
+            #             Resource: '*'
+            #    - Sid: StepFunctions
+            #        Effect: Allow
+            #        Action:
+            #            - states:StartExecution
+            #            - states:StopExecution
+            #            - states:CreateActivity
+            #            - states:DeleteActivity
+            #            - states:DescribeActivity
+            #            - states:GetActivityTask
+            #            - states:ListActivities
+            #            - states:ListStateMachines
+            #            - states:CreateStateMachine
+            #            - states:DeleteStateMachine
+            #            - states:UpdateStateMachine
+            #            - states:DescribeStateMachine
+            #            - states:TagResource
+            #            - states:UntagResource
+            #            - states:SendTaskSuccess
+            #            - states:SendTaskFailure
+            #            - states:SendTaskHeartbeat
+            #            - states:GetExecutionHistory       
+
+    # Connectors:
+    #   DynamoDBConn:
+    #     Properties: 
+    #       Destination:
+    #         Id: DynamoDBTable1
+    #       Permissions:
+    #           - Write
+    #       #SourceReference: SourceReference
+
+    # CloudWatchLogGroup:
+    #   Type: AWS::Logs::LogGroup
+    #   UpdateReplacePolicy: Retain
+    #   DeletionPolicy: Retain
+    #   Properties:
+    #     LogGroupName: !Sub /aws/lambda/${LambdaFunction}
+
+# Outputs:
+#   HttpApiEndpoint:
+#     Value: !Ref HttpApi
+#     Value: !Sub 'https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com'
+    
+# Outputs:
+#   ApiGatewayEndpoint:
+#     Description: "API Gateway endpoint URL"
+#     Value: !Sub "https://${apiGateway}.execute-api.${AWS::Region}.amazonaws.com/${environment}
+
+
+
+

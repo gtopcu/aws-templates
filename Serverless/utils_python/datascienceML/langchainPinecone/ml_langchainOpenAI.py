@@ -7,7 +7,6 @@ python3 -m venv venv
 source venv/bin/activate
 
 pip install python-dotenv 
-
 pip install -U langchain-openai
 
 #Deprecated:
@@ -108,48 +107,3 @@ text-embedding-3-large
 # for embedding in response:
 #     print(embedding)
 
-
-# Pinecone
-PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
-PINECONE_INDEX = os.getenv("PINECONE_INDEX")
-
-pc = Pinecone(api_key=PINECONE_API_KEY)
-
-print(pc.list_collections())
-print(pc.list_indexes())
-
-index = pc.Index(PINECONE_INDEX)
-for idx in index.list():
-    print(idx)
-
-# index.upsert(
-#     vectors=[
-#         {
-#             "id": "vec1", 
-#             "values": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1], 
-#             "metadata": {"genre": "drama"}
-#         }, {
-#             "id": "vec2", 
-#             "values": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2], 
-#             "metadata": {"genre": "action"}
-#         }, {
-#             "id": "vec3", 
-#             "values": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3], 
-#             "metadata": {"genre": "drama"}
-#         }, {
-#             "id": "vec4", 
-#             "values": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4], 
-#             "metadata": {"genre": "action"}
-#         }
-#     ],
-#     namespace= "ns1"
-# )
-
-# index.query(
-#     namespace="ns1",
-#     vector=[0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
-#     top_k=2,
-#     include_values=True,
-#     include_metadata=True,
-#     filter={"genre": {"$eq": "action"}}
-# )

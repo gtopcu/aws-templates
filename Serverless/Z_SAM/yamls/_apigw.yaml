@@ -1,0 +1,31 @@
+
+
+  Api:
+    Type: AWS::Serverless::Api    # HttpApi
+    # Description: Serverless API
+    Cors:
+        AllowOrigin: '''*'''
+        AllowHeaders: '''*'''
+        AllowMethods: '''*'''
+        AllowCredentials: true
+        MaxAge: 5
+    Properties:
+        Path: /{proxy+} 
+        Method: ANY 
+    AlwaysDeploy: true
+    # StageName: dev
+    # Auth:
+    # EndpointConfiguration: REGIONAL
+    # Domain: 
+    # TracingEnabled: false
+    # AccessLogSetting: 
+    # CanarySetting:
+    # CacheClusterEnabled: false
+    # CacheClusterSize: 
+    # BinaryMediaTypes: # see Binary responses section
+    #   - "*~1*" # converts to */* for any binary type
+    # OpenApiVersion: 3.0.3 
+    #   DefinitionBody:
+    #     openapi: '3.0.3'
+    #     info: {}
+    #     paths:

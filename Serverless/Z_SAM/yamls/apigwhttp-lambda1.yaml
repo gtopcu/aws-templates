@@ -2,27 +2,6 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: Simple HTTP API to Lambda function using python3.12
 
-Globals:
-  Function:
-    Timeout: 28
-    MemorySize: 128
-    Environment:
-      Variables:
-        POWERTOOLS_LOG_LEVEL: INFO
-        POWERTOOLS_SERVICE_NAME: service1
-        POWERTOOLS_TRACE_DISABLED: true
-        #POWERTOOLS_TRACER_CAPTURE_RESPONSE: false
-        #POWERTOOLS_TRACER_CAPTURE_ERROR: false
-        POWERTOOLS_LOGGER_LOG_EVENT: false
-        #POWERTOOLS_LOGGER_SAMPLE_RATE: 0.1
-        #POWERTOOLS_METRICS_NAMESPACE: service1metrics
-        #POWERTOOLS_PARAMETERS_MAX_AGE: 60 #seconds
-        #POWERTOOLS_PARAMETERS_SSM_DECRYPT: true
-        #POWERTOOLS_DEV: false
-    Layers:
-      # https://docs.powertools.aws.dev/lambda/python/latest/#lambda-layer
-      - !Sub arn:aws:lambda:${AWS::Region}:017000801446:layer:AWSLambdaPowertoolsPythonV2:61
-
 Resources:
   # Lambda function
   ApiFunction:
@@ -32,6 +11,8 @@ Resources:
       CodeUri: lambdas/
       Runtime: python3.12
       Description: API handler function
+      Timeout: 28
+      MemorySize: 128
       Events:
         ApiEvent:
           Type: HttpApi
@@ -42,10 +23,6 @@ Resources:
           #DefinitionBody:
           #  openapi: '3.0.3'
           #  info: {}
-      #https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-policy-templates.html
-      #Environment:
-      #  Variables:
-      #    TABLE_NAME: !Ref DynamoDBTable1
 
 Outputs:
   HttpApiEndpoint:

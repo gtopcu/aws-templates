@@ -5,26 +5,8 @@ Description: SAM template
 Globals:
   Function:
     Timeout: 30
-    MemorySize: 128
-    Runtime: python3.11
-    #Tracing: Active
-    Environment:
-      Variables:
-        POWERTOOLS_LOG_LEVEL: INFO
-        POWERTOOLS_SERVICE_NAME: service1
-        POWERTOOLS_TRACE_DISABLED: true
-        #POWERTOOLS_TRACER_CAPTURE_RESPONSE: false
-        #POWERTOOLS_TRACER_CAPTURE_ERROR: false
-        POWERTOOLS_LOGGER_LOG_EVENT: false
-        #POWERTOOLS_LOGGER_SAMPLE_RATE: 0.1
-        #POWERTOOLS_METRICS_NAMESPACE: service1metrics
-        #POWERTOOLS_PARAMETERS_MAX_AGE: 60 #seconds
-        #POWERTOOLS_PARAMETERS_SSM_DECRYPT: true
-        #POWERTOOLS_DEV: false
-    Layers:
-      # Find the latest Layer version in the official documentation
-      # https://docs.powertools.aws.dev/lambda/python/latest/#lambda-layer
-      - !Sub arn:aws:lambda:${AWS::Region}:017000801446:layer:AWSLambdaPowertoolsPythonV2:61
+    MemorySize: 1769
+    Runtime: python3.12
 
 Resources:
   HelloWorldFunction:
@@ -55,20 +37,32 @@ Resources:
       MessageRetentionPeriod: 1209600 #14 days
       # FifoQueue: false
       # MaximumMessageSize: 262144
-      # ContentBasedDeduplication: false
-      # KmsMasterKeyId: alias/aws/sqs
-      # KmsDataKeyReusePeriodSeconds: 300
+      # BatchSize: 1
       # DelaySeconds: 0
       # ReceiveMessageWaitTimeSeconds: 0
+      # ContentBasedDeduplication: false
       # SqsManagedSseEnabled: true
+      # KmsMasterKeyId: alias/aws/sqs
+      # KmsDataKeyReusePeriodSeconds: 300
       RedrivePolicy:
         maxReceiveCount: 2
         deadLetterTargetArn: !GetAtt SampleDLQ.Arn
   
-  SampleDLQ:
-    Type: AWS::SQS::Queue
-    UpdateReplacePolicy: Delete
+  SampleSNSTopic:
+    Type: AWS::SNS::Topic
     DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
     Properties:
-      # VisibilityTimeout: 30 #Fn timeout*6, 12 hours max
-      MessageRetentionPeriod: 1209600 #14 days
+      # FifoTopic: False
+      Subscription:
+        - Endpoint: !GetAtt SampleQueue.Arn
+          Protocol: sqs
+        - Endpoint: gtopcu@gmail.com
+          Protocol: email
+        - Endpoint: XXXXXXXXXXXXXXXX
+          Protocol: sms
+        - Endpoint: url
+          Protocol: http
+      
+
+      

@@ -1,0 +1,31 @@
+
+  
+  MyDynamoDBTable:
+    Type: 'AWS::DynamoDB::Table'
+    UpdateReplacePolicy: Delete
+    DeletionPolicy: Delete
+    Properties:
+      TableName: MyTable
+      AttributeDefinitions:
+        - AttributeName: PK
+          AttributeType: S
+        - AttributeName: SortKey
+          AttributeType: N
+      KeySchema:
+        - AttributeName: PK
+          KeyType: HASH
+        - AttributeName: SortKey
+          KeyType: RANGE
+      # BillingMode: PROVISIONED
+      #ProvisionedThroughput: 
+      #  ReadCapacityUnits: 10
+      #  WriteCapacityUnits: 5
+      #PointInTimeRecoverySpecification:
+      #  PointInTimeRecoveryEnabled: True
+      #DeletionProtectionEnabled: True
+      #ContributorInsightsSpecification: 
+      #  Enabled: True
+      #SSESpecification: 
+      #  SSEEnabled: True
+      # StreamSpecification:
+      #   StreamViewType: NEW_IMAGE

@@ -1,0 +1,41 @@
+
+
+MyLambdaFunction:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Description: Lambda writing to DynamoDB
+      Runtime: python3.12
+      MemorySize: 1769
+      Timeout: 20
+      # Architectures:
+      #   - x86_64
+      # EphemeralStorage:
+      #   Size: 512
+      # Tracing: Active
+      Handler: lambda_function.lambda_handler
+      CodeUri: ./lambda_function/
+      # Environment:
+        # Variables:
+        #   TableName: ddb-table1
+      # Policies:
+      #   - DynamoDBCrudPolicy: 
+      # EventInvokeConfig:
+      #     MaximumEventAgeInSeconds: 21600
+      #     MaximumRetryAttempts: 2
+      # FunctionUrlConfig:
+      #   AuthType: NONE
+      #   InvokeMode: BUFFERED
+      #       TableName: !Ref MyDynamoDBTable
+      # AutoPublishAlias: false
+      # DeploymentPreference: 
+      #   Type: AllAtOnce
+      # DeploymentPreference:
+      #   Type: Canary10Percent10Minutes 
+      #   Alarms:
+      #     - !Ref AliasErrorMetricGreaterThanZeroAlarm
+      #     - !Ref LatestVersionErrorMetricGreaterThanZeroAlarm
+      #   Hooks:
+      #     # Validation Lambda functions that are run before & after traffic shifting
+      #     PreTraffic: !Ref PreTrafficLambdaFunction
+      #     PostTraffic: !Ref PostTrafficLambdaFunction
+
