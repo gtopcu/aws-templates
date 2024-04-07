@@ -35,6 +35,19 @@ import traceback
 
 # BIG_CONSTANT: int = 10000000
 
+class SampleClass:
+    name: str
+    age : 0
+    def __init__(self, name:str, age: int) -> None:
+        self.name = name
+        self.age = age
+    # def __str__(self) -> str:
+    #     return "str"
+    # def __repr__(self) -> str:
+    #      return f"SampleClass(name={self.name}, age={self.age})"
+    # def __format__(self, __format_spec: str) -> str:
+    #     pass
+
 def main() -> None:
 
     # time = time.perf_counter
@@ -397,9 +410,18 @@ def main() -> None:
     # name = "gokhan"
     # print("username_%s" % name)             # string interpolation
     # print("%s %s" % ("Hello", "World"))
+
+    # data = b'\x01'*1024)
+    # print("SampleClass".__dict__)
+    # sc = SampleClass("Gokhan", 40)
+    # print(repr(sc))
+    # print(hasattr(sc, "age"))
+    # print(f"{1/10:.2f}")
+    # pprint(tomldata, sort_dicts=True)
+
     # traceback.print_stack()
-    # data = b'\x01'*1024
-    
+    # traceback.print_exc()
+
     # BaseException -> 
     #  Exception -> SystemExit 
     #               StandardError -> ValueError: int("A"), KeyError: dict['key1'], TypeError: str[0]='a', 
@@ -445,6 +467,14 @@ def kwargs(**kwargs):
     if value := kwargs.get("name"):
         print("name found =", value)
 
+# https://docs.python.org/3/tutorial/controlflow.html#more-on-defining-functions
+def combined_example(pos_only, /, standard, *, kwd_only):
+    print(pos_only, standard, kwd_only)
+
+# name and age mandatory for both
+def mandatoryArgs(self, /, name: str, age: int): ...
+def mandatoryKwargs(self, *, name: str, age: int): ...
+
 def input_none(input:str | None=None):
     print(input)
     return print("Returning")
@@ -478,13 +508,7 @@ def f(*args: int, **kwargs: int):
 # def callable(callable: Callable[[int, int], int], a: int, b: int) -> int:
 #     return callable(a, b)
 
-# https://docs.python.org/3/tutorial/controlflow.html#more-on-defining-functions
-def combined_example(pos_only, /, standard, *, kwd_only):
-    print(pos_only, standard, kwd_only)
 
-# name and age mandatory for both
-def mandatoryArgs(self, /, name: str, age: int): ...
-def mandatoryKwargs(self, *, name: str, age: int): ...
 
 if __name__ == "__main__":
     main()

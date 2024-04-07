@@ -1,0 +1,27 @@
+# Config file
+name = "S. Gokhan Topcu"
+version = "1.0.0"
+website = "sklld.io"
+country = "TR"
+updated = 2024-04-07T22:43:43+03:00
+
+[items]
+numbers = [1, 2, 3]
+letters = ['a','b','c']
+
+[items.details]
+updated = true
+author = "John Doe"
+
+[database]
+db.type = "sqlite"
+db.path = "data.db"
+
+[inline_table]
+inline = { name = "John Doe", age = 30 }
+
+[[param_group]]
+param = "memory_size"
+
+[[param_group]]
+param = "cpu_count"

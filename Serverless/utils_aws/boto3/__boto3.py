@@ -32,10 +32,10 @@ my_config = Config(
 )
 client = boto3.client('kinesis', config=my_config)
 
-
 # Session - not thread safe, create new one per thread
-
 my_session = boto3.session.Session()
+credentials = boto3.session.Session().get_credentials()
+awsauth = botocore.auth.AWS4Auth(credentials.access_key, credentials.secret_key, 'us-west-2', 'kinesis')
 # aws_access_key_id
 # aws_secret_access_key
 # region_name

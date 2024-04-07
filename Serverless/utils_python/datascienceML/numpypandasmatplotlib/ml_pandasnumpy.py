@@ -172,10 +172,10 @@ df.sort_index(axis=1, ascending=False, inplace=True)
 
 df.to_csv("dataframe.csv")
 df.to_excel("dataframe.xlsx")
-df.to_json("dataframe.json")
+df.to_json("dataframe.json", lines=False)
 df.to_sql("dataframe")
 df.to_numpy()
-
+df.assign()
 
 # %matplotlib inline
 df.plot(title="Plot Data", grid=True, legend=True, subplots=True, logx=False, logy=False) # line plot
