@@ -62,6 +62,5 @@ pip install -e .[dev]
 
 pip install pip-tools
 pip-compile -o requirements.txt pyproject.toml (requirements.txt -> pyproject.toml w/ pinned versions)
-
-
-
+pip-compile requirements-dev.in
+pip-sync requirements-dev.txt

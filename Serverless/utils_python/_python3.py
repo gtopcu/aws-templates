@@ -1,7 +1,7 @@
 
 # https://stackoverflow.com/questions/52827463/collections-iterable-vs-typing-iterable-in-type-annotation-and-checking-for-iter
 
-# from typing import Any, Optional, TypedDict, TypeVar, Self, Final
+from typing import Any, Optional, TypedDict, TypeVar, Self, Final
 # from typing import Dict, Set, FrozenSet, Tuple, NamedTuple, OrderedDict
 # from typing import Literal, Annotated, LiteralString
 # from typing_extensions import TypedDict, TypeVar, Literal, Annotated, LiteralString, Any, Optional, Self, Final
@@ -397,11 +397,9 @@ def main() -> None:
     # name = "gokhan"
     # print("username_%s" % name)             # string interpolation
     # print("%s %s" % ("Hello", "World"))
-    # DynamoTable(object):
-
-    traceback.print_stack()
-        
-
+    # traceback.print_stack()
+    # data = b'\x01'*1024
+    
     # BaseException -> 
     #  Exception -> SystemExit 
     #               StandardError -> ValueError: int("A"), KeyError: dict['key1'], TypeError: str[0]='a', 
@@ -416,6 +414,10 @@ def main() -> None:
     # sys.exit(0) - Raises SystemExit exception, finally & cleanups run
     # os._exit(0) - Immediate kill, no finals/cleanups run. Only POSIX files are closed
 
+
+def __eq__(self, other: Self) -> bool:
+    # return self.name == other.name and self.age == other.age
+    self.__dict__ == other.__dict__
 
 def generator_func(loop_count: int):
     for i in range(loop_count):
@@ -479,6 +481,10 @@ def f(*args: int, **kwargs: int):
 # https://docs.python.org/3/tutorial/controlflow.html#more-on-defining-functions
 def combined_example(pos_only, /, standard, *, kwd_only):
     print(pos_only, standard, kwd_only)
+
+# name and age mandatory for both
+def mandatoryArgs(self, /, name: str, age: int): ...
+def mandatoryKwargs(self, *, name: str, age: int): ...
 
 if __name__ == "__main__":
     main()

@@ -1,10 +1,14 @@
 
+# https://github.com/getmoto/moto
 # https://blog.newmathdata.com/advanced-unit-testing-in-aws-a666e787aa99
+
 # pip install moto
+# pip install 'moto[ec2,s3,all]'
 
 import os
 import pytest
 import boto3
+from moto import mock_aws
 from moto import mock_s3
 
 @mock_s3
@@ -21,6 +25,16 @@ def test_s3_upload():
     response = s3.get_object(Bucket=bucket_name, Key='test_file.txt')
     data = response['Body'].read()
     assert data == b'Hello Moto!'
+
+@mock_aws
+def test_my_model_save():
+    conn = boto3.resource("s3", region_name="us-east-1")
+    # We need to create the bucket since this is all in Moto's 'virtual' AWS account
+    conn.create_bucket(Bucket="mybucket")
+    model_instance = MyModel("steve", "is awesome")
+    model_instance.save()
+    body = conn.Object("mybucket", "steve").get()["Body"].read().decode("utf-8")
+    assert body == "is awesome"
 
 @pytest.fixture(scope="function") #scope can be function, class, module, session
 def aws_credentials():

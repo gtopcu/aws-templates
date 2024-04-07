@@ -1,0 +1,38 @@
+
+
+cdk init ~= terraform init
+cdk diff == terraform plan
+cdk deploy == terraform apply
+
+
+provider "aws" {
+  region = "us-west-2"
+}
+
+module "s3_bucket" {
+  source = "terraform-aws-modules/s3-bucket/aws"
+  bucket = "mybucketname"
+  block_public_policy = true
+  versioning = {
+    enabled = true
+  }
+}
+
+module "lambda_function" {
+  source        = "terraform-aws-modules/lambda/aws"
+  function_name = "my-tf-test-lambda"
+  handler       = "exports.handler"
+  runtime       = "nodejs12.x"
+  environment_variables = {
+    BUCKET = module.s3_bucket.s3_bucket_id
+  }
+}
+
+module "sheduled_fargate_Task" {
+  source = "link-to-private-registry"
+  cluster_id = aws_ecs_cluster.default.id
+  service_name = "crawler"
+  image = "amazon/amazon-ecs-sample"
+  ram = 512
+  schedule = "minute"
+}

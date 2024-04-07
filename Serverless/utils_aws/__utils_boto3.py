@@ -41,11 +41,9 @@ my_session = boto3.session.Session()
 # region_name
 # profile_name
 
-
 # Now we can create low-level clients or resource clients from our custom session
 sqs = my_session.client('sqs')
 s3 = my_session.resource('s3')
-
 
 # Catch exceptions through ClientError and parse error codes for all service-side exceptions and errors
 
@@ -70,7 +68,8 @@ for key, value in sorted(botocore.exceptions.__dict__.items()):
 }
 
 """
-# caching exceptions with Client
+# Client
+# Client instances are thread-safe, but creating them is not. Create before using them with a ThreadPoolExecutor
 client = boto3.client('aws_service_name')
 try:
     client.some_api_call(SomeParam='some_param')
@@ -117,8 +116,8 @@ except botocore.exceptions.ClientError as err:
         raise err
 
 
-# Resource - DEPRECATED
-# catching exceptions with Resource - not thread safe create new one per thread
+# Resource
+# Not thread safe create new one per thread
 client = boto3.resource('s3')
 
 try:

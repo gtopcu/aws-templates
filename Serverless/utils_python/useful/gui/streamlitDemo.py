@@ -43,6 +43,7 @@ def main():
     for i in range(100):
         time.sleep(0.01)
         progress_bar.progress(i, text="progress")
+    slider_val = st.slider('Select a value')
 
     with st.sidebar:
         st.chat_input("Chat", key="chat_input", max_chars=20, on_submit=print("chat input"))
