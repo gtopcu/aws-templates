@@ -3,7 +3,8 @@
 .git
 /.git
 .env
-
+.venv
+venv
 # ignore all directories with the name test
 # test/
 # ignore a text.txt file located in a test directory at the root directory
