@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Open with Live Server</p>
+
+<input id="input" type="text"/>
+<button type="button" onclick="myFunction()">Click Me</button>
+
+<script>
+  function myFunction() {
+    console.log("Ran!")
+    const message = document.getElementById("p01");
+    let x = document.getElementById("demo").value;
+    try {
+      if(x.trim() == "") throw "empty";
+      if(isNaN(x)) throw "not a number";
+      x = Number(x);
+      if(x < 5) throw "too low";
+      if(x > 10) throw "too high";
+      message.innerHTML = x;
+    }
+    catch(err) {
+      message.innerHTML = "Input is " + err;
+    }
+  }
+
+
+</script>
+
+</body>
+</html>
+

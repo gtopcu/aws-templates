@@ -1,5 +1,8 @@
 
 # https://www.youtube.com/watch?v=iWS9ogMPOI0
+# https://www.youtube.com/watch?v=_Y3uAFVYk5I
+# https://www.youtube.com/watch?v=0A_GCXBCNUQ
+
 
 # pip install fastapi
 # pip install "uvicorn[standard]"
@@ -7,17 +10,18 @@
 # python3 -m venv venv
 # source venv/bin/activate
 
-# uvicorn app:app --reload
+# uvicorn api_fastapi:app --reload
 # http://127.0.0.1:8000/docs
 
 from datetime import datetime
 
-from fastapi import FastAPI, Request, status, HTTPException #, Depends, Form, File, status
+from fastapi import FastAPI, Request, status, HTTPException, File, UploadFile
 # from fastapi import File, UploadFile, Body, Path, Query, Cookie, Header
 # from fastapi.responses import Response, HTMLResponse, JSONResponse
 # FileResponse, PlainTextResponse, RedirectResponse,  StreamingResponse
 # from fastjsonschema import validate, exceptions
-
+from fastapi.middleware.cors import CORSMiddleware
+# from _customRouter import router
 
 from pydantic import BaseModel, Field
 
@@ -28,6 +32,18 @@ class ToDo(BaseModel):
 
 # FastAPI is async by default (Flask is not)
 app = FastAPI()
+# app.include_router(router)
+# app.add_exception_handler(HTTPException, exceptionHandler, exc: exc.detail)
+app.add_middleware( 
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+#     expose_headers=["*"],
+#     max_age=3600,
+#     # origins=["XXXXXXXXXX"],
+)
 
 items = [ToDo(id=1, title="Buy milk"), ToDo(id=2, title="Buy bread")]
 
@@ -55,10 +71,17 @@ async def get_item(item_id: int):
         raise HTTPException(status_code=404, detail="Item not found", headers={"X-Error": "Not found"})
         # return {"message": "Item not found"}
 
-@app.post("/items", response_model=ToDo)
+@app.post("/items", response_model=ToDo, status_code=status.HTTP_201_CREATED, tags=["items"])
 async def create_item(request: Request, item: ToDo):
     items.append(item)
     return item
+
+@app.post("/uploadfile")
+async def upload_file(file: UploadFile = File(...)):
+    contents = await file.read()
+    # print(contents)
+    print("File uploaded: ", file.filename)
+    return {"filename": file.filename, "size": len(contents)} 
 
 # def main():
 #     import uvicorn

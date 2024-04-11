@@ -2,9 +2,6 @@
 # https://www.youtube.com/watch?v=3vfum74ggHE
 # https://www.youtube.com/watch?v=AKQ3XEDI9Mw
 
-# https://docs.sqlalchemy.org/en/20/orm/session_basics.html
-# https://docs.pydantic.dev/latest/concepts/models/#orm-mode-aka-arbitrary-class-instances
-
 # pip install fastapi
 # pip install "uvicorn[standard]"
 # pip install python-multipart sqlalchemy jinja2
@@ -31,19 +28,17 @@ from starlette.responses import RedirectResponse, HTMLResponse, JSONResponse, Pl
 # templates = Jinja2Templates(directory="templates")
 
 
-from sqlalchemy import create_engine, ForeignKey, Column, Integer, Float, String, CHAR, Text,  DateTime, Boolean
+from sqlalchemy import create_engine, ForeignKey, Column, Integer, Float, String, CHAR, Text, DateTime, Boolean
 # from sqlalchemy import func, sum, min, max, or_, not_
-from sqlalchemy.orm import sessionmaker, Session, declarative_base
+from sqlalchemy.orm import sessionmaker, Session, declarative_base, Mapped, mapped_column
+# from sqlalchemy.orm import relationship, backref, joinedload, subqueryload, selectinload, lazyload
 # from sqlalchemy.sql.expression import select, update, union, alias, delete, bindparam, outerjoin
 # from sqlalchemy.sql.functions import concat, count, current_date, current_timestamp, current_time, sysdate
 # from sqlalchemy.sql.schema import Column, ForeignKey, Index, Table, UniqueConstraint
 
-DB_URL = "sqlite:///" + str(Path(__file__).parent) + "/sqlite.db"
-# Path(DB_URL).unlink(missing_ok=True)
-
-engine = create_engine(DB_URL, echo=True, connect_args={"check_same_thread": False})
-SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False, expire_on_commit=False)
-
+DB_URL = "sqlite:///sqlite.db"
+engine = create_engine(DB_URL, echo=True) # connect_args={"check_same_thread": False})
+SessionLocal = sessionmaker(bind=engine) # autocommit=False, autoflush=False, expire_on_commit=False)
 Base = declarative_base()
 
 class ToDo(Base):
@@ -67,7 +62,7 @@ class ToDo(Base):
     def __init__(self, title: str, working: bool = False):
         self.title = title
         self.working = working
-        self.updated = datetime.now()
+        self.updated = datetime.now() # default=sa.func.now()
     def  __repr__(self):
         return f"<ToDo {self.title}>"
 
@@ -94,6 +89,7 @@ class ToDoNotes(Base):
 
 # Create all tables in the engine. This is equivalent to "Create Table" statements in raw SQL.
 Base.metadata.create_all(bind=engine)
+# Base.metadata.drop_all(bind=engine)
 
 def get_db():
     db = SessionLocal()
@@ -143,7 +139,7 @@ async def home(request: Request, db: Session = Depends(get_db)):
     
     return {"todos": todos}
 
-@app.post("/item")
+@app.post("/item", status_code=status.HTTP_201_CREATED)
 async def post(request: Request, title:str = Form(...), db: Session = Depends(get_db)):
     todo = ToDo(title=title)
     db.add(todo)

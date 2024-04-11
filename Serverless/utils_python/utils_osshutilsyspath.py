@@ -26,6 +26,7 @@ def main():
     # sys.modules
     # sys.gettrace()
     # sys.settrace()
+    # sys.executable
     # sys.exc_info()
     # sys.exc_type
     # sys.exc_value

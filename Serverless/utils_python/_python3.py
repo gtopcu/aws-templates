@@ -28,7 +28,6 @@ import math
 
 from datetime import datetime, UTC
 import time
-from pytz import timezone
 
 from functools import reduce
 import traceback
@@ -64,6 +63,12 @@ def main() -> None:
 
     # print(chr(100))
 
+    # my_tuple = (1, )
+    # my_tuple = tuple((1, 2, 3))
+    # my_tuple3 = my_tuple1 + my_tuple2
+    # my_tuple.index(i)
+    # my_tuple.count(i)
+    
     # my_list = [x for x in range(10) if x % 2 == 0]
     # my_set = {i for i in range(10)}
     # my_set2 = set()
@@ -217,6 +222,7 @@ def main() -> None:
     # random.choice(numbers)
     # random.seed("ABC")
     # random.randrange(0, 100, 10)
+    # bytes = random.randbytes(10) # 0-255
 
     # with open("fruit.pickle", "wb") as file:
     #     pickle.dump(fruit, file)
@@ -403,6 +409,38 @@ def main() -> None:
     # decoded = data.decode("utf-8")
     # dataArray = bytearray(bytes)
     # dataArray.swapcase()
+    # "asdf".casefold()
+    # f"{val.casefold()}"
+
+    # mytuple = tuple((1, 2))
+    # x, y = mytuple # unpacking
+    # tuple3 = tuple1 + tuple2
+    # mylist.pop(1)           -> Any: IndexError
+    # mydict.popitem()        -> Any: KeyError
+    # mydict.pop("key1")      -> Any: KeyError
+    # myset.pop()             -> Any: KeyError
+    # myset.remove(element)   -> None: KeyError
+    # myset.discard(element)  -> None: No error
+
+    # mylist = [*range(3)]
+    # mylist = list(map(lambda x: x*x, mylist))
+    # (lambda x: x*x)(3)
+    # func = lambda x,y: x*y
+
+    # iterator = (x for x in range(6))
+    # print(next(iterator))
+    # for i in iterator:
+    #     print(i)
+    
+    # https://www.youtube.com/watch?v=1-qmfHfDg6k
+    # mylist1 = [1,2,3]
+    # mylist2 = [4,5,6]
+    # print(dict(zip(mylist1, mylist2)))
+    # mydict = { x:y for x,y in zip(mylist1, mylist2) }
+    # print(mydict)
+    # mylist = [[1,2,3],[4,5,6]]
+    # mylist = [item for sublist in mylist for item in sublist]
+    # print(mylist)
 
     # for i in generator_func(10):
     #     print(i)
@@ -421,6 +459,7 @@ def main() -> None:
 
     # traceback.print_stack()
     # traceback.print_exc()
+    # sys.version
 
     # BaseException -> 
     #  Exception -> SystemExit 
@@ -436,6 +475,8 @@ def main() -> None:
     # sys.exit(0) - Raises SystemExit exception, finally & cleanups run
     # os._exit(0) - Immediate kill, no finals/cleanups run. Only POSIX files are closed
 
+    # import webbrowser
+    # webbrowser.open("http://localhost:8080", new=0, autoraise=False
 
 def __eq__(self, other: Self) -> bool:
     # return self.name == other.name and self.age == other.age
@@ -512,3 +553,18 @@ def f(*args: int, **kwargs: int):
 
 if __name__ == "__main__":
     main()
+
+
+"""
+/Users/gtopcu/.bash_profile
+/Users/gtopcu/.zshrc
+/Library/Frameworks/Python.framework/Versions/3.11/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/anaconda3/condabin:/Library/Frameworks/Python.framework/Versions/3.11/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/gtopcu/.local/bin
+/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/gtopcu/.local/bin:/opt/homebrew/bin/python3.12
+/opt/homebrew/bin/python3.12
+/opt/homebrew/bin/python3.11
+/usr/local/bin/python3
+export PATH=".:$PATH:/opt/xyz/bin"
+"python.defaultInterpreterPath": "/opt/homebrew/bin/python3.12",
+source .venv/bin/activate
+
+"""

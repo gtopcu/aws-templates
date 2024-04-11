@@ -3,11 +3,29 @@
 # https://www.w3schools.com/python/matplotlib_line.asp
 
 import matplotlib.pyplot as plt 
+#import matplotlib.pylab as plt
+import pandas as pd
 import numpy as np
 
 from typing import Sequence
 
 import math
+
+#------------------------------------------------------------------------------------------------
+
+df = pd.read_csv("data.csv")
+df.plot(kind="scatter", x="time", y="value")
+df.plot.line()
+df.plot.scatter(x="time", y="value")
+df.plot.hist()
+df.plot.area()
+df.plot.bar(stacked=True)
+df.plot.barh() # horizontal bar
+df.plot.box()
+df.plot.hexbin(x="time", y="value", gridsize=10)
+df.plot.pie(y="value", autopct="%1.1f%%")
+plt.savefig("plot.png")
+
 
 #------------------------------------------------------------------------------------------------
 # Line Chart
@@ -65,7 +83,6 @@ import math
 # plt.hist(x)
 # plt.show() 
 
-
 #-----------------------------------------------------------------------------------------------
 
 
@@ -104,3 +121,12 @@ import math
 # plt.plot()
 # plt.show()
 
+
+##########################################################################################
+# OPTIONS
+
+# pd.set_option("precision", 1)
+# pd.set_option("display.max_columns", 500)
+# pd.set_option("display.rows", 20)
+# pd.set_option("display.width", 1000)
+# pd.set_option("display.max_colwidth", -1)

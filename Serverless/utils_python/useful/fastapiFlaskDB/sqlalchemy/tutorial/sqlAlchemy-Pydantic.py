@@ -1,7 +1,6 @@
 
-
-# https://docs.sqlalchemy.org/en/20/orm/session_basics.html
 # https://docs.pydantic.dev/latest/concepts/models/#orm-mode-aka-arbitrary-class-instances
+
 # pip install sqlalchemy
 
 from sqlalchemy import create_engine, ForeignKey, Column, Integer, Float, String, CHAR, Text,  DateTime, Boolean

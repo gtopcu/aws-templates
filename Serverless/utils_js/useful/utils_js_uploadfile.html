@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Open with Live Server</p>
+
+<input id="input" type="file" accept="image/*"/>
+<button type="button" onclick="myFunction()">Click Me</button>
+<p id="output"></p>
+
+<script>
+  async function myFunction() {
+    console.log("Ran!");
+    const input = document.getElementById("input");
+    if (!input.files[0]) {
+      alert("Please select a file")
+      return;
+    }
+    const file = input.files[0]
+    console.log(file)
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const response = await fetch("http://127.0.0.1:8000/uploadfile", {
+                          method: "POST",
+                          body: formData
+                      });
+      const result = await response.json();
+      console.log(result)
+      const output = document.getElementById("output");
+      output.innerHTML = `Uploaded: ${result.filename} <br/>Size: ${result.size}`
+      //output.textContent = result
+    }
+    catch(exc) {
+      console.error("Error:", exc)
+    }
+  }
+</script>
+
+</body>
+</html>
+

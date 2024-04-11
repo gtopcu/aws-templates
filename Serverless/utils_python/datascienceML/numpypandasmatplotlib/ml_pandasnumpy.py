@@ -56,11 +56,20 @@ import matplotlib.pyplot as plt
 # x = arr.copy()
 # x = arr.view()
 
+# pd.Series(arr.flatten()).plot(kind='hist', bins=50, title='Histogram')
+# plt.show()
+
+np.int8
+np.int32
+np.float32
+np.float64
+
 # np.sort(random)
 # np.arange(0, 10, 1)
+# np.ones((3, 3), np.float32)   # 3 x 3 matrix consisting of 1s with float32 data type
 # np.random.randint(0, 100, 10)
-# np.random.randn(4)        # 4 x 1 matrix
-# np.random.randn(4, 3)     # 4 x 3 matrix
+# np.random.randn(4)            # 4 x 1 matrix
+# np.random.randn(4, 3)         # 4 x 3 matrix
 # np.random.shuffle(lst)
 # np.random.choice(lst)
 # np.random.seed(1)
@@ -68,12 +77,11 @@ import matplotlib.pyplot as plt
 # np.random.normal(loc=mean, scale, size) # gaussian
 
 # create random data
-# xdata = np.random.random([2, 4])  # 2x4 array
-# xdata1 = xdata[0, :]              # 1st row
-# xdata2 = xdata[1, :]              # 2nd row
-
-# Ellipsis: select all first row elements(in case of row-major structure) in the 4th dimension
-# [:, :, :, 0], [ … , 0] and [Ellipsis, 0] are all equivalent.
+# xdata = np.random.random([2, 4])      # 2x4 array
+# xdata = xdata[0, :]                   # 1st row
+# xdata = xdata[1, :]                   # 2nd row
+# xdata = xdata[:,:,0]                  # 1st row in the 3rd dimension 
+# xdata = xdata[ … , 0]                 # 1st row in the last dimension
 # array = np.random.rand(2, 2, 2, 2)
 # print(array[..., 0])
 # print(array[Ellipsis, 0])
@@ -173,6 +181,7 @@ df.sort_index(axis=1, ascending=False, inplace=True)
 df.to_csv("dataframe.csv")
 df.to_excel("dataframe.xlsx")
 df.to_json("dataframe.json", lines=False)
+df.to_pickle("dataframe.pkl")
 df.to_sql("dataframe")
 df.to_numpy()
 df.assign()
@@ -180,12 +189,9 @@ df.assign()
 # %matplotlib inline
 df.plot(title="Plot Data", grid=True, legend=True, subplots=True, logx=False, logy=False) # line plot
 df["A"].plot(kind="bar") # 'line', 'bar', 'barh', 'hist', 'box', 'kde', 'density', 'area', 'pie', 'scatter', 'hexbin'
+df
 plt.show()
 
-pd.set_option("precision", 1)
-pd.set_option("display.max_columns", 500)
-pd.set_option("display.rows", 20)
-pd.set_option("display.width", 1000)
-pd.set_option("display.max_colwidth", -1)
+
 
 

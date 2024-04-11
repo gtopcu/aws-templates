@@ -6,6 +6,26 @@ https://github.com/ran-isenberg/aws-lambda-handler-cookbook/blob/main/app.py
 export PATH=$PATH:/opt/homebrew/bin/python3.12
 sudo apt install Python3-pip
 
+  pip <command> [options]
+
+  install                     Install packages.
+  download                    Download packages.
+  uninstall                   Uninstall packages.
+  freeze                      Output installed packages in requirements format.
+  inspect                     Inspect the python environment.
+  list                        List installed packages.
+  show                        Show information about installed packages.
+  check                       Verify installed packages have compatible dependencies.
+  config                      Manage local and global configuration.
+  search                      Search PyPI for packages.
+  cache                       Inspect and manage pip's wheel cache.
+  index                       Inspect information available from package indexes.
+  wheel                       Build wheels from your requirements.
+  hash                        Compute hashes of package archives.
+  completion                  A helper command used for command completion.
+  debug                       Show information useful for debugging.
+  help                        Show help for commands.
+
 where | which python/pip
 python --version
 python3 -m venv venv
@@ -15,6 +35,7 @@ pip freeze > requirements.txt
 pip install -r requirements.txt -t dependencies (--target)  
 (cd dependencies ; zip ../aws_lambda_artifact.zip -r . ; zip aws_lambda_artifact.zip -u main.py)
 pip install python-dotenv -q -U (--quiet --upgrade --quiet)
+pip install SimpleCV==1.2
 pip install requests 
 pip install pytest
 pip install boto3
@@ -23,6 +44,10 @@ pip install ruff
 pip install aws_lambda_powertools
 pip install requests-aws4auth
 precommit install
+
+pip install SimpleCV==1.*
+pip install example-package>=1.2.0
+pip install example-package<=1.2.0
 
 
 # https://www.youtube.com/watch?v=Ji2XDxmXSOM
@@ -64,3 +89,14 @@ pip install pip-tools
 pip-compile -o requirements.txt pyproject.toml (requirements.txt -> pyproject.toml w/ pinned versions)
 pip-compile requirements-dev.in
 pip-sync requirements-dev.txt
+
+
+https://aws.plainenglish.io/streamline-lambda-development-with-poetry-25fbc212a846
+https://github.com/micmurawski/poetry-plugin-lambda-build
+
+[tool.poetry-plugin-lambda-build]
+artifact_path = "package.zip"
+
+poetry self add poetry-plugin-lambda-build
+poetry self add poetry-plugin-export
+poetry build-lambda

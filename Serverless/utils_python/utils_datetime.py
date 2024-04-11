@@ -19,6 +19,7 @@ def get_time_iso_tz() -> str:
 # datetime.datetime(2020, 5, 17, tzinfo=UTC) # hour, minute, second, microsecond, tzone=None
 # datetime.datetime.now() + datetime.timedelta(days=1, hours=2)
 # print(datetime.now() > date)
+# datetime.utcnow())
 
 # date = datetime.fromisoformat("2024-02-20T13:55:05")
 # datetime.fromisocalendar(2020, 5, 17)
