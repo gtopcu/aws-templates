@@ -67,6 +67,7 @@ np.float64
 # np.sort(random)
 # np.arange(0, 10, 1)
 # np.ones((3, 3), np.float32)   # 3 x 3 matrix consisting of 1s with float32 data type
+# np.unique(y)
 # np.random.randint(0, 100, 10)
 # np.random.randn(4)            # 4 x 1 matrix
 # np.random.randn(4, 3)         # 4 x 3 matrix
@@ -151,18 +152,20 @@ df
 df.size   
 df.shape  # (16598, 11)
 df.dtypes
+df.index
 df.values
 df.columns = ["2021", "2022", "2023"]
 
 df.describe()
-df.index
 df.set_index("A", inplace=True)
 
 df.head(2)
 df.tail(2)
 df["D"] = df["A"] * 2 / df["B"]
 df[2:4]             # rows 2:4
+df["genre"]         # genre column
 df[["A", "B"]]      # columns A and B
+X = df.drop(columns=["genre"]) # drop column and return the rest, does not modify original
 
 df.iloc[0]          # First row
 df.iloc[0:2]        # first two rows

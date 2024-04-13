@@ -9,6 +9,4 @@ NLP: NLTK, Gensim, Transformers, PyTorch
 GUI/FE: Flask, Django, Pyramid, Tornado, CherryPy
 R packages: ggplot2, dplyr, tidyr, readr
 
-
 Scikit-learn(common algorithms i.e. decision trees, neural networks)
-Sci-Py

@@ -9,9 +9,9 @@ Keras, Tensorboard
 
 PyTorch
 torch, torchserve, autograd, torchaudio, torchvision, primtorch, torchinductor
+sigmoid(activation & loss) functions
 
-activating function, loss
-
-
-pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117
+conda install pytorch torchvision -c pytorch
+pip install torch torchvision
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117
 

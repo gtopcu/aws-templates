@@ -1,9 +1,9 @@
 # https://www.youtube.com/watch?v=5PgqzVG9SCk
 
 # pip install scikit-learn
-# pip install pillow
 # pip install pandas
 # pip install numpy
+# pip install pillow
 
 import pickle
 from PIL import Image, ImageOps
