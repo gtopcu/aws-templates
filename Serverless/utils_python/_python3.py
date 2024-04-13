@@ -32,6 +32,9 @@ import time
 from functools import reduce
 import traceback
 
+# from . import database as db
+# from .database import engine
+
 # BIG_CONSTANT: int = 10000000
 
 class SampleClass:
@@ -566,5 +569,5 @@ if __name__ == "__main__":
 export PATH=".:$PATH:/opt/xyz/bin"
 "python.defaultInterpreterPath": "/opt/homebrew/bin/python3.12",
 source .venv/bin/activate
-
+source /Users/gtopcu/My Drive/VSCode/aws-templates/.venv/bin/activate
 """

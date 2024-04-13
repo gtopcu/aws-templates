@@ -81,9 +81,11 @@ poetry version major | minor | patch -> update project version in pyproject.toml
 # https://python-poetry.org/docs/cli/#export
 poetry export (--only|--with|without dev) --without-hashes -f requirements.txt -o requirements.txt
 
+# https://stackoverflow.com/questions/15031694/installing-python-packages-from-local-file-system-folder-to-virtualenv-with-pip
 # Install a project in editable mode (i.e.  setuptools "develop mode") from a local project path or a VCS url:
-pip install -e .
+pip install -e .      - 
 pip install -e .[dev]
+pip install -e /pkg   -> Top-level directory where 'setup.py' can be found.
 
 pip install pip-tools
 pip-compile -o requirements.txt pyproject.toml (requirements.txt -> pyproject.toml w/ pinned versions)

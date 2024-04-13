@@ -33,6 +33,7 @@ pwd
 ls -l -a
 ls -a | grep -i Doc
 ls -ltr pythonX-bash.py
+du -a /dir/ | sort -n -r | head -n 20   -> 20 largest files in /dir/ ascending
 man <command>
 cd ..
 cd ~ (go to /root)
