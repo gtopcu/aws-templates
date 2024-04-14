@@ -21,6 +21,9 @@ print(response)
 ddb = boto3.resource('dynamodb', endpoint_url='http://localhost:8000')
 print(list(ddb.tables.all()))
 
+# Limit
+table.query(Limit=37)
+
 """
 # inputItems = json.loads("""
 # [

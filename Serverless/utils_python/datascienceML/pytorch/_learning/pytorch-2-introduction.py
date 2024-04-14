@@ -3,34 +3,7 @@
 # https://pytorch.org/tutorials/beginner/introyt/introyt1_tutorial.html 
 # https://pytorch.org/get-started/locally/
 
-# import torch
-
-# x = torch.rand(5, 3)
-# print(x)
-
-# z = torch.zeros(5, 3)
-# z.dtype
-# i = torch.ones((5, 3), dtype=torch.int16)
-# i.dtype
-
-# torch.manual_seed(1729)
-# r1 = torch.rand(2, 2)
-# r2 = torch.rand(2, 2)
-# torch.manual_seed(1729)
-# r3 = torch.rand(2, 2) # same as r1 as same seed
-
-# ones = torch.ones(2, 3)
-# twos = torch.ones(2, 3) * 2
-# threes = ones + twos
-# threes.shape
-
-# r = torch.rand(2, 2) - 0.5 * 2 # numbers between -1 and 1
-# torch.abs(r)
-# torch.asin(r)       # arcsine
-# torch.det(r)        # determinant
-# torch.svd(r)        # single value decomposition
-# torch.std_mean(r)
-# torch.max(r)
+import torch
 
 
 # Autograd
@@ -103,32 +76,32 @@
 # Datasets and Loaders
 ###################################################################################################
 
-# %matplotlib inline
-import torch
-import torchvision
-import torchvision.transforms as transforms
-# from torch.utils.data import Dataset, DataLoader
-# from torchvision.datasets import ImageFolder
+# # %matplotlib inline
+# import torch
+# import torchvision
+# import torchvision.transforms as transforms
+# # from torch.utils.data import Dataset, DataLoader
+# # from torchvision.datasets import ImageFolder
 
-transform = transforms.Compose(
-    [transforms.ToTensor(),
-     transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+# transform = transforms.Compose(
+#     [transforms.ToTensor(),
+#      transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
 
-trainset = torchvision.datasets.CIFAR10(root='./data', train=True, download=True, transform=transform)
-trainloader = torch.utils.data.DataLoader(trainset, batch_size=4, shuffle=True, num_workers=2)
+# trainset = torchvision.datasets.CIFAR10(root='./data', train=True, download=True, transform=transform)
+# trainloader = torch.utils.data.DataLoader(trainset, batch_size=4, shuffle=True, num_workers=2)
 
-import numpy as np
-from matplotlib import pyplot as plt
+# import numpy as np
+# from matplotlib import pyplot as plt
 
-def imshow(imb):
-    img = img / 2 + 0.5
-    npimg = img.numpy()
-    plt.imshow(np.transpose(npimg, (1, 2, 0)))
+# def imshow(imb):
+#     img = img / 2 + 0.5
+#     npimg = img.numpy()
+#     plt.imshow(np.transpose(npimg, (1, 2, 0)))
 
-dataiter = iter(trainloader)
-images, labels = dataiter.next()
-imshow(torchvision.utils.make_grid(images))
-print(' '.join('%5s' % classes[labels[j]] for j in range(4)))
+# dataiter = iter(trainloader)
+# images, labels = dataiter.next()
+# imshow(torchvision.utils.make_grid(images))
+# print(' '.join('%5s' % classes[labels[j]] for j in range(4)))
 
 
 

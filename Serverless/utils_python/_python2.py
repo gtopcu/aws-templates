@@ -41,25 +41,6 @@
 
 
 ####################################################################################################
-# TypedDict
-
-# https://peps.python.org/pep-0589/
-
-# from typing import TypedDict, Unpack
-
-# https://docs.python.org/3/library/typing.html#typing.TypedDict
-# class Movie(TypedDict, total=False): #total: all fields required
-#     name: Required[str]
-#     year: int
-#     rating: NotRequired[float]
-
-# def foo(**kwargs: Unpack[Movie]):
-#     print(kwargs)
-#     print(kwargs["name"])
-
-# foo(name="The Matrix", year=1999)
-
-####################################################################################################
 
 # from typing import LiteralString #for preventing SQL injection
 
@@ -121,3 +102,30 @@
 # print(sum_numbers((1, 2, 3)))
 
 ####################################################################################################
+
+# TypedDict
+
+# https://peps.python.org/pep-0589/
+
+from typing import TypedDict, Unpack, Required, NotRequired
+
+https://docs.python.org/3/library/typing.html#typing.TypedDict
+class Movie(TypedDict, total=False): #total: all fields required
+    name: Required[str]
+    year: int
+    rating: NotRequired[float]
+    duration: Required[int]
+
+movie: Movie = {"name": "The Matrix", "year": 1999, "duration": 136}
+
+my_typedict = TypedDict("MyDict", {"name": str, "age": Required[int]}, total=False)
+my_typedict = TypedDict("MyDict", name=str, age=Required[int]) # deprecated, will be removed in 3.13
+
+# def foo(**kwargs: Unpack[Movie]):
+#     print(kwargs)
+#     print(kwargs["name"])
+
+# foo(name="The Matrix", year=1999)
+
+####################################################################################################
+

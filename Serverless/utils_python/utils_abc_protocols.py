@@ -21,23 +21,37 @@
 
 ####################################################################################################
 
-from abc import ABC, abstractmethod # Python 3.6
-from typing import Protocol, runtime_checkable # Python 3.8
+# from abc import ABC, abstractmethod # Python 3.6
+# from typing import Protocol, runtime_checkable # Python 3.8
 
-# Duct-typing, no need for inheritence / if you cant control original code
-# Can use isinstance() and issubclass(), raise TypeError if applied to a non-protocol class
-@runtime_checkable
-class Portable(Protocol):
-    @abstractmethod
-    def handle(self, data) -> int: ...
+# # Duct-typing, no need for inheritence / if you cant control original code
+# # Can use isinstance() and issubclass(), raise TypeError if applied to a non-protocol class
+# @runtime_checkable
+# class Portable(Protocol):
+#     @abstractmethod
+#     def handle(self, data) -> int: ...
 
-def do_handle(p: Portable, data) -> int:
-    return p.handle(data)
+# def do_handle(p: Portable, data) -> int:
+#     return p.handle(data)
 
-class Mug(Portable):
-    def handle(self, data) -> int:
-        return super().handle(data)
+# class Mug(Portable):
+#     def handle(self, data) -> int:
+#         return super().handle(data)
 
-mug = Mug()
-print(isinstance(mug, Portable))
+# mug = Mug()
+# print(isinstance(mug, Portable))
 
+####################################################################################################
+
+# from typing import Protocol, runtime_checkable
+
+# @runtime_checkable
+# class MyProtocol(Protocol):
+#     var: int
+#     def do_this(self) -> None:
+#         ...
+# class MyClass(MyProtocol):
+#     #var = 10
+#     def __init__(self, var: int):
+#         self.var = var
+        

@@ -64,13 +64,20 @@ np.int32
 np.float32
 np.float64
 
-# np.sort(random)
-# np.arange(0, 10, 1)
+# print(np.array((2, 2), dtype=np.int64))
+# np.empty(2, 2)
+# np.zeros((2,2), np.int32)
 # np.ones((3, 3), np.float32)   # 3 x 3 matrix consisting of 1s with float32 data type
+# np.empty_like(x)
+# np.zeros_like(x)
+# np.ones_like(x)
+# np.sort(random)
 # np.unique(y)
+# np.arange(0, 10, 1)
 # np.random.randint(0, 100, 10)
-# np.random.randn(4)            # 4 x 1 matrix
-# np.random.randn(4, 3)         # 4 x 3 matrix
+# np.random.rand(4)            # 4 x 1 matrix (0-to-1)
+# np.random.randn(4)           # 4 x 1 matrix (-1-to-1)
+# np.random.rand(4, 3)         # 4 x 3 matrix (0-to-1)
 # np.random.shuffle(lst)
 # np.random.choice(lst)
 # np.random.seed(1)
@@ -98,7 +105,7 @@ np.float64
 # Pandas - Series
 # print(pd.__version__)
 
-# series = pd.Series(np.random.randn(4), name="PD Series'")
+# series = pd.Series(np.random.randn(4), name="PD Series")
 # series.index = ["2020", "2021", "2022", "2023"]
 # print(series["2020"])
 # series["2020"] = 0.09012
@@ -146,54 +153,54 @@ np.float64
 
 # data:list[str] = requests.get("http://data.csv").content.decode().split("\n")
 
-df = pd.read_csv("data.csv", sep=';')
-df = pd.read_csv("data.csv", index_col = 0, parse_dates=True, delimiter=" ",  sep=';')
-df
-df.size   
-df.shape  # (16598, 11)
-df.dtypes
-df.index
-df.values
-df.columns = ["2021", "2022", "2023"]
+# df = pd.read_csv("data.csv", sep=';')
+# df = pd.read_csv("data.csv", index_col = 0, parse_dates=True, delimiter=" ",  sep=';')
+# df
+# df.size   
+# df.shape  # (16598, 11)
+# df.dtypes
+# df.index
+# df.values
+# df.columns = ["2021", "2022", "2023"]
 
-df.describe()
-df.set_index("A", inplace=True)
+# df.describe()
+# df.set_index("A", inplace=True)
 
-df.head(2)
-df.tail(2)
-df["D"] = df["A"] * 2 / df["B"]
-df[2:4]             # rows 2:4
-df["genre"]         # genre column
-df[["A", "B"]]      # columns A and B
-X = df.drop(columns=["genre"]) # drop column and return the rest, does not modify original
+# df.head(2)
+# df.tail(2)
+# df["D"] = df["A"] * 2 / df["B"]
+# df[2:4]             # rows 2:4
+# df["genre"]         # genre column
+# df[["A", "B"]]      # columns A and B
+# X = df.drop(columns=["genre"]) # drop column and return the rest, does not modify original
 
-df.iloc[0]          # First row
-df.iloc[0:2]        # first two rows
-df.iloc[:3]         # first three rows
-df.iloc[1,2]        # element at row 1 and column 2
-df.iloc[2:4, 1:3]   # rows 2:4 and columns 1:3
+# df.iloc[0]          # First row
+# df.iloc[0:2]        # first two rows
+# df.iloc[:3]         # first three rows
+# df.iloc[1,2]        # element at row 1 and column 2
+# df.iloc[2:4, 1:3]   # rows 2:4 and columns 1:3
 
-df.loc[2:4, "B"]                    # rows 2:4 and column B
-df.loc[df.index[1:3], ["C", "B"]]   # rows 1:3 and columns C and B
-df.loc[df.index[1:3], ["C", "B"]] = 0
-df.loc[df.index[1:3], ["C", "B"]] = np.random.randn(2, 2)
+# df.loc[2:4, "B"]                    # rows 2:4 and column B
+# df.loc[df.index[1:3], ["C", "B"]]   # rows 1:3 and columns C and B
+# df.loc[df.index[1:3], ["C", "B"]] = 0
+# df.loc[df.index[1:3], ["C", "B"]] = np.random.randn(2, 2)
 
-df = df.sort_values(by="A", ascending=False)
-df.sort_index(axis=1, ascending=False, inplace=True)
+# df = df.sort_values(by="A", ascending=False)
+# df.sort_index(axis=1, ascending=False, inplace=True)
 
-df.to_csv("dataframe.csv")
-df.to_excel("dataframe.xlsx")
-df.to_json("dataframe.json", lines=False)
-df.to_pickle("dataframe.pkl")
-df.to_sql("dataframe")
-df.to_numpy()
-df.assign()
+# df.to_csv("dataframe.csv")
+# df.to_excel("dataframe.xlsx")
+# df.to_json("dataframe.json", lines=False)
+# df.to_pickle("dataframe.pkl")
+# df.to_sql("dataframe")
+# df.to_numpy()
+# df.assign()
 
-# %matplotlib inline
-df.plot(title="Plot Data", grid=True, legend=True, subplots=True, logx=False, logy=False) # line plot
-df["A"].plot(kind="bar") # 'line', 'bar', 'barh', 'hist', 'box', 'kde', 'density', 'area', 'pie', 'scatter', 'hexbin'
-df
-plt.show()
+# # %matplotlib inline
+# df.plot(title="Plot Data", grid=True, legend=True, subplots=True, logx=False, logy=False) # line plot
+# df["A"].plot(kind="bar") # 'line', 'bar', 'barh', 'hist', 'box', 'kde', 'density', 'area', 'pie', 'scatter', 'hexbin'
+# df
+# plt.show()
 
 
 

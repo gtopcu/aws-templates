@@ -18,7 +18,6 @@ import heapq
 import os, sys, shutil
 from pathlib import Path
 from sys import getsizeof
-from timeit import timeit, repeat
 import random
 import pickle, shelve
 import copy
@@ -64,8 +63,6 @@ def main() -> None:
     #     case _:
     #         print("default")
 
-    # print(chr(100))
-
     # my_tuple = (1, )
     # my_tuple = tuple((1, 2, 3))
     # my_tuple3 = my_tuple1 + my_tuple2
@@ -78,31 +75,23 @@ def main() -> None:
     # # my_frozenset = frozenset(my_list)
     # my_dict = {x: x ** 2 for x in range(10)}
     # my_deque = deque(my_list, maxlen=5)
-    # print(my_deque)
     # my_defaultdict = defaultdict(lambda: "default")
     # my_defaultdict = defaultdict(int)
     # print(my_defaultdict["NoKeyError"])
-
+    # my_ordereddict = OrderedDict()
+    
     # x, y = 1, 2
     # x = (12 * 3) if True else 6
-    # print(time.time())
-    # print("Done")
 
-    # myint = 10
-    # myfloat = float(myint)
-    # print(type(myfloat))
-
-    # tuple1 = (1, )
-    # print(type(tuple1))
-
-    # list = [x for x in range(0, 10, 2)]
-    # list2 = [x*x for x in range(0, 10) if x%2==1]
-    # print(list.count(2))
-    # print(list.index(1))
-    # print(list.extend(list2))
-    # print(list.pop(0))
-    # print(list.remove(2))
-    # print(list.reverse())
+    # list.count(2)
+    # list.index(1)
+    # list.insert(0, 1)
+    # list.append(10)
+    # list.extend(list2)
+    # list.pop()    # pop last element
+    # list.pop(idx) # pop item at idx - raises IndexError
+    # list.remove(2)
+    # list.reverse()
     # list.sort(reverse=True)
     # print(list)
     # for i, j in enumerate(list):
@@ -117,7 +106,7 @@ def main() -> None:
 
     # dict = {x: x**2 for x in range(0, 10)}
     # print(dict.popitem())
-    # print(dict.pop(0))
+    # print(dict.pop("key"))
     # print(dict.get(10, 100)) # Returns None instead of KeyError
     # print(dict[2])
     # print(dict)
@@ -130,9 +119,9 @@ def main() -> None:
     # print(dict)
 
     # Student = namedtuple('Student', ['name', 'age', 'DOB'])
-    # S = Student('Nandini', '19', '2541997')
-    # print(S[1])
-    # print(S.name)
+    # nt = Student('Nandini', '19', '2541997')
+    # print(nt[1])
+    # print(nt.name)
     
     # d1 = {'a': 1, 'b': 2}  
     # d2 = {'c': 3, 'd': 4}  
@@ -156,8 +145,6 @@ def main() -> None:
     # mylist1 = list(range(4))
     # mylist2 = [4,5,6]
     # print(mylist1 + mylist2)
-    # mylist1.extend(mylist2)
-    # print(mylist1)
     # print(slice(None, 5).indices)
     # mydict = dict(zip(mylist1, mylist2)) # {0: 4, 1: 5, 2: 6}
 
@@ -175,9 +162,7 @@ def main() -> None:
     # dict1 = { 0: 'A', 1: 'B', 2: 'C' }
     # dict2 = { 2: 'D', 4: 'E', 5: 'F' }
     # dict1 |= dict2
-    # print(dict1)
     # dict1.update(dict2)
-    # print(dict1)
 
     # numbers: list[int] = list(range(10))
     # print(numbers[::-2])
@@ -383,6 +368,7 @@ def main() -> None:
     # nonlocal var
 
     # from . import module
+    # import .module
     # import builtins
     # print(dir(builtins))
     # print(sys.path)       # first checks builtins for imported modules, than sys.path/env vars
@@ -450,7 +436,8 @@ def main() -> None:
 
     # name = "gokhan"
     # print("username_%s" % name)             # string interpolation
-    # print("%s %s" % ("Hello", "World"))
+    # print("%s %d %.2f" % ("Hello", 1.2, 1.2))
+    # print("{0} {1} {2}".format("Hello", 1.2, 1.2))
 
     # data = b'\x01'*1024)
     # print("SampleClass".__dict__)
@@ -459,6 +446,12 @@ def main() -> None:
     # print(hasattr(sc, "age"))
     # print(f"{1/10:.2f}")
     # pprint(tomldata, sort_dicts=True)
+
+    # mylist = list(string)
+    # mylist = [int(i) for i in string]    
+
+    # print(mytype := (len("abc") > 2))     -> Walrus operator
+    # if myval := get_value(): ...
 
     # traceback.print_stack()
     # traceback.print_exc()
@@ -469,6 +462,8 @@ def main() -> None:
     #               StandardError -> ValueError: int("A"), KeyError: dict['key1'], TypeError: str[0]='a', 
     #               IndexError, AttributeError, NameError, AssertionError, StopIteration, ArithmeticError, 
     #               ZeroDivisionError, NotImplementedError, RuntimeError, SystemError
+
+    
 
     print("done", end="\n")
     # vnenv set python interpreter
@@ -558,16 +553,3 @@ if __name__ == "__main__":
     main()
 
 
-"""
-/Users/gtopcu/.bash_profile
-/Users/gtopcu/.zshrc
-/Library/Frameworks/Python.framework/Versions/3.11/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/anaconda3/condabin:/Library/Frameworks/Python.framework/Versions/3.11/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/gtopcu/.local/bin
-/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/gtopcu/.local/bin:/opt/homebrew/bin/python3.12
-/opt/homebrew/bin/python3.12
-/opt/homebrew/bin/python3.11
-/usr/local/bin/python3
-export PATH=".:$PATH:/opt/xyz/bin"
-"python.defaultInterpreterPath": "/opt/homebrew/bin/python3.12",
-source .venv/bin/activate
-source /Users/gtopcu/My Drive/VSCode/aws-templates/.venv/bin/activate
-"""

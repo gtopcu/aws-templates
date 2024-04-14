@@ -1,0 +1,11 @@
+
+
+https://blog.stackademic.com/rust-apigateway-lambda-dynamo-cdk-another-all-in-one-serverless-backend-option-4da2059a8810
+
+brew tap cargo-lambda/cargo-lambda
+brew install cargo-lambda
+pip3 install cargo-lambda
+cargo lambda new rust_lambda_restapi
+cargo lambda start -> http://localhost:9000
+cargo lambda watch
+cdk deploy

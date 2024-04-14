@@ -92,6 +92,7 @@ pip-compile -o requirements.txt pyproject.toml (requirements.txt -> pyproject.to
 pip-compile requirements-dev.in
 pip-sync requirements-dev.txt
 
+pipenv install aws-lambda-powertools
 
 https://aws.plainenglish.io/streamline-lambda-development-with-poetry-25fbc212a846
 https://github.com/micmurawski/poetry-plugin-lambda-build
@@ -102,3 +103,21 @@ artifact_path = "package.zip"
 poetry self add poetry-plugin-lambda-build
 poetry self add poetry-plugin-export
 poetry build-lambda
+
+
+-- Upgrade Python
+brew update && brew upgrade python
+python -m venv --upgrade env
+
+/Users/gtopcu/.bash_profile
+/Users/gtopcu/.zshrc
+/Library/Frameworks/Python.framework/Versions/3.11/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/anaconda3/condabin:/Library/Frameworks/Python.framework/Versions/3.11/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/gtopcu/.local/bin
+/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/gtopcu/.local/bin:/opt/homebrew/bin/python3.12
+/opt/homebrew/bin/python3.12
+/opt/homebrew/bin/python3.11
+/usr/local/bin/python3
+export PATH=".:$PATH:/opt/xyz/bin"
+"python.defaultInterpreterPath": "/opt/homebrew/bin/python3.12",
+source .venv/bin/activate
+source /Users/gtopcu/My Drive/VSCode/aws-templates/.venv/bin/activate
+
