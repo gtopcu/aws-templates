@@ -108,15 +108,12 @@ def main() -> None:
     # print(dict.popitem())
     # print(dict.pop("key"))
     # print(dict.get(10, 100)) # Returns None instead of KeyError
-    # print(dict[2])
-    # print(dict)
     # dict2 = dict.fromkeys([1, 2, 3], 0)
-    # print(dict2)
     # dict.update(dict2)
-    # print(dict)
     # print(dict.setdefault(9, 81))
     # del dict[9]
-    # print(dict)
+    # list = sorted(dict, key=dict.get, reverse=True)
+    # list = sorted(occurences, key=lambda x:occurences[x], reverse=True)
 
     # Student = namedtuple('Student', ['name', 'age', 'DOB'])
     # nt = Student('Nandini', '19', '2541997')
@@ -429,7 +426,7 @@ def main() -> None:
     # print(mydict)
     # mylist = [[1,2,3],[4,5,6]]
     # mylist = [item for sublist in mylist for item in sublist]
-    # print(mylist)
+    
 
     # for i in generator_func(10):
     #     print(i)

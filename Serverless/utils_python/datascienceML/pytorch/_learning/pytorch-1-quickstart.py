@@ -73,7 +73,6 @@ from torchvision.transforms import ToTensor
 # matrix_i32 = matrix_f32.to(torch.int32)
 # print(matrix_i32)
 
-
 # Dataset stores the samples and their corresponding labels
 # DataLoader wraps an iterable around the Dataset
 

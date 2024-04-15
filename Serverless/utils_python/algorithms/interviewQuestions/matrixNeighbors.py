@@ -71,7 +71,6 @@
             
 #             alive_matrix[(x, y)] = alive
 
-
 #     # print("AliveMatrix: ")
 #     # pprint(alive_matrix)
 #     #result =  { (i, j): i for i in range(rows) j for j in range(cols) }
@@ -110,9 +109,7 @@ def print_neighbors(grid, x, y):
     ]
     for neighbor_x, neighbor_y in neighbors:
         if 0 <= neighbor_x < rows and 0 <= neighbor_y < cols:
-            print("Neighbor at ({}, {}): {}".format(neighbor_x, neighbor_y, grid[neighbor_x][neighbor_y]))
-        else:
-            pass #print("Neighbor at ({}, {}): Out of bounds".format(neighbor_x, neighbor_y))
+            print(f"{neighbor_x, neighbor_y}", grid[neighbor_x][neighbor_y])
 
 grid = [
     [1, 2, 3],
