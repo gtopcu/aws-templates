@@ -206,55 +206,153 @@ class Solution:
         #         #return float(sum(self.items)) / len(self.items)
 
     ######################################################################################################################
-    # HEAP
+    # Tree
     #######################################################################################################################
 
     # https://leetcode.com/problems/maximum-depth-of-binary-tree/description/
-    # Definition for a binary tree node.
+    # class TreeNode:
+    #     def __init__(self, val=0, left=None, right=None):
+    #         self.val = val
+    #         self.left = left
+    #         self.right = right
+    # # Binary tree capacity: pow(2, depth)-1
+    # def maxDepth(self, root: Optional[TreeNode]) -> int:
+    #     if root is None:
+    #         return 0
+    #     if root.left is None and root.right is None:
+    #         return 1
+    #     max_depth = 1
+    #     current_depth = 1
+    #     def traverseNode(node):
+    #         nonlocal max_depth
+    #         nonlocal current_depth
+    #         if (node.left is not None):
+    #             current_depth += 1
+    #             if current_depth > max_depth:
+    #                 max_depth = current_depth
+    #             traverseNode(node.left)
+    #             current_depth -= 1
+    #         if (node.right is not None):
+    #             current_depth += 1
+    #             if current_depth > max_depth:
+    #                 max_depth = current_depth
+    #             traverseNode(node.right)
+    #             current_depth -= 1
+    #     traverseNode(root)
+    #     return max_depth
 
+    ######################################################################################################################
+    # String
+    #######################################################################################################################
 
-# https://leetcode.com/problems/maximum-depth-of-binary-tree/
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
-# Binary tree capacity: pow(2, depth)-1
-def maxDepth(self, root: Optional[TreeNode]) -> int:
+    # https://leetcode.com/problems/longest-substring-without-repeating-characters/
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        longest = ""
+        current = []
+        for i in s:
+            if i in current:
+                current = [i]
+            else:
+                current.extend(i)
+                if (len(current) > len(longest)):
+                    longest = "".join(current)
+        return longest
+
+    # https://leetcode.com/problems/longest-repeating-character-replacement/description/
+    def characterReplacement(self, s: str, k: int) -> int:
+        longest = ""
+        for i in range(0, len(s)):
+            if i==0 and k>0 and i < len(s)-2 and s[i+1] == s[i+2]:
+                current = [s[i+1]]
+                replace_left = k-1
+            else:
+                current = [s[i]]
+                replace_left = k
+            for j in range(i+1, len(s)):
+                if s[j] == current[-1]:
+                    current.extend(current[-1])
+                    if len(current) > len(longest):
+                        longest = "".join(current)
+                else:
+                    if replace_left > 0:
+                        replace_left -= 1
+                        current.extend(current[-1])
+                        if len(current) > len(longest):
+                            longest = "".join(current)
+                    else:
+                        current = [s[j]]
+                        replace_left = k
+        return longest
+
+    # https://leetcode.com/problems/minimum-window-substring/
+    def minWindow(self, s: str, t: str) -> str:
+        window = ""
+        if len(t) > len(s):
+            return window
+        if s == t:
+            return s
+        for i in range(0, len(s)):
+            for j in range(i, len(s)):
+                includes = True
+                for k in t:
+                    if k not in s[i:j+1]:
+                        includes = False
+                        break
+                if includes:
+                    if len(s[i:j+1]) < len(window) or window == "":
+                        window = s[i:j+1]
+        return window
     
-    max_depth = 1
-    def traverseNode(node):
-        nonlocal max_depth
-        if node.left:
-            max_depth += 1
-            traverseNode(node.left)
-        if node.right:
-            max_depth += 1
-            traverseNode(node.right)
-    traverseNode(root)
-    return max_depth
+    ######################################################################################################################
+    # DynamicProgramming
+    #######################################################################################################################
+    
+    # https://leetcode.com/problems/climbing-stairs/
+    def climbStairs(self, n: int) -> int:
+        step_map = { 1: 1, 2: 2 }
+        def climb(steps: int):
+            result = step_map.get(steps)
+            if result:
+                return result
+            else:
+                prev1 = climb(steps-1)
+                step_map[steps-1] = prev1
+                prev2 = climb(steps-2)
+                step_map[steps-2] = prev2
+                return prev1 + prev2
+        return climb(n)
+
+    # https://leetcode.com/problems/coin-change/description/
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        if not coins:
+            return -1
+        coins.sort()
+        def findAmount(coins):
+            if len(coins) == 1:
+                if coins[0] == amount:
+                    return 1
+                elif amount % coins[0] == 0:
+                    return amount // coins[0]
+                else:
+                    return -1
+            
+        
+        return findAmount(coins)
 
 
 def main() -> None:
     start = time.time()
-    
-    # TreeNode{val: 3, left: TreeNode{val: 9, left: None, right: None}, right: TreeNode{val: 20, left: TreeNode{val: 15, left: None, right: None}, right: TreeNode{val: 7, left: None, right: None}}}
 
-    null = -100
-    # maxDepth(None, [3,9,20,null,null,15,7]) # 3
-    # maxDepth(None, [1,null,2]) # 2
+    # print(Solution.climbStairs(None, 4)) # 1-1, 2-2, 3-3, 4-5
+    print(Solution.coinChange(None, [], 10)) # 
+     
     
-    print(math.log(1, 2))
-    1 2 4 8
-    1 3 7 15
-
     print(f"Done {time.time()-start:.6f}")
 
 if __name__ == "__main__":
     main()
 
-
-
+    
     # print(Solution().twoSum(None, [2,5,5,11], 10)) # [1,2]
     # print(Solution.maxProfit(None, [7,6,4,3,1])) # 0
     # print(Solution.containsDuplicate(None, np.random.randint(0, 10000, 100)))
@@ -269,3 +367,9 @@ if __name__ == "__main__":
     # print(Solution.getSum(None, 1, 2))
     # print(Solution.mergeKLists(None, [[1,4,5],[1,3,4],[2,6]])) # [1,1,2,3,4,4,5,6]
     # print(Solution.topKFrequent(None, [1,1,1,2,2,3], 2)) # [1,2]
+    # root = TreeNode(3, TreeNode(9, None, None), TreeNode(20, TreeNode(15, None, None), TreeNode(7, None, None)))
+    # root = TreeNode(1, TreeNode(2, TreeNode(4, None, None)), TreeNode(3, None, TreeNode(5, None, None)))
+    # print(Solution.maxDepth(None, root)) # 3
+    # print(Solution.characterReplacement(None, "ABBB", 2)) # 
+    # print(Solution.minWindow(None, "ADOBECODEBANC", "ABC")) # "BANC"
+    # print(Solution.minWindow(None, "ab", "a")) # "a"

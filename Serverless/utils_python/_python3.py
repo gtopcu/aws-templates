@@ -31,8 +31,13 @@ import time
 from functools import reduce
 import traceback
 
+from operator import add, sub, mul, itemgetter, attrgetter, methodcaller
+from operator import itemgetter
+from operator import itemgetter
+
 # from . import database as db
-# from .database import engine
+# import .database as db
+
 
 # BIG_CONSTANT: int = 10000000
 
@@ -77,7 +82,6 @@ def main() -> None:
     # my_deque = deque(my_list, maxlen=5)
     # my_defaultdict = defaultdict(lambda: "default")
     # my_defaultdict = defaultdict(int)
-    # print(my_defaultdict["NoKeyError"])
     # my_ordereddict = OrderedDict()
     
     # x, y = 1, 2
@@ -266,8 +270,8 @@ def main() -> None:
     # dict["key1"] -> Big O(1)
 
     # Heap queue / priority queue. hq[0] is always its smallest element.
-    # Python only allows min heaps. For max heaps, multiply by -1 at push/pop
-    # read O(1), add/remove O(log n)
+    # Python only allows min heaps. For max heaps, multiply by -1 at push/pop or use _heapify_max
+    # create O(n), read O(1), add/remove O(log n)
     # When adding to heap[3], element at heap[3] is sent to the end of the queue
     # 
     # heapq.heapify(my_list) # transforms list into a min heap, in-place, in linear time
@@ -275,9 +279,10 @@ def main() -> None:
     # heapq.heappop(my_list) # pops the smallest item from the heap
     # heapq.heappushpop(my_list, item) # pushes a new item and then returns the smallest item; the heap size is unchanged
     # heapq.heapreplace(my_list, item) # pops and returns the smallest item; the heap size is unchanged
-    # heapq.merge(iter1, iter2) # merges two sorted lists into one sorted list
     # heapq.nlargest(n, iter) # returns the n largest elements from the heap
     # heapq.nsmallest(n, iter) # returns the n smallest elements from the heap
+    # heapq.merge(iter1, iter2) # merges two sorted lists into one sorted list
+    # heapq._heapify_max(my_list) # max heap. or use heap.heapify([-x for x in my_lsit])
 
     # print(sys.maxsize)        # 9223372036854775807
     # math.inf
@@ -305,13 +310,12 @@ def main() -> None:
     # kwargs(name=1234)
     # kwargs(**{"name":1234})
 
-    # list = [0] * 5
-    # stack = []
-    # if not stack:
-    #     print("empty")
-    # else:
-    #     print("not empty")        
     
+    # x: list[list[int]]
+    # list = [0] * 5
+    # list = [ [1]*4,[2]*4,[3]*4 ]
+    # list = [ [x]*4 for x in range(3) ]
+    # list = [ [0]*4 ]* 4 # not good, all innter arrays will be same object
     # list1 = [[1,2,3], *range(5)]
     # list2 = list1[:]
     # list2 = list(list1)
@@ -319,34 +323,15 @@ def main() -> None:
     # list2 = list1.copy()
     # list2 = copy.copy(list1)
     # list2 = copy.deepcopy(list1)
-    # list1[0][0] = 0
-    # print(id(list1), id(list2))
-    # print(id(list1[0][0]), list2[0][0])
-    # print(list1)
-    # print(list2)
 
-    # x: list[list[int]]
-    # list = [ [x]*4 for x in range(3) ]
-    # print(list)
-    # list = [ [0]*4 ]* 4 # not good, all innter arrays will be same object
-    # print(list)
-    # list = [ [1]*4,[2]*4,[3]*4 ]
-    # print(list)
-    # list = [ {} ]
-    # for i, number in enumerate(range(10)):
-    #     print(i, number)
-    # nums1 = [1, 2, 3]
-    # nums2 = [4, 5, 6]
-    # for i, j in zip(nums1, nums2):
-    #     print(i, j)
-    # dict1 = dict(zip(nums1, nums2))
-    # print(dict1)
+    # mylist = [item for sublist in mylist for item in sublist]
+    # for i, j in zip(list1, list2):
+    # dict1 = dict(zip(list1, list2))
     # custom_sorting = ["This", "is", "a", "number"]
     # custom_sorting.sort(key=len)
     # custom_sorting.sort(key=lambda x: len(x))
-    # print(custom_sorting)
-    # for i in map(print, range(10)):
-    #     pass
+    
+    # for i in map(print, range(10)): ...
     # map(lambda x: print(x), range(10))
     # listMap = list(map(lambda x: x * x, range(10)))
     # listMap = [*map(lambda x: x * x, range(10))]
@@ -415,21 +400,6 @@ def main() -> None:
 
     # iterator = (x for x in range(6))
     # print(next(iterator))
-    # for i in iterator:
-    #     print(i)
-    
-    # https://www.youtube.com/watch?v=1-qmfHfDg6k
-    # mylist1 = [1,2,3]
-    # mylist2 = [4,5,6]
-    # print(dict(zip(mylist1, mylist2)))
-    # mydict = { x:y for x,y in zip(mylist1, mylist2) }
-    # print(mydict)
-    # mylist = [[1,2,3],[4,5,6]]
-    # mylist = [item for sublist in mylist for item in sublist]
-    
-
-    # for i in generator_func(10):
-    #     print(i)
 
     # name = "gokhan"
     # print("username_%s" % name)             # string interpolation
@@ -443,6 +413,15 @@ def main() -> None:
     # print(hasattr(sc, "age"))
     # print(f"{1/10:.2f}")
     # pprint(tomldata, sort_dicts=True)
+    
+    # my_list = [0, 1, 2]
+    # r: slice = slice(None, None, -1)
+    # print(my_list[r])
+    # list_getter: itemgetter = itemgetter(0, -1)
+    # a, b = list_getter(my_list)
+    # my_dict = { "a": 1, "b": 2 }
+    # getter: itemgetter = itemgetter("a", "b")
+    # a, b = getter(my_dict)
 
     # mylist = list(string)
     # mylist = [int(i) for i in string]    
@@ -459,8 +438,6 @@ def main() -> None:
     #               StandardError -> ValueError: int("A"), KeyError: dict['key1'], TypeError: str[0]='a', 
     #               IndexError, AttributeError, NameError, AssertionError, StopIteration, ArithmeticError, 
     #               ZeroDivisionError, NotImplementedError, RuntimeError, SystemError
-
-    
 
     print("done", end="\n")
     # vnenv set python interpreter

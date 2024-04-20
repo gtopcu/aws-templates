@@ -10,5 +10,10 @@ pip install notebook
 jupyter notebook
 http://localhost:8888/tree
 
+%matplotlib inline
+%time do_sth
+%timeit
+
+
 
 

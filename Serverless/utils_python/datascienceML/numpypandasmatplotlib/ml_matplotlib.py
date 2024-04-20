@@ -11,6 +11,7 @@ from typing import Sequence
 
 import math
 
+# %matplotlib inline
 #------------------------------------------------------------------------------------------------
 
 df = pd.read_csv("data.csv")
