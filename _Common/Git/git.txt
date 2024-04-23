@@ -1,4 +1,6 @@
 
+# https://medium.com/@jake.page91/the-guide-to-git-i-never-had-a89048d4703a
+
 which git
 git config --list
 git config --global user.name "S. Gokhan Topcu"
@@ -7,17 +9,83 @@ git config --global user.email "gtopcu@gmail.com"
 git config --global credential.helper cache
 git config --global credential.helper 'store --file ~/.my-credentials'
 
+.git-credentials
 ---
+
 
 ```
 git init
 git add README.md
+git rm README.md
 git commit -m "first commit"
 git branch -M main
+git checkout -b feature-branch-name
+git switch branch
 git remote add origin git@github.com:gtopcu/aws-templates.git
 git remote add origin https://github.com/gtopcu/python_lambda
-git push -u origin main
+git fetch
+git pull
+git push -u origin main --force
+git rebase upstream_branch
+git reset --soft HEAD~X       # Change to the number after HEAD~ depending on the commits you want to squash
+git cherry-pick <commit-hash> # Do this multiple times if multiple commits are wanted
+git tag
+git show abc123def456789 
+git status
+git log
+git diff
 ```
+
+
+# Clone a Repository
+git clone <repository_url>
+
+# Stage Changes for Commit
+git add <file(s)>
+
+# Commit Changes
+git commit -m "Commit message"
+
+# Push Changes to the Remote Repository
+git push
+
+# Force Push Changes (use with caution)
+git push --force
+
+# Reset Working Directory to Last Commit
+git reset --hard
+
+# Create a New Branch
+git branch <branch_name>
+
+# Switch to a Different Branch
+git checkout <branch_name>
+
+# Merge Changes from Another Branch
+git merge <branch_name>
+
+# Rebase Changes onto Another Branch (use with caution)
+git rebase <base_branch>
+
+# View Status of Working Directory
+git status
+
+# View Commit History
+git log
+
+# Undo Last Commit (use with caution)
+git reset --soft HEAD^
+
+# Discard Changes in Working Directory
+git restore <file(s)>
+
+# Retrieve Lost Commit References
+git reflog
+
+# Interactive Rebase to Rearrange Commits
+git rebase --interactive HEAD~3
+
+
 
 ---
 
@@ -78,7 +146,7 @@ git clone https://github.com/hukanege.git
 git remote add <name><url>
 git remote add origin https://github.com/gtopcu/python_lambda
 git branch --set-upstream-to=origin/main
-git push --set-upstream origin main
+git push --set-upstream origin main --force
 git push -u origin main
 git fetch <remote><branch> (download only, do not merge) 
 git pull <remote><branch> (fetch + merge)

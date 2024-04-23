@@ -166,6 +166,8 @@ df = pd.read_csv("data.csv", sep=';')
 
 # df.describe()
 # df.set_index("A", inplace=True)
+# df.printSchema()
+# df.show()
 
 # df.head(2)
 # df.tail(2)
@@ -173,16 +175,17 @@ df = pd.read_csv("data.csv", sep=';')
 # df["create_date"] = dt.datetime.now()
 # df["salary"] = df["salary"] + 1_000_000
 # df["salary"] = df["salary"].apply(lambda x: x * 2)
-# df[2:4]             # rows 2:4
-# df["genre"]         # genre column
-# df[["A", "B"]]      # columns A and B
+# df[2:4]               # rows 2:4
+# df["genre"]           # genre column
+# df[["A", "B"]]        # columns A and B
 # X = df.drop(columns=["genre"]) # drop column and return the rest, does not modify original
+# X = df.dropna()       # drop missing values
 # df = df.sort_values(by="A", ascending=False)
 # df.sort_index(axis=1, ascending=False, inplace=True)
 
-# df.groupby(["emp_no", "name"])["salary"].max()
-# df.all() df.any() df.median() df.max() df.min() df.count() df.abs() df.filter() df.first()
+# df.all() df.any() df.median() df.max() df.min() df.count() df.abs() df.map() df.filter() df.first()
 # df.keys() df.values() df.items() df.assign() df.reset_index()
+# df.agg(["min", "max", "mean"])["A"].values
 
 # df.at[0, "A"] = 0
 # df.iloc[0]          # First row
@@ -196,6 +199,14 @@ df = pd.read_csv("data.csv", sep=';')
 # df.loc[df.index[1:3], ["C", "B"]] = 0
 # df.loc[df.index[1:3], ["C", "B"]] = np.random.randn(2, 2)
 
+# Can use SQL on DFs
+# df.select("*")
+# df.select("A", "B").where("A > 0").limit(10).groupby("A").sum().orderby("A", ascending=False).distinct()
+# df.where((df.Age > 30) & (df.Type == 1) & df.Job.isin(["student", "doctor"])).limit(5).show(10)
+# df.groupby(["emp_no", "name"])["salary"].max().alias("SalaryMax")
+
+# DF to Spark RDD
+# df.rdd
 
 # df.plot(title="Plot Data", grid=True, legend=True, subplots=True, logx=False, logy=False) # line plot
 # df["A"].plot(kind="bar") # 'line', 'bar', 'barh', 'hist', 'box', 'kde', 'density', 'area', 'pie', 'scatter', 'hexbin'

@@ -1,0 +1,163 @@
+
+# https://dev.to/aws-builders/how-to-set-up-amazon-rds-proxy-for-amazon-aurora-serverless-database-cluster-and-connect-aws-lambda-function-to-it-20m5
+
+Parameters:
+  VpcId:
+    Type: String
+    Default: vpc-950cd6fd
+    Description: VpcId of your existing Virtual Private Cloud (VPC)
+  Subnets:
+    Type: CommaDelimitedList  
+    Default: subnet-0787be4d, subnet-88dc46e0
+    Description: The list of SubnetIds, for at least two Availability Zones in the
+      region in your Virtual Private Cloud (VPC)
+
+Resources:
+  LambdaSecurityGroup:
+      Type: AWS::EC2::SecurityGroup
+      Properties:
+        GroupDescription: SecurityGroup for Serverless Functions
+        VpcId: 
+          Ref: VpcId
+  VPCSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Security group for RDS DB Instance.
+      VpcId: 
+         Ref: VpcId 
+      SecurityGroupEgress: 
+        - CidrIp: '0.0.0.0/0'
+          Description: lambda RDS access over 5432
+          FromPort: 5432
+          IpProtocol: TCP
+          ToPort: 5432
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: '5432'
+          ToPort: '5432'
+          SourceSecurityGroupId:
+               Ref: LambdaSecurityGroup
+  DBSecret:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Name: !Ref UserSecret
+      Description: RDS database auto-generated user password
+      GenerateSecretString:
+        SecretStringTemplate: !Sub '{"username": "${DBMasterUserName}"}'
+        GenerateStringKey: "password"
+        PasswordLength: 30
+        ExcludeCharacters: '"@/\'
+  DBSubnetGroup:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties:
+      DBSubnetGroupDescription: Subnets available for the RDS DB Instance
+      SubnetIds:
+       Ref: Subnets
+  AuroraServerlessV2Cluster:
+    Type: 'AWS::RDS::DBCluster'
+    DeletionPolicy: Delete
+    Properties:
+      DBClusterIdentifier: !Ref DBClusterName
+      Engine: aurora-postgresql
+      Port: 5432
+      EnableHttpEndpoint: true
+      MasterUsername: !Join ['', ['{{resolve:secretsmanager:', !Ref DBSecret, ':SecretString:username}}' ]]
+      MasterUserPassword: !Join ['', ['{{resolve:secretsmanager:', !Ref DBSecret, ':SecretString:password}}' ]]
+      DatabaseName: !Ref DatabaseName
+      ServerlessV2ScalingConfiguration:
+        MinCapacity: 0.5
+        MaxCapacity: 1
+      DBSubnetGroupName:
+        Ref: DBSubnetGroup
+      VpcSecurityGroupIds:
+      - !Ref VPCSecurityGroup
+  AuroraServerlessV2Instance:
+    Type: 'AWS::RDS::DBInstance'
+    Properties:
+      Engine: aurora-postgresql
+      DBInstanceClass: db.serverless
+      DBClusterIdentifier: !Ref AuroraServerlessV2Cluster
+      MonitoringInterval: 1
+      MonitoringRoleArn: !GetAtt EnhancedMonitoringRole.Arn
+      PubliclyAccessible: false
+      EnablePerformanceInsights: true
+      PerformanceInsightsRetentionPeriod: 7
+  RDSProxy:
+    Type: AWS::RDS::DBProxy
+    Properties:
+      Auth:
+        - { AuthScheme: SECRETS, SecretArn: !Ref DBSecret}
+      DBProxyName: 'rds-proxy'
+      RoleArn: !GetAtt RDSProxyRole.Arn
+      EngineFamily: 'POSTGRESQL'
+      IdleClientTimeout: 120
+      RequireTLS: true
+      DebugLogging: false
+      VpcSecurityGroupIds:
+      - !Ref VPCSecurityGroup
+      VpcSubnetIds: !Ref  Subnets
+  RDSProxyRole:
+    Type: AWS::IAM::Role
+    Properties:
+      Path: /
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Action: [ 'sts:AssumeRole' ]
+            Effect: Allow
+            Principal:
+              Service: [ rds.amazonaws.com ]
+      Policies:
+        - PolicyName: DBProxyPolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Action:
+                  - secretsmanager:GetSecretValue
+                Effect: Allow
+                Resource:
+                  - !Ref DBSecret
+  ProxyTargetGroup:
+    Type: AWS::RDS::DBProxyTargetGroup
+    Properties:
+      DBProxyName: !Ref RDSProxy
+      DBClusterIdentifiers: [ !Ref AuroraServerlessV2Cluster]
+      TargetGroupName: default
+      ConnectionPoolConfigurationInfo:
+        MaxConnectionsPercent: 5
+        MaxIdleConnectionsPercent: 4
+        ConnectionBorrowTimeout: 120
+    
+  LambdaFunc:
+    Type: AWS::Lambda::Function
+    Properties:
+      Handler: index.handler
+      Role: !GetAtt LambdaRole.Arn
+      Runtime: nodejs14.x
+      Code:
+        ZipFile: |
+          exports.handler = async (event) => {
+            console.log(JSON.stringify(event, null, 2));
+            return "Hello from Lambda!";
+          };
+      Environment:
+        Variables:
+          DB_USER_PASSWORD: !Join ['', ['{{resolve:secretsmanager:', !Ref DBSecret, ':SecretString:password}}' ]]
+          DB_USER_NAME: !Join ['', ['{{resolve:secretsmanager:', !Ref DBSecret, ':SecretString:username}}' ]]
+          RDS_PROXY_ENDPOINT: !GetAtt RDSProxy.Endpoint 
+      Policies:
+        - Statement:
+            - Sid: AllowDbConnect
+              Effect: Allow
+              Action:
+                - rds-db:connect
+              Resource:
+                - !Sub arn:aws:rds-db:${AWS::Region}:${AWS::AccountId}:dbuser:!Select [6, !Split [":", !GetAtt RDSProxy.DBProxyArn]]/*
+
+        - VPCAccessPolicy: {}
+      VpcConfig:
+        SecurityGroupIds:
+          - Fn::GetAtt: LambdaSecurityGroup.GroupId
+        SubnetIds: !Ref  Subnets
+
+  

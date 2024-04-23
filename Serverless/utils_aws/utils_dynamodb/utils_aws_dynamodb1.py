@@ -66,7 +66,9 @@ def get_item(table_name, key):
     """ Key={"id": id} """
     table = dynamodb.Table(table_name)
     response = table.get_item(Key=key) 
-    return response
+    if "Item" not in response:
+        return None
+    return response["Item"]
 
 def put_item(table_name, item):
     """
@@ -123,7 +125,11 @@ def query(table_name, keyConditionExpression, expressionAttributeValues):
 def scan(table_name):
     table = dynamodb.Table(table_name)
     response = table.scan()
-    return response
+    data = response['Items']
+    while 'LastEvaluatedKey' in response:
+        response = table.scan(ExclusiveStartKey=response['LastEvaluatedKey'])
+        data.extend(response['Items'])
+    return data
 
 # 16MB and 100 items limit
 # can read or write items from one or more tables

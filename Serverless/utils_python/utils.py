@@ -3,9 +3,12 @@ import uuid
 import json
 import time
 from typing import Any
+from dotenv import find_dotenv
+from dotenv import load_dotenv
 
 # pip install python-dotenv
 # from dotenv import load_dotenv, find_dotenv 
+# load_dotenv(find_dotenv())
 # if not load_dotenv(find_dotenv()):
 #     raise Exception("Failed to load .env file")
 # print(os.getenv('DDB_TABLE'))

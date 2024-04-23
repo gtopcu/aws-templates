@@ -1,7 +1,8 @@
-
-# from datetime import datetime, UTC
+# from datetime import datetime, timedelta, UTC
+import datetime
 import time
 # from pytz import timezone
+# import isodate
 
 DATE_FORMAT : str           = "%Y-%m-%d %H:%M:%S"   # 2024-03-24 14:03:42
 DATE_FORMAT_ISO : str       = "%Y-%m-%dT%H:%M:%S"   # 2024-03-24T14:03:42 #ISO8601 
@@ -17,6 +18,7 @@ def get_time_iso_tz() -> str:
     return time.strftime(DATE_FORMAT_ISO_TZ)
 
 # datetime.datetime(2020, 5, 17, tzinfo=UTC) # hour, minute, second, microsecond, tzone=None
+# datetime.datetime.now().replace(days=0, minutes=0, seconds=0, microsecond=0)
 # datetime.datetime.now() + datetime.timedelta(days=1, hours=2)
 # print(datetime.now() > date)
 # datetime.utcnow())
