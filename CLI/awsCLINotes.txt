@@ -31,7 +31,6 @@ aws_access_key_id=YOUR_ACCESS_KEY_HERE
 aws_secret_access_key=YOUR_SECRET_ACCESS_KEY
 region=YOUR_REGION (such as us-west-2, us-west-1, etc)
 
-
 apt install awscli
 
 aws configure
@@ -80,6 +79,9 @@ aws s3 rb s3://gokhantopcu-clitest
 aws s3 cp <file> s3://<s3path>
 aws s3 cp s3://gokhantopcu .
 aws s3 sync <dir> s3://<s3path>
+aws s3 mv s3://source_folder/ s3://destination_folder/ --recursive
+aws s3 cp s3://source_folder/ s3://destination_folder/ --recursive
+aws s3 rm s3://source_folder --recursive
 
 BUCKET = gokhantopcu
 PREFIX = myfiles
