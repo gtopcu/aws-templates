@@ -53,6 +53,8 @@ find conten*
 chown -R hukanege /Users/hukanege/.aws/ (recursive for dir)
 chown -R www-data /tmp
 
+chmod a+rx <filename>
+chmod ug+x <filename>
 chmod u-x <filename>
 chmod u+rw <filename>
 chmod +x  <dir      :   Allow cd on dir 
@@ -175,6 +177,15 @@ struct timespec st_atim;  /* time of last access */
 struct timespec st_mtim;  /* time of last modification */
 struct timespec st_ctim;  /* time of last status change */
 
+********************** Amazon Linux 2 *************************
+--Amzn Linux2
+yum update -y
+yum install httpd -y
+service httpd start
+chkconfig httpd on
+chmod 400 ~/ssh/mypair.pem 
+ssh -i ~/ssh/mypair.pem ec2-user@ip
+
 ********************** Amazon Linux 2023 *************************
 https://aws.amazon.com/blogs/compute/python-3-12-runtime-now-available-in-aws-lambda/
 https://www.youtube.com/watch?v=VRqazCsTbZk
@@ -204,11 +215,6 @@ aptitude install
 aptitude upgrade
 aptitude search xx
 
---Amzn Linux2
-yum update -y
-yum install httpd -y
-service httpd start
-chkconfig httpd on
 
 **************************** Network ****************************
 

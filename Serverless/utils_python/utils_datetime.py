@@ -17,9 +17,9 @@ def get_time_iso() -> str:
 def get_time_iso_tz() -> str:
     return time.strftime(DATE_FORMAT_ISO_TZ)
 
-# datetime.datetime(2020, 5, 17, tzinfo=UTC) # hour, minute, second, microsecond, tzone=None
-# datetime.datetime.now().replace(days=0, minutes=0, seconds=0, microsecond=0)
-# datetime.datetime.now() + datetime.timedelta(days=1, hours=2)
+# datetime(2020, 5, 17, tzinfo=UTC) # hour, minute, second, microsecond, tzone=None
+# datetime.now().replace(days=0, minutes=0, seconds=0, microsecond=0)
+# datetime.now() + timedelta(days=1, hours=2)
 # print(datetime.now() > date)
 # datetime.utcnow())
 

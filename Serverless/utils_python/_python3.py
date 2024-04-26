@@ -426,6 +426,15 @@ def main() -> None:
     # mylist = list(string)
     # mylist = [int(i) for i in string]    
 
+    # generator_func(): 
+    #   for i in range(3): 
+    #       yield i 
+    # generator = generator_func()
+    # next(generator)
+    # yield from generator
+
+    # reduce(lambda x, y = x+y, my_list, init_value) -> GENERATOR!
+
     # print(mytype := (len("abc") > 2))     -> Walrus operator
     # if myval := get_value(): ...
 
