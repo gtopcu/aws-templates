@@ -1,6 +1,10 @@
 
+# export PATH=$PATH:/usr/local/go/bin
 # git branch -l remove checkout switch
-# chmod u+rwx keypair.pemchmod 400ssh -i keypair.pem ec2-user@192.168.1.1.aws /etc/hosts, var/log
+# chmod u+rwx keypair.pem
+# chmod 400
+# ssh -i keypair.pem ec2-user@192.168.1.1
+# .aws /etc/hosts, var/log
 
 # --------------------------------------------------------------------------------------------
 
@@ -13,7 +17,8 @@
 # reversed/sorted (generator), round, abs, min-max, sum, power, enumerate, zip, filter, reduce, chr/ord, 
 # callable, any/all, iter, isinstance, id, type, join, slice, issubclass, [*filter()]
 
-# sys.versionsys.executable
+# sys.version
+# sys.executable
 # os.path.dirname(__file__)
 # for dirname, dirpath, filename in os.walk('.'): # /dir
 # output = 'username_%s' % name
@@ -23,11 +28,16 @@
 
 # object.super()._new_()
 
-# def __eq__(self, other: Self) -> bool:    # return self.name == other.name and self.age == other.age    self.__dict__ == other.__dict__
-# def __repr__(self) -> str:         return f"SampleClass(name={self.name}, age={self.age})"
-# @property def total(self):     return self.item_price * self.item_count
+# def __eq__(self, other: Self) -> bool:    
+#   return self.name == other.name and self.age == other.age    self.__dict__ == other.__dict__
+# def __repr__(self) -> str:         r
+#   return f"SampleClass(name={self.name}, age={self.age})"
+# @property def total(self):     
+#   return self.item_price * self.item_count
 
-# mylist = [*range(3)]mylist = list(map(lambda x: x*x, mylist))map(lambda x: (x, x * 2))
+# mylist = [*range(3)]
+# mylist = list(map(lambda x: x*x, mylist))
+# map(lambda x: (x, x * 2))
 # flipped = nums_rdd.map(lambda x: (x[1], x[0]))
 # list = sorted(dict, key=dict.get, reverse=True)
 # list = sorted(occurrences, key=lambda x:occurrences[x], reverse=True)
@@ -36,7 +46,7 @@
 # print(my_list[r])
 
 # set() tuple(1, ) tuple((1,2))mytuple = tuple((1, 2))x, y = mytuple # unpackingtuple3 = tuple1 + tuple2
-# # mylist.pop(1) -> Any: IndexError# mydict.popitem() -> Any# mydict.pop("key1") -> Any: KeyError# myset.pop() -> Any# myset.remove(element) -> None: KeyError# myset.discard(element) -> None: No error
+# mylist.pop(1) -> Any: IndexError# mydict.popitem() -> Any# mydict.pop("key1") -> Any: KeyError# myset.pop() -> Any# myset.remove(element) -> None: KeyError# myset.discard(element) -> None: No error
 # iterator = (x for x in range(6))print(next(iterator))for i in iterator:        print(i)
 # mylist1 = [1,2,3]mylist2 = [4,5,6]print(dict(zip(mylist1, mylist2)))mydict = { x:y for x,y in zip(mylist1, mylist2) }print(mydict)
 # datetime.replace(hour=0)
@@ -47,7 +57,8 @@
 # python -m project.apppip list | grep pandas
 
 # --------------------------------------------------------------------------------------------
-# Pandas--------------------------------------------------------------------------------------------
+# Pandas
+# --------------------------------------------------------------------------------------------
 # statistics.median(self.items)
 # random.rand(1,2) / zeros/ones/ arange(0, 10, 2)
 # df = pd.read_csv()

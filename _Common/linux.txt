@@ -13,9 +13,10 @@ https://crontab.guru/
 -	range of values
 /	step values
 
-48 5 1-6 1,12 0,3   : Run on everyday on 1th & 6th of January & December Sunday-Wednesday at 05:48AM
-*/2 * * * *         : Run every second minute - 00:00, 00:02, etc
-*/30 * * * *        : Run every 30 minutes - 00:00, 00:30, etc
+min hour day month day of week 
+48 5 1-6 1,12 0,3   : 05:48AM every Sunday & Wednesday on 1th & 6th of January & December 
+*/2 * * * *         : Every second minute - 00:00, 00:02, etc
+*/30 * * * *        : Every 30 minutes - 00:00, 00:30, etc
 
 crontab –l
 crontab –e
@@ -151,7 +152,7 @@ cat <filename.txt>
 cat hash1 hash2 > hash12
 tail -f <filename.txt> (-n / --lines, -c / --bytes)
 more <filename.txt>
-yum install / apt get install xclip
+apt/yum/dnf install xclip
 
 Create large file
 dd if=/dev/urandom of=largefile bs=3145728 count=1 (create large file)

@@ -5,6 +5,7 @@
 pytest-cov: Plugin for pytest that generates coverage reports.
 
 pytest -vs
+pytest -cov
 pytest TestClass.py -v (verbose) -s(show print) -c(code coverage)
 pytest TestClass.py::test_method
 pytest test_mod.py::TestClass::test_method

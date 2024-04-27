@@ -60,9 +60,18 @@
 
 ####################################################################################################
 
-# from overrides import override
-# @override
+# from typing import overload
+# @overload
+# def utf8(value: None) -> None: ...
+# @overload
+# def utf8(value: bytes) -> bytes: ...
+# @overload
+# def utf8(value: str) -> bytes: ...
 
+
+# from overrides import override
+
+# @override
 # class Base:
 #     def get_color() -> str:
 #         return "blue"

@@ -6,6 +6,7 @@ from typing import Any, Optional, TypedDict, TypeVar, Self, Final
 # from typing import Literal, Annotated, LiteralString
 # from typing_extensions import TypedDict, TypeVar, Literal, Annotated, LiteralString, Any, Optional, Self, Final
 
+from typing import TypeAlias, NewType
 # from collections import deque, defaultdict, namedtuple, ChainMap, Counter, OrderedDict, UserDict, UserList, UserString
 # from collections.abc import Callable, Iterable, Iterator, Generator, Container
 # from collections.abc import Sized, Hashable, Sequence, Mapping, MutableSequence, MutableMapping
@@ -38,7 +39,6 @@ from operator import itemgetter
 # from . import database as db
 # import .database as db
 
-
 # BIG_CONSTANT: int = 10000000
 
 class SampleClass:
@@ -56,8 +56,19 @@ class SampleClass:
 
 def main() -> None:
 
-    # time = time.perf_counter
+    # time = time.perf_counter()
     # print(f"Total time: {total_time:.3f}")
+
+    # my_type = int -> type alias
+    # print(my_type(3))
+    # my_type = NewType("my_type", int)
+
+    # my_type = tuple[int, str]
+    # var: my_type = (10, "hi")
+
+    # Strings: TypeAlias = list[str]
+    # strings: Strings = ["hi", "hello"]
+    # Basket: TypeAlias = list[Fruit]  -> Fruit not defined yet
 
     # char = "c"
     # match char:

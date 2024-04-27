@@ -1,12 +1,10 @@
 # https://docs.python.org/3/library/functools.html
-from functools import cache, lru_cache, wraps, update_wrapper, reduce
+from functools import cache, cached_property, lru_cache, wraps, reduce
 import time
 
 def main() -> None:
     
     # print(factorial(3))
-    # print(factorial(14))
-    # print(factorial(6))
     # print(factorial.cache_info())
 
     function(1, 2, 3)
@@ -18,6 +16,10 @@ def main() -> None:
 # @lru_cache(maxsize=128, typed=False) #maxsize=None 
 def factorial(n):
     return n * factorial(n-1) if n else 1
+
+@cached_property
+def cached_prop():
+    return 10 * 10
 
 def func_wrapper_with_args(arg1: int):
     print("Decorator arg: ", arg1)

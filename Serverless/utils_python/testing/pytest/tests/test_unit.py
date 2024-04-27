@@ -36,6 +36,10 @@ def test_usageerror():
 def test_skip():
     pytest.skip("skipping this test")
 
+@pytest.mark.slow()
+def test_slow():
+    pass
+
 def test_fail():
     pytest.fail("failing this test")
 
@@ -46,21 +50,10 @@ def test_xfail():
 def test_xpass():
     pass
 
-@pytest.mark.slow()
-def test_slow():
-    pass
-
 # Use the raises helper to assert that some code raises an exception:
-def raise_exception():
-    raise SystemExit(1)
-
 def test_raises():
-    with pytest.raises(SystemExit):
-        raise_exception()
-
-# Using pytest.mark.parametrize
-def add(a, b):
-    return a + b
+    with pytest.raises(ValueError):
+        raise ValueError("Invalid input")
 
 # Testing the add function with various sets of parameters
 @pytest.mark.parametrize("a, b, expected", [
@@ -71,7 +64,7 @@ def add(a, b):
     (100, 200, 300),
 ])
 def test_add(a, b, expected):
-    assert add(a, b) == expected
+    assert (a + b) == expected
 
 # @pytest.mark.parametrize(
 #     "value", ["foo", "bar", "baz"]

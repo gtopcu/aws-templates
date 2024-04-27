@@ -1,0 +1,23 @@
+
+aws ecs create-service \
+    --cluster YOUR_CLUSTER_NAME \
+    --task-definition TASK_DEFINITION_NAME \
+    --enable-execute-command \
+    --launch-type FARGATE \
+    --service-name SERVICE_NAME\
+    --desired-count 1 \
+    --region eu-west-1 \
+    --network-configuration "awsvpcConfiguration={subnets=[SUBNET_NAME],securityGroups=[SG_NAME],assignPublicIp=ENABLED}"
+
+
+https://medium.com/terraform-aws-tips/ecs-exec-aws-fargate-78afd1b93ad1
+
+aws ecs update-service SERVICE_NAME --cluster YOUR_CLUSTER_NAME \
+  --enable-execute-command \
+  --force-new-deployment
+
+aws ecs execute-command --cluster YOUR_CLUSTER_NAME \
+    --task 69e2ecb626944671b9ad9c5199d911ef \
+    --container CONTAINER_NAME \
+    --interactive \
+    --command "/bin/sh"
