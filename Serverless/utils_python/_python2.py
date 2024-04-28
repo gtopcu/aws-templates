@@ -1,10 +1,7 @@
 # https://www.youtube.com/watch?v=T8UXgR-EtoM
 # https://docs.python.org/3/library/typing.html
 
-# Faster list/set comprehension
-# Formalized & multi-line f-strings
-# Better error descriptions
-# Union types str | int
+# Union: str | int
 
 # from typing import Type
 # type myTypeAlias = list[str]
@@ -26,65 +23,24 @@
 # from typing import Final #@final for methods
 # MAX_SIZE: Final = 9000
 
-####################################################################################################
-# Generics
+# from typing import TypedDict, TypeVar, TypeAlias, NewType, Literal
+# my_type = int -> type alias
+# print(my_type(3))
+# my_type = NewType("my_type", int)
 
-# class MyClass[T: (int, float)]:
-#     def myFunc(input: T) -> T:
-#         return T
+# my_type = tuple[int, str]
+# var: my_type = (10, "hi")
 
-# def myFunc[T](input: list[T]) -> T:
-#     return input
+# Strings: TypeAlias = list[str]
+# strings: Strings = ["hi", "hello"]
+# Basket: TypeAlias = list[Fruit]  -> Fruit not defined yet
 
-# type Point = tuple[float, float]
-# type Points[T] = tuple[T, T]
-
-
-####################################################################################################
+# Mode: TypeAlias = Literal["read", "write", "append"]
 
 # from typing import LiteralString #for preventing SQL injection
-
 # def run_query(sql: LiteralString) -> None:
 #     pass
 
-# def caller(arbitrary_string: str, literal_string: LiteralString) -> None:
-#     run_query("SELECT * FROM students")  # OK
-#     run_query("SELECT * FROM users WHERE id = 1 OR 1=1") #SQL injection
-#     run_query(literal_string)  # OK
-#     run_query("SELECT * FROM " + literal_string)  # OK
-#     run_query(arbitrary_string)  # type checker error
-#     run_query(  # type checker error
-#         f"SELECT * FROM students WHERE name = {arbitrary_string}"
-#     )
-# caller("SELECT * FROM students", "students")
-
-####################################################################################################
-
-# from typing import overload
-# @overload
-# def utf8(value: None) -> None: ...
-# @overload
-# def utf8(value: bytes) -> bytes: ...
-# @overload
-# def utf8(value: str) -> bytes: ...
-
-
-# from overrides import override
-
-# @override
-# class Base:
-#     def get_color() -> str:
-#         return "blue"
-
-# class GoodChild(Base):
-#     @override
-#     def get_color() -> str:
-#         return "green"
-
-# class BadChild(Base):
-#     @override
-#     def get_colour() -> str:
-#         return "red"
 
 ####################################################################################################
 
@@ -116,19 +72,19 @@
 
 # https://peps.python.org/pep-0589/
 
-from typing import TypedDict, Unpack, Required, NotRequired
+# from typing import TypedDict, Unpack, Required, NotRequired
 
-https://docs.python.org/3/library/typing.html#typing.TypedDict
-class Movie(TypedDict, total=False): #total: all fields required
-    name: Required[str]
-    year: int
-    rating: NotRequired[float]
-    duration: Required[int]
+# https://docs.python.org/3/library/typing.html#typing.TypedDict
+# class Movie(TypedDict, total=False): #total: all fields required
+#     name: Required[str]
+#     year: int
+#     rating: NotRequired[float]
+#     duration: Required[int]
 
-movie: Movie = {"name": "The Matrix", "year": 1999, "duration": 136}
+# movie: Movie = {"name": "The Matrix", "year": 1999, "duration": 136}
 
-my_typedict = TypedDict("MyDict", {"name": str, "age": Required[int]}, total=False)
-my_typedict = TypedDict("MyDict", name=str, age=Required[int]) # deprecated, will be removed in 3.13
+# my_typedict = TypedDict("MyDict", {"name": str, "age": Required[int]}, total=False)
+# my_typedict = TypedDict("MyDict", name=str, age=Required[int]) # deprecated, will be removed in 3.13
 
 # def foo(**kwargs: Unpack[Movie]):
 #     print(kwargs)
@@ -137,4 +93,43 @@ my_typedict = TypedDict("MyDict", name=str, age=Required[int]) # deprecated, wil
 # foo(name="The Matrix", year=1999)
 
 ####################################################################################################
+
+# from typing import overload
+# @overload
+# def utf8(value: None) -> None: ...
+# @overload
+# def utf8(value: bytes) -> bytes: ...
+# @overload
+# def utf8(value: str) -> bytes: ...
+
+
+# from overrides import override
+
+# @override
+# class Base:
+#     def get_color() -> str:
+#         return "blue"
+
+# class GoodChild(Base):
+#     @override
+#     def get_color() -> str:
+#         return "green"
+
+# class BadChild(Base):
+#     @override
+#     def get_colour() -> str:
+#         return "red"
+
+####################################################################################################
+# Generics
+
+# class MyClass[T: (int, float)]:
+#     def myFunc(input: T) -> T:
+#         return T
+
+# def myFunc[T](input: list[T]) -> T:
+#     return input
+
+# type Point = tuple[float, float]
+# type Points[T] = tuple[T, T]
 

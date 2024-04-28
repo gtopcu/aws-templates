@@ -1,3 +1,4 @@
+from typing import Self
 class Human:
     def __init__(self, name: str, age: int, jobs:list[str]=None) -> None:
         self.name = name
@@ -12,6 +13,16 @@ class Human:
 
     def __hash__(self) -> int:
         return self.age * 17
+    
+    def __iter__(self) -> Self:
+        return self
+
+    def __next__(self) -> Self:
+        if self.age < 100:
+            self.age += 1
+            return self
+        else:
+            raise StopIteration
 
     def __int__(self) -> int:
         return self.age
@@ -48,6 +59,9 @@ class Human:
 
 myHuman = Human("John", 20, jobs=["programmer"])
 print(myHuman)
+print(dir(myHuman))
+iterator = iter(myHuman) # Human.__iter__
+myHuman2 = iterator.__next__()
 print(repr(myHuman))
 print(hash(myHuman))
 print(int(myHuman))

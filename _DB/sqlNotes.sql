@@ -6,7 +6,7 @@ query = """
 """
 
 CREATE TABLE hero (id INTEGER NOT NULL, name VARCHAR NOT NULL,)
-CREATE INDEX ix_hero_name ON hero (name)
+CREATE UNIQUE INDEX ix_hero_name ON hero (name)
 
 SELECT name FROM hero WHERE name = 'Deadpond'
 INSERT INTO hero (id, name) VALUES (1, 'Deadpond')
@@ -15,6 +15,20 @@ DELETE FROM hero WHERE name = 'Deadpond'
 
 TRUNCATE TABLE hero
 DROP TABLE IF EXISTS hero
+ALTER TABLE hero ADD COLUMN address TEXT
+
+------------------------------------------------------------------------------------
+
+SELECT customer_id, SUM (amount) FROM payment 
+GROUP BY customer_id 
+HAVING SUM (amount) > 200
+ORDER BY AMOUNT DESC;
+
+SELECT first_name || ' ' || last_name full_name, SUM (amount) amount 
+FROM payment 
+INNER JOIN customer USING (customer_id) 
+GROUP BY full_name 
+ORDER BY amount DESC;
 
 ------------------------------------------------------------------------------------
 

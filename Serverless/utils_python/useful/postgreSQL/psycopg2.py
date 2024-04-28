@@ -109,3 +109,8 @@ cur = conn.cursor()
 #     conn.close()
 #     return
 
+# Insert/Read BYTEA
+# https://www.postgresqltutorial.com/postgresql-python/blob/
+# cur.execute("INSERT INTO part_drawings(part_id,file_extension,drawing_data) " +
+#                             "VALUES(%s,%s,%s)",
+#                             (part_id, file_extension, psycopg2.Binary(data)))

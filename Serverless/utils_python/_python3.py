@@ -1,12 +1,10 @@
 
 # https://stackoverflow.com/questions/52827463/collections-iterable-vs-typing-iterable-in-type-annotation-and-checking-for-iter
 
-from typing import Any, Optional, TypedDict, TypeVar, Self, Final
-# from typing import Dict, Set, FrozenSet, Tuple, NamedTuple, OrderedDict
-# from typing import Literal, Annotated, LiteralString
-# from typing_extensions import TypedDict, TypeVar, Literal, Annotated, LiteralString, Any, Optional, Self, Final
+from typing import Any, Optional, Self, Final
+# from typing import Dict, Set, FrozenSet, Tuple
+# from typing import TypedDict, TypeVar, TypeAlias, NewType, Literal, LiteralString, Annotated
 
-from typing import TypeAlias, NewType
 # from collections import deque, defaultdict, namedtuple, ChainMap, Counter, OrderedDict, UserDict, UserList, UserString
 # from collections.abc import Callable, Iterable, Iterator, Generator, Container
 # from collections.abc import Sized, Hashable, Sequence, Mapping, MutableSequence, MutableMapping
@@ -56,19 +54,12 @@ class SampleClass:
 
 def main() -> None:
 
+    # print(dir(random))
+    # my_iterator = iter(my_list) = my_list.__iter__() # list: iterable
+    # val = next(my_iterator)                          # my_iterator: iterator raises StopIteration
+
     # time = time.perf_counter()
     # print(f"Total time: {total_time:.3f}")
-
-    # my_type = int -> type alias
-    # print(my_type(3))
-    # my_type = NewType("my_type", int)
-
-    # my_type = tuple[int, str]
-    # var: my_type = (10, "hi")
-
-    # Strings: TypeAlias = list[str]
-    # strings: Strings = ["hi", "hello"]
-    # Basket: TypeAlias = list[Fruit]  -> Fruit not defined yet
 
     # char = "c"
     # match char:

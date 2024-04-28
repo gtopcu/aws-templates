@@ -1,20 +1,23 @@
 
 /* https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-data-types/ */
 CREATE TABLE IF NOT EXISTS "person" (
-     id             SERIAL PRIMARY KEY NOT NULL,
-     uuid           UUID,
-     name           VARCHAR(100) NOT NULL,
-     AGE            INT,
-     gender         CHAR(1),
-     money          NUMERIC(10, 2) DEFAULT 0,
-     remaining      FLOAT(2),
-     description    TEXT,
-     logo           BYTEA,
-     json_data      JSON,
-     is_active      BOOLEAN, 
-     birth_date     DATE,
-     created_at     TIMESTAMPZ,
-     employee_id    INT,
+     id                  INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, /*SERIAL PRIMARY KEY,*/
+     contact_id          uuid DEFAULT gen_random_uuid(),
+     name                VARCHAR(100) NOT NULL,
+     AGE                 INT,
+     gender              CHAR(1),
+     money               NUMERIC(10, 2) DEFAULT 0,
+     phones              TEXT [],
+     remaining           FLOAT(2),
+     single_digit        REAL,
+     double_precision    DOUBLE PRECISION
+     logo                BYTEA,
+     json_data           JSON,
+     is_active           BOOLEAN, 
+     birth_date          DATE DEFAULT CURRENT_DATE,
+     created_at          TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+     create_time         TIME(2), 
+     employee_id         INT,
      CONSTRAINT fk_emp FOREIGN KEY (employee_id) REFERENCES "employee"(id)
 )
 CREATE UNIQUE INDEX indx1 ON "person" (name)
@@ -57,12 +60,14 @@ VARCHAR(n) is the variable-length character string. The VARCHAR(n) allows you to
 TEXT is the variable-length character string. Theoretically, text data is a character string with unlimited length.
 
 Integer:
-Small integer (SMALLINT) is a 2-byte signed integer that has a range from -32,768 to 32,767.
-Integer (INT) is a 4-byte integer that has a range from -2,147,483,648 to 2,147,483,647.
+
+Small integer (SMALLINT) -> 2-byte signed integer that has a range from -32,768 to 32,767.
+INT = INT4 = INTEGER     -> 4-byte integer that has a range from -2,147,483,648 to 2,147,483,647.
 
 Floating-point number:
 float(n)  is a floating-point number whose precision, is at least, n, up to a maximum of 8 bytes.
-real or float8 is a 4-byte floating-point number.
+real -> single precision
+float=float8=DOUBLE PRECISION -> 4-byte floating-point number
 numeric or numeric(p,s) is a real number with p digits with s number after the decimal point. This numeric(p,s) is the exact number.
 
 Temporal data types:

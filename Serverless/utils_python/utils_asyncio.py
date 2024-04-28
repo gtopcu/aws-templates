@@ -1,6 +1,7 @@
 
 # https://www.youtube.com/watch?v=K56nNuBEd0c 
 # https://www.youtube.com/watch?v=dEZKySL3M9c
+# https://www.youtube.com/watch?v=0GVLtTnebNA
 
 import asyncio
 import time
@@ -25,6 +26,17 @@ async def main() -> None:
 
     #batch = asyncio.gather(brew_coffee(), toast_bagel())
     #result_coffee, result_bagel = await batch
+
+    # asyncio.gather(task(1), task(2))
+    # asyncio.sleep(1)
+    # task = asyncio.create_task(task(3))
+    # await asyncio.wait([coffee_task, bagel_task])
+    # await asyncio.wait_for(coffee_task, timeout=10)
+    # task.done()
+    # task.cancel()
+    # task.cancelled()
+    # result task.result()
+    # asyncio.TimeoutError, asyncio.CancelledError
 
     coffee_task = asyncio.create_task(brew_coffee())
     bagel_task = asyncio.create_task(toast_bagel())
