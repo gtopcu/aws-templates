@@ -62,6 +62,13 @@ if __name__ == "__main__":
     asyncio.run(main())
 
 
+# https://www.youtube.com/watch?v=dEZKySL3M9c
+# async def main():
+#     async for chunk in stream:
+#         pass   
+
+
+
 ####################################################################################################
 # asyncio TaskGroups instead of gather
 

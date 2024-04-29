@@ -35,3 +35,14 @@ CREATE TRIGGER department_updated_at_trigger
 BEFORE UPDATE ON department
 FOR EACH ROW
 EXECUTE FUNCTION update_updated_at();
+
+
+SELECT 
+  (
+    SUM (CASE WHEN gender = 1 THEN 1 ELSE 0 END) / NULLIF (
+      SUM (CASE WHEN gender = 2 THEN 1 ELSE 0 END), 
+      0
+    )
+  ) * 100 AS "Male/Female ratio" 
+FROM 
+  members;

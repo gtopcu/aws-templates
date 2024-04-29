@@ -1,7 +1,7 @@
 import json
 import boto3
 import botocore
-from botocore.exceptions import 
+from botocore.exceptions import ClientException
 from boto3.dynamodb.conditions import Key, Attr
 
 dynamodb = boto3.resource('dynamodb')

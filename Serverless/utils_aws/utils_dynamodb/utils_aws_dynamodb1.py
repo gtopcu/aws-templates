@@ -15,7 +15,7 @@ from boto3.dynamodb.types import TypeSerializer, TypeDeserializer
 # import botocore
 # from botocore.exceptions import ClientError
 
-dynamodb = boto3.resource('dynamodb')
+ddb = boto3.resource('dynamodb')
 # table.item_count
 # table.table_size_bytes
 # table.creation_date_time 
@@ -23,11 +23,11 @@ dynamodb = boto3.resource('dynamodb')
 # https://dynobase.dev/dynamodb-python-with-boto3/#get-item
 
 # Use port 8000 for DynamoDB Local and 4569 for DynamoDB from LocalStack
-# dynamodb = boto3.resource('dynamodb',
+# ddb = boto3.resource('dynamodb',
 #                          region_name=region,
 #                          endpoint_url='http://localhost:8000')
 
-# client = boto3.client('dynamodb',
+# ddb = boto3.client('dynamodb',
 #                       aws_access_key_id='yyyy',
 #                       aws_secret_access_key='xxxx',
 #                       region_name='us-east-1')
@@ -44,7 +44,15 @@ dynamodb = boto3.resource('dynamodb')
 #    }
 #    max_pool_connections = 20, # default 10 for Session
 # )
-# dynamodb = boto3.resource('dynamodb', config=my_config)
+# ddb = boto3.resource('dynamodb', config=my_config)
+
+# https://www.dynamodbguide.com/expression-basics
+# attribute_exists(): Check for existence of an attribute
+# attribute_not_exists(): Check for non-existence of an attribute
+# attribute_type(): Check if an attribute is of a certain type
+# begins_with(): Check if an attribute begins with a particular substring
+# contains(): Check if a String attribute contains a particular substring or a Set attribute contains a particular element
+# size(): Returns a number indicating the size of an attribute
 
 @staticmethod
 def dynamo_to_python(dynamo_object: dict) -> dict:
@@ -64,7 +72,7 @@ def python_to_dynamo(python_object: dict) -> dict:
 
 def get_item(table_name, key):
     """ Key={"id": id} """
-    table = dynamodb.Table(table_name)
+    table = ddb.Table(table_name)
     response = table.get_item(Key=key) 
     if "Item" not in response:
         return None
@@ -78,7 +86,7 @@ def put_item(table_name, item):
             'content': 'some-content',
         }
     """
-    table = dynamodb.Table(table_name)
+    table = ddb.Table(table_name)
     return table.put_item(Item=item)
 
 def update_item(table_name, key, updateExpression, expressionAttributeValues):
@@ -93,7 +101,7 @@ def update_item(table_name, key, updateExpression, expressionAttributeValues):
         },
         ReturnValues="UPDATED_NEW"
     """
-    table = dynamodb.Table(table_name)
+    table = ddb.Table(table_name)
     response = table.update_item(
         Key=key,
         UpdateExpression=updateExpression,
@@ -101,14 +109,23 @@ def update_item(table_name, key, updateExpression, expressionAttributeValues):
     )
     return response
 
+# def update_item_counter():
+#     ddb = boto3.resource('dynamodb')
+#     table = ddb.Table(os.environ['DDB_TABLE_NAME'])
+#     table.update_item(
+#         Key={'path': 'get'},
+#         UpdateExpression='ADD hits :incr',
+#         ExpressionAttributeValues={':incr': 1}
+#     )
+
 def delete_item(table_name, key: Key):
-    table = dynamodb.Table(table_name)
+    table = ddb.Table(table_name)
     response = table.delete_item(Key=key)
     return response
 
 # 1MB limit
 def query(table_name, keyConditionExpression, expressionAttributeValues):
-    table = dynamodb.Table(table_name)
+    table = dddb.Table(table_name)
     response = table.query(
         KeyConditionExpression=keyConditionExpression,
         ExpressionAttributeValues=expressionAttributeValues
@@ -123,7 +140,7 @@ def query(table_name, keyConditionExpression, expressionAttributeValues):
 
 # 1MB limit
 def scan(table_name):
-    table = dynamodb.Table(table_name)
+    table = ddb.Table(table_name)
     response = table.scan()
     data = response['Items']
     while 'LastEvaluatedKey' in response:
@@ -135,7 +152,7 @@ def scan(table_name):
 # can read or write items from one or more tables
 # Partial Errors: UnprocessedKeys
 def batch_get_items():
-    response = dynamodb.batch_get_item(
+    response = ddb.batch_get_item(
         RequestItems={
             'my-table': {
                 'Keys': [
@@ -157,7 +174,7 @@ def batch_get_items():
 # Partial Errors: UnprocessedItems
 # https://boto3.amazonaws.com/v1/documentation/api/latest/guide/dynamodb.html#batch-writing
 def batch_write_items(table_name):
-    table = dynamodb.Table(table_name)
+    table = ddb.Table(table_name)
 
     #overwrite_by_pkeys=['partition_key', 'sort_key']
     with table.batch_writer() as batch:
@@ -219,13 +236,5 @@ def batch_write_items(table_name):
         FilterExpression=Attr('address.state').eq('CA')
     )
 
-
-    https://www.dynamodbguide.com/expression-basics
-    attribute_exists(): Check for existence of an attribute
-    attribute_not_exists(): Check for non-existence of an attribute
-    attribute_type(): Check if an attribute is of a certain type
-    begins_with(): Check if an attribute begins with a particular substring
-    contains(): Check if a String attribute contains a particular substring or a Set attribute contains a particular element
-    size(): Returns a number indicating the size of an attribute
 
     """

@@ -8,9 +8,8 @@ CREATE TABLE IF NOT EXISTS "person" (
      gender              CHAR(1),
      money               NUMERIC(10, 2) DEFAULT 0,
      phones              TEXT [],
-     remaining           FLOAT(2),
      single_digit        REAL,
-     double_precision    DOUBLE PRECISION
+     remaining           FLOAT(2), /* = FLOAT8, DOUBLE PRECISION) */
      logo                BYTEA,
      json_data           JSON,
      is_active           BOOLEAN, 
@@ -25,27 +24,31 @@ SELECT "person".*, "employee".title AS emp_title FROM "person" JOIN "employee" O
 SELECT * FROM user WHERE name LIKE '%Jen%'
 
 /*
-- Boolean (BOOLEAN/BOOL)
-- Character types such as CHAR(n) (uses all n length), VARCHAR(n), and TEXT(unlimited length)
-- Numeric types such as integer and floating-point number: INT, SMALLINT, Float(n), Float8(n), REAL, NUMERIC(p,s)
-- Temporal types such as DATE, TIME, TIMESTAMP, TIMESTAMPZ, INTERVAL
-- UUID for storing Universally Unique Identifiers
-- JSON stores JSON data - JSON/JSONB
-- Array for storing array strings, numbers, etc.
-- hstore stores key-value pair
-- Special types such as network address and geometric data.
 
+BOOLEAN = BOOL
+CHAR(n) | VARCHAR(n) | TEXT
+SMALLINT                           -> 2 bytes
+INT=INT4=INTEGER                   -> 4 bytes
+NUMERIC(n,p) | DECIMAL(n,p)
+REAL                                              -> 4 byte, single precision
+FLOAT(n) = FLOAT8(n) = DOUBLE PRECISION           -> 8 byte, double precision
+DATE | TIME | TIMESTAMP | TIMESTAMPTZ | INTERVAL
+JSON | JSONB
+XML
+BYTEA (max 1GB)
+UUID
+Array
+hstore
 
-PostgreSQL supports the following data types:
-- Boolean
-- Character types such as char, varchar, and text.
-- Numeric types such as integer and floating-point number.
-- Temporal types such as date, time, timestamp, and interval
-- UUID for storing Universally Unique Identifiers
-- Array for storing array strings, numbers, etc.
-- JSON stores JSON data
-- hstore stores key-value pair
-- Special types such as network address and geometric data.
+Special data types:
+box – a rectangular box
+line – a set of points
+point – a geometric pair of numbers
+lseg – a line segment
+polygon – a closed geometric
+inet – an IP4 address
+macaddr– a MAC address
+
 
 Boolean
 A Boolean data type can hold one of three possible values: true, false, or null. You use boolean or bool keyword to declare a 
@@ -55,12 +58,13 @@ column with the Boolean data type. When you insert data into a Boolean column, P
 When you select data from a Boolean column, PostgreSQL converts the values back e.g., t to true, f to false and space to null.
 
 Character:
-CHAR(n) is the fixed-length character with space padded. If you insert a string that is shorter than the length of the column, PostgreSQL pads spaces. If you insert a string that is longer than the length of the column, PostgreSQL will issue an error.
-VARCHAR(n) is the variable-length character string. The VARCHAR(n) allows you to store up to n characters. PostgreSQL does not pad spaces when the stored string is shorter than the length of the column.
+CHAR(n) is the fixed-length character with space padded. If you insert a string that is shorter than the length of the column, 
+PostgreSQL pads spaces. If you insert a string that is longer than the length of the column, PostgreSQL will issue an error.
+VARCHAR(n) is the variable-length character string. The VARCHAR(n) allows you to store up to n characters. 
+PostgreSQL does not pad spaces when the stored string is shorter than the length of the column.
 TEXT is the variable-length character string. Theoretically, text data is a character string with unlimited length.
 
 Integer:
-
 Small integer (SMALLINT) -> 2-byte signed integer that has a range from -32,768 to 32,767.
 INT = INT4 = INTEGER     -> 4-byte integer that has a range from -2,147,483,648 to 2,147,483,647.
 
@@ -90,13 +94,6 @@ UUID
 The UUID data type allows you to store Universal Unique Identifiers defined by RFC 4122 The UUID values guarantee a better 
 uniqueness than SERIAL and can be used to hide sensitive data exposed to the public such as values of id in URL.
 
-Special data types:
-box – a rectangular box
-line – a set of points
-point – a geometric pair of numbers
-lseg – a line segment
-polygon – a closed geometric
-inet – an IP4 address
-macaddr– a MAC address
+
 
 */

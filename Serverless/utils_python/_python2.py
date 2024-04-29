@@ -23,7 +23,7 @@
 # from typing import Final #@final for methods
 # MAX_SIZE: Final = 9000
 
-# from typing import TypedDict, TypeVar, TypeAlias, NewType, Literal
+# from typing import Type, TypedDict, TypeVar, TypeAlias, NewType, Literal
 # my_type = int -> type alias
 # print(my_type(3))
 # my_type = NewType("my_type", int)
