@@ -20,3 +20,8 @@ pytest -m slow              -> run all tests decorated with the @pytest.mark.slo
 pytest --durations=10 -vv   -> get a list of the slowest 10 test durations
 pytest --durations=10 --durations-min=1.0 -vv -> get a list of the slowest 10 test durations over 1.0s
 
+pip install pytest pylint pytest-cov 
+pip install -U coverage
+# pytest  -v -s  
+coverage run -m pytest  -v -s 
+coverage report -m

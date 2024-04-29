@@ -186,7 +186,9 @@ df = pd.read_csv("data.csv", sep=';')
 # df.all() df.any() df.median() df.max() df.min() df.count() df.abs() df.map() df.filter() df.first()
 # df.keys() df.values() df.items() df.assign() df.reset_index()
 # df.agg(["min", "max", "mean"])["A"].values
+# df.apply(lambda row: row["A"] * 2, axis=1)
 
+# for idx, row in df.iterrows():
 # df.at[0, "A"] = 0
 # df.iloc[0]          # First row
 # df.iloc[0:2]        # first two rows
