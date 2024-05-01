@@ -32,17 +32,18 @@ def get_docstring(input1: int) -> list[str]:
 def sleep(seconds: int) -> None:
     time.sleep(seconds)
 
-#def timeit_test() -> None:
+def timeit_test() -> None:
+    pass
     # time.perf_counter()
     # time.perf_counter_ns()
     # print(f"Total: {(time.time() - start):.3f}s")
     # print(f"Total: {(time.perf_counter() - start) * 1000} ms")
-if __name__ == "__main__":
+# if __name__ == "__main__":
     # timed: float = timeit.timeit(stmt="sleep(1)", setup="import random", timer=time.perf_counter, number=2, globals=globals())
     # print(f"Total: {timed:.3f}s")
     # print(f"Total: {round(timed, 1)}s")
-    timed_list: list[float] = timeit.repeat(stmt="sleep(1)", setup="import random", timer=time.time, number=1, repeat=3, globals=globals())
-    print(f"Total: {min(timed_list):.3f}")
+    # timed_list: list[float] = timeit.repeat(stmt="sleep(1)", setup="import random", timer=time.time, number=1, repeat=3, globals=globals())
+    # print(f"Total: {min(timed_list):.3f}")
 
 def generate_uuid():
     return str(uuid.uuid4())

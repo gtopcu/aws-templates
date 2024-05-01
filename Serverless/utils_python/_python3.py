@@ -31,26 +31,15 @@ from functools import reduce
 import traceback
 
 from operator import add, sub, mul, itemgetter, attrgetter, methodcaller
-from operator import itemgetter
-from operator import itemgetter
+
 
 # from . import database as db
+# from .database import model
 # import .database as db
+
 
 # BIG_CONSTANT: int = 10000000
 
-class SampleClass:
-    name: str
-    age : 0
-    def __init__(self, name:str, age: int) -> None:
-        self.name = name
-        self.age = age
-    # def __str__(self) -> str:
-    #     return "str"
-    # def __repr__(self) -> str:
-    #      return f"SampleClass(name={self.name}, age={self.age})"
-    # def __format__(self, __format_spec: str) -> str:
-    #     pass
 
 def main() -> None:
 
@@ -351,17 +340,10 @@ def main() -> None:
     # global var
     # nonlocal var
 
-    # from . import module
-    # import .module
-    # import builtins
-    # print(dir(builtins))
-    # print(sys.path)       # first checks builtins for imported modules, than sys.path/env vars
-    # PYTHONPATH=usr/users/...
-    # sys.path.append('/usr/bin/lib...') 
-    # sys.path.append(os.path.abspath(module_path))
-
     # hasattr(object, name)
     # getattr(object, name) # AttributeError
+    # setattr(object, name, value)
+    # delattr(object, name)
 
     # Ellipses
     # https://www.geeksforgeeks.org/what-is-three-dots-or-ellipsis-in-python3/
@@ -440,9 +422,17 @@ def main() -> None:
     # print(mytype := (len("abc") > 2))     -> Walrus operator
     # if myval := get_value(): ...
 
+    # import builtins
+    # print(dir(builtins))
+    # print(sys.path)       # first checks builtins for imported modules, than sys.path/env vars
+    # PYTHONPATH=usr/users/...
+    # sys.path.append('/usr/bin/lib...') 
+    # sys.path.append(os.path.abspath(module_path))
+    # sys.version
+
     # traceback.print_stack()
     # traceback.print_exc()
-    # sys.version
+    # traceback.print_exception(type(err), err, err.__traceback__)
 
     # BaseException -> 
     #  Exception -> SystemExit 

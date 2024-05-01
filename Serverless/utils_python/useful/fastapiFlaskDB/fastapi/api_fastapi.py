@@ -118,7 +118,7 @@ async def root(request: Request) -> Any: # background_tasks: BackgroundTasks
 
 # http://127.0.0.1:8000/items?limit=2
 @app.get("/items", response_model=list[ToDo])
-async def list_items(request: Request, limit:int = 10), #skip: int | None) -> Any:
+async def list_items(request: Request, limit:int = 10): #skip: int | None) -> Any:
     return items[0:limit]
 
 @app.get("/items/{item_id}", response_model=ToDo)
@@ -141,5 +141,9 @@ async def upload_file(file: UploadFile = File(...)) -> Any:
     print("File uploaded: ", file.filename)
     return {"filename": file.filename, "size": len(contents)} 
 
-# def main():
-#     import uvicorn
+def main(): 
+    import uvicorn 
+    uvicorn.run(app, port=5000, log_level="info")
+
+if __name__ == "__main__":
+    main()

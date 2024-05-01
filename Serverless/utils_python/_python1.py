@@ -53,8 +53,8 @@
 # # functional syntax
 # # Color = Enum('Color', ['RED', 'GREEN', 'BLUE'])
 
-# class Role(IntEnum): #or IntFlag
-#     AUTHOR = auto() #or object()
+# class Role(IntEnum): # IntFlag
+#     AUTHOR = auto() # object()
 #     EDITOR = auto()
 #     VIEWER = auto()
 #     ADMIN = AUTHOR | EDITOR | VIEWER

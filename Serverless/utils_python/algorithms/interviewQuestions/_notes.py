@@ -48,7 +48,11 @@
 # set() tuple(1, ) tuple((1,2))mytuple = tuple((1, 2))x, y = mytuple # unpackingtuple3 = tuple1 + tuple2
 # mylist.pop(1) -> Any: IndexError# mydict.popitem() -> Any# mydict.pop("key1") -> Any: KeyError# myset.pop() -> Any# myset.remove(element) -> None: KeyError# myset.discard(element) -> None: No error
 # iterator = (x for x in range(6))print(next(iterator))for i in iterator:        print(i)
-# mylist1 = [1,2,3]mylist2 = [4,5,6]print(dict(zip(mylist1, mylist2)))mydict = { x:y for x,y in zip(mylist1, mylist2) }print(mydict)
+# mylist1 = [1,2,3]
+# mylist2 = [4,5,6]
+# print(dict(zip(mylist1, mylist2)))
+# mydict = { x:y for x,y in zip(mylist1, mylist2) }
+# print(mydict)
 # datetime.replace(hour=0)
 # datetime.timedelta(day=1)
 # bytes = random.randbytes(10) # 0-255

@@ -171,6 +171,7 @@ df = pd.read_csv("data.csv", sep=';')
 
 # df.head(2)
 # df.tail(2)
+# df["columnName"] | df.columnName
 # df["D"] = df["A"] * 2 / df["B"]
 # df["create_date"] = dt.datetime.now()
 # df["salary"] = df["salary"] + 1_000_000
@@ -206,6 +207,7 @@ df = pd.read_csv("data.csv", sep=';')
 # df.select("A", "B").where("A > 0").limit(10).groupby("A").sum().orderby("A", ascending=False).distinct()
 # df.where((df.Age > 30) & (df.Type == 1) & df.Job.isin(["student", "doctor"])).limit(5).show(10)
 # df.groupby(["emp_no", "name"])["salary"].max().alias("SalaryMax")
+# average_sales_per_agent = df.groupby('Agent')['Total Sale Price'].mean()
 
 # DF to Spark RDD
 # df.rdd

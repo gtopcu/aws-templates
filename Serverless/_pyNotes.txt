@@ -34,6 +34,7 @@ pip list | freeze
 pip freeze > requirements.txt
 pip install -r requirements.txt -t dependencies (--target)  
 (cd dependencies ; zip ../aws_lambda_artifact.zip -r . ; zip aws_lambda_artifact.zip -u main.py)
+pip install -r requirements-prod.txt -t dist
 pip install python-dotenv -q -U (--quiet --upgrade --quiet)
 pip install SimpleCV==1.2
 pip install requests 
@@ -49,6 +50,8 @@ pip install SimpleCV==1.*
 pip install example-package>=1.2.0
 pip install example-package<=1.2.0
 
+pip install pylint
+pylint myfile.py    # pylint: disable=invalid-name
 
 # https://www.youtube.com/watch?v=Ji2XDxmXSOM
 python select interpreter: /Users/gtopcu/My Drive/VSCode/aws-templates/Serverless-SAM/.venv
@@ -79,13 +82,16 @@ poetry publish (to pypi.org)
 poetry version major | minor | patch -> update project version in pyproject.toml
 
 # https://python-poetry.org/docs/cli/#export
-poetry export (--only|--with|without dev) --without-hashes -f requirements.txt -o requirements.txt
+poetry export --without dev -f requirements.txt -o requirements.txt
+poetry export (--only|--with|--without dev) --without-hashes -f requirements.txt -o requirements.txt
 
 # https://stackoverflow.com/questions/15031694/installing-python-packages-from-local-file-system-folder-to-virtualenv-with-pip
 # Install a project in editable mode (i.e.  setuptools "develop mode") from a local project path or a VCS url:
 pip install -e .      - 
 pip install -e .[dev]
 pip install -e /pkg   -> Top-level directory where 'setup.py' can be found.
+
+pip install localfile.whl
 
 pip install pip-tools
 pip-compile -o requirements.txt pyproject.toml (requirements.txt -> pyproject.toml w/ pinned versions)
@@ -105,10 +111,6 @@ poetry self add poetry-plugin-export
 poetry build-lambda
 
 
--- Upgrade Python
-brew update && brew upgrade python
-python -m venv --upgrade env
-
 /Users/gtopcu/.bash_profile
 /Users/gtopcu/.zshrc
 /Library/Frameworks/Python.framework/Versions/3.11/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/anaconda3/condabin:/Library/Frameworks/Python.framework/Versions/3.11/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/gtopcu/.local/bin
@@ -119,5 +121,5 @@ python -m venv --upgrade env
 export PATH=".:$PATH:/opt/xyz/bin"
 "python.defaultInterpreterPath": "/opt/homebrew/bin/python3.12",
 source .venv/bin/activate
-source /Users/gtopcu/My Drive/VSCode/aws-templates/.venv/bin/activate
+source "/Users/gtopcu/My Drive/VSCode/aws-templates/.venv/bin/activate"
 

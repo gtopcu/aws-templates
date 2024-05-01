@@ -27,8 +27,12 @@ async def main() -> None:
     #batch = asyncio.gather(brew_coffee(), toast_bagel())
     #result_coffee, result_bagel = await batch
 
-    # asyncio.gather(task(1), task(2))
-    # asyncio.sleep(1)
+    # asyncio.get_running_loop()
+    # asyncio.get_event_loop()
+    # asyncio.run(brew_coffee())
+    # await asyncio.gather(task(1), task(2))
+    # await asyncio.gather(*task_list, return_exceptions=True)
+    # await asyncio.sleep(1)
     # task = asyncio.create_task(task(3))
     # await asyncio.wait([coffee_task, bagel_task])
     # await asyncio.wait_for(coffee_task, timeout=10)
@@ -48,6 +52,16 @@ async def main() -> None:
     print(f"Result of toastBagel: {result_bagel}")
     print(f"Time: {time.perf_counter() - start:.2f}")
 
+#   coroutines = [ task1(), task2() ]
+#   results = await asyncio.gather(*coroutines, return_exceptions=True)
+#     err = None
+#     for result, coro in zip(results, coroutines):
+#         if isinstance(result, Exception):
+#             err = result
+#             print(f"{coro.__name__} failed:")
+#             traceback.print_exception(type(err), err, err.__traceback__)
+#     if err:
+#         raise RuntimeError("One or more scripts failed.")
 
 async def read_stream(stream: Iterable) -> None:
     async for chunk in stream:

@@ -22,6 +22,7 @@ import pydantic
 from pydantic import (
     BaseModel,
     Field,
+    validator,
     ValidationError,
     EmailStr,
     SecretStr,
@@ -38,7 +39,7 @@ class MyData(BaseModel):
     name: str = Field(min_length=1, max_length=10)
     age: int = Field(ge=0, le=100)
     email: EmailStr | None = None
-    url: HttpUrl | None = None = Field(default=None, alias="url_alias")
+    url: HttpUrl | None = Field(default=None, alias="url_alias")
 
 # data:MyData = MyData.model_validate(app.current_request.json_body)
 
@@ -101,6 +102,11 @@ class User(BaseModel):
         if "name".casefold() != "john":
             raise ValueError("name must be John")
     
+    # @pydantic.model_validator(mode="before")
+    # @classmethod
+    # def transform_body_to_dict(cls, value: str):
+    #     return json.loads(value)
+    
     @pydantic.field_serializer("role", when_used="json") #always
     @classmethod
     def serialize_role(self, value: Role) -> str:
@@ -111,6 +117,8 @@ class User(BaseModel):
         if not info.include and not info.exclude:
             return {"name": self.name.lower()}
         return serializer(self)
+
+   
 
 def main() -> None:
     
