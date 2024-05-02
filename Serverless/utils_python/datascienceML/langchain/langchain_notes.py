@@ -1,6 +1,7 @@
 
 # https://www.youtube.com/watch?v=aywZrzNaKjs
 # https://python.langchain.com/docs/integrations/chat/openai
+# https://github.com/gkamradt/langchain-tutorials/blob/main/getting_started/Quickstart%20Guide.ipynb
 
 """
 python3 -m venv venv

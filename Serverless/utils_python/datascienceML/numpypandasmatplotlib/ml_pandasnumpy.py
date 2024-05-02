@@ -159,16 +159,16 @@ df = pd.read_csv("data.csv", sep=';')
 # df
 # df.size   
 # df.shape  # (16598, 11)
-# df.dtypes
+# df.dtypes | df.printSchema()
 # df.index
 # df.values
 # df.columns = ["column1", "column2"]
 
 # df.describe()
-# df.set_index("A", inplace=True)
-# df.printSchema()
+# df.set_index("id", inplace=True)
 # df.show()
 
+# df.show()
 # df.head(2)
 # df.tail(2)
 # df["columnName"] | df.columnName
@@ -184,8 +184,9 @@ df = pd.read_csv("data.csv", sep=';')
 # df = df.sort_values(by="A", ascending=False)
 # df.sort_index(axis=1, ascending=False, inplace=True)
 
-# df.all() df.any() df.median() df.max() df.min() df.count() df.abs() df.map() df.filter() df.first()
+# df.all() df.any() df.median() df.max() df.min() df.count() df.abs() df.map(), df.first()
 # df.keys() df.values() df.items() df.assign() df.reset_index()
+# df.filter() | df.select()
 # df.agg(["min", "max", "mean"])["A"].values
 # df.apply(lambda row: row["A"] * 2, axis=1)
 
@@ -203,6 +204,12 @@ df = pd.read_csv("data.csv", sep=';')
 # df.loc[df.index[1:3], ["C", "B"]] = np.random.randn(2, 2)
 
 # Can use SQL on DFs
+# import pandasql as ps
+# ps.sqldf("SELECT * FROM df WHERE A > 0 and B < 0", locals())
+# sql_query = SELECT * FROM data df LEFT JOIN df2 ON df.id = df2.id WHERE df.A > 0
+# ps.sqldf(sql_query, locals())
+
+# df.query("A > 0 and gender = 'f'", inplace=True)
 # df.select("*")
 # df.select("A", "B").where("A > 0").limit(10).groupby("A").sum().orderby("A", ascending=False).distinct()
 # df.where((df.Age > 30) & (df.Type == 1) & df.Job.isin(["student", "doctor"])).limit(5).show(10)

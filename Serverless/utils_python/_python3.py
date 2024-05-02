@@ -9,9 +9,6 @@ from typing import Any, Optional, Self, Final
 # from collections.abc import Callable, Iterable, Iterator, Generator, Container
 # from collections.abc import Sized, Hashable, Sequence, Mapping, MutableSequence, MutableMapping
 # from collections.abc import Set, MutableSet, MappingView, KeysView, ItemsView, ValuesView
-
-from collections.abc import Iterable
-
 import heapq
 
 import os, sys, shutil
@@ -31,7 +28,6 @@ from functools import reduce
 import traceback
 
 from operator import add, sub, mul, itemgetter, attrgetter, methodcaller
-
 
 # from . import database as db
 # from .database import model
@@ -295,12 +291,11 @@ def main() -> None:
     # print(math.pow(2, 100) < float("inf")) # True
     # math.prod(nums[0:10])
 
-    # print(iter.next())
+    
     # print(issubclass(Exception, BaseException))
 
     # kwargs(name=1234)
     # kwargs(**{"name":1234})
-
     
     # x: list[list[int]]
     # list = [0] * 5

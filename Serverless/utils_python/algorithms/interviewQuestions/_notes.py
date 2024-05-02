@@ -20,6 +20,7 @@
 # sys.version
 # sys.executable
 # os.path.dirname(__file__)
+# os.path.join(os.path.dirname(os.path.abspath(__file__)), 'test.txt')
 # for dirname, dirpath, filename in os.walk('.'): # /dir
 # output = 'username_%s' % name
 # def mandatoryKwargs(self, *, name: str, age: int): ...
@@ -56,9 +57,13 @@
 # datetime.replace(hour=0)
 # datetime.timedelta(day=1)
 # bytes = random.randbytes(10) # 0-255
-# functools reduce, cache, lru_cachefrom collections import deque, OrderedDict(move to left)heapq._heapify_max()
-# from . import database as dbimport .database
-# python -m project.apppip list | grep pandas
+# functools reduce, cache, lru_cache
+# from collections import deque, OrderedDict(move to left)
+# heapq._heapify_max()
+# from . import database as db
+# import .database
+# python -m project.app
+# pip list | grep pandas
 
 # --------------------------------------------------------------------------------------------
 # Pandas
