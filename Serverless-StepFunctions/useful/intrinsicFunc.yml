@@ -1,0 +1,13 @@
+
+{
+ "Summary": {
+  "Type": "Pass",
+  "Parameters": {
+   "Original.$": "$",
+   "UUID.$": "States.UUID()",
+   "Number.$": "States.ArrayLength($.numbers)",
+   "message.$": "States.Format('Hello, the array contains {} items', States.ArrayLength($.numbers))"
+  },
+  "End": true
+ }
+}

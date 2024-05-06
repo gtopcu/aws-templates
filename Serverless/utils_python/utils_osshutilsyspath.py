@@ -6,6 +6,9 @@ import glob
 # Setup the environment
 # !pip install -q -U immutabledict sentencepiece 
 
+# import psutil
+# psutil.virtual_memory()
+
 def get_env(env_name: str, default:str | None) -> str | None:
     return os.getenv(env_name, str)    
     # os.environ.get(env_name, default)

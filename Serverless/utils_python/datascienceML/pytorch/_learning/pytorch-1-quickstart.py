@@ -12,7 +12,12 @@ from torch.utils.data import DataLoader
 from torchvision import datasets
 from torchvision.transforms import ToTensor
 
-# print(torch.cuda.is_available())
+import psutil
+psutil.virtual_memory()
+
+# torch.cuda.is_available()
+# torch.cuda.device_count()
+# torch.cuda.get_device_name(0)
 
 # 1 dimension: Vector
 # 2 dimensions: Matrix

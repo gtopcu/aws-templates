@@ -33,6 +33,8 @@ from operator import add, sub, mul, itemgetter, attrgetter, methodcaller
 # from .database import model
 # import .database as db
 
+# import psutil
+# psutil.virtual_memory()
 
 # BIG_CONSTANT: int = 10000000
 

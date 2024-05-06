@@ -50,7 +50,7 @@ sam package                             Package the app (sam deploy packages too
 sam deploy --guided                     Deploy the app
 sam deploy -t template.yml stack-name xxx --config-file myconfig.yaml
 
-sam delete                              Delete an AWS SAM application and the artifacts created by sam deploy
+sam delete --stack-name sam-app         Delete an AWS SAM application and the artifacts created by sam deploy
 sam logs --tail                         Fetch logs for a function
 sam publish                             Publish a packaged AWS SAM template to the AWS Serverless Application Repository
 sam traces                              Fetch AWS X-Ray traces
@@ -62,11 +62,6 @@ sam sync --stack-name <project name> --watch --code
 sam sync --stack-name <project name> --code --resource AWS::Serverless::Function
 sam sync --stack-name <project name> --code --resource-id HelloWorldFunction
 sam logs --stack-name <project name> --include-traces --tail
-
-https://explore.skillbuilder.aws/learn/course/12836/play/51248/deploying-serverless-applications;lp=92
-sam pipeline bootstrap			Creates all of the environment resources, permission, authentication
-sam pipeline init				Creates the pipeline for your CI/CD system
-sam pipeline init --bootstrap	Entire bootstrap and initialization process
 
 Invoke:
 sam local invoke -e ./events/lambda_event.json samFunction
@@ -81,6 +76,13 @@ Generate Event
 https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/using-sam-cli-local-generate-event.html
 sam local generate-event apigateway aws-proxy >> apigw-proxy.json 
 sam local generate-event apigateway sqs receive-message/s3 put/sns notification
+
+https://explore.skillbuilder.aws/learn/course/12836/play/51248/deploying-serverless-applications;lp=92
+https://dev.to/aws-builders/how-to-add-cicd-to-my-sam-project-5hm4?es_id=eea8096ee1
+sam pipeline bootstrap			Creates all of the environment resources, permission, authentication
+sam pipeline init				Creates the pipeline for your CI/CD system
+sam pipeline init --bootstrap	Entire bootstrap and initialization process
+sam deploy -t codepipeline.yaml --stack-name pipeline-{sam-app} --capabilities=CAPABILITY_IAM --region us-east-2
 
 ---------------------------------------------------------------------------------------------
 

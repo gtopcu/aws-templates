@@ -116,6 +116,10 @@ async def root(request: Request) -> Any: # background_tasks: BackgroundTasks
 #         content = f"notification for {email}: {message}"
 #         email_file.write(content)
 
+# @app.get("/items/{item_id}")
+# async def get_item(item_id: int, query_str: str = None) -> Any:
+#     return {"item_id": item_id, "query_str": query_str}
+
 # http://127.0.0.1:8000/items?limit=2
 @app.get("/items", response_model=list[ToDo])
 async def list_items(request: Request, limit:int = 10): #skip: int | None) -> Any:
@@ -143,7 +147,7 @@ async def upload_file(file: UploadFile = File(...)) -> Any:
 
 def main(): 
     import uvicorn 
-    uvicorn.run(app, port=5000, log_level="info")
+    uvicorn.run(app, port=5000, log_level="info", use_colors=True)
 
 if __name__ == "__main__":
     main()

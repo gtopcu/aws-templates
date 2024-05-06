@@ -1,4 +1,16 @@
 
+/Library/PostgreSQL/16/scripts/runpsql.sh; exit
+psql -hlocalhost -U postgres
+database: postgres
+port: 5432
+
+select now();
+timing on
+
+SHOW TIMEZONE;
+SET timezone = 'America/Los_Angeles';
+
+
 https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-bytea-data-type/
 
 RETURNING / HAVING 
@@ -11,8 +23,6 @@ SELECT typname, typlen
 FROM pg_type 
 WHERE typname ~ '^timestamp';
 
-SHOW TIMEZONE;
-SET timezone = 'America/Los_Angeles';
 
 CREATE TABLE mailing_list (
     first_name VARCHAR NOT NULL,
@@ -35,7 +45,6 @@ CREATE TRIGGER department_updated_at_trigger
 BEFORE UPDATE ON department
 FOR EACH ROW
 EXECUTE FUNCTION update_updated_at();
-
 
 SELECT 
   (
