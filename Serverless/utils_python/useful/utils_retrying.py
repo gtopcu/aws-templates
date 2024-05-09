@@ -5,6 +5,9 @@
 import random
 from retrying import retry
 
+# from retry import retry
+# @retry(tries=10, delay=2, backoff=2, jitter=1)
+
 # @retry() # retries forever
 @retry(wait_random_min=1000, wait_random_max=2000) # retries if exception
 def do_something_unreliable():

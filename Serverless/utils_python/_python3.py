@@ -6,7 +6,7 @@ from typing import Any, Optional, Self, Final
 # from typing import TypedDict, TypeVar, TypeAlias, NewType, Literal, LiteralString, Annotated
 
 # from collections import deque, defaultdict, namedtuple, ChainMap, Counter, OrderedDict, UserDict, UserList, UserString
-# from collections.abc import Callable, Iterable, Iterator, Generator, Container
+from collections.abc import Callable, Iterable, Iterator, Generator, Container
 # from collections.abc import Sized, Hashable, Sequence, Mapping, MutableSequence, MutableMapping
 # from collections.abc import Set, MutableSet, MappingView, KeysView, ItemsView, ValuesView
 import heapq
@@ -16,13 +16,16 @@ from pathlib import Path
 from sys import getsizeof
 import random
 import pickle, shelve
+# import jsonpickle
 import copy
-
+# import jwt
+import base64
 import atexit
 import math
 
 from datetime import datetime, UTC
 import time
+import string
 
 from functools import reduce
 import traceback
@@ -36,10 +39,16 @@ from operator import add, sub, mul, itemgetter, attrgetter, methodcaller
 # import psutil
 # psutil.virtual_memory()
 
+type MyType = Callable[[str], str]
+
 # BIG_CONSTANT: int = 10000000
 
 
 def main() -> None:
+
+    string.digits
+    string.punctuation
+    string.whitespace
 
     # print(dir(random))
     # my_iterator = iter(my_list) = my_list.__iter__() # list: iterable
@@ -422,6 +431,7 @@ def main() -> None:
     # import builtins
     # print(dir(builtins))
     # print(sys.path)       # first checks builtins for imported modules, than sys.path/env vars
+    # print(sys.path[0])
     # PYTHONPATH=usr/users/...
     # sys.path.append('/usr/bin/lib...') 
     # sys.path.append(os.path.abspath(module_path))
@@ -452,15 +462,6 @@ def __eq__(self, other: Self) -> bool:
     # return self.name == other.name and self.age == other.age
     self.__dict__ == other.__dict__
 
-def generator_func(loop_count: int):
-    for i in range(loop_count):
-        yield i
-        time.sleep(1)
-
-def iterate(y:Iterable):
-    for x in y: # it = iter(y)  # y.__iter__()
-        # x = next(y)           # it.__next__() - StopIteration
-        pass
 
 @atexit.register
 def func_exit() -> None:

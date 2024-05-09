@@ -6,6 +6,7 @@ import timeit
 #import profile
 import uuid
 import json
+import jsonpickle
 from typing import Any
 
 # pip install python-dotenv
@@ -113,3 +114,17 @@ def json_dump(dict: object, file, formatted: bool) -> None:
         else:
             json.dump(dict, f)
     
+# def save_document_to_json(file_name, doc: Document):
+#     jobj = jsonpickle.encode(doc)
+#     with open(file_name, 'w') as f:
+#         f.write(jobj)
+#         f.close()
+
+# def load_document_from_json(file_name):
+#     with open(file_name, 'r') as f:
+#         jobj = f.read()
+#         f.close()
+#         doc = jsonpickle.decode(jobj)
+#         if not isinstance(doc, Document):
+#             raise Exception('Document type is not correct')
+#         return doc

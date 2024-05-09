@@ -1,10 +1,18 @@
 # https://www.youtube.com/watch?v=T8UXgR-EtoM
 # https://docs.python.org/3/library/typing.html
 
+#from typing import Any, Self, Final, Literal, Annotated
+
 # Union: str | int
+# mydict: dict[str, Any]
+# type my_literal = Literal["a", "b", "c"]
+# type MyType = Callable[[str], str]
+
+# from typing import Final #@final for methods
+# MAX_SIZE: Final = 9000
 
 # from typing import Type
-# type myTypeAlias = list[str]
+# type myTypeAlias = list[str] # Python3.12
 # def myfunc(arg: myTypeAlias):
 #     pass
 
@@ -19,9 +27,6 @@
 # from annotated_types import Gt, Ge, Le, Lt
 # type my_literal = Literal["a", "b", "c"]
 # my_annotaded = Annotated[float, Gt(0), Le(200)]
-
-# from typing import Final #@final for methods
-# MAX_SIZE: Final = 9000
 
 # from typing import Type, TypedDict, TypeVar, TypeAlias, NewType, Literal
 # my_type = int -> type alias

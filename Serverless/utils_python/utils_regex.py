@@ -37,3 +37,7 @@ x = re.search(r"\bS\w+", txt) #search for uppercase S
 print(x.span())
 print(x.string)
 print(x.group())
+
+# import string
+# regex = re.compile("[%s]" % re.escape(string.punctuation + " " + string.digits))
+# text = regex.sub("", txt)
