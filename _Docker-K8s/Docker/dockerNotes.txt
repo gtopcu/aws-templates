@@ -11,6 +11,8 @@ docker ps
 docker image ls
 docker history myApp:10
 
+docker run --name local-db --env-file ./.env -d -p 5432:5432 postgres:latest
+
 docker build -t getting-started .
 docker run --name getting-started
 docker run -d -p 80:80 getting-startedrm

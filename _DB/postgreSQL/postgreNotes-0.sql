@@ -1,4 +1,8 @@
 
+pg_ctl start/stop
+service postgresql start/stop
+brew services start/stop postgresql
+
 /Library/PostgreSQL/16/scripts/runpsql.sh; exit
 psql -hlocalhost -U postgres
 database: postgres

@@ -33,6 +33,7 @@ source venv/bin/activate
 pip list | freeze
 pip freeze > requirements.txt
 pip install -r requirements.txt -t dependencies (--target)  
+pip3 install --no-cache-dir -r requirements.txt
 (cd dependencies ; zip ../aws_lambda_artifact.zip -r . ; zip aws_lambda_artifact.zip -u main.py)
 pip install -r requirements-prod.txt -t dist
 pip install python-dotenv -q -U (--quiet --upgrade --quiet)
@@ -51,7 +52,7 @@ pip install example-package>=1.2.0
 pip install example-package<=1.2.0
 
 pip install pylint
-pylint myfile.py    # pylint: disable=invalid-name
+pylint myfile.py    # pylint: disable=all disable=invalid-name 
 
 # https://www.youtube.com/watch?v=Ji2XDxmXSOM
 python select interpreter: /Users/gtopcu/My Drive/VSCode/aws-templates/Serverless-SAM/.venv
@@ -90,7 +91,6 @@ poetry export (--only|--with|--without dev) --without-hashes -f requirements.txt
 pip install -e .      - 
 pip install -e .[dev]
 pip install -e /pkg   -> Top-level directory where 'setup.py' can be found.
-
 pip install localfile.whl
 
 pip install pip-tools

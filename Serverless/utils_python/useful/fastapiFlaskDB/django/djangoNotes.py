@@ -1,4 +1,6 @@
 
+# docker run --name local-db --env-file ./.env -d -p 5432:5432 postgres:latest
+# python project/manage.py migrate
 
 # pip install django
 # django-admin startproject myproject
@@ -14,7 +16,7 @@
 
 # python manage.py shell
 # python manage.py shell_plus
-# python manage.py createsuperuser
+# python manage.py createsuperuser --username admin --email admin@example.com
 # python manage.py inspectdb
 # python manage.py sqlsequencereset
 # python manage.py test

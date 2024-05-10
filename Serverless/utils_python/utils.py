@@ -12,6 +12,7 @@ from typing import Any
 # pip install python-dotenv
 # from dotenv import load_dotenv, find_dotenv 
 # load_dotenv(find_dotenv())
+# load_dotenv(dotenv_path=ENV_FILENAME)
 # if not load_dotenv(find_dotenv()):
 #     raise Exception("Failed to load .env file")
 # print(os.getenv('DDB_TABLE'))
