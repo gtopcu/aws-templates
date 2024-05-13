@@ -46,9 +46,10 @@
 #     RED = 1
 #     GREEN = 2
 #     BLUE = 3
-
-#     def __repr__(self):
-#         return "<%s.%s>" % (self.__class__.__name__, self._name_)
+#   def __str__(self):
+#       return self.value
+#   def __repr__(self):
+#       return "<%s.%s>" % (self.__class__.__name__, self._name_)
 
 # # functional syntax
 # # Color = Enum('Color', ['RED', 'GREEN', 'BLUE'])

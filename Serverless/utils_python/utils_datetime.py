@@ -21,7 +21,6 @@ def get_time_iso_tz() -> str:
 # datetime.now().replace(days=0, minutes=0, seconds=0, microsecond=0)
 # datetime.now() + timedelta(days=1, hours=2)
 # print(datetime.now() > date)
-# datetime.utcnow())
 
 # date = datetime.fromisoformat("2024-02-20T13:55:05")
 # datetime.fromisocalendar(2020, 5, 17)
@@ -29,6 +28,7 @@ def get_time_iso_tz() -> str:
 
 # now: datetime = datetime.now() # tz=UTC
 # print(now)                                            # 2024-03-20 12:57:32.133498
+# datetime.utcnow()
 # print(now.isoformat())                                # 2024-03-20T12:57:32.133498 -> ISO8601 - since Python3.6
 # print(now.astimezone())                               # 2024-03-20 12:58:36.424456+03:00
 # print(now.strftime("%Y-%m-%d %H:%M:%S"))              # 2024-03-20T12:59:21

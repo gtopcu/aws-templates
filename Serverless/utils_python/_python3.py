@@ -39,16 +39,16 @@ from operator import add, sub, mul, itemgetter, attrgetter, methodcaller
 # import psutil
 # psutil.virtual_memory()
 
-type MyType = Callable[[str], str]
+# type MyType = Callable[[str], str]
 
 # BIG_CONSTANT: int = 10000000
 
 
 def main() -> None:
 
-    string.digits
-    string.punctuation
-    string.whitespace
+    # string.digits
+    # string.punctuation
+    # string.whitespace
 
     # print(dir(random))
     # my_iterator = iter(my_list) = my_list.__iter__() # list: iterable
@@ -427,6 +427,8 @@ def main() -> None:
 
     # print(mytype := (len("abc") > 2))     -> Walrus operator
     # if myval := get_value(): ...
+
+    # return "<%s.%s>" % (self.__class__.__name__, self._name_)
 
     # import builtins
     # print(dir(builtins))
