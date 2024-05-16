@@ -30,6 +30,8 @@ import matplotlib.pyplot as plt
 # arr = np.array([[1, 2, 3], [4, 5, 6]])                              # 2-Dimentional
 # arr = np.array([[[1, 2, 3], [4, 5, 6]], [[1, 2, 3], [4, 5, 6]]])    # 3-Dimentional
 # arr = np.array([1, 2, 3, 4], ndmin=5)
+# arr.reshape(3. 2, -1) -> only one dimension can be -1
+# arr.reshape(-1)       -> flatten
 
 # arr.dtype     # array's data type
 # arr.ndim      # array's no of dimensions
@@ -66,8 +68,6 @@ import matplotlib.pyplot as plt
 # np.empty_like(x)
 # np.zeros_like(x)
 # np.ones_like(x)
-# np.sort(random)
-# np.unique(y)
 # np.arange(0, 10, 1)
 # np.random.randint(0, 100, 10)
 # np.random.rand(4)            # 4 x 1 matrix (0-to-1)
@@ -78,6 +78,9 @@ import matplotlib.pyplot as plt
 # np.random.seed(1)
 # np.random.bytes(32)
 # np.random.normal(loc=mean, scale, size) # gaussian
+# np.sort(random)
+# np.unique(y)
+# x = np.where(arr%2 == 0)
 
 # create random data
 # xdata = np.random.random([2, 4])      # 2x4 array

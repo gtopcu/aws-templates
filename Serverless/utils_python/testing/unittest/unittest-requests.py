@@ -22,6 +22,8 @@ class TestGetUserData(unittest.TestCase):
         mock_get.return_value = mock_response
         userdata = get_userdata(1)
         mock_get.assert_called_with("http://api.example.com/1")
+        mock_get.assert_called()
+        mock_get.assert_not_called()
         self.assertEqual(userdata["name"], "John")
         self.assertEqual(userdata, response_dict)
         self.assertAlmostEqual

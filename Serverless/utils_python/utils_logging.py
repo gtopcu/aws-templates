@@ -27,6 +27,7 @@ logging.info("INFO MSG %s", x)
 logging.warning("WARNING MSG")
 logging.error("ERROR MSG")
 logging.critical("CRITICAL MSG")
+# logging.error(f"Unexpected Error: {e}", exc_info=True)
 
 def get_logger() -> logging.Logger:
     logging.basicConfig(level=logging.WARN,

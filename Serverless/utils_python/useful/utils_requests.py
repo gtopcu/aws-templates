@@ -37,6 +37,21 @@ def requests_get(endpoint_url, headers=None, auth=None, timeout: int = 30) -> re
     # except requests.exceptions.ConnectionError as e:
     #     raise RuntimeError(f"Connection error: {e}") from e
 
+    # try:
+    #     response = requests.get(base_url)
+    #     if response.status_code in (200, 201):
+    #         return response.status_code, response.json()
+    #     else:
+    #         return json.dumps({"ERROR": "Cat Fact Not Available"})
+    # except requests.exceptions.HTTPError as errh:
+    #     logging.error(errh)
+    # except requests.exceptions.ConnectionError as errc:
+    #     logging.error(errc)
+    # except requests.exceptions.Timeout as errt:
+    #     logging.error(errt)
+    # except requests.exceptions.RequestException as err:
+    #     logging.error(err)
+
 def requests_put(endpoint_url, payload, headers=None, auth=None, timeout: int = 30) -> Any:
     # payload = {
     #     "user_id": "1000",
