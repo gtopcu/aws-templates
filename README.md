@@ -228,16 +228,14 @@ Security & Ops
 - Deploy Landing Zone Accelerator to configure the new accounts
 - Enable CloudTrail for all accounts for management events & put logs to CW & S3
 - Use PowerUserAccess role for admins instead of Administrator (no IAM/org/account)
-- Setup CW Subscription Filters -> Kinesis->S3/ES/Lambda & CloudTrail Lake or Organization access
 - Organization account Security Hub -> Enable SecurityHub, GuardDuty, Detective, Macie, ControlTower, Config etc (https://youtube.com/watch?v=jPGERcPM5G4)
 - Enable AWS Chatbot to receive SecurityHub/CW Alert etc notifications in Slack/Chime
 - To detect PII data, use Macie for S3 buckets, and Comprehend/Glue Studio transform for anything else
 - AWS Artifact & Landing Zone Accelerator for PCI/HIPAA etc certifications & improve overall architectural security
 - Setup conformance packs (PCI-DSS etc) in AWS Config
 - Setup log & trail collection & S3 buckets replication to security account CW & S3
-- Create a custom KMS key for encryption - use for S3, RDS, EBS backups etc
 - Enable IAM Access Advisor & Analyzer on all accounts
-- Enable VPC flow logs, CF/API GW/ELB/S3 access logs on all VPCs on all accounts
+- Enable VPC flow logs for ECS/CF/API GW/ELB/S3 access logs on all VPCs on all accounts
 - Set up Systems Manager Parameter Store & Secrets Manager with rotation windows
 - No public buckets - use bucket policies, not IAM
 - Check insecure API GW endpoints
@@ -249,18 +247,27 @@ Security & Ops
 - AWS Backup - backup DBs, S3
 - Enable AWS Health to see multi-account service status
 - Add Route53 healthchecks
-- Use synthetic canaries & RUM
-- Set alerts for HTTP 500, 429 etc errors on API GW, CloudFront etc
 - Enable monitoring & access logging for API GW
-- Enable X-Ray on Lambda & Application-Lambda-Container Insights
 - Enable DevOps Guru Serverless for Lambda concurrency & DynamoDB throttling (along with CW Contributor Insights)
 - Enable ResillienceHub to meet RTO-RPO requirements
-- Stream metrics to managed Prometheus & display on Grafana
-- Utilize metric filters from CW logs to get alerts from the logs
-- Create CW alarms for any CW metric needed i.e. SQS ApproxNoOfMessages
-- Use CW patterns & anomaly detection for logs & lambda trigger/SysMgr for alarms
+- Create a custom KMS key for encryption - use for S3, RDS, EBS backups etc. Set key rotations
 - Lambda env vars, Dynamo, S3 - secure with own KMS keys
-- Enable & use Container Insights to track ECS/Fargate utilization
+
+
+CW:
+  - Setup custom dashboards & myApplications on home page & mobile app
+  - Use synthetic canaries & RUM
+  - Set alerts for HTTP 500, 429 etc errors on API GW, CloudFront etc
+  - CW Metrics -> Set recommended alarms (CW alarms can now trigger Lambda) 
+  - CW Metrics - > Set up business metrics
+  - Create CW alarms for any CW metric needed i.e. SQS ApproxNoOfMessages
+  - CW -> Setup ApplicationSignals with SLOs (p99, p95 etc) 
+  - Use CW patterns & anomaly detection for logs & lambda trigger/SysMgr for alarms
+  - Utilize metric filters from CW logs to get alerts from the logs
+  - Stream metrics to managed Prometheus & display on Grafana
+  - Setup CW Subscription Filters -> Kinesis->S3/ES/Lambda & CloudTrail Lake or Organization access
+  - Enable & use Container Insights to track ECS/Fargate utilization
+  - Enable X-Ray on Lambda & Application-Lambda-Container Insights
 
 RDS
 - Use RDS Proxy with IAM authentication (Aurora MySQL, PostreSQL)
