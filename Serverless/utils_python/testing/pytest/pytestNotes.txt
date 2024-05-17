@@ -24,4 +24,6 @@ pip install pytest pylint pytest-cov
 pip install -U coverage
 # pytest  -v -s  
 coverage run -m pytest  -v -s 
+python -m coverage run -m pytest
 coverage report -m
+

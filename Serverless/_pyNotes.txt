@@ -32,6 +32,7 @@ python3 -m venv venv
 source venv/bin/activate
 pip list | freeze
 pip freeze > requirements.txt
+python -m pip install --upgrade pip
 pip install -r requirements.txt -t dependencies (--target)  
 pip3 install --no-cache-dir -r requirements.txt
 (cd dependencies ; zip ../aws_lambda_artifact.zip -r . ; zip aws_lambda_artifact.zip -u main.py)
@@ -53,6 +54,8 @@ pip install example-package<=1.2.0
 
 pip install pylint
 pylint myfile.py    # pylint: disable=all disable=invalid-name 
+pylint --rcfile=.pylintrc .
+flake8 --config=.flake8 .
 
 # https://www.youtube.com/watch?v=Ji2XDxmXSOM
 python select interpreter: /Users/gtopcu/My Drive/VSCode/aws-templates/Serverless-SAM/.venv
