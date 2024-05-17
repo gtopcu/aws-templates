@@ -2,7 +2,8 @@
 # https://docs.pytest.org/en/8.0.x/
 # https://blog.newmathdata.com/advanced-unit-testing-in-aws-a666e787aa99
 
-pytest-cov: Plugin for pytest that generates coverage reports.
+pytest-cov: Plugin for pytest that generates coverage reports
+pytest-env: Plugin for env vars with pytest.ini file
 
 pytest -vs
 pytest -cov

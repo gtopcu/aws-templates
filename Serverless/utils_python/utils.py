@@ -102,18 +102,18 @@ def json_load(file) -> Any:
 def json_loads(input) -> Any:
     return json.loads(input)
     
-def json_dumps(dict: object, formatted: bool) -> str:
+def json_dumps(obj: object, formatted: bool) -> str:
     if formatted:
-        return json.dumps(dict, indent=4, sort_keys=True, separators=(". ", " = "))
+        return json.dumps(obj, indent=4, sort_keys=True, separators=(". ", " = "))
     #allow_nan, default, cls, skip_keys
-    return json.dumps(dict) 
+    return json.dumps(obj) 
 
-def json_dump(dict: object, file, formatted: bool) -> None:
+def json_dump(obj: object, file, formatted: bool) -> None:
     with open(file, "w", encoding="utf-8") as f:
         if formatted:
-            json.dump(dict, f, indent=4, sort_keys=True, separators=(". ", " = "))
+            json.dump(obj, f, indent=4, sort_keys=True, separators=(". ", " = "))
         else:
-            json.dump(dict, f)
+            json.dump(obj, f)
     
 # def save_document_to_json(file_name, doc: Document):
 #     jobj = jsonpickle.encode(doc)
