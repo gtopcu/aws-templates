@@ -3,6 +3,7 @@
 # https://blog.newmathdata.com/advanced-unit-testing-in-aws-a666e787aa99
 
 pytest-cov==4.1.0
+coverage
 pytest-env==1.1.3
 pytest-mock==3.12.0
 moto==5.0.0
@@ -23,7 +24,8 @@ pytest -m slow              -> run all tests decorated with the @pytest.mark.slo
 pytest --durations=10 -vv   -> get a list of the slowest 10 test durations
 pytest --durations=10 --durations-min=1.0 -vv -> get a list of the slowest 10 test durations over 1.0s
 
-pip install pytest pylint pytest-cov 
+pip install pylint 
+pip install pytest
 pip install -U coverage
 # pytest  -v -s  
 coverage run -m pytest  -v -s 
