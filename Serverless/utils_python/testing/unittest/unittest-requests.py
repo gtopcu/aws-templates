@@ -1,21 +1,36 @@
 
 # https://www.youtube.com/watch?v=-F6wVOlsEAM
+# https://www.youtube.com/watch?v=WFRljVPHrkE
 
 # pip install requests
 import requests
 import unittest
 from unittest.mock import Mock, patch
 
+
 def get_userdata(user_id):
     response = requests.get(f"http://api.example.com/{user_id}")
     return response.json()
 
-
 class TestGetUserData(unittest.TestCase):
 
-    @patch('requests.get')
+    def setUp(self):
+        self.mock_get = Mock()
+        self.mock_get.status_code = 200
+        self.mock_get.json.return_value = {"name": "John"}
+
+    @patch('requests.get', return_value=Mock(status_code=200, json=lambda: {"name": "John"}))
     def test_get_userdata(self, mock_get):
+        userdata = get_userdata(1)
+        mock_get.assert_called_with("http://api.example.com/1")
+        mock_get.assert_called()
+        mock_get.assert_not_called()
+        print(userdata)
+
+    @patch('requests.get')
+    def test_get_userdata2(self, mock_get):
         mock_response = Mock()
+        mock_response.status_code = 200
         response_dict = {"name": "John"}
         mock_response.json.return_value = response_dict
         
