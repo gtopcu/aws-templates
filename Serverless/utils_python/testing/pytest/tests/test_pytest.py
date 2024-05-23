@@ -16,12 +16,32 @@ Each test has a unique instance of the class, but class attributes are shared
 #     if __debug__: # default True
 #         raise AssertionError
 
+@pytest.fixture(autouse=True)
+def aws_env(monkeypatch):
+    """
+    Sets mock AWS credentials and region for testing.
+    """
+    monkeypatch.setenv('AWS_ACCESS_KEY_ID', 'testing')
+    monkeypatch.setenv('AWS_SECRET_ACCESS_KEY', 'testing')
+    monkeypatch.setenv('AWS_SECURITY_TOKEN', 'testing')
+    monkeypatch.setenv('AWS_SESSION_TOKEN', 'testing')
+    monkeypatch.setenv('AWS_DEFAULT_REGION', 'us-east-1')
+
 # scope: function(default), class, module, package, session
 @pytest.fixture(scope="module") # autouse=True
 def context():
     return "Context initialized"
 
-# # Create a test function for MyClass format_name
+# https://pytest-mock.readthedocs.io/en/latest/usage.html
+# def test_foo(mocker):
+#     mocker.patch('os.remove')
+#     mocker.patch.object(os, 'listdir', autospec=True)
+#     mocker.patch.object(
+#                 sqs_queue.sqs_client, 'delete_message',
+#                 side_effect=ClientError({'Error': {}}, 'DeleteMessage')
+#             )
+ 
+# Create a test function for MyClass format_name
 def test_check_context(context):
     print("Context:", context)
     assert context == "Context initialized"

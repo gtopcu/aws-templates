@@ -1,0 +1,49 @@
+
+"iam:PassRole"
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "iam:GetRole",
+                "iam:CreateRole",
+                "iam:UpdateRole",
+                "iam:ListRoles",
+                "iam:ListRolePolicies",
+                "iam:DeleteRole",
+                "iam:UpdateRoleDescription",
+                "iam:GetRolePolicy",
+                "iam:PutRolePolicy",
+                "iam:GetPolicy",
+                "iam:GetPolicyVersion",
+                "iam:ListPlicies",
+                "iam:CreatePolicy",
+                "iam:CreatePolicyVersion",
+                "iam:AttachRolePolicy",
+                "iam:DeletePolicy",
+                "iam:DeletePolicyVersion",
+                "iam:DetachRolePolicy",
+                "iam:TagRole",
+                "iam:TagPolicy",
+                "iam:ListRoleTags",
+                "iam:ListPolicyTags",
+                "iam:UntagPolicy",
+                "iam:UntagRole",
+            ],
+            "Resource": [
+                "arn:aws:iam::523571139036:role/dev-*",
+                "arn:aws:iam::523571139036:role/service-role/dev-*"
+            ]
+        }
+    ]
+}
+"arn:aws:s3:::dev-*/*",
+"arn:aws:s3:::dev-*"
+"Resource": "arn:aws:iam::523571139036:role/service-role/dev-*"
+
+User: arn:aws:iam::523571139036:user/gokhan.topcu@areal.ai is not authorized to perform: iam:CreatePolicy on resource: 
+policy AWSLambdaBasicExecutionRole-6a503188-7ee4-411f-992e-228fa6dc7d2d because no identity-based policy allows the 
+iam:CreatePolicy action

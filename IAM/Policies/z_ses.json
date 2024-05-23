@@ -1,0 +1,23 @@
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Sid": "VisualEditor0",
+			"Effect": "Allow",
+			"Action": [
+				"ses:SendEmail",
+				"ses:SendTemplatedEmail",
+				"ses:SendCustomVerificationEmail",
+				"ses:SendRawEmail",
+				"ses:SendBulkTemplatedEmail",
+				"ses:CreateTemplate",
+				"ses:CreateEmailTemplate"
+			],
+			"Resource": [
+				"arn:aws:ses:us-west-1:xxxxxxxxxxxxx:identity/*@gmail.com",
+				"arn:aws:ses:us-west-1:xxxxxxxxxxxxx:template/dev-*",
+				"arn:aws:ses:us-west-1:xxxxxxxxxxxxx:template/test-*"
+			]
+		}
+	]
+}

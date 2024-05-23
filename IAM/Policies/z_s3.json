@@ -12,6 +12,11 @@
     ]
 }
 
+// "Resource": [
+// 	"arn:aws:s3:::dev-*/*",
+// 	"arn:aws:s3:::dev-*"
+// ]
+
 {
 	"Version": "2012-10-17",
 	"Statement": [
