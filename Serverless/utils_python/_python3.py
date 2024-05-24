@@ -430,6 +430,11 @@ def main() -> None:
 
     # return "<%s.%s>" % (self.__class__.__name__, self._name_)
 
+    # my_list = [1, 2]
+    # print(*my_list)
+    # l1, l2 = my_list
+    # print(l1, l2)
+
     # import builtins
     # print(dir(builtins))
     # print(sys.path)       # first checks builtins for imported modules, than sys.path/env vars

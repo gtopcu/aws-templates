@@ -1,7 +1,7 @@
 # https://www.youtube.com/watch?v=T8UXgR-EtoM
 # https://docs.python.org/3/library/typing.html
 
-#from typing import Any, Self, Final, Literal, Annotated
+# from typing import Any, Self, Final, Literal, Annotated
 
 # Union: str | int
 # mydict: dict[str, Any]
