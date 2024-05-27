@@ -12,5 +12,5 @@ aws cloudformation describe-stacks \
 --query "Stacks[0].Outputs[?OutputKey=='ApiUrl'].OutputValue" \
 --output text
 
-aws cloudformation delete-stack --stack-name=apollo-server-lambda-nodejs
+aws cloudformation delete-stack --stack-name some-stack --deletion-mode FORCE_DELETE_STACK
 
