@@ -49,6 +49,13 @@ def main() -> None:
     # string.digits
     # string.punctuation
     # string.whitespace
+    # "str".isdigit
+    # ".".join(["1", "2", "3"])
+    # "str".index("i")
+    # "iii".find("i")
+    # "str".casefold()
+    # "str ".strip()
+    # "str".swapcase()
 
     # print(dir(random))
     # my_iterator = iter(my_list) = my_list.__iter__() # list: iterable
@@ -302,7 +309,6 @@ def main() -> None:
     # print(math.pow(2, 100) < float("inf")) # True
     # math.prod(nums[0:10])
 
-    
     # print(issubclass(Exception, BaseException))
 
     # kwargs(name=1234)
