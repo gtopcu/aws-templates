@@ -5,7 +5,7 @@ from typing import Any, Optional, Self, Final
 # from typing import Dict, Set, FrozenSet, Tuple
 # from typing import TypedDict, TypeVar, TypeAlias, NewType, Literal, LiteralString, Annotated
 
-# from collections import deque, defaultdict, namedtuple, ChainMap, Counter, OrderedDict, UserDict, UserList, UserString
+# from collections import deque, defaultdict, OrderedDict, namedtuple, ChainMap, Counter, UserDict, UserList, UserString
 from collections.abc import Callable, Iterable, Iterator, Generator, Container
 # from collections.abc import Sized, Hashable, Sequence, Mapping, MutableSequence, MutableMapping
 # from collections.abc import Set, MutableSet, MappingView, KeysView, ItemsView, ValuesView
@@ -39,6 +39,10 @@ from operator import add, sub, mul, itemgetter, attrgetter, methodcaller
 # import psutil
 # psutil.virtual_memory()
 
+# import socket
+# hostname = socket.gethostname()
+# server_ip = socket.gethostbyname(server_ip)
+
 # type MyType = Callable[[str], str]
 
 # BIG_CONSTANT: int = 10000000
@@ -56,6 +60,8 @@ def main() -> None:
     # "str".casefold()
     # "str ".strip()
     # "str".swapcase()
+    # len(re.findall(r'[a-zA-Z]', text))
+    # ascii_letter = set(string.ascii_letters)
 
     # print(dir(random))
     # my_iterator = iter(my_list) = my_list.__iter__() # list: iterable

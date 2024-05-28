@@ -1,0 +1,25 @@
+
+# https://medium.com/@anil.razzu/accessing-packages-of-aws-codeartifact-from-dockerfile-1452fe2d6261
+
+FROM python:3.9-slim-buster
+ENV POETRY_VIRTUALENVS_CREATE=false \
+    POETRY_VERSION=1.2.2 \
+    PATH="/root/.local/bin:$PATH"
+WORKDIR /opt
+ARG TOKEN="token"
+COPY pyproject.toml ./pyproject.toml
+RUN apt-get update && apt-get -y install curl && apt install -y curl && \
+curl -sSL 'https://install.python-poetry.org' | python - && poetry --version
+RUN poetry config http-basic.repository_name aws $TOKEN && poetry install
+COPY ./dob_calculator/ /opt/dob_calculator/
+ENTRYPOINT ["python", "-m", "dob_calculator.calculator"]
+
+
+#pull packages 
+poetry update
+
+#build packages
+poetry build 
+
+#push packages
+poetry publish -r dob_push
