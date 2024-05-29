@@ -17,6 +17,7 @@ print(x)
 x = re.sub("\s", "9", txt, 3)
 print(x)
 
+re.sub('"https?:[^ ]*"', '""', url)
 REGEX_EMAIL = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
 email_pattern = re.compile(REGEX_EMAIL)
 
@@ -24,6 +25,11 @@ REGEX_NAME = r"^[a-zA-Z]+$"
 name_pattern = re.compile(REGEX_NAME)
 if not name_pattern.match("Test input"):
     raise ValueError("Invalid name")
+
+# pattern = re.compile(fwd, re.IGNORECASE)
+# subject = pattern.sub('', subject)
+# value = email.lower()
+# emails = re.findall(r'[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.[a-z]+', value)
 
 
 """

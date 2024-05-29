@@ -54,15 +54,17 @@ def main() -> None:
     # string.punctuation
     # string.whitespace
     # "str".isdigit
+    # ascii_letter = set(string.ascii_letters)
     # ".".join(["1", "2", "3"])
     # "str".index("i")
     # "iii".find("i")
     # "str".casefold()
+    # f"{val.casefold()}"
     # "str ".strip()
     # "str".swapcase()
     # len(re.findall(r'[a-zA-Z]', text))
-    # ascii_letter = set(string.ascii_letters)
-
+    
+    
     # print(dir(random))
     # my_iterator = iter(my_list) = my_list.__iter__() # list: iterable
     # val = next(my_iterator)                          # my_iterator: iterator raises StopIteration
@@ -381,9 +383,6 @@ def main() -> None:
     # data = b"bytestring"
     # decoded = data.decode("utf-8")
     # dataArray = bytearray(bytes)
-    # dataArray.swapcase()
-    # "asdf".casefold()
-    # f"{val.casefold()}"
 
     # mytuple = tuple((1, 2))
     # x, y = mytuple # unpacking
@@ -459,6 +458,7 @@ def main() -> None:
     # traceback.print_stack()
     # traceback.print_exc()
     # traceback.print_exception(type(err), err, err.__traceback__)
+    # logger.error(traceback.format_exc())
 
     # BaseException -> 
     #  Exception -> SystemExit 
