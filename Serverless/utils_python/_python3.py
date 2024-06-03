@@ -111,7 +111,7 @@ def main() -> None:
     # list.reverse()
     # list.sort(reverse=True)
     # print(list)
-    # for i, j in enumerate(list):
+    # for i, j in enumerate(list, 1):
     #     print(i, j)
     # for filtered in filter(lambda x: x % 4 == 0, list):
     #     print(filtered)
