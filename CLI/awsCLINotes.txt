@@ -76,7 +76,7 @@ https://docs.aws.amazon.com/cli/latest/userguide/cli-services-s3-commands.html
 aws s3 ls
 aws s3 mb s3://gokhantopcu-clitest
 aws s3 rb s3://gokhantopcu-clitest
-aws s3 cp <file> s3://<s3path>
+aws s3 cp <file> s3://<s3path> --storage-class [CLASS]
 aws s3 cp s3://gokhantopcu .
 aws s3 sync <dir> s3://<s3path>
 aws s3 mv s3://source_folder/ s3://destination_folder/ --recursive
@@ -89,10 +89,34 @@ aws s3 sync . s3://$BUCKET/$PREFIX/
 aws s3 sync --exclude="*" --include="[0-9]*.jpg" . s3://$BUCKET/$PREFIX/ 
 
 aws s3 sync --delete <dir> s3://<s3path>
+
 aws s3api list-objects --bucket <YOUR_BUCKET_NAME> --page-size 5 (default: 1000)
 aws s3api list-objects --bucket <YOUR_BUCKET_NAME> --max-items 1
+aws s3api get-bucket-policy-status --bucket testdgcloudfronts3
+
+aws s3api put-object --bucket [target-bucket] \
+--key tags.txt \
+--body "makeyourtime.txt" \
+--tagging "AllYourTags=AreBelong&To=Us"
+--object-lock-retain-until-date "2099-01-01T00:00:00+0000" \
+--object-lock-legal-hold-status "ON" \
+--object-lock-mode "COMPLIANCE"
+
 aws s3api put-bucket-versioning --bucket DOC-EXAMPLE-BUCKET1 &&
     --versioning-configuration Status=Enabled,MFADelete=Enabled --mfa "SERIAL 123456"
+
+aws s3api list-multipart-uploads --bucket [bucket-name]
+aws s3api create-multipart-upload --bucket [bucket-name] --key [key]
+
+aws s3api upload-part \
+--bucket [bucket-name] \
+--key [key] \
+--upload-id xxx \
+--part-number 1 \
+--body somelocalfile.txt
+
+curl -X GET https://[bucketname].s3.amazonaws.com
+curl -X DELETE https://[bucketname].s3-ap-southeast-2.amazonaws.com
 
 
 ------------------------------------------------------------------------------------

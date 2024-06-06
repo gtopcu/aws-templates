@@ -18,27 +18,19 @@
         {
             "Effect": "Allow",
             "Principal": "*",
-            "Action": "s3:*",
-            "Resource": "arn:aws:s3:::{bucket_name}"
+            "Action": "s3:*", 
+			//"Action": "s3:PutObject",
+            "Resource": "arn:aws:s3:::BucketName/*",
+						// 	"arn:aws:s3:::dev-*/*",
+						// 	"arn:aws:s3:::dev-*"
+			"Condition": {
+                "StringEquals": {
+                    "s3:x-amz-storage-class": ["STANDARD"]
+                }
+            }
         }
     ]
 }
-
-// "Resource": [
-// 	"arn:aws:s3:::dev-*/*",
-// 	"arn:aws:s3:::dev-*"
-// ]
-
-{
-	"Version": "2012-10-17",
-	"Statement": [
-	  {
-		"Effect": "Allow",
-		"Action": "s3:PutObject",
-		"Resource": "arn:aws:s3:::BucketName/*"
-	  }
-	]
-  }
 
 //Deny without SSL:
 {
