@@ -3,6 +3,7 @@ https://hub.docker.com/
 https://docs.docker.com/
 https://labs.play-with-docker.com/
 https://www.youtube.com/watch?v=bKFMS5C4CG0
+https://devtron.ai/blog/cmd-and-entrypoint-differences/
 
 sudo apt install docker.io -y
 
