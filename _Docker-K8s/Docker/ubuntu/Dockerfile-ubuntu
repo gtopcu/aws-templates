@@ -1,0 +1,14 @@
+
+https://devtron.ai/blog/cmd-and-entrypoint-differences/
+
+FROM ubuntu
+CMD ["echo", "Hello World"]
+
+FROM ubuntu
+ENTRYPOINT ["echo", "Hello World"]
+
+docker build -t myimage .
+docker run myimage
+
+docker run myimage echo "message changed"
+docker run myimage printenv

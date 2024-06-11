@@ -5,6 +5,14 @@ https://labs.play-with-docker.com/
 https://www.youtube.com/watch?v=bKFMS5C4CG0
 https://devtron.ai/blog/cmd-and-entrypoint-differences/
 
+FROM ubuntu
+CMD ["echo", "Hello World"]
+
+CMD echo "Hello World" (shell form)
+CMD ["echo", "Hello World"] (exec form)
+ENTRYPOINT echo "Hello World" (shell form)
+ENTRYPOINT ["echo", "Hello World"] (exec form)
+
 sudo apt install docker.io -y
 
 docker --version

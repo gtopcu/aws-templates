@@ -29,6 +29,7 @@ def aws_env(monkeypatch):
 
 # scope: function(default), class, module, package, session
 @pytest.fixture(scope="module") # autouse=True
+# pytest.mark.usefixtures("lambda_context")
 def context():
     return "Context initialized"
 

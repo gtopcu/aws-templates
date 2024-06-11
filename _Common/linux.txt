@@ -31,6 +31,7 @@ sudo su - execute all with sudo
 clear
 history
 pwd
+printenv
 ls -l -a
 ls -a | grep -i Doc
 ls -ltr pythonX-bash.py
