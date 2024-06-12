@@ -1,0 +1,30 @@
+
+
+Extending EC2 EBS volume:
+https://medium.com/@hustle.averykang/extend-the-volume-size-of-an-ec2-instance-44c0feedc61b
+
+
+~$ lsblk
+
+NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+nvme0n1     259:0    0    50G  0 disk 
+├─nvme0n1p1 259:1    0    10G  0 part /
+├─nvme0n1p2 259:2    0    20G  0 part /mnt/data
+└─nvme0n1p3 259:3    0    20G  0 part /mnt/backup
+
+lsblk
+df -T
+sudo growpart /dev/nvme0n1 1
+
+# For ext2/ext3/ext4 file systems:
+# sudo resize2fs /dev/<partition-name>
+sudo resize2fs /dev/nvme0n1p1
+
+# For XFS file systems:
+sudo xfs_growfs /mnt
+
+df -h
+
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/nvme0n1p1  128G  13G  115G  10% /
+

@@ -1,4 +1,12 @@
 # https://hub.docker.com/_/python
+
+FROM python:2.7
+ADD application.py /tmp/application.py
+EXPOSE 8080
+ENTRYPOINT ["python", "/tmp/application.py"]
+
+# -----------------------------------------------------------------
+
 FROM python:3.12.2
 
 COPY requirements.txt ./
@@ -25,3 +33,7 @@ CMD [ "python", "./your-daemon-or-script.py" ]
 
 # Run script in Docker directly without dockerfile:
 # docker run -it --rm --name running-script -v "$PWD":/usr/src/myapp -w /usr/src/myapp python:3 python script.py
+
+# -----------------------------------------------------------------
+
+

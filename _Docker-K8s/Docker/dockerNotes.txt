@@ -5,9 +5,11 @@ https://labs.play-with-docker.com/
 https://www.youtube.com/watch?v=bKFMS5C4CG0
 https://devtron.ai/blog/cmd-and-entrypoint-differences/
 
+Top 8 Docker Best Practices for using Docker in Production
+https://www.youtube.com/watch?v=8vXoMqWgbQQ
+
 FROM ubuntu
 CMD ["echo", "Hello World"]
-
 CMD echo "Hello World" (shell form)
 CMD ["echo", "Hello World"] (exec form)
 ENTRYPOINT echo "Hello World" (shell form)
@@ -24,7 +26,7 @@ docker run --name local-db --env-file ./.env -d -p 5432:5432 postgres:latest
 
 docker build -t getting-started .
 docker run --name getting-started
-docker run -d -p 80:80 getting-startedrm
+docker run -dp 80:80 getting-startedrm
 docker run -dp 3000:3000 gtopcu/getting-started
 
 docker create -> create a container without starting it
@@ -91,8 +93,6 @@ docker run -itd -rm --network host --name stormbreaker nginx
 docker run -it --network todo-app nicolaka/netshoot
 dig mysql
 
-Ubuntu
-docker pull ubuntu
 
 ---
 Docker-Compose
@@ -129,77 +129,4 @@ services:
 volumes:
   todo-mysql-data:
 
-
-Dockerfiles
----
-
-```
-FROM ubuntu
-ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update
-RUN apt-get install apache2 -y
-RUN apt-get install apache2-utils -y
-RUN apt-get clean
-EXPOSE 8080
-CMD ["apache2ctl","-D","FOREGROUND"]
-```
-
-docker build -t testdockerrepo .
-docker run -dp 8080:8080 testdockerrepo
-
----
-
-FROM ubuntu:12.04
-# Install dependencies
-RUN apt-get update -y
-RUN apt-get install -y apache2
-
-# Install apache and write hello world message
-RUN echo "Hello Cloud Gurus!!!! This web page is running in a Docker container!" > /var/www/index.html
-
-# Configure apache
-RUN a2enmod rewrite
-RUN chown -R www-data:www-data /var/www
-ENV APACHE_RUN_USER www-data
-ENV APACHE_RUN_GROUP www-data
-ENV APACHE_LOG_DIR /var/log/apache2
-
-EXPOSE 8080
-
-CMD ["/usr/sbin/apache2", "-D",  "FOREGROUND"]
-
----
-
-FROM node:12-alpine
-WORKDIR /app
-COPY . .
-RUN yarn install --production
-CMD ["node", "src/index.js"]
-
---
-
-docker build -t testdockerrepo .
-docker run -dp 3000:3000 testdockerrepo
-
----
-
-FROM python:2.7
-
-# Add sample application
-ADD application.py /tmp/application.py
-
-EXPOSE 8080
-
-# Run it
-ENTRYPOINT ["python", "/tmp/application.py"]
-
---
-
-docker build -t testdockerrepo .
-docker run -dp 8080:8080 testdockerrepo
-
----
-
-Top 8 Docker Best Practices for using Docker in Production
-https://www.youtube.com/watch?v=8vXoMqWgbQQ
 

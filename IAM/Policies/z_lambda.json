@@ -1,0 +1,28 @@
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "iam:CreateRole",
+                "iam:AttachRolePolicy",
+                "iam:UpdateAssumeRolePolicy",
+                "iam:PassRole"
+            ],
+            "Resource": [
+                "arn:aws:iam::{AWS:Account}:role/AWSLambdaBasicExecutionRole",
+                "arn:aws:iam::{AWS:Account}:role/my-lambda-role*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "lambda:CreateFunction",
+                "lambda:UpdateFunctionCode",
+                "lambda:GetFunction"
+            ],
+            "Resource": "arn:aws:lambda::{AWS:Account}:function:{function-name}"
+        }
+    ]
+} 

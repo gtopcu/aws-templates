@@ -108,6 +108,8 @@ hostname -i
 hostnamectl set-hostname k8s-control
 lsblk: list disks, / means root disk
 df -h : free disk space
+df -T : filesystem type of your partitions
+growpart /dev/nvme0n1 1
 du: file sizes
 free -m : free memory
 top: CPU usage
@@ -221,6 +223,11 @@ aptitude search xx
 **************************** Network ****************************
 
 sudo sysctl network restart
+netstat -all
+netstat -an | grep ":8080 " | grep ESTABLISHED | wc -l
+total_conn=$(netstat -an | grep <port> | wc -l) 
+netstat -tupl
+netstat -r
 whatis ip
 cat /etc/resolv.conf -> DNS config
 ip route show
@@ -236,10 +243,6 @@ dig -x google.com: reverse lookup
 host google.com: list nameservers
 whois google.com
 ethtool eth0
-netstat -tupl
-netstat -r
-total_conn=$(netstat -an | grep <port> | wc -l) 
-netstat -all
 telnet 54.78.7.114:22
 ipconfig -a
 
