@@ -32,6 +32,16 @@ import traceback
 
 from operator import add, sub, mul, itemgetter, attrgetter, methodcaller
 
+# del len id any/all is/not in/not sorted reversed isinstance min max pow round floor enumerate map filter reduce zip
+
+# print('?name=%s' % name)
+
+# def httpbin(*suffix):
+#     """Returns url for HTTPBIN resource."""
+#     return HTTPBIN_URL + '/'.join(suffix)
+
+
+# print(dir(random))
 # from . import database as db
 # from .database import model
 # import .database as db
@@ -64,8 +74,6 @@ def main() -> None:
     # "str".swapcase()
     # len(re.findall(r'[a-zA-Z]', text))
     
-    
-    # print(dir(random))
     # my_iterator = iter(my_list) = my_list.__iter__() # list: iterable
     # val = next(my_iterator)                          # my_iterator: iterator raises StopIteration
 
@@ -440,6 +448,8 @@ def main() -> None:
     # if myval := get_value(): ...
 
     # return "<%s.%s>" % (self.__class__.__name__, self._name_)
+    name = "gokhan"
+    print('?name=%s' % name)
 
     # my_list = [1, 2]
     # print(*my_list)
@@ -466,6 +476,7 @@ def main() -> None:
     #               IndexError, AttributeError, NameError, AssertionError, StopIteration, ArithmeticError, 
     #               ZeroDivisionError, NotImplementedError, RuntimeError, SystemError
 
+    
     print("done", end="\n")
     # vnenv set python interpreter
     # Control + L, Command + Click
@@ -538,7 +549,6 @@ def f(*args: int, **kwargs: int):
 #     func()
 # def callable(callable: Callable[[int, int], int], a: int, b: int) -> int:
 #     return callable(a, b)
-
 
 
 if __name__ == "__main__":
