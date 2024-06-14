@@ -4,7 +4,10 @@
 # https://www.youtube.com/watch?v=OPyoXx0yA0I
 
 from typing import Any
+
+import grequests # https://github.com/spyoungtech/grequests/blob/master/README.rst
 import requests
+from requests.exceptions import Timeout, ConnectionError, ConnectTimeout, HTTPError
 import httpx
 import aiohttp
 import asyncio

@@ -27,19 +27,21 @@ from datetime import datetime, UTC
 import time
 import string
 
-from functools import reduce
+from functools import reduce, partial
 import traceback
-
 from operator import add, sub, mul, itemgetter, attrgetter, methodcaller
 
-# del len id any/all is/not in/not sorted reversed isinstance min max pow round floor enumerate map filter reduce zip
+# psycopg
+# None del len type id any/all is/not in/not sorted reversed isinstance min max pow round floor enumerate map filter reduce zip
+# for index, req in enumerate(requests):
+# ImportError RuntimeError
+# self.assertEqual assertLess assertTrue assertIsNone assertIsInstance
 
 # print('?name=%s' % name)
 
 # def httpbin(*suffix):
 #     """Returns url for HTTPBIN resource."""
 #     return HTTPBIN_URL + '/'.join(suffix)
-
 
 # print(dir(random))
 # from . import database as db
@@ -455,6 +457,9 @@ def main() -> None:
     # print(*my_list)
     # l1, l2 = my_list
     # print(l1, l2)
+
+
+
 
     # import builtins
     # print(dir(builtins))
