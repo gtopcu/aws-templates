@@ -467,6 +467,12 @@ def main() -> None:
     # sys.path.append(os.path.abspath(module_path))
     # sys.version
 
+    # import sys
+    # from pip._internal import main
+    # main(['install', '-I', '-q', 'boto3', '--target', '/tmp/', '--no-cache-dir', '--disable-pip-version-check'])
+    # sys.path.insert(0,'/tmp/')
+    # import boto3
+
     # traceback.print_stack()
     # traceback.print_exc()
     # traceback.print_exception(type(err), err, err.__traceback__)

@@ -1,5 +1,9 @@
 from typing import Self
 class Human:
+
+    def __new__(cls, name: str) -> Self:
+        super().__new__(cls)
+
     def __init__(self, name: str, age: int, jobs:list[str]=None) -> None:
         self.name = name
         self.age = age
