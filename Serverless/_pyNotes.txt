@@ -33,6 +33,7 @@ source venv/bin/activate
 pip list | freeze
 pip freeze > requirements.txt
 python -m pip install --upgrade pip
+pip install . (must have 'setup.py' or 'pyproject.toml')
 pip install -r requirements.txt -t dependencies (--target)  
 pip3 install --no-cache-dir -r requirements.txt
 (cd dependencies ; zip ../aws_lambda_artifact.zip -r . ; zip aws_lambda_artifact.zip -u main.py)

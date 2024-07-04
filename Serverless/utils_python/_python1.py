@@ -54,6 +54,8 @@
 # # functional syntax
 # # Color = Enum('Color', ['RED', 'GREEN', 'BLUE'])
 
+# python(str, Enum)
+
 # class Role(IntEnum): # IntFlag
 #     AUTHOR = auto() # object()
 #     EDITOR = auto()
