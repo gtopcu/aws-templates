@@ -1,0 +1,16 @@
+
+𝗦𝗤𝗟𝗔𝗹𝗰𝗵𝗲𝗺𝘆:
+
+1. 𝗱𝗲𝗰𝗹𝗮𝗿𝗮𝘁𝗶𝘃𝗲_𝗯𝗮𝘀𝗲(): Define your database models in a clean, object-oriented way
+2. 𝗖𝗼𝗹𝘂𝗺𝗻: Create table columns with specific data types and constraints
+3. 𝗿𝗲𝗹𝗮𝘁𝗶𝗼𝗻𝘀𝗵𝗶𝗽(): Define relationships between your models (one-to-many, many-to-many)
+4. 𝘀𝗲𝘀𝘀𝗶𝗼𝗻.𝗮𝗱𝗱(), 𝘀𝗲𝘀𝘀𝗶𝗼𝗻.𝗰𝗼𝗺𝗺𝗶𝘁(): Add objects to your database and save changes
+5. 𝘀𝗲𝘀𝘀𝗶𝗼𝗻.𝗾𝘂𝗲𝗿𝘆(): Construct powerful queries to retrieve data
+
+𝗔𝗹𝗲𝗺𝗯𝗶𝗰:
+
+1. 𝗮𝗹𝗲𝗺𝗯𝗶𝗰 𝗶𝗻𝗶𝘁: Initialize Alembic in your project
+2. 𝗮𝗹𝗲𝗺𝗯𝗶𝗰 𝗿𝗲𝘃𝗶𝘀𝗶𝗼𝗻 --𝗮𝘂𝘁𝗼𝗴𝗲𝗻𝗲𝗿𝗮𝘁𝗲: Automatically generate migration scripts based on changes to your models
+3. 𝗮𝗹𝗲𝗺𝗯𝗶𝗰 𝘂𝗽𝗴𝗿𝗮𝗱𝗲 𝗵𝗲𝗮𝗱: Apply all pending migrations to your database
+4. 𝗮𝗹𝗲𝗺𝗯𝗶𝗰 𝗱𝗼𝘄𝗻𝗴𝗿𝗮𝗱𝗲 -𝟭: Roll back the last migration
+5. 𝗮𝗹𝗲𝗺𝗯𝗶𝗰 𝗵𝗶𝘀𝘁𝗼𝗿𝘆: View a list of all migrations
