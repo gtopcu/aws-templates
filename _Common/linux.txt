@@ -2,8 +2,14 @@
 Linux Commands:
 https://www.xmind.net/m/WwtB/#
 
+
 echo $PATH
 export PATH=$PATH:/usr/local/go/bin
+
+chmod u+rwx keypair.pem
+chmod 400 ~/ssh/mypair.pem 
+ssh -i ~/ssh/mypair.pem ec2-user@192.168.1.1
+.aws /etc/hosts, var/log
 
 **************************** Cron ****************************
 
@@ -210,15 +216,17 @@ apt-get update && apt-get install --no-install-recommends --no-install-suggests 
              php7.4-fpm \
              php7.4-xmlwriter \
              ..
+apt(-get) update -y
 apt(-get) install aptitude
-apt(-get) update
 apt(-get) ugrade
 apt(-get) remove
+
+sysctl enable | disable apache
+sysctl start | stop apache
 
 aptitude install
 aptitude upgrade
 aptitude search xx
-
 
 **************************** Network ****************************
 

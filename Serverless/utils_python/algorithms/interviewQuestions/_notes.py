@@ -8,6 +8,10 @@
 
 # --------------------------------------------------------------------------------------------
 
+# import os
+# os.environ['AWS_ACCESS_KEY_ID'] = '...'
+# os.getenv('AWS_SECRET_ACCESS_KEY', 'default')
+
 # BaseException ->     
 #   Exception -> SystemExit     
 #   StandardError -> ValueError: int("A"), KeyError: dict['key1'], TypeError: str[0]='a',     
@@ -33,7 +37,8 @@
 #   return self.name == other.name and self.age == other.age    self.__dict__ == other.__dict__
 # def __repr__(self) -> str:         r
 #   return f"SampleClass(name={self.name}, age={self.age})"
-# @property def total(self):     
+# @property 
+# def total(self):     
 #   return self.item_price * self.item_count
 
 # mylist = [*range(3)]
@@ -46,7 +51,10 @@
 # r: slice = slice(None, None, -1)
 # print(my_list[r])
 
-# set() tuple(1, ) tuple((1,2))mytuple = tuple((1, 2))x, y = mytuple # unpackingtuple3 = tuple1 + tuple2
+# set() tuple(1, ) tuple((1,2))
+# mytuple = tuple((1, 2))
+# x, y = mytuple # unpacking
+# tuple3 = tuple1 + tuple2
 # mylist.pop(1) -> Any: IndexError# mydict.popitem() -> Any# mydict.pop("key1") -> Any: KeyError# myset.pop() -> Any# myset.remove(element) -> None: KeyError# myset.discard(element) -> None: No error
 # iterator = (x for x in range(6))print(next(iterator))for i in iterator:        print(i)
 # mylist1 = [1,2,3]
