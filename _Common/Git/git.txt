@@ -25,7 +25,7 @@ git switch branch
 git remote add origin git@github.com:gtopcu/aws-templates.git
 git remote add origin https://github.com/gtopcu/python_lambda
 git fetch
-git pull
+git pull --autostash
 git push -u origin main --force
 git rebase upstream_branch
 git reset --soft HEAD~X       # Change to the number after HEAD~ depending on the commits you want to squash
