@@ -20,10 +20,10 @@ docker run myimage printenv
 # --------------------------------------------------------------------
 
 FROM ubuntu:12.04
+
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install dependencies
-
 RUN apt-get update -y
 RUN apt-get install -y apache2
 
