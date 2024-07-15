@@ -209,25 +209,6 @@ curl-minimal
 gnupg2-minimal
 dnf install node
 
-************************** apt-get/yum ***************************
-
---Ubuntu
-apt-get update && apt-get install --no-install-recommends --no-install-suggests -y \
-             php7.4-fpm \
-             php7.4-xmlwriter \
-             ..
-apt(-get) update -y
-apt(-get) install aptitude
-apt(-get) ugrade
-apt(-get) remove
-
-sysctl enable | disable apache
-sysctl start | stop apache
-
-aptitude install
-aptitude upgrade
-aptitude search xx
-
 **************************** Network ****************************
 
 sudo sysctl network restart
@@ -238,6 +219,7 @@ netstat -tupl
 netstat -r
 whatis ip
 cat /etc/resolv.conf -> DNS config
+ip a
 ip route show
 ip addr
 ip addr show -> list network interfaces

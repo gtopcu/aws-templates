@@ -24,8 +24,8 @@ FROM ubuntu:12.04
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install dependencies
-RUN apt-get update -y
-RUN apt-get install -y apache2
+RUN apt update -y
+RUN apt install -y apache2
 
 # Install apache and write hello world message
 RUN echo "Hello Cloud Gurus!!!! This web page is running in a Docker container!" > /var/www/index.html

@@ -1,0 +1,42 @@
+
+
+docker run -i -t ubuntu bash
+
+ip a
+sudo passwd root -> generate password for root
+
+------------------------------------------------------------------------------------------------
+SSH - OpenSSH enabled after Ubuntu 18
+------------------------------------------------------------------------------------------------
+
+ssh username@ip_address
+chmod 400 keypair.pem
+ssh -i keypair.pem username@ip_address
+
+ssh-keygen
+ssh-copy-id -> to copy public key to the server ~/.ssh
+
+~/.ssh/authorized_keys
+~/.ssh/id_rsa.pub
+~/.ssh/id_rsa
+
+cat ~/.ssh/id_rsa.pub | ssh username@remote_host "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
+sudo nano /etc/ssh/sshd_config
+PasswordAuthentication no
+
+sudo apt update -y
+sudo apt install -y openssh-server
+sudo systemctl status ssh
+sudo systemctl start stop restart ssh
+sudo systemctl enable --now ssh
+sudo systemctl disable --now ssh
+sudo ufw allow ssh
+sudo ufw deny 22/tcp
+
+
+
+
+
+
+
+

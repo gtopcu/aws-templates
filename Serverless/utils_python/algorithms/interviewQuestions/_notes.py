@@ -1,10 +1,22 @@
 
 # export PATH=$PATH:/usr/local/go/bin
-# git branch -l remove checkout switch
 # chmod u+rwx keypair.pem
 # chmod 400
 # ssh -i keypair.pem ec2-user@192.168.1.1
 # .aws /etc/hosts, var/log
+
+# for _ in range(n)
+# python(str, Enum)
+
+# mydict = dict(name='gokhan')
+# mydict["address"] = "istanbul"
+# print(mydict.get("address", "none"))
+# print(mydict.pop('name', None))
+# print(mydict.popitem())
+
+# mylist = [1, 2, 3]
+# print(*mylist)
+# mylist.pop()
 
 # --------------------------------------------------------------------------------------------
 
@@ -55,8 +67,16 @@
 # mytuple = tuple((1, 2))
 # x, y = mytuple # unpacking
 # tuple3 = tuple1 + tuple2
-# mylist.pop(1) -> Any: IndexError# mydict.popitem() -> Any# mydict.pop("key1") -> Any: KeyError# myset.pop() -> Any# myset.remove(element) -> None: KeyError# myset.discard(element) -> None: No error
-# iterator = (x for x in range(6))print(next(iterator))for i in iterator:        print(i)
+# mylist.pop(1) -> Any: IndexError
+# mydict.popitem() -> Any
+# mydict.pop("key1") -> Any: KeyError
+# myset.pop() -> Any
+# myset.remove(element) -> None: KeyError
+# myset.discard(element) -> None: No error
+# iterator = (x for x in range(6))
+# print(next(iterator))
+# for i in iterator:        
+#   print(i)
 # mylist1 = [1,2,3]
 # mylist2 = [4,5,6]
 # print(dict(zip(mylist1, mylist2)))
