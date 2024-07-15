@@ -34,6 +34,9 @@ docker history myApp:10
 
 docker run --name local-db --env-file ./.env -d -p 5432:5432 postgres:latest
 
+nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://127.0.0.1:2375 --storage-driver=overlay2 &
+timeout 15 sh -c "until docker info; do echo .; sleep 1; done"
+
 docker build -t getting-started .
 docker run --name getting-started
 docker run -dp 80:80 getting-startedrm
@@ -53,12 +56,15 @@ docker builder prune -f -a        : Clear image cache
 docker tag getting-started gtopcu/getting-started
 docker push gtopcu/getting-started:tagname
 
+aws ecr get-login --no-include-email --region $AWS_REGION
+
 docker cp
 docker start/stop/kill
 docker exec -it <container-id> sh 
 docker exec <container-id> cat /data.txt
 docker logs -f
 docker login -u gtopcu
+docker logout
 docker scan getting-started
 docker image history
 

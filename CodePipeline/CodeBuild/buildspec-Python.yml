@@ -1,0 +1,56 @@
+
+# https://medium.com/@susandarhtet1998/ci-cd-on-aws-simple-hands-on-python-flask-app-de89016f3b71
+
+#buildspec.yml
+version: 0.2
+
+env:
+  variables:
+    AWS_REGION: "ap-southeast-1"
+    REPOSITORY_URL: "accountid.dkr.ecr.ap-southeast-1.amazonaws.com/demoapp"
+    IMAGE_TAG: "master"
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.12
+    commands:
+      - echo "Starting install phase"
+      - pip install --upgrade awscli
+      - echo "Installing Docker"
+      - curl -fsSL https://get.docker.com -o get-docker.sh
+      - sh get-docker.sh
+      - echo "Starting Docker daemon"
+      - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://127.0.0.1:2375 --storage-driver=overlay2 &
+      - timeout 15 sh -c "until docker info; do echo .; sleep 1; done"
+      - echo "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID"
+      - echo "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY"
+      - echo "AWS_REGION=$AWS_REGION"
+      - aws configure set aws_access_key_id "$AWS_ACCESS_KEY_ID"
+      - aws configure set aws_secret_access_key "$AWS_SECRET_ACCESS_KEY"
+      - aws configure set region "$AWS_REGION"
+  pre_build:
+    commands:
+      - echo "Logging in to Amazon ECR"
+      - $(aws ecr get-login --no-include-email --region "$AWS_REGION")
+  build:
+    commands:
+      - echo "Building the Docker image"
+      - docker build -t $REPOSITORY_URL:$IMAGE_TAG .
+      - echo "Pushing the Docker image"
+      - docker push $REPOSITORY_URL:$IMAGE_TAG
+  post_build:
+    commands:
+      - echo "Docker logout"
+      - docker logout $REPOSITORY_URL
+
+artifacts:
+  files:
+    - appspec.yml
+    - deploy.sh
+    - '**/*'
+  discard-paths: yes
+
+cache:
+  paths:
+    - '/root/.cache/pip/**/*'

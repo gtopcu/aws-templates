@@ -1,4 +1,5 @@
-#Install CodeDeploy agent on your EC2 instance:
+
+# AWS Linux2
 sudo yum update
 sudo yum install ruby
 sudo yum install wget
@@ -8,6 +9,18 @@ chmod +x ./install
 sudo ./install auto
 sudo service codedeploy-agent status
 
-#Create your application.zip and load it into CodeDeploy:
+# Create your application.zip and load it into CodeDeploy:
 aws deploy create-application --application-name mywebapp
 aws deploy push --application-name mywebapp --s3-location s3://<MY_BUCKET_NAME>/webapp.zip --ignore-hidden-files
+
+# Ubuntu
+$ sudo apt-get update
+$ sudo apt-get install ruby -y
+$ sudo apt-get install wget -y
+$ wget https://aws-codedeploy-ap-southeast-1.s3.amazonaws.com/latest/install
+$ sudo chmod +x ./install
+$ sudo ./install auto
+$ sudo service codedeploy-agent start
+
+# Logs
+$ tail -f /var/log/aws/codedeploy-agent/codedeploy-agent.log

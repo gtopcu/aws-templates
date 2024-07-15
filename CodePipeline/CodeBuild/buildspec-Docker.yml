@@ -1,24 +1,36 @@
 version: 0.2 
-#env: 
-  #variables: 
-     # key: "value" 
-     # key: "value" 
-  #parameter-store: 
-     # key: "value" 
-     # key: "value" 
+
+env:
+  variables:
+    AWS_REGION: "us-east-1"
+    REPOSITORY_URL: "accountid.dkr.ecr.us-east-1.amazonaws.com/demoapp"
+    IMAGE_TAG: "master"
 phases: 
   install:
     runtime-versions:
         docker: 18     
     commands: 
+      - echo "Starting install phase"
+      # - echo "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID"
+      # - echo "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY"
+      - echo "AWS_REGION=$AWS_REGION" 
+      - echo "REPOSITORY_URL=$REPOSITORY_URL"
+      - echo "IMAGE_TAG=$IMAGE_TAG"
+      # - aws configure set aws_access_key_id "$AWS_ACCESS_KEY_ID"
+      # - aws configure set aws_secret_access_key "$AWS_SECRET_ACCESS_KEY"
+      # - aws configure set region "$AWS_REGION"
+      # - echo "Installing Docker"
+      # - curl -fsSL https://get.docker.com -o get-docker.sh
+      # - sh get-docker.sh
+      - echo "Starting Docker daemon"
       - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://127.0.0.1:2375 --storage-driver=overlay2&
       - timeout 15 sh -c "until docker info; do echo .; sleep 1; done"
   pre_build: 
-    commands: 
+    commands:
     - echo Logging in to Amazon ECR.... 
     - aws --version
     # update the following line with your own region
-    - $(aws ecr get-login --no-include-email --region eu-central-1) 
+    - $(aws ecr get-login --no-include-email --region $AWS_REGION) 
   build: 
     commands: 
     - echo Build started on `date` 
@@ -26,13 +38,16 @@ phases:
     # update the following line with the name of your own ECR repository
     - docker build -t mydockerrepo . 
     # update the following line with the URI of your own ECR repository (view the Push Commands in the console)
-    - docker tag mydockerrepo:latest 757250003982.dkr.ecr.eu-central-1.amazonaws.com/mydockerrepo:latest 
+    - docker tag $REPOSITORY_URL:$IMAGE_TAG 
   post_build: 
     commands: 
     - echo Build completed on `date` 
     - echo pushing to repo
     # update the following line with the URI of your own ECR repository
-    - docker push 757250003982.dkr.ecr.eu-central-1.amazonaws.com/mydockerrepo:latest 
+    - docker push $REPOSITORY_URL
+    - echo "Docker logout"
+    - docker logout $REPOSITORY_URL
+
 #artifacts: 
     # - location 
     # - location 
