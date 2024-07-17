@@ -24,10 +24,10 @@ Debugging and Troubleshooting
 
 𝐤𝐮𝐛𝐞𝐜𝐭𝐥 𝐥𝐨𝐠𝐬
 kubectl logs my-pod
-kubectl logs my-pod -c my-container (specify a container
+kubectl logs my-pod -c my-container (specify a container)
 
 𝐤𝐮𝐛𝐞𝐜𝐭𝐥 𝐞𝐱𝐞𝐜
-kubectl exec -it my-pod -- bash (interactive shell
+kubectl exec -it my-pod -- bash (interactive shell)
 
 𝐤𝐮𝐛𝐞𝐜𝐭𝐥 𝐩𝐨𝐫𝐭-𝐟𝐨𝐫𝐰𝐚𝐫𝐝
 kubectl port-forward my-pod 8080:8
@@ -51,3 +51,40 @@ kubectl scale deployment/my-deployment --replicas
 
 𝐤𝐮𝐛𝐞𝐜𝐭𝐥 𝐞𝐝𝐢𝐭
 kubectl edit deployment my-deployment
+
+
+
+--------------------------------------------------------------------------------
+
+
+𝙠𝙪𝙗𝙚𝙘𝙩𝙡 𝙚𝙭𝙚𝙘 -𝙞𝙩 [𝙥𝙤𝙙-𝙣𝙖𝙢𝙚] -- /𝙗𝙞𝙣/𝙗𝙖𝙨𝙝 - When you need to access a pod shell 
+
+𝙠𝙪𝙗𝙚𝙘𝙩𝙡 𝙡𝙤𝙜𝙨 [𝙥𝙤𝙙-𝙣𝙖𝙢𝙚] - When you need to fetch pod logs 
+
+𝙠𝙪𝙗𝙚𝙘𝙩𝙡 𝙜𝙚𝙩 𝙚𝙫𝙚𝙣𝙩𝙨- When you need to check recent events
+ 
+𝙠𝙪𝙗𝙚𝙘𝙩𝙡 𝙩𝙤𝙥 𝙥𝙤𝙙𝙨/𝙣𝙤𝙙𝙚𝙨 - When you need to monitor pod/node resource usage 
+
+𝙠𝙪𝙗𝙚𝙘𝙩𝙡 𝙙𝙚𝙨𝙘𝙧𝙞𝙗𝙚 𝙥𝙤𝙙 [𝙥𝙤𝙙-𝙣𝙖𝙢𝙚]/𝙣𝙤𝙙𝙚 [𝙣𝙤𝙙𝙚-𝙣𝙖𝙢𝙚] - When you need detailed pod/node information 
+
+𝙠𝙪𝙗𝙚𝙘𝙩𝙡 𝙥𝙤𝙧𝙩-𝙛𝙤𝙧𝙬𝙖𝙧𝙙 [𝙥𝙤𝙙-𝙣𝙖𝙢𝙚] [𝙡𝙤𝙘𝙖𝙡-𝙥𝙤𝙧𝙩]:[𝙥𝙤𝙙-𝙥𝙤𝙧𝙩] - When you need to forward a port to a pod 
+
+𝙠𝙪𝙗𝙚𝙘𝙩𝙡 𝙘𝙥 [𝙥𝙤𝙙-𝙣𝙖𝙢𝙚]:[𝙥𝙖𝙩𝙝] [𝙡𝙤𝙘𝙖𝙡-𝙥𝙖𝙩𝙝]- When you need to copy files from pod to local 
+
+𝙠𝙪𝙗𝙚𝙘𝙩𝙡 𝙧𝙤𝙡𝙡𝙤𝙪𝙩 𝙨𝙩𝙖𝙩𝙪𝙨 𝙙𝙚𝙥𝙡𝙤𝙮𝙢𝙚𝙣𝙩 [𝙙𝙚𝙥𝙡𝙤𝙮𝙢𝙚𝙣𝙩-𝙣𝙖𝙢𝙚] - When you need to check deployment rollout status 
+
+𝙠𝙪𝙗𝙚𝙘𝙩𝙡 𝙙𝙧𝙖𝙞𝙣 [𝙣𝙤𝙙𝙚-𝙣𝙖𝙢𝙚] - When you need to prepare a node for maintenance 
+
+𝙠𝙪𝙗𝙚𝙘𝙩𝙡 𝙘𝙤𝙧𝙙𝙤𝙣 [𝙣𝙤𝙙𝙚-𝙣𝙖𝙢𝙚] - When you need to mark a node as unschedulable 
+
+𝙠𝙪𝙗𝙚𝙘𝙩𝙡 𝙪𝙣𝙘𝙤𝙧𝙙𝙤𝙣 [𝙣𝙤𝙙𝙚-𝙣𝙖𝙢𝙚] - When you need to mark a node as schedulable 
+ 
+𝙠𝙪𝙗𝙚𝙘𝙩𝙡 𝙩𝙖𝙞𝙣𝙩 𝙣𝙤𝙙𝙚𝙨 [𝙣𝙤𝙙𝙚-𝙣𝙖𝙢𝙚] 𝙠𝙚𝙮=𝙫𝙖𝙡𝙪𝙚:𝙉𝙤𝙎𝙘𝙝𝙚𝙙𝙪𝙡𝙚 - When you need to taint a node 
+
+𝙠𝙪𝙗𝙚𝙘𝙩𝙡 𝙚𝙙𝙞𝙩 [𝙧𝙚𝙨𝙤𝙪𝙧𝙘𝙚] [𝙣𝙖𝙢𝙚] - When you need to edit a resource configuration 
+
+𝙠𝙪𝙗𝙚𝙘𝙩𝙡 𝙙𝙚𝙨𝙘𝙧𝙞𝙗𝙚 𝙨𝙚𝙧𝙫𝙞𝙘𝙚 [𝙨𝙚𝙧𝙫𝙞𝙘𝙚-𝙣𝙖𝙢𝙚]/𝙞𝙣𝙜𝙧𝙚𝙨𝙨 [𝙞𝙣𝙜𝙧𝙚𝙨𝙨-𝙣𝙖𝙢𝙚]/𝙝𝙥𝙖 [𝙝𝙥𝙖-𝙣𝙖𝙢𝙚] - When you need detailed service/ingress/HPA information 
+
+𝙠𝙪𝙗𝙚𝙘𝙩𝙡 𝙜𝙚𝙩 𝙙𝙖𝙚𝙢𝙤𝙣𝙨𝙚𝙩𝙨- When you need to check daemonset status 
+
+𝙠𝙪𝙗𝙚𝙘𝙩𝙡 𝙜𝙚𝙩 𝙨𝙚𝙘𝙧𝙚𝙩𝙨 - When you need to check secret status
