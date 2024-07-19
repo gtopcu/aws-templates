@@ -1,10 +1,13 @@
 
 
+Build a CI/CD Deployment Pipeline, and Monitor a Kubernetes Cluster on Amazon EKS
+https://cmakkaya.medium.com/step-by-step-tutorial-to-set-up-build-a-ci-cd-deployment-pipeline-and-monitor-a-kubernetes-f210c850a8e1
+
 𝐤𝐮𝐛𝐞𝐜𝐭𝐥 𝐠𝐞𝐭
 kubectl get pods (list pods)
 kubectl get deployments (list deployments)
 kubectl get services (list services)
-kubectl get all (list most resources in a namespace
+kubectl get all (list most resources in a namespace)
 
 𝐤𝐮𝐛𝐞𝐜𝐭𝐥 𝐝𝐞𝐬𝐜𝐫𝐢𝐛𝐞
 kubectl describe pod my-pod
@@ -30,11 +33,11 @@ kubectl logs my-pod -c my-container (specify a container)
 kubectl exec -it my-pod -- bash (interactive shell)
 
 𝐤𝐮𝐛𝐞𝐜𝐭𝐥 𝐩𝐨𝐫𝐭-𝐟𝐨𝐫𝐰𝐚𝐫𝐝
-kubectl port-forward my-pod 8080:8
+kubectl port-forward my-pod 8080:80
 
 𝐤𝐮𝐛𝐞𝐜𝐭𝐥 𝐭𝐨𝐩
 kubectl top pod (pod resource usage) 
-kubectl top node (node resource usage
+kubectl top node (node resource usage)
 
 𝐤𝐮𝐛𝐞𝐜𝐭𝐥 𝐞𝐱𝐩𝐥𝐚𝐢𝐧
 kubectl explain pod 
@@ -44,7 +47,7 @@ Managing Workloads
 
 𝐤𝐮𝐛𝐞𝐜𝐭𝐥 𝐫𝐨𝐥𝐥𝐨𝐮𝐭
 kubectl rollout status deployment/my-deployment 
-kubectl rollout undo deployment/my-deployme
+kubectl rollout undo deployment/my-deployment
 
 𝐤𝐮𝐛𝐞𝐜𝐭𝐥 𝐬𝐜𝐚𝐥𝐞
 kubectl scale deployment/my-deployment --replicas

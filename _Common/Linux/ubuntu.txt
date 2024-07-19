@@ -1,9 +1,23 @@
 
 
-docker run -i -t ubuntu bash
+docker run -it ubuntu bash
 
-ip a
 sudo passwd root -> generate password for root
+
+sudo apt list --installed
+sudo apt update -y
+sudo apt install --no-install-recommends ufw
+sudo systemctl enable disable status start stop restart --now ssh
+
+# https://www.youtube.com/watch?v=KJUVzg0fdnQ
+# https://sistemdostu.com/haproxy-nedir-nasil-kurulur
+sudo apt install --no-install-recommends software-properties-common
+add-apt-repository ppa:vbernat/haproxy-2.6
+apt install haproxy-2.6.\*
+sudo systemctl status | enable haproxy
+nano /etc/haproxy/haproxy.cfg
+systemctl restart haproxy
+sudo haproxy -f /etc/haproxy/haproxy.cfg - without restart
 
 ------------------------------------------------------------------------------------------------
 SSH - OpenSSH enabled after Ubuntu 18
@@ -24,12 +38,13 @@ cat ~/.ssh/id_rsa.pub | ssh username@remote_host "mkdir -p ~/.ssh && cat >> ~/.s
 sudo nano /etc/ssh/sshd_config
 PasswordAuthentication no
 
-sudo apt update -y
 sudo apt install -y openssh-server
 sudo systemctl status ssh
 sudo systemctl start stop restart ssh
 sudo systemctl enable --now ssh
 sudo systemctl disable --now ssh
+
+sudo apt install -y ufw
 sudo ufw allow ssh
 sudo ufw deny 22/tcp
 

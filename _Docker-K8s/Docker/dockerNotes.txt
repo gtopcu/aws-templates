@@ -5,10 +5,6 @@ https://labs.play-with-docker.com/
 https://www.youtube.com/watch?v=bKFMS5C4CG0
 https://devtron.ai/blog/cmd-and-entrypoint-differences/
 
-Top 8 Docker Best Practices for using Docker in Production
-https://www.youtube.com/watch?v=8vXoMqWgbQQ
-
-
 https://stackoverflow.com/questions/21553353/what-is-the-difference-between-cmd-and-entrypoint-in-a-dockerfile
 Dockerfile should specify at least one of CMD or ENTRYPOINT commands.
 ENTRYPOINT should be defined when using the container as an executable.
@@ -25,6 +21,9 @@ CMD ["echo", "Hello World"] (exec form)
 ENTRYPOINT echo "Hello World" (shell form)
 ENTRYPOINT ["echo", "Hello World"] (exec form)
 
+Top 8 Docker Best Practices for using Docker in Production
+https://www.youtube.com/watch?v=8vXoMqWgbQQ
+
 sudo apt install docker.io -y
 
 docker --version
@@ -32,15 +31,17 @@ docker ps
 docker image ls
 docker history myApp:10
 
+docker build -t container_name .
+docker run --name container_name
+docker run -dp 80:80 container_name
+
 docker run --name local-db --env-file ./.env -d -p 5432:5432 postgres:latest
+docker run -it --entrypoint /bin/bash
+docker exec -it container_name /bin/bash
+docker attach container_name
 
 nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://127.0.0.1:2375 --storage-driver=overlay2 &
 timeout 15 sh -c "until docker info; do echo .; sleep 1; done"
-
-docker build -t getting-started .
-docker run --name getting-started
-docker run -dp 80:80 getting-startedrm
-docker run -dp 3000:3000 gtopcu/getting-started
 
 docker create -> create a container without starting it
 doccker run -rm [image] -> create & start a container & remove after it stops

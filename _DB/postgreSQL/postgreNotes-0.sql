@@ -4,7 +4,7 @@ service postgresql start/stop
 brew services start/stop postgresql
 
 /Library/PostgreSQL/16/scripts/runpsql.sh; exit
-psql -hlocalhost -U postgres
+psql -h localhost -U postgres
 database: postgres
 port: 5432
 
@@ -26,6 +26,26 @@ JSON-JSONB / XML / BYTEA(1GB)
 SELECT typname, typlen 
 FROM pg_type 
 WHERE typname ~ '^timestamp';
+
+CREATE EXTENSION IF NOT EXISTS vector;
+ALTER TABLE pull_request_github_events
+ADD COLUMN embedding vector(1024);
+
+CREATE TABLE IF NOT EXISTS events (
+	event_id BIGINT,
+	event_time TIMESTAMPTZ NOT NULL,
+	pr_is_merged BOOL,
+);
+
+SELECT
+    time_bucket ('1 day', event_time) AS bucket,
+    count(*) AS star_count
+FROM events
+WHERE
+    NOW() - INTERVAL '30 days' <= event_time
+    AND LOWER(repo_name) = 'timescale/timescaledb'
+GROUP BY bucket
+ORDER BY bucket DESC;
 
 
 CREATE TABLE mailing_list (

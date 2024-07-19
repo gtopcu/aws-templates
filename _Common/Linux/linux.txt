@@ -2,7 +2,6 @@
 Linux Commands:
 https://www.xmind.net/m/WwtB/#
 
-
 echo $PATH
 export PATH=$PATH:/usr/local/go/bin
 
@@ -38,10 +37,10 @@ clear
 history
 pwd
 printenv
-ls -l -a
+ls -l -a -s
 ls -a | grep -i Doc
 ls -ltr pythonX-bash.py
-du -a /dir/ | sort -n -r | head -n 20   -> 20 largest files in /dir/ ascending
+du -a /dir | sort -n -r | head -n 20   -> 20 largest files ascending
 man <command>
 cd ..
 cd ~ (go to /root)
@@ -112,11 +111,12 @@ finger user
 hostname
 hostname -i
 hostnamectl set-hostname k8s-control
+du: file sizes, du -sh: total size
 lsblk: list disks, / means root disk
 df -h : free disk space
 df -T : filesystem type of your partitions
 growpart /dev/nvme0n1 1
-du: file sizes
+
 free -m : free memory
 top: CPU usage
 htop: system monitor (sudo yum install htop -y)
@@ -274,12 +274,13 @@ vi (w):q!
 ----------------------------------------------------------------
 Install UFW firewall
 ----------------------------------------------------------------
-sudo apt-get install ufw
+sudo apt install -y ufw
 By default, UFW is set to block all incoming connections
 sudo ufw allow ssh
 sudo ufw allow http
 sudo ufw allow https
-sudo ufw enable
+sudo ufw deny 22/tcp
+sudo ufw enable | disable
 
 
 **************************** Other ****************************
