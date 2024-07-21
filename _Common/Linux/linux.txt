@@ -10,6 +10,8 @@ chmod 400 ~/ssh/mypair.pem
 ssh -i ~/ssh/mypair.pem ec2-user@192.168.1.1
 .aws /etc/hosts, var/log
 
+curl api.ipify.org
+
 **************************** Cron ****************************
 
 https://crontab.guru/

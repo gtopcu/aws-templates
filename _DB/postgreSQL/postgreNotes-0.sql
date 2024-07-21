@@ -4,7 +4,7 @@ service postgresql start/stop
 brew services start/stop postgresql
 
 /Library/PostgreSQL/16/scripts/runpsql.sh; exit
-psql -h localhost -U postgres
+psql -hlocalhost -U postgres
 database: postgres
 port: 5432
 
@@ -14,6 +14,9 @@ timing on
 SHOW TIMEZONE;
 SET timezone = 'America/Los_Angeles';
 
+AlloyDB
+SET google_columnar_engine.enable_columnar_scan=off;
+SHOW google_columnar_engine.enable_columnar_scan;
 
 https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-bytea-data-type/
 
