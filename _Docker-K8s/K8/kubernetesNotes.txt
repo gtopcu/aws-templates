@@ -3,11 +3,16 @@
 Build a CI/CD Deployment Pipeline, and Monitor a Kubernetes Cluster on Amazon EKS
 https://cmakkaya.medium.com/step-by-step-tutorial-to-set-up-build-a-ci-cd-deployment-pipeline-and-monitor-a-kubernetes-f210c850a8e1
 
+kubeconfig -> /Users/gtopcu/.kube/config
+
 𝐤𝐮𝐛𝐞𝐜𝐭𝐥 𝐠𝐞𝐭
-kubectl get pods (list pods)
-kubectl get deployments (list deployments)
-kubectl get services (list services)
-kubectl get all (list most resources in a namespace)
+kubectl get nodes
+kubectl get ns
+kubectl get pod
+kubectl get pods
+kubectl get deployments
+kubectl get services
+kubectl get all
 
 𝐤𝐮𝐛𝐞𝐜𝐭𝐥 𝐝𝐞𝐬𝐜𝐫𝐢𝐛𝐞
 kubectl describe pod my-pod
