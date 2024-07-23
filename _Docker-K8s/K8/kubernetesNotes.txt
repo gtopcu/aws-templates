@@ -6,23 +6,26 @@ https://cmakkaya.medium.com/step-by-step-tutorial-to-set-up-build-a-ci-cd-deploy
 kubeconfig -> /Users/gtopcu/.kube/config
 
 𝐤𝐮𝐛𝐞𝐜𝐭𝐥 𝐠𝐞𝐭
+kubectl get all
 kubectl get nodes
 kubectl get ns
 kubectl get pod
-kubectl get pods
+kubectl get pods -n mynamespace
 kubectl get deployments
 kubectl get services
-kubectl get all
+kubectl get svc -n mynamespace
+kubectl get secret
 
 𝐤𝐮𝐛𝐞𝐜𝐭𝐥 𝐝𝐞𝐬𝐜𝐫𝐢𝐛𝐞
 kubectl describe pod my-pod
 kubectl describe node my-nod
 
 𝐤𝐮𝐛𝐞𝐜𝐭𝐥 𝐜𝐫𝐞𝐚𝐭𝐞
-kubectl create -f my-deployment.yam
+kubectl create -f my-deployment.yaml
+kubectl create ns mynamespace
 
 𝐤𝐮𝐛𝐞𝐜𝐭𝐥 𝐚𝐩𝐩𝐥𝐲
-kubectl apply -f my-deployment.yaml (apply a deployment definition
+kubectl apply -n mynamespace -f my-deployment.yaml
 
 𝐤𝐮𝐛𝐞𝐜𝐭𝐥 𝐝𝐞𝐥𝐞𝐭𝐞
 kubectl delete pod my-pod
@@ -39,6 +42,7 @@ kubectl exec -it my-pod -- bash (interactive shell)
 
 𝐤𝐮𝐛𝐞𝐜𝐭𝐥 𝐩𝐨𝐫𝐭-𝐟𝐨𝐫𝐰𝐚𝐫𝐝
 kubectl port-forward my-pod 8080:80
+kubectl port-forward svc/myservice -n mynamespace 8080:443 --address 0.0.0.0 &
 
 𝐤𝐮𝐛𝐞𝐜𝐭𝐥 𝐭𝐨𝐩
 kubectl top pod (pod resource usage) 
