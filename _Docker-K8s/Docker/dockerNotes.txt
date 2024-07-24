@@ -35,7 +35,13 @@ docker build -t container_name .
 docker run --name container_name
 docker run -dp 80:80 container_name
 
-docker run --name local-db --env-file ./.env -d -p 5432:5432 postgres:latest
+docker run -d --name container_name -v named-volume:/data ubuntu
+docker run --name container_name -v mysql-data:/var/lib/mysql/data -> named volume
+docker run --name container_name -v /home/mount/data:/var/lib/mysql/data -> host volume
+docker run --name container_name -v /var/lib/mysql/data -> anonymous volumes ie. /var/lib/docker/volumes/random-hash/_data auto created on host
+docker run -d --name wordpress --mount source=sample-volume,target=/var/www/html wordpress
+
+docker run --name local-db --env-file ./.env -dp 5432:5432 postgres:latest
 docker run -it --entrypoint /bin/bash
 docker exec -it container_name /bin/bash
 docker attach container_name
@@ -69,17 +75,19 @@ docker logout
 docker scan getting-started
 docker image history
 
-Named Volume
+Docker Volumes (-v bind mount, -mount regular mount)
+https://refine.dev/blog/docker-volumes/#using-a-docker-volume
+docker volume create
+docker volume create --name named-volume --driver local
+docker run --name volumetest -itdp 3000:3000 -v named-volume:/etc/myappdata alpine
 docker volume -help
 docker volume ls
-docker volume inspect
-docker volume rm
-docker volume prune
-docker volume create todo-db
-docker run --name volumetest -itdp 3000:3000 -v todo-db:/etc/todos alpine
-docker exec -it volumetest sh
-docker volume inspect todo-db
+docker volume ls -f dangling=true (list volumes not used by any container)
+docker volume rm <volume>
+docker volume inspect <volume>
 
+docker volume prune
+docker exec -it volumetest sh
 
 Binding Mount Points:
 docker run -dp 3000:3000 `
@@ -97,7 +105,7 @@ docker network rm <network_name>
 docker network create todo-app-network 
 docker run -d \
     --network todo-app-network --network-alias mysql \
-    -v todo-mysql-data:/var/lib/mysql \
+    -v mysql-data:/var/lib/mysql \
     -e MYSQL_ROOT_PASSWORD=secret \
     -e MYSQL_DATABASE=todos \
     mysql:5.7
