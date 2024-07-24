@@ -3,8 +3,9 @@
 # https://www.youtube.com/watch?v=QLQsW8VbTN4
 
 """
-Spark is basically Pandas on steroids :) 
+Spark is basically Pandas on steroids :)
 - Distributed to many machines, and like Hadoop, does Map/Reduce
+- Can use S3, HDFS etc as storage
 
 Spark (originally written in Scala):
     - Distributed computing framework
@@ -13,7 +14,7 @@ Spark (originally written in Scala):
         - Java
         - Python
     - Spark SQL: SQL on Spark
-    - Spark Streaming: streaming data processing
+    - Spark Streaming: streaming data processing (ie. Kafka/Kinesis etc)
     - Spark MLlib: machine learning
 
 RDD: Resilient Distributed Dataset
