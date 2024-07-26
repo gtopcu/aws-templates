@@ -1,6 +1,10 @@
 
 https://aws.amazon.com/blogs/aws/amazon-linux-2023-a-cloud-optimized-linux-distribution-with-long-term-support/
 
+Amazon Linux 2 was based on Red Hat Enterprise Linux (RHEL) 7
+Amazon Linux 2023 will use a combination of Fedora Linux and CentOS Stream
+Amazon Linux allows no-reboot kernel security updates
+
 dnf list
 dnf install httpd
 dnf install -y python3

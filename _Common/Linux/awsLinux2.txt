@@ -1,3 +1,7 @@
+
+Based on RHEL 7
+AL2 came with Python2.7, AL2023 does not come with Python installed
+
 ------------------------------------------------------------
 EC2 Bootstrap 1 - Simple website with Apache runs as root
 ------------------------------------------------------------

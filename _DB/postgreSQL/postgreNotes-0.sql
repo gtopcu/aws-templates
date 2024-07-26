@@ -26,6 +26,15 @@ UNION / INTERSECT / EXCEPT
 TO_CHAR / CAST / CASE / COALESCE / NULLIF
 JSON-JSONB / XML / BYTEA(1GB) 
 
+Visualize with Grafana
+sql
+SELECT
+date_trunc('hour', created_at) AS hour,
+COUNT(*) AS total_users
+FROM users
+GROUP BY hour
+ORDER BY hour;
+
 SELECT typname, typlen 
 FROM pg_type 
 WHERE typname ~ '^timestamp';

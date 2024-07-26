@@ -1,5 +1,6 @@
 
 # export PATH=$PATH:/usr/local/go/bin
+# !/usr/bin/env python3
 # chmod u+rwx keypair.pem
 # chmod 400
 # ssh -i keypair.pem ec2-user@192.168.1.1
