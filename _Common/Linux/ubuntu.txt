@@ -2,8 +2,6 @@
 
 docker run -it ubuntu bash
 
-sudo passwd root -> generate password for root
-
 sudo apt list --installed
 sudo apt update -y
 sudo apt install --no-install-recommends ufw
@@ -22,6 +20,9 @@ sudo haproxy -f /etc/haproxy/haproxy.cfg - without restart
 ------------------------------------------------------------------------------------------------
 SSH - OpenSSH enabled after Ubuntu 18
 ------------------------------------------------------------------------------------------------
+
+sudo /etc/init.d/sshd start
+sudo passwd root -> generate password for root
 
 ssh username@ip_address
 chmod 400 keypair.pem

@@ -32,8 +32,10 @@ docker image ls
 docker history myApp:10
 
 docker build -t container_name .
-docker run --name container_name
-docker run -dp 80:80 container_name
+docker run --name container_name -dp 80:80
+docker run --rm --it --name container_name
+docker run --name container_name -e GROUP_ID=1 
+docker run --name local-db --env-file ./.env -dp 5432:5432 postgres:latest
 
 docker run -d --name container_name -v named-volume:/data ubuntu
 docker run --name container_name -v mysql-data:/var/lib/mysql/data -> named volume
@@ -41,7 +43,6 @@ docker run --name container_name -v /home/mount/data:/var/lib/mysql/data -> host
 docker run --name container_name -v /var/lib/mysql/data -> anonymous volumes ie. /var/lib/docker/volumes/random-hash/_data auto created on host
 docker run -d --name wordpress --mount source=sample-volume,target=/var/www/html wordpress
 
-docker run --name local-db --env-file ./.env -dp 5432:5432 postgres:latest
 docker run -it --entrypoint /bin/bash
 docker exec -it container_name /bin/bash
 docker attach container_name
