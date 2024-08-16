@@ -19,6 +19,7 @@ sudo haproxy -f /etc/haproxy/haproxy.cfg - without restart
 
 ------------------------------------------------------------------------------------------------
 SSH - OpenSSH enabled after Ubuntu 18
+https://www.youtube.com/watch?v=6vTcH_kMrhU
 ------------------------------------------------------------------------------------------------
 
 sudo /etc/init.d/sshd start
@@ -35,6 +36,7 @@ ssh-copy-id -> to copy public key to the server ~/.ssh
 ~/.ssh/id_rsa.pub
 ~/.ssh/id_rsa
 
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 cat ~/.ssh/id_rsa.pub | ssh username@remote_host "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
 sudo nano /etc/ssh/sshd_config
 PasswordAuthentication no
