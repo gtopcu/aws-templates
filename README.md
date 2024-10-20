@@ -29,7 +29,7 @@ Lambda:
 - For polling errors(SQS) -> refer to SQS notes, for streaming errors(Kinesis/DynamoDB Streams) -> refer to Kinesis notes
 
 API GW:
-- 10k req/s 30sec 10MB max. Billed by million requests & cache size x hour, 1 million calls free every month for 12 months
+- 10k req/s 30sec(can raise) 10MB max. Billed by million requests & cache size x hour, 1 million calls free per month for 12 months
 - Regional, EdgeOptimized(CloudFront provides DDoS protection), Private(VPC endpoints)
 - Log request_ids in your clients
 - Direct service integration -> returns request_id for tracking
@@ -37,7 +37,7 @@ API GW:
 - API Keys & usage plans, access logging, request validaton, throttling/caching, SDK generation, OIDC authentication, canary deployments per stage
 - Set CW alarms using custom metrics & metric filters, utilize CW log insights & dashboards and X-Ray for tracing
 - Use resource policies to restrict access to AWS accounts/users, VPCs, IPs etc
-- Documentation, API keys, testing, monitization -> apiable.com, AWS DataExchange
+- Documentation, API keys, testing, monitization -> apiable.io, readme.com, AWS DataExchange
 - Lambda Authorizer uses lambda concurrency, use auth caching - 5 min to 1 hour
 - IAM auth useful for internal APIs, use WAF for public APIs
 - HTTP APIs: Up to %40 faster & %30 cheaper compared to Rest APIs. OIDC/OAuth2 & Lambda Auth. Lambda & HTTP integration, no WAF etc
@@ -208,6 +208,7 @@ S3:
 
 Cloud Formation:
 - Utilize rollback config based on CW alarms
+- Use git sync to auto-sync
 
 Cognito:
 - OpenID providers, sync lambda triggers, AI powered fraud detection
