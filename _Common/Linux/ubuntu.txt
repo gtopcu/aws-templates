@@ -22,10 +22,21 @@ SSH - OpenSSH enabled after Ubuntu 18
 https://www.youtube.com/watch?v=6vTcH_kMrhU
 ------------------------------------------------------------------------------------------------
 
+sudo apt update && sudo apt upgrade
+sudo apt install -y openssh-server
+sudo systemctl status ssh
+sudo systemctl start ssh
+sudo systemctl enable --now ssh
+sudo systemctl disable --now ssh
+sudo ufw allow ssh
+sudo ufw enable
+sudo ufw deny 22/tcp
+sudo ss -tunlp | grep ssh
+ssh username@ip_address
+
 sudo /etc/init.d/sshd start
 sudo passwd root -> generate password for root
 
-ssh username@ip_address
 chmod 400 keypair.pem
 ssh -i keypair.pem username@ip_address
 
@@ -41,15 +52,7 @@ cat ~/.ssh/id_rsa.pub | ssh username@remote_host "mkdir -p ~/.ssh && cat >> ~/.s
 sudo nano /etc/ssh/sshd_config
 PasswordAuthentication no
 
-sudo apt install -y openssh-server
-sudo systemctl status ssh
-sudo systemctl start stop restart ssh
-sudo systemctl enable --now ssh
-sudo systemctl disable --now ssh
 
-sudo apt install -y ufw
-sudo ufw allow ssh
-sudo ufw deny 22/tcp
 
 
 

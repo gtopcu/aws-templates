@@ -95,9 +95,9 @@ def read_file(filename) -> str:
         #         file.close()
 
 def json_load(file) -> Any:
-    with open(file, "r", encoding="utf-8") as f:
+    with open(file, "r", encoding="utf-8") as file:
         # (object_hook=None, parse_float=None, parse_int=None, parse_constant=None, object_pairs_hook=None)
-        return json.load(f)
+        return json.load(file)
 
 def json_loads(input) -> Any:
     return json.loads(input)
@@ -109,11 +109,11 @@ def json_dumps(obj: object, formatted: bool) -> str:
     return json.dumps(obj) 
 
 def json_dump(obj: object, file, formatted: bool) -> None:
-    with open(file, "w", encoding="utf-8") as f:
+    with open(file, "w", encoding="utf-8") as file:
         if formatted:
-            json.dump(obj, f, indent=4, sort_keys=True, separators=(". ", " = "))
+            json.dump(obj, file, indent=4, sort_keys=True, separators=(". ", " = "))
         else:
-            json.dump(obj, f)
+            json.dump(obj, file)
     
 # def save_document_to_json(file_name, doc: Document):
 #     jobj = jsonpickle.encode(doc)

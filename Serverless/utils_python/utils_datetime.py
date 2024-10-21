@@ -26,7 +26,7 @@ def get_time_iso_tz() -> str:
 # datetime.fromisocalendar(2020, 5, 17)
 # datetime.fromtimestamp(time.time())
 
-# now: datetime = datetime.now() # tz=UTC
+# now: datetime = datetime.datetime.now() # tz=UTC
 # print(now)                                            # 2024-03-20 12:57:32.133498
 # datetime.utcnow()
 # print(now.isoformat())                                # 2024-03-20T12:57:32.133498 -> ISO8601 - since Python3.6
