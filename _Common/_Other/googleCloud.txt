@@ -1,4 +1,6 @@
 
+https://medium.com/google-cloud/an-intro-to-google-cloud-for-aws-experts-c416f574c8ab
+
 https://cloud.google.com/sdk/docs/install
 sh ./google-cloud-sdk/install.sh
 
@@ -9,4 +11,5 @@ gcloud components install: Install specific components
 gcloud components update: Update your gcloud CLI to the latest version
 gcloud config set project: Set a default Google Cloud project to work on
 gcloud info: Display current gcloud CLI environment details
-
+gcloud auth application-default login: Refreshes credentials 
+This auto refreshes the credentials file at: $HOME/.config/gcloud/application_default_credentials.json
