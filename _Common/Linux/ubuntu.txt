@@ -2,20 +2,35 @@
 
 docker run -it ubuntu bash
 
+service/systemctl
+sudo apt install systemd -> Install systemd and the systemctl utility
+service < option > | --status-all | [ service_name [ command | --full-restart ]
+sudo service enable disable status start stop restart --now ssh
+
+ll == ls -al
 sudo apt list --installed
 sudo apt update -y
 sudo apt install --no-install-recommends ufw
-sudo systemctl enable disable status start stop restart --now ssh
 
 # https://www.youtube.com/watch?v=KJUVzg0fdnQ
 # https://sistemdostu.com/haproxy-nedir-nasil-kurulur
 sudo apt install --no-install-recommends software-properties-common
 add-apt-repository ppa:vbernat/haproxy-2.6
 apt install haproxy-2.6.\*
-sudo systemctl status | enable haproxy
+sudo service status | enable haproxy
 nano /etc/haproxy/haproxy.cfg
-systemctl restart haproxy
+service restart haproxy
 sudo haproxy -f /etc/haproxy/haproxy.cfg - without restart
+
+------------------------------------------------------------------------------------------------
+Install Python3 + venv
+------------------------------------------------------------------------------------------------
+sudo apt install python3 python3-pip python3-venv -y
+
+mkdir my_project
+cd my_project
+python3 -m venv venv
+source venv/bin/activate
 
 ------------------------------------------------------------------------------------------------
 SSH - OpenSSH enabled after Ubuntu 18
@@ -24,15 +39,15 @@ https://www.youtube.com/watch?v=6vTcH_kMrhU
 
 sudo apt update && sudo apt upgrade
 sudo apt install -y openssh-server
-sudo systemctl status ssh
-sudo systemctl start ssh
-sudo systemctl enable --now ssh
-sudo systemctl disable --now ssh
+sudo service status ssh
+sudo service start ssh
+sudo service enable --now ssh
+sudo service disable --now ssh
 sudo ufw allow ssh
 sudo ufw enable
 sudo ufw deny 22/tcp
 sudo ss -tunlp | grep ssh
-ssh username@ip_address
+ssh ubuntu@10.0.0.0
 
 sudo /etc/init.d/sshd start
 sudo passwd root -> generate password for root

@@ -43,6 +43,7 @@ docker run --name container_name -v /home/mount/data:/var/lib/mysql/data -> host
 docker run --name container_name -v /var/lib/mysql/data -> anonymous volumes ie. /var/lib/docker/volumes/random-hash/_data auto created on host
 docker run -d --name wordpress --mount source=sample-volume,target=/var/www/html wordpress
 
+docker run -it ubuntu bash
 docker run -it --entrypoint /bin/bash
 docker exec -it container_name /bin/bash
 docker attach container_name
