@@ -15,7 +15,7 @@ POSTGRE_PORT: int = os.environ.setdefault('POSTGRE_PORT', 5432)
 os.getcwd()
 os.path.join(__file__, 'test.txt')
 
-args:list[str] = sys.argv[:1]
+args:list[str] = sys.argv[:2]
 sys.getsizeof('abc')
 sys.version
 sys.version_info

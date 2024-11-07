@@ -3,7 +3,8 @@
 
 # class Student:
     
-#     name = 'unknown' #class attribute
+#     name = 'unknown' #class attribute / static variable
+#     STATIC_CONST = 23
 
 #     def __init__(self, name):
 #         self.__name = name #instance attribute
@@ -28,6 +29,10 @@
 #     @classmethod
 #     def getobject(cls):
 #         return cls('Steve')
+
+#     @staticmethod
+#     def getStaticConst(cls):
+#         return _python1.STATIC_CONST
         
 # std = Student('Steve')
 # del std.name
@@ -36,6 +41,7 @@
 # Student.tostring()  #Student Class Attributes: name=unknown
 # std = Student.getobject()
 # print(std.name)  #'Steve' 
+# print(_python1.STATIC_CONST)
 
 
 ####################################################################################################

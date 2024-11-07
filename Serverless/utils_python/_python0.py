@@ -1,7 +1,7 @@
 from typing import Self
 class Human:
 
-    def __new__(cls, name: str) -> Self:
+    def __new__(cls, name) -> Self:
         super().__new__(cls)
 
     def __init__(self, name: str, age: int, jobs:list[str]=None) -> None:
@@ -65,7 +65,7 @@ myHuman = Human("John", 20, jobs=["programmer"])
 print(myHuman)
 print(dir(myHuman))
 iterator = iter(myHuman) # Human.__iter__
-myHuman2 = iterator.__next__()
+myHuman2 = iterator.__next__() # or next(iterator)
 print(repr(myHuman))
 print(hash(myHuman))
 print(int(myHuman))

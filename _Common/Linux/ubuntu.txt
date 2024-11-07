@@ -23,6 +23,10 @@ sudo apt install --no-install-recommends foo
 sudo apt update && sudo apt upgrade -y
 sudo apt update && sudo apt install foo bar -y
 sudo apt update && sudo apt dist-upgrade foo bar -y
+<<<<<<< HEAD
+=======
+
+>>>>>>> d6266861 (functools partial)
 sudo service ssh --status --status-all --enable --disable --start --full-restart --stop
 sudo apt install systemd -> Install systemd and the systemctl utility
 sudo systemctl enable disable status start stop restart --now ssh
@@ -92,9 +96,36 @@ sudo service status | enable haproxy
 nano /etc/haproxy/haproxy.cfg
 service restart haproxy
 sudo haproxy -f /etc/haproxy/haproxy.cfg - without restart
+<<<<<<< HEAD
+=======
 
 
 
+------------------------------------------------------------------------------------------------
+Install SSL Cert from Let's Encrypt & Certbot
+https://www.youtube.com/watch?v=KJUVzg0fdnQ
+https://sistemdostu.com/haproxy-nedir-nasil-kurulur
+------------------------------------------------------------------------------------------------
+>>>>>>> d6266861 (functools partial)
 
+1. Install Certbot, the Let's Encrypt client:
+   sudo apt update
+   sudo apt install certbot
 
+2. Obtain an SSL certificate using Certbot:
+   sudo certbot certonly --manual
+   This will walk you through the process of obtaining a certificate. 
+   You'll need to follow the instructions provided, which may involve creating DNS records or placing 
+   a file on your web server.
+
+3. Once you have the certificate, you can configure your web server to use it. 
+   
+   For Apache, edit the Apache configuration file (usually /etc/apache2/sites-available/your_domain.conf) 
+   and add the following lines:
+   SSLCertificateFile /etc/letsencrypt/live/your_domain/fullchain.pem
+   SSLCertificateKeyFile /etc/letsencrypt/live/your_domain/privkey.pem
+
+   For Nginx, edit the Nginx configuration file (usually /etc/nginx/sites-available/your_domain) and add the following lines:
+   ssl_certificate /etc/letsencrypt/live/your_domain/fullchain.pem;
+   ssl_certificate_key /etc/letsencrypt/live/your_domain/privkey.pem;
 

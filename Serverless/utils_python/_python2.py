@@ -6,7 +6,7 @@
 # Union: str | int
 # mydict: dict[str, Any]
 # type my_literal = Literal["a", "b", "c"]
-# type MyType = Callable[[str], str]
+# type my_type = Callable[[str], str]
 
 # from typing import Final #@final for methods
 # MAX_SIZE: Final = 9000
@@ -42,7 +42,7 @@
 
 # Mode: TypeAlias = Literal["read", "write", "append"]
 
-# from typing import LiteralString #for preventing SQL injection
+# from typing import LiteralString # for preventing SQL injection
 # def run_query(sql: LiteralString) -> None:
 #     pass
 
