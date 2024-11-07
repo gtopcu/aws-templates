@@ -492,7 +492,8 @@ def main() -> None:
     # atexit.unregister(func_exit)
     # sys.exit(0) - Raises SystemExit exception, finally & cleanups run
     # os._exit(0) - Immediate kill, no finals/cleanups run. Only POSIX files are closed
-
+    # exit(1)
+    
     # import webbrowser
     # webbrowser.open("http://localhost:8080", new=0, autoraise=False
 
