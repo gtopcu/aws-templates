@@ -5,6 +5,7 @@ class Human:
         super().__new__(cls)
 
     def __init__(self, name: str, age: int, jobs:list[str]=None) -> None:
+        super().__init__()
         self.name = name
         self.age = age
         self.jobs = jobs

@@ -111,6 +111,7 @@ def main():
     # path = Path()                     # .
     # path = Path.home()                # /Users/gtopcu
     # path = Path(__file__)             # /Users/gtopcu/.../utils/utils.py - doesnt work in .ipynb
+    # path = Path('file:///usr/bin')
     # path.__str__()
     # print(path.parent)                # /Users/gtopcu/.../utils
     # print(path.parts)                 # ('/', 'Users', 'gtopcu', ...., 'utils', 'utils.py')

@@ -74,19 +74,21 @@
 ####################################################################################################
 
 # TypedDict
-
 # https://peps.python.org/pep-0589/
-
-# from typing import TypedDict, Unpack, Required, NotRequired
-
 # https://docs.python.org/3/library/typing.html#typing.TypedDict
+
+# from typing import TypedDict, Unpack, Required, NotRequired, ReadOnly
+
 # class Movie(TypedDict, total=False): #total: all fields required
 #     name: Required[str]
 #     year: int
 #     rating: NotRequired[float]
 #     duration: Required[int]
+#     serial: ReadOnly[str] # Python3.13
 
-# movie: Movie = {"name": "The Matrix", "year": 1999, "duration": 136}
+# movie: TypedDict = {"name": "The Matrix", "year": 1999, "rating": 8.7, "serial": "tt0133093"}
+# movie = Movie(name="The Matrix", year=1999, rating=8.7, duration=136, serial="tt0133093")
+# movie["serial"] = "this will result in error"
 
 # my_typedict = TypedDict("MyDict", {"name": str, "age": Required[int]}, total=False)
 # my_typedict = TypedDict("MyDict", name=str, age=Required[int]) # deprecated, will be removed in 3.13
@@ -96,6 +98,19 @@
 #     print(kwargs["name"])
 
 # foo(name="The Matrix", year=1999)
+
+####################################################################################################
+# Generics
+
+# class MyClass[T: (int, float)]:
+#     def myFunc(input: T) -> T:
+#         return T
+
+# def myFunc[T](input: list[T]) -> T:
+#     return input
+
+# type Point = tuple[float, float]
+# type Points[T] = tuple[T, T]
 
 ####################################################################################################
 
@@ -125,16 +140,5 @@
 #     def get_colour() -> str:
 #         return "red"
 
-####################################################################################################
-# Generics
 
-# class MyClass[T: (int, float)]:
-#     def myFunc(input: T) -> T:
-#         return T
-
-# def myFunc[T](input: list[T]) -> T:
-#     return input
-
-# type Point = tuple[float, float]
-# type Points[T] = tuple[T, T]
 

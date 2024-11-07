@@ -72,7 +72,7 @@ def read_file(filename) -> str:
             # file.seek(26)
             # file.tell()
             # file.readline(10) # read 10 chars from line
-            # lines: file.readlines(3) # read 3 lines
+            # lines = file.readlines(3) # read 3 lines
             # file.read(10) # read 10 chars
             return file.read()
     
