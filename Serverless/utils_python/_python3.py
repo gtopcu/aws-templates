@@ -559,6 +559,5 @@ def f(*args: int, **kwargs: int):
 # def callable(callable: Callable[[int, int], int], a: int, b: int) -> int:
 #     return callable(a, b)
 
-
 if __name__ == "__main__":
     main()
