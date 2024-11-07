@@ -4,10 +4,10 @@ CentOS no longer = RedHat
 AlmaLinux, RockyLinux -> replacement for RedHat
 
 dnf list
+dnf update -y
 dnf install httpd
 dnf install -y python3
 dnf check-release-update
 dnf upgrade --releasever=2023.0.20230308
 dnf check-update --releasever=2023.0.20230308
 
-$ which yum

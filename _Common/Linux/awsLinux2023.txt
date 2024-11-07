@@ -6,6 +6,7 @@ Amazon Linux 2023 will use a combination of Fedora Linux and CentOS Stream
 Amazon Linux allows no-reboot kernel security updates
 
 dnf list
+dnf update -y
 dnf install httpd
 dnf install -y python3
 dnf check-release-update

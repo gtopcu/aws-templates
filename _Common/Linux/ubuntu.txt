@@ -1,30 +1,36 @@
 
+Debian -> Ubuntu
 
 docker run -it ubuntu bash
 
-service/systemctl
-sudo apt install systemd -> Install systemd and the systemctl utility
-service < option > | --status-all | [ service_name [ command | --full-restart ]
-sudo service enable disable status start stop restart --now ssh
-
+export PATH=$PATH:/usr/local/go/bin
 ll == ls -al
+sudo chown -R <user-name> <directory-name>
+/var/log 
+/etc/hosts 
+
+which sudo
+su -
+
+https://askubuntu.com/questions/222348/what-does-sudo-apt-get-update-do/222352#222352
+sudo apt --help
 sudo apt list --installed
+sudo apt list --upgradable
+sudo add-apt-repository ppa:vbernat/haproxy-2.6 -> /etc/apt/sources.list
+
 sudo apt update -y
-sudo apt install --no-install-recommends ufw
-
-# https://www.youtube.com/watch?v=KJUVzg0fdnQ
-# https://sistemdostu.com/haproxy-nedir-nasil-kurulur
-sudo apt install --no-install-recommends software-properties-common
-add-apt-repository ppa:vbernat/haproxy-2.6
-apt install haproxy-2.6.\*
-sudo service status | enable haproxy
-nano /etc/haproxy/haproxy.cfg
-service restart haproxy
-sudo haproxy -f /etc/haproxy/haproxy.cfg - without restart
+sudo apt install --no-install-recommends foo
+sudo apt update && sudo apt upgrade -y
+sudo apt update && sudo apt install foo bar -y
+sudo apt update && sudo apt dist-upgrade foo bar -y
+sudo service ssh --status --status-all --enable --disable --start --full-restart --stop
+sudo apt install systemd -> Install systemd and the systemctl utility
+sudo systemctl enable disable status start stop restart --now ssh
 
 ------------------------------------------------------------------------------------------------
-Install Python3 + venv
+Install Python3 + pip + venv
 ------------------------------------------------------------------------------------------------
+sudo apt update -y
 sudo apt install python3 python3-pip python3-venv -y
 
 mkdir my_project
@@ -33,21 +39,18 @@ python3 -m venv venv
 source venv/bin/activate
 
 ------------------------------------------------------------------------------------------------
-SSH - OpenSSH enabled after Ubuntu 18
+Install OpenSSH - enabled after Ubuntu 18
 https://www.youtube.com/watch?v=6vTcH_kMrhU
 ------------------------------------------------------------------------------------------------
-
-sudo apt update && sudo apt upgrade
+sudo apt update -y && sudo apt upgrade -y
 sudo apt install -y openssh-server
 sudo service status ssh
 sudo service start ssh
 sudo service enable --now ssh
 sudo service disable --now ssh
-sudo ufw allow ssh
-sudo ufw enable
-sudo ufw deny 22/tcp
 sudo ss -tunlp | grep ssh
 ssh ubuntu@10.0.0.0
+ssh root@10.0.0.0
 
 sudo /etc/init.d/sshd start
 sudo passwd root -> generate password for root
@@ -67,9 +70,28 @@ cat ~/.ssh/id_rsa.pub | ssh username@remote_host "mkdir -p ~/.ssh && cat >> ~/.s
 sudo nano /etc/ssh/sshd_config
 PasswordAuthentication no
 
+------------------------------------------------------------------------------------------------
+Install UFW
+------------------------------------------------------------------------------------------------
+sudo apt install --no-install-recommends ufw
+sudo ufw allow ssh
+sudo ufw allow ssh
+sudo ufw deny 22/tcp
+sudo ufw enable 
+sudo ufw disable
 
-
-
+------------------------------------------------------------------------------------------------
+Install HAProxy
+https://www.youtube.com/watch?v=KJUVzg0fdnQ
+https://sistemdostu.com/haproxy-nedir-nasil-kurulur
+------------------------------------------------------------------------------------------------
+sudo apt install --no-install-recommends software-properties-common
+add-apt-repository ppa:vbernat/haproxy-2.6
+apt install haproxy-2.6.\*
+sudo service status | enable haproxy
+nano /etc/haproxy/haproxy.cfg
+service restart haproxy
+sudo haproxy -f /etc/haproxy/haproxy.cfg - without restart
 
 
 
