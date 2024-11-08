@@ -3,7 +3,7 @@
 
 # class Student:
     
-#     name = 'unknown' #class attribute / static variable
+#     name = 'unknown' # class attribute
 #     STATIC_CONST = 23
 
 #     def __init__(self, name):
@@ -38,7 +38,7 @@
 # del std.name
 # print(std.name)  #AttributeError
 
-# Student.tostring()  #Student Class Attributes: name=unknown
+# Student.tostring()  # Student Class Attributes: name=unknown
 # std = Student.getobject()
 # print(std.name)  #'Steve' 
 # print(_python1.STATIC_CONST)

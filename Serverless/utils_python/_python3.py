@@ -4,6 +4,7 @@
 from typing import Any, Optional, Self, Final
 # from typing import Dict, Set, FrozenSet, Tuple
 # from typing import TypedDict, TypeVar, TypeAlias, NewType, Literal, LiteralString, Annotated
+# from typing import Callable, Iterable, Iterator, Generator, Collection, Sequence, Mapping, MutableSequence, MutableMapping
 
 # from collections import deque, defaultdict, OrderedDict, namedtuple, ChainMap, Counter, UserDict, UserList, UserString
 from collections.abc import Callable, Iterable, Iterator, Generator, Container
@@ -336,7 +337,7 @@ def main() -> None:
     # list = [0] * 5
     # list = [ [1]*4,[2]*4,[3]*4 ]
     # list = [ [x]*4 for x in range(3) ]
-    # list = [ [0]*4 ]* 4 # not good, all innter arrays will be same object
+    # list = [ [0]*4 ] * 4 # not good, all inner arrays will be same object
     # list1 = [[1,2,3], *range(5)]
     # list2 = list1[:]
     # list2 = list(list1)
@@ -450,8 +451,10 @@ def main() -> None:
     # if myval := get_value(): ...
 
     # return "<%s.%s>" % (self.__class__.__name__, self._name_)
-    # name = "gokhan"
-    # print('?name=%s' % name)
+    # name1 = "gokhan"
+    # name2 = "goknur"
+    # print("%s" % name1)
+    # print("%s %s" % (name1, name2))
 
     # my_list = [1, 2]
     # print(*my_list)

@@ -1,7 +1,9 @@
 # https://www.youtube.com/watch?v=T8UXgR-EtoM
 # https://docs.python.org/3/library/typing.html
 
-# from typing import Any, Self, Final, Literal, Annotated
+# from typing import Any, Optional, Self, Final, Literal, Annotated
+# from typing import Callable
+# from collections.abc import Callable
 
 # Union: str | int
 # mydict: dict[str, Any]
@@ -53,10 +55,10 @@
 
 # from typing import Any, Optional, Union
 
-# def optional_union(input: str) -> Union[str, None] #Optional[str]
+# def optional_union(input: str) -> Union[str, None] # Optional[str]
 #     return None
 
-# def myUtil(mylist: str | None=None) -> None:
+# def myUtil(mylist: str | None=None) -> None: # Python 3.12
 #     return mylist
 
 # print(typing.TYPE_CHECKING)
