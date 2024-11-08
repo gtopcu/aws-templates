@@ -6,7 +6,6 @@ import sysconfig
 import concurrent.futures
 from concurrent.futures import Future
 
-
 done = False
 
 def worker(arg):
