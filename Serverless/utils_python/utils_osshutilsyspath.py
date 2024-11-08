@@ -1,5 +1,5 @@
 
-import os, sys, shutil, traceback
+import os, sys, sysconfig, shutil, traceback
 from pathlib import Path # PurePath, PosixPath, WindowsPath
 import glob
 
@@ -16,6 +16,10 @@ def get_env(env_name: str, default:str | None) -> str | None:
 def main():
     
     print("------------------------------ main ------------------------------")
+
+    # python3 -m sysconfig
+    # sysconfig.get_python_version()  # 3.13 
+    # sysconfig.get_platform()        # macosx-10.13-universal
 
     # sys.path[0]
     # sys.version          # 3.11.5 (v3.11.5:cce6ba91b3, Aug 24 2023, 10:50:31) [Clang 13.0.0 (clang-1300.0.29.30)]
@@ -37,6 +41,7 @@ def main():
     # sys.exc_traceback
     # sys.last_type
     # sys.exit(0)
+    # exit(1)
 
     # traceback.print_stack()
     # print(traceback.format_exc())

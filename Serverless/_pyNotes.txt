@@ -1,10 +1,11 @@
 
-https://www.youtube.com/watch?v=52W3Qyg242Y
+https://www.youtube.com/watch?v=NMQwzI9hprg - Step-by-Step Python Package Deployment with GitHub Actions(Poetry + PyPI)
 https://github.com/squidfunk/mkdocs-material
-https://github.com/ran-isenberg/aws-lambda-handler-cookbook/blob/main/app.py
+
+python select interpreter: /Users/gtopcu/My Drive/VSCode/aws-templates/.venv
 
 export PATH=$PATH:/opt/homebrew/bin/python3.12
-sudo apt install Python3-pip
+sudo apt update -y && sudo apt install python3-pip
 
   pip <command> [options]
 
@@ -61,11 +62,10 @@ pylint --rcfile=.pylintrc .
 flake8 --config=.flake8 .
 
 # https://www.youtube.com/watch?v=Ji2XDxmXSOM
-python select interpreter: /Users/gtopcu/My Drive/VSCode/aws-templates/Serverless-SAM/.venv
 pip install --upgrade poetry
 poetry config virtualenvs.in-project true
 poetry new myproject (for existing projects: poetry init -> creates pyproject.toml + poetry.lock) 
-poetry install (if pyproject.toml exists, creates venv) --no-root
+poetry install (if pyproject.toml exists, creates venv) --no-root | --sync | --no-interaction
 poetry env info -p
 poetry env list
 poetry env remove {env}
