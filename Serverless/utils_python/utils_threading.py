@@ -1,7 +1,6 @@
+
 import threading
-from multiprocessing import Process, Queue
 import time
-import sysconfig
 
 import concurrent.futures
 from concurrent.futures import Future
@@ -17,10 +16,10 @@ def worker(arg):
 
 # worker()
 # t1 = threading.Thread(target=worker, args=(100, "200"), name="thread-1", daemon=False)
-# #t1 = threading.Thread(target=worker, args=(100, "200"), daemon=True).start() #daemon threads stop when others finish
+# #t1 = threading.Thread(target=worker, args=(100, "200"), daemon=True).start() # daemon threads stop when others finish
 
 # t1.start()
-# t1.join(5) #wait 5 secs for t1 to finish
+# t1.join(5) # wait 5 secs for t1 to finish
 
 # input("Press any key to exit..")
 # done = True
@@ -31,5 +30,5 @@ if __name__ == "__main__":
         executor.map(worker, (1, ))
         executor.map(worker, (2, ))
         executor.map(worker, (3, ))
-        #future:Future = executor.submit(worker, (3, ))
+        # future:Future = executor.submit(worker, (3, ))
         executor.shutdown(wait=True)

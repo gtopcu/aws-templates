@@ -1,49 +1,4 @@
 
-# https://www.tutorialsteacher.com/python/classmethod-decorator
-
-# class Student:
-    
-#     name = 'unknown' # class attribute
-#     STATIC_CONST = 23
-
-#     def __init__(self, name):
-#         self.__name = name #instance attribute
-
-#     @property
-#     def name(self):
-#         return self.__name
-    
-#     @name.setter
-#     def name(self, value):
-#         self.__name=value
-    
-#     @name.deleter
-#     def name(self):
-#         print('Deleting..')
-#         del self.__name
-
-#     @classmethod
-#     def tostring(cls):
-#         print('Student Class Attributes: name=', cls.name)
-
-#     @classmethod
-#     def getobject(cls):
-#         return cls('Steve')
-
-#     @staticmethod
-#     def getStaticConst(cls):
-#         return _python1.STATIC_CONST
-        
-# std = Student('Steve')
-# del std.name
-# print(std.name)  #AttributeError
-
-# Student.tostring()  # Student Class Attributes: name=unknown
-# std = Student.getobject()
-# print(std.name)  #'Steve' 
-# print(_python1.STATIC_CONST)
-
-
 ####################################################################################################
 
 # https://docs.python.org/3/library/enum.html

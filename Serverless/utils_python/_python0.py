@@ -1,14 +1,25 @@
-from typing import Self
-class Human:
 
-    def __new__(cls, name) -> Self:
-        super().__new__(cls)
+from typing import Self
+from abc import ABC, abstractmethod
+
+# class AbstractHuman(ABC):
+#     @abstractmethod
+#     def calculate_work(self) -> int:
+#         pass
+
+class Human: #(AbstractHuman):
+
+    name: str = "Gokhan" #   static var, access with Human.name. can have same name as instance var
+
+    def __new__(cls, name: str, age: int, jobs:list[str]=None) -> Self:
+        return super().__new__(cls)
 
     def __init__(self, name: str, age: int, jobs:list[str]=None) -> None:
-        super().__init__()
+        # super().__init__()
         self.name = name
-        self.age = age
+        self.age = age      # instance var, access with human.name
         self.jobs = jobs
+        self._title = "Mr."
     
     def __str__(self) -> str:
         return self.name
@@ -62,17 +73,59 @@ class Human:
     def __getitem__(self, key):
         return self.jobs[key]
 
-myHuman = Human("John", 20, jobs=["programmer"])
-print(myHuman)
-print(dir(myHuman))
-iterator = iter(myHuman) # Human.__iter__
-myHuman2 = iterator.__next__() # or next(iterator)
-print(repr(myHuman))
-print(hash(myHuman))
-print(int(myHuman))
-myHuman2 = Human("Cash", 34)
-print(myHuman + myHuman2)
-myHuman += myHuman2
-print(myHuman)
-print("programmer" in myHuman)
-print(myHuman[0])
+    @property
+    def title(self) -> str:
+        print("getting title")
+        return self._title
+
+    @title.setter
+    def title(self, title: str) -> None:
+        print("setting title")
+        self._title = title
+    
+    @title.deleter
+    def title(self) -> None:
+        print("deleting title")
+        self._title = None
+
+    #https://www.tutorialsteacher.com/python/classmethod-decorator
+    @classmethod
+    def get_class_name(cls) -> str:
+        return Human.name
+
+    @staticmethod
+    def calculate_retirement(human: Self) -> int:
+        return 65 - human.age
+
+
+human = Human("John", 40, ["programmer"])
+print(human)
+
+print(human.name) # access by instance var -> John
+print(Human.name) # access by class/static var -> Gokhan
+
+print(human.title) # access by property -> Mr.
+human.title = "Dr." # set by property
+print(human.title)
+del human.title # delete by property
+print(human.title)
+
+print(Human.get_class_name()) # access by class method
+print(human.get_class_name()) # access by instance method
+
+print(human.calculate_retirement(human)) # access by static method
+print(Human.calculate_retirement(human)) # access by static method
+
+# print(dir(human))
+# iterator = iter(human) # Human.__iter__
+# human2 = iterator.__next__() # or next(iterator)
+# print(repr(human))
+# print(hash(human))
+# print(int(human))
+# human2 = Human("Cash", 34)
+# print(human + human2)
+# human += human2
+# print(human)
+# print("programmer" in human)
+# print(human[0])
+
