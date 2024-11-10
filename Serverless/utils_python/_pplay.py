@@ -69,6 +69,7 @@ mylist2.append({'a': 1, 'b': 2})
 # def add(a: float, b: float) -> float:
 #     return a + b
 
+
 try:
     print(1/0)
 except ZeroDivisionError as e:
