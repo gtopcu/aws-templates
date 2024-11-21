@@ -257,9 +257,10 @@ Security & Ops
 
 CW:
   - Setup custom dashboards & myApplications on home page & mobile app
+  - Set up lifecycle rules & CW IA to optimize costs
   - Use synthetic canaries & RUM
   - Set alerts for HTTP 500, 429 etc errors on API GW, CloudFront etc
-  - CW Metrics -> Set recommended alarms (CW alarms can now trigger Lambda) 
+  - CW Metrics -> Set recommended alarms (CW alarms can trigger Lambda) 
   - CW Metrics - > Set up business metrics
   - Create CW alarms for any CW metric needed i.e. SQS ApproxNoOfMessages
   - CW -> Setup ApplicationSignals with SLOs (p99, p95 etc) 
@@ -267,13 +268,15 @@ CW:
   - Utilize metric filters from CW logs to get alerts from the logs
   - Stream metrics to managed Prometheus & display on Grafana
   - Setup CW Subscription Filters -> Kinesis->S3/ES/Lambda & CloudTrail Lake or Organization access
-  - Enable & use Container Insights to track ECS/Fargate utilization
+  - Enable & use ContainerInsights to track ECS/Fargate utilization
   - Enable X-Ray on Lambda & Application-Lambda-Container Insights
 
 RDS
-- Use RDS Proxy with IAM authentication (Aurora MySQL, PostreSQL)
-- Use custom RDS endpoints
+- Use custom RDS reader/writer endpoints
 - Launch DB clusters in separate, dedicated VPCs
+- Use RDS Proxy with IAM authentication (Aurora MySQL, PostreSQL)
+- Aurora Serverless v2(scales to 0), Aurora Global Database
+- Aurora Data API (SQL over HTTP)
 
 Costs:
 - Set up budgets, check new savings advisor & saving plans. Set up billing alarms & cost anomaly detection
@@ -296,9 +299,9 @@ Costs:
 <br/>
 
 # re:Invent'24:
-- CloudFormation: CF hooks(validate with lambda - cdk nag, cf-lint) & timeline view(11.24)
-- CloudFront: ALB support with WAF(preconfig), VPC origins, new logging options, gRPC support, Anycast static IPs
-- CloudWatch: Can trigger lambda on alerts, search all log groups(LogInsights), 
+- CloudFormation: CF hooks(validate with lambda) & timeline view
+- CloudFront: ALB support with WAF(preconfig ACLs & SG), VPC origins, new logging options, gRPC support, Anycast static IPs
+- CloudWatch: Search all log groups(LogInsights)
 - DynamoDB: Attribute based access control(RBAC), warm thruhput for tables&indexes, price cut on-demand %50 global tables %67
 - SFs: Export as IaC from console
 - Lambda: Support for Python 3.13, snapstart for Python & .Net(not free), S3 as failure destination(async/streaming)
@@ -306,7 +309,7 @@ Costs:
 - RDS: 
 - Bedrock: Conversational agents, 
 - Other AI: AppStudio, Q developer console/Datadog integration,  
-- Other: VPC block public access, 
+- Other: VPC block public access, Amplify AI kit
 
 # 2024 Other Important Updates:
 Aurora Serverless 2.0, OpenSearch Serverless, MSK Serverless, Kinesis Serverless
