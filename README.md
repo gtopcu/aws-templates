@@ -11,13 +11,13 @@ Lambda:
 - 1 million requests & 400.000GB free. Pricing: number of requests & duration. Use Lambda PowerTuning SF to tune
 - 50MB zipped 250MB unzipped including layers. 3MB console max, 10GB uncompressed for container lambdas. 10 extensions max
 - Concurrency = RPS x duration in seconds
-- Invocations Types -> sync: API GW, Lambda, Cognito, async: S3, EventBridge, SNS, polling: SQS, streaming: Kinesis/Dynamo Streams
+- Invocations Types -> sync: API GW, Lambda, Cognito, async: S3/EventBridge/SNS, polling: SQS, streaming: Kinesis/DynamoStreams
 - To avoid cold starts: use min libs, set provisioned concurrency if necessary, define DB conn. etc outside handler method
 - Type of errors:
   * Invocation errors(throttles, large size, permissions - for async invocations, retries 2 times for max 6 hours by default)
   * Function errors(function error, timeout)
 - For invocation errors, can use Lambda DLQ or destinations(preferred, contains more data) (errors are delivered after all retries)
-   -> success & fail for async(targets: SQS, SNS, EventBridge, Lambda), fails only for streaming(targets: SQS/SNS)
+   -> success & fail for async(targets: S3/SQS/SNS/EventBridge/Lambda), fails only for streaming(targets: S3/SQS/SNS)
 - Use reserved & provisioned concurrency as necessary. +1000 concurrency per 10seconds
 - Use CW application insights & lambda insights (extension) for overall picture
 - IAM PassRole -> Trust Policiy -> STS assumeRole
@@ -25,7 +25,7 @@ Lambda:
 - Use the latest Lambda PowerTools as a layer
 - Can filter messages(no charge)
 - FunctionURLs are new, supports IAM or no auth
-- SnapStart -> Java(available in Java 11/17) Spring Boot over 10sec init, lowers to <1 sec. beforeCheckpoint/afterRestore hooks
+- SnapStart -> Python, .Net, Java 11/17 Spring Boot over 10sec lowers to <1 sec. beforeCheckpoint/afterRestore hooks
 - For polling errors(SQS) -> refer to SQS notes, for streaming errors(Kinesis/DynamoDB Streams) -> refer to Kinesis notes
 
 API GW:
@@ -206,15 +206,16 @@ S3:
 - Ideal object size: 12-16MB
 - 3500TPS PUT/POST/DELETE vs 5000TPS HEAD/GET. 100K TPS for Express One Zone
 
-Cloud Formation:
+CloudFormation:
 - Utilize rollback config based on CW alarms
-- Use git sync to auto-sync
+- git sync, CF hooks, cfn-lint, timeline view(
 
 Cognito:
 - OpenID providers, sync lambda triggers, AI powered fraud detection
 
 Redis:
 - Key/Value, Sets, SortedSets great for real-time leaderboards, Geolocation, Multi-AZ
+- Valkey %30 price, same SDK and features
 
 <br/>
 
@@ -224,7 +225,7 @@ Security & Ops
 - Enable password rotation/policies & MFA for root & save the QR code. - IAM supports PCI DSS
 - Delete root user access keys & create custom login alias URL
 - Enable IAM Identity Center(formerly SSO), Identity Federation thru Octa/Oauth/AD etc
-- Set up Organization & Service Control Policies, TagPolicies & BackupPolicies per account
+- Set up Organization & Service/Resource Control Policies, TagPolicies & BackupPolicies per account
 - Enable ControlTower on the Organization account & use account factory
 - Deploy Landing Zone Accelerator to configure the new accounts
 - Enable CloudTrail for all accounts for management events & put logs to CW & S3
@@ -253,7 +254,6 @@ Security & Ops
 - Enable ResillienceHub to meet RTO-RPO requirements
 - Create a custom KMS key for encryption - use for S3, RDS, EBS backups etc. Set key rotations
 - Lambda env vars, Dynamo, S3 - secure with own KMS keys
-
 
 CW:
   - Setup custom dashboards & myApplications on home page & mobile app
@@ -292,3 +292,23 @@ Costs:
 - Check cloudFront origin retrieval
 - Use graviton based Lambda & ECS-Fargate
 - Use spot instances with EC2 & Fargate (no GPU instances, containerD. ECS=uses EC2 & ECS agent & can SSH)
+
+<br/>
+
+# re:Invent'24:
+- CloudFormation: CF hooks(validate with lambda - cdk nag, cf-lint) & timeline view(11.24)
+- CloudFront: ALB support with WAF(preconfig), VPC origins, new logging options, gRPC support, Anycast static IPs
+- CloudWatch: Can trigger lambda on alerts, search all log groups(LogInsights), 
+- DynamoDB: Attribute based access control(RBAC), warm thruhput for tables&indexes, price cut on-demand %50 global tables %67
+- SFs: Export as IaC from console
+- Lambda: Support for Python 3.13, snapstart for Python & .Net(not free), S3 as failure destination(async/streaming)
+- EventBridge: Avg latency down to 100ms from 1.2s, 
+- RDS: 
+- Bedrock: Conversational agents, 
+- Other AI: AppStudio, Q developer console/Datadog integration,  
+- Other: VPC block public access, 
+
+# 2024 Other Important Updates:
+Aurora Serverless 2.0, OpenSearch Serverless, MSK Serverless, Kinesis Serverless
+AppComposer is now InfrastructureComposer, S3 now supports 1M buckets, MSK Express
+

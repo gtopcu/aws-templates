@@ -23,10 +23,6 @@ sudo apt install --no-install-recommends foo
 sudo apt update && sudo apt upgrade -y
 sudo apt update && sudo apt install foo bar -y
 sudo apt update && sudo apt dist-upgrade foo bar -y
-<<<<<<< HEAD
-=======
-
->>>>>>> d6266861 (functools partial)
 sudo service ssh --status --status-all --enable --disable --start --full-restart --stop
 sudo apt install systemd -> Install systemd and the systemctl utility
 sudo systemctl enable disable status start stop restart --now ssh
@@ -96,17 +92,12 @@ sudo service status | enable haproxy
 nano /etc/haproxy/haproxy.cfg
 service restart haproxy
 sudo haproxy -f /etc/haproxy/haproxy.cfg - without restart
-<<<<<<< HEAD
-=======
-
-
 
 ------------------------------------------------------------------------------------------------
 Install SSL Cert from Let's Encrypt & Certbot
 https://www.youtube.com/watch?v=KJUVzg0fdnQ
 https://sistemdostu.com/haproxy-nedir-nasil-kurulur
 ------------------------------------------------------------------------------------------------
->>>>>>> d6266861 (functools partial)
 
 1. Install Certbot, the Let's Encrypt client:
    sudo apt update

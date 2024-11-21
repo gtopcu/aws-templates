@@ -4,7 +4,8 @@ https://github.com/squidfunk/mkdocs-material
 
 python select interpreter: /Users/gtopcu/My Drive/VSCode/aws-templates/.venv
 
-export PATH=$PATH:/opt/homebrew/bin/python3.12
+echo $PATH
+export PATH=$PATH:/opt/homebrew/bin/python3.13
 sudo apt update -y && sudo apt install python3-pip
 
   pip <command> [options]
@@ -121,10 +122,9 @@ poetry build-lambda
 /Library/Frameworks/Python.framework/Versions/3.11/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/anaconda3/condabin:/Library/Frameworks/Python.framework/Versions/3.11/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/gtopcu/.local/bin
 /opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/gtopcu/.local/bin:/opt/homebrew/bin/python3.12
 /opt/homebrew/bin/python3.12
-/opt/homebrew/bin/python3.11
 /usr/local/bin/python3
 export PATH=".:$PATH:/opt/xyz/bin"
 "python.defaultInterpreterPath": "/opt/homebrew/bin/python3.12",
 source .venv/bin/activate
-source "/Users/gtopcu/My Drive/VSCode/aws-templates/.venv/bin/activate"
+source "/Users/gtopcu/GoogleDrive/VSCode/aws-templates/.venv/bin/activate"
 
