@@ -298,20 +298,26 @@ Costs:
 
 <br/>
 
-# re:Invent'24:
-- CloudFormation: CF hooks(validate with lambda) & timeline view
-- CloudFront: ALB support with WAF(preconfig ACLs & SG), VPC origins, new logging options, gRPC support, Anycast static IPs
+# pre-Invent'24:
+- CloudFormation: Lambda hooks, timeline view
+- CloudFront: ALB support with WAF(preconfig ACLs & SG), VPC origins(private VPCs can connect w/out a public ALB), 
+              new logging options, gRPC support, Anycast static IPs
 - CloudWatch: Search all log groups(LogInsights)
-- DynamoDB: Attribute based access control(RBAC), warm thruhput for tables&indexes, price cut on-demand %50 global tables %67
-- SFs: Export as IaC from console
-- Lambda: Support for Python 3.13, snapstart for Python & .Net(not free), S3 as failure destination(async/streaming)
-- EventBridge: Avg latency down to 100ms from 1.2s, 
-- RDS: 
-- Bedrock: Conversational agents, 
-- Other AI: AppStudio, Q developer console/Datadog integration,  
-- Other: VPC block public access, Amplify AI kit
+- DynamoDB: price cut on-demand %50 global tables %67, warm thruhput for tables & indexes(4k WPS & 12k RPS initially), 
+            Attribute based access control(RBAC - based on table/user/policy tags) 
+- SFs: Export as SAM / InfrastructureComposer from console
+- Lambda: Support for Python 3.13, snapstart for Python & .Net(not free), S3 as failure destination(async/streaming),
+          VSCode-like editor, export as SAM, change logging type
+- EventBridge: Avg latency down to 100ms from 1.2s
+- RDS: Aurora Serverless V2 scales to %0, 
+- Bedrock: ConversationalBuilder, PromptManager,  
+- Other AI: AppStudio, Q developer: inline chat, console/Datadog integration,  
+- Other: VPC block public access, Amplify AI kit, Resource Control Policies(RCPs), ECS deployment history, 
+AWS Backup S3 cross-region bucket replication, Route53 DNS Resolver Firewall Advanced
+
+# re-Invent'24:
 
 # 2024 Other Important Updates:
-Aurora Serverless 2.0, OpenSearch Serverless, MSK Serverless, Kinesis Serverless
-AppComposer is now InfrastructureComposer, S3 now supports 1M buckets, MSK Express
+SysManager cross-account params, Console to CF/CDK, OpenSearch Serverless, Kinesis Serverless, MSK Serverless & Express 
+AppComposer -> InfrastructureComposer, S3 now supports 1M buckets, 
 
