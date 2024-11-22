@@ -119,11 +119,12 @@ DynamoDB:
 - Design considerations: Avoid hot partitions, only use indexes if must, utilize write sharding, separate hot/cold tabbles, scatter/gather for large items, sparse indexes, STD, one-to-many(for many attributes), separate table for frequently used attributes(varied access pattern), optimistic locking(update ConditionExpression:versionNo=1) etc
 
 SQS:
-- max message size(1 - 256KB, 256KB default. Up to 2GB with Extended Client Library for Python/Java) 
-- retention(1 min - 14 days, 4 days default)
-- visibility timeout(0 sec - 12 hours max, 30sec default. Set 6 x Lambda timeout)
-- delivery delay(0 - 15 mins), receive message wait time(0 - 20 secs), long polling
-- SQS FIFO 70kTPS, 700k with batching, now also supports redrive, requires MessageGroupId, can deduplicate by MessageDeduplicationId(5 min idempotency), order guaranteed within group
+- Message size 256KB(max) default. Up to 2GB with Extended Client Library for Python/Java 
+- Retention 4 days default (1 min - 14 days)
+- Visibility timeout 30sec default (0 sec - 12 hours) Set 6 x Lambda timeout
+- Delivery delay(0 - 15 mins), receive message wait time(0 - 20 secs), long polling
+- SQS FIFO 70kTPS, 700kTPS with batching. Now also supports redrive, requires MessageGroupId, can de-duplicate by 
+  MessageDeduplicationId(5min idempotency), order guaranteed within group, 120k in-flight max 
 - Only use MaximumConcurrency setting on the queue with lambda, do not use ReservedConcurrency(leads to overpolling)
 - Use correlationID & return address to track the message on the sender
 - Batching:
@@ -201,7 +202,7 @@ Kinesis:
 
 S3:
 - StorageLens, AccessPoints, 2-buckets multi-region APs, S3 Select/Express/MountPoints, Athena/Glue Databew
-- EventBridge can better filter & transform S3 events but more expensive (enable CloudTrail data events)
+- EventBridge can better filter & transform S3 events but more expensive(enable CloudTrail data events)
 - Use multi-part uploads & byte range fetches for efficiency
 - Ideal object size: 12-16MB
 - 3500TPS PUT/POST/DELETE vs 5000TPS HEAD/GET. 100K TPS for Express One Zone
@@ -294,30 +295,35 @@ Costs:
 - Check network out data
 - Check cloudFront origin retrieval
 - Use graviton based Lambda & ECS-Fargate
-- Use spot instances with EC2 & Fargate (no GPU instances, containerD. ECS=uses EC2 & ECS agent & can SSH)
+- Use spot instances with EC2(EC2 & ECS agent, can SSH) & Fargate(no GPU instances, containerD)
 
 <br/>
 
+# 2024 Important Updates:
+SysManager cross-account params, Console to CF/CDK, OpenSearch Serverless, Kinesis Serverless,  
+ 
 # pre-Invent'24:
 - CloudFormation: Lambda hooks, timeline view
 - CloudFront: ALB support with WAF(preconfig ACLs & SG), VPC origins(private VPCs can connect w/out a public ALB), 
-              new logging options, gRPC support, Anycast static IPs
+              new access log formats & destinations, gRPC support, Anycast static IPs, origin/header modification using functions
 - CloudWatch: Search all log groups(LogInsights)
-- DynamoDB: price cut on-demand %50 global tables %67, warm thruhput for tables & indexes(4k WPS & 12k RPS initially), 
+- DynamoDB: Price cut on-demand %50 global tables %67, warm thruhput for tables & indexes(4k WPS & 12k RPS initially), 
             Attribute based access control(RBAC - based on table/user/policy tags) 
-- SFs: Export as SAM / InfrastructureComposer from console
-- Lambda: Support for Python 3.13, snapstart for Python & .Net(not free), S3 as failure destination(async/streaming),
+- API GW: Custom domain names for private endpoints,
+- Lambda: Python 3.13 & Node 22, snapstart Python & .Net(not free), S3 as failure destination(async/streaming),
           VSCode-like editor, export as SAM, change logging type
 - EventBridge: Avg latency down to 100ms from 1.2s
-- RDS: Aurora Serverless V2 scales to %0, 
-- Bedrock: ConversationalBuilder, PromptManager,  
-- Other AI: AppStudio, Q developer: inline chat, console/Datadog integration,  
-- Other: VPC block public access, Amplify AI kit, Resource Control Policies(RCPs), ECS deployment history, 
-AWS Backup S3 cross-region bucket replication, Route53 DNS Resolver Firewall Advanced
+- SFs: Export as SAM / InfrastructureComposer from console
+- Kinesis: on-Demand now supports 5x throughtput - 10GB/s for writers 20GB/s for consumers per stream
+- RDS: Aurora Serverless V2 scales down to %0
+- Bedrock: ConversationalBuilder, Prompt Management/Flows/Optimizer, BatchInference(50% cheaper)
+- Other AI: AppStudio, Amplify AI kit, Q developer: inline chat, console/Datadog integration
+- Other: VPC block public access, AWS Organizations Root User Access, Resource Control Policies(RCPs), 
+         ECS deployment history & predictive scaling, AWS Backup S3 cross-region bucket replication, MSK Express, 
+         S3 now supports 1M buckets, AppComposer->InfrastructureComposer, Route53 DNS Resolver Firewall Advanced,
+         EC2 zonal shift for autoscaling, Amazon Keyspaces(Cassandra) reduced prices up to 75%
 
 # re-Invent'24:
 
-# 2024 Other Important Updates:
-SysManager cross-account params, Console to CF/CDK, OpenSearch Serverless, Kinesis Serverless, MSK Serverless & Express 
-AppComposer -> InfrastructureComposer, S3 now supports 1M buckets, 
+
 
