@@ -300,24 +300,34 @@ Costs:
 <br/>
 
 # 2024 Important Updates:
-SysManager cross-account params, Console to CF/CDK, OpenSearch Serverless, Kinesis Serverless,  
+SysManager cross-account params, Console to CF/CDK, OpenSearch Serverless, Kinesis Serverless  
  
 # pre-Invent'24:
-- CloudFormation: Lambda hooks, timeline view
-- CloudFront: ALB support with WAF(preconfig ACLs & SG), VPC origins(private VPCs can connect w/out a public ALB), 
-              new access log formats & destinations, gRPC support, Anycast static IPs, origin/header modification using functions
-- CloudWatch: Search all log groups(LogInsights)
+
+Serverless:
 - DynamoDB: Price cut on-demand %50 global tables %67, warm thruhput for tables & indexes(4k WPS & 12k RPS initially), 
             Attribute based access control(RBAC - based on table/user/policy tags) 
-- API GW: Custom domain names for private endpoints,
+- API GW: Custom domain names for private endpoints
 - Lambda: Python 3.13 & Node 22, snapstart Python & .Net(not free), S3 as failure destination(async/streaming),
           VSCode-like editor, export as SAM, change logging type
 - EventBridge: Avg latency down to 100ms from 1.2s
-- SFs: Export as SAM / InfrastructureComposer from console
+- SFs: Export as SAM / InfrastructureComposer from console, Variables & JSON Data 
 - Kinesis: on-Demand now supports 5x throughtput - 10GB/s for writers 20GB/s for consumers per stream
-- RDS: Aurora Serverless V2 scales down to %0
+
+AI:
 - Bedrock: ConversationalBuilder, Prompt Management/Flows/Optimizer, BatchInference(50% cheaper)
 - Other AI: AppStudio, Amplify AI kit, Q developer: inline chat, console/Datadog integration
+
+- CloudFormation: Lambda/Guard/ChangeSet/CloudControlAPI(Terraform) hooks, timeline view
+- CloudFront: ALB support with WAF(preconfig ACLs & SG), VPC origins(private VPCs can connect w/out a public ALB), 
+              new access log formats & destinations, gRPC support, Anycast static IPs, origin/header modification using functions
+- CloudWatch: Search all log groups(LogInsights)
+- SystemManager: Manage EC2 and hybrid nodes across ALL accounts and regions in your AWS Organization
+                 Superhero mode: Instantly spot unmanaged EC2 instances
+                 Auto-fix: SysMgr now diagnoses and remedies issues to bring nodes to managed state
+
+Other:
+- RDS: Aurora Serverless V2 scales down to %0
 - Other: VPC block public access, AWS Organizations Root User Access, Resource Control Policies(RCPs), 
          ECS deployment history & predictive scaling, AWS Backup S3 cross-region bucket replication, MSK Express, 
          S3 now supports 1M buckets, AppComposer->InfrastructureComposer, Route53 DNS Resolver Firewall Advanced,

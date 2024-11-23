@@ -1,6 +1,4 @@
 
-from dotenv import find_dotenv
-from dotenv import load_dotenv
 import time
 import timeit
 #import profile
@@ -10,12 +8,15 @@ import jsonpickle
 from typing import Any
 
 # pip install python-dotenv
+from dotenv import load_dotenv
+load_dotenv()
 # from dotenv import load_dotenv, find_dotenv 
 # load_dotenv(find_dotenv())
 # load_dotenv(dotenv_path=ENV_FILENAME)
 # if not load_dotenv(find_dotenv()):
 #     raise Exception("Failed to load .env file")
 # print(os.getenv('DDB_TABLE'))
+# os.environ.get("DDB_TABLE")
 
 def get_docstring(input1: int) -> list[str]:
     """

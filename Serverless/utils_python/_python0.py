@@ -97,7 +97,6 @@ class Human: #(AbstractHuman):
     def calculate_retirement(human: Self) -> int:
         return 65 - human.age
 
-
 human = Human("John", 40, ["programmer"])
 print(human)
 

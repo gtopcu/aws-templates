@@ -33,6 +33,9 @@ python --version
 python3 -m venv venv
 source venv/bin/activate
 
+pip install requests
+pip uninstall requests
+
 pip list | freeze
 pip freeze > requirements.txt
 python -m pip install --upgrade pip
@@ -123,8 +126,7 @@ poetry build-lambda
 /opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/gtopcu/.local/bin:/opt/homebrew/bin/python3.12
 /opt/homebrew/bin/python3.12
 /usr/local/bin/python3
-export PATH=".:$PATH:/opt/xyz/bin"
 "python.defaultInterpreterPath": "/opt/homebrew/bin/python3.12",
-source .venv/bin/activate
-source "/Users/gtopcu/GoogleDrive/VSCode/aws-templates/.venv/bin/activate"
+
+
 

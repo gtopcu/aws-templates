@@ -36,10 +36,13 @@ from pydantic import (
 # ----------------------------------------------------------------------------------------------------
 
 class MyData(BaseModel):
-    name: str = Field(min_length=1, max_length=10)
+    name: str = Field(min_length=1, max_length=10, description="Full Name")
     age: int = Field(ge=0, le=100)
     email: EmailStr | None = None
     url: HttpUrl | None = Field(default=None, alias="url_alias")
+
+    def __str__(self) -> str:
+        return f"{self.name} {self.age} {self.email} {self.url}"
 
 # data:MyData = MyData.model_validate(app.current_request.json_body)
 

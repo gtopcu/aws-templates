@@ -1,5 +1,7 @@
 
 
+# Code complete: Option + C
+
 https://aws.amazon.com/blogs/devops/amazon-q-developer-inline-chat/?trk=39c84365-5c2d-4402-8c01-c5a6c3457227&sc_channel=sm
 
 Inline Chat: Mac + I

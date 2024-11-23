@@ -84,8 +84,14 @@ def requests_put(endpoint_url, payload, headers=None, auth=None, timeout: int = 
 #     print(f"Time elapsed: {end - start:.2f}")
 
 # ---------------------------------------------------------------------------------------------------------------------
+# aiohttp - supports concurrency
 
-# # aiohttp - supports concurrency
+# async def async_main() -> None:
+#   async with aiohttp.ClientSession() as session:
+#       async with session.get("XXXXXXXXXXXXXXXXXXXXXXX") as resp:
+#           print(resp.status)
+#           print(await resp.text())
+
 # async def async_aiohttp_get(session: aiohttp.ClientSession, url: str) -> Any:
 #     async with session.get(url) as response:
 #         return await response.json()
@@ -95,8 +101,7 @@ def requests_put(endpoint_url, payload, headers=None, auth=None, timeout: int = 
 #         response = async_aiohttp_get(session, "XXXXXXXXXXXXXXXXXXXXXXX")
 
 # ---------------------------------------------------------------------------------------------------------------------
-
-# # httpx - supports concurrency & HTTP2 & typed
+# httpx - supports concurrency & HTTP2 & typed
 
 # async def httpx_get(url: str) -> Any:
 #     async with httpx.AsyncClient() as client:

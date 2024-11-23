@@ -125,7 +125,7 @@ def delete_item(table_name, key: Key):
 
 # 1MB limit
 def query(table_name, keyConditionExpression, expressionAttributeValues):
-    table = dddb.Table(table_name)
+    table = ddb.Table(table_name)
     response = table.query(
         KeyConditionExpression=keyConditionExpression,
         ExpressionAttributeValues=expressionAttributeValues
