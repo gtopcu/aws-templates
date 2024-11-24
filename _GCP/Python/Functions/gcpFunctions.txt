@@ -1,0 +1,54 @@
+
+
+https://cloud.google.com/functions/docs/running/overview
+https://www.youtube.com/watch?v=LAcErtGU-VU
+
+pip install functions_framework
+functions-framework --target=YOUR_FUNCTION_NAME --port 8080 --signature-type http(default)/cloudevent
+
+Requirements.txt
+functions-framework==3.*
+
+CLI:
+CloudFunctions
+gcloud functions invoke
+gcloud functions call YOUR_FUNCTION_NAME \
+  --region=REGION --gen2 \
+  --data '{"name":"Kalani"}'
+
+gcloud functions deploy echo-function \
+  --gen2 \
+  --runtime=python313 \
+  --region=us-central1 \
+  --source=. \
+  --entry-point=echo_input \
+  --trigger-http \
+  --allow-unauthenticated
+
+HTTP:
+curl localhost:8080
+
+curl -X GET "FUNCTION_URL?param1=value1&param2=value2"
+
+curl -X POST "FUNCTION_URL" \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Hello World"}'
+
+PubSub:
+curl localhost:8080 \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -H "ce-id: 123451234512345" \
+  -H "ce-specversion: 1.0" \
+  -H "ce-time: 2020-01-02T12:34:56.789Z" \
+  -H "ce-type: google.cloud.pubsub.topic.v1.messagePublished" \
+  -H "ce-source: //pubsub.googleapis.com/projects/MY-PROJECT/topics/MY-TOPIC" \
+  -d '{
+        "message": {
+          "data": "d29ybGQ=",
+          "attributes": {
+             "attr1":"attr1-value"
+          }
+        },
+        "subscription": "projects/MY-PROJECT/subscriptions/MY-SUB"
+      }'

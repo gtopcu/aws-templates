@@ -299,9 +299,7 @@ Costs:
 
 <br/>
 
-# 2024 Important Updates:
-SysManager cross-account params, Console to CF/CDK, OpenSearch Serverless, Kinesis Serverless  
- 
+
 # pre-Invent'24:
 
 Serverless:
@@ -318,6 +316,7 @@ AI:
 - Bedrock: ConversationalBuilder, Prompt Management/Flows/Optimizer, BatchInference(50% cheaper)
 - Other AI: AppStudio, Amplify AI kit, Q developer: inline chat, console/Datadog integration
 
+Others:
 - CloudFormation: Lambda/Guard/ChangeSet/CloudControlAPI(Terraform) hooks, timeline view
 - CloudFront: ALB support with WAF(preconfig ACLs & SG), VPC origins(private VPCs can connect w/out a public ALB), 
               new access log formats & destinations, gRPC support, Anycast static IPs, origin/header modification using functions
@@ -325,13 +324,13 @@ AI:
 - SystemManager: Manage EC2 and hybrid nodes across ALL accounts and regions in your AWS Organization
                  Superhero mode: Instantly spot unmanaged EC2 instances
                  Auto-fix: SysMgr now diagnoses and remedies issues to bring nodes to managed state
-
-Other:
+- Compute: VPC block public access, ALB Header Modification, EFS cross-account replication, 
+           EC2 zonal shift for autoscaling, ECS deployment history & predictive scaling,
 - RDS: Aurora Serverless V2 scales down to %0
-- Other: VPC block public access, AWS Organizations Root User Access, Resource Control Policies(RCPs), 
-         ECS deployment history & predictive scaling, AWS Backup S3 cross-region bucket replication, MSK Express, 
-         S3 now supports 1M buckets, AppComposer->InfrastructureComposer, Route53 DNS Resolver Firewall Advanced,
-         EC2 zonal shift for autoscaling, Amazon Keyspaces(Cassandra) reduced prices up to 75%
+- Other: AWS Organizations Root User Access, Resource Control Policies(RCPs), AppComposer->InfrastructureComposer, 
+         AWS Backup S3 cross-region bucket replication, MSK Express, Amazon Keyspaces(Cassandra) reduced prices up to 75%
+         S3 now supports 1M buckets, Route53 DNS Resolver Firewall Advanced,
+         OpenSearch Serverless Binary Vector & Point-in-Time Search
 
 # re-Invent'24:
 
