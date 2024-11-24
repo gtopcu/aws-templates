@@ -6,9 +6,12 @@ sh ./google-cloud-sdk/install.sh
 
 https://cloud.google.com/sdk/docs/cheatsheet
 gcloud info - Display current gcloud CLI environment details
-gcloud init - Initialize, authorize, and configure the gcloud CLI
 gcloud version - Display version and installed components
-gcloud config set project - Set a default Google Cloud project to work on
+
+gcloud init
+gcloud auth login
+gcloud config set project <PROJECT_ID>
+
 gcloud config set account ACCOUNT
 gcloud auth application-default login - Refreshes credentials ($HOME/.config/gcloud/application_default_credentials.json)
 gcloud auth print-identity-token -> Temp JWT token -> curl -H "Authorization:bearer $(gcloud auth print-identity-token)"
@@ -19,6 +22,8 @@ gcloud components remove <COMPONENT_ID>
 
 CloudBuild
 gcloud projects describe <PROJECT_NAME>
+gcloud auth configure-docker us-east1-docker.pck.dev
+gcloud builds submit --tag us-east1-docker.pck.dev/<PROJECT_ID>/<REPO_NAME>/<IMG_NAME>:<TAG_NAME> 
 
 CloudRun
 gcloud run deploy
