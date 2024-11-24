@@ -307,9 +307,9 @@ Serverless:
             Attribute based access control(RBAC - based on table/user/policy tags) 
 - API GW: Custom domain names for private endpoints
 - Lambda: Python 3.13 & Node 22, snapstart Python & .Net(not free), S3 as failure destination(async/streaming),
-          VSCode-like editor, export as SAM, change logging type
+          VSCode-like editor, export as SAM, ApplicationSignals support
 - EventBridge: Avg latency down to 100ms from 1.2s
-- SFs: Export as SAM / InfrastructureComposer from console, Variables & JSON Data 
+- SFs: Export as SAM / InfrastructureComposer from console, Variables & JSONata support
 - Kinesis: on-Demand now supports 5x throughtput - 10GB/s for writers 20GB/s for consumers per stream
 - Cognito: 
 
@@ -326,7 +326,8 @@ Others:
                  Superhero mode: Instantly spot unmanaged EC2 instances
                  Auto-fix: SysMgr now diagnoses and remedies issues to bring nodes to managed state
 - Compute: VPC block public access, ALB Header Modification, EFS cross-account replication, 
-           EC2 zonal shift for autoscaling, ECS deployment history & predictive scaling,
+           EC2 zonal shift for autoscaling, ECS deployment history & predictive scaling, 
+           SecurityGroup sharing(same account & region)
 - RDS: Aurora Serverless V2 scales down to %0
 - Other: AWS Organizations Root User Access, Resource Control Policies(RCPs), AppComposer->InfrastructureComposer, 
          AWS Backup S3 cross-region bucket replication, MSK Express, Amazon Keyspaces(Cassandra) reduced prices up to 75%

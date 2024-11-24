@@ -1,3 +1,20 @@
+----------------------------------------------------------------------------------------------------------------------
+https://aws.amazon.com/blogs/compute/introducing-the-amazon-linux-2023-runtime-for-aws-lambda/
+
+FROM public.ecr.aws/lambda/python:3.13
+# Copy function code
+COPY lambda_handler.py ${LAMBDA_TASK_ROOT}
+
+----------------------------------------------------------------------------------------------------------------------
+
+# Use the Amazon Linux 2023 Lambda base image
+FROM public.ecr.aws/lambda/provided.al2023
+
+# Install the required Python version
+RUN dnf install -y python3
+
+----------------------------------------------------------------------------------------------------------------------
+
 https://aws.amazon.com/blogs/aws/amazon-linux-2023-a-cloud-optimized-linux-distribution-with-long-term-support/
 https://aws.amazon.com/blogs/compute/python-3-12-runtime-now-available-in-aws-lambda/
 
@@ -12,16 +29,6 @@ RUN pip3 install -r requirements.txt --target "${LAMBDA_TASK_ROOT}" --no-cache-d
 
 COPY . ${LAMBDA_TASK_ROOT}
 CMD ["app.lambda_handler"]
-
-----------------------------------------------------------------------------------------------------------------------
-
-https://aws.amazon.com/blogs/compute/introducing-the-amazon-linux-2023-runtime-for-aws-lambda/
-
-# Use the Amazon Linux 2023 Lambda base image
-FROM public.ecr.aws/lambda/provided.al2023
-
-# Install the required Python version
-RUN dnf install -y python3
 
 ----------------------------------------------------------------------------------------------------------------------
 

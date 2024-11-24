@@ -1,4 +1,5 @@
 
+import os
 import time
 import timeit
 #import profile
@@ -59,6 +60,14 @@ def write_file(filename, content):
         # file.writelines(content)
         file.write(content)
         # file.flush()
+
+def read_file_curr_dir(filename) -> str:
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(current_dir, filename)
+    
+    with open(file_path, 'r') as file:
+        # return json.load(file)
+        return file.read()
 
 # r(default, error if not exists), r+(read/write), w/a(create if not exists), x(create, error if exists)
 # b/t(default)

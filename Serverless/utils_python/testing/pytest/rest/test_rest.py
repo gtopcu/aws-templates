@@ -1,6 +1,7 @@
 
 # pip install pytest requests
 # pytest -v test_rest.py
+# https://github.com/rakyll/hey
 
 import json
 import os
@@ -16,7 +17,7 @@ def load_json_file(filename):
         return json.load(file)
 
 class TestAPIEndpoint:
-    
+
     @pytest.fixture
     def api_url(self):
         """Fixture for API URL - can be configured based on environment"""
