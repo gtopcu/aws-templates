@@ -311,6 +311,7 @@ Serverless:
 - EventBridge: Avg latency down to 100ms from 1.2s
 - SFs: Export as SAM / InfrastructureComposer from console, Variables & JSON Data 
 - Kinesis: on-Demand now supports 5x throughtput - 10GB/s for writers 20GB/s for consumers per stream
+- Cognito: 
 
 AI:
 - Bedrock: ConversationalBuilder, Prompt Management/Flows/Optimizer, BatchInference(50% cheaper)

@@ -39,6 +39,8 @@ import logging
 # POSTGRE_PORT: int = os.environ.setdefault('POSTGRE_PORT', 5432)
 # os.getcwd()
 # os.path.join(__file__, 'test.txt')
+# current_dir = os.path.dirname(os.path.abspath(__file__))
+# file_path = os.path.join(current_dir, filename)
 
 # args:list[str] = sys.argv[:2]
 # sys.getsizeof('abc')

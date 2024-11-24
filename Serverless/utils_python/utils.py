@@ -17,6 +17,8 @@ load_dotenv()
 #     raise Exception("Failed to load .env file")
 # print(os.getenv('DDB_TABLE'))
 # os.environ.get("DDB_TABLE")
+# current_dir = os.path.dirname(os.path.abspath(__file__))
+# file_path = os.path.join(current_dir, filename)
 
 def get_docstring(input1: int) -> list[str]:
     """
