@@ -10,20 +10,29 @@ Requirements.txt
 functions-framework==3.*
 
 CLI:
-CloudFunctions
+gcloud services enable cloudfunctions.googleapis.com
+gcloud auth login
+gcloud config set project PROJECT_ID
+
 gcloud functions invoke
 gcloud functions call YOUR_FUNCTION_NAME \
   --region=REGION --gen2 \
   --data '{"name":"Kalani"}'
 
-gcloud functions deploy echo-function \
-  --gen2 \
-  --runtime=python313 \
-  --region=us-central1 \
-  --source=. \
-  --entry-point=echo_input \
-  --trigger-http \
-  --allow-unauthenticated
+gcloud functions deploy my-function --gen2 --runtime=python313 \
+  --region=us-central1 --trigger-http --memory 512MB --timeout 90 \ 
+  --entry-point=function_input --allow-unauthenticated \
+  --max-instances 1 --service-account my-function@api-gateway-360218.iam.gserviceaccount.com
+  --source=. 
+
+gcloud functions deploy user-function-manual --region europe-west1 --entry-point functions.UserFunction 
+                            --runtime java17 --trigger-http --memory 512MB --timeout 90 
+                            --max-instances 1 --service-account user-function@api-gateway-360218.iam.gserviceaccount.com
+gcloud functions add-iam-policy-binding user-function-manual --region=europe-west1 
+                          --member="serviceAccount:user-function@api-gateway-360218.iam.gserviceaccount.com" 
+                          --role="roles/cloudfunctions.invoker"
+gcloud functions logs read user-function-manual --region europe-west1 
+gcloud functions delete user-function-manual --region=europe-west1
 
 HTTP:
 curl localhost:8080

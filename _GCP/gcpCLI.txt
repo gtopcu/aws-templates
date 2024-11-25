@@ -20,6 +20,13 @@ gcloud components install <COMPONENT_ID>
 gcloud components update <COMPONENT_ID>
 gcloud components remove <COMPONENT_ID>
 
+gcloud services enable cloudfunctions.googleapis.com
+gcloud services enable apigateway.googleapis.com
+gcloud services enable cloudbuild.googleapis.com
+
+gcloud services enable servicemanagement.googleapis.com
+gcloud services enable servicecontrol.googleapis.com
+
 CloudBuild
 gcloud projects describe <PROJECT_NAME>
 gcloud auth configure-docker us-east1-docker.pck.dev
