@@ -31,3 +31,20 @@ LIMIT
   10;
 
 --------------------------------------------------------------------------------
+
+SELECT 
+    COUNT(*) AS total_trips, 
+    SUM(trip_duration) as total_trip_duration
+FROM `unicorn-demo-354607.dataset.citibike_trips`
+GROUP BY bike_id
+
+--------------------------------------------------------------------------------
+
+For a SQL table of the following format:
+score INTEGER
+rank INTEGER
+refresh_date DATE
+create a SELECT statement that select the top 1 rank,
+display the score, rank, refresh_date
+and order by refresh_date
+
