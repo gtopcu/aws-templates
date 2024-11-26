@@ -3,8 +3,13 @@
 import functions_framework
 import json
 
+# from cloudevents.http import CloudEvent
+# from cloudevents.pydantic import CloudEvent as CloudEventPydantic
+# from cloudevents.exceptions import CloudEventValidationException
+
 @functions_framework.http
 def echo_input(request):
+    
     """
     HTTP Cloud Function that echoes back the request data.
     Args:

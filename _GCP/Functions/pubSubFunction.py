@@ -1,6 +1,7 @@
 
 import base64
 from cloudevents.http import CloudEvent
+
 import functions_framework
 
 @functions_framework.cloud_event

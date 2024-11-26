@@ -81,7 +81,7 @@
 
 # from typing import TypedDict, Unpack, Required, NotRequired, ReadOnly
 
-# class Movie(TypedDict, total=False): #total: all fields required
+# class Movie(TypedDict, total=False): # total: all fields required
 #     name: Required[str]
 #     year: int
 #     rating: NotRequired[float]

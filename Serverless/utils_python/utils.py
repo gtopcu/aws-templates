@@ -113,6 +113,8 @@ def json_load(file) -> Any:
 
 def json_loads(input) -> Any:
     return json.loads(input)
+    # except json.JSONDecodeError:
+    #   print("Message is not JSON format")  
     
 def json_dumps(obj: object, formatted: bool) -> str:
     if formatted:

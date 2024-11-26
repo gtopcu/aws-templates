@@ -21,6 +21,13 @@ class myPersonClass:
         :return: The name of the person
         :rtype: str 
         """
+        """
+        Returns the name of the person
+        Args:
+            self: Current instance
+        Returns:
+            Name of the person
+        """
         return self.name
 
 
@@ -43,6 +50,8 @@ import logging
 # file_path = os.path.join(current_dir, filename)
 # os.getcwd()
 # os.listdir()
+# print(__name__)
+# print(__file__)
 
 # args:list[str] = sys.argv[:2]
 # sys.getsizeof('abc')
@@ -130,13 +139,21 @@ import logging
 # i, j = mydict.popitem()
 # print(i, j)
 
-# print(__name__)
-# print(__file__)
-
-# def add(a: float, b: float) -> float:
-#     return a + b
-
 # try:
 #     print(1/0)
 # except ZeroDivisionError as e:
 #     print(f'Error during operation: {str(e)}')
+
+
+# matrix = [(0, 0), (0, 1), (0, 2),
+#           (1, 0), (1, 1), (1, 2),
+#           (2, 0), (2, 1), (2, 2)]
+
+# matrix = [
+#     (x, y)
+#     for x in range(3)
+#     for y in range(3)
+# ]
+
+# for row, col in matrix:
+#     print(row, col)

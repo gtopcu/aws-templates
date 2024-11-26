@@ -335,10 +335,10 @@ def main() -> None:
     
     # x: list[list[int]]
     # list = [0] * 5
-    # list = [ [1]*4,[2]*4,[3]*4 ]
+    # list = [ [1]*4,[2]*4,[3]*4 ]  # -> [[1, 1, 1, 1], [2, 2, 2, 2], [3, 3, 3, 3]]
     # list = [ [x]*4 for x in range(3) ]
     # list = [ [0]*4 ] * 4 # not good, all inner arrays will be same object
-    # list1 = [[1,2,3], *range(5)]
+    # list1 = [[1,2,3], *range(5)]    # -> [[1, 2, 3], 0, 1, 2, 3, 4]
     # list2 = list1[:]
     # list2 = list(list1)
     # list2 = [x for x in list1]

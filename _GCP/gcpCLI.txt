@@ -20,6 +20,10 @@ gcloud components install <COMPONENT_ID>
 gcloud components update <COMPONENT_ID>
 gcloud components remove <COMPONENT_ID>
 
+gcloud services enable compute.googleapis.com
+gcloud services enable storage-component.googleapis.com
+gcloud services enable bigquery.googleapis.com
+gcloud services enable bigquery-storage.googleapis.com
 gcloud services enable cloudfunctions.googleapis.com
 gcloud services enable apigateway.googleapis.com
 gcloud services enable cloudbuild.googleapis.com
