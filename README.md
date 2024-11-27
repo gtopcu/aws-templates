@@ -309,13 +309,17 @@ Serverless:
 - Lambda: Python 3.13 & Node 22, snapstart Python & .Net(not free), S3 as failure destination(async/streaming),
           VSCode-like editor, export as SAM, ApplicationSignals support
 - EventBridge: Avg latency down to 100ms from 1.2s
-- SFs: Export as SAM / InfrastructureComposer from console, Variables & JSONata support
+- SFs: Export as SAM/InfrastructureComposer from console, Variables & JSONata support
 - Kinesis: on-Demand now supports 5x throughtput - 10GB/s for writers 20GB/s for consumers per stream
-- Cognito: 
+- Cognito: New landing page/managed login, pricing tiers (Lite/Essentials/Plus), passkey auth
+- S3: Conditional writes(if-none-match header), ExpressOneZone append data, 1M buckets, 
+      AWS Backup S3 cross-region bucket replication,
+      
 
 AI:
 - Bedrock: ConversationalBuilder, Prompt Management/Flows/Optimizer, BatchInference(50% cheaper)
-- Other AI: AppStudio, Amplify AI kit, Q developer: inline chat, console/Datadog integration
+- Other AI: AppStudio, Amplify AI kit, Q developer: inline chat, console/Datadog integration, 
+            Sagemaker realtime endpoints scale to 0, 
 
 Others:
 - CloudFormation: Lambda/Guard/ChangeSet/CloudControlAPI(Terraform) hooks, timeline view
@@ -330,9 +334,8 @@ Others:
            SecurityGroup sharing(same account & region)
 - RDS: Aurora Serverless V2 scales down to %0
 - Other: AWS Organizations Root User Access, Resource Control Policies(RCPs), AppComposer->InfrastructureComposer, 
-         AWS Backup S3 cross-region bucket replication, MSK Express, Amazon Keyspaces(Cassandra) reduced prices up to 75%
-         S3 now supports 1M buckets, Route53 DNS Resolver Firewall Advanced,
-         OpenSearch Serverless Binary Vector & Point-in-Time Search
+         MSK Express, Amazon Keyspaces(Cassandra) reduced prices up to 75%, Route53 DNS Resolver Firewall Advanced, 
+         OpenSearch Serverless Binary Vector & Point-in-Time Search, ingestion Lambda support
 
 # re-Invent'24:
 
