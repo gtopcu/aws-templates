@@ -40,6 +40,10 @@ import os
 import sys
 import logging
 
+# import pandas as pd
+# df = pd.DataFrame(list)
+# df.to_csv("output.csv")
+
 # os.getenv('DDB_TABLE', 'table1')
 # os.environ.get('DDB_TABLE', 'table1')
 # POSTGRE_IP = os.environ['POSTGRE_IP']
@@ -48,6 +52,8 @@ import logging
 # os.path.join(__file__, 'test.txt')
 # current_dir = os.path.dirname(os.path.abspath(__file__))
 # file_path = os.path.join(current_dir, filename)
+# if not os.path.exists(file_path):
+#     raise FileNotFoundError(f"File not found: {file_path}")
 # os.getcwd()
 # os.listdir()
 # print(__name__)

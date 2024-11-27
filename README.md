@@ -312,10 +312,9 @@ Serverless:
 - SFs: Export as SAM/InfrastructureComposer from console, Variables & JSONata support
 - Kinesis: on-Demand now supports 5x throughtput - 10GB/s for writers 20GB/s for consumers per stream
 - Cognito: New landing page/managed login, pricing tiers (Lite/Essentials/Plus), passkey auth
-- S3: Conditional writes(if-none-match header), ExpressOneZone append data, 1M buckets, 
+- S3: Conditional writes(if-none-match/if-match bucket policy), ExpressOneZone append data, 1M buckets, 
       AWS Backup S3 cross-region bucket replication,
       
-
 AI:
 - Bedrock: ConversationalBuilder, Prompt Management/Flows/Optimizer, BatchInference(50% cheaper)
 - Other AI: AppStudio, Amplify AI kit, Q developer: inline chat, console/Datadog integration, 

@@ -64,6 +64,8 @@ def write_file(filename, content):
 def read_file_curr_dir(filename) -> str:
     current_dir = os.path.dirname(os.path.abspath(__file__))
     file_path = os.path.join(current_dir, filename)
+    if not os.path.exists(file_path):
+      raise FileNotFoundError(f"File not found: {file_path}")
     
     with open(file_path, 'r') as file:
         # return json.load(file)
