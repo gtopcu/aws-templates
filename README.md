@@ -316,7 +316,8 @@ Serverless:
       AWS Backup S3 cross-region bucket replication,
       
 AI:
-- Bedrock: ConversationalBuilder, Prompt Management/Flows/Optimizer, BatchInference(50% cheaper)
+- Bedrock: ConversationalBuilder, Prompt Management/Flows/Optimizer, BatchInference(50% cheaper),
+           custom intervention using Amazon Bedrock Agents, human-based model evaluation feature
 - Other AI: AppStudio, Amplify AI kit, Q developer: inline chat, console/Datadog integration, 
             Sagemaker realtime endpoints scale to 0, 
 
@@ -325,15 +326,16 @@ Others:
 - CloudFront: ALB support with WAF(preconfig ACLs & SG), VPC origins(private VPCs can connect w/out a public ALB), 
               new access log formats & destinations, gRPC support, Anycast static IPs, origin/header modification using functions
 - CloudWatch: Search all log groups(LogInsights)
+- Compute: EC2 zonal shift for autoscaling, ECS deployment history & predictive scaling, 
+           EFS cross-account replication, EFS supports up to 2.5 million IOPS per file system(x10)
+           VPC block public access, ALB Header Modification, AWS PrivateLink cross-region support, 
+           SecurityGroup sharing(same account & region), 
+- RDS: Aurora Serverless V2 scales down to %0
 - SystemManager: Manage EC2 and hybrid nodes across ALL accounts and regions in your AWS Organization
                  Superhero mode: Instantly spot unmanaged EC2 instances
                  Auto-fix: SysMgr now diagnoses and remedies issues to bring nodes to managed state
-- Compute: VPC block public access, ALB Header Modification, EFS cross-account replication, 
-           EC2 zonal shift for autoscaling, ECS deployment history & predictive scaling, 
-           SecurityGroup sharing(same account & region)
-- RDS: Aurora Serverless V2 scales down to %0
 - Other: AWS Organizations Root User Access, Resource Control Policies(RCPs), AppComposer->InfrastructureComposer, 
-         MSK Express, Amazon Keyspaces(Cassandra) reduced prices up to 75%, Route53 DNS Resolver Firewall Advanced, 
+         MSK Express, Amazon Keyspaces(Cassandra) reduced prices up to 75%, Route53 DNS Resolver Firewall Advanced,   
          OpenSearch Serverless Binary Vector & Point-in-Time Search, ingestion Lambda support
 
 # re-Invent'24:

@@ -54,17 +54,43 @@ pip install botocore
 pip install ruff
 pip install aws_lambda_powertools
 pip install requests-aws4auth
-precommit install
 
 pip install SimpleCV==1.*
 pip install example-package>=1.2.0
 pip install example-package<=1.2.0
 
+----------------------------------------------------------------------------------------------------------------
+pylint
+----------------------------------------------------------------------------------------------------------------
 pip install pylint
 pylint myfile.py    # pylint: disable=all disable=invalid-name 
 pylint --rcfile=.pylintrc .
 flake8 --config=.flake8 .
 
+----------------------------------------------------------------------------------------------------------------
+uv
+----------------------------------------------------------------------------------------------------------------
+https://docs.astral.sh/uv/
+curl -LsSf https://astral.sh/uv/install.sh | sh
+uv python install 3.10 3.11 3.12
+uv venv
+uv venv --python 3.12.0
+uv python pin pypy@3.11
+uv init myproject -> cd myproject
+uv add --script example.py requests
+uv add ruff
+uv run ruff check
+uv tool run/uvx pycowsay 'hello world!'
+uv tool install ruff
+ruff --version
+uv pip compile docs/requirements.in \
+   --universal \
+   --output-file docs/requirements.txt
+uv pip sync docs/requirements.txt
+
+----------------------------------------------------------------------------------------------------------------
+POETRY
+----------------------------------------------------------------------------------------------------------------
 # https://www.youtube.com/watch?v=Ji2XDxmXSOM
 pip install --upgrade poetry
 poetry config virtualenvs.in-project true

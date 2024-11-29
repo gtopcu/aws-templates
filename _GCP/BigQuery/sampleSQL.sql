@@ -1,4 +1,23 @@
 
+--------------------------------------------------------------------------------
+
+CREATE TABLE `PROJECT_ID.data_lineage_demo.nyc_green_trips_2021`
+COPY `bigquery-public-data.new_york_taxi_trips.tlc_green_trips_2021`
+
+--------------------------------------------------------------------------------
+
+CREATE TABLE `PROJECT_ID.data_lineage_demo.total_green_trips_22_21`
+AS SELECT vendor_id, COUNT(*) AS number_of_trips
+FROM (
+     SELECT vendor_id FROM `PROJECT_ID.data_lineage_demo.nyc_green_trips_2022`
+     UNION ALL
+     SELECT vendor_id FROM `PROJECT_ID.data_lineage_demo.nyc_green_trips_2021`
+)
+GROUP BY vendor_id
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
 
 -- This query shows a list of the daily top Google Search terms.
 SELECT
