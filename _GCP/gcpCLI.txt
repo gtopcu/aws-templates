@@ -8,6 +8,7 @@ https://cloud.google.com/sdk/docs/cheatsheet
 gcloud info - Display current gcloud CLI environment details
 gcloud version - Display version and installed components
 
+gcloud --help
 gcloud init
 gcloud auth login
 gcloud config set project <PROJECT_ID>
@@ -31,6 +32,11 @@ gcloud services enable cloudbuild.googleapis.com
 gcloud services enable servicemanagement.googleapis.com
 gcloud services enable servicecontrol.googleapis.com
 
+CloudStorage
+gcloud storage --help
+gcloud storage GROUP(buckets/folders/hmac/insights/managed-folders/objects/operations)
+gcloud storage ls cp mv rm restore cat du hash rsync sign-url service-agent
+
 CloudBuild
 gcloud projects describe <PROJECT_NAME>
 gcloud auth configure-docker us-east1-docker.pck.dev
@@ -39,3 +45,22 @@ gcloud builds submit --tag us-east1-docker.pck.dev/<PROJECT_ID>/<REPO_NAME>/<IMG
 CloudRun
 gcloud run deploy
 
+CloudSQL
+gcloud sql --help
+gcloud sql GROUP(backups/databases/export/flags/import/operations/ssl/tiers/users)
+gcloud sql connect generate-login-token reschedule-maintenance
+gcloud sql instances --help
+gcloud sql instances create my_cloud_db --cpu 8 --memory 512mb --region us-central \
+                            --availability-type zonal/regional --secondary-zone -us-central2
+gcloud sql instances list restart create clone delete describe patch promote-replica failover get-latest-recovery-time list
+gcloud sql instances reencrypt reset-ssl-config restore-backup switchover
+
+----------------------------------------------------------------------------
+Permissions
+----------------------------------------------------------------------------
+roles/compute.viewer:
+compute.images.get
+compute.images.list
+
+roles/storage.objectAdmin
+roles/storage.objectCreator 

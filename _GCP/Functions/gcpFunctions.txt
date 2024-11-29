@@ -25,6 +25,9 @@ gcloud functions deploy my-function --gen2 --runtime=python313 \
   --max-instances 1 --service-account my-function@api-gateway-360218.iam.gserviceaccount.com
   --source=. 
 
+--trigger-topic my_topic
+--trigger-event google.storage.object.create/change/add/finalize
+
 gcloud functions deploy user-function-manual --region europe-west1 --entry-point functions.UserFunction 
                             --runtime java17 --trigger-http --memory 512MB --timeout 90 
                             --max-instances 1 --service-account user-function@api-gateway-360218.iam.gserviceaccount.com
@@ -39,7 +42,7 @@ curl localhost:8080
 
 curl -X GET "FUNCTION_URL?param1=value1&param2=value2"
 
-curl -X POST "FUNCTION_URL" \
+curl -X POST localhost:8080 \
   -H "Content-Type: application/json" \
   -d '{"message": "Hello World"}'
 

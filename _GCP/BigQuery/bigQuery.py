@@ -7,6 +7,12 @@
 # gcloud init
 # gcloud auth application-default login
 
+# bq --help
+# bq ls
+# bq mk --project_id=project-id --dataset_id=dataset-id --location=location --default_table_expiration=3600
+# bq set --project_id=project-id --dataset_id=dataset-id --location=location --default_table_expiration=3600
+
+
 from google.cloud import bigquery
 
 client = bigquery.Client()
