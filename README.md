@@ -301,6 +301,8 @@ Costs:
 
 
 # pre-Invent'24:
+https://aws.amazon.com/blogs/aws/top-announcements-of-aws-reinvent-2024/
+https://theburningmonk.com/2024/11/best-preinvent-2024-serverless-announcements
 
 Serverless:
 - DynamoDB: Price cut on-demand %50 global tables %67, warm thruhput for tables & indexes(4k WPS & 12k RPS initially), 
@@ -309,34 +311,39 @@ Serverless:
 - Lambda: Python 3.13 & Node 22, snapstart Python & .Net(not free), S3 as failure destination(async/streaming),
           VSCode-like editor, export as SAM, ApplicationSignals support
 - EventBridge: Avg latency down to 100ms from 1.2s
-- SFs: Export as SAM/InfrastructureComposer from console, Variables & JSONata support
+- SFs: Export as SAM/InfrastructureComposer from console, Variables & JSONata support, PrivateLink VPC access
 - Kinesis: on-Demand now supports 5x throughtput - 10GB/s for writers 20GB/s for consumers per stream
 - Cognito: New landing page/managed login, pricing tiers (Lite/Essentials/Plus), passkey auth
 - S3: Conditional writes(if-none-match/if-match bucket policy), ExpressOneZone append data, 1M buckets, 
-      AWS Backup S3 cross-region bucket replication,
+      AWS Backup S3 cross-region bucket replication, TransferFamily web apps & StorageBrowser
       
 AI:
 - Bedrock: ConversationalBuilder, Prompt Management/Flows/Optimizer, BatchInference(50% cheaper),
            custom intervention using Amazon Bedrock Agents, human-based model evaluation feature
 - Other AI: AppStudio, Amplify AI kit, Q developer: inline chat, console/Datadog integration, 
-            Sagemaker realtime endpoints scale to 0, 
+            Sagemaker realtime endpoints scale down to 0 & multi-adapter inference
 
 Others:
 - CloudFormation: Lambda/Guard/ChangeSet/CloudControlAPI(Terraform) hooks, timeline view
 - CloudFront: ALB support with WAF(preconfig ACLs & SG), VPC origins(private VPCs can connect w/out a public ALB), 
               new access log formats & destinations, gRPC support, Anycast static IPs, origin/header modification using functions
 - CloudWatch: Search all log groups(LogInsights)
-- Compute: EC2 zonal shift for autoscaling, ECS deployment history & predictive scaling, 
-           EFS cross-account replication, EFS supports up to 2.5 million IOPS per file system(x10)
+- Compute: EC2 I8g(IO optimized) & I7ie(storage optimized) instances, zonal shift for autoscaling, 
+           EBS time-based snapshot copy, instant start times Capacity Blocks, future-dated reservations 
+           ECS deployment history & predictive scaling, Container Insights with enhanced observability,
+           EFS cross-account replication & up to 2.5 million IOPS per file system(x10)
            VPC block public access, ALB Header Modification, AWS PrivateLink cross-region support, 
-           SecurityGroup sharing(same account & region), 
-- RDS: Aurora Serverless V2 scales down to %0
+           SecurityGroup sharing(same account & region)
+           
+- RDS: Aurora Serverless V2 scales down to %0, MemoryDB multi-region with 99.999% availability, 
+       CW DatabaseInsights for Aurora, 
 - SystemManager: Manage EC2 and hybrid nodes across ALL accounts and regions in your AWS Organization
                  Superhero mode: Instantly spot unmanaged EC2 instances
                  Auto-fix: SysMgr now diagnoses and remedies issues to bring nodes to managed state
-- Other: AWS Organizations Root User Access, Resource Control Policies(RCPs), AppComposer->InfrastructureComposer, 
+- Other: AWS Organizations Root User Access, Resource Control Policies(RCPs), Declarative Policies, 
          MSK Express, Amazon Keyspaces(Cassandra) reduced prices up to 75%, Route53 DNS Resolver Firewall Advanced,   
-         OpenSearch Serverless Binary Vector & Point-in-Time Search, ingestion Lambda support
+         OpenSearch Serverless Binary Vector & Point-in-Time Search, ingestion Lambda support for transformation,
+         EKS AutoMode & Hybrid Nodes, AppComposer->InfrastructureComposer
 
 # re-Invent'24:
 

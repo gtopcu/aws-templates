@@ -7,6 +7,7 @@ import uuid
 import json
 import jsonpickle
 from typing import Any
+import random
 
 # pip install python-dotenv
 from dotenv import load_dotenv
@@ -53,6 +54,10 @@ def timeit_test() -> None:
 
 def generate_uuid():
     return str(uuid.uuid4())
+
+def generate_random_number():
+    return random.randint(1, 100) # random.random()
+    # rstr = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(N))
 
 # https://docs.python.org/3/glossary.html#term-file-object
 def write_file(filename, content):
