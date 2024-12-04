@@ -315,12 +315,13 @@ Serverless:
 - Kinesis: on-Demand now supports 5x throughtput - 10GB/s for writers 20GB/s for consumers per stream
 - Cognito: New landing page/managed login, pricing tiers (Lite/Essentials/Plus), passkey auth
 - S3: Conditional writes(if-none-match/if-match bucket policy), ExpressOneZone append data, 1M buckets, 
-      AWS Backup S3 cross-region bucket replication, TransferFamily web apps & StorageBrowser
+      AWS Backup S3 cross-region bucket replication, TransferFamily web apps & StorageBrowser,
+      S3 Metadata & Tables(Apache Iceberg)
       
 AI:
 - Bedrock: ConversationalBuilder, Prompt Management/Flows/Optimizer, BatchInference(50% cheaper),
            custom intervention using Amazon Bedrock Agents, human-based model evaluation feature
-- Other AI: AppStudio, Amplify AI kit, Q developer: inline chat, console/Datadog integration, 
+- Other AI: AppStudio, Amplify AI kit, Q developer: code review, inline chat, console/Datadog integration, 
             Sagemaker realtime endpoints scale down to 0 & multi-adapter inference
 
 Others:
@@ -328,15 +329,14 @@ Others:
 - CloudFront: ALB support with WAF(preconfig ACLs & SG), VPC origins(private VPCs can connect w/out a public ALB), 
               new access log formats & destinations, gRPC support, Anycast static IPs, origin/header modification using functions
 - CloudWatch: Search all log groups(LogInsights)
-- Compute: EC2 I8g(IO optimized) & I7ie(storage optimized) instances, zonal shift for autoscaling, 
+- Compute: EC2 I8g(IO optimized), I7ie(storage optimized), P5en, TR2 Instances & TR2 UltraServers, zonal shift for autoscaling, 
            EBS time-based snapshot copy, instant start times Capacity Blocks, future-dated reservations 
            ECS deployment history & predictive scaling, Container Insights with enhanced observability,
            EFS cross-account replication & up to 2.5 million IOPS per file system(x10)
            VPC block public access, ALB Header Modification, AWS PrivateLink cross-region support, 
            SecurityGroup sharing(same account & region)
-           
-- RDS: Aurora Serverless V2 scales down to %0, MemoryDB multi-region with 99.999% availability, 
-       CW DatabaseInsights for Aurora, 
+- RDS: Aurora Serverless V2 scales down to 0%, Aurora DSQL multi-region, 99.999% availability,
+       CW DatabaseInsights for Aurora, MemoryDB multi-region with 99.999% availability, 
 - SystemManager: Manage EC2 and hybrid nodes across ALL accounts and regions in your AWS Organization
                  Superhero mode: Instantly spot unmanaged EC2 instances
                  Auto-fix: SysMgr now diagnoses and remedies issues to bring nodes to managed state

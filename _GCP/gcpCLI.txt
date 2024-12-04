@@ -10,10 +10,17 @@ gcloud version - Display version and installed components
 
 gcloud --help
 gcloud init
-gcloud auth login
+gcloud auth list -> show the active account
+gcloud config set account ACCOUNT
+gcloud config list project -> show the active project
 gcloud config set project <PROJECT_ID>
 
-gcloud config set account ACCOUNT
+https://cloud.google.com/compute/docs/regions-zones
+gcloud config set compute/region REGION (us-east1/us-east1-a us-central1/us-central1-a)
+export REGION=REGION
+export ZONE=Zone
+
+gcloud auth login
 gcloud auth application-default login - Refreshes credentials ($HOME/.config/gcloud/application_default_credentials.json)
 gcloud auth print-identity-token -> Temp JWT token -> curl -H "Authorization:bearer $(gcloud auth print-identity-token)"
 
@@ -31,6 +38,25 @@ gcloud services enable cloudbuild.googleapis.com
 
 gcloud services enable servicemanagement.googleapis.com
 gcloud services enable servicecontrol.googleapis.com
+
+IAM
+gcloud iam list-testable-permissions <full-resource-name>
+gcloud iam service-accounts create
+gcloud projects add-iam-policy-binding --member serviceAccount:”my_sa@project_id.iam.gserviceaccount.com.” --role <role>
+
+Compute
+gcloud compute instances create --help
+gcloud compute ssh gcelab2 --zone=Zone
+gcloud compute instances create gcelab2 --machine-type e2-medium --zone=$ZONE \
+                --service-account <name-of-service-account@gserviceaccount.com>
+gcloud compute instance-groups managed rolling-action start_update my_cloud_ig \
+                --version=template=my_cloud_ig_template --type=proactive --region=us-central1 
+
+gcloud compute snapshots list --project PROJECT_ID
+gcloud compute snapshots describe SNAPSHOT_NAME
+
+VPC
+gcloud compute networks subnets expand-ip-range mysubnet --region us-central1 --prefix-length 21
 
 CloudStorage
 gcloud storage --help
@@ -55,9 +81,25 @@ gcloud sql instances create my_cloud_db --cpu 8 --memory 512mb --region us-centr
 gcloud sql instances list restart create clone delete describe patch promote-replica failover get-latest-recovery-time list
 gcloud sql instances reencrypt reset-ssl-config restore-backup switchover
 
+
 ----------------------------------------------------------------------------
 Permissions
 ----------------------------------------------------------------------------
+roles/iam.securityAdmin
+roles/iam.roles.create 
+
+roles/resourcemanager.organizationAdmin
+roles/resourcemanager.folderIamAdmin 
+roles/resourcemanager.projects.setIamPolicy
+
+Instance Admin Role(Predefined):
+compute.instances.get
+compute.instances.list
+compute.instances.start
+compute.instances.stop
+compute.instances.setMachineType
+compute.instances.delete
+
 roles/compute.viewer:
 compute.images.get
 compute.images.list

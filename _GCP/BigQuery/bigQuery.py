@@ -11,6 +11,7 @@
 # bq ls
 # bq mk --project_id=project-id --dataset_id=dataset-id --location=location --default_table_expiration=3600
 # bq set --project_id=project-id --dataset_id=dataset-id --location=location --default_table_expiration=3600
+# bq mk --external_table_definition=my_table_def my_dataset.my_ext_table # -> Permenant external table(i.e. bigtable)
 
 
 from google.cloud import bigquery

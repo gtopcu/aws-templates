@@ -26,6 +26,7 @@ sudo apt update && sudo apt dist-upgrade foo bar -y
 sudo service ssh --status --status-all --enable --disable --start --full-restart --stop
 sudo apt install systemd -> Install systemd and the systemctl utility
 sudo systemctl enable disable status start stop restart --now ssh
+ps auwx | grep nginx
 
 ------------------------------------------------------------------------------------------------
 Install Python3 + pip + venv
