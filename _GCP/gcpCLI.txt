@@ -62,6 +62,11 @@ CloudStorage
 gcloud storage --help
 gcloud storage GROUP(buckets/folders/hmac/insights/managed-folders/objects/operations)
 gcloud storage ls cp mv rm restore cat du hash rsync sign-url service-agent
+gcloud storage cp gs://.../cat.png my-cat.png
+
+export LOCATION=EU
+gcloud storage buckets create -l $LOCATION gs://$DEVSHELL_PROJECT_ID
+gsutil acl ch -u allUsers:R gs://$DEVSHELL_PROJECT_ID/my-cat.png -> modify ACL & can be read by everyone
 
 CloudBuild
 gcloud projects describe <PROJECT_NAME>
