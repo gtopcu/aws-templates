@@ -319,7 +319,7 @@ Serverless:
       S3 Metadata & Tables(Apache Iceberg)
       
 AI:
-- Bedrock: ConversationalBuilder, Prompt Management/Flows/Optimizer, BatchInference(50% cheaper),
+- Bedrock: ConversationalBuilder, Prompt Management/Flows/Optimizer, BatchInference(50% cheaper), Data Automation,
            custom intervention using Amazon Bedrock Agents, human-based model evaluation feature
 - Other AI: AppStudio, Amplify AI kit, Q developer: code review, inline chat, console/Datadog integration, 
             Sagemaker realtime endpoints scale down to 0 & multi-adapter inference

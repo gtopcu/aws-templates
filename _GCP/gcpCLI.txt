@@ -8,15 +8,21 @@ https://cloud.google.com/sdk/docs/cheatsheet
 gcloud info - Display current gcloud CLI environment details
 gcloud version - Display version and installed components
 
+$GOOGLE_CLOUD_PROJECT
+
 gcloud --help
 gcloud init
 gcloud auth list -> show the active account
 gcloud config set account ACCOUNT
 gcloud config list project -> show the active project
 gcloud config set project <PROJECT_ID>
+gcloud projects describe <PROJECT_NAME> -> Project id/name/number
 
 https://cloud.google.com/compute/docs/regions-zones
+us-east1 us-central1 us-west1 us-south1 europe-west1 europe-north1 me-central1
 gcloud config set compute/region REGION (us-east1/us-east1-a us-central1/us-central1-a)
+gcloud config set compute/region "us-east1"
+LOCATION="us-east1"
 export REGION=REGION
 export ZONE=Zone
 
@@ -35,7 +41,7 @@ gcloud services enable bigquery-storage.googleapis.com
 gcloud services enable cloudfunctions.googleapis.com
 gcloud services enable apigateway.googleapis.com
 gcloud services enable cloudbuild.googleapis.com
-
+gcloud services enable run.googleapis.com
 gcloud services enable servicemanagement.googleapis.com
 gcloud services enable servicecontrol.googleapis.com
 
@@ -55,9 +61,6 @@ gcloud compute instance-groups managed rolling-action start_update my_cloud_ig \
 gcloud compute snapshots list --project PROJECT_ID
 gcloud compute snapshots describe SNAPSHOT_NAME
 
-VPC
-gcloud compute networks subnets expand-ip-range mysubnet --region us-central1 --prefix-length 21
-
 CloudStorage
 gcloud storage --help
 gcloud storage GROUP(buckets/folders/hmac/insights/managed-folders/objects/operations)
@@ -68,13 +71,21 @@ export LOCATION=EU
 gcloud storage buckets create -l $LOCATION gs://$DEVSHELL_PROJECT_ID
 gsutil acl ch -u allUsers:R gs://$DEVSHELL_PROJECT_ID/my-cat.png -> modify ACL & can be read by everyone
 
-CloudBuild
-gcloud projects describe <PROJECT_NAME>
-gcloud auth configure-docker us-east1-docker.pck.dev
-gcloud builds submit --tag us-east1-docker.pck.dev/<PROJECT_ID>/<REPO_NAME>/<IMG_NAME>:<TAG_NAME> 
-
 CloudRun
 gcloud run deploy
+gcloud run deploy --image gcr.io/$GOOGLE_CLOUD_PROJECT/helloworld --allow-unauthenticated --region=$LOCATION
+gcloud run services delete helloworld --region="REGION"
+
+CloudBuild
+gcloud builds submit --tag us-east1-docker.pck.dev/<PROJECT_ID>/<REPO_NAME>/<IMG_NAME>:<TAG_NAME> 
+gcloud builds submit --tag gcr.io/$GOOGLE_CLOUD_PROJECT/helloworld
+
+ArtifactRegistry
+gcloud auth configure-docker
+gcloud auth configure-docker us-east1-docker.pck.dev
+gcloud artifacts print-settings python --project=hukanege --repository=python-test --location=us-east1
+gcloud container images list
+gcloud container images delete gcr.io/$GOOGLE_CLOUD_PROJECT/helloworld
 
 CloudSQL
 gcloud sql --help
@@ -85,6 +96,9 @@ gcloud sql instances create my_cloud_db --cpu 8 --memory 512mb --region us-centr
                             --availability-type zonal/regional --secondary-zone -us-central2
 gcloud sql instances list restart create clone delete describe patch promote-replica failover get-latest-recovery-time list
 gcloud sql instances reencrypt reset-ssl-config restore-backup switchover
+
+VPC
+gcloud compute networks subnets expand-ip-range mysubnet --region us-central1 --prefix-length 21
 
 
 ----------------------------------------------------------------------------
