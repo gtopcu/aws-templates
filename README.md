@@ -300,7 +300,8 @@ Costs:
 <br/>
 
 
-# pre-Invent'24:
+# re-Invent'24 - Simplexity:
+https://www.youtube.com/watch?v=aim5x73crbM
 https://aws.amazon.com/blogs/aws/top-announcements-of-aws-reinvent-2024/
 https://theburningmonk.com/2024/11/best-preinvent-2024-serverless-announcements
 
@@ -344,8 +345,3 @@ Others:
          MSK Express, Amazon Keyspaces(Cassandra) reduced prices up to 75%, Route53 DNS Resolver Firewall Advanced,   
          OpenSearch Serverless Binary Vector & Point-in-Time Search, ingestion Lambda support for transformation,
          EKS AutoMode & Hybrid Nodes, AppComposer->InfrastructureComposer
-
-# re-Invent'24:
-
-
-
