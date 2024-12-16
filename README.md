@@ -320,7 +320,7 @@ Serverless:
       
 AI:
 - Bedrock: ConversationalBuilder, Prompt Management/Flows/Optimizer, BatchInference(50% cheaper), Data Automation,
-           custom intervention using Amazon Bedrock Agents, human-based model evaluation feature
+           custom intervention using Amazon Bedrock Agents, human-based model evaluation feature, ConverseAPI(LangChain)
 - Other AI: AppStudio, Amplify AI kit, Q developer: code review, inline chat, console/Datadog integration, 
             Sagemaker realtime endpoints scale down to 0 & multi-adapter inference
 
