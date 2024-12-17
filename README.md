@@ -307,7 +307,7 @@ https://theburningmonk.com/2024/11/best-preinvent-2024-serverless-announcements
 
 Serverless:
 - DynamoDB: Price cut on-demand %50 global tables %67, warm thruhput for tables & indexes(4k WPS & 12k RPS initially), 
-            Attribute based access control(RBAC - based on table/user/policy tags) 
+            Global Tables Strong Consistency(DSQL), Attribute based access control(RBAC - based on table/user/policy tags)
 - API GW: Custom domain names for private endpoints
 - Lambda: Python 3.13 & Node 22, snapstart Python & .Net(not free), S3 as failure destination(async/streaming),
           VSCode-like editor, export as SAM, ApplicationSignals support
@@ -320,8 +320,10 @@ Serverless:
       S3 Metadata & Tables(Apache Iceberg)
       
 AI:
-- Bedrock: ConversationalBuilder, Prompt Management/Flows/Optimizer, BatchInference(50% cheaper), Data Automation,
-           custom intervention using Amazon Bedrock Agents, human-based model evaluation feature, ConverseAPI(LangChain)
+- Bedrock: ConversationalBuilder, PromptManagement&Caching/Flows/Optimizer, BatchInference(50% cheaper), Data Automation,
+           custom intervention using Amazon Bedrock Agents, human-based model evaluation feature, ConverseAPI(LangChain),
+           Guardrails automatic reasoning checks & multimodal toxicity detection for image content,
+           latency-optimized inference for foundation models, Model Distillation, Marketplace
 - Other AI: AppStudio, Amplify AI kit, Q developer: code review, inline chat, console/Datadog integration, 
             Sagemaker realtime endpoints scale down to 0 & multi-adapter inference
 
@@ -333,15 +335,16 @@ Others:
 - Compute: EC2 I8g(IO optimized), I7ie(storage optimized), P5en, TR2 Instances & TR2 UltraServers, zonal shift for autoscaling, 
            EBS time-based snapshot copy, instant start times Capacity Blocks, future-dated reservations 
            ECS deployment history & predictive scaling, Container Insights with enhanced observability,
-           EFS cross-account replication & up to 2.5 million IOPS per file system(x10)
+           EFS cross-account replication & up to 2.5 million IOPS per file system(x10), EC2 bandwith config for EBS & VPC,
            VPC block public access, ALB Header Modification, AWS PrivateLink cross-region support, 
            SecurityGroup sharing(same account & region)
 - RDS: Aurora Serverless V2 scales down to 0%, Aurora DSQL multi-region, 99.999% availability,
-       CW DatabaseInsights for Aurora, MemoryDB multi-region with 99.999% availability, 
+       CW DatabaseInsights for Aurora, MemoryDB multi-region with 99.999% availability, Aurora as vector store
 - SystemManager: Manage EC2 and hybrid nodes across ALL accounts and regions in your AWS Organization
                  Superhero mode: Instantly spot unmanaged EC2 instances
                  Auto-fix: SysMgr now diagnoses and remedies issues to bring nodes to managed state
 - Other: AWS Organizations Root User Access, Resource Control Policies(RCPs), Declarative Policies, 
          MSK Express, Amazon Keyspaces(Cassandra) reduced prices up to 75%, Route53 DNS Resolver Firewall Advanced,   
          OpenSearch Serverless Binary Vector & Point-in-Time Search, ingestion Lambda support for transformation,
-         EKS AutoMode & Hybrid Nodes, AppComposer->InfrastructureComposer
+         EKS AutoMode & Hybrid Nodes, AppComposer->InfrastructureComposer,
+         TimeSyncService
