@@ -309,7 +309,7 @@ Serverless:
             Global Tables Strong Consistency(DSQL), Attribute based access control(RBAC - based on table/user/policy tags)
 - API GW: Custom domain names for private endpoints
 - Lambda: Python 3.13 & Node 22, snapstart Python & .Net(not free), S3 as failure destination(async/streaming),
-          VSCode-like editor, export as SAM, ApplicationSignals support, new metrics for EventSourceMappings
+          VSCode editor, SAM export, ApplicationSignals & FaultInjectionService support, new metrics for EventSourceMappings
 - EventBridge: Avg latency down to 100ms from 1.2s
 - SFs: Export as SAM/InfrastructureComposer from console, Variables & JSONata support, PrivateLink VPC access
 - Kinesis: on-Demand now supports 5x throughtput - 10GB/s for writers 20GB/s for consumers per stream

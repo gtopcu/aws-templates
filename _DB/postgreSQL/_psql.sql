@@ -14,5 +14,9 @@ psql --dbname $DB_NAME --host $ENDPOINT --username $DB_USER --set sslmode=requir
 \dt schema.*                    -> list objects with any name under the schema myschema
 \include ~/src/myscript.sql     -> execute the given SQL file
 
+chmod +x myscript.sh
+#!/bin/bash
+...
+
 
 
