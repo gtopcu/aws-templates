@@ -310,22 +310,23 @@ Serverless:
             zero-ETL integration to OpenSearch & RedShift
 - API GW: Custom domain names for private endpoints
 - Lambda: Python 3.13 & Node 22, snapstart Python & .Net(not free), S3 as failure destination(async/streaming),
-          VSCode-like inline editor, SAM export, ApplicationSignals & FaultInjectionService support, 
+          VSCode-like editor(3MB file limit), SAM export, ApplicationSignals & FaultInjectionService support, 
           Top10 Lambda Metrics in Lambda Dashboard, new metrics for EventSourceMappings
-- EventBridge: Avg latency down to 100ms from 1.2s
+- EventBridge: Avg latency down to 100ms from 1.2s, PrivateLink VPC access
 - SFs: Export as SAM/InfrastructureComposer from console, Variables & JSONata support, PrivateLink VPC access
 - Kinesis: on-Demand now supports 5x throughtput - 10GB/s for writers 20GB/s for consumers per stream
 - Cognito: New landing page/managed login, pricing tiers (Lite/Essentials/Plus), passkey auth
 - S3: Conditional writes(if-none-match/if-match bucket policy), ExpressOneZone append data, 1M buckets, 
       AWS Backup S3 cross-region bucket replication, TransferFamily web apps & StorageBrowser,
       S3 Metadata & Tables(Apache Iceberg)
+- Ampify: Amplify AI kit,, WAF Support(IP filtering, geo-restriction etc)      
       
 AI:
 - Bedrock: ConversationalBuilder, PromptManagement&Caching/Flows/Optimizer, BatchInference(50% cheaper), Data Automation,
            custom intervention using Amazon Bedrock Agents, human-based model evaluation feature, ConverseAPI(LangChain),
            Guardrails up to 85% discount, automatic reasoning checks & multimodal toxicity detection for image content,
            latency-optimized inference for foundation models, Model Distillation, Marketplace
-- Other AI: AppStudio, Amplify AI kit, Q developer: code review, inline chat, console/Datadog integration, 
+- Other AI: AppStudio, Q developer: code review, inline chat, console/Datadog integration, 
             Sagemaker realtime endpoints scale down to 0 & multi-adapter inference
 
 Others:

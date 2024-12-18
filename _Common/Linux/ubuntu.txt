@@ -131,6 +131,11 @@ https://sistemdostu.com/haproxy-nedir-nasil-kurulur
 
 ---------------------------------------------------------------------------------------------------
 
+docker run -it --entrypoint /bin/bash
+docker exec -it container_name /bin/bash
+docker run -it ubuntu bash
+docker attach
+
 export PATH=$PATH:/usr/local/go/bin
 var/log /etc/hosts /etc/apt/sources.list
 sudo apt --help
@@ -145,21 +150,30 @@ sudo chmod +x myscript.sh
 sudo bash myscript.sh
 sudo chmod 400 keypair.pem
 sudo chmod u+rwx keypair.pem
-ssh -i "gt-key.pem" ec2-user@54.78.7.114
+ssh -i keypair.pem ec2-user@54.78.7.114
 sudo rm -rf /*
 
-docker run -it --entrypoint /bin/bash
-docker exec -it container_name /bin/bash
-docker run -it ubuntu bash
-docker attach
+None del len type id any/all is/not in/not sorted reversed isinstance sum min max pow round floor enumerate map filter reduce zip
 
 psycopg
+pip install -r requirements.txt
+python3 -m venv venv
+source venv/bin/activate
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 os.getcwd()
 os.listdir()
-current_dir = os.path.dirname(os.path.abspath(_file_))
+os.makedirs(my_dir, exists_ok=True)
+current_dir = os.path.dirname(os.path.abspath(__file__))
 file_path = os.path.join(current_dir, filename)
 danger = [] if danger is None else danger
+[i for i in items if i%2==0]
 [[random.randint(0, 100) for _ in range(size)] for _ in range(size)]
+[[0] * 5]
+A = np.random.rand(size, size) -> np.dot(A, A)
 f"Total time: {end-start:.2f}"
-
-None del len type id any/all is/not in/not sorted reversed isinstance sum min max pow round floor enumerate map filter reduce zip
+" ".join(mylist) mytext.strip() b"OxAdkwaF"
+client = boto3.client(service_name="bedrock_runtime")
+from botocore.exceptions import ClientError
+err.response["Error"]["Code"]
+err.response["Error"]["Message"]
