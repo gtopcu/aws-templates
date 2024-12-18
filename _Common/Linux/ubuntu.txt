@@ -3,9 +3,14 @@ Debian -> Ubuntu
 
 docker run -it ubuntu bash
 
-export PATH=$PATH:/usr/local/go/bin
 ll == ls -al
-sudo chown -R <user-name> <directory-name>
+export PATH=$PATH:/usr/local/go/bin
+
+chown -R hukanege /src/
+sudo chmod +x myscript.sh
+sudo bash myscript.sh
+sudo rm -rf /*
+
 /var/log 
 /etc/hosts 
 
@@ -13,7 +18,9 @@ which sudo
 su -
 
 https://askubuntu.com/questions/222348/what-does-sudo-apt-get-update-do/222352#222352
+/etc/apt/sources.list
 sudo apt --help
+sudo apt search pypy3
 sudo apt list --installed
 sudo apt list --upgradable
 sudo add-apt-repository ppa:vbernat/haproxy-2.6 -> /etc/apt/sources.list
@@ -121,3 +128,38 @@ https://sistemdostu.com/haproxy-nedir-nasil-kurulur
    ssl_certificate /etc/letsencrypt/live/your_domain/fullchain.pem;
    ssl_certificate_key /etc/letsencrypt/live/your_domain/privkey.pem;
 
+
+---------------------------------------------------------------------------------------------------
+
+export PATH=$PATH:/usr/local/go/bin
+var/log /etc/hosts /etc/apt/sources.list
+sudo apt --help
+sudo apt search python3
+sudo apt list --installed
+sudo apt list --upgradable
+sudo apt update && sudo apt upgrade -y
+sudo apt update && sudo apt install foo bar -y
+sudo service ssh --status --status-all --enable --disable --start --full-restart --stop
+sudo chown -R hukanege /src/
+sudo chmod +x myscript.sh
+sudo bash myscript.sh
+sudo chmod 400 keypair.pem
+sudo chmod u+rwx keypair.pem
+ssh -i "gt-key.pem" ec2-user@54.78.7.114
+sudo rm -rf /*
+
+docker run -it --entrypoint /bin/bash
+docker exec -it container_name /bin/bash
+docker run -it ubuntu bash
+docker attach
+
+psycopg
+os.getcwd()
+os.listdir()
+current_dir = os.path.dirname(os.path.abspath(_file_))
+file_path = os.path.join(current_dir, filename)
+danger = [] if danger is None else danger
+[[random.randint(0, 100) for _ in range(size)] for _ in range(size)]
+f"Total time: {end-start:.2f}"
+
+None del len type id any/all is/not in/not sorted reversed isinstance sum min max pow round floor enumerate map filter reduce zip

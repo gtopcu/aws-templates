@@ -307,9 +307,11 @@ https://theburningmonk.com/2024/11/best-preinvent-2024-serverless-announcements
 Serverless:
 - DynamoDB: Price cut on-demand %50 global tables %67, warm thruhput for tables & indexes(4k WPS & 12k RPS initially), 
             Global Tables Strong Consistency(DSQL), Attribute based access control(RBAC - based on table/user/policy tags)
+            zero-ETL integration to OpenSearch & RedShift
 - API GW: Custom domain names for private endpoints
 - Lambda: Python 3.13 & Node 22, snapstart Python & .Net(not free), S3 as failure destination(async/streaming),
-          VSCode editor, SAM export, ApplicationSignals & FaultInjectionService support, new metrics for EventSourceMappings
+          VSCode-like inline editor, SAM export, ApplicationSignals & FaultInjectionService support, 
+          Top10 Lambda Metrics in Lambda Dashboard, new metrics for EventSourceMappings
 - EventBridge: Avg latency down to 100ms from 1.2s
 - SFs: Export as SAM/InfrastructureComposer from console, Variables & JSONata support, PrivateLink VPC access
 - Kinesis: on-Demand now supports 5x throughtput - 10GB/s for writers 20GB/s for consumers per stream
@@ -338,7 +340,8 @@ Others:
            VPC block public access, ALB Header Modification, AWS PrivateLink cross-region support, 
            SecurityGroup sharing(same account & region), zonal shift for autoscaling
 - RDS: Aurora Serverless V2 scales down to 0%, Aurora DSQL multi-region, 99.999% availability,
-       CW DatabaseInsights for Aurora, MemoryDB multi-region with 99.999% availability, Aurora as vector store
+       CW DatabaseInsights for Aurora, MemoryDB multi-region with 99.999% availability & Valkey, Aurora as vector store
+       zero-ETL integration to RedShift
 - SystemManager: Manage EC2 and hybrid nodes across ALL accounts and regions in your AWS Organization
                  Superhero mode: Instantly spot unmanaged EC2 instances
                  Auto-fix: SysMgr now diagnoses and remedies issues to bring nodes to managed state
