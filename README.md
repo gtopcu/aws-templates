@@ -331,7 +331,7 @@ AI:
 
 Others:
 - CloudFormation: Lambda/Guard/ChangeSet/CloudControlAPI(Terraform) hooks, timeline view
-- CloudFront: ALB support with WAF(preconfig ACLs & SG), VPC origins(private VPCs can connect w/out a public ALB), 
+- CloudFront: ALB support with WAF(preconfig ACLs & SG), VPC origins(egress EC2 in private subnet w/out a public IP/ALB), 
               new access log formats & destinations, gRPC support, Anycast static IPs, origin/header modification using functions
 - CloudWatch: Search all log groups(LogInsights)
 - Compute: I8g(IO optimized), I7ie(storage optimized), U7ie(6&8TiB high-memory), P5en, F2(FPGA), TR2 Instances & UltraServers, 
