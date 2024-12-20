@@ -310,22 +310,21 @@ Serverless:
             zero-ETL integration to OpenSearch & RedShift
 - API GW: Custom domain names for private endpoints
 - Lambda: Python 3.13 & Node 22, snapstart Python & .Net(not free), S3 as failure destination(async/streaming),
-          VSCode-like editor(3MB file limit), SAM export, ApplicationSignals & FaultInjectionService support, 
+          VSCode-like editor(3MB editable file limit), SAM export, ApplicationSignals & FaultInjectionService support, 
           Top10 Lambda Metrics in Lambda Dashboard, new metrics for EventSourceMappings
 - EventBridge: Avg latency down to 100ms from 1.2s, PrivateLink VPC access
 - SFs: Export as SAM/InfrastructureComposer from console, Variables & JSONata support, PrivateLink VPC access
 - Kinesis: on-Demand now supports 5x throughtput - 10GB/s for writers 20GB/s for consumers per stream
 - Cognito: New landing page/managed login, pricing tiers (Lite/Essentials/Plus), passkey auth
 - S3: Conditional writes(if-none-match/if-match bucket policy), ExpressOneZone append data, 1M buckets, 
-      AWS Backup S3 cross-region bucket replication, TransferFamily web apps & StorageBrowser,
-      S3 Metadata & Tables(Apache Iceberg)
-- Ampify: Amplify AI kit,, WAF Support(IP filtering, geo-restriction etc)      
+      AWS Backup S3 cross-region bucket replication, TransferFamily web apps, S3 Metadata & Tables(Apache Iceberg)
+- Ampify: Amplify AI kit, StorageBrowser for S3, WAF Support(IP filtering, geo-restriction etc)      
       
 AI:
-- Bedrock: ConversationalBuilder, PromptManagement&Caching/Flows/Optimizer, BatchInference(50% cheaper), Data Automation,
-           custom intervention using Amazon Bedrock Agents, human-based model evaluation feature, ConverseAPI(LangChain),
+- Bedrock: Nova FMs, ConversationalBuilder, PromptManager-Caching/Flows/Optimizer, BatchInference(50% cheaper), Data Automation,
+           custom intervention using agents, human-based model evaluation feature, ConverseAPI(LangChain),
            Guardrails up to 85% discount, automatic reasoning checks & multimodal toxicity detection for image content,
-           latency-optimized inference for foundation models, Model Distillation, Marketplace
+           latency-optimized inference for FMs, Model Distillation, Marketplace
 - Other AI: AppStudio, Q developer: code review, inline chat, console/Datadog integration, 
             Sagemaker realtime endpoints scale down to 0 & multi-adapter inference
 
@@ -333,21 +332,20 @@ Others:
 - CloudFormation: Lambda/Guard/ChangeSet/CloudControlAPI(Terraform) hooks, timeline view
 - CloudFront: ALB support with WAF(preconfig ACLs & SG), VPC origins(egress EC2 in private subnet w/out a public IP/ALB), 
               new access log formats & destinations, gRPC support, Anycast static IPs, origin/header modification using functions
-- CloudWatch: Search all log groups(LogInsights)
+- CloudWatch: Search all log groups(LogInsights), live logs in VS Code
 - Compute: I8g(IO optimized), I7ie(storage optimized), U7ie(6&8TiB high-memory), P5en, F2(FPGA), TR2 Instances & UltraServers, 
-           EBS time-based snapshot copy, instant start times Capacity Blocks, future-dated reservations 
-           ECS deployment history & predictive scaling, Container Insights with enhanced observability,
+           EBS time-based snapshot copy, instant start times Capacity Blocks, future reservations, zonal shift for autoscaling,
            EFS cross-account replication & up to 2.5 million IOPS per file system(x10), EC2 bandwith config for EBS & VPC,
-           VPC block public access, ALB Header Modification, AWS PrivateLink cross-region support, 
-           SecurityGroup sharing(same account & region), zonal shift for autoscaling
-- RDS: Aurora Serverless V2 scales down to 0%, Aurora DSQL multi-region, 99.999% availability,
-       CW DatabaseInsights for Aurora, MemoryDB multi-region with 99.999% availability & Valkey, Aurora as vector store
-       zero-ETL integration to RedShift
+- Network: VPC block public access, PrivateLink private subnets(VPC endpoints & RAM) and cross-region support,
+           SecurityGroup sharing(same account & region), ALB Header Modification, Route53 DNS Resolver Firewall Advanced
+- RDS: Aurora DSQL multi-region, 99.999% availability, Aurora as vector store, Aurora Serverless V2 scales down to 0%, 
+       CW DatabaseInsights for Aurora, MemoryDB multi-region with 99.999% availability & Valkey, zero-ETL integration to RedShift
 - SystemManager: Manage EC2 and hybrid nodes across ALL accounts and regions in your AWS Organization
                  Superhero mode: Instantly spot unmanaged EC2 instances
                  Auto-fix: SysMgr now diagnoses and remedies issues to bring nodes to managed state
-- Other: AWS Organizations Root User Access, Resource Control Policies(RCPs), Declarative Policies, 
-         MSK Express, Amazon Keyspaces(Cassandra) reduced prices up to 75%, Route53 DNS Resolver Firewall Advanced,   
-         OpenSearch Serverless Binary Vector & Point-in-Time Search, ingestion Lambda support for transformation,
-         EKS AutoMode & Hybrid Nodes, AppComposer->InfrastructureComposer, CloudMap SLAs,
-         TimeSyncService
+- ECS/EKS: ECS deployment history & predictive scaling, Container Insights with enhanced observability,
+           EKS AutoMode & Hybrid Nodes  
+- Other: Organizations Root User Access, Resource Control Policies(RCPs), Declarative Policies, 
+         MSK Express, Amazon Keyspaces(Cassandra) reduced prices up to 75%, 
+         OpenSearch Serverless BinaryVector & PIT Search, ingestion Lambda support for transformation,
+         CloudMap SLAs, TimeSyncService
