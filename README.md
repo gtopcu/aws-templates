@@ -318,14 +318,14 @@ Serverless:
 - Cognito: New landing page/managed login, pricing tiers (Lite/Essentials/Plus), passkey auth
 - S3: Conditional writes(if-none-match/if-match bucket policy), ExpressOneZone append data, 1M buckets, 
       AWS Backup S3 cross-region bucket replication, TransferFamily web apps, S3 Metadata & Tables(Apache Iceberg)
-- Ampify: Amplify AI kit, StorageBrowser for S3, WAF Support(IP filtering, geo-restriction etc)      
+- Amplify: Amplify AI kit, StorageBrowser for S3, WAF Support(IP filtering, geo-restriction etc)      
       
 AI:
 - Bedrock: Nova FMs, ConversationalBuilder, PromptManager-Caching/Flows/Optimizer, BatchInference(50% cheaper), Data Automation,
            custom intervention using agents, human-based model evaluation feature, ConverseAPI(LangChain),
            Guardrails up to 85% discount, automatic reasoning checks & multimodal toxicity detection for image content,
            latency-optimized inference for FMs, Model Distillation, Marketplace
-- Other AI: AppStudio, Q developer: code review, inline chat, console/Datadog integration, 
+- Other AI: AppStudio, Q developer: code review, inline chat, console/Datadog integration, Q Business new goodies,
             Sagemaker realtime endpoints scale down to 0 & multi-adapter inference
 
 Others:
