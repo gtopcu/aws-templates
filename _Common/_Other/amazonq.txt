@@ -4,7 +4,7 @@
 
 https://aws.amazon.com/blogs/devops/amazon-q-developer-inline-chat/?trk=39c84365-5c2d-4402-8c01-c5a6c3457227&sc_channel=sm
 
-Inline Chat: Mac + I
+Inline Chat: Command + i
 
 1. /dev
 Ask for help implementing a new feature. Q analyzes your project context and suggests an approach with code examples

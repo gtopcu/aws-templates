@@ -1,4 +1,9 @@
 
+# python -m venv .venv
+# source .venv/bin/activate
+
+# Amazon Q: Command + i
+
 # pip install pylint
 # pylint _pplay.py  
 # pylint: disable=all disable=invalid-name disable=missing-class-docstring (remove this line to get the results)
@@ -31,7 +36,7 @@ class myPersonClass:
         return self.name
 
 
-# from typing import Self, Any, Optional, Final, Literal, NewType, TypeAlias
+# from typing import Self, Any, Optional, Final, Literal, NewType, TypeAlias, TypedDict
 # from collections import namedtuple, deque, OrderedDict, defaultdict
 # from collections.abc import Mapping, Sequence, Set, Generator, Callable, Iterable, Iterator, AsyncIterable
 
@@ -43,6 +48,10 @@ import logging
 # import pandas as pd
 # df = pd.DataFrame(list)
 # df.to_csv("output.csv")
+
+# import numpy as np
+# matrix = np.random.rand(3, 5)
+# matrix = np.dot(10, matrix)
 
 # os.getenv('DDB_TABLE', 'table1')
 # os.environ.get('DDB_TABLE', 'table1')
@@ -150,7 +159,6 @@ import logging
 # except ZeroDivisionError as e:
 #     print(f'Error during operation: {str(e)}')
 
-
 # matrix = [(0, 0), (0, 1), (0, 2),
 #           (1, 0), (1, 1), (1, 2),
 #           (2, 0), (2, 1), (2, 2)]
@@ -163,3 +171,4 @@ import logging
 
 # for row, col in matrix:
 #     print(row, col)
+

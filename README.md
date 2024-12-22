@@ -312,7 +312,7 @@ Serverless:
 - Lambda: Python 3.13 & Node 22, snapstart Python & .Net(not free), S3 as failure destination(async/streaming),
           VSCode-like editor(3MB editable file limit), SAM export, ApplicationSignals & FaultInjectionService support, 
           Top10 Lambda Metrics in Lambda Dashboard, new metrics for EventSourceMappings
-- EventBridge: Avg latency down to 100ms from 1.2s, PrivateLink VPC access
+- EventBridge: Avg latency down to 100ms from 1.2s, PrivateLink VPC access, API destinations proactive OAuth token refresh
 - SFs: Export as SAM/InfrastructureComposer from console, Variables & JSONata support, PrivateLink VPC access
 - Kinesis: on-Demand now supports 5x throughtput - 10GB/s for writers 20GB/s for consumers per stream
 - Cognito: New landing page/managed login, pricing tiers (Lite/Essentials/Plus), passkey auth
@@ -343,9 +343,9 @@ Others:
 - SystemManager: Manage EC2 and hybrid nodes across ALL accounts and regions in your AWS Organization
                  Superhero mode: Instantly spot unmanaged EC2 instances
                  Auto-fix: SysMgr now diagnoses and remedies issues to bring nodes to managed state
-- ECS/EKS: ECS deployment history & predictive scaling, Container Insights with enhanced observability,
-           EKS AutoMode & Hybrid Nodes  
+- ECS/EKS: ECS deployment history & predictive scaling, enhanced Container Insights, Farget network fault injection experiments,
+           EKS AutoMode & Hybrid Nodes, node health monitoring & auto-repair
 - Other: Organizations Root User Access, Resource Control Policies(RCPs), Declarative Policies, 
          MSK Express, Amazon Keyspaces(Cassandra) reduced prices up to 75%, 
          OpenSearch Serverless BinaryVector & PIT Search, ingestion Lambda support for transformation,
-         CloudMap SLAs, TimeSyncService
+         CloudMap SLAs, TimeSyncService, DataTransferTerminals, CleanRooms multi-cloud

@@ -1,10 +1,11 @@
+
 # pip install pillow
 from PIL import Image, ExifTags, ImageFilter, ImageOps #, ImageEnhance, ImageDraw, ImageFont, ImageChops, ImageColor, ImageStat
 import io
 
 def bytes_to_image(image_bytes):
-    with io.BytesIO(image_bytes) as b:
-        with Image.open(b) as image:
+    with io.BytesIO(image_bytes) as buffer:
+        with Image.open(buffer) as image:
             image.load()
             # exif = {
             #     PIL.ExifTags.TAGS[k]: v
