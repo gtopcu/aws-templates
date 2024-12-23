@@ -303,6 +303,7 @@ Costs:
 https://www.youtube.com/watch?v=aim5x73crbM
 https://aws.amazon.com/blogs/aws/top-announcements-of-aws-reinvent-2024/
 https://theburningmonk.com/2024/11/best-preinvent-2024-serverless-announcements
+https://www.youtube.com/watch?v=5wokwEtddtc
 
 Serverless:
 - DynamoDB: Price cut on-demand %50 global tables %67, warm thruhput for tables & indexes(4k WPS & 12k RPS initially), 
@@ -312,19 +313,21 @@ Serverless:
 - Lambda: Python 3.13 & Node 22, snapstart Python & .Net(not free), S3 as failure destination(async/streaming),
           VSCode-like editor(3MB editable file limit), SAM export, ApplicationSignals & FaultInjectionService support, 
           Top10 Lambda Metrics in Lambda Dashboard, new metrics for EventSourceMappings
-- EventBridge: Avg latency down to 100ms from 1.2s, PrivateLink VPC access, API destinations proactive OAuth token refresh
+- EventBridge: Avg latency down to 130ms from 2.2s, PrivateLink VPC access, API destinations proactive OAuth token refresh
 - SFs: Export as SAM/InfrastructureComposer from console, Variables & JSONata support, PrivateLink VPC access
 - Kinesis: on-Demand now supports 5x throughtput - 10GB/s for writers 20GB/s for consumers per stream
 - Cognito: New landing page/managed login, pricing tiers (Lite/Essentials/Plus), passkey auth
 - S3: Conditional writes(if-none-match/if-match bucket policy), ExpressOneZone append data, 1M buckets, 
       AWS Backup S3 cross-region bucket replication, TransferFamily web apps, S3 Metadata & Tables(Apache Iceberg)
-- Amplify: Amplify AI kit, StorageBrowser for S3, WAF Support(IP filtering, geo-restriction etc)      
+- Amplify: Amplify AI kit, StorageBrowser for S3, WAF Support(IP filtering, geo-restriction etc)
+- AppSync: EventsAPI(EventBridge->Appsync Async+WebSockets), cross-account API access with RAM
       
 AI:
 - Bedrock: Nova FMs, ConversationalBuilder, PromptManager-Caching/Flows/Optimizer, BatchInference(50% cheaper), Data Automation,
            custom intervention using agents, human-based model evaluation feature, ConverseAPI(LangChain),
            Guardrails up to 85% discount, automatic reasoning checks & multimodal toxicity detection for image content,
-           latency-optimized inference for FMs, Model Distillation, Marketplace
+           latency-optimized inference for FMs, Model Distillation, Marketplace, 
+           KnowledgeBases Aurora as vector store, structured retrieval(Redshift & SageMaker Lakehouse), multi-model, GraphRAG & streaming support, multi-agent collaboration, IntelligentPromptRouting, DataAutomation, Rerank API
 - Other AI: AppStudio, Q developer: code review, inline chat, console/Datadog integration, Q Business new goodies,
             Sagemaker realtime endpoints scale down to 0 & multi-adapter inference
 

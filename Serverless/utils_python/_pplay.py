@@ -40,10 +40,13 @@ class myPersonClass:
 # from collections import namedtuple, deque, OrderedDict, defaultdict
 # from collections.abc import Mapping, Sequence, Set, Generator, Callable, Iterable, Iterator, AsyncIterable
 
-# load_dotenv()
 import os
 import sys
 import logging
+
+# pip install python-dotenv
+# from dotenv import load_dotenv
+# load_dotenv()
 
 # import pandas as pd
 # df = pd.DataFrame(list)
@@ -102,7 +105,7 @@ import logging
 # sorted = sorted(myset, reverse=True)
 # print(sorted)
 
-# for i, j in enumerate(myset, 0):
+# for i, j in enumerate(myset, 1):
 #     print(i, j)
 
 
