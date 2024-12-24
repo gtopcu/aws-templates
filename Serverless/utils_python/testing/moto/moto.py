@@ -48,12 +48,8 @@ def aws_credentials():
 @pytest.fixture
 def aws_client(aws_credentials):
     with mock_aws():
+        # yield boto3.client("dynamodb", region_name="us-east-1")
         yield boto3.resource("dynamodb", region_name="us-east-1")
-
-@pytest.fixture
-def aws_resource(aws_credentials):
-    with mock_aws():
-        yield boto3.client("dynamodb", region_name="us-east-1")
 
 @pytest.fixture
 def create_table(aws_client):
@@ -108,7 +104,7 @@ def test_dynamo_put(create_table):
     print(response)
     assert response["Item"]["string"] == "data"
 
-    def dynamo_put(table_name, value):
+def dynamo_put(table_name, value):
     dynamodb = boto3.resource('dynamodb')
     table = dynamodb.Table(table_name)
     return table.put_item(
@@ -117,7 +113,6 @@ def test_dynamo_put(create_table):
             'mykey': 'foo'
         },
     )
-
 
 def lambda_handler(event, context):
     

@@ -313,8 +313,8 @@ Serverless:
 - Lambda: Python 3.13 & Node 22, snapstart Python & .Net(not free), S3 as failure destination(async/streaming),
           VSCode-like editor(3MB editable file limit), SAM export, ApplicationSignals & FaultInjectionService support, 
           Top10 Lambda Metrics in Lambda Dashboard, new metrics for EventSourceMappings
-- EventBridge: Avg latency down to 130ms from 2.2s, PrivateLink VPC access, API destinations proactive OAuth token refresh
-- SFs: Export as SAM/InfrastructureComposer from console, Variables & JSONata support, PrivateLink VPC access
+- EventBridge: Avg latency down to 130ms from 2.2s, VPC Lattice+PrivateLink VPC access, API dest. proactive OAuth token refresh
+- SFs: Export as SAM/InfrastructureComposer from console, Variables & JSONata support, VPC Lattice+PrivateLink VPC access
 - Kinesis: on-Demand now supports 5x throughtput - 10GB/s for writers 20GB/s for consumers per stream
 - Cognito: New landing page/managed login, pricing tiers (Lite/Essentials/Plus), passkey auth
 - S3: Conditional writes(if-none-match/if-match bucket policy), ExpressOneZone append data, 1M buckets, 
@@ -326,8 +326,8 @@ AI:
 - Bedrock: Nova FMs, ConversationalBuilder, PromptManager-Caching/Flows/Optimizer, BatchInference(50% cheaper), Data Automation,
            custom intervention using agents, human-based model evaluation feature, ConverseAPI(LangChain),
            Guardrails up to 85% discount, automatic reasoning checks & multimodal toxicity detection for image content,
-           latency-optimized inference for FMs, Model Distillation, Marketplace, 
-           KnowledgeBases Aurora as vector store, structured retrieval(Redshift & SageMaker Lakehouse), multi-model, GraphRAG & streaming support, multi-agent collaboration, IntelligentPromptRouting, DataAutomation, Rerank API
+           latency-optimized inference for FMs, Model Distillation, Marketplace, KnowledgeBases Aurora as vector store, 
+           structured retrieval(Redshift & SageMaker Lakehouse), multi-model, GraphRAG & streaming support, multi-agent collaboration, IntelligentPromptRouting, DataAutomation, Rerank API
 - Other AI: AppStudio, Q developer: code review, inline chat, console/Datadog integration, Q Business new goodies,
             Sagemaker realtime endpoints scale down to 0 & multi-adapter inference
 
@@ -337,8 +337,9 @@ Others:
               new access log formats & destinations, gRPC support, Anycast static IPs, origin/header modification using functions
 - CloudWatch: Search all log groups(LogInsights), live logs in VS Code
 - Compute: I8g(IO optimized), I7ie(storage optimized), U7ie(6&8TiB high-memory), P5en, F2(FPGA), TR2 Instances & UltraServers, 
-           EBS time-based snapshot copy, instant start times Capacity Blocks, future reservations, zonal shift for autoscaling,
+           EBS time-based snapshot copy(15m-48h), instant start Capacity Blocks, future reservations, zonal shift for autoscaling,
            EFS cross-account replication & up to 2.5 million IOPS per file system(x10), EC2 bandwith config for EBS & VPC,
+           EC2 Optimized CPU config during autoscaling for licensing
 - Network: VPC block public access, PrivateLink private subnets(VPC endpoints & RAM) and cross-region support,
            SecurityGroup sharing(same account & region), ALB Header Modification, Route53 DNS Resolver Firewall Advanced
 - RDS: Aurora DSQL multi-region, 99.999% availability, Aurora as vector store, Aurora Serverless V2 scales down to 0%, 
