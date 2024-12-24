@@ -3,6 +3,7 @@ from dataclasses import asdict, astuple, dataclass, field
 from datetime import datetime
 # from pydantic import BaseModel
 from typing import Type
+from uuid import uuid4
 
 # If init is true, an __init__() method is added to the class
 # If repr is true, a __repr__() method is added
@@ -49,6 +50,7 @@ print(my_double_linked_list2)
 #     #name2: str = field(default="GT")
 #     birthday: datetime = field(default_factory=datetime.now)
 #     addresses: list[str] = field(default_factory=list, compare=False, hash=False, repr=False)
+#     user_id: str = field(default_factory=lambda: f"{uuid4()}")
 #     # model: Type[T]
 
 # if __name__ == '__main__':

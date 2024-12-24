@@ -66,6 +66,7 @@ class User(BaseModel):
         "str_to_lower": False
     }
     uuid: UUID4 = Field(default_factory=uuid4) #"12345678-1234-1234-1234-123456789012"
+#   user_id: str = Field(default_factory=lambda: f"{uuid4()}")
     other_uuids: list[UUID4] = Field(default_factory=list)
     id_: int = Field(alias="id", default=None, gt=0, strict=True, frozen=True, kw_only=False)
     name: str = "default"

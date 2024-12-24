@@ -324,15 +324,16 @@ Serverless:
       
 AI:
 - Bedrock: Nova FMs, ConversationalBuilder, PromptManager-Caching/Flows/Optimizer, BatchInference(50% cheaper), Data Automation,
-           custom intervention using agents, human-based model evaluation feature, ConverseAPI(LangChain),
+           custom intervention using agents, human-based model evaluation feature, ConverseAPI(LangChain), 
            Guardrails up to 85% discount, automatic reasoning checks & multimodal toxicity detection for image content,
            latency-optimized inference for FMs, Model Distillation, Marketplace, KnowledgeBases Aurora as vector store, 
-           structured retrieval(Redshift & SageMaker Lakehouse), multi-model, GraphRAG & streaming support, multi-agent collaboration, IntelligentPromptRouting, DataAutomation, Rerank API
-- Other AI: AppStudio, Q developer: code review, inline chat, console/Datadog integration, Q Business new goodies,
-            Sagemaker realtime endpoints scale down to 0 & multi-adapter inference
+           multi-model, GraphRAG & streaming support, multi-agent collaboration, IntelligentPromptRouting, Rerank API,
+- Other AI: AppStudio, Sagamaker Unified Studio, structured retrieval(Redshift & SageMaker Lakehouse), 
+            Sagemaker realtime endpoints scale down to 0 & multi-adapter inference,
+            Q developer: code review, inline chat, console/Datadog integration, Q Business new goodies
 
 Others:
-- CloudFormation: Lambda/Guard/ChangeSet/CloudControlAPI(Terraform) hooks, timeline view
+- CloudFormation: Lambda/Guard/ChangeSet/CloudControlAPI(Terraform) hooks, timeline view, github sync
 - CloudFront: ALB support with WAF(preconfig ACLs & SG), VPC origins(egress EC2 in private subnet w/out a public IP/ALB), 
               new access log formats & destinations, gRPC support, Anycast static IPs, origin/header modification using functions
 - CloudWatch: Search all log groups(LogInsights), live logs in VS Code
@@ -342,14 +343,15 @@ Others:
            EC2 Optimized CPU config during autoscaling for licensing
 - Network: VPC block public access, PrivateLink private subnets(VPC endpoints & RAM) and cross-region support,
            SecurityGroup sharing(same account & region), ALB Header Modification, Route53 DNS Resolver Firewall Advanced
-- RDS: Aurora DSQL multi-region, 99.999% availability, Aurora as vector store, Aurora Serverless V2 scales down to 0%, 
+- RDS: Aurora DSQL - Postgre16, no FKs/triggers/extensions/vectors, single-region %99.99% multi-region 99.999% availability, 
+       Aurora Serverless V2 scales down to 0%, Aurora as vector store, 
        CW DatabaseInsights for Aurora, MemoryDB multi-region with 99.999% availability & Valkey, zero-ETL integration to RedShift
 - SystemManager: Manage EC2 and hybrid nodes across ALL accounts and regions in your AWS Organization
                  Superhero mode: Instantly spot unmanaged EC2 instances
                  Auto-fix: SysMgr now diagnoses and remedies issues to bring nodes to managed state
 - ECS/EKS: ECS deployment history & predictive scaling, enhanced Container Insights, Farget network fault injection experiments,
            EKS AutoMode & Hybrid Nodes, node health monitoring & auto-repair
-- Other: Organizations Root User Access, Resource Control Policies(RCPs), Declarative Policies, 
+- Other: Organizations -> Root User Access Control, ResourceControlPolicies(RCPs), EC2 DeclarativePolicies(VPC block public access)
          MSK Express, Amazon Keyspaces(Cassandra) reduced prices up to 75%, 
          OpenSearch Serverless BinaryVector & PIT Search, ingestion Lambda support for transformation,
          CloudMap SLAs, TimeSyncService, DataTransferTerminals, CleanRooms multi-cloud
