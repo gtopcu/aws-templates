@@ -344,8 +344,9 @@ Others:
 - Network: VPC block public access, PrivateLink private subnets(VPC endpoints & RAM) and cross-region support,
            SecurityGroup sharing(same account & region), ALB Header Modification, Route53 DNS Resolver Firewall Advanced
 - RDS: Aurora DSQL - Postgre16, no FKs/triggers/extensions/vectors, single-region %99.99% multi-region 99.999% availability, 
-       Aurora Serverless V2 scales down to 0%, Aurora as vector store, 
+       Aurora Serverless V2 scales down to 0% (scale up approx 15sec), Aurora as vector store, 
        CW DatabaseInsights for Aurora, MemoryDB multi-region with 99.999% availability & Valkey, zero-ETL integration to RedShift
+       RDS live volume shrink using Blue/Green Deployments
 - SystemManager: Manage EC2 and hybrid nodes across ALL accounts and regions in your AWS Organization
                  Superhero mode: Instantly spot unmanaged EC2 instances
                  Auto-fix: SysMgr now diagnoses and remedies issues to bring nodes to managed state
