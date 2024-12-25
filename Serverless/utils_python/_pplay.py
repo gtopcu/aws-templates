@@ -1,6 +1,7 @@
 
 # python -m venv .venv
 # source .venv/bin/activate
+# pip install -U boto3
 
 # Amazon Q: Command + i
 

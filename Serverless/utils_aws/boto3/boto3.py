@@ -3,7 +3,7 @@
 
 import boto3
 import botocore
-import botocore.exceptions.ClientError
+from botocore.exceptions import ClientError
 import boto3.session
 import logging
 
@@ -20,14 +20,14 @@ import logging
 # max_attempts = 10
 # retry_mode = standard
 
-# Setting custom config - default is legacy with 5 max retries
+# Setting custom config - modes: legacy/standard/adaptive, default is legacy with 5 max retries
 from botocore.config import Config
 my_config = Config(
     region_name = 'us-west-2',
     signature_version = 'v4',
     retries = {
         'max_attempts': 10,
-        'mode': 'standard'
+        'mode': 'adaptive'
     }
 )
 client = boto3.client('kinesis', config=my_config)
@@ -46,6 +46,13 @@ sqs = my_session.client('sqs')
 s3 = my_session.resource('s3')
 
 # Catch exceptions through ClientError and parse error codes for all service-side exceptions and errors
+try:
+    client.describe_stream(StreamName='myDataStream')
+
+except ClientError as err:
+    # print(str(err))
+    print("Error Code: " + f"{err.response['Error']['Code']}")
+    print("Error Message: " + f"{err.response['Error']['Message']}")
 
 # list all boto3 exceptions
 for key, value in sorted(botocore.exceptions.__dict__.items()):
@@ -92,7 +99,7 @@ try:
     logger.info('Calling DescribeStream API on myDataStream')
     client.describe_stream(StreamName='myDataStream')
 
-except botocore.exceptions.ClientError as error:
+except ClientError as error:
     if error.response['Error']['Code'] == 'LimitExceededException':
         logger.warn('API call limit exceeded; backing off and retrying...')
     else:
@@ -107,7 +114,7 @@ queue_url = 'SQS_QUEUE_URL'
 try:
     client.send_message(QueueUrl=queue_url, MessageBody=('some_message'))
 
-except botocore.exceptions.ClientError as err:
+except ClientError as err:
     if err.response['Error']['Code'] == 'InternalError': # Generic error
         print('Error Message: {}'.format(err.response['Error']['Message']))
         print('Request ID: {}'.format(err.response['ResponseMetadata']['RequestId']))

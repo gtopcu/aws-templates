@@ -20,12 +20,10 @@ def lambda_handler(event, context):
             'statusCode': 201,
             'body': event
         }
-    except ClientError as e:
-        print(e)
-        return {
-            'statusCode': 500,
-            'body': e
-        }   
+    except ClientError as err:
+        # print(str(err))
+        print("Error Code: " + f"{err.response['Error']['Code']}")
+        print("Error Message: " + f"{err.response['Error']['Message']}")
 
 
 # class ddb_table:

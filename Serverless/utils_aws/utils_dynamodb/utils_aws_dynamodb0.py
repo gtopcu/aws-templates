@@ -1,7 +1,7 @@
 import json
 import boto3
 import botocore
-from botocore.exceptions import ClientException
+from botocore.exceptions import ClientError
 from boto3.dynamodb.conditions import Key, Attr
 
 dynamodb = boto3.resource('dynamodb')
@@ -68,12 +68,12 @@ def lambda_handler(event, context):
         try: 
             table.put_item(Item=item, ConditionExpression="attribute_not_exists(id)")
             successfulItems.append(item)
-        except botocore.exceptions.ClientError as error:
-            if(error.response['Error']['Code'] == "ConditionalCheckFailedException"):
+        except ClientError as err:
+            if(err.response['Error']['Code'] == "ConditionalCheckFailedException"):
                 print("Item already exists: ", item)
                 successfulItems.append(item)
             else:
-                print("Error: ", error)
+                print("Error: " + str(err))
     return {
          'statusCode': 201,
          'body': successfulItems
@@ -88,11 +88,11 @@ def lambda_handler(event, context):
     #     #             )
     #     print("success!")
         
-    # except botocore.exceptions.ClientError as error:
-    #     print("error!")
-    #     print(error.response['Error']['Code'])
-    #     print(error.response['Error']['Message'])
-    #     print(error.response['ResponseMetadata'])
+    # except ClientError as err:
+    #     print("Error: " + str(err))
+    #     print(err.response['Error']['Code'])
+    #     print(err.response['Error']['Message'])
+    #     print(err.response['ResponseMetadata'])
     
     # my_id = '001'
     # response = table.get_item(

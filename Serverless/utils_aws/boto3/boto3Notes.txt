@@ -9,5 +9,6 @@ https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/python
 python3
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python3 get-pip.py
-pip install boto3
+pip install -U boto3
+pip install -U botocore
 quit()
