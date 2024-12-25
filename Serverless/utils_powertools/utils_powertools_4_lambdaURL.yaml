@@ -4,8 +4,8 @@ Description: Hello world event handler Lambda Function URL
 
 Globals:
   Function:
-    Timeout: 5
-    Runtime: python3.12
+    Timeout: 30
+    Runtime: python3.13
     Tracing: Active
     Environment:
       Variables:

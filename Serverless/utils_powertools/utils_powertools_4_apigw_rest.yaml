@@ -17,8 +17,8 @@ Globals:
       # - "*~1csv" # converts to */csv, eg text/csv, application/csv
 
   Function:
-    Timeout: 5
-    Runtime: python3.12
+    Timeout: 30
+    Runtime: python3.13
     Tracing: Active
     Environment:
       Variables:

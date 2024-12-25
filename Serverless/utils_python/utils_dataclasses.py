@@ -4,6 +4,7 @@ from datetime import datetime
 # from pydantic import BaseModel
 from typing import Type
 from uuid import uuid4
+from typing import Any, Optional
 
 # If init is true, an __init__() method is added to the class
 # If repr is true, a __repr__() method is added
@@ -14,6 +15,10 @@ from uuid import uuid4
 # If kw_only is true, then by default all fields are keyword-only
 # If slots is true, a new class with a __slots__ attribute is returned
 
+# @dataclass(init=True, kw_only=True, unsafe_hash=True, order=True, frozen=True, slots=True)
+# class SimpleDataclass:
+#     id: int
+#     name: Optional[str]
 
 @dataclass
 class DoubleLinkedList:
@@ -46,7 +51,7 @@ print(my_double_linked_list2)
 # class Employee: #[T: BaseModel]:
 #     id: int
 #     #id2 : int = field()
-#     name: str
+#     name: Optional[str]
 #     #name2: str = field(default="GT")
 #     birthday: datetime = field(default_factory=datetime.now)
 #     addresses: list[str] = field(default_factory=list, compare=False, hash=False, repr=False)

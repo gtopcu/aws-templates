@@ -4,6 +4,7 @@ from aws_lambda_powertools import Logger
 from aws_lambda_powertools.utilities.typing import LambdaContext
 from aws_lambda_powertools.logging import correlation_paths
 from aws_lambda_powertools.utilities.data_classes import APIGatewayProxyEvent
+# from aws_lambda_powertools.utilities.data_classes import APIGatewayProxyEvent2
 
 import requests
 
@@ -14,20 +15,17 @@ import requests
 # boto3.set_stream_logger()
 # boto3.set_stream_logger("botocore")
 
-# logger = Logger()
+logger = Logger()
 # logger = Logger(level="DEBUG INFO WARNING ERROR CRITICAL")
-# logger = Logger(serialize_stacktrace=True)
-logger = Logger(log_uncaught_exceptions=True)
-
-#logger = Logger(service="payment", use_rfc3339=True)
-#date_format = "%m/%d/%Y %I:%M:%S %p"
-#logger_custom_format = Logger(service="loyalty", datefmt=date_format)
+# logger = Logger(service="payment", log_uncaught_exceptions=True, serialize_stacktrace=True, use_rfc3339=True)
+# date_format = "%m/%d/%Y %I:%M:%S %p"
+# logger = Logger(service="loyalty", datefmt=date_format)
 
 ENDPOINT = "http://httpbin.org/status/500"
 
 @logger.inject_lambda_context(log_event=True, #beware of sensitive data!
                               clear_state=True, #logger is global scope
-                              correlation_id_path=correlation_paths.API_GATEWAY_)
+                              correlation_id_path=correlation_paths.API_GATEWAY_HTTP)
 def lambda_handler(event: dict, context: LambdaContext) -> str:
 
     request = APIGatewayProxyEvent(event)
