@@ -9,9 +9,11 @@ https://docs.aws.amazon.com/cdk/api/v2/docs/aws-construct-library.html
 https://serverlessland.com/patterns/
 https://www.youtube.com/watch?v=_kf4ajni3Qk
 
+CDK-NAG:
+https://github.com/cdklabs/cdk-nag
+
 npm install -g aws-cdk             # install latest version
 npm install -g aws-cdk@8.4.0       # install specific version
-
 
 # python -m pip install aws-cdk-lib
 

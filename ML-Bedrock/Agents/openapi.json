@@ -1,0 +1,137 @@
+{
+    "openapi":"3.0.3",
+    "info":{
+       "title":"Meeting API",
+       "description":"Provides API methods to view and schedule meetings",
+       "version":"1.0.0",
+       "summary":"Meeting APIs to manage meetings"
+    },
+    "servers":[
+       {
+          "url":"/"
+       }
+    ],
+    "paths":{
+       "/meeting_list":{
+          "get":{
+             "summary":"GET /meeting_list",
+             "description":"Returns the list of meetings",
+             "operationId":"meeting_list_meeting_list_get",
+             "responses":{
+                "422":{
+                   "description":"Validation Error",
+                   "content":{
+                      "application/json":{
+                         "schema":{
+                            "$ref":"#/components/schemas/HTTPValidationError"
+                         }
+                      }
+                   }
+                },
+                "200":{
+                   "description":"Successful Response",
+                   "content":{
+                      "application/json":{
+                         "schema":{
+                            "type":"string",
+                            "title":"Return",
+                            "description":"List of scheduled meetings"
+                         }
+                      }
+                   }
+                }
+             }
+          }
+       },
+       "/schedule_meeting":{
+          "post":{
+             "summary":"POST /schedule_meeting",
+             "description":"Schedules a meeting with the given email",
+             "operationId":"schedule_meeting_schedule_meeting_post",
+             "parameters":[
+                {
+                   "description":"Email address of the attendee to schedule the meeting with",
+                   "required":true,
+                   "schema":{
+                      "type":"string",
+                      "title":"Email",
+                      "description":"Email address of the attendee to schedule the meeting with"
+                   },
+                   "name":"email",
+                   "in":"query"
+                }
+             ],
+             "responses":{
+                "422":{
+                   "description":"Validation Error",
+                   "content":{
+                      "application/json":{
+                         "schema":{
+                            "$ref":"#/components/schemas/HTTPValidationError"
+                         }
+                      }
+                   }
+                },
+                "200":{
+                   "description":"Successful Response",
+                   "content":{
+                      "application/json":{
+                         "schema":{
+                            "type":"string",
+                            "title":"Return",
+                            "description":"Email address of the scheduled attandee"
+                         }
+                      }
+                   }
+                }
+             }
+          }
+       }
+    },
+    "components":{
+       "schemas":{
+          "HTTPValidationError":{
+             "properties":{
+                "detail":{
+                   "items":{
+                      "$ref":"#/components/schemas/ValidationError"
+                   },
+                   "type":"array",
+                   "title":"Detail"
+                }
+             },
+             "type":"object",
+             "title":"HTTPValidationError"
+          },
+          "ValidationError":{
+             "properties":{
+                "loc":{
+                   "items":{
+                      "anyOf":[
+                         {
+                            "type":"string"
+                         },
+                         {
+                            "type":"integer"
+                         }
+                      ]
+                   },
+                   "type":"array",
+                   "title":"Location"
+                },
+                "type":{
+                   "type":"string",
+                   "title":"Error Type"
+                }
+             },
+             "type":"object",
+             "required":[
+                "loc",
+                "msg",
+                "type"
+             ],
+             "title":"ValidationError"
+          }
+       }
+    }
+ }

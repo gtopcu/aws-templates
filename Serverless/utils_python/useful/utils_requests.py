@@ -26,11 +26,11 @@ from datetime import timedelta
 
 def requests_get(endpoint_url, headers=None, auth=None, timeout: int = 30) -> requests.Response:
     response = requests.get(endpoint_url, headers=headers, timeout=timeout)
-    # data:list[str] = requests.get("http://data.csv").content.decode().split("\n")
-    # httpError = response.raise_for_status()
+    # data:list[str] = requests.get("http://data.csv").content.decode("utf-8").split("\n")
+    # response.raise_for_status()
     # status_code = response.status_code
     # response_body = response.json()
-    # content = response.content
+    # response.content.decode("utf-8")
     # return MyDataClass(**response.json())
     return response
     # try:
@@ -55,20 +55,21 @@ def requests_get(endpoint_url, headers=None, auth=None, timeout: int = 30) -> re
     # except requests.exceptions.RequestException as err:
     #     logging.error(err)
 
-def requests_put(endpoint_url, payload, headers=None, auth=None, timeout: int = 30) -> Any:
+def requests_post(endpoint_url, payload, headers=None, auth=None, timeout: int = 30) -> Any:
     # payload = {
     #     "user_id": "1000",
     #     "isActive": True
     # }
     response = requests.post(endpoint_url, headers=headers, auth=auth, timeout=timeout, json=payload)
-    httpError = response.raise_for_status()
-    #status_code = response.status_code
-    #response_body = response.json()
+    # response = requests.post("https://dummy/post", json={"email": email})
+    # response.raise_for_status()
+    # status_code = response.status_code
+    # response.content.decode("utf-8")
     return response.json()     
 
 def requests_put(endpoint_url, payload, headers=None, auth=None, timeout: int = 30) -> Any:
     response = requests.put(endpoint_url, headers=headers, auth=auth, timeout=timeout, json=payload)
-    httpError = response.raise_for_status()
+    # response.raise_for_status()
     return response.json()
 
 # # Session reuses the same connection, much faster
@@ -79,6 +80,8 @@ def requests_put(endpoint_url, payload, headers=None, auth=None, timeout: int = 
 # def main() -> None:
 #     start = time.perf_counter()
 #     with requests.Session() as session:
+#         response = requests_get_with_session(session)
+#         response = requests_get_with_session(session)
 #         response = requests_get_with_session(session)
 #     end = time.perf_counter()
 #     print(f"Time elapsed: {end - start:.2f}")

@@ -1,3 +1,5 @@
+
+import aws_cdk as cdk
 from aws_cdk import (
     Stack,
     Duration,
@@ -22,10 +24,17 @@ class LambdaSqsCdkStack(Stack):
         # Create Lambda function
         lambda_fn = _lambda.Function(
             self, "infraops-cdktest-LambdaFunctionToSqs",
-            runtime=_lambda.Runtime.PYTHON_3_9,
+            runtime=_lambda.Runtime.PYTHON_3_13,
             handler="sendSqsMessage.handler",
             code=_lambda.Code.from_asset("lambda_fns"),
         )
 
         # Grant send message to lambda function
         queue.grant_send_messages(lambda_fn)
+        queue.grant_consume_messages(lambda_fn)
+
+        cdk.CfnOutput(self, "QueueARN", value=queue.queue_arn)
+
+app = cdk.App()
+LambdaSqsCdkStack(app, "LambdaSqsCdkStack")
+app.synth()

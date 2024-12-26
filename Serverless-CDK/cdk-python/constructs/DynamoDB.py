@@ -16,6 +16,9 @@ class DynamoDBTableConstruct(cdk.Construct):
             partition_key=dynamodb.Attribute(
                 name="id", type=dynamodb.AttributeType.STRING
             ),
+            sort_key=dynamodb.Attribute(
+                name="timestamp", type=dynamodb.AttributeType.NUMBER
+            ),
             billing_mode=dynamodb.BillingMode.PAY_PER_REQUEST,
             removal_policy=cdk.RemovalPolicy.DESTROY,
         )
