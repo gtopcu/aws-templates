@@ -65,6 +65,7 @@ class UserTable:
         r = self._table.query(
             KeyConditionExpression=(
                 Key('PK').eq(connection_id)
+                
             ),
             Select='ALL_ATTRIBUTES',
         )

@@ -324,7 +324,7 @@ Serverless:
       
 AI:
 - Bedrock: Nova FMs, ConversationalBuilder, PromptManager-Caching/Flows/Optimizer, BatchInference(50% cheaper), Data Automation,
-           custom intervention using agents, human-based model evaluation feature, ConverseAPI(LangChain), 
+           custom intervention using agents, human & LLM-as-judge, model & RAG evaluation, ConverseAPI(LangChain), 
            Guardrails up to 85% discount, automatic reasoning checks & multimodal toxicity detection for image content,
            latency-optimized inference for FMs, Model Distillation, Marketplace, KnowledgeBases Aurora as vector store, 
            multi-model, GraphRAG & streaming support, multi-agent collaboration, IntelligentPromptRouting, Rerank API,

@@ -54,6 +54,7 @@ ddb = boto3.resource('dynamodb')
 # contains(): Check if a String attribute contains a particular substring or a Set attribute contains a particular element
 # size(): Returns a number indicating the size of an attribute
 
+# https://www.tecracer.com/blog/2023/09/teaching-boto3-to-store-floats-and-datetime-objects-in-dynamodb.html
 @staticmethod
 def dynamo_to_python(dynamo_object: dict) -> dict:
     deserializer = TypeDeserializer()

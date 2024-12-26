@@ -152,6 +152,7 @@ sudo chmod 400 keypair.pem
 sudo chmod u+rwx keypair.pem
 ssh -i keypair.pem ec2-user@54.78.7.114
 sudo rm -rf /*
+cat/touch/nano/head/tail -n
 
 None del len type id any/all is/not in/not sorted reversed isinstance sum min max pow round floor enumerate map filter reduce zip
 

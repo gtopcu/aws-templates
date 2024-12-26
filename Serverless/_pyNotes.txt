@@ -63,7 +63,7 @@ pip install example-package<=1.2.0
 pylint
 ----------------------------------------------------------------------------------------------------------------
 pip install pylint
-pylint myfile.py    # pylint: disable=all disable=invalid-name 
+pylint myfile.py    # pylint: disable=all disable=invalid-name disable=missing-class-docstring
 pylint --rcfile=.pylintrc .
 flake8 --config=.flake8 .
 

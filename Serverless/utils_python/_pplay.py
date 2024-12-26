@@ -99,6 +99,11 @@ import logging
 # name: str = "John"
 # name.join("Doe")
 # print('my name is %s' % name)
+# " ".removeprefix("")
+# " ".removesuffix("")
+# ",".join(mylist)
+# " ".casefold()
+# " ".strip()
 
 # myset = {1, 2, 3}
 # myset.add(2)
