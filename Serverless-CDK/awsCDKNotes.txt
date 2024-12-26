@@ -12,6 +12,9 @@ https://www.youtube.com/watch?v=_kf4ajni3Qk
 CDK-NAG:
 https://github.com/cdklabs/cdk-nag
 
+brew install node@22
+node -v 
+npm -v
 npm install -g aws-cdk             # install latest version
 npm install -g aws-cdk@8.4.0       # install specific version
 
