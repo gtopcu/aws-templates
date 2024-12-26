@@ -13,8 +13,12 @@ CDK-NAG:
 https://github.com/cdklabs/cdk-nag
 
 brew install node@22
+brew uninstall node
 node -v 
 npm -v
+brew unlink node
+brew link --overwrite --force node@22
+
 npm install -g aws-cdk             # install latest version
 npm install -g aws-cdk@8.4.0       # install specific version
 

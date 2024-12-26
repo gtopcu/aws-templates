@@ -1,14 +1,17 @@
 
+import aws_cdk as cdk
 from aws_cdk import (
+    Stack,
+    Duration,
+    RemovalPolicy,
     aws_lambda as _lambda,
     aws_apigateway as apigateway,
     aws_cognito as cognito,
     aws_iam as iam,
-    core
 )
 
-class MyCdkApp(core.Stack):
-    def _init_(self, scope: core.Construct, id: str, **kwargs) -> None:
+class MyCdkApp(Stack):
+    def _init_(self, scope: cdk.Construct, id: str, **kwargs) -> None:
         super()._init_(scope, id, **kwargs)
 
         # Cognito User Pool
@@ -24,11 +27,11 @@ class MyCdkApp(core.Stack):
         )
 
         # Lambda function
-        my_lambda = _lambda.Function(
+        lambda_fn = _lambda.Function(
             self, "MyLambda",
             runtime=_lambda.Runtime.PYTHON_3_12,
             memory_size=1769,
-            timeout=core.Duration.seconds(30),
+            timeout=Duration.seconds(30),
             handler="lambda_function.handler",
             code=_lambda.Code.from_asset("lambda"),
             environment={
@@ -37,7 +40,7 @@ class MyCdkApp(core.Stack):
         )
 
         # Grant Lambda function permissions to access Cognito User Pool
-        user_pool.grant_invoke(my_lambda)
+        user_pool.grant_invoke(lambda_fn)
 
         # API Gateway
         api = apigateway.RestApi(
@@ -86,6 +89,6 @@ class MyCdkApp(core.Stack):
                             authorization_type=apigateway.AuthorizationType.COGNITO,
                             authorizer=apigateway.CfnAuthorizer.IdentifierProperty(id=cognito_authorizer.ref))
 
-app = core.App()
+app = cdk.App()
 MyCdkApp(app, "MyCdkApp")
 app.synth()

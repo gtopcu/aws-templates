@@ -22,7 +22,7 @@ class LambdaSQSStack(Stack):
         super().__init__(scope, construct_id, **kwargs)
 
         # Create AWS Lambda function
-        self.lambda_fn = _lambda.Function(
+        lambda_fn = _lambda.Function(
             self,
             "LambdaFunction",
             function_name="LambdaFunction",
@@ -77,7 +77,7 @@ class LambdaSQSStack(Stack):
         # lambda_function.add_layers(self.lambda_layer)
 
         # Create SQS Queue
-        self.queue = sqs.Queue(
+        queue = sqs.Queue(
             self, "cdktest-LambdaToSqsQueue",
             queue_name='cdktest-LambdaToSqsQueue',
             visibility_timeout=Duration.seconds(300),
@@ -95,11 +95,11 @@ class LambdaSQSStack(Stack):
         )
             
         # Grant send message to lambda function
-        self.queue.grant_send_messages(self.lambda_fn)
-        self.queue.grant_consume_messages(self.lambda_fn)
+        queue.grant_send_messages(lambda_fn)
+        queue.grant_consume_messages(lambda_fn)
 
-        cdk.CfnOutput(self,"LambdaFunctionArn", value=self.lambda_fn.function_arn)
-        cdk.CfnOutput(self, "QueueARN", value=self.queue.queue_arn)
+        cdk.CfnOutput(self,"LambdaFunctionArn", value=lambda_fn.function_arn)
+        cdk.CfnOutput(self, "QueueARN", value=queue.queue_arn)
 
 app = cdk.App()
 LambdaSQSStack(app, "LambdaApiGWStack") # env=cdk.Environment(account='102224384400', region='us-east-2')
