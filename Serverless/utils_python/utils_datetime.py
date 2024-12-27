@@ -1,8 +1,12 @@
-from datetime import datetime, timedelta, UTC
+from datetime import datetime, timedelta, timezone, UTC
 # import datetime
 import time
 # from pytz import timezone
 # import isodate
+
+datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+time.strftime("%Y-%m-%d %H:%M:%S")
 
 DATE_FORMAT : str           = "%Y-%m-%d %H:%M:%S"   # 2024-03-24 14:03:42
 DATE_FORMAT_ISO : str       = "%Y-%m-%dT%H:%M:%S"   # 2024-03-24T14:03:42 #ISO8601 

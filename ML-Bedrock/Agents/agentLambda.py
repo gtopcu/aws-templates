@@ -1,6 +1,7 @@
 
 # https://docs.powertools.aws.dev/lambda/python/latest/core/event_handler/bedrock_agents/
 # https://www.youtube.com/watch?v=NWoC5FTSt7s
+# https://www.youtube.com/watch?v=2L_XE6g3atI
 
 from distutils import version # Deprecated since version 3.10, removed in version 3.12.
 import requests
@@ -25,11 +26,11 @@ def lambda_handler(event:dict, context:dict):
     action = event["action"]
     api_path = event["apiPath"]
     http_method = event["httpMethod"]
+    parameters: list[dict] = event["parameters"]
 
     if api_path == "/latest_version" and http_method == "GET":
         body = powertools_version()
     elif api_path == "/schedule_meeting" and http_method == "POST":
-        parameters: list[dict] = event["parameters"]
         email = next((param["value"] for param in parameters if param["name"] == "email"), None)
         body = schedule_meeting(email)
     else:

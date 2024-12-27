@@ -1,6 +1,7 @@
 
 # https://docs.powertools.aws.dev/lambda/python/latest/core/event_handler/bedrock_agents/
 # https://www.youtube.com/watch?v=NWoC5FTSt7s
+# https://www.youtube.com/watch?v=2L_XE6g3atI
 
 # from distutils import version # Deprecated since version 3.10, removed in version 3.12.
 import requests
@@ -67,6 +68,7 @@ def schedule_meeting(email:Annotated[str, Query(max_length=200, description="Ema
         # app.current_event.api_path
         # app.current_event.http_method
         # app.current_event.agent
+        # app.current_event.parameters
         # app.current_event.decoded_body
     )
     return "Scheduled meeting with: " + email

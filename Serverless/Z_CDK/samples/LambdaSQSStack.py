@@ -98,7 +98,7 @@ class LambdaSQSStack(Stack):
         queue.grant_send_messages(lambda_fn)
         queue.grant_consume_messages(lambda_fn)
 
-        cdk.CfnOutput(self,"LambdaFunctionArn", value=lambda_fn.function_arn)
+        cdk.CfnOutput(self,"LambdaFunctionArn", value=lambda_fn.function_arn, export_name="LambdaFunctionArn")
         cdk.CfnOutput(self, "QueueARN", value=queue.queue_arn)
 
 app = cdk.App()

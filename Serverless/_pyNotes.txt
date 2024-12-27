@@ -40,7 +40,7 @@ pip list | freeze
 pip freeze > requirements.txt
 python -m pip install --upgrade pip
 pip3 install -r requirements.txt
-pip3 install --no-cache-dir -r requirements.txt
+pip install --no-cache-dir --upgrade -r requirements.txt
 pip install -r requirements.txt -t dependencies (--target)
 (cd dependencies ; zip ../aws_lambda_artifact.zip -r . ; zip aws_lambda_artifact.zip -u main.py)
 pip install . (must have 'setup.py' or 'pyproject.toml')

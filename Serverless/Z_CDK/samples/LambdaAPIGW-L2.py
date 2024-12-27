@@ -133,7 +133,7 @@ class ApiGatewayLambdaStackL2(Stack):
         # api_gw.add_domain_name()
         # api_gw.add_api_key()
 
-        cdk.CfnOutput(self,"APIGW-URL", value=api_gw.url)
+        cdk.CfnOutput(self,"APIGW-URL", value=api_gw.url, export_name="APIGW-URL") # Fn.importValue(exportName)
         cdk.CfnOutput(self,"APIGW-DomainName", value=api_gw.domain_name)
         cdk.CfnOutput(self,"APIGW-Stage", value=api_gw.deployment_stage)        
         cdk.CfnOutput(self,"LambdaFunctionArn", value=lambda_fn.function_arn)

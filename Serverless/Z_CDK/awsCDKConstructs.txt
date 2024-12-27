@@ -1,4 +1,65 @@
+-------------------------------------------------------------------------------------
+Importing/referencing resources across stacks:
 
+# 1. Using lookups
+# cdk.importVpc(self, "VpcId", "vpc-12345678")  
+# ec2.Vpc.from_lookup(self, "ImportedVpc", vpc_id=vpc_id)
+# api_gw.from_rest_api_id("ApiGatewayRestApiId")
+
+# 2. Using: CF outputs:
+# cdk.CfnOutput(self,"APIGW-URL", value=api_gw.url, export_name="APIGW-URL") # Fn.importValue(exportName)
+
+# 3. Using CF Parameters:
+# vpc_id_param = cfn.CfnParameter(self, "VpcIdParam", type="String", description="The VPC ID") # -> stack1
+# vpc_id = core.Fn.ref("VpcIdParam") # -> stack2
+
+# 4. Use SystemsMgr ParamStore or SecretManager to store & share ARNs:
+import aws_cdk.aws_ssm as ssm
+ssm.StringParameter(self, "MyVpcId", parameter_name="/my/vpc/id", string_value="vpc-xxx")  # -> stack1
+vpc_id = ssm.StringParameter.value_for_string_parameter(self, "/my/vpc/id") # -> stack2
+vpc = ec2.Vpc.from_lookup(self, "ImportedVpc", vpc_id=vpc_id)
+
+----------------------------------------------------------------------------------------
+Sample - accessing resources in another stack:
+
+class MyFirstStack(core.Stack):
+    def __init__(self, scope: core.Construct, id: str, **kwargs) -> None:
+        super().__init__(scope, id, **kwargs)
+
+        # Example resource: VPC
+        self.vpc = ec2.Vpc(self, "MyVpc")
+
+class MySecondStack(core.Stack):
+    def __init__(self, scope: core.Construct, id: str, **kwargs) -> None:
+        super().__init__(scope, id, **kwargs)
+
+        # Example resource: EC2 instance that uses the VPC from MyFirstStack
+        # Here we would typically reference the VPC from the first stack
+        self.ec2_instance = ec2.Instance(self, "MyInstance",
+            instance_type=ec2.InstanceType("t2.micro"),
+            machine_image=ec2.AmazonLinuxImage(),
+            vpc=self.vpc  # Assuming self.vpc is passed from MyFirstStack
+        )
+
+----------------------------------------------------------------------------------------
+Creating stacks in a particular order
+
+AWS CDK creates the stacks in an app in parallel. If you want the stacks to be created in a particular order 
+use the add_dependency() method:
+
+class MyApp(core.App):
+    def __init__(self):
+        super().__init__()
+
+        first_stack = MyFirstStack(self, "FirstStack")
+        second_stack = MySecondStack(self, "SecondStack")
+        second_stack.add_dependency(first_stack)
+
+app = MyApp()
+app.synth()
+
+----------------------------------------------------------------------------------------
+CDK Constructs
 
 A CDK construct is a reusable cloud component that encapsulates everything needed to create and configure AWS resources. 
 

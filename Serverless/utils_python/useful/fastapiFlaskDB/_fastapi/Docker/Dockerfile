@@ -2,7 +2,7 @@
 # https://fastapi.tiangolo.com/deployment/docker/#official-docker-image-with-gunicorn-uvicorn
 # https://fastapi.tiangolo.com/deployment/docker/#docker-image-with-poetry
 
-FROM python:3.9
+FROM python:3.13
 
 WORKDIR /code
 COPY ./requirements.txt /code/requirements.txt
@@ -18,13 +18,13 @@ CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
 # http://127.0.0.1/redocs
 
 # Dockerfile with Poetry:
-# FROM python:3.9 as requirements-stage 
+# FROM python:3.13 as requirements-stage 
 # WORKDIR /tmp
 # RUN pip install poetry
 # COPY ./pyproject.toml ./poetry.lock* /tmp/
 # RUN poetry export -f requirements.txt --output requirements.txt --without-hashes
 
-# FROM python:3.9
+# FROM python:3.13
 # WORKDIR /code
 # COPY --from=requirements-stage /tmp/requirements.txt /code/requirements.txt
 # RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt

@@ -76,11 +76,12 @@ class ApiGatewayLambdaStackL3(Stack):
             cloud_watch_role=True
         )
 
-        cdk.CfnOutput(self,"APIGW-URL", value=api_gw.url)
+        # cdk.importVpc(self, "VpcId", "vpc-12345678")  
+        # api_gw.from_rest_api_id("ApiGatewayRestApiId")
+        cdk.CfnOutput(self,"APIGW-URL", value=api_gw.url, export_name="APIGW-URL") # Fn.importValue(exportName)
         cdk.CfnOutput(self,"APIGW-DomainName", value=api_gw.domain_name)
         cdk.CfnOutput(self,"APIGW-Stage", value=api_gw.deployment_stage)        
         cdk.CfnOutput(self,"LambdaFunctionArn", value=lambda_fn.function_arn)
-
 
 app = cdk.App()
 ApiGatewayLambdaStackL3(app, "ApiGatewayLambdaStack") # env=cdk.Environment(account='102224384400', region='us-east-2')

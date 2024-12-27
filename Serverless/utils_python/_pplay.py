@@ -50,6 +50,12 @@ import logging
 # from dotenv import load_dotenv
 # load_dotenv()
 
+# from datetime import datetime, timezone
+# import time
+# print(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+# print(datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S"))
+# print(time.strftime("%Y-%m-%d %H:%M:%S"))
+
 # import pandas as pd
 # df = pd.DataFrame(list)
 # df.to_csv("output.csv")
@@ -182,3 +188,7 @@ import logging
 # for row, col in matrix:
 #     print(row, col)
 
+# my_list = [[x, y] for x in range(3) for y in range(3)]
+# print(my_list)
+# flattened = [val for sublist in my_list for val in sublist]
+# print(flattened)
