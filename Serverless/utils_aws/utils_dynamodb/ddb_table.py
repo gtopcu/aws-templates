@@ -8,9 +8,9 @@ import boto3.dynamodb.conditions
 import boto3.dynamodb.types
 import boto3.dynamodb.transform
 
-dynamo: boto3.session.Session.resource = boto3.resource('dynamodb')
+dynamo = boto3.resource('dynamodb')
 table: boto3.dynamodb.table.Table = dynamo.Table('table-1')
-table_resouce: boto3.dynamodb.table.TableResource = table.TableResource()
+table_resource: boto3.dynamodb.table.TableResource = table.TableResource()
 
 
 def lambda_handler(event, context):
