@@ -46,6 +46,11 @@ from pydantic import (
 )
 
 # ----------------------------------------------------------------------------------------------------
+
+# https://github.com/pydantic/pydantic/issues/8006
+# Do not use Optional[str] = None, use str | None = None instead
+# model_dump with exclude_defaults=True or exclude_none=True
+
 class Item(BaseModel):
     name: str
 
@@ -55,7 +60,7 @@ class MyData(BaseModel):
     email: EmailStr | None = None
     url: HttpUrl | None = Field(default=None, alias="url_alias")
     uuid: UUID = Field(default_factory=uuid4)
-    size: Optional[float] = None
+    size: float | None = None
     # items: list[Item]
     creation_date: datetime = Field(default_factory=datetime.now, description="Record creation timestamp")
 
@@ -70,7 +75,7 @@ class MyData(BaseModel):
 
 try: 
     my_data = MyData(name="John", age=30, email="john@example.com", url="https://example.com")
-    print(my_data.model_dump_json())
+    print(my_data.model_dump_json(exclude_none=True)) # https://github.com/pydantic/pydantic/issues/8006
     # my_data.model_dump()
     # MyData.model_validate_json()
     # MyData.model_validate_strings()

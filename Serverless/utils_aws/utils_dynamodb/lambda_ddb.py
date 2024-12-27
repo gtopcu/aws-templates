@@ -9,8 +9,8 @@ import boto3.dynamodb.types
 import boto3.dynamodb.transform
 
 dynamo = boto3.resource('dynamodb')
-table: boto3.dynamodb.table.Table = dynamo.Table('table-1')
-table_resource: boto3.dynamodb.table.TableResource = table.TableResource()
+table = dynamo.Table('table-1')
+# table_resource: boto3.dynamodb.table.TableResource = table.TableResource()
 
 
 def lambda_handler(event, context):
@@ -25,17 +25,3 @@ def lambda_handler(event, context):
         print("Error Code: " + f"{err.response['Error']['Code']}")
         print("Error Message: " + f"{err.response['Error']['Message']}")
 
-
-# class ddb_table:
-
-#     def __init__(self, table_name:str):
-#         table: boto3.dynamodb.table = boto3.resource('dynamodb').Table(table_name)
-#         table_resouce = table.TableResource()
-#         table_resouce.
-        
-
-#     # XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-#     def put_item(self, item: dict) -> None:
-        
-#         self.table.put_item(Item=item)
-        

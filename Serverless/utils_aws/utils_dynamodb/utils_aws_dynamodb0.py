@@ -6,6 +6,7 @@ from boto3.dynamodb.conditions import Key, Attr
 
 dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table("table-1")
+print("Table status:", table.table_status)
 
 """
 docker pull amazon/dynamodb-local

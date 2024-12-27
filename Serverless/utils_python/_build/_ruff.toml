@@ -4,37 +4,37 @@
 # ruff check test.py
 # ruff check test.py --fix
 
-# settings.json
-#   "[python]": {
-#     "editor.formatOnType": false,
-#     "editor.formatOnSave": false,
-#     "editor.defaultFormatter": "charliermarsh.ruff",
-#     "editor.codeActionsOnSave": {
-#       "source.fixAll": false,
-#       "source.organizeImports": false
-#     }
-#   },
+settings.json
+  "[python]": {
+      "editor.formatOnType": false,
+      "editor.formatOnSave": false,
+      "editor.defaultFormatter": "charliermarsh.ruff",
+      "editor.codeActionsOnSave": {
+        "source.fixAll": "false",
+        "source.organizeImports": "false",
+      }
+  }
 
-# [tool.ruff]
-# ruff linter
-# extend-select = ["W", "B", "I", "N", ""C4", "EM", "G", "T20", "SIM", "TCH", "LOG"]
-
+[tool.ruff]
+ruff linter
+extend-select = ["W", "B", "I", "N", ""C4", "EM", "G", "T20", "SIM", "TCH", "LOG"]
+ 
 # ignore = []
-# show-fixes = true
-# target-version = "py312"
-
-# exclude = [
-#   ".ruff_cache",
-#   ".git",
-#   ".venv",
-#   "venv",
-#   "build",
-#   "dist"
-# ]
-
+show-fixes = true
+target-version = "py313"
+# 
+exclude = [
+  ".ruff_cache",
+  ".git",
+  ".venv",
+  "venv",
+  "build",
+  "dist"
+]
+ 
 # per-file-ignores = {}
-
+# 
 # Same as Black
-# line-length = 88
-
-# [tool.ruff.isort]
+line-length = 88
+ 
+[tool.ruff.isort]
