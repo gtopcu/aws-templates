@@ -37,6 +37,10 @@ class CDKPythonStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
+        # import aws_cdk.aws_ssm as ssm
+        # ssm.StringParameter(self, "MyVpcId", parameter_name="/my/vpc/id", string_value="vpc-xxx")  # -> stack1
+        # vpc_id = ssm.StringParameter.value_for_string_parameter(self, "/my/vpc/id") # -> stack2
+        # vpc = ec2.Vpc.from_lookup(self, "ImportedVpc", vpc_id=vpc_id)
 
         # role=iam.Role.from_role_arn(self, "")
 
