@@ -1,0 +1,5 @@
+
+https://github.com/cdklabs/cdk-nag?tab=readme-ov-file
+https://aws.amazon.com/blogs/devops/manage-application-security-and-compliance-with-the-aws-cloud-development-kit-and-cdk-nag/
+
+

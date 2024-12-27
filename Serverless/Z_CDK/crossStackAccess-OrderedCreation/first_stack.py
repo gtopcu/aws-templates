@@ -1,9 +1,9 @@
 
-from aws_cdk import core
+import aws_cdk as cdk
 from aws_cdk import aws_ec2 as ec2
 
-class FirstStack(core.Stack):
-    def __init__(self, scope: core.Construct, id: str, **kwargs) -> None:
+class FirstStack(cdk.Stack):
+    def __init__(self, scope: cdk.Construct, id: str, **kwargs) -> None:
         super().__init__(scope, id, **kwargs)
 
         # Example resource: VPC

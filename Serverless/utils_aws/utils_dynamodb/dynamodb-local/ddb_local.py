@@ -1,5 +1,7 @@
 # https://dynobase.dev/run-dynamodb-locally/
 # https://dynobase.dev/dynamodb-python-with-boto3/#dynamodb-local
+# https://www.dynamodbguide.com/expression-basics
+# https://www.youtube.com/watch?v=cyge2Lx4Jvw
 
 # docker run -p 8000:8000 amazon/dynamodb-local
 
