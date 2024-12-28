@@ -101,7 +101,7 @@ class ApiGatewayLambdaStackL2(Stack):
 
         # Add proxy resource with {proxy+} - catches all routes
         api_gw_proxy = self.api_gw.root.add_resource("{proxy+}")
-        # api_gw_proxy = self.api_gw.root.add_resource("/customers/{proxy+}", 
+        # api_gw_proxy = self.api_gw.root.add_resource("/v1/customers/{proxy+}", 
         #     default_cors_preflight_options=apigw.CorsOptions(allow_origins=['*']),
         #     default_integration=api_gw_integration,
         # )

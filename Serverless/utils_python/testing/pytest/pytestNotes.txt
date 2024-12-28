@@ -1,21 +1,31 @@
 
 # https://docs.pytest.org/en/8.0.x/
 # https://blog.newmathdata.com/advanced-unit-testing-in-aws-a666e787aa99
+# https://docs.pytest.org/en/stable/how-to/monkeypatch.html
+# https://pytest-mock.readthedocs.io/en/latest/usage.html
+# https://docs.python.org/3/library/unittest.mock.html#patch
 
 # http://httpbin.org/
 
-pytest-cov==4.1.0
-coverage
-pytest-env==1.1.3
-pytest-mock==3.12.0
-moto==5.0.0
+pytest.ini must be at project root dir
+tests should be in /tests folder
+test class names should be test_*.py *_test.py
+test method names should be test_*
 
+pytest
+pytest-env (installed with pytest)
+pytest-mock
+pytest-cov
+coverage
+moto
+
+pytest --verbose (-v)
 pytest -vs
-pytest -cov
-pytest TestClass.py -v (verbose) -s(show print) -c(code coverage)
-pytest TestClass.py::test_method
+pytest -vsco
+pytest test_class.py -v (verbose) -s(show print) -c(code coverage)
+pytest test_class.py::test_method
 pytest test_mod.py::TestClass::test_method
-pytest testing/
+pytest tests/
 pytest --pyargs pkg.testing
 pytest test_unit.py -x (stop after failure) --maxfail=2 (stop after two failures)
 
@@ -26,11 +36,10 @@ pytest -m slow              -> run all tests decorated with the @pytest.mark.slo
 pytest --durations=10 -vv   -> get a list of the slowest 10 test durations
 pytest --durations=10 --durations-min=1.0 -vv -> get a list of the slowest 10 test durations over 1.0s
 
-pip install pylint 
 pip install pytest
 pip install -U coverage
-# pytest  -v -s  
-coverage run -m pytest  -v -s 
+# pytest  -vs  
+coverage run -m pytest  -vs 
 python -m coverage run -m pytest
 coverage report -m
 

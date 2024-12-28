@@ -16,6 +16,7 @@ Each test has a unique instance of the class, but class attributes are shared
 #     if __debug__: # default True
 #         raise AssertionError
 
+# https://docs.pytest.org/en/stable/how-to/monkeypatch.html
 @pytest.fixture(autouse=True)
 def aws_env(monkeypatch):
     """
@@ -34,6 +35,7 @@ def context():
     return "Context initialized"
 
 # https://pytest-mock.readthedocs.io/en/latest/usage.html
+# https://docs.python.org/3/library/unittest.mock.html#patch
 # def test_foo(mocker):
 #     mocker.patch('os.remove')
 #     mocker.patch.object(os, 'listdir', autospec=True)
