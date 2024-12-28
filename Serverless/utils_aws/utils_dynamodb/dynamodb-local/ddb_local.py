@@ -16,8 +16,9 @@
 # python -m venv .venv
 # source .venv/bin/activate
 # pip install -U -r requirements.txt
-# /Users/mac/GoogleDrive/VSCode/aws-templates/Serverless/utils_aws/utils_dynamodb/dynamodb-local/.venv
 
+# pip install simplejson
+# import simplejson as json
 import json
 
 import boto3
@@ -25,12 +26,15 @@ import boto3.dynamodb.conditions
 import boto3.dynamodb.transform
 import boto3.dynamodb.types
 from boto3 import dynamodb
-from boto3.dynamodb.conditions import Attr, Key
+from boto3.dynamodb.conditions import Key, Attr
 
 # from boto3.dynamodb.table import TableResource, BatchWriter, BatchReader
 # from boto3.session import Session
 from botocore.exceptions import ClientError
 from pydantic_models import Person
+
+# https://github.com/boto/boto3/issues/665#issuecomment-340260257
+from decimal import Decimal
 
 REGION = "us-east-1"
 ACCESS_KEY_ID = "xxx"
@@ -62,36 +66,50 @@ print("Table status:", table.table_status)
 # table.query(Limit=37)
 
 response = table.put_item(
-    Item={"ID": "1", "Name": "Gokhan Topcu", "Age": 40, "Address": "my address"}
+    Item={"id": "1", "name": "Gokhan Topcu", "age": 40, "address": "my address"}
 )
 # print(response)
 
-# response = table.get_item(Key={"ID": "1"})
-# if item := response.get('Item'):
-#     print("Item: ", item)
-# else:
-#     print("Not found: ", my_id)
+response = table.get_item(Key={"id": "1", "name": "Gokhan Topcu"})
+if record := response.get("Item"):
+    print("Record: ", record)
+else:
+    print("Not found")
 # record = response["Item"]
 # print(record)
 # print(type(record)) #dict
-# print(record["ID"])
-# print(record["Name"])
-# print(record["Address"])
+# print(record["id"])
+# print(record["name"])
+# print(record["address"])
+# record = json.loads(record)
+# record = json.loads(record, parse_float=Decimal)
 # print(json.dumps(record))
-# person = Person(**record)
-# print(person.model_dump_json())
+person = Person(**record)
+# print(person.model_dump())
+print(
+    person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_unset=True)
+)
+# record:dict = json.loads(person.model_dump_json(exclude_none=True))
+# print(record)
 
 person = Person(
-    ID="2",
-    Name="Goknur Topcu",
-    Age=30,
-    Address="my address2",
-    Hobbies=["walking, swimming"],
+    id="2",
+    name="Goknur Topcu",
+    age=30,
+    address="my address2",
+    money=30.12,
+    hobbies=["walking, swimming"],
 )
-response = table.put_item(Item=person.model_dump())
+response = table.put_item(
+    Item=person.model_dump(exclude_none=True, exclude_defaults=True, exclude_unset=True)
+)
+# print(person.model_dump())
+print(
+    person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_unset=True)
+)
 
 # try:
-#     table.put_item(Item=item, ConditionExpression="attribute_not_exists(ID)")
+#     table.put_item(Item=item, ConditionExpression="attribute_not_exists(id)")
 #     successfulItems.append(item)
 # except ClientError as err:
 #     if(err.response['Error']['Code'] == "ConditionalCheckFailedException"):
@@ -102,10 +120,10 @@ response = table.put_item(Item=person.model_dump())
 
 # response = table.update_item(
 #     Key={
-#         "ID": "2"
+#         "id": "2"
 #     },
-#     UpdateExpression="SET Age = :age",
-#     ConditionExpression='attribute_not_exists(Age)' # Do not update if exists
+#     UpdateExpression="SET age = :age", # SET-ADD-DELETE
+#     ConditionExpression='attribute_not_exists(age)' # Do not update if exists
 #     ExpressionAttributeValues={
 #         ":age": 31
 #     },
@@ -114,12 +132,15 @@ response = table.put_item(Item=person.model_dump())
 # print(response)
 
 # Delete
-# response = table.delete_item(Key={"ID": "1"})
+# response = table.delete_item(Key={"id": "1"})
 # print(response)
 
 # Scan - 1MB Limit
 # response = table.scan()
-# response = table.scan(ProjectionExpression="ID, Name, Age")
+# response = table.scan(
+#     FilterExpression=Key("name").begins_with("G"),
+#     ProjectionExpression="id, age"
+# )
 # for item in response["Items"]:
 #     print(item)
 
@@ -137,13 +158,13 @@ response = table.put_item(Item=person.model_dump())
 
 # Query - 1MB Limit
 # response = table.query(
-#     KeyConditionExpression=Key("ID").eq("2"),
-#     # FilterExpression=Attr("Age").eq(30) & Attr("Address").begins_with("my") #& Attr("Hobbies").contains("walking"),
-#     # FilterExpression=Attr("Age").between(30, 40) & Attr("Age").is_in([30, 31, 32]) & Attr("Age").exists()
-#     # FilterExpression=Attr("Age").gt(30) & Attr("Age").lt(40) & Attr("Age").ne(31) & Attr("Age").gte(30) & Attr("Age").lte(40)
+#     KeyConditionExpression=Key("id").eq("1"),
+#     # FilterExpression=Attr("age").eq(30) & Attr("address").begins_with("my") #& Attr("hobbies").contains("walking"),
+#     # FilterExpression=Attr("age").between(30, 40) & Attr("age").is_in([30, 31, 32]) & Attr("age").exists()
+#     # FilterExpression=Attr("age").gt(30) & Attr("Age").lt(40) & Attr("age").ne(31) & Attr("age").gte(30) & Attr("age").lte(40)
 #     # IndexName="GSI1",
 #     # Limit=10,
-#     # ProjectionExpression="ID, Name, Age",
+#     # ProjectionExpression="id, name, age",
 #     # ScanIndexForward=False # true = ascending, false = descending
 # )
 # data = response['Items']
@@ -156,14 +177,14 @@ response = table.put_item(Item=person.model_dump())
 # Batch Write - 25 items / 16GB limit
 # with table.batch_writer() as batch:
 #     for i in range(1, 10):
-#         batch.put_item(Item={"ID": str(i)})
-# You can also delete_items in a batch.
-# batch.delete_item(Key={'HashKey': 'SomeHashKey'})
+#         batch.put_item(Item={"id": str(i)})
+#         You can also delete_items in a batch.
+#         batch.delete_item(Key={'id': str(i)})
 
 
 # Batch Get - 100 items / 16GB limit
 # response = ddb.batch_get_item(
-#     RequestItems={"employee": {"Keys": [{"ID": "1"}], "ConsistentRead": True}},
+#     RequestItems={"employee": {"Keys": [{"id": "1"}], "ConsistentRead": True}},
 #     ReturnConsumedCapacity="TOTAL",
 # )
 # # print(response)
@@ -177,14 +198,14 @@ response = table.put_item(Item=person.model_dump())
 #     while scan is None or "LastEvaluatedKey" in scan:
 #         if scan is not None and "LastEvaluatedKey" in scan:
 #             scan = table.scan(
-#                 ProjectionExpression="ID",
+#                 ProjectionExpression="id",
 #                 ExclusiveStartKey=scan["LastEvaluatedKey"],
 #             )
 #         else:
-#             scan = table.scan(ProjectionExpression="ID")
+#             scan = table.scan(ProjectionExpression="id")
 
 #         for item in scan["Items"]:
-#             batch.delete_item(Key={"ID": item["ID"]})
+#             batch.delete_item(Key={"id": item["id"]})
 
 
 # Increment Attribute

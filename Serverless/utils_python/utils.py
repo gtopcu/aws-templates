@@ -9,6 +9,8 @@ import jsonpickle
 from typing import Any
 import random
 
+import simplejson as json # for decimals
+
 # pip install python-dotenv
 from dotenv import load_dotenv
 load_dotenv()

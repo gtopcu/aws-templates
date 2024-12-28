@@ -79,6 +79,11 @@ import logging
 #     raise FileNotFoundError(f"File not found: {file_path}")
 # os.getcwd()
 # os.listdir()
+# os.makedirs('test', exist_ok=True)
+# os.rmdir('test')
+# os.chmod('test.txt', 0o777)
+# os.chown(('test.txt', 1000, 1000)
+# os.system('clear')
 # print(__name__)
 # print(__file__)
 
@@ -168,10 +173,14 @@ import logging
 # mylist2 = list[dict[str, Any]]
 # mylist2.append({'a': 1, 'b': 2})
 
-# mydict = {'a': 1, 'b': 2, 'c': 3}
-# mydict.update({'d': 4})
+mydict = {'a': 1, 'b': 2, 'c': 3}
+# d = mydict.get('d', 4)
+# d = mydict.pop('d', 4)
 # i, j = mydict.popitem()
-# print(i, j)
+# mydict.fromkeys(list, 0)
+# mydict.setdefault('d', 4)
+# mydict.update({'d': 4})
+# mydict.clear()
 
 # try:
 #     print(1/0)

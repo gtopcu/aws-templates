@@ -27,7 +27,8 @@ from aws_lambda_powertools.event_handler.exceptions import (
 import requests
 from requests import Response
 
-from pydantic import BaseModel, Field
+from aws_lambda_powertools.utilities.parser import event_parser, BaseModel, Field, ValidationError, parse
+# from pydantic import BaseModel, Field
 from typing import Any, Optional
 
 tracer = Tracer()
@@ -40,11 +41,11 @@ app = APIGatewayRestResolver()
 
 # app = APIGatewayHttpResolver() # Defaults to v2 payload
 # app = LambdaFunctionUrlResolver()
-  
+
 
 class Todo(BaseModel):  
     userId: int
-    id_: Optional[int] = Field(alias="id", default=None)
+    id_: int | None = Field(default=None, alias="id", default=None)
     title: str
     completed: bool
 
@@ -107,7 +108,7 @@ def create_todo():
 # @app.not_found
 # @tracer.capture_method
 # def handle_not_found_errors(exc: NotFoundError) -> Response:
-#     logger.info(f"Not found route: {app.current_event.path}")
+#     logger.info(f"Route not found: {app.current_event.path}")
 #     return Response(status_code=418, content_type=content_types.TEXT_PLAIN, body="I'm a teapot!")
 
 # @app.exception_handler(ValueError)
@@ -134,7 +135,10 @@ def create_todo():
                               )
 
 @event_source(data_class=APIGatewayProxyEvent) 
-def lambda_handler(event: APIGatewayProxyEvent, context) -> dict:
+# @event_source(data_class=APIGatewayProxyEventV2) # for HTTP v2
+# @event_parser(model=Todo)
+# def lambda_handler(event: Todo, context:LambdaContext) -> dict:
+def lambda_handler(event: APIGatewayProxyEvent, context:LambdaContext) -> dict:
 
     # event.path
     # event.body
@@ -145,7 +149,7 @@ def lambda_handler(event: APIGatewayProxyEvent, context) -> dict:
     # event.query_string_parameters.get("id")
     # event.query_string_parameters["id"]
     # event.get_query_string_value
-    
+
     logger.debug(event)
 
     logger.info(
@@ -158,6 +162,15 @@ def lambda_handler(event: APIGatewayProxyEvent, context) -> dict:
                 "remaining_time": context.get_remaining_time_in_millis()
             },
         )
+
+    # try:
+    #     todo: Todo = parse(event=event, model=Todo)
+    #     return todo.items
+    # except ValidationError:
+    #     return {
+    #         "status_code": 400,
+    #         "message": "Invalid input data" 
+    #     }
 
     return app.resolve(event, context)
 
