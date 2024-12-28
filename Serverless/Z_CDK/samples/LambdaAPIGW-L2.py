@@ -18,7 +18,7 @@ class ApiGatewayLambdaStackL2(Stack):
         super().__init__(scope, construct_id, **kwargs)
 
         # Create Lambda function
-        lambda_fn = _lambda.Function(
+        self.lambda_fn = _lambda.Function(
             self, 
             "LambdaFunction",
             function_name="LambdaFunction",
@@ -30,14 +30,14 @@ class ApiGatewayLambdaStackL2(Stack):
             handler="mylambda.handler",
             timeout=Duration.seconds(30),
             # environment={
-            #     "QUEUE_URL": queue.queue_url
+            #     "QUEUE_URL": self.queue.queue_url
             # },
             logging_format= _lambda.LoggingFormat.JSON,
             removal_policy=RemovalPolicy.DESTROY,
         )
 
         # Create API Gateway
-        api_gw = apigw.RestApi(
+        self.api_gw = apigw.RestApi(
             self, "API GW API",
             rest_api_name="API GW API",
             description="API Gateway with proxy integration to Lambda",
@@ -58,7 +58,7 @@ class ApiGatewayLambdaStackL2(Stack):
             # ),
 
             # default_integration=apigw.LambdaIntegration(
-            #     lambda_fn,
+            #     self.lambda_fn,
             #     proxy=True,
             #     integration_responses=[
             #         apigw.IntegrationResponse(
@@ -95,19 +95,23 @@ class ApiGatewayLambdaStackL2(Stack):
         
         # Create proxy integration
         api_gw_integration = apigw.LambdaIntegration(
-            lambda_fn,
+            self.lambda_fn,
             proxy=True 
         )
 
         # Add proxy resource with {proxy+} - catches all routes
-        api_gw_proxy = api_gw.root.add_resource('{proxy+}')
+        api_gw_proxy = self.api_gw.root.add_resource("{proxy+}")
+        # api_gw_proxy = self.api_gw.root.add_resource("/customers/{proxy+}", 
+        #     default_cors_preflight_options=apigw.CorsOptions(allow_origins=['*']),
+        #     default_integration=api_gw_integration,
+        # )
         api_gw_proxy.add_method('ANY', api_gw_integration)  # ANY method will catch all HTTP methods
 
         # Also add the root path
-        api_gw.root.add_method('ANY', api_gw_integration)
+        self.api_gw.root.add_method('ANY', api_gw_integration)
 
         # # Create usage plan
-        # plan = api_gw.add_usage_plan('UsagePlan',
+        # plan = self.api_gw.add_usage_plan('UsagePlan',
         #     name='Standard',
         #     description='Standard usage plan with API key',
         #     throttle=apigw.ThrottleSettings(
@@ -121,7 +125,7 @@ class ApiGatewayLambdaStackL2(Stack):
         # )
 
         # # Create API key
-        # key = api_gw.add_api_key('ApiKey',
+        # key = self.api_gw.add_api_key('ApiKey',
         #     api_key_name='MyApiKey',
         #     description='API key for accessing the API'
         # )
@@ -130,13 +134,13 @@ class ApiGatewayLambdaStackL2(Stack):
         # plan.add_api_key(key)
 
         # Set other config
-        # api_gw.add_domain_name()
-        # api_gw.add_api_key()
+        # self.api_gw.add_domain_name()
+        # self.api_gw.add_api_key()
 
-        cdk.CfnOutput(self,"APIGW-URL", value=api_gw.url, export_name="APIGW-URL") # Fn.importValue(exportName)
-        cdk.CfnOutput(self,"APIGW-DomainName", value=api_gw.domain_name)
-        cdk.CfnOutput(self,"APIGW-Stage", value=api_gw.deployment_stage)        
-        cdk.CfnOutput(self,"LambdaFunctionArn", value=lambda_fn.function_arn)
+        cdk.CfnOutput(self,"APIGW-URL", value=self.api_gw.url, export_name="APIGW-URL") # Fn.importValue(exportName)
+        cdk.CfnOutput(self,"APIGW-DomainName", value=self.api_gw.domain_name)
+        cdk.CfnOutput(self,"APIGW-Stage", value=self.api_gw.deployment_stage)        
+        cdk.CfnOutput(self,"LambdaFunctionArn", value=self.lambda_fn.function_arn)
         
 app = cdk.App()
 ApiGatewayLambdaStackL2(app, "ApiGatewayLambdaStack") # env=cdk.Environment(account='102224384400', region='us-east-2')

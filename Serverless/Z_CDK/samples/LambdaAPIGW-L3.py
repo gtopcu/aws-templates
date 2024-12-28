@@ -36,7 +36,7 @@ class ApiGatewayLambdaStackL3(Stack):
         super().__init__(scope, construct_id, **kwargs)
 
         # Create Lambda function
-        lambda_fn = _lambda.Function(
+        self.lambda_fn = _lambda.Function(
             self, 
             "LambdaFunction",
             function_name="LambdaFunction",
@@ -55,9 +55,9 @@ class ApiGatewayLambdaStackL3(Stack):
         )
 
         # Create API Gateway with Lambda integration using L3 construct
-        api_gw = apigw.LambdaRestApi(
+        self.api_gw = apigw.LambdaRestApi(
             self, 'MyApi',
-            handler=lambda_fn,
+            handler=self.lambda_fn,
             proxy=True,
             # deploy=True,
             endpoint_types=[apigw.EndpointType.REGIONAL],
@@ -73,15 +73,16 @@ class ApiGatewayLambdaStackL3(Stack):
                 allow_origins=apigw.Cors.ALL_ORIGINS,
                 allow_methods=apigw.Cors.ALL_METHODS
             ),
-            cloud_watch_role=True
+            cloud_watch_role=True,
+            removal_policy=RemovalPolicy.DESTROY,
         )
 
         # cdk.importVpc(self, "VpcId", "vpc-12345678")  
         # api_gw.from_rest_api_id("ApiGatewayRestApiId")
-        cdk.CfnOutput(self,"APIGW-URL", value=api_gw.url, export_name="APIGW-URL") # Fn.importValue(exportName)
-        cdk.CfnOutput(self,"APIGW-DomainName", value=api_gw.domain_name)
-        cdk.CfnOutput(self,"APIGW-Stage", value=api_gw.deployment_stage)        
-        cdk.CfnOutput(self,"LambdaFunctionArn", value=lambda_fn.function_arn)
+        cdk.CfnOutput(self,"APIGW-URL", value=self.api_gw.url, export_name="APIGW-URL") # Fn.importValue(exportName)
+        cdk.CfnOutput(self,"APIGW-DomainName", value=self.api_gw.domain_name)
+        cdk.CfnOutput(self,"APIGW-Stage", value=self.api_gw.deployment_stage)        
+        cdk.CfnOutput(self,"LambdaFunctionArn", value=self.lambda_fn.function_arn)
 
 app = cdk.App()
 ApiGatewayLambdaStackL3(app, "ApiGatewayLambdaStack") # env=cdk.Environment(account='102224384400', region='us-east-2')

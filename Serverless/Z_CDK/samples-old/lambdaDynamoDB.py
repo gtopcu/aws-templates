@@ -10,7 +10,7 @@ class MyCdkApp(core.Stack):
         super()._init_(scope, id, **kwargs)
 
         # DynamoDB Table
-        ddb_table = dynamodb.Table(
+        self.ddb_table = dynamodb.Table(
             self, "CDKDynamoTable",
             partition_key=dynamodb.Attribute(name="PK", type=dynamodb.AttributeType.STRING),
             sort_key=dynamodb.Attribute(name="SortKey", type=dynamodb.AttributeType.NUMBER),
@@ -31,7 +31,7 @@ class MyCdkApp(core.Stack):
         )
 
         # Lambda Function
-        ddb_lambda = _lambda.Function(
+        self.ddb_lambda = _lambda.Function(
             self, "CDKDynamoLambda",
             runtime=_lambda.Runtime.PYTHON_3_12,
             memory_size=1769,
@@ -39,7 +39,7 @@ class MyCdkApp(core.Stack):
             handler="cdk_dynamo_lambda.handler",
             code=_lambda.Code.from_asset("lambda"),
             environment={
-                "TABLE_NAME": ddb_table.table_name
+                "TABLE_NAME": self.ddb_table.table_name
             },
             # layers=[layer],
             # tracing=_lambda.Tracing.ACTIVE,
@@ -56,9 +56,9 @@ class MyCdkApp(core.Stack):
         )
 
         # Grant DynamoDB table access to Lambda function
-        ddb_table.grant_read_write_data(ddb_lambda)
-        # ddb_table.grant_stream_read(ddb_lambda)
-        # ddb_table.grant_full_access(ddb_lambda)
+        self.ddb_table.grant_read_write_data(self.ddb_lambda)
+        # self.ddb_table.grant_stream_read(self.ddb_lambda)
+        # self.ddb_table.grant_full_access(self.ddb_lambda)
         
 
 app = core.App()

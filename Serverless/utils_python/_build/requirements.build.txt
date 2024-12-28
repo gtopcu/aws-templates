@@ -1,7 +1,6 @@
 boto3
-botocore
+aws-cdk-lib
 aws-lambda-powertools
-aws-lambda-powertools[parser]
 requests
 pydantic
 simplejson
