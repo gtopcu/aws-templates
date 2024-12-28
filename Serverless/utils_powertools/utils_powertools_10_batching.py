@@ -9,6 +9,7 @@ from aws_lambda_powertools.utilities.batch import (
 from aws_lambda_powertools.utilities.data_classes.sqs_event import SQSRecord
 from aws_lambda_powertools.utilities.typing import LambdaContext
 
+# EventType.DynamoDBStreams EventType.KinesisDataStreams
 processor = BatchProcessor(event_type=EventType.SQS)  
 tracer = Tracer()
 logger = Logger()
@@ -16,7 +17,8 @@ logger = Logger()
 
 @tracer.capture_method
 def record_handler(record: SQSRecord):  
-    payload: str = record.json_body  # if json string data, otherwise record.body for str
+    # payload: str = record.body
+    payload: str = record.json_body
     logger.info(payload)
 
 

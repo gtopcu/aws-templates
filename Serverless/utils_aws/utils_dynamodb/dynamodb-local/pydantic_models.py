@@ -47,11 +47,20 @@ class Person(BaseModel):
     def __str__(self) -> str:
         return f"{self.name} {self.age} {self.address} {self.creation_date}"
 
+    # You must raise either ValueError, TypeError, or AssertionError
     # @field_validator("name")
     # def name_not_empty(cls, v):
     #     if not v.strip():
     #         raise ValueError("name cannot be empty")
     #     return v.strip()
+
+    # You must raise either ValueError, TypeError, or AssertionError
+    # @model_validator(mode="after")  
+    # def check_id_uuid(cls, values):
+    #     id, uuid = values.get("id"), values.get("uuid")
+    #     if id is not None and uuid is not None and id != uuid:
+    #         raise ValueError("id and uuid should match")
+    #     return values
 
     # @field_serializer("money", when_used="json")
     # def serialize_money(self, money: Decimal) -> str:

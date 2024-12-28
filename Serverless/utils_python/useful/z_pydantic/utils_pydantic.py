@@ -39,6 +39,7 @@ from pydantic import (
     field_validator,
     model_validator,
     ValidationError,
+    Json,
     EmailStr,
     SecretStr,
     StrictInt,
@@ -58,6 +59,18 @@ getcontext().prec = 2
 # https://github.com/pydantic/pydantic/issues/8006
 # Do not use Optional[str] = None, use str | None = None instead
 # model_dump with exclude_defaults=True or exclude_none=Truev
+
+# ----------------------------------------------------------------------------------------------------
+# Validating JSON fields:
+class Order(BaseModel):
+    order_id: int
+    reason: str
+class OrderModel(BaseModel):
+    body: Json[Order]
+{
+    "body": "{\"order_id\": 12345, \"reason\": \"Changed my mind\"}"
+}
+# ----------------------------------------------------------------------------------------------------
 
 class Person(BaseModel):
     id: str = Field(min_length=1, max_length=50, description="Employee ID")
@@ -83,6 +96,14 @@ class Person(BaseModel):
     #     if not v.strip():
     #         raise ValueError("name cannot be empty")
     #     return v.strip()
+
+    # You must raise either ValueError, TypeError, or AssertionError
+    # @model_validator(mode="after")  
+    # def check_id_uuid(cls, values):
+    #     id, uuid = values.get("id"), values.get("uuid")
+    #     if id is not None and uuid is not None and id != uuid:
+    #         raise ValueError("id and uuid should match")
+    #     return values
 
     # @field_serializer("money", when_used="json")
     # def serialize_money(self, money: Decimal) -> str:
