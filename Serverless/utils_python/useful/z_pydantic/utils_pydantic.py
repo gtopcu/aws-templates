@@ -77,6 +77,7 @@ class Person(BaseModel):
     def __str__(self) -> str:
         return f"{self.name} {self.age} {self.address} {self.creation_date}"
 
+    # You must raise either ValueError, TypeError, or AssertionError
     # @field_validator("name")
     # def name_not_empty(cls, v):
     #     if not v.strip():

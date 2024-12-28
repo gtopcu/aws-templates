@@ -27,8 +27,8 @@ from aws_lambda_powertools.event_handler.exceptions import (
 import requests
 from requests import Response
 
-from aws_lambda_powertools.utilities.parser import event_parser, BaseModel, Field, ValidationError, parse
-# from pydantic import BaseModel, Field
+# from aws_lambda_powertools.utilities.parser import event_parser, parse
+# from pydantic import BaseModel, Field, ValidationError
 from typing import Any, Optional
 
 tracer = Tracer()
@@ -43,11 +43,11 @@ app = APIGatewayRestResolver()
 # app = LambdaFunctionUrlResolver()
 
 
-class Todo(BaseModel):  
-    userId: int
-    id_: int | None = Field(default=None, alias="id", default=None)
-    title: str
-    completed: bool
+# class Todo(BaseModel):  
+#     userId: int
+#     id_: int | None = Field(default=None, alias="id", default=None)
+#     title: str
+#     completed: bool
 
 
 @app.get("/ping")
@@ -136,8 +136,6 @@ def create_todo():
 
 @event_source(data_class=APIGatewayProxyEvent) 
 # @event_source(data_class=APIGatewayProxyEventV2) # for HTTP v2
-# @event_parser(model=Todo)
-# def lambda_handler(event: Todo, context:LambdaContext) -> dict:
 def lambda_handler(event: APIGatewayProxyEvent, context:LambdaContext) -> dict:
 
     # event.path
@@ -162,15 +160,6 @@ def lambda_handler(event: APIGatewayProxyEvent, context:LambdaContext) -> dict:
                 "remaining_time": context.get_remaining_time_in_millis()
             },
         )
-
-    # try:
-    #     todo: Todo = parse(event=event, model=Todo)
-    #     return todo.items
-    # except ValidationError:
-    #     return {
-    #         "status_code": 400,
-    #         "message": "Invalid input data" 
-    #     }
 
     return app.resolve(event, context)
 
