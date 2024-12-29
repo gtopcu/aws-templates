@@ -52,6 +52,7 @@ import logging
 # pip install python-dotenv
 # from dotenv import load_dotenv
 # load_dotenv()
+# logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
 # from datetime import datetime, timezone
 # import time

@@ -1,4 +1,6 @@
 
+aws sso login --profile root
+
 ------------------------------------------------------------------------------------
 SSH Connection:
 ------------------------------------------------------------------------------------
@@ -11,6 +13,7 @@ Install CLI
 https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
 curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
 sudo installer -pkg AWSCLIV2.pkg -target /
+apt install awscli
 
 CLI Doc:
 https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html
@@ -22,22 +25,17 @@ https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-skeleton.html
 sudo chown -R hukanege /Users/hukanege/.aws/
 /.aws/credentials
 /.aws/config
-(C:\Users\USER_NAME\.aws\)
 
-$ mkdir ~/.aws
-$ cat >> ~/.aws/config
 [default]
 aws_access_key_id=YOUR_ACCESS_KEY_HERE
 aws_secret_access_key=YOUR_SECRET_ACCESS_KEY
-region=YOUR_REGION (such as us-west-2, us-west-1, etc)
-
-apt install awscli
+region=YOUR_REGION
 
 aws configure
 aws configure [--profile profile-name]
 aws configure list
 aws configure list-profiles
-aws configure set region us-east-2 --profile spiky
+aws configure set region us-east-2 --profile root
 aws configure import --csv file://credentials.csv
 aws iam get-user
 which aws

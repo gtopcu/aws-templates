@@ -1,10 +1,15 @@
 
-terraform init -backend-config="backend.tfvars"
-terraform plan
+terraform fmt
+terraform init -upgrade -backend-config="backend.tfvars" -reconfigure -migrate-state
+terraform plan -output terraform-plan.yaml
 terraform apply -auto-approve
 terraform destroy -auto-approve
 
 terraform init -> Downloads the latest version of TF
+
+terraform import module mymodule.s3_bucket.state_file_bucket devops-infra
+
+
 
 Claude - AWS:
 Create a sample terraform file for a Python 3.13 lambda function that is triggered from a sqs queue. 
