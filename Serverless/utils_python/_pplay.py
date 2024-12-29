@@ -104,6 +104,13 @@ import logging
 # sys.version
 # sys.version_info
 
+# from pathlib import Path
+# Path.mkdir('test', parents=True, exist_ok=True)
+# print(Path.home())
+# print(Path.cwd())
+# print(Path(__file__))
+# print(Path(__file__).parent.is_dir())
+
 # logger = logging.getLogger(__name__)
 # logger.info('test')
 

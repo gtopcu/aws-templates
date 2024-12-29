@@ -16,23 +16,109 @@ Each test has a unique instance of the class, but class attributes are shared
 #     if __debug__: # default True
 #         raise AssertionError
 
+
+# --------------------------------------------------------------------------------------------
+# MONKEYPATCH:
+# --------------------------------------------------------------------------------------------
 # https://docs.pytest.org/en/stable/how-to/monkeypatch.html
-@pytest.fixture(autouse=True)
+# https://pytest-with-eric.com/mocking/pytest-monkeypatch/
+
+@pytest.fixture(scope="class")
 def aws_env(monkeypatch):
     """
-    Sets mock AWS credentials and region for testing.
+    setattr(obj, name, value): Set an attribute on an object for the duration of the test
+    delattr(obj, name): Delete an attribute from an object
+    setitem(mapping, name, value): Set a key-value pair in a dictionary
+    delitem(mapping, name): Remove a key from a dictionary
+    setenv(name, value): Set an environment variable
+    delenv(name): Remove an environment variable
+    syspath_prepend(path): Add a path to sys.path
+    chdir(path): Change the current working directory
+    context(): Apply patches in a controlled scope
     """
     monkeypatch.setenv('AWS_ACCESS_KEY_ID', 'testing')
-    monkeypatch.setenv('AWS_SECRET_ACCESS_KEY', 'testing')
-    monkeypatch.setenv('AWS_SECURITY_TOKEN', 'testing')
-    monkeypatch.setenv('AWS_SESSION_TOKEN', 'testing')
-    monkeypatch.setenv('AWS_DEFAULT_REGION', 'us-east-1')
+    assert monkeypatch.getenv('AWS_DEFAULT_REGION') == 'us-east-1'
 
-# scope: function(default), class, module, package, session
-@pytest.fixture(scope="module") # autouse=True
-# pytest.mark.usefixtures("lambda_context")
-def context():
-    return "Context initialized"
+    #Context manager that returns a new MonkeyPatch object which undoes any patching done inside the with block upon exit.
+    # Useful in situations where it is desired to undo some patches before the test ends,
+    # with monkeypatch.context() as m:
+    #     m.setattr(functools, "partial", 3)
+
+# Patching objects/functions using monkeypatch:
+
+# from pathlib import Path
+
+# def get_ssh_path():
+#     return Path.home() / ".ssh"
+
+# def test_get_ssh_path(monkeypatch):
+#     def mockreturn():
+#         return Path("/tmp")
+
+#     monkeypatch.setattr(Path, "home", mockreturn)
+#     assert get_ssh_path() == Path("/tmp/.ssh")
+
+#     # Optional: reset the monkeypatch if needed for rest of the test
+#     monkeypatch.delattr(Path, "home")
+
+# --------------------------------------------------------------------------------------------
+
+# Patching function/API responses using monkeypatch:
+
+# import requests
+
+# def get_cat_fact():
+#     """Fetches a random cat fact from the MeowFacts API."""
+#     response = requests.get("https://meowfacts.herokuapp.com/")
+#     return response.json()
+
+# if __name__ == "__main__":
+#     print(get_cat_fact())
+
+
+# # with monkeypatch:
+
+# class MockResponse:
+#     @staticmethod
+#     def json():
+#         return {"data": ["Cats can jump up to six times their length."]}
+
+
+# def test_get_cat_fact(monkeypatch):
+#     monkeypatch.setattr("requests.get", lambda x: MockResponse())
+#     assert get_cat_fact() == {"data": ["Cats can jump up to six times their length."]}
+
+
+# If you need to mock the MeowFacts API across multiple tests, you can move the logic into a reusable fixture:
+
+# @pytest.fixture
+# def mock_meowfacts_api(monkeypatch):
+#     class MockResponse:
+#         @staticmethod
+#         def json():
+#             return {"data": ["Cats sleep 70% of their lives."]}
+
+#     def mock_get(*args, **kwargs):
+#         return MockResponse()
+
+#     monkeypatch.setattr("requests.get", mock_get)
+
+# def test_get_cat_fact(mock_meowfacts_api):
+#     result = get_cat_fact()
+#     assert result == {"data": ["Cats sleep 70% of their lives."]}
+
+
+# To block all HTTP requests using the requests library, you can define a global patch in a conftest.py file.
+# The autouse=True fixture automatically applies to all tests, ensuring that no test makes actual HTTP calls
+# Use monkeypatch.context() to limit the scope of a patch to a specific block of code
+
+# @pytest.fixture(autouse=True)
+# def no_requests(monkeypatch):
+#     """Disable all HTTP requests by removing requests.sessions.Session.request."""
+#     monkeypatch.delattr("requests.sessions.Session.request")
+
+
+# --------------------------------------------------------------------------------------------
 
 # https://pytest-mock.readthedocs.io/en/latest/usage.html
 # https://docs.python.org/3/library/unittest.mock.html#patch
@@ -43,15 +129,27 @@ def context():
 #                 sqs_queue.sqs_client, 'delete_message',
 #                 side_effect=ClientError({'Error': {}}, 'DeleteMessage')
 #             )
+
+# --------------------------------------------------------------------------------------------
+
+# scope: function(default), class, module, package, session
+@pytest.fixture(scope="class", autouse=False)
+# pytest.mark.usefixtures("lambda_context")
+def lambda_context():
+    return "Context initialized"
  
-# Create a test function for MyClass format_name
-def test_check_context(context):
-    print("Context:", context)
-    assert context == "Context initialized"
-    # assert context == ["a", "b", "c", "d", "e", "f", "g"]
+def test_check_context(lambda_context):
+    print("Context:", lambda_context)
+    assert lambda_context == "Context initialized"
+    # assert lambda_context == ["a", "b", "c", "d", "e", "f", "g"]
     # assert hasattr(x, "check")
     # assert isinstance(x, MyClass)
-    # assert 0, context  # to show value
+    # assert 0, lambda_context  # to show value
+
+# Use the raises helper to assert that some code raises an exception:
+def test_raises():
+    with pytest.raises(ValueError):
+        raise ValueError("Invalid input")
 
 def test_usageerror():
     pytest.UsageError("usage error")
@@ -72,11 +170,6 @@ def test_xfail():
 @pytest.mark.xfail(reason="always xfail")
 def test_xpass():
     pass
-
-# Use the raises helper to assert that some code raises an exception:
-def test_raises():
-    with pytest.raises(ValueError):
-        raise ValueError("Invalid input")
 
 # Testing the add function with various sets of parameters
 @pytest.mark.parametrize("a, b, expected", [
