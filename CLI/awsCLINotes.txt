@@ -31,6 +31,7 @@ aws_access_key_id=YOUR_ACCESS_KEY_HERE
 aws_secret_access_key=YOUR_SECRET_ACCESS_KEY
 region=YOUR_REGION
 
+aws --version (aws-cli/2.22.26 Python/3.12.6 Darwin/24.2.0 exe/x86_64)
 aws configure
 aws configure [--profile profile-name]
 aws configure list
@@ -148,14 +149,20 @@ Lambda
 ------------------------------------------------------------------------------------
 
 aws lambda list-functions --function-version ALL --region <REGION> \
-    --output text --query "Functions[?Runtime=='<RUNTIME>'].FunctionArn"
-
-aws lambda invoke --function-name error-example outfile.txt    
+    --output text --query "Functions[?Runtime=='<RUNTIME>'].FunctionArn"  
 
 aws lambda update-function-code --function-name pythonLambda --zip-file fileb://deployment_package.zip
 
 aws lambda publish-layer-version --layer-name $LAYER_NAME --description "pymediainfo" \
     --content S3Bucket=$LAMBDA_LAYERS_BUCKET,S3Key=pymediainfo-python38.zip --compatible-runtimes python3.8
+
+aws lambda invoke --function-name my-function output.json && cat output.json 
+
+aws lambda invoke \
+    --function-name my-function \
+    --cli-binary-format raw-in-base64-out \
+    --payload '{"name": "Alice", "birthday": "1990-01-01", "email": "alice@gmail.com"}' \
+    output.json && cat output.json 
 
 ------------------------------------------------------------------------------------
 ECS

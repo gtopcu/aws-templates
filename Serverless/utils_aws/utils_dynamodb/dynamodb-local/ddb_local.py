@@ -31,7 +31,7 @@ from boto3.dynamodb.conditions import Key, Attr
 # from boto3.dynamodb.table import TableResource, BatchWriter, BatchReader
 # from boto3.session import Session
 from botocore.exceptions import ClientError
-from pydantic_models import Person
+from .schemas import Person
 
 # https://github.com/boto/boto3/issues/665#issuecomment-340260257
 from decimal import Decimal
@@ -65,9 +65,7 @@ print("Table status:", table.table_status)
 
 # table.query(Limit=37)
 
-response = table.put_item(
-    Item={"id": "1", "name": "Gokhan Topcu", "age": 40, "address": "my address"}
-)
+response = table.put_item(Item={"id": "1", "name": "Gokhan Topcu", "age": 40, "address": "my address"})
 # print(response)
 
 response = table.get_item(Key={"id": "1", "name": "Gokhan Topcu"})
@@ -75,6 +73,10 @@ if record := response.get("Item"):
     print("Record: ", record)
 else:
     print("Not found")
+#     return {
+#         "statusCode": 404,
+#         "body": { "result": "Not found" },
+#    }
 # record = response["Item"]
 # print(record)
 # print(type(record)) #dict
@@ -86,9 +88,8 @@ else:
 # print(json.dumps(record))
 person = Person(**record)
 # print(person.model_dump())
-print(
-    person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_unset=True)
-)
+# person.model_dump(mode="json") # or "python"
+print(person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_unset=True))
 # record:dict = json.loads(person.model_dump_json(exclude_none=True))
 # print(record)
 
@@ -100,14 +101,14 @@ person = Person(
     money=30.12,
     hobbies=["walking, swimming"],
 )
-response = table.put_item(
-    Item=person.model_dump(exclude_none=True, exclude_defaults=True, exclude_unset=True)
-)
+response = table.put_item(Item=person.model_dump(exclude_none=True, exclude_defaults=True, exclude_unset=True))
 # print(person.model_dump())
-print(
-    person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_unset=True)
-)
-
+print(person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_unset=True))
+#     return {
+#         "statusCode": 201,
+#         "body": { "result": "Created successfully" },
+#    }
+#      
 # try:
 #     table.put_item(Item=item, ConditionExpression="attribute_not_exists(id)")
 #     successfulItems.append(item)

@@ -1,35 +1,5 @@
 
-# variables.tf
-variable "aws_region" {
-  description = "AWS region"
-  type        = string
-  default     = "us-east-1"
-}
-
-variable "s3_bucket_name" {
-  description = "Name of the S3 bucket to store Lambda code"
-  type        = string
-}
-
-variable "sqs_queue_name" {
-  description = "Name of the SQS queue"
-  type        = string
-}
-
-variable "lambda_function_name" {
-  description = "Name of the Lambda function"
-  type        = string
-}
-
 # main.tf
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
-    }
-  }
-}
 
 provider "aws" {
   region = var.aws_region

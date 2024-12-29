@@ -4,9 +4,20 @@ import time
 # from pytz import timezone
 # import isodate
 
-datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
-time.strftime("%Y-%m-%d %H:%M:%S")
+# datetime.now(timezone.utc)
+# time.time()
+# time.strftime("%Y-%m-%d %H:%M:%S")
+# datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+# time.strptime("2024-03-24", "%Y-%m-%d")
+# date = datetime.strptime("2024-03-24", "%Y-%m-%d").date()
+# date.today()
+# date.day
+# date.month
+# date.year
+# date = datetime.strptime("2024-03-24", "%Y-%m-%d").date()
+# birthday = datetime.strptime("2020-07-24", "%Y-%m-%d").date()
+# age = (date.today() - birthday).days // 365
+# print(age)
 
 DATE_FORMAT : str           = "%Y-%m-%d %H:%M:%S"   # 2024-03-24 14:03:42
 DATE_FORMAT_ISO : str       = "%Y-%m-%dT%H:%M:%S"   # 2024-03-24T14:03:42 #ISO8601 
@@ -37,7 +48,7 @@ if __name__ == "__main__":
 # datetime.fromisocalendar(2020, 5, 17)
 # datetime.fromtimestamp(time.time())
 
-# now: datetime = datetime.datetime.now() # tz=UTC
+# now = datetime.now() # tz=UTC
 # print(now)                                            # 2024-03-20 12:57:32.133498
 # datetime.utcnow()
 # print(now.isoformat())                                # 2024-03-20T12:57:32.133498 -> ISO8601 - since Python3.6

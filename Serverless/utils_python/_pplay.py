@@ -56,9 +56,20 @@ import logging
 
 # from datetime import datetime, timezone
 # import time
-# print(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-# print(datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S"))
-# print(time.strftime("%Y-%m-%d %H:%M:%S"))
+# datetime.now(timezone.utc)
+# time.time()
+# time.strftime("%Y-%m-%d %H:%M:%S")
+# datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+# time.strptime("2024-03-24", "%Y-%m-%d")
+# date = datetime.strptime("2024-03-24", "%Y-%m-%d").date()
+# date.today()
+# date.day
+# date.month
+# date.year
+# date = datetime.strptime("2024-03-24", "%Y-%m-%d").date()
+# birthday = datetime.strptime("2020-07-24", "%Y-%m-%d").date()
+# age = (date.today() - birthday).days // 365
+# print(age)
 
 # import pandas as pd
 # df = pd.DataFrame(list)
@@ -120,6 +131,7 @@ import logging
 # ",".join(mylist)
 # " ".casefold()
 # " ".strip()
+# "mr. gokhan topcu".title()
 
 # myset = {1, 2, 3}
 # myset.add(2)

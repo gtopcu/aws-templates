@@ -16,7 +16,7 @@ class MyEvent(BaseModel):
 
 
 # @event_parser(model=MyEvent) # raises a ValidationError directly from Pydantic
-def lambda_handler(event: MyEvent, context:LambdaContext):
+def lambda_handler(event: dict, context:LambdaContext):
     
     # return {"statusCode": 200, "body": f"Hello {event.name}, your ID is {event.id}"}
     try:

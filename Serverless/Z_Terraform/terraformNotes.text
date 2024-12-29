@@ -1,15 +1,54 @@
 
-terraform fmt
-terraform init -upgrade -backend-config="backend.tfvars" -reconfigure -migrate-state
-terraform plan -output terraform-plan.yaml
-terraform apply -auto-approve
-terraform destroy -auto-approve
+https://developer.hashicorp.com/terraform/downloads
 
-terraform init -> Downloads the latest version of TF
+Install Homebrew:
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+Install TF:
+brew tap hashicorp/tap
+brew install hashicorp/tap/terraform
+
+------------------------------------------------------------------------------------------------
+
+aws configure or:
+export AWS_ACCESS_KEY_ID="your_access_key"
+export AWS_SECRET_ACCESS_KEY="your_secret_key"
+export AWS_REGION="us-west-2"
+
+terraform -version (1.10.3)
+terraform init (downloads latest version) 
+terraform init -upgrade -backend-config="backend.tfvars" -reconfigure -migrate-state 
+terraform validate
+terraform plan -output terraform-plan.yaml
+terraform apply -var-file="dev.tfvars" -auto-approve
+terraform destroy -auto-approve
 
 terraform import module mymodule.s3_bucket.state_file_bucket devops-infra
 
+------------------------------------------------------------------------------------------------
 
+  console               Try Terraform expressions at an interactive command prompt
+  fmt                   Reformat your configuration in the standard style
+  force-unlock          Release a stuck lock on the current workspace
+  get                   Install or upgrade remote Terraform modules
+  graph                 Generate a Graphviz graph of the steps in an operation
+  import                Associate existing infrastructure with a Terraform resource
+  login                 Obtain and save credentials for a remote host (/Users/mac/.terraform.d/credentials.tfrc.json)
+  logout                Remove locally-stored credentials for a remote host
+  metadata              Metadata related commands
+  modules -json         Show all declared modules in a working directory
+  output                Show output values from your root module
+  providers             Show the providers required for this configuration
+  refresh               Update the state to match remote systems
+  show                  Show the current state or a saved plan
+  state                 Advanced state management
+  taint                 Mark a resource instance as not fully functional
+  test                  Execute integration tests for Terraform modules
+  untaint               Remove the 'tainted' state from a resource instance
+  version               Show the current Terraform version
+  workspace             Workspace management
+
+------------------------------------------------------------------------------------------------
 
 Claude - AWS:
 Create a sample terraform file for a Python 3.13 lambda function that is triggered from a sqs queue. 

@@ -13,12 +13,12 @@ class CustomDynamoDBTableConstruct(dynamodb.TableV2):
         super().__init__(scope, id, partition_key=partition_key, billing=billing, dynamo_stream=dynamo_stream, encryption=encryption, global_secondary_indexes=global_secondary_indexes, local_secondary_indexes=local_secondary_indexes, removal_policy=removal_policy, replicas=replicas, sort_key=sort_key, table_name=table_name, time_to_live_attribute=time_to_live_attribute, warm_throughput=warm_throughput, contributor_insights=contributor_insights, deletion_protection=deletion_protection, kinesis_stream=kinesis_stream, point_in_time_recovery=point_in_time_recovery, resource_policy=resource_policy, table_class=table_class, tags=tags)
 
 
-class DynamoDBTableConstruct(cdk.Construct):
-    def __init__(self, scope: cdk.Construct, id: str, **kwargs):
+class DynamoDBStack(cdk.Stack):
+    def __init__(self, scope: cdk.Stack, id: str, **kwargs):
         super().__init__(scope, id, **kwargs)
 
         # DynamoDB table
-        table = dynamodb.TableV2(
+        self.ddbtable = dynamodb.TableV2(
             self,
             "CDKDDBTable",
             partition_key=dynamodb.Attribute(
@@ -43,20 +43,16 @@ class DynamoDBTableConstruct(cdk.Construct):
             #         )
             #     )
             # ],
-            # stream=dynamodb.StreamViewType.NEW_AND_OLD_IMAGES,
-            # stream=dynamodb.StreamViewType.NEW_IMAGE,
-            # stream=dynamodb.StreamViewType.KEYS_ONLY,
-            # stream=dynamodb.StreamViewType.KEYS_ONLY,
-            # table_class=dynamodb.TableClass.STANDARD_INFREQUENT_ACCESS,
-            billing_mode=dynamodb.BillingMode.PAY_PER_REQUEST,            
-            # billing_mode=dynamodb.BillingMode.PROVISIONED,
+            # billing=dynamodb.BillingMode.PAY_PER_REQUEST,  
+            # billing=dynamodb.BillingMode.PROVISIONED,
             # read_capacity=5,
             # write_capacity=5
             # point_in_time_recovery=True,
             # time_to_live_attribute="TTL",
-            # stream=dynamodb.StreamViewType.KEYS_ONLY,
             # stream=dynamodb.StreamViewType.NEW_AND_OLD_IMAGES,
             # stream=dynamodb.StreamViewType.NEW_IMAGE,
+            # stream=dynamodb.StreamViewType.KEYS_ONLY,
+            # table_class=dynamodb.TableClass.STANDARD_INFREQUENT_ACCESS,
             # server_side_encryption=True,
             # encryption=dynamodb.TableEncryption.AWS_MANAGED,
             # contributor_insights=True,
@@ -67,11 +63,19 @@ class DynamoDBTableConstruct(cdk.Construct):
         )
 
         # Grant access to the table for lambda
-        # table.grant_read_write_data(lambda_fn)
-        # table.grant_stream_read(lambda_fn)
-        # table.grant_full_access(lambda_fn)
+        # self.ddbtable.grant_read_write_data(lambda_fn)
+        # self.ddbtable.grant_stream_read(lambda_fn)
+        # self.ddbtable.grant_full_access(lambda_fn)
+
+        # self.ddbtable.grant(
+        #     lambda_role,
+        #     "dynamodb:PutItem",
+        #     "dynamodb:GetItem",
+        #     "dynamodb:UpdateItem",
+        #     "dynamodb:DeleteItem",
+        # )
 
         # Outputs
-        cdk.CfnOutput(self, "TableName", value=table.table_name)
-        cdk.CfnOutput(self, "TableArn", value=table.table_arn)
-        cdk.CfnOutput(self, "TableStreamArn", value=table.table_stream_arn)
+        cdk.CfnOutput(self, "TableName", value=self.ddbtable.table_name)
+        cdk.CfnOutput(self, "TableArn", value=self.ddbtable.table_arn)
+        # cdk.CfnOutput(self, "TableStreamArn", value=self.ddbtable.table_stream_arn)

@@ -1,0 +1,81 @@
+
+https://github.com/cdklabs/cdk-nag?tab=readme-ov-file
+
+Manage application security and compliance with the AWS Cloud Development Kit and cdk-nag
+https://aws.amazon.com/blogs/devops/manage-application-security-and-compliance-with-the-aws-cloud-development-kit-and-cdk-nag/
+
+npm install cdk-nag
+
+--------------------------------------------------------------------------------------------------------
+
+Importing/referencing resources across stacks:
+
+# 1. Using lookups
+# cdk.importVpc(self, "VpcId", "vpc-12345678")  
+# ec2.Vpc.from_lookup(self, "ImportedVpc", vpc_id=vpc_id)
+# api_gw.from_rest_api_id("ApiGatewayRestApiId")
+
+# 2. Using: CF outputs:
+# cdk.CfnOutput(self,"APIGW-URL", value=api_gw.url, export_name="APIGW-URL") # Fn.importValue(exportName)
+
+# 3. Using CF Parameters:
+# vpc_id_param = cfn.CfnParameter(self, "VpcIdParam", type="String", description="The VPC ID") # -> stack1
+# vpc_id = core.Fn.ref("VpcIdParam") # -> stack2
+
+# 4. Use SystemsMgr ParamStore or SecretManager to store & share ARNs:
+import aws_cdk.aws_ssm as ssm
+ssm.StringParameter(self, "MyVpcId", parameter_name="/my/vpc/id", string_value="vpc-xxx")  # -> stack1
+vpc_id = ssm.StringParameter.value_for_string_parameter(self, "/my/vpc/id") # -> stack2
+vpc = ec2.Vpc.from_lookup(self, "ImportedVpc", vpc_id=vpc_id)
+
+--------------------------------------------------------------------------------------------------------
+https://docs.aws.amazon.com/cdk/v2/guide/tagging.html
+
+Tags.of(myConstruct).add('key', 'value');
+Tags.of(myConstruct).remove('key');
+Tags.of(stack).add('Department', 'Finance');
+
+--------------------------------------------------------------------------------------------------------
+https://docs.aws.amazon.com/cdk/v2/guide/aspects.html
+
+Align with best practices while creating infrastructure using CDK Aspects
+https://aws.amazon.com/blogs/devops/align-with-best-practices-while-creating-infrastructure-using-cdk-aspects/
+
+--------------------------------------------------------------------------------------------------------
+
+Testing CDK Applications in Any Language:
+https://aws.amazon.com/blogs/developer/testing-cdk-applications-in-any-language/
+
+--------------------------------------------------------------------------------------------------------
+
+CDK Migrate:
+https://docs.aws.amazon.com/cdk/v2/guide/ref-cli-cdk-migrate.html
+
+Migrate deployed AWS resources, AWS CloudFormation stacks, and CloudFormation templates into a new CDK project.
+This command creates a new CDK app that includes a single stack that is named with the value you provide 
+using --stack-name. You can configure the migration source using --from-scan, --from-stack, or --from-path
+
+--------------------------------------------------------------------------------------------------------
+
+Nested Stacks:
+https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk/README.html#nested-stacks
+
+class MyNestedStack(cfn.NestedStack):
+    def __init__(self, scope, id, *, parameters=None, timeout=None, notifications=None):
+        super().__init__(scope, id, parameters=parameters, timeout=timeout, notifications=notifications)
+
+        s3.Bucket(self, "NestedBucket")
+
+class MyParentStack(Stack):
+    def __init__(self, scope, id, *, description=None, env=None, stackName=None, tags=None, notificationArns=None, synthesizer=None, terminationProtection=None, analyticsReporting=None, crossRegionReferences=None, permissionsBoundary=None, suppressTemplateIndentation=None):
+        super().__init__(scope, id, description=description, env=env, stackName=stackName, tags=tags, notificationArns=notificationArns, synthesizer=synthesizer, terminationProtection=terminationProtection, analyticsReporting=analyticsReporting, crossRegionReferences=crossRegionReferences, permissionsBoundary=permissionsBoundary, suppressTemplateIndentation=suppressTemplateIndentation)
+
+        MyNestedStack(self, "Nested1")
+        MyNestedStack(self, "Nested2")
+
+--------------------------------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------------------------------
+
+

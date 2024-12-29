@@ -12,6 +12,10 @@ pip install -U email_validator
 pydantic[email]
 pydantic = {extras = ["email"], version = "^2.6.1"}
 
+DevTools -> debug(my_model)
+https://docs.pydantic.dev/latest/integrations/devtools/
+pip install devtools
+
 OpenAPI/JSON/YAML/CSV/GraphQL/Dict to Pydantic:
 https://docs.pydantic.dev/latest/integrations/datamodel_code_generator/
 
@@ -20,6 +24,17 @@ https://docs.pydantic.dev/latest/concepts/models/#basic-model-usage
 
 ORM Mode:
 https://docs.pydantic.dev/latest/concepts/models/#arbitrary-class-instances
+
+Pydantic Settings:
+https://docs.pydantic.dev/latest/api/pydantic_settings/
+
+Pydantic Types:
+https://docs.pydantic.dev/dev/api/types/#pydantic.types
+
+Pydantic Lambda:
+https://docs.pydantic.dev/latest/integrations/aws_lambda/
+https://pydantic.dev/articles/lambda-intro
+
 
 """
 
@@ -39,14 +54,33 @@ from pydantic import (
     field_validator,
     model_validator,
     ValidationError,
+    ConfigDict,
+    ValidationInfo,
+    computed_field,
     Json,
     EmailStr,
-    SecretStr,
     StrictInt,
     PositiveInt,
+    NegativeInt,
+    PositiveFloat,
+    NegativeFloat,
+    NonNegativeInt,     # An integer that must be greater than or equal to zero
+    NonNegativeFloat,   # A float that must be greater than or equal to zero
+    NonPositiveInt,     # An integer that must be less than or equal to zero
+    NonPositiveFloat,   # A float that must be less than or equal to zero
     StringConstraints,
-    HttpUrl
-    #AwareDatetime
+    HttpUrl,
+    PastDate,
+    FutureDate,
+    PastDatetime,
+    FutureDatetime,
+    AwareDatetime,      # A datetime that requires timezone info
+    NaiveDatetime,      # A datetime that doesn't require timezone info
+    Secret,
+    SecretStr,
+    Base64Str,
+    UUID4,
+
 )
 
 # ----------------------------------------------------------------------------------------------------
@@ -67,9 +101,9 @@ class Order(BaseModel):
     reason: str
 class OrderModel(BaseModel):
     body: Json[Order]
-{
-    "body": "{\"order_id\": 12345, \"reason\": \"Changed my mind\"}"
-}
+# {
+#     "body": "{\"order_id\": 12345, \"reason\": \"Changed my mind\"}"
+# }
 # ----------------------------------------------------------------------------------------------------
 
 class Person(BaseModel):
@@ -77,15 +111,21 @@ class Person(BaseModel):
     # uuid: UUID = Field(default_factory=uuid4, description="Unique ID", examples=["12345678-1234-1234-1234-123456789012"])
     name: str = Field(min_length=1, max_length=100, description="Full Name")
     age: int | None = Field(default=None, ge=0, le=100, description="Age in years")
+    # birthday: PastDate | None
     address: str | None = Field(default=None, min_length=1, max_length=200, description="Address")
-    # email: EmailStr | None = Field(default=None, description="Email address")
-    # url: HttpUrl | None = Field(default=None, alias="url_alias")
+    email: EmailStr | None = Field(default=None, description="Email address")
+    url: HttpUrl | None = Field(default=None, alias="url_alias")
     money: Decimal = Field(default=Decimal(0), ge=Decimal(0), description="Money in USD") 
     # money: float = Field(default=0, decimal_places=2, ge=0, description="Money in USD") 
     # hobbies: list[str] | None = None
     # items: list[Item]
-    # creation_date: datetime = Field(default_factory=datetime.now, description="Record creation timestamp")
-    creation_date: str = Field(default=str(time.strftime("%Y-%m-%d %H:%M:%S")), description="Record creation timestamp")
+    # creation_date: datetime = Field(default_factory=datetime.now, description="Record creation timestamp", serialization_alias="creationDate")
+    creation_date: str = Field(default=str(time.strftime("%Y-%m-%d %H:%M:%S")), description="Record creation timestamp", serialization_alias="creationDate")
+
+    # @computed_field
+    # @property
+    # def age(self) -> int: 
+    #     return (date.today() - self.birthday).days // 365
 
     def __str__(self) -> str:
         return f"{self.name} {self.age} {self.address} {self.creation_date}"
@@ -111,9 +151,10 @@ class Person(BaseModel):
 
 
 try: 
-    my_data = Person(name="John", age=30, email="john@example.com", url="https://example.com")
+    my_data = Person(id="1", name="John", age=30, email="john@example.com")# , url_alias="example.com") 
     print(my_data.model_dump_json(exclude_none=True)) # https://github.com/pydantic/pydantic/issues/8006
     # my_data.model_dump()
+    my_data.model_dump(mode="json") # or python
     # MyData.model_validate_json()
     # MyData.model_validate_strings()
     # MyData.model_validate()
@@ -121,6 +162,8 @@ try:
     # my_data.model_rebuild()
 except ValidationError as e:
     print("Pydantic validation failed: " + str(e))
+    #return {"result": "error", "message": e.errors(include_url=False, include_context=True, include_input=True)}
+        
 
 # ----------------------------------------------------------------------------------------------------
 

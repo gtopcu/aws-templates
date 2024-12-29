@@ -5,13 +5,19 @@ from pydantic import (
     field_validator,
     model_validator,
     field_serializer,
+    computed_field,
+    ValidationInfo,
     ValidationError,
     EmailStr,
     SecretStr,
     StrictInt,
     PositiveInt,
     StringConstraints,
-    HttpUrl
+    HttpUrl,
+    PastDate,
+    FutureDate,
+    PastDatetime,
+    FutureDatetime,
     #AwareDatetime
 )
 from typing import Literal, Annotated
@@ -29,20 +35,28 @@ getcontext().prec = 2
 # Do not use Optional[str] = None, use str | None = None instead
 # model_dump with exclude_defaults=True or exclude_none=True
 
+# https://pydantic.dev/articles/lambda-intro
+
 class Person(BaseModel):
     id: str = Field(min_length=1, max_length=50, description="Employee ID")
     # uuid: UUID = Field(default_factory=uuid4, description="Unique ID", examples=["12345678-1234-1234-1234-123456789012"])
     name: str = Field(min_length=1, max_length=100, description="Full Name")
     age: int | None = Field(default=None, ge=0, le=100, description="Age in years")
+    # birthday: PastDate | None
     address: str | None = Field(default=None, min_length=1, max_length=200, description="Address")
     # email: EmailStr | None = Field(default=None, description="Email address")
     # url: HttpUrl | None = Field(default=None, alias="url_alias")
     money: Decimal = Field(default=Decimal(0), ge=Decimal(0), description="Money in USD") 
     # money: float = Field(default=0, decimal_places=2, ge=0, description="Money in USD") 
-    # hobbies: list[str] | None = None
-    # items: list[Item]
-    # creation_date: datetime = Field(default_factory=datetime.now, description="Record creation timestamp")
-    creation_date: str = Field(default=str(time.strftime("%Y-%m-%d %H:%M:%S")), description="Record creation timestamp")
+    hobbies: list[str] | None = None
+    # items: list[Item] # 
+    # creation_date: datetime = Field(default_factory=datetime.now, description="Record creation timestamp", serialization_alias="creationDate")
+    creation_date: str = Field(default=str(time.strftime("%Y-%m-%d %H:%M:%S")), description="Record creation timestamp", serialization_alias="creationDate")
+
+    # @computed_field
+    # @property
+    # def age(self) -> int: 
+    #     return (date.today() - self.birthday).days // 365
 
     def __str__(self) -> str:
         return f"{self.name} {self.age} {self.address} {self.creation_date}"
@@ -77,3 +91,4 @@ class Person(BaseModel):
 #     # my_data.model_rebuild()
 # except ValidationError as e:
 #     print("Pydantic validation failed: " + str(e))
+#     return {"result": "error", "message": e.errors(include_url=False, include_context=True, include_input=True)}

@@ -4,11 +4,20 @@ https://github.com/squidfunk/mkdocs-material
 
 python select interpreter: /Users/gtopcu/My Drive/VSCode/aws-templates/.venv
 
+#!/usr/bin/env python3
 echo $PATH
 export PATH=$PATH:/opt/homebrew/bin/python3.13
 sudo apt update -y && sudo apt install python3-pip
 
   pip <command> [options]
+
+  pip install \
+    --platform manylinux2014_x86_64 \  
+    --target=<your_package_dir> \  
+    --implementation cp \  
+    --python-version 3.13 \  
+    --only-binary=:all: \  
+    --upgrade pydantic
 
   install                     Install packages.
   download                    Download packages.
