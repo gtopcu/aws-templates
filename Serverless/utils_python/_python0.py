@@ -11,6 +11,12 @@ class Human: #(AbstractHuman):
 
     name: str = "Gokhan" #   static var, access with Human.name. can have same name as instance var
 
+    #The __new__ method is called during object creation, before __init__. It's a special method that's 
+    # responsible for creating and returning the new instance of a class. __new__ is rarely overridden for:
+    # - Creating singleton classes
+    # - Modifying instance creation in metaclasses
+    # - Subclassing immutable types like str or int
+    @staticmethod
     def __new__(cls, name: str, age: int, jobs:list[str]=None) -> Self:
         return super().__new__(cls)
 

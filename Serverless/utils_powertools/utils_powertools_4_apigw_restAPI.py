@@ -31,11 +31,11 @@ import requests
 from requests import Response
 
 # from aws_lambda_powertools.utilities.parser import event_parser, parse
-# from pydantic import BaseModel, Field, ValidationError
+from pydantic import BaseModel, Field, ValidationError
 from typing import Any, Optional
 
 tracer = Tracer()
-logger = Logger(level="INFO")
+logger = Logger(level="INFO", log_uncaught_exceptions=True, serialize_stacktrace=True)
 # app = APIGatewayRestResolver() 
 # app = APIGatewayRestResolver(enable_validation=True, strip_prefixes=["/customDNS"]) 
 # app.enable_swagger(path="/swagger", persist_authorization=True)
@@ -47,13 +47,16 @@ app = APIGatewayHttpResolver() # Defaults to v2 payload
 # app = LambdaFunctionUrlResolver()
 
 
-# class Todo(BaseModel):  
-#     userId: int
-#     id_: int | None = Field(default=None, alias="id", default=None)
-#     title: str
-#     completed: bool
+class Todo(BaseModel):  
+    userId: int
+    id_: int | None = Field(default=None, alias="id", default=None)
+    title: str
+    completed: bool
 
 
+# /{proxy+}
+# /parent/{proxy+}
+# {customPath}/pets/{petID}
 @app.get("/ping")
 def ping():
     return {"message": "pong"} # Auto-serializes dictionary responses to JSON and trims
@@ -76,7 +79,7 @@ def get_todo_by_id(todo_id: str) -> Todo:
 def catch_any_route_get_method():
     return {"path_received": app.current_event.path}
 
-@app.post("/todos")
+@app.post("/todos", deprecated=True)
 @tracer.capture_method
 def create_todo():
     todo_data: dict = app.current_event.json_body  # deserialize json str to dict

@@ -1,0 +1,46 @@
+
+https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html
+https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html
+
+With the 2.0 format version, API Gateway can infer the response format for you. 
+API Gateway makes the following assumptions if your Lambda function returns valid JSON and doesn't return a statusCode:
+
+ - isBase64Encoded is false.
+ - statusCode is 200.
+ - content-type is application/json.
+ - body is the function's response.
+
+Lambda response can be text/json:
+
+1.
+"Hello from Lambda!"
+->
+{
+    "isBase64Encoded": false,
+    "statusCode": 200,
+    "body": "Hello from Lambda!",
+    "headers": {
+      "content-type": "application/json"
+    }
+  }
+
+2.
+{ "message": "Hello from Lambda!" }
+->
+{
+    "isBase64Encoded": false,
+    "statusCode": 200,
+    "body": "{ \"message\": \"Hello from Lambda!\" }",
+    "headers": {
+      "content-type": "application/json"
+    }
+  }
+
+To customize the response, your Lambda function should return a response with the following format:
+{
+    "cookies" : ["cookie1", "cookie2"],
+    "isBase64Encoded": true|false,
+    "statusCode": httpStatusCode,
+    "headers": { "headername": "headervalue", ... },
+    "body": "Hello from Lambda!"
+}      

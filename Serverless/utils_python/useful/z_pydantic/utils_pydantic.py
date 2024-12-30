@@ -94,6 +94,8 @@ getcontext().prec = 2
 # Do not use Optional[str] = None, use str | None = None instead
 # model_dump with exclude_defaults=True or exclude_none=Truev
 
+# VSCode Settings -> Type Checking Mode
+
 # ----------------------------------------------------------------------------------------------------
 # Validating JSON fields:
 class Order(BaseModel):
