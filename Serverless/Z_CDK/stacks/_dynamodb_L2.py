@@ -20,26 +20,29 @@ class DynamoDBStack(cdk.Stack):
         # DynamoDB table
         self.ddbtable = dynamodb.TableV2(
             self,
-            "CDKDDBTable",
+            "DDBTable",
             partition_key=dynamodb.Attribute(
-                name="id", type=dynamodb.AttributeType.STRING
+                name="PK", type=dynamodb.AttributeType.STRING
             ),
             sort_key=dynamodb.Attribute(
-                name="timestamp", type=dynamodb.AttributeType.NUMBER
+                name="SK", type=dynamodb.AttributeType.STRING
             ),
             # local_secondary_indexes=[
             #     dynamodb.LocalSecondaryIndex(
-            #         index_name="timestampIndex",
+            #         index_name="LSI1",
             #         sort_key=dynamodb.Attribute(
-            #             name="timestamp", type=dynamodb.AttributeType.NUMBER
+            #             name="LSI1SK", type=dynamodb.AttributeType.STRING
             #         )
             #     )
             # ],
             # global_secondary_indexes=[
             #     dynamodb.GlobalSecondaryIndex(
-            #         index_name="timestampIndex",
+            #         index_name="GSI1",
             #         partition_key=dynamodb.Attribute(
-            #             name="timestamp", type=dynamodb.AttributeType.NUMBER
+            #             name="GSI1PK", type=dynamodb.AttributeType.STRING
+            #         ),
+            #         sort_key=dynamodb.Attribute(
+            #             name="GSI1SK", type=dynamodb.AttributeType.STRING
             #         )
             #     )
             # ],

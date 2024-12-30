@@ -121,8 +121,9 @@ class Person(BaseModel):
     # money: float = Field(default=0, decimal_places=2, ge=0, description="Money in USD") 
     # hobbies: list[str] | None = None
     # items: list[Item]
-    # creation_date: datetime = Field(default_factory=datetime.now, description="Record creation timestamp", serialization_alias="creationDate")
-    creation_date: str = Field(default=str(time.strftime("%Y-%m-%d %H:%M:%S")), description="Record creation timestamp", serialization_alias="creationDate")
+    # created: datetime = Field(default_factory=datetime.now, description="Record creation timestamp", serialization_alias="creationDate")
+    created: str = Field(default=str(time.strftime("%Y-%m-%dT%H:%M:%S")), description="Record creation timestamp")
+    expiry: int = Field(default=0, description="Record expiry timestamp - dynamo TTL")
 
     # @computed_field
     # @property

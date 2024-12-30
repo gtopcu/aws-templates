@@ -127,6 +127,14 @@ class CDKPythonStack(Stack):
                             enforce_ssl=True,
                             removal_policy=RemovalPolicy.DESTROY,
                     )
+        # Define permissions between function and S3 bucket using grantRead method
+        # self.bucket.grant_read(lambda_fn)
+        # self.bucket.grant_write(lambda_fn)
+        # self.bucket.grant_put(lambda_fn)
+        # self.bucket.grant_read_write(lambda_fn)
+        # self.bucket.grant_delete(lambda_fn)
+        # self.bucket.grant_put_acl(lambda_fn)
+
 
         # CloudFront
         self.cf_distribution = cloudfront.Distribution(self, "cdktest-CloudFrontDistribution",
