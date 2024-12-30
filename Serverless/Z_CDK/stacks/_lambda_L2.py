@@ -27,7 +27,7 @@ class LambdaStack(Stack):
         )
 
         # Create Lambda execution role
-        lambda_role = iam.Role(
+        self.lambda_execution_role = iam.Role(
             self, "LambdaExecutionRole",
             assumed_by=iam.ServicePrincipal("lambda.amazonaws.com"),
             managed_policies=[
@@ -49,15 +49,14 @@ class LambdaStack(Stack):
             # environment={
             #     "QUEUE_URL": queue.queue_url
             # },
-            layers=[self.layer_powertools],
+            # layers=[self.layer_powertools],
             # tracing=_lambda.Tracing.ACTIVE,
             # system_log_level_v2= _lambda.SystemLogLevel.V2_INFO,
-            # application_log_level_v2= _lambda.ApplicationLogLevel.V2_INFO,
-            # log_format= _lambda.LogFormat.JSON,
-            # logging_format=_lambda.LoggingFormat.JSON,
+            # application_log_level_v2= _lambda.ApplicationLogLevel.V2_INFO,
+            logging_format=_lambda.LoggingFormat.JSON, # default: LoggingFormat.TEXT
+            # log_group=None,
             # log_retention=cdk.aws_logs.RetentionDays.ONE_WEEK,
             # log_retention=None,
-            # log_group=None,
             # recursive_loop=RecursiveLoop.Terminate,
             # reserved_concurrent_executions=100,
             # runtime_management_mode=_lambda.RuntimeManagementMode.AUTO | FUNCTION_UPDATE,
@@ -81,7 +80,7 @@ class LambdaStack(Stack):
             # allow_public_subnet=False
             # profiling=False,
             # profiling_group=None,
-            # role=iam.Role.from_role_arn(self, "cdktest-LambdaFunctionRole", "XXX"),
+            # role=self.lambda_execution_role
             # environment_encryption=None,
             # ephemeral_storage_size=cdk.Size.mebibytes(10240), # /tmp
             # filesystem= _lambda.FileSystem.from_efs_access_point(
@@ -96,6 +95,17 @@ class LambdaStack(Stack):
             #     "AWS_LAMBDA_LOG_GROUP_NAME": "/aws/lambda/LambdaFunction",
             # },
         )
+
+        # Add Lambda URL
+        # self.lambda_fn.add_function_url(
+        #     auth_type=_lambda.FunctionUrlAuthType.NONE, # | AWS_IAM
+        #     cors=_lambda.FunctionUrlCorsOptions(
+        #         allowed_origins=["*"],
+        #         allowed_methods=[_lambda.HttpMethod.ALL],
+        #         allowed_headers=["*"]
+        #     ),
+        #     invoke_mode= _lambda.InvokeMode.BUFFERED # | RESPONSE_STEAM
+        # )
 
         cdk.CfnOutput(self,"LambdaFunctionArn", value=self.lambda_fn.function_arn, export_name="LambdaFunctionArn")
 
