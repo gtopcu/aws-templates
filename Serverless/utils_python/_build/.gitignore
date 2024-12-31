@@ -5,6 +5,8 @@
 .env
 .venv
 venv
+.pytest_cache
+.coverage
 cdk.out
 # ignore all directories with the name test
 # test/
