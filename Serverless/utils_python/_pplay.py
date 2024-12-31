@@ -11,6 +11,9 @@
 # pylint _pplay.py
 # pylint: disable=all disable=invalid-name disable=missing-class-docstring (remove this line to get the results)
 # pylint --rcfile=.pylintrc .
+
+# ruff format .
+# ruff check . --fix
 # ruff check test.py
 # ruff check test.py --fix
 
