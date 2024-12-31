@@ -20,8 +20,8 @@ pytest-cov
 coverage
 moto
 
-pytest tests/unit
-pytest tests -c pytest.ini
+pytest tests/unit -vs --cov
+pytest tests -c pytest.ini -vs
 coverage run -m pytest -vs
 
 ------------------------------------------------------------------------------------
@@ -43,7 +43,7 @@ def test_database_connection():
 
 pytest --verbose (-v)
 pytest -vs
-pytest -vsco
+pytest -vs --cov
 pytest test_class.py -v (verbose) -s(show print) -c(code coverage)
 pytest test_class.py::test_method
 pytest test_mod.py::TestClass::test_method
@@ -61,7 +61,7 @@ pytest -vs
     --strict-markers: ensure all markers are registered
     --tb=short: shorter traceback format
     --showlocals: show local variables in tracebacks
-    --durations=3: show 3 slowest tests
+    --durations=10: show 10 slowest tests
 
 pip install -U coverage
 coverage run -m pytest -vs
