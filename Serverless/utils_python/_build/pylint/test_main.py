@@ -15,8 +15,6 @@ for key, value in os.environ.items():
 
 @dataclass
 class LambdaContext:
-
-
     function_name: str = "testLambda"
     memory_limit_in_mb: int = 128
     invoked_function_arn: str = "arn:aws:lambda:eu-west-1:123456789012:function:test"
