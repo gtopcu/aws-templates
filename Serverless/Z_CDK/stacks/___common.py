@@ -4,14 +4,18 @@ import aws_cdk as cdk
 from aws_cdk import (
     Stack,
     Construct,
+    RemovalPolicy,
     aws_iam as iam,
     aws_ssm as ssm,
     aws_secretsmanager as sm,
     aws_cloudwatch as cloudwatch,
     aws_sns as sns,
+    aws_sns_subscriptions,
     CfnParameter
 )
 from constructs import Construct
+import queue
+from aws_cdk import aws_iam
 
 
 class CommonStack(cdk.Stack):
@@ -79,11 +83,55 @@ class CommonStack(cdk.Stack):
         # topic = sns.Topic.from_topic_attributes( self, "MyTopic", topic_arn="XXX")
 
         # SNS - creating new topics
-        topic = sns.Topic(self, "MyTopic",
-            display_name="MyTopic",
-            topic_name="MyTopic",
-            master_key=iam.AccountRootPrincipal()
-        )
+        # topic = sns.Topic(self, "MyTopic",
+        #     display_name="MyTopic",
+        #     topic_name="MyTopic",   
+        #     fifo=False,
+        #     # content_based_deduplication=False,
+        #     # enforce_ssl=False,
+        #     # master_key=None,
+        #     # signature_version="1",
+        #     # logging_configs=None,
+        #     # tracing_config=sns.TracingConfig.PASS_THROUGH, # sns.TracingConfig.ACTIVE
+        # )
+        # topic.apply_removal_policy(RemovalPolicy.DESTROY)
+        
+        # topic.grant_publish(iam.ServicePrincipal("events.amazonaws.com"))
+        # topic.grant_subscribe(lambda_fn)
+        # topic.add_to_resource_policy(aws_iam.PolicyStatement(
+        #     actions=["sns:Publish"],
+        #     principals=[iam.ServicePrincipal("events.amazonaws.com")],
+        #     resources=[topic.topic_arn]
+        # )
+
+        # topic.add_logging_config(
+        #         protocol=sns.LoggingProtocol.SQS,
+        #         failure_feedback_role=role,
+        #         success_feedback_role=role,
+        #         success_feedback_sample_rate=50
+        # )
+
+        # topic.add_subscription(sns.Subscription(
+        #     endpoint="XXX",
+        #     protocol=sns.SubscriptionProtocol.HTTPS,
+        #     raw_message_delivery=False,
+        #     dead_letter_queue=None,
+        #     filter_policy=None,
+        #     subscription_role_arn=None
+        # ))
+
+        # topic.add_subscription(aws_sns_subscriptions.SqsSubscription(
+        #     queue=queue,
+        #     raw_message_delivery=False,
+        #     dead_letter_queue=None,
+        #     filter_policy=None
+        # ))
+
+        # topic.add_subscription(aws_sns_subscriptions.LambdaSubscription(
+        #     function=lambda_fn,
+        #     dead_letter_queue=None,
+        #     filter_policy=None
+        # )
 
         # ------------------------------------------------------------------------------------------
         

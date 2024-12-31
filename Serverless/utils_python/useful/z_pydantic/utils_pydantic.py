@@ -38,12 +38,13 @@ https://pydantic.dev/articles/lambda-intro
 
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 import time
 from typing import Any, Optional, TypedDict, Self
 # from typing import Dict, List, Tuple
 from typing import Literal, Annotated
 from annotated_types import Gt, Ge, Le, Lt
+# from typing_extensions import Annotated, Gt, Ge, Le, Lt
 from uuid import uuid4, UUID
 from enum import auto, IntFlag
 import re
@@ -120,10 +121,11 @@ class Person(BaseModel):
     money: Decimal = Field(default=Decimal(0), ge=Decimal(0), description="Money in USD") 
     # money: float = Field(default=0, decimal_places=2, ge=0, description="Money in USD") 
     # hobbies: list[str] | None = None
-    # items: list[Item]
+    # items: list[Item] # 
     # created: datetime = Field(default_factory=datetime.now, description="Record creation timestamp", serialization_alias="creationDate")
-    created: str = Field(default=str(time.strftime("%Y-%m-%dT%H:%M:%S")), description="Record creation timestamp")
-    expiry: int = Field(default=0, description="Record expiry timestamp - dynamo TTL")
+    # created: str = Field(default=str(time.strftime("%Y-%m-%dT%H:%M:%S")), description="Record creation date")
+    # created: str = Field(default=str(datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S")), description="Record creation date")
+    # expiry: int = Field(default=0, description="Record expiry timestamp - dynamo TTL")
 
     # @computed_field
     # @property

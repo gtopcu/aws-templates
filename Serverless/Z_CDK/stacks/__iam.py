@@ -20,28 +20,51 @@ class IAMStack(Stack):
         super().__init__(scope, construct_id, **kwargs)
 
 
-        #  # https://docs.aws.amazon.com/cdk/v2/guide/define-iam-l2.html
+        #  https://docs.aws.amazon.com/cdk/v2/guide/define-iam-l2.html
 
         # Add this to use the role customization feature
         iam.Role.customizeRoles(stack);
 
+        # AWS account ID (i.e. '123456789012')
+        account_id = iam.AccountRootPrincipal()
+
         # Granting access to IAM Group/Users
-        iam_group = iam.Group(self, 'data-science')
-        iam_user = iam.User(self, 'my-user', groups=[iam_group])
+        iam_group = iam.Group(self, "my-group")
+        iam_user = iam.User(self, "my-user", groups=[iam_group])
         bucket.grant_read(iam_user)
 
+        # Getting an AWS Service principal
+        principal = iam.ServicePrincipal("events.amazonaws.com")
+
+        # Get role by name
         existing_role = iam.Role.from_role_name(self, "Role", 
             "my-pre-existing-role", 
-            mutable=False) # Prevent CDK from attempting to add policies to this role
+            mutable=False # Prevent CDK from attempting to add policies to this role
+        ) 
 
-        
-        lambda_role = iam.Role(
-            self, "LambdaExecutionRole",
+        # Creating a role
+        lambda_role = iam.Role(self, "LambdaExecutionRole",
+            description="Lambda basic execution role",   
             assumed_by=iam.ServicePrincipal("lambda.amazonaws.com"),
             managed_policies=[
                 iam.ManagedPolicy.from_aws_managed_policy_name("service-role/AWSLambdaBasicExecutionRole")
-            ]
+            ],
+            inline_policies=iam.PolicyDocument(
+                statements=[
+                    iam.PolicyStatement(
+                        actions=["s3:GetObject", "s3:List*"],
+                        resources=[
+                            bucket.bucket_arn,
+                            bucket.arn_for_objects('*'),
+                        ]
+                    )
+                ]
+            )
         )
+        # lambda_role.add_managed_policy(
+        #     iam.ManagedPolicy.from_aws_managed_policy_name("service-role/AWSLambdaBasicExecutionRole")
+        # )
+
 
         lambda_fn.add_to_role_policy(iam.PolicyStatement(
             actions=['s3:GetObject', 's3:List*'],

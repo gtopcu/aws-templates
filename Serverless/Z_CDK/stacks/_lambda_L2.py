@@ -109,23 +109,29 @@ class LambdaStack(Stack):
         #     invoke_mode= _lambda.InvokeMode.BUFFERED # | RESPONSE_STEAM
         # )
 
-        # lambda_role = iam.Role(
-        #     self, "LambdaExecutionRole",
+        # lambda_role = iam.Role(self, "LambdaExecutionRole",
+        #     description="Lambda basic execution role",   
         #     assumed_by=iam.ServicePrincipal("lambda.amazonaws.com"),
         #     managed_policies=[
         #         iam.ManagedPolicy.from_aws_managed_policy_name("service-role/AWSLambdaBasicExecutionRole")
-        #     ]
+        #     ],
+        #     inline_policies=iam.PolicyDocument(
+        #         statements=[
+        #             iam.PolicyStatement(
+        #                 actions=["s3:GetObject", "s3:List*"],
+        #                 resources=[
+        #                     bucket.bucket_arn,
+        #                     bucket.arn_for_objects('*'),
+        #                 ]
+        #             )
+        #         ]
+        #     )
+        # )
+        # lambda_role.add_managed_policy(
+        #     iam.ManagedPolicy.from_aws_managed_policy_name("service-role/AWSLambdaBasicExecutionRole")
         # )
 
-        # https://docs.aws.amazon.com/cdk/v2/guide/define-iam-l2.html
-        # lambda_fn.add_to_role_policy(iam.PolicyStatement(
-        #     actions=['s3:GetObject', 's3:List*'],
-        #     resources=[
-        #         bucket.bucket_arn,
-        #         bucket.arn_for_objects('*'),
-        #     ]
-        # ))
-
+        cdk.CfnOutput(self,"LambdaFunctionName", value=self.lambda_fn.function_name, export_name="LambdaFunctionName")
         cdk.CfnOutput(self,"LambdaFunctionArn", value=self.lambda_fn.function_arn, export_name="LambdaFunctionArn")
 
 app = cdk.App()

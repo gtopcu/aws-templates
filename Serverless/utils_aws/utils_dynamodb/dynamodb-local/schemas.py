@@ -23,7 +23,7 @@ from pydantic import (
 from typing import Literal, Annotated
 from annotated_types import Gt, Ge, Le, Lt
 from uuid import uuid4, UUID
-from datetime import datetime
+from datetime import datetime, timezone
 import time
 
 # https://github.com/boto/boto3/issues/665#issuecomment-340260257
@@ -51,7 +51,8 @@ class Person(BaseModel):
     hobbies: list[str] | None = None
     # items: list[Item] # 
     # created: datetime = Field(default_factory=datetime.now, description="Record creation timestamp", serialization_alias="creationDate")
-    created: str = Field(default=str(time.strftime("%Y-%m-%dT%H:%M:%S")), description="Record creation date")
+    # created: str = Field(default=str(time.strftime("%Y-%m-%dT%H:%M:%S")), description="Record creation date")
+    # created: str = Field(default=str(datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S")), description="Record creation date")
     # expiry: int = Field(default=0, description="Record expiry timestamp - dynamo TTL")
 
     # @computed_field
