@@ -94,16 +94,3 @@ repos:
 #       log_file: .pre-commit-pytest.log
 #       require_serial: true
 
-# - repo: local
-#   hooks:
-#     - id: python-lint
-#       name: python-lint
-#       entry: python-lint
-#       language: python
-#       types: [python]
-#       pass_filenames: false
-#       always_run: true
-#       verbose: true
-#       stages: [commit]
-#       log_file: .pre-commit-python-lint.log
-#       require_serial: true
