@@ -105,8 +105,7 @@ repos:
         # stages: [commit]
         # log_file: pytest.log
         # require_serial: true
-        args: ["-vs"]
-        # "--cov", "--cov-fail-under=80"]
+        # args: ["-vs", "--cov", "--cov-fail-under=80"]
 
     # -   id: pytest-fast
     #     name: pytest-fast
