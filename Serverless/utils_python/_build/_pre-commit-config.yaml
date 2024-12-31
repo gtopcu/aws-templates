@@ -18,7 +18,23 @@
 # pre-commit installed at .git/hooks/pre-commit
 # pre-commit uninstall
 
+# pre-commit run --all-files --verbose --show-diff-on-failure
+# pre-commit autoupdate  -> update hooks in the yaml file to the latest version
+# pre-commit validate-config
+# pre-commit sample-config
+
+# Run on staged files only
+# pre-commit run
+
+# Run on all files
 # pre-commit run --all-files
+
+# Run on specific files or directories
+# pre-commit run --files path/to/file1 path/to/directory/**/*
+
+# Run a specific hook
+# pre-commit run black --all-files
+
 
 repos:
 # - repo: https://github.com/astral-sh/uv-pre-commit
@@ -30,32 +46,34 @@ repos:
 #       args: [requirements.in, -o, requirements.txt]
 
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.0.1
+  rev: v5.0.0
   hooks:
   -   id: end-of-file-fixer
   -   id: trailing-whitespace
   -   id: check-added-large-files
   -   id: check-json
   -   id: check-yaml
+  -   id: check-toml
 
-# -   repo: https://github.com/pycqa/pylint
-    # rev: v3.1.0
-    # hooks:
-    # -   id: pylint
-    #     args: ["--rcfile=.pylintrc"]
-    #     #args: ["--score=no"]
-    #     additional_dependencies: ["boto3","botocore"]
+- repo: https://github.com/pycqa/pylint
+  rev: v3.1.0
+  hooks:
+    - id: pylint
+      args: ["--rcfile=.pylintrc"]
+      #args: ["--recursive=y", "--score=no"]
+      #additional_dependencies: ["boto3","botocore"]
 
 - repo: https://github.com/PyCQA/isort
-  rev: 5.12.0
+  rev: 5.13.2
   hooks:
     - id: isort
+      args: ["--profile", "black"]
 
 # - repo: https://github.com/psf/black
 #   rev: 23.11.0
 #   hooks:
 #   -   id: black
-#       args: [--safe]
+#       args: [--safe, --line-length=79]
 
 # - repo: https://github.com/PyCQA/flake8
 #   rev: 7.1.1
@@ -63,15 +81,18 @@ repos:
 #     - id: flake8
 #       args: [--config=.flake8, --max-line-length=79]
 
-- repo: https://github.com/astral-sh/ruff-pre-commit
-  # Ruff version.
-  rev: v0.8.1
-  hooks:
-    # Run the linter.
-    - id: ruff
-      args: [ --fix ]
-    # Run the formatter.
-    - id: ruff-format
+-   repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.8.4
+    hooks:
+    # Run the linter
+    -   id: ruff
+        args: [
+            --fix,
+            --exit-non-zero-on-fix,
+            --line-length=79
+        ]
+    # Run the formatter
+    -   id: ruff-format
 
 # - repo: local
 #   hooks:
@@ -87,16 +108,3 @@ repos:
 #       log_file: .pre-commit-pytest.log
 #       require_serial: true
 
-# - repo: local
-#   hooks:
-#     - id: python-lint
-#       name: python-lint
-#       entry: python-lint
-#       language: python
-#       types: [python]
-#       pass_filenames: false
-#       always_run: true
-#       verbose: true
-#       stages: [commit]
-#       log_file: .pre-commit-python-lint.log
-#       require_serial: true
