@@ -1,5 +1,6 @@
 
 https://github.com/aws/aws-cdk
+https://docs.aws.amazon.com/cdk/api/v2/
 https://docs.aws.amazon.com/cdk/v2/guide/home.html
 https://docs.aws.amazon.com/cdk/api/v2/docs/aws-construct-library.html
 https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-cdk-testing.html
@@ -28,7 +29,6 @@ npm install -g aws-cdk@8.4.0       # install specific version
 # export CDK_DEFAULT_ACCOUNT=12312312321
 # export CDK_DEFAULT_REGION=us-east-2
 
-cdk bootstrap aws://102224384400/us-east-2
 
 cdk --version
 cdk bootstrap -> Deploys the CDK Toolkit staging stack; see Bootstrapping
@@ -37,10 +37,9 @@ cdk init app --language python
 cdk ls -> Lists the stacks in the app
 cdk synth -> Synthesizes and prints the CloudFormation template for the specified stack(s)
 cdk diff -> Compares the specified stack with the deployed stack or a local CloudFormation template
-cdk deploy (-all) -> Deploys the specified stack(s)
-cdk deploy "Dev/*"
+cdk deploy -all --no-notices --no-rollback
 cdk deploy --hotswap -> Will try hotswap deployment first
-cdk deploy --no-rollback -> will not rollback a failed deployment by default
+cdk deploy "Dev/*"
 cdk rollback -> used if deployed with --no-rollback
 cdk watch -> Watch for changes
 cdk destroy -> Destroys the specified stack(s)
@@ -50,15 +49,16 @@ cdk docs (doc) -> Opens the CDK API reference in your browser
 cdk doctor -> Checks your CDK project for potential problems
 cdk import -> Import existing resources
 cdk migrate -> Migrate existing resources
+cdk notices -> Displays CDK notices
 cdk ack 16603 -> Acknowledge & hide CDK notices
 
 cdk context -> Manages cached context values
-
 --clear BOOLEAN -> Clear all context.
 --force, -f BOOLEAN -> Ignore missing key error. Default value: false
 --help, -h BOOLEAN -> Show command reference information for the cdk context command.
 --reset, -e STRING -> The context key, or its index, to reset.
 
+--------------------------------------------------------------------------------------------------------
 
 class MyEcsConstructStack(Stack):
 

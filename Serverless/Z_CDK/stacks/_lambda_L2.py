@@ -44,6 +44,7 @@ class LambdaStack(Stack):
             # architecture= _lambda.Architecture.X86_64,
             memory_size=1769,
             code=_lambda.Code.from_asset("lambda_fns"),
+            # code=_lambda.Code.from_inline("def handler(event, context):\n  print(event)\n  return \"Hello from Lambda!\""),
             handler="mylambda.handler",
             timeout=Duration.seconds(30),
             # environment={
