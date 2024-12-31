@@ -18,6 +18,7 @@
 # pre-commit installed at .git/hooks/pre-commit
 # pre-commit uninstall
 
+# pre-commit run --all-files -v
 # pre-commit run --all-files --verbose --show-diff-on-failure
 # pre-commit autoupdate  -> update hooks in the yaml file to the latest version
 # pre-commit validate-config
