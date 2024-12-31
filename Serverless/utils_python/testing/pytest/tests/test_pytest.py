@@ -131,6 +131,11 @@ def aws_env(monkeypatch):
 
 # --------------------------------------------------------------------------------------------
 
+# can also place in conftest.py / use monkeypatch.setenv()
+# @pytest.fixture(scope="session", autouse=True)
+# def set_env():
+#     os.environ["FLAG"] = "1"
+
 # scope: function(default), class, module, package, session
 @pytest.fixture(scope="class", autouse=False)
 # pytest.mark.usefixtures("lambda_context")
@@ -156,8 +161,17 @@ def test_usageerror():
 def test_skip():
     pytest.skip("skipping this test")
 
-@pytest.mark.slow()
-def test_slow():
+@pytest.mark.unit
+def test_unit():
+    pass
+
+@pytest.mark.slow
+@pytest.mark.integration
+def test_integration():
+    pass
+
+@pytest.mark.xfail(reason="always xfail")
+def test_xpass():
     pass
 
 def test_fail():
@@ -165,10 +179,6 @@ def test_fail():
 
 def test_xfail():
     pytest.xfail("xfailing this test")
-
-@pytest.mark.xfail(reason="always xfail")
-def test_xpass():
-    pass
 
 # Testing the add function with various sets of parameters
 @pytest.mark.parametrize("a, b, expected", [

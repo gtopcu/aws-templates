@@ -13,14 +13,33 @@ test class names should be test_*.py *_test.py
 test method names should be test_*
 
 pytest
-pytest-env (installed with pytest)
+pytest-env
+pytest-dotenv
 pytest-mock
 pytest-cov
 coverage
 moto
 
-python -m pytest tests/unit
-python -m coverage run -m pytest -vs
+pytest tests/unit
+pytest tests -c pytest.ini
+coverage run -m pytest -vs
+
+------------------------------------------------------------------------------------
+
+pytest -m unit                  -> Run only unit tests
+pytest -m "not slow"            -> Run all tests except slow ones
+pytest -m "unit or integration" -> Run both unit and integration tests
+
+@pytest.mark.unit
+def test_environment_variables():
+    pass
+
+@pytest.mark.slow
+@pytest.mark.integration
+def test_database_connection():
+    pass
+
+------------------------------------------------------------------------------------    
 
 pytest --verbose (-v)
 pytest -vs
@@ -37,6 +56,12 @@ pytest --runslow            -> run all tests decorated with the @pytest.mark.slo
 pytest -m slow              -> run all tests decorated with the @pytest.mark.slow decorator
 pytest --durations=10 -vv   -> get a list of the slowest 10 test durations
 pytest --durations=10 --durations-min=1.0 -vv -> get a list of the slowest 10 test durations over 1.0s
+
+pytest -vs 
+    --strict-markers: ensure all markers are registered
+    --tb=short: shorter traceback format
+    --showlocals: show local variables in tracebacks
+    --durations=3: show 3 slowest tests
 
 pip install -U coverage
 coverage run -m pytest -vs

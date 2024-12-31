@@ -55,14 +55,6 @@ repos:
   -   id: check-yaml
   -   id: check-toml
 
-- repo: https://github.com/pycqa/pylint
-  rev: v3.1.0
-  hooks:
-    - id: pylint
-      args: ["--rcfile=.pylintrc"]
-      #args: ["--recursive=y", "--score=no"]
-      #additional_dependencies: ["boto3","botocore"]
-
 - repo: https://github.com/PyCQA/isort
   rev: 5.13.2
   hooks:
@@ -81,31 +73,26 @@ repos:
 #     - id: flake8
 #       args: [--config=.flake8, --max-line-length=79]
 
--   repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.8.4
-    hooks:
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: v0.8.4
+  hooks:
     # Run the linter
-    -   id: ruff
-        args: [
-            --fix,
-            --exit-non-zero-on-fix,
-            --line-length=79
-        ]
+    - id: ruff
+      args: [
+          --fix,
+          --exit-non-zero-on-fix,
+          --line-length=79
+      ]
     # Run the formatter
     -   id: ruff-format
 
-# - repo: local
+# - repo: https://github.com/pycqa/pylint
+#   rev: v3.1.0
 #   hooks:
-#     - id: pytest
-#       name: pytest
-#       language: python
-#       types: [python]
-#       pass_filenames: true
-#       always_run: true
-#       verbose: true
-#       stages: [commit]
-#       log_file: .pre-commit-pytest.log
-#       require_serial: true
+#     - id: pylint
+#       args: ["--rcfile=.pylintrc"]
+#       #args: ["--recursive=y", "--score=no"]
+#       #additional_dependencies: ["boto3","botocore"]
 
 -   repo: local
     hooks:
@@ -118,12 +105,7 @@ repos:
         # stages: [commit]
         # log_file: pytest.log
         # require_serial: true
-        args: [
-            "tests/",
-            "-v",
-            "--cov"
-        ]
-        # "--cov-fail-under=80"
+        # args: ["tests/", "-vs", "--cov", "--cov-fail-under=80"]
         
     # -   id: pytest-fast
     #     name: pytest-fast
