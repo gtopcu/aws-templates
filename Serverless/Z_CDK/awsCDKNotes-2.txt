@@ -1,3 +1,13 @@
+
+Best practices:
+- Use cdk-nag
+- Create own constructs & stacks with best practices
+- Combine grouped stacks into stages
+- Create CW alarms based on metrics
+- Utilize CDK Pipelines & Lambda Canary Deployments
+- Tag your resources
+- Use CDK assertions with Pytest
+
 --------------------------------------------------------------------------------------------------------
 
 Workshop: AWS CDK Immersion Day Workshop

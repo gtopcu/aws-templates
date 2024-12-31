@@ -3,6 +3,7 @@
 # https://docs.powertools.aws.dev/lambda/python/latest/utilities/data_classes/#api-gateway-proxy-v2
 # https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html
 # https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html
+# https://docs.aws.amazon.com/lambda/latest/dg/urls-invocation.html
 
 # When using the data validation feature, you need to add pydantic as a dependency
 # Resolvers: APIGatewayRestResolver, APIGatewayHttpResolver, ALBResolver, LambdaFunctionUrlResolver, VPCLatticeResolver

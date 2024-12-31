@@ -1,0 +1,47 @@
+
+https://github.com/okigan/awscurl
+
+
+brew install awscurl
+pip install awscurl
+
+-------------------------------------------------------------------------------------------------------------------------
+Running as Docker:
+
+docker pull okigan/awscurl # or via docker pull ghcr.io/okigan/awscurl 
+docker run --rm -it okigan/awscurl --access_key ACCESS_KEY  --secret_key SECRET_KEY --service s3 s3://...
+docker run --rm -it -v "$HOME/.aws:/root/.aws" okigan/awscurl --service s3 s3://...
+
+alias awscurl='docker run --rm -ti -v "$HOME/.aws:/root/.aws" -e AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY -e AWS_SECURITY_TOKEN -e AWS_PROFILE okigan/awscurl'
+
+-------------------------------------------------------------------------------------------------------------------------
+
+awscurl --service execute-api -X POST -d @request.json https://<prefix>.execute-api.us-east-1.amazonaws.com/<resource>
+awscurl --service s3 'https://awscurl-sample-bucket.s3.amazonaws.com' | tidy -xml -iq
+awscurl --service ec2 'https://ec2.amazonaws.com?Action=DescribeRegions&Version=2013-10-15' | tidy -xml -iq 
+
+-------------------------------------------------------------------------------------------------------------------------
+
+[-h] [-v] [-i] [-X REQUEST] [-d DATA] [-H HEADER] [-k] [--fail-with-body] [--data-binary] [--region REGION] 
+[--profile PROFILE] [--service SERVICE] [--access_key ACCESS_KEY] [--secret_key SECRET_KEY] [--security_token SECURITY_TOKEN] 
+[--session_token SESSION_TOKEN] [-L] [-o <file>]
+  
+  -h, --help                show this help message and exit
+  -v, --verbose             verbose flag (default: False)
+  -i, --include             include headers in the output (default: False)
+  -X, --request             Specify request command to use (default: GET)
+  -d, --data DATA           HTTP POST data (default: )
+  -H, --header HEADER       HTTP header (default: None)
+  -o, --output <file>       Write to file instead of stdout (default: )
+  -k, --insecure            Allow insecure server connections when using SSL (default: False)
+  --fail-with-body          Fail on HTTP errors but save the body (default: False)
+  --data-binary             Process HTTP POST data exactly as specified with no extra processing whatsoever. (default: False)
+  --region REGION           AWS region [env var: AWS_DEFAULT_REGION] (default: us-east-1)
+  --profile PROFILE         AWS profile [env var: AWS_PROFILE] (default: default)
+  --service SERVICE         AWS service (default: execute-api)
+  --access_key ACCESS_KEY   [env var: AWS_ACCESS_KEY_ID] (default: None)
+  --secret_key SECRET_KEY   [env var: AWS_SECRET_ACCESS_KEY] (default: None)
+  --security_token SECURITY_TOKEN   [env var: AWS_SECURITY_TOKEN] (default: None)
+  --session_token SESSION_TOKEN     [env var: AWS_SESSION_TOKEN] (default: None)
+  -L, --location        Follow redirects (default: False)
+  

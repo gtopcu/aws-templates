@@ -97,6 +97,8 @@ class LambdaStack(Stack):
         )
 
         # Add Lambda URL
+        # https://docs.aws.amazon.com/lambda/latest/dg/urls-configuration.html
+        # https://<url-id>.lambda-url.<region>.on.aws
         # self.lambda_fn.add_function_url(
         #     auth_type=_lambda.FunctionUrlAuthType.NONE, # | AWS_IAM
         #     cors=_lambda.FunctionUrlCorsOptions(
