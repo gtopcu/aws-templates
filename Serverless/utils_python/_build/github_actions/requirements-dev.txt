@@ -1,7 +1,0 @@
-pre-commit
-isort
-ruff 
-black
-flake8
-pytest
-coverage

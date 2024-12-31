@@ -8,8 +8,7 @@ ruff check . --fix
 ruff format .
 
 
-VSCode
-settings.json
+VSCode -> settings.json
   "[python]": {
       "editor.formatOnType": false,
       "editor.formatOnSave": false,
