@@ -98,7 +98,6 @@ repos:
 #   hooks:
 #     - id: pytest
 #       name: pytest
-#       entry: ./ ./venv/bin/pytest tests
 #       language: python
 #       types: [python]
 #       pass_filenames: true
@@ -107,4 +106,37 @@ repos:
 #       stages: [commit]
 #       log_file: .pre-commit-pytest.log
 #       require_serial: true
+
+-   repo: local
+    hooks:
+    -   id: pytest
+        name: pytest
+        entry: pytest
+        language: python
+        pass_filenames: false
+        always_run: true
+        # stages: [commit]
+        # log_file: pytest.log
+        # require_serial: true
+        args: [
+            "tests/",
+            "-v",
+            "--cov"
+        ]
+        # "--cov-fail-under=80"
+        
+    # -   id: pytest-fast
+    #     name: pytest-fast
+    #     entry: pytest
+    #     language: python
+    #     pass_filenames: false
+    #     always_run: true
+    #     stages: [push]
+    #     args: [
+    #         "tests/",
+    #         "-v",
+    #         "--durations=3",
+    #         "-m",
+    #         "not slow"
+    #     ]
 

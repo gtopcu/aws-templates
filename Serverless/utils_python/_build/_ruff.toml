@@ -4,7 +4,9 @@
 ruff check test.py
 ruff check test.py --fix
 
-ruff check . --fix
+ruff check . --fix \
+             --exit-non-zero-on-fix \
+             --line-length=79 \
 ruff format .
 
 
@@ -42,7 +44,6 @@ exclude = [
     ".ruff_cache",
     ".svn",
     ".tox",
-    ".venv",
     "__pypackages__",
     "_build",
     "buck-out",
@@ -50,10 +51,11 @@ exclude = [
     "dist",
     "node_modules",
     "venv",
+    ".venv",
 ]
 
 # Same as Black.
-line-length = 88
+line-length = 79
 
 [lint]
 
