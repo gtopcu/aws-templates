@@ -18,10 +18,11 @@
 # pre-commit installed at .git/hooks/pre-commit
 # pre-commit uninstall
 
-# pre-commit run --all-files
-# pre-commit autoupdate                             -> updates repos in the yaml file to the latest version
-# pre-commit run --all-files --verbose
-# pre-commit run --all-files --show-diff-on-failure
+# pre-commit run --all-files --verbose --show-diff-on-failure
+# pre-commit run <hook_name>
+# pre-commit autoupdate  -> updates repos in the yaml file to the latest version
+# pre-commit validate-config
+# pre-commit sample-config
 
 
 repos:
