@@ -1,33 +1,5 @@
-
-# https://www.youtube.com/watch?v=bcAqceZkZRQ
-
-ruff check test.py
-ruff check test.py --fix
-
-ruff check . --fix \
-             --exit-non-zero-on-fix \
-             --line-length=79 \
-ruff format .
-
-
-VSCode -> settings.json
-  "[python]": {
-      "editor.formatOnType": false,
-      "editor.formatOnSave": false,
-      "editor.defaultFormatter": "charliermarsh.ruff",
-      "editor.codeActionsOnSave": {
-        "source.fixAll": "false",
-        "source.organizeImports": "false",
-      }
-  }
-
-# ruff.toml
-
 # Assume Python 3.13
 target-version = "py313"
-
-# Enable pycodestyle (`E`) and Pyflakes (`F`) codes by default.
-select = ["E", "F", "W", "I", "N", "B", "C4", "SIM", "ERA", "PL", "RUF"]
 
 # Exclude a variety of commonly ignored directories.
 exclude = [
@@ -54,10 +26,11 @@ exclude = [
     ".venv",
 ]
 
-# Same as Black.
-line-length = 79
+line-length = 100
 
 [lint]
+# Enable pycodestyle (`E`) and Pyflakes (`F`) codes by default.
+select = ["E", "F", "W", "I", "N", "B", "C4", "SIM", "ERA", "PL", "RUF"]
 
 # Ignore commented out code
 ignore = ["ERA001"]

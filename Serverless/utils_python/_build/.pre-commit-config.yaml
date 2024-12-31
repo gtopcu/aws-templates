@@ -81,7 +81,7 @@ repos:
       args: [
           --fix,
           --exit-non-zero-on-fix,
-          --line-length=79
+          #--line-length=79
       ]
     # Run the formatter
     -   id: ruff-format
@@ -105,8 +105,9 @@ repos:
         # stages: [commit]
         # log_file: pytest.log
         # require_serial: true
-        # args: ["tests/", "-vs", "--cov", "--cov-fail-under=80"]
-        
+        args: ["-vs"]
+        # "--cov", "--cov-fail-under=80"]
+
     # -   id: pytest-fast
     #     name: pytest-fast
     #     entry: pytest
@@ -116,9 +117,8 @@ repos:
     #     stages: [push]
     #     args: [
     #         "tests/",
-    #         "-v",
+    #         "-vs",
     #         "--durations=3",
     #         "-m",
     #         "not slow"
     #     ]
-
