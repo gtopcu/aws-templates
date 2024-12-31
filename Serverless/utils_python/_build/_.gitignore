@@ -2,13 +2,14 @@
 .vscode/
 .git
 /.git
-.env
+
 .venv
 venv
 .pytest_cache
 .ruff_cache
 .coverage
 cdk.out
+
 # ignore all directories with the name test
 # test/
 # ignore a text.txt file located in a test directory at the root directory
