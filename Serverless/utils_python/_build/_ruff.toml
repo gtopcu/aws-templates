@@ -1,8 +1,12 @@
 
 # https://www.youtube.com/watch?v=bcAqceZkZRQ
 
-# ruff check test.py
-# ruff check test.py --fix
+ruff check test.py
+ruff check test.py --fix
+
+ruff check . --fix
+ruff format .
+
 
 VSCode
 settings.json

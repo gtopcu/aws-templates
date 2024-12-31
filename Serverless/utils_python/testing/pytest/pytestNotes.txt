@@ -19,13 +19,15 @@ pytest-cov
 coverage
 moto
 
+python -m pytest tests/unit
+python -m coverage run -m pytest -vs
+
 pytest --verbose (-v)
 pytest -vs
 pytest -vsco
 pytest test_class.py -v (verbose) -s(show print) -c(code coverage)
 pytest test_class.py::test_method
 pytest test_mod.py::TestClass::test_method
-pytest tests/
 pytest --pyargs pkg.testing
 pytest test_unit.py -x (stop after failure) --maxfail=2 (stop after two failures)
 
@@ -37,6 +39,5 @@ pytest --durations=10 -vv   -> get a list of the slowest 10 test durations
 pytest --durations=10 --durations-min=1.0 -vv -> get a list of the slowest 10 test durations over 1.0s
 
 pip install -U coverage
-coverage run -m pytest   -vs 
+coverage run -m pytest -vs
 coverage report -m
-

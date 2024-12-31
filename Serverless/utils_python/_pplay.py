@@ -1,14 +1,14 @@
 
 # python -m venv .venv
 # source .venv/bin/activate
-# source /Users/mac/GoogleDrive/VSCode/aws-templates/.venv/bin/activate
+# source /Users/mac/GoogleDrive/VSCode/.venv/bin/activate
 # pip install -U boto3
 
 # Amazon Q: Command + i
 
 # pip install black + black extension + Command+P Black
 # pip install pylint
-# pylint _pplay.py  
+# pylint _pplay.py
 # pylint: disable=all disable=invalid-name disable=missing-class-docstring (remove this line to get the results)
 # pylint --rcfile=.pylintrc .
 # ruff check test.py
@@ -19,17 +19,17 @@ This better get 10/10!
 https://www.youtube.com/watch?v=RqdhVaX50mc
 """
 # CamelCase(PascalCase) / snake_case
-class myPersonClass: 
+class myPersonClass:
     """ This is my nice Person class"""
 
     def __init__(self, name: str) -> None:
         self.name = name
-    
+
     def get_name(self) -> str:
         """
         Returns the name of the person
         :return: The name of the person
-        :rtype: str 
+        :rtype: str
         """
         """
         Returns the name of the person
@@ -45,9 +45,9 @@ class myPersonClass:
 # from collections import namedtuple, deque, OrderedDict, defaultdict
 # from collections.abc import Mapping, Sequence, Set, Generator, Callable, Iterable, Iterator, AsyncIterable
 
+import logging
 import os
 import sys
-import logging
 
 # pip install python-dotenv
 # from dotenv import load_dotenv
@@ -150,7 +150,7 @@ import logging
 #     print(i, j)
 
 
-# Pack-unpack 
+# Pack-unpack
 # https://www.youtube.com/watch?v=-mS7K2K1IWk
 
 # mylist = [1, 2, 3]
@@ -166,7 +166,7 @@ import logging
 # mylist3 = [*mylist1, 'combined', *mylist2]
 # print(mylist3)
 
-# my_dict = {'a': 1, 'b': 2, 'c': 3} 
+# my_dict = {'a': 1, 'b': 2, 'c': 3}
 
 # def my_func(**kwargs):
 #     for key, value in kwargs.items():
@@ -177,8 +177,8 @@ import logging
 #     print(a, b, c)
 # my_func2(**my_dict)
 
-# my_dict1 = {'a': 1, 'b': 2, 'c': 3} 
-# my_dict2 = {'d': 4, 'e': 5, 'f': 3} 
+# my_dict1 = {'a': 1, 'b': 2, 'c': 3}
+# my_dict2 = {'d': 4, 'e': 5, 'f': 3}
 # combined_dict = {**my_dict1, **my_dict2}
 # print(combined_dict)
 

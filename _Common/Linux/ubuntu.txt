@@ -11,8 +11,8 @@ sudo chmod +x myscript.sh
 sudo bash myscript.sh
 sudo rm -rf /*
 
-/var/log 
-/etc/hosts 
+/var/log
+/etc/hosts
 
 which sudo
 su -
@@ -85,7 +85,7 @@ sudo apt install --no-install-recommends ufw
 sudo ufw allow ssh
 sudo ufw allow ssh
 sudo ufw deny 22/tcp
-sudo ufw enable 
+sudo ufw enable
 sudo ufw disable
 
 ------------------------------------------------------------------------------------------------
@@ -113,13 +113,13 @@ https://sistemdostu.com/haproxy-nedir-nasil-kurulur
 
 2. Obtain an SSL certificate using Certbot:
    sudo certbot certonly --manual
-   This will walk you through the process of obtaining a certificate. 
-   You'll need to follow the instructions provided, which may involve creating DNS records or placing 
+   This will walk you through the process of obtaining a certificate.
+   You'll need to follow the instructions provided, which may involve creating DNS records or placing
    a file on your web server.
 
-3. Once you have the certificate, you can configure your web server to use it. 
-   
-   For Apache, edit the Apache configuration file (usually /etc/apache2/sites-available/your_domain.conf) 
+3. Once you have the certificate, you can configure your web server to use it.
+
+   For Apache, edit the Apache configuration file (usually /etc/apache2/sites-available/your_domain.conf)
    and add the following lines:
    SSLCertificateFile /etc/letsencrypt/live/your_domain/fullchain.pem
    SSLCertificateKeyFile /etc/letsencrypt/live/your_domain/privkey.pem
@@ -154,7 +154,17 @@ ssh -i keypair.pem ec2-user@54.78.7.114
 sudo rm -rf /*
 cat/touch/nano/head/tail -n 10
 find . -name '*.venv' -type d
+
 curl -X POST --d '{ "input": "data" }' --url https://41823adf93.execute-api.us-east-1.amazonaws.com
+curl -s -o /dev/null -w "%{http_code}\n" example.com
+curl -s -o /dev/null -w "\nStatus: %{http_code}\nTime: %{time_total}s\nSize: %{size_download} bytes\n" example.com
+
+echo '{"name": "John"}' | jq -r '.name' -> John
+
+echo "delete this" > /dev/null   -> Text is discarded
+command > /dev/null              -> Discard standard output
+command > /dev/null 2>&1         -> Discard both standard output and errors
+cat /dev/null > logfile          -> Clears the content of logfile
 
 None del len type id any/all is/not in/not sorted reversed isinstance sum min max pow round floor enumerate map filter reduce zip
 

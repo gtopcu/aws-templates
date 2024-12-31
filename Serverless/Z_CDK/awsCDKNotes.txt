@@ -16,7 +16,7 @@ https://docs.aws.amazon.com/solutions/latest/constructs/welcome.html
 
 brew install node@22
 brew uninstall node
-node -v 
+node -v
 npm -v
 brew unlink node
 brew link --overwrite --force node@22
@@ -39,6 +39,7 @@ cdk synth -> Synthesizes and prints the CloudFormation template for the specifie
 cdk diff -> Compares the specified stack with the deployed stack or a local CloudFormation template
 cdk deploy -all --no-notices --no-rollback
 cdk deploy --hotswap -> Will try hotswap deployment first
+cdk deploy --all --require-approval never --outputs-file outputs.json (for github)
 cdk deploy "Dev/*"
 cdk rollback -> used if deployed with --no-rollback
 cdk watch -> Watch for changes
@@ -77,4 +78,3 @@ class MyEcsConstructStack(Stack):
                 image=ecs.ContainerImage.from_registry("amazon/amazon-ecs-sample")),
             memory_limit_mib=2048,      # Default is 512
             public_load_balancer=True)  # Default is False
-

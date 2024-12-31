@@ -2,7 +2,7 @@
 
 import aws_cdk as cdk
 from aws_cdk import Stack
-from aws_cdk.assertions import Template, Match, Capture
+from aws_cdk.assertions import Capture, Match, Template
 
 """
 Match.absent()
@@ -49,6 +49,20 @@ template.resource_properties_count_is("AWS::S3::Bucket", {
     "ShouldNotExist": Match.absent(),
 }, 1)
 
+template.has_resource_properties(
+    "AWS::CloudWatch::Alarm",
+    {
+        "Namespace": "AWS/SQS",
+        "MetricName": "ApproximateNumberOfMessagesVisible",
+        "Dimensions": [
+            {
+                "Name": "QueueName",
+                "Value": Match.any_value(),
+            },
+        ],
+    },
+)
+
 template.find_outputs(  # returns a dict
     "Find CF outputs with export name & value",
     Match.object_like({
@@ -64,5 +78,3 @@ template.has_output(  # returns a bool
         "Value": Match.any_value(),
     })
 )
-
-

@@ -1,0 +1,40 @@
+pip install pylint
+
+pylint --generate-rcfile > .pylintrc
+
+pylint .
+pylint --recursive=y .
+pylint file.py
+  --r --recursive y
+  --rcfile (uses .pylintrc by default)
+  --output OUTPUT
+  --output-format, -f <format> text, parseable, colorized, json2
+  --source-roots <path>[,<path>...]
+  --generate-rcfile
+  --generate-toml-config -> Uses existing .pylintrc file
+  --list-extensions
+  --ignore cdk.out       -> Ignore CDK output directory
+  --fail-under 8.0       -> Fail if score is below 8.0/10
+  --reports=y
+  --msg-template="{path}:{line}: [{msg_id}({symbol}), {obj}] {msg}"
+
+--------------------------------------------------------------------------------------------------------
+-> if running in server/github
+clear-cache-post-run=yes 
+exit-zero=no
+persistent=no
+
+--------------------------------------------------------------------------------------------------------
+
+max-line-length=79
+
+disable=raw-checker-failed,
+        bad-inline-option,
+        locally-disabled,
+        file-ignored,
+        suppressed-message,
+        useless-suppression,
+        deprecated-pragma,
+        use-symbolic-message-instead,
+        use-implicit-booleaness-not-comparison-to-string,
+        use-implicit-booleaness-not-comparison-to-zero

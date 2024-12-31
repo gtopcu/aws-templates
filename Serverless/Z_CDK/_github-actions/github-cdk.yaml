@@ -1,0 +1,73 @@
+name: CDK CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-test-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.13'
+        
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        # Add these in your repository's Settings > Secrets and variables > Actions
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pytest
+        npm install -g aws-cdk
+        
+    - name: Run unit tests
+      run: |
+        python -m pytest tests/unit
+    
+    - name: Run CDK assertions tests
+      run: |
+        python -m pytest tests/infra
+        
+    - name: CDK synth
+      run: cdk synth
+
+    - name: Deploy to AWS
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: |
+        cdk deploy --all --require-approval never
+        
+    # - name: Deploy to AWS
+    #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    #   run: |
+    #     # Capture the stack outputs
+    #     OUTPUTS=$(cdk deploy --all --require-approval never --outputs-file outputs.json)
+    #     # Extract the URL from outputs and store it as an environment variable
+    #     echo "LAMBDA_URL=$(jq -r '.LambdaStack.FunctionUrl' outputs.json)" >> $GITHUB_ENV
+        
+    # - name: Validate Lambda URL
+    #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    #   run: |
+    #     echo "Testing Lambda URL: $LAMBDA_URL"
+    #     # Wait for 10 seconds to allow Lambda to be fully deployed
+    #     sleep 10
+    #     # Make the request and check the response
+    #     response=$(curl -s -o /dev/null -w "%{http_code}" $LAMBDA_URL)
+    #     if [ "$response" != "200" ]; then
+    #       echo "Error: Lambda URL returned status code $response"
+    #       exit 1
+    #     else
+    #       echo "Success: Lambda URL is working correctly"
+    #     fi

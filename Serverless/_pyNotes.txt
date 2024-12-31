@@ -2,7 +2,10 @@
 https://www.youtube.com/watch?v=NMQwzI9hprg - Step-by-Step Python Package Deployment with GitHub Actions(Poetry + PyPI)
 https://github.com/squidfunk/mkdocs-material
 
-python select interpreter: /Users/gtopcu/My Drive/VSCode/aws-templates/.venv
+python -m venv .venv
+source .venv/bin/activate
+source /Users/mac/GoogleDrive/VSCode/.venv/bin/activate
+python select interpreter: /Users/gtopcu/My Drive/VSCode/.venv
 
 #!/usr/bin/env python3
 echo $PATH
@@ -12,11 +15,11 @@ sudo apt update -y && sudo apt install python3-pip
   pip <command> [options]
 
   pip install \
-    --platform manylinux2014_x86_64 \  
-    --target=<your_package_dir> \  
-    --implementation cp \  
-    --python-version 3.13 \  
-    --only-binary=:all: \  
+    --platform manylinux2014_x86_64 \
+    --target=<your_package_dir> \
+    --implementation cp \
+    --python-version 3.13 \
+    --only-binary=:all: \
     --upgrade pydantic
 
   install                     Install packages.
@@ -52,12 +55,12 @@ pip3 install -r requirements.txt
 pip install --no-cache-dir --upgrade -r requirements.txt
 pip install -r requirements.txt -t dependencies (--target)
 (cd dependencies ; zip ../aws_lambda_artifact.zip -r . ; zip aws_lambda_artifact.zip -u main.py)
-pip install -r ./requirements.txt -t ./layers/python/lib/python3.11/site-packages/ 
+pip install -r ./requirements.txt -t ./layers/python/lib/python3.11/site-packages/
 pip install . (must have 'setup.py' or 'pyproject.toml')
 pip install -r requirements-prod.txt -t dist
 pip install python-dotenv -q -U (--quiet --upgrade --quiet)
 pip install SimpleCV==1.2
-pip install requests 
+pip install requests
 pip install pytest
 pip install boto3
 pip install botocore
@@ -104,7 +107,7 @@ POETRY
 # https://www.youtube.com/watch?v=Ji2XDxmXSOM
 pip install --upgrade poetry
 poetry config virtualenvs.in-project true
-poetry new myproject (for existing projects: poetry init -> creates pyproject.toml + poetry.lock) 
+poetry new myproject (for existing projects: poetry init -> creates pyproject.toml + poetry.lock)
 poetry install (if pyproject.toml exists, creates venv) --no-root | --sync | --no-interaction
 poetry env info -p
 poetry env list
@@ -113,14 +116,14 @@ poetry env use {pythonInstallationDir}
 poetry shell / exit / deactivate / activate
 poetry run (runs from env)
 poetry lock (locks dependencies in pyproject.toml)
-poetry add "aws-lambda-powertools[aws-sdk]" --group dev 
+poetry add "aws-lambda-powertools[aws-sdk]" --group dev
 poetry add boto3 --group dev
 poetry add botocore -G dev
 poetry add requests
 poetry add requests@2.31.0  -> exact version 2.31.0
 poetry add requests^2.31.0  -> latest minor version: 2.x.x  (caret) - poetry default
 poetry add requests~2.31.0  -> latest patch version: 2.31.x (tilda)
-poetry update | requests 
+poetry update | requests
 poetry remove requests
 poetry show --tree | --all | --nocache
 poetry check
@@ -134,7 +137,7 @@ poetry export (--only|--with|--without dev) --without-hashes -f requirements.txt
 
 # https://stackoverflow.com/questions/15031694/installing-python-packages-from-local-file-system-folder-to-virtualenv-with-pip
 # Install a project in editable mode (i.e.  setuptools "develop mode") from a local project path or a VCS url:
-pip install -e .      - 
+pip install -e .      -
 pip install -e .[dev]
 pip install -e /pkg   -> Top-level directory where 'setup.py' can be found.
 pip install localfile.whl
@@ -163,6 +166,3 @@ poetry build-lambda
 /opt/homebrew/bin/python3.12
 /usr/local/bin/python3
 "python.defaultInterpreterPath": "/opt/homebrew/bin/python3.12",
-
-
-
