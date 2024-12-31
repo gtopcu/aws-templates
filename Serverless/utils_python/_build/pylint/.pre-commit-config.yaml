@@ -19,10 +19,21 @@
 # pre-commit uninstall
 
 # pre-commit run --all-files --verbose --show-diff-on-failure
-# pre-commit run <hook_name>
-# pre-commit autoupdate  -> updates repos in the yaml file to the latest version
+# pre-commit autoupdate  -> update hooks in the yaml file to the latest version
 # pre-commit validate-config
 # pre-commit sample-config
+
+# Run on staged files only
+# pre-commit run
+
+# Run on all files
+# pre-commit run --all-files
+
+# Run on specific files or directories
+# pre-commit run --files path/to/file1 path/to/directory/**/*
+
+# Run a specific hook
+# pre-commit run black --all-files
 
 
 repos:
@@ -48,19 +59,21 @@ repos:
     # hooks:
     # -   id: pylint
     #     args: ["--rcfile=.pylintrc"]
-    #     #args: ["--score=no"]
+    #     #args: ["--recursive=y", "--score=no"]
     #     additional_dependencies: ["boto3","botocore"]
+
 
 - repo: https://github.com/PyCQA/isort
   rev: 5.13.2
   hooks:
     - id: isort
+      args: ["--profile", "black"]
 
 # - repo: https://github.com/psf/black
 #   rev: 23.11.0
 #   hooks:
 #   -   id: black
-#       args: [--safe]
+#       args: [--safe, --line-length=79]
 
 # - repo: https://github.com/PyCQA/flake8
 #   rev: 7.1.1
