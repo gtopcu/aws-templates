@@ -53,6 +53,7 @@ repos:
   -   id: check-added-large-files
   -   id: check-json
   -   id: check-yaml
+  -   id: check-toml
 
 # - repo: https://github.com/pycqa/pylint
     # rev: v3.1.0
@@ -81,17 +82,18 @@ repos:
 #     - id: flake8
 #       args: [--config=.flake8, --max-line-length=79]
 
-- repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: v0.8.4
-  hooks:
-    - id: ruff
-      args: [check . --fix]
-
-- repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: v0.8.4
-  hooks:
-    - id: ruff
-      args: [format .]
+-   repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.8.4
+    hooks:
+    # Run the linter
+    -   id: ruff
+        args: [
+            --fix,
+            --exit-non-zero-on-fix,
+            --line-length=79
+        ]
+    # Run the formatter
+    -   id: ruff-format
 
 # - repo: local
 #   hooks:
