@@ -36,21 +36,20 @@ jobs:
         pip install -r requirements.txt
         pip install pre-commit isort ruff pytest coverage
         npm install -g aws-cdk
-      # pip install -r requirements-dev.txt
       # pre-commit isort isort black flake8 ruff pytest coverage
     
     - name: Run pre-commit
       run: |
         pre-commit run --all-files
         
-    - name: Run isort
-      run: |
-        isort --profile black .
+    # - name: Run isort
+    #   run: |
+    #     isort --profile black .
 
-    - name: Run Ruff
-      run: |
-        ruff check . --fix
-        ruff format .
+    # - name: Run Ruff
+    #   run: |
+    #     ruff check . --fix
+    #     ruff format .
 
     # - name: Run PyLint
     #   run: |
