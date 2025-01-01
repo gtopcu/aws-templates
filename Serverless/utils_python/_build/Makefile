@@ -1,30 +1,71 @@
 
-.PHONY: dev deps dep-update
-make BUILD_TLS=yes
+CURRENT_DIR := $(shell pwd)
+# CURRENT_DIR := $(CURDIR)
 
-FLAGS = --without dev --without-hashes -f requirements.txt -o requirements.txt
+.PHONY: help show-dir env-create env-activate deps install update build test lint scan clean deploy
 
-requirements: requirements.txt (@ hides the command in output)
- @echo "creating requirements.txt"
- poetry export $(FLAGS)
- chmod +x requirements.txt 
+# Default target when just running 'make'
+help:
+	@echo "Available commands:"
+	@echo "make env-create   - Create virtual environment"
+	@echo "make env-activate - Activate virtual environment"
+	@echo "make deps         - Create requirements.txt files"
+	@echo "make install      - Install dependencies"
+	@echo "make update       - Update dependencies"
+	@echo "make build        - Build package"
+	@echo "make test         - Run tests"
+	@echo "make lint         - Run linters"
+	@echo "make scan         - Run vulnerability scanner"
+	@echo "make clean        - Clean up cache files"
+	@echo "make deploy       - Deploy to AWS"
+
+show-dir:
+	@echo "Current working directory: $(CURRENT_DIR)"
+	@echo "Using pwd command: $(shell pwd)"
+
+env-create:
+	python -m venv $(CURRENT_DIR)/.venv
+
+env-activate:
+	source $(CURRENT_DIR)/.venv/bin/activate
 
 deps:
- poetry export --only=dev --without-hashes --format=requirements.txt > dev_requirements.txt
- poetry export --without=dev --without-hashes --format=requirements.txt > requirements.txt
+	poetry export -v --with dev --without-hashes -o requirements-dev.txt
+	poetry export -v --without-hashes -o requirements.txt
 
-dep-update: poetry update -vvv
+install:
+#   make env-activate
+	pip install safety poetry poetry-plugin-export
+	pip install -r requirements-dev.txt
+#	pre-commit install
 
-dev:
- pip install --upgrade pip pre-commit poetry
- make deps
- pre-commit install
- poetry shell
+update:
+	poetry update -v
 
-build: 
- make deps 
- mkdir -p .build/lambdas ; cp -r service .build/lambdas 
- mkdir -p .build/common_layer ; poetry export --without=dev --without-hashes --format=requirements.txt > .build/common_layer/requirements.txt
+build:
+	poetry build -v
 
-unit: pytest texts
+test:
+	pytest -vs --cov
 
+lint:
+	pre-commit run --all-files
+	pylint .
+	ruff check --fix
+	ruff format
+
+scan:
+	safety scan --detailed-output --apply-fixes
+
+clean:
+	find . -type d -name "__pycache__" -exec rm -rf {} +
+	find . -type f -name "*.pyc" -delete
+	rm -rf .coverage
+	rm -rf .pytest_cache
+	rm -rf .ruff_cache
+	rm -rf $(CURRENT_DIR)/build/*
+	rm -rf $(CURRENT_DIR)/__pycache__
+	rm -rf cdk.out
+
+deploy:
+	cdk deploy --all --require-approval never

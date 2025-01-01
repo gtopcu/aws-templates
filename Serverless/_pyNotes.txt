@@ -51,15 +51,19 @@ pip uninstall requests
 pip list | freeze
 pip freeze > requirements.txt
 python -m pip install --upgrade pip
+pip install python-dotenv -q -U 
 pip3 install -r requirements.txt
 pip install --no-cache-dir --upgrade -r requirements.txt
-pip install -r requirements.txt -t dependencies (--target)
-(cd dependencies ; zip ../aws_lambda_artifact.zip -r . ; zip aws_lambda_artifact.zip -u main.py)
+pip install -r requirements-prod.txt -t dist
 pip install -r ./requirements.txt -t ./layers/python/lib/python3.11/site-packages/
 pip install . (must have 'setup.py' or 'pyproject.toml')
-pip install -r requirements-prod.txt -t dist
-pip install python-dotenv -q -U (--quiet --upgrade --quiet)
+pip install package.whl
+
 pip install SimpleCV==1.2
+pip install SimpleCV==1.*
+pip install SimpleCV>=1.2.0
+pip install SimpleCV<=1.2.0
+
 pip install requests
 pip install pytest
 pip install boto3
@@ -68,9 +72,6 @@ pip install ruff
 pip install aws_lambda_powertools
 pip install requests-aws4auth
 
-pip install SimpleCV==1.*
-pip install example-package>=1.2.0
-pip install example-package<=1.2.0
 
 ----------------------------------------------------------------------------------------------------------------
 safety - https://docs.safetycli.com/safety-docs/safety-cli/quick-start-guide
@@ -112,18 +113,18 @@ pipenv check            -> Checks for PyUp Safety vulnerabilities and against PE
 pipenv --python 3.13    -> Create a new project using Python 3.13
 pipenv install          -> Installs all packages from Pipfile
 pipenv install --dev    -> Install all dependencies for a project including dev
-pipenv install boto3    -> Installs provided packages and adds them to Pipfile 
 pipenv install -e .     -> Install a local setup.py into your virtual environment/Pipfile:
-pipenv uninstall        -> Uninstalls a provided package and removes it from Pipfile.
+pipenv install boto3    -> Installs provided packages and adds them to Pipfile 
+pipenv uninstall boto3  -> Uninstalls a provided package and removes it from Pipfile.
 pipenv lock             -> Generates Pipfile.lock
 pipenv lock --pre       -> Create a lockfile containing pre-releases
-pipenv graph            -> Show a graph of your installed dependencies
-pipenv run pip freeze   -> Use a lower-level pip command
 pipenv clean            -> Uninstalls all packages not specified in Pipfile.lock
 pipenv sync             -> Installs all packages specified in Pipfile.lock
 pipenv update           -> Runs lock, then sync
 pipenv upgrade          -> Resolves provided packages and adds them to Pipfile, or (if no packages are given), 
                            merges results to Pipfile.lock
+pipenv graph            -> Show a graph of your installed dependencies
+pipenv run pip freeze   -> Use a lower-level pip command
 pipenv shell            -> Spawns a shell within the virtualenv
 
 ----------------------------------------------------------------------------------------------------------------
@@ -134,24 +135,22 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 uv python install 3.13 3.12
 uv venv
 uv venv --python 3.13.0
-uv python pin pypy@3.11
+uv python pin pypy@3.13
 uv init myproject -> cd myproject
 uv add --script example.py requests
 uv add ruff
-uv run ruff check
+uv run ruff check --fix
 uv tool run/uvx pycowsay 'hello world!'
 uv tool install ruff
 ruff --version
-uv pip compile docs/requirements.in \
-   --universal \
-   --output-file docs/requirements.txt
-uv pip sync docs/requirements.txt
+uv pip compile requirements.in --universal --output-file requirements.txt
+uv pip sync requirements.txt
 
 ----------------------------------------------------------------------------------------------------------------
 POETRY
 ----------------------------------------------------------------------------------------------------------------
 # https://www.youtube.com/watch?v=Ji2XDxmXSOM
-pip install --upgrade poetry
+pip install --upgrade poetry poetry-plugin-export
 poetry config virtualenvs.in-project true
 poetry new myproject (for existing projects: poetry init -> creates pyproject.toml + poetry.lock)
 poetry install (if pyproject.toml exists, creates venv) --no-root | --sync | --no-interaction
@@ -159,7 +158,7 @@ poetry env info -p
 poetry env list
 poetry env remove {env}
 poetry env use {pythonInstallationDir}
-poetry shell / exit / deactivate / activate
+poetry shell | exit deactivate / activate
 poetry run (runs from env)
 poetry lock (locks dependencies in pyproject.toml)
 poetry add "aws-lambda-powertools[aws-sdk]" --group dev
@@ -169,17 +168,17 @@ poetry add requests
 poetry add requests@2.31.0  -> exact version 2.31.0
 poetry add requests^2.31.0  -> latest minor version: 2.x.x  (caret) - poetry default
 poetry add requests~2.31.0  -> latest patch version: 2.31.x (tilda)
-poetry update | requests
+poetry update ---v | <requests>
 poetry remove requests
 poetry show --tree | --all | --nocache
 poetry check
-poetry build (for dist & wheel)
+poetry build (builds /dist with .whl & .tar.gz)
 poetry publish (to pypi.org)
 poetry version major | minor | patch -> update project version in pyproject.toml
-
-# https://python-poetry.org/docs/cli/#export
-poetry export --without dev -f requirements.txt -o requirements.txt
+poetry export -vvv --with dev --without-hashes -o requirements-dev.txt
+poetry export -vvv --without-hashes -o requirements.txt
 poetry export (--only|--with|--without dev) --without-hashes -f requirements.txt -o requirements.txt
+                                            --without-urls --extras=[extras] --no-cache
 
 # https://stackoverflow.com/questions/15031694/installing-python-packages-from-local-file-system-folder-to-virtualenv-with-pip
 # Install a project in editable mode (i.e.  setuptools "develop mode") from a local project path or a VCS url:

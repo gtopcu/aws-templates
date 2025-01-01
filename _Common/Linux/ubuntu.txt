@@ -158,6 +158,7 @@ ssh -i keypair.pem ec2-user@54.78.7.114
 sudo rm -rf /*
 cat/touch/nano/head/tail -n 10
 find . -name '*.venv' -type d
+tar -xf file.tar.gz
 
 curl -X POST --d '{ "input": "data" }' --url https://41823adf93.execute-api.us-east-1.amazonaws.com
 curl -s -o /dev/null -w "%{http_code}\n" example.com

@@ -7,6 +7,8 @@ aws-cdk-lib
 boto3
 
 safety
+poetry
+poetry-plugin-export
 pip-tools
 pipenv
 python-dotenv
