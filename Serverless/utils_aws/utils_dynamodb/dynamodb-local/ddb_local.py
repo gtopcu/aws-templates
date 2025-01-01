@@ -193,6 +193,7 @@ print(person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_u
 
 
 # Batch Write - 25 items / 16GB limit
+# BatchWriter: Parallel, non-atomic writes -> handle partial failures!
 # with table.batch_writer() as batch:
 #     for i in range(1, 10):
 #         batch.put_item(Item={"id": str(i)})

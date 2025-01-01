@@ -50,6 +50,7 @@ test:
 
 lint:
 #	pre-commit run --all-files
+	isort .
 	pylint .
 	ruff check --fix
 	ruff format
@@ -58,13 +59,12 @@ scan:
 	safety scan --detailed-output --apply-fixes
 
 clean:
-#	find . -type d -name "__pycache__" -exec rm -rf {} +
+	find . -type d -name "__pycache__" -exec rm -rf {} +
 #	find . -type f -name "*.pyc" -delete
 	rm -f .coverage
 	rm -rf .pytest_cache
 	rm -rf .ruff_cache
 	rm -rf $(CURRENT_DIR)/build/*
-	rm -rf $(CURRENT_DIR)/__pycache__
 	rm -rf cdk.out
 
 deploy:
