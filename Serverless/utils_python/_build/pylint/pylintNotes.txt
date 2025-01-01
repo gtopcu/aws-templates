@@ -30,6 +30,10 @@ init-hook
 
 max-line-length=79
 
+C0114: Missing module docstring: missing-module-docstring
+C0115: Missing class docstring
+C0116: Missing function or method docstring
+
 disable=raw-checker-failed,
         bad-inline-option,
         locally-disabled,
@@ -39,4 +43,7 @@ disable=raw-checker-failed,
         deprecated-pragma,
         use-symbolic-message-instead,
         use-implicit-booleaness-not-comparison-to-string,
-        use-implicit-booleaness-not-comparison-to-zero
+        use-implicit-booleaness-not-comparison-to-zero,
+        missing-module-docstring,
+        missing-class-docstring,
+        missing-function-docstring

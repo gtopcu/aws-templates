@@ -7,7 +7,7 @@ analyse-fallback-blocks=no
 
 # Clear in-memory caches upon conclusion of linting. Useful if running pylint
 # in a server-like mode.
-# clear-cache-post-run=
+clear-cache-post-run=yes
 
 # Load and enable all available extensions. Use --list-extensions to see a list
 # all available extensions.
@@ -20,7 +20,7 @@ analyse-fallback-blocks=no
 
 # Always return a 0 (non-error) status code, even if lint errors are found.
 # This is primarily useful in continuous integration scripts.
-exit-zero=yes
+exit-zero=no
 
 # A comma-separated list of package or module names from where C extensions may
 # be loaded. Extensions are loading into the active Python interpreter and may
@@ -443,7 +443,10 @@ disable=raw-checker-failed,
         deprecated-pragma,
         use-symbolic-message-instead,
         use-implicit-booleaness-not-comparison-to-string,
-        use-implicit-booleaness-not-comparison-to-zero
+        use-implicit-booleaness-not-comparison-to-zero,
+        missing-module-docstring,
+        missing-class-docstring,
+        missing-function-docstring
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option
