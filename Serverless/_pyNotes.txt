@@ -10,7 +10,7 @@ python select interpreter: /Users/gtopcu/My Drive/VSCode/.venv
 #!/usr/bin/env python3
 echo $PATH
 export PATH=$PATH:/opt/homebrew/bin/python3.13
-sudo apt update -y && sudo apt install python3-pip
+sudo apt update -y && sudo apt install python3 python3-pip python3-venv -y
 
   pip <command> [options]
 
@@ -25,7 +25,7 @@ sudo apt update -y && sudo apt install python3-pip
   install                     Install packages.
   download                    Download packages.
   uninstall                   Uninstall packages.
-  freeze                      Output installed packages in requirements format.
+  freeze                      Outputs installed packages in requirements format.
   inspect                     Inspect the python environment.
   list                        List installed packages.
   show                        Show information about installed packages.
@@ -42,22 +42,24 @@ sudo apt update -y && sudo apt install python3-pip
 
 where | which python/pip
 python --version
-python3 -m venv venv
-source venv/bin/activate
+python3 -m venv .venv
+source .venv/bin/activate
 
 pip install requests
 pip uninstall requests
 
-pip list | freeze
+pip list | freeze | show | search
 pip freeze > requirements.txt
 python -m pip install --upgrade pip
-pip install python-dotenv -q -U 
+pip install -v python-dotenv -q -U 
 pip3 install -r requirements.txt
-pip install --no-cache-dir --upgrade -r requirements.txt
+pip install --no-cache-dir --no-input --upgrade -r requirements.txt
 pip install -r requirements-prod.txt -t dist
 pip install -r ./requirements.txt -t ./layers/python/lib/python3.11/site-packages/
 pip install . (must have 'setup.py' or 'pyproject.toml')
+pip install . -e
 pip install package.whl
+pip install package.tar.gz
 
 pip install SimpleCV==1.2
 pip install SimpleCV==1.*
@@ -72,6 +74,21 @@ pip install ruff
 pip install aws_lambda_powertools
 pip install requests-aws4auth
 
+----------------------------------------------------------------------------------------------------------------
+
+# https://stackoverflow.com/questions/15031694/installing-python-packages-from-local-file-system-folder-to-virtualenv-with-pip
+
+pip install -v -q  -U -r <requirements.txt> -t <dir> --root <dir> -i <url>(default https://pypi.org/simple)
+  --dry-run --no-deps --force-reinstall --require-virtualenv --isolated --no-input --no-cache-dir 
+  --disable-pip-version-check --no-clean --compile --no-compile --timeout <sec> --log <path>
+
+pip install . -e --src <target_dir>
+pip install package.whl
+pip install package.tar.gz
+pip install package --no-index --find-links file:///vscode/package
+
+pip install -e .      
+pip install -e /pkg -> Top-level directory where 'setup.py' can be found.
 
 ----------------------------------------------------------------------------------------------------------------
 safety - https://docs.safetycli.com/safety-docs/safety-cli/quick-start-guide
@@ -179,13 +196,6 @@ poetry export -vvv --with dev --without-hashes -o requirements-dev.txt
 poetry export -vvv --without-hashes -o requirements.txt
 poetry export (--only|--with|--without dev) --without-hashes -f requirements.txt -o requirements.txt
                                             --without-urls --extras=[extras] --no-cache
-
-# https://stackoverflow.com/questions/15031694/installing-python-packages-from-local-file-system-folder-to-virtualenv-with-pip
-# Install a project in editable mode (i.e.  setuptools "develop mode") from a local project path or a VCS url:
-pip install -e .      -
-pip install -e .[dev]
-pip install -e /pkg   -> Top-level directory where 'setup.py' can be found.
-pip install localfile.whl
 
 
 https://aws.plainenglish.io/streamline-lambda-development-with-poetry-25fbc212a846

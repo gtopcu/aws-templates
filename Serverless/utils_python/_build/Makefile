@@ -2,7 +2,7 @@
 CURRENT_DIR := $(shell pwd)
 # CURRENT_DIR := $(CURDIR)
 
-.PHONY: help show-dir env-create env-activate deps install update build test lint scan clean deploy
+.PHONY: help show-dir env-create env-activate deps install-dev install update build test lint scan clean deploy
 
 # Default target when just running 'make'
 help:
@@ -10,6 +10,7 @@ help:
 	@echo "make env-create   - Create virtual environment"
 	@echo "make env-activate - Activate virtual environment"
 	@echo "make deps         - Create requirements.txt files"
+	@echo "make install-dev  - Install dev dependencies"
 	@echo "make install      - Install dependencies"
 	@echo "make update       - Update dependencies"
 	@echo "make build        - Build package"
@@ -33,10 +34,16 @@ deps:
 	poetry export -v --with dev --without-hashes -o requirements-dev.txt
 	poetry export -v --without-hashes -o requirements.txt
 
-install:
+install-dev:
 #   make env-activate
 	pip install safety poetry poetry-plugin-export
 	pip install -r requirements-dev.txt
+#	pre-commit install
+
+install:
+#   make env-activate
+	pip install safety poetry poetry-plugin-export
+	pip install -r requirements.txt
 #	pre-commit install
 
 update:
