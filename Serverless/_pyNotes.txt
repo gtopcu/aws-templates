@@ -99,14 +99,32 @@ flake8 . --config=.flake8
 pip-tools
 ----------------------------------------------------------------------------------------------------------------
 pip install pip-tools
-pip-compile -o pyproject.toml requirements.txt 
-pip-compile requirements.in
-pip-sync requirements.txt
+pip-compile requirements.in     -> Compiles requirements.txt from requirements.in pyproject.toml setup.cfg or setup.py
+pip-compile -o requirements.txt requirements.in 
+pip-sync requirements.txt --ask -> Sync virtual environment with requirements.txt
 
 ----------------------------------------------------------------------------------------------------------------
 pipenv
 ----------------------------------------------------------------------------------------------------------------
-pipenv install boto3
+pipenv -v -q --where --venv --py --envs --rm(virtual env) --clear(pipenv&pip caches)
+pipenv check            -> Checks for PyUp Safety vulnerabilities and against PEP 508 markers provided in Pipfile
+
+pipenv --python 3.13    -> Create a new project using Python 3.13
+pipenv install          -> Installs all packages from Pipfile
+pipenv install --dev    -> Install all dependencies for a project including dev
+pipenv install boto3    -> Installs provided packages and adds them to Pipfile 
+pipenv install -e .     -> Install a local setup.py into your virtual environment/Pipfile:
+pipenv uninstall        -> Uninstalls a provided package and removes it from Pipfile.
+pipenv lock             -> Generates Pipfile.lock
+pipenv lock --pre       -> Create a lockfile containing pre-releases
+pipenv graph            -> Show a graph of your installed dependencies
+pipenv run pip freeze   -> Use a lower-level pip command
+pipenv clean            -> Uninstalls all packages not specified in Pipfile.lock
+pipenv sync             -> Installs all packages specified in Pipfile.lock
+pipenv update           -> Runs lock, then sync
+pipenv upgrade          -> Resolves provided packages and adds them to Pipfile, or (if no packages are given), 
+                           merges results to Pipfile.lock
+pipenv shell            -> Spawns a shell within the virtualenv
 
 ----------------------------------------------------------------------------------------------------------------
 uv
