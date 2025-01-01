@@ -74,6 +74,7 @@ repos:
 #     - id: flake8
 #       args: [--config=.flake8, --max-line-length=79]
 
+
 - repo: https://github.com/astral-sh/ruff-pre-commit
   rev: v0.8.4
   hooks:
@@ -91,9 +92,8 @@ repos:
   rev: v3.1.0
   hooks:
     - id: pylint
-      #args: ["--rcfile=.pylintrc", "--recursive=y", "--score=no"]
-      additional_dependencies: ["pytest"]
-      #additional_dependencies: ["boto3","botocore"]
+      # args: ["--rcfile=.pylintrc", "--recursive=y", "--score=no"]
+      # additional_dependencies: ["boto3","botocore"]
 
 -   repo: local
     hooks:

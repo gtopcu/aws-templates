@@ -73,21 +73,43 @@ pip install example-package>=1.2.0
 pip install example-package<=1.2.0
 
 ----------------------------------------------------------------------------------------------------------------
+safety - https://docs.safetycli.com/safety-docs/safety-cli/quick-start-guide
+----------------------------------------------------------------------------------------------------------------
+pip install safety
+safety auth login --headless | logout
+safety check-updates
+safety scan --detailed-output --apply-fixes --debug --stage dev --key API_KEY
+safety scan -r requirements.txt | requirements.in | pyproject.toml
+safety validate | generate policy_file 
+
+----------------------------------------------------------------------------------------------------------------
 pylint
 ----------------------------------------------------------------------------------------------------------------
 pip install pylint
 pylint myfile.py    # pylint: disable=all disable=invalid-name disable=missing-class-docstring
+pytlint .
 pylint --rcfile=.pylintrc .
 flake8 --config=.flake8 .
+
+----------------------------------------------------------------------------------------------------------------
+pip-tools & pipenv
+----------------------------------------------------------------------------------------------------------------
+
+pip install pip-tools
+pip-compile -o requirements.txt pyproject.toml (requirements.txt -> pyproject.toml w/ pinned versions)
+pip-compile requirements-dev.in
+pip-sync requirements-dev.txt
+
+pipenv install aws-lambda-powertools
 
 ----------------------------------------------------------------------------------------------------------------
 uv
 ----------------------------------------------------------------------------------------------------------------
 https://docs.astral.sh/uv/
 curl -LsSf https://astral.sh/uv/install.sh | sh
-uv python install 3.10 3.11 3.12
+uv python install 3.13 3.12
 uv venv
-uv venv --python 3.12.0
+uv venv --python 3.13.0
 uv python pin pypy@3.11
 uv init myproject -> cd myproject
 uv add --script example.py requests
@@ -142,12 +164,6 @@ pip install -e .[dev]
 pip install -e /pkg   -> Top-level directory where 'setup.py' can be found.
 pip install localfile.whl
 
-pip install pip-tools
-pip-compile -o requirements.txt pyproject.toml (requirements.txt -> pyproject.toml w/ pinned versions)
-pip-compile requirements-dev.in
-pip-sync requirements-dev.txt
-
-pipenv install aws-lambda-powertools
 
 https://aws.plainenglish.io/streamline-lambda-development-with-poetry-25fbc212a846
 https://github.com/micmurawski/poetry-plugin-lambda-build

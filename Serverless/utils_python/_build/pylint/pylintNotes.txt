@@ -23,6 +23,8 @@ pylint file.py
 clear-cache-post-run=yes 
 exit-zero=no
 persistent=no
+-> set for imports:
+init-hook
 
 --------------------------------------------------------------------------------------------------------
 

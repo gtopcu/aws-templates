@@ -87,6 +87,9 @@ import sys
 # POSTGRE_IP = os.environ['POSTGRE_IP']
 # POSTGRE_PORT: int = os.environ.setdefault('POSTGRE_PORT', 5432)
 
+# for path in sys.path:
+#     print("Path: " + path)
+# sys.path.append(os.getcwd() + "/.venv/lib/python3.13/site-packages")
 # os.path.join(__file__, 'test.txt')
 # current_dir = os.path.dirname(os.path.abspath(__file__))
 # file_path = os.path.join(current_dir, filename)
