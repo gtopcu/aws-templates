@@ -100,7 +100,7 @@ flake8 . --config=.flake8
 pip-tools
 ----------------------------------------------------------------------------------------------------------------
 pip install pip-tools
-pip-compile requirements.in     -> Compiles requirements.txt from requirements.in pyproject.toml setup.cfg or setup.py
+pip-compile requirements.in -> Compiles requirements.txt from requirements.in pyproject.toml setup.cfg or setup.py
 pip-compile -o requirements.txt requirements.in 
 pip-sync requirements.txt --ask -> Sync virtual environment with requirements.txt
 
@@ -168,7 +168,7 @@ poetry add requests
 poetry add requests@2.31.0  -> exact version 2.31.0
 poetry add requests^2.31.0  -> latest minor version: 2.x.x  (caret) - poetry default
 poetry add requests~2.31.0  -> latest patch version: 2.31.x (tilda)
-poetry update ---v | <requests>
+poetry update -v | <requests>
 poetry remove requests
 poetry show --tree | --all | --nocache
 poetry check
