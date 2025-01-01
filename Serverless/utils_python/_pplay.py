@@ -6,11 +6,10 @@
 
 # Amazon Q: Command + i
 
-# pip install black + black extension + Command+P Black
-# pip install pylint
-# pylint _pplay.py
-# pylint: disable=all disable=invalid-name disable=missing-class-docstring (remove this line to get the results)
-# pylint --rcfile=.pylintrc .
+# pylint . --rcfile=.pylintrc .
+# disable=all disable=invalid-name disable=missing-class-docstring (remove this line to get 
+
+# safety scan --detailed-output --apply-fixes
 
 # ruff format .
 # ruff check . --fix

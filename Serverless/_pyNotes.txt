@@ -89,16 +89,20 @@ pip install pylint
 pylint myfile.py    # pylint: disable=all disable=invalid-name disable=missing-class-docstring
 pytlint .
 pylint --rcfile=.pylintrc .
-flake8 --config=.flake8 .
+
+----------------------------------------------------------------------------------------------------------------
+flake8
+----------------------------------------------------------------------------------------------------------------
+flake8 . --config=.flake8
 
 ----------------------------------------------------------------------------------------------------------------
 pip-tools & pipenv
 ----------------------------------------------------------------------------------------------------------------
-
 pip install pip-tools
-pip-compile -o requirements.txt pyproject.toml (requirements.txt -> pyproject.toml w/ pinned versions)
-pip-compile requirements-dev.in
-pip-sync requirements-dev.txt
+pip-compile -o pyproject.toml requirements.txt 
+pip-compile requirements.in
+pip-sync requirements.txt
+
 
 pipenv install aws-lambda-powertools
 
