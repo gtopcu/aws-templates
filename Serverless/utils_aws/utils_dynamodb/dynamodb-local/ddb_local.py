@@ -46,7 +46,7 @@ ACCESS_KEY_SECRET = "yyy"
 #     region_name=REGION,
 #     aws_access_key_id=ACCESS_KEY_ID,
 #     aws_secret_access_key=ACCESS_KEY_SECRET,
-# )
+# )
 ddb = boto3.resource(
     "dynamodb",
     endpoint_url="http://localhost:8000",
@@ -61,7 +61,24 @@ ddb = boto3.resource(
 table: dynamodb.table = ddb.Table("employee")
 print(table)
 print("Table status:", table.table_status)
+
 # table_resource: TableResource = table.TableResource()
+# ddb.meta.client.describe_table(TableName="employee")
+
+# ddb.meta.client.transact_write_items()
+# ddb.meta.client.transact_get_items()
+# dynamodb.transact_write_items()
+# dynamodb.transact_get_items()
+
+# ddb_client.get_waiter(TableName="employee").wait(TableName="employee", WaiterConfig={"Delay": 1, "MaxAttempts": 10}
+# ddb_client.get_paginator(TableName="employee").paginate(TableName="employee", PaginationConfig={"MaxItems": 10, "PageSize": 10})
+# ddb_client.can_paginate()
+# ddb_client.meta.partition
+# ddb_client.meta.region_name
+# ddb_client.meta.service_model
+# ddb_client.meta.events
+# ddb_client.meta.config
+# ddb_client.meta.endpoint_url
 
 # table.query(Limit=37)
 
@@ -223,12 +240,91 @@ print(person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_u
 #     },
 #     ReturnValues="UPDATED_NEW"
 
-# Legacy - do not use
 # def update_item_counter():
-#     ddb = boto3.resource('dynamodb')
-#     table = ddb.Table(os.environ['DDB_TABLE_NAME'])
 #     table.update_item(
-#         Key={'path': 'get'},
+#         Key={'ID': 1000},
 #         UpdateExpression='ADD hits :incr',
 #         ExpressionAttributeValues={':incr': 1}
 #     )
+#
+
+# Transaction write
+def write_to_dynamodb_transaction():
+    items = [
+        {
+            'Put': {
+                'TableName': 'MyTable',
+                'Item': {
+                    'ID': {'S': '1'},
+                    'Name': {'S': 'Item 1'},
+                    'Price': {'N': '10'},
+                }
+            }
+        }
+    ]
+    dynamodb = boto3.client('dynamodb', region_name='us-west-2')
+    try:
+        response = dynamodb.transact_write_items(TransactItems=items)
+        # response = ddb.meta.client.transact_write_items(TransactItems=items)
+        print("Transaction successful:", response)
+
+    except ClientError as e:
+        print(f"Error occurred: {e}")
+
+
+# def write_to_dynamodb_transaction2(order_id: str, customer_id: str):
+#     dynamodb = boto3.resource('dynamodb')
+    
+#     # Reference to tables
+#     orders_table = dynamodb.Table('Orders')
+#     customers_table = dynamodb.Table('Customers')
+#     inventory_table = dynamodb.Table('Inventory')
+
+#     try:
+#         # Create transaction
+#         dynamodb.meta.client.transact_write_items(
+#             TransactItems=[
+#                 {
+#                     'Put': {
+#                         'TableName': 'Orders',
+#                         'Item': {
+#                             'order_id': order_id,
+#                             'customer_id': customer_id,
+#                             'status': 'PENDING'
+#                         },
+#                         'ConditionExpression': 'attribute_not_exists(order_id)'
+#                     }
+#                 },
+#                 {
+#                     'Update': {
+#                         'TableName': 'Customers',
+#                         'Key': {
+#                             'customer_id': customer_id
+#                         },
+#                         'UpdateExpression': 'SET order_count = order_count + :inc',
+#                         'ExpressionAttributeValues': {
+#                             ':inc': 1
+#                         }
+#                     }
+#                 },
+#                 {
+#                     'Update': {
+#                         'TableName': 'Inventory',
+#                         'Key': {
+#                             'product_id': 'PROD1'
+#                         },
+#                         'UpdateExpression': 'SET stock = stock - :dec',
+#                         'ConditionExpression': 'stock >= :dec',
+#                         'ExpressionAttributeValues': {
+#                             ':dec': 1
+#                         }
+#                     }
+#                 }
+#             ]
+#         )
+#         return True
+#     except ClientError as e:
+#         print(f"Transaction failed: {e}")
+#         return False
+#
+#
