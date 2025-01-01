@@ -92,27 +92,6 @@ pip install -e .
 pip install -e /pkg -> Top-level directory where 'setup.py' can be found.
 
 ----------------------------------------------------------------------------------------------------------------
-PyPI
-----------------------------------------------------------------------------------------------------------------
-
-TEST ----------------------------------------------------------------------------------------------------------
-API Token: pypi-AgENdGVzdC5weXBpLm9yZwIkMmMxYmQ1ZWQtNGIwOC00NGQ0LWIyMTAtMzAyMGVkYzdlN2ViAAIqWzMsImJhNTQ4YWUxLThlOTItNGVlNC05NDAyLWZmOGM5ZmIxNTdlOCJdAAAGILhspaUVQZrEuzZS9pYliiYe198ngDi8K1AMbrfdkGoW
-
-[testpypi]
-  username = __token__
-  password = pypi-AgENdGVzdC5weXBpLm9yZwIkMmMxYmQ1ZWQtNGIwOC00NGQ0LWIyMTAtMzAyMGVkYzdlN2ViAAIqWzMsImJhNTQ4YWUxLThlOTItNGVlNC05NDAyLWZmOGM5ZmIxNTdlOCJdAAAGILhspaUVQZrEuzZS9pYliiYe198ngDi8K1AMbrfdkGoW
-
-PROD ----------------------------------------------------------------------------------------------------------
-API Token: pypi-AgEIcHlwaS5vcmcCJDhlM2E3ZGY0LTRlODAtNGFlNS1hNzNiLWJjMjc4ZDkyMjRkOAACKlszLCIzNDUxZjkxZS0wNDk2LTQ3MGUtOGQzNS1iOTY5YjBmMmQ1YmEiXQAABiDo9x4ZWjKEtpzKSOSBdtiA0rmxHd7xbeifxbz7lr38lw
-
-[pypi]
-username = __token__
-password = pypi-AgEIcHlwaS5vcmcCJDhlM2E3ZGY0LTRlODAtNGFlNS1hNzNiLWJjMjc4ZDkyMjRkOAACKlszLCIzNDUxZjkxZS0wNDk2LTQ3MGUtOGQzNS1iOTY5YjBmMmQ1YmEiXQAABiDo9x4ZWjKEtpzKSOSBdtiA0rmxHd7xbeifxbz7lr38lw
-
-[pypi]
-token = "pypi-AgEIcHlwaS5vcmcCJDhlM2E3ZGY0LTRlODAtNGFlNS1hNzNiLWJjMjc4ZDkyMjRkOAACKlszLCIzNDUxZjkxZS0wNDk2LTQ3MGUtOGQzNS1iOTY5YjBmMmQ1YmEiXQAABiDo9x4ZWjKEtpzKSOSBdtiA0rmxHd7xbeifxbz7lr38lw"
-
-----------------------------------------------------------------------------------------------------------------
 safety - https://docs.safetycli.com/safety-docs/safety-cli/quick-start-guide
 ----------------------------------------------------------------------------------------------------------------
 pip install safety
@@ -218,15 +197,6 @@ poetry export -vvv --with dev --without-hashes -o requirements-dev.txt
 poetry export -vvv --without-hashes -o requirements.txt
 poetry export (--only|--with|--without dev) --without-hashes -f requirements.txt -o requirements.txt
                                             --without-urls --extras=[extras] --no-cache
-
-
-poetry config repositories.testpypi https://test.pypi.org/legacy/
-poetry config pypi-token.testpypi pypi-AgENdGVzdC5weXBpLm9yZwIkMmMxYmQ1ZWQtNGIwOC00NGQ0LWIyMTAtMzAyMGVkYzdlN2ViAAIqWzMsImJhNTQ4YWUxLThlOTItNGVlNC05NDAyLWZmOGM5ZmIxNTdlOCJdAAAGILhspaUVQZrEuzZS9pYliiYe198ngDi8K1AMbrfdkGoW
-poetry publish -r testpypi
-pip install -i https://test.pypi.org/simple/ test-repo-gtopcu
-
-poetry config pypi-token.pypi pypi-AgEIcHlwaS5vcmcCJDhlM2E3ZGY0LTRlODAtNGFlNS1hNzNiLWJjMjc4ZDkyMjRkOAACKlszLCIzNDUxZjkxZS0wNDk2LTQ3MGUtOGQzNS1iOTY5YjBmMmQ1YmEiXQAABiDo9x4ZWjKEtpzKSOSBdtiA0rmxHd7xbeifxbz7lr38lw
-poetry publish (to pypi.org)
 
 https://aws.plainenglish.io/streamline-lambda-development-with-poetry-25fbc212a846
 https://github.com/micmurawski/poetry-plugin-lambda-build
