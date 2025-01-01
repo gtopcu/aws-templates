@@ -22,7 +22,10 @@ moto
 
 pytest tests/unit -vs --cov
 pytest tests -c pytest.ini -vs
+
+pip install -U coverage
 coverage run -m pytest -vs
+coverage report -m
 
 ------------------------------------------------------------------------------------
 
@@ -63,6 +66,4 @@ pytest -vs
     --showlocals: show local variables in tracebacks
     --durations=10: show 10 slowest tests
 
-pip install -U coverage
-coverage run -m pytest -vs
-coverage report -m
+

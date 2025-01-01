@@ -137,7 +137,10 @@ docker run -it ubuntu bash
 docker attach
 
 export PATH=$PATH:/usr/local/go/bin
-var/log /etc/hosts /etc/apt/sources.list
+/var/log 
+/etc/hosts 
+/etc/apt/sources.list
+
 sudo apt --help
 sudo apt search python3
 sudo apt list --installed
@@ -145,6 +148,7 @@ sudo apt list --upgradable
 sudo apt update && sudo apt upgrade -y
 sudo apt update && sudo apt install foo bar -y
 sudo service ssh --status --status-all --enable --disable --start --full-restart --stop
+sudo systemctl enable disable status start stop restart --now ssh
 sudo chown -R hukanege /src/
 sudo chmod +x myscript.sh
 sudo bash myscript.sh
