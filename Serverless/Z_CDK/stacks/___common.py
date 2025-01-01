@@ -22,13 +22,17 @@ class CommonStack(cdk.Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-    
+        # self.node
+
         # ------------------------------------------------------------------------------------------
         # Context variables
         # https://docs.aws.amazon.com/cdk/v2/guide/get_context_var.html
 
-        # Setting using CLI:
+        # Setting during synth:
         # cdk synth -c bucket_name=mygroovybucket
+
+        # Setting during deploy:
+        # cdk deploy -c environment=production -c instanceType=t2.micro
 
         # Setting using cdk.json:
         # {
@@ -43,6 +47,31 @@ class CommonStack(cdk.Stack):
         # Retrieving outside a Context/Stage (when self is not available):
         # app = cdk.App()
         # bucket_name = app.node.try_get_context("bucket_name")
+
+        # ------------------------------------------------------------------------------------------
+        
+        # CloudFormation Parameters
+        # Can provide CF params with cdk deploy command, or by specifying parameter values in your CDK project’s stack file:
+
+        # cdk deploy --parameters uploadBucketName=uploadbucket -> if single stack
+        # cdk deploy stack-logical-id --parameters stack-name:parameter-name=parameter-value -> if multi-stack
+
+        # https://docs.aws.amazon.com/cdk/v2/guide/get_cfn_param.html
+        # param_bucket_name = CfnParameter(self, "bucketName", type="String", default="my-bucket" description="S3 bucket name")
+
+        # A CfnParameter instance exposes its value to your CDK app via a token. The parameter's token is resolved at 
+        # synthesis time. But it resolves to a reference to the parameter defined in the AWS CloudFormation template 
+        # (which will be resolved at deploy time), rather than to a concrete value.
+        
+        # You can retrieve the token as an instance of the Token class, or in string, string list, or numeric encoding. 
+        # Your choice depends on the kind of value required by the class or method that you want to use the parameter with.
+
+        # value	            Token class instance
+        # value_as_list	    The token represented as a string list
+        # value_as_number	The token represented as a number
+        # value_as_string	The token represented as a string
+
+        # bucket = Bucket(self, "amzn-s3-demo-bucket", bucket_name=param_bucket_name.value_as_string)
 
         # ------------------------------------------------------------------------------------------
 
@@ -209,36 +238,6 @@ class CommonStack(cdk.Stack):
 
 
         # ------------------------------------------------------------------------------------------
-
-        # Creating a CF parameter:
-        # When you deploy a generated AWS CloudFormation template through the AWS CloudFormation console, 
-        # you will be prompted to provide the values for each parameter. You can also provide parameter values using the 
-        # CDK CLI cdk deploy command, or by specifying parameter values in your CDK project’s stack file.
-
-        # cdk deploy --parameters uploadBucketName=uploadbucket -> if single stack
-        # cdk deploy stack-logical-id --parameters stack-name:parameter-name=parameter-value -> if multi-stack
-
-        # https://docs.aws.amazon.com/cdk/v2/guide/get_cfn_param.html
-        # bucket_name = CfnParameter(self, "bucketName", type="String", default="my-bucket" description="S3 bucket name")
-
-        # Using a CF parameter
-        # A CfnParameter instance exposes its value to your CDK app via a token. Like all tokens, the parameter's token 
-        # is resolved at synthesis time. But it resolves to a reference to the parameter defined in the AWS CloudFormation 
-        # template (which will be resolved at deploy time), rather than to a concrete value.
-        # You can retrieve the token as an instance of the Token class, or in string, string list, or numeric encoding. 
-        # Your choice depends on the kind of value required by the class or method that you want to use the parameter with.
-
-        # value	            Token class instance
-        # value_as_list	    The token represented as a string list
-        # value_as_number	The token represented as a number
-        # value_as_string	The token represented as a string
-
-        # bucket = Bucket(self, "amzn-s3-demo-bucket", 
-        # bucket_name=upload_bucket_name.value_as_string)
-
-        # ------------------------------------------------------------------------------------------
-
-
 
         # ------------------------------------------------------------------------------------------
         # ------------------------------------------------------------------------------------------

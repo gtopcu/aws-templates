@@ -41,6 +41,8 @@ cdk deploy -all --no-notices --no-rollback
 cdk deploy --hotswap -> Will try hotswap deployment first
 cdk deploy --all --require-approval never --outputs-file outputs.json (for github)
 cdk deploy "Dev/*"
+cdk deploy --parameters uploadBucketName=uploadbucket               -> Providing CF param for single-stack
+cdk deploy stack-logical-id --parameters stack-name:pname=pvalue    -> Providing CF param for multi-stack
 cdk rollback -> used if deployed with --no-rollback
 cdk watch -> Watch for changes
 cdk destroy -> Destroys the specified stack(s)
@@ -52,6 +54,19 @@ cdk import -> Import existing resources
 cdk migrate -> Migrate existing resources
 cdk notices -> Displays CDK notices
 cdk ack 16603 -> Acknowledge & hide CDK notices
+
+--------------------------------------------------------------------------------------------------------
+Context variables -> default values in cdk.json
+
+cdk synth -c bucket_name=mygroovybucket
+cdk deploy -c environment=production -c instanceType=t2.micro
+
+Setting using cdk.json:
+{
+    "context": {
+        "bucket_name": "myotherbucket"
+    }
+}
 
 cdk context -> Manages cached context values
 --clear BOOLEAN -> Clear all context.
