@@ -112,7 +112,32 @@ pylint --rcfile=.pylintrc .
 ----------------------------------------------------------------------------------------------------------------
 flake8
 ----------------------------------------------------------------------------------------------------------------
+pip install flake8
 flake8 . --config=.flake8
+
+----------------------------------------------------------------------------------------------------------------
+pyright
+----------------------------------------------------------------------------------------------------------------
+https://github.com/RobertCraigie/pyright-python
+pip install pyright
+pyright . --verbose
+pyright --verbose --level warning --warnings -p pyrightconfig.json -v <venvpath> --outputjson 
+
+[tool.pyright]
+include = ["src", "tests"] 
+exclude = [".venv"]
+typeCheckingMode = "basic"
+pythonVersion = "3.13"
+venvPath = "."
+venv = ".venv"
+
+https://github.com/jakebailey/pyright-action
+- name: Run Pyright
+  uses: jakebailey/pyright-action@v2
+  with:
+    level: warning
+#   version: 2.3.2
+#   python-version: '3.13'
 
 ----------------------------------------------------------------------------------------------------------------
 pip-tools
@@ -149,7 +174,7 @@ pipenv shell            -> Spawns a shell within the virtualenv
 uv
 ----------------------------------------------------------------------------------------------------------------
 https://docs.astral.sh/uv/
-curl -LsSf https://astral.sh/uv/install.sh | sh
+curl -LsSf https://astral.sh/uv/install.sh | shX
 uv python install 3.13 3.12
 uv venv
 uv venv --python 3.13.0

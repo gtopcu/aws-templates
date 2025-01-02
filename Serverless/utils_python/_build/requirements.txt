@@ -21,6 +21,7 @@ ruff
 black
 flake8
 pylint
+pyright
 pytest
 pytest-env
 pytest-dotenv

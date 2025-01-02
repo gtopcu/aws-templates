@@ -39,13 +39,12 @@ deps:
 
 install-dev:
 #   make env-activate
-	pip install safety poetry poetry-plugin-export
+	pip install poetry poetry-plugin-export pyright safety
 	pip install -r requirements-dev.txt
 #	pre-commit install
 
 install:
 #   make env-activate
-	pip install safety poetry poetry-plugin-export
 	pip install -r requirements.txt
 #	pre-commit install
 
@@ -59,12 +58,13 @@ test:
 	pytest -vs --cov
 
 lint:
-#	pre-commit run --all-files
+#	pre-commit run --all-files -v
 	isort .
-	pylint .
 	ruff check --fix
 	ruff format
-
+	pylint .
+	pyright . --verbose
+	
 scan:
 	safety scan --detailed-output --apply-fixes
 

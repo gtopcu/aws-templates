@@ -1,0 +1,41 @@
+{
+    // "include": [
+    //     "src",
+    //     "tests"
+    // ],
+    "exclude": [
+        "**/__pycache__",
+        "build",
+        "dist"
+    ],
+    // "ignore": [
+    //     "src/oldcode"
+    // ],
+    //"strict": ["src"]
+    
+    "defineConstant": {
+        "DEBUG": true
+    },
+    "typeCheckingMode": "basic",        // off/basic/strict
+    "useLibraryCodeForTypes": true,
+    "reportMissingImports": true,
+    "reportMissingTypeStubs": false,
+    "pythonVersion": "3.13",
+    "pythonPlatform": "Linux",
+    "venvPath": ".venv",
+    "strictListInference": true,
+    "strictDictionaryInference": true,
+    "strictParameterNone": true,
+    "reportOptionalSubscript": "warning",
+    "reportOptionalMemberAccess": "warning",
+    "reportOptionalCall": "warning",
+    "reportOptionalIterable": "warning",
+    "reportOptionalContextManager": "warning",
+    "reportOptionalOperand": "warning",
+    "reportUnusedExpression": "warning",
+    "reportUnusedImport": "warning",
+    "reportDeprecated": "warning",
+    "reportDuplicateImport": "warning",
+    "reportReturnType": "warning"
+    //"python.analysis.diagnosticMode": "workspace",
+}

@@ -95,6 +95,12 @@ repos:
       # args: ["--rcfile=.pylintrc", "--recursive=y", "--score=no"]
       # additional_dependencies: ["boto3","botocore"]
 
+- repo: https://github.com/RobertCraigie/pyright-python
+  rev: v1.1.391
+  hooks:
+    - id: pyright
+      args: ["--verbose"]
+
 -   repo: local
     hooks:
     -   id: pytest
