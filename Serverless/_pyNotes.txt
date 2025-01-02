@@ -168,6 +168,9 @@ uv pip sync requirements.txt
 POETRY
 ----------------------------------------------------------------------------------------------------------------
 # https://www.youtube.com/watch?v=Ji2XDxmXSOM
+
+curl -sSL https://install.python-poetry.org | python3 -
+poetry --version
 pip install --upgrade poetry poetry-plugin-export
 poetry config virtualenvs.in-project true
 poetry new myproject (for existing projects: poetry init -> creates pyproject.toml + poetry.lock)
@@ -179,9 +182,8 @@ poetry env use {pythonInstallationDir}
 poetry shell | exit deactivate / activate
 poetry run (runs from env)
 poetry lock (locks dependencies in pyproject.toml)
-poetry add "aws-lambda-powertools[aws-sdk]" --group dev
-poetry add boto3 --group dev
-poetry add botocore -G dev
+poetry add --group dev "aws-lambda-powertools[aws-sdk]"
+poetry add -G dev boto3 botocore
 poetry add requests
 poetry add requests@2.31.0  -> exact version 2.31.0
 poetry add requests^2.31.0  -> latest minor version: 2.x.x  (caret) - poetry default

@@ -2,7 +2,8 @@
 CURRENT_DIR := $(shell pwd)
 # CURRENT_DIR := $(CURDIR)
 
-.PHONY: help show-dir env-create env-activate deps install-dev install update build test lint scan clean deploy
+.PHONY: help show-dir deps install-dev install update build test lint scan clean deploy 
+# env-create env-activate 
 
 # Default target when just running 'make'
 help:
@@ -24,11 +25,13 @@ show-dir:
 	@echo "Current working directory: $(CURRENT_DIR)"
 	@echo "Using pwd command: $(shell pwd)"
 
-env-create:
-	python -m venv $(CURRENT_DIR)/.venv
+# env-create:
+#	python -m venv $(CURRENT_DIR)/.venv
 
-env-activate:
-	source $(CURRENT_DIR)/.venv/bin/activate
+
+# env-activate:
+#	source $(CURRENT_DIR)/.venv/bin/activate
+	poetry shell	
 
 deps:
 	poetry export -v --with dev --without-hashes -o requirements-dev.txt
