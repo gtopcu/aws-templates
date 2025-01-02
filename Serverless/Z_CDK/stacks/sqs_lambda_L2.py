@@ -11,6 +11,14 @@ from aws_cdk import (
     aws_sqs as sqs,
     aws_s3 as s3,
 )
+from aws_cdk.aws_cloudwatch import (
+    Alarm,
+    ComparisonOperator,
+    Metric,
+    NumberMetric,
+    TreatMissingData,
+)
+import aws_cdk.aws_cloudwatch as cw
 
 from constructs import Construct
 
@@ -84,20 +92,6 @@ class SQSLambdaStack(Stack):
             # use_content_based_deduplication=False,
             removal_policy=RemovalPolicy.DESTROY,
         )
-
-        # self.lambda_fn.from_function_arn()
-        # self.lambda_fn.add_environment( "QUEUE_URL", queue.queue_url)
-        # self.lambda_fn.add_alias("Alias", description="Alias", version=lambda_fn.current_version)
-        # self.lambda_fn.add_function_url(
-        #     auth_type=_lambda.FunctionUrlAuthType.NONE,
-        #     cors=_lambda.FunctionUrlCorsOptions(
-        #         allow_credentials=False,
-        #         allowed_headers=["*"],
-        #         allowed_methods=["*"],
-        #         allowed_origins=["*"],
-        #         max_age=Duration.seconds(0),
-        #     ),
-        # )
         # self.lambda_fn.add_permission( "sqs:SendMessage",
         #     principal= _lambda.ServicePrincipal("sqs.amazonaws.com"),
         #     action="lambda:InvokeFunction",
@@ -125,6 +119,22 @@ class SQSLambdaStack(Stack):
         self.queue.grant_purge(self.lambda_fn)
         self.queue.grant(self.lambda_fn, "sqs:DeleteMessage")
 
+        # Add CW alarm
+        # self.queue.metric_approximate_age_of_oldest_message
+        # self.queue.metric_number_of_messages_received
+        # self.queue.metric_number_of_messages_sent
+        # self.queue.metric_number_of_messages_deleted
+        # self.queue.metric_approximate_number_of_messages_not_visible
+        metric = self.queue.metric_approximate_number_of_messages_visible(
+            label="Messages Visible (Approx)",
+            period=Duration.minutes(5),
+        )
+        metric.create_alarm(self, "TooManyVisibleAlarm",
+            comparison_operator=cw.ComparisonOperator.GREATER_THAN_THRESHOLD,
+            threshold=100,
+        )
+
+        # CF OUTPUTS
         cdk.CfnOutput(
             self,
             "LambdaFunctionArn",

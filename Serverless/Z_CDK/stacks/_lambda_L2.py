@@ -9,6 +9,12 @@ from aws_cdk import (
 )
 from constructs import Construct
 
+from aws_cdk.aws_lambda import Function, Runtime, Code, Alias, VersionOptions
+from aws_cdk.aws_cloudwatch import Alarm, ComparisonOperator
+from aws_cdk.aws_codedeploy import LambdaDeploymentGroup, LambdaDeploymentConfig
+
+from datetime import datetime
+
 class LambdaStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
@@ -20,26 +26,24 @@ class LambdaStack(Stack):
 
         """
 
+        # environment_type = self.node.try_get_context("environmentType")
+        # context = self.node.try_get_context(environment_type)
+        # self.alias_name = context["lambda"]["alias"]
+        # self.stage_name = context["lambda"]["stage"]
+        current_date =  datetime.today().strftime('%d-%m-%Y')
+
+
         # https://docs.powertools.aws.dev/lambda/python/latest/
         self.layer_powertools = _lambda.LayerVersion.from_layer_version_attributes(self, 'LambdaPowertoolsLatest',
             layer_version_arn="arn:aws:lambda:us-east-1:017000801446:layer:AWSLambdaPowertoolsPythonV3-313-x86_64",
             compatible_runtimes=[_lambda.Runtime.PYTHON_3_13]
         )
 
-        # Create Lambda execution role
-        self.lambda_execution_role = iam.Role(
-            self, "LambdaExecutionRole",
-            assumed_by=iam.ServicePrincipal("lambda.amazonaws.com"),
-            managed_policies=[
-                iam.ManagedPolicy.from_aws_managed_policy_name("service-role/AWSLambdaBasicExecutionRole")
-            ]
-        )
-
         self.lambda_fn = _lambda.Function(
             self,
-            "LambdaFunction",
+            id="LambdaFunction",
             function_name="LambdaFunction",
-            description="LambdaFunction",
+            # description=f"{self.stack_name}-LambdaFunction",
             runtime=_lambda.Runtime.PYTHON_3_13,
             # architecture= _lambda.Architecture.X86_64,
             memory_size=1769,
@@ -95,7 +99,21 @@ class LambdaStack(Stack):
             #     "AWS_LAMBDA_EXEC_WRAPPER": "/opt/bootstrap",
             #     "AWS_LAMBDA_LOG_GROUP_NAME": "/aws/lambda/LambdaFunction",
             # },
+            # current_version_options = VersionOptions(
+            #     description = f'Version deployed on {current_date}',
+            #     removal_policy = RemovalPolicy.DESTROY
+            # )
         )
+
+        # new_version = self.lambda_fn.current_version
+        # new_version.apply_removal_policy(RemovalPolicy.RETAIN)
+
+        # alias = Alias(
+        #     scope = self,
+        #     id = "FunctionAlias",
+        #     alias_name = self.alias_name,
+        #     version = new_version
+        # )
 
         # Add Lambda URL
         # https://docs.aws.amazon.com/lambda/latest/dg/urls-configuration.html
@@ -108,6 +126,35 @@ class LambdaStack(Stack):
         #         allowed_headers=["*"]
         #     ),
         #     invoke_mode= _lambda.InvokeMode.BUFFERED # | RESPONSE_STEAM
+        # )
+
+        # failure_alarm = Alarm(
+        #     scope = self,
+        #     id = "FunctionFailureAlarm",
+        #     metric = alias.metric_errors(),
+        #     threshold = 1,
+        #     evaluation_periods = 1,
+        #     alarm_description = "The latest deployment errors > 0",
+        #     alarm_name = f"{self.stack_name}-canary-alarm",
+        #     comparison_operator = ComparisonOperator.GREATER_THAN_OR_EQUAL_TO_THRESHOLD,
+        # )
+
+        # https://catalog.us-east-1.prod.workshops.aws/workshops/5195ab7c-5ded-4ee2-a1c5-775300717f42/en-US/first-cdk-project/adding-app-configuration
+        # LambdaDeploymentGroup(
+        #     scope = self,
+        #     id = "CanaryDeployment",
+        #     alias = alias,
+        #     deployment_config = LambdaDeploymentConfig.CANARY_10_PERCENT_5_MINUTES,
+        #     alarms = [failure_alarm]
+        # )
+
+        # Create Lambda execution role
+        # self.lambda_execution_role = iam.Role(
+        #     self, "LambdaExecutionRole",
+        #     assumed_by=iam.ServicePrincipal("lambda.amazonaws.com"),
+        #     managed_policies=[
+        #         iam.ManagedPolicy.from_aws_managed_policy_name("service-role/AWSLambdaBasicExecutionRole")
+        #     ]
         # )
 
         # lambda_role = iam.Role(self, "LambdaExecutionRole",

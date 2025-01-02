@@ -23,10 +23,21 @@ class CommonStack(cdk.Stack):
         super().__init__(scope, construct_id, **kwargs)
 
         # self.node
+        # self.stack_id
+        # self.stack_name
+        # self.account
+        # self.region
+        # self.environment # aws://account/region
+        # Stack.of(lambda_fn)
+        # Stack.export_value(123, name="exported_value")  # Create a CloudFormation Export for a string value.
+        #                                                 # Returns a string representing of Fn.importValue()
+        # path = my_construct.node.path # Stack1/MyBucket
 
         # ------------------------------------------------------------------------------------------
         # Context variables
         # https://docs.aws.amazon.com/cdk/v2/guide/get_context_var.html
+        # cdk.json/context, cdk.context.json 
+        # construct.node.setContext() 
 
         # Setting during synth:
         # cdk synth -c bucket_name=mygroovybucket
@@ -47,6 +58,13 @@ class CommonStack(cdk.Stack):
         # Retrieving outside a Context/Stage (when self is not available):
         # app = cdk.App()
         # bucket_name = app.node.try_get_context("bucket_name")
+
+        # Context methods (looks up from AWS account & caches in cdk.context.json if necessary)
+        # HostedZone.fromLookup -> Gets the hosted zones in your account.
+        # stack.availabilityZones -> Gets the supported Availability Zones.
+        # StringParameter.valueFromLookup -> Gets a value from the current Region's Amazon EC2 Systems Manager Parameter Store.
+        # Vpc.fromLookup -> Gets the existing Amazon Virtual Private Clouds in your accounts.
+        # LookupMachineImage -> Looks up a machine image for use with a NAT instance in an Amazon Virtual Private Cloud.
 
         # ------------------------------------------------------------------------------------------
         

@@ -72,9 +72,9 @@ class ApiGWHttpLambdaProxyStack(Stack):
 
         self.lambda_fn = _lambda.Function(
             self,
-            "LambdaFunction",
+            id="LambdaFunction",
             function_name="LambdaFunction",
-            description="LambdaFunction",
+            # description=f"{self.stack_name}-LambdaFunction",
             runtime=_lambda.Runtime.PYTHON_3_13,
             # architecture= _lambda.Architecture.X86_64,
             memory_size=1769,
@@ -93,20 +93,30 @@ class ApiGWHttpLambdaProxyStack(Stack):
 
         lambda_integration = HttpLambdaIntegration("LambdaProxyIntegration", self.lambda_fn, timeout=Duration.seconds(29))
 
-        self.api_gw = apigw.HttpApi(self, id="HttpApi", 
+        # #!/bin/bash
+        # URL=<Rest API Endpoint>
+        # while true; do
+        #     echo "$(date +%F_%H%M%S) - $(curl -s $URL)"
+        #     sleep 5
+        # done
+        # chmod +x script.sh
+        # bash ./script.sh
+
+        self.api_gw = apigw.HttpApi(
+                self, 
+                id="HttpApi", 
                 api_name="HttpApi",
-                description="HttpApi",
+                http_api_name="HttpApi",
+                description=f"{self.stack_name} - API Gateway HTTP API with proxy integration to Lambda",
                 create_default_stage=True,
                 default_authorization_scopes=None,
                 # default_authorizer=cognito_jwt_authorizer,
-                disable_execute_api_endpoint=False,
-                http_api_name="HttpApi",
                 parameter_mapping=None,
                 default_domain_mapping=None,
                 default_integration=lambda_integration,
                 description="HttpApi",
-                disable_execute_api_endpoint=False,
-                route_selection_expression= None,
+                # disable_execute_api_endpoint=False,
+                # route_selection_expression= None,
                 # cors_preflight=apigw.CorsPreflightOptions(
                 #     allow_methods=[apigw.CorsHttpMethod.GET, apigw.CorsHttpMethod.HEAD,
                 #     apigw.CorsHttpMethod.OPTIONS, apigw.CorsHttpMethod.POST

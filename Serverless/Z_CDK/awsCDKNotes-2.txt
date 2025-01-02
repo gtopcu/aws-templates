@@ -5,10 +5,15 @@ Best practices:
 - Combine grouped stacks into stages
 - Create CW alarms based on metrics
 - Utilize CDK Pipelines & Lambda Canary Deployments
-- Tag your resources
+- Do not use CF params(not available at synth), use context variables and environment vars
+- Tag your resources at stage level - not passed to other stages
 - Use CDK assertions with Pytest
 
+
 --------------------------------------------------------------------------------------------------------
+
+Workshop: Building CI/CD pipelines for Lambda canary deployments using AWS CDK
+https://catalog.us-east-1.prod.workshops.aws/workshops/5195ab7c-5ded-4ee2-a1c5-775300717f42/en-US/cicd/cdk-pipelines/pipeline
 
 Workshop: AWS CDK Immersion Day Workshop
 https://catalog.us-east-1.prod.workshops.aws/workshops/10141411-0192-4021-afa8-2436f3c66bd8/en-US
@@ -19,8 +24,30 @@ https://github.com/cdklabs/cdk-nag?tab=readme-ov-file
 
 Manage application security and compliance with the AWS Cloud Development Kit and cdk-nag
 https://aws.amazon.com/blogs/devops/manage-application-security-and-compliance-with-the-aws-cloud-development-kit-and-cdk-nag/
+https://github.com/stelligent/cfn_nag#installation
 
-npm install cdk-nag
+brew install ruby brew-gem
+export PATH=$PATH:/opt/homebrew/lib/ruby/gems/3.4.0/bin
+echo 'export PATH="/opt/homebrew/opt/ruby/bin:$PATH"' >> /Users/mac/.zshrc
+brew gem install cfn-nag
+
+cfn_nag_rules -> show all rules
+cfn_nag_scan --help
+cfn_nag_scan --input-path <CF json/yaml/template> --debug --output-format json 
+                --profile-path <profile_path> --deny-list-path cfn_nag_supress.yaml
+
+cfn_nag_profile.text:
+F1
+F2
+F27
+W3
+W5
+
+GitHub Action:
+- name: Simple test
+  uses: stelligent/cfn_nag@master
+  with:
+    input_path: tests
 
 --------------------------------------------------------------------------------------------------------
 
@@ -28,30 +55,91 @@ https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk/README.html#accessing-reso
 
 Accessing resources across stacks:
 
-# 1. Using lookups
-# cdk.importVpc(self, "VpcId", "vpc-12345678")  
-# ec2.Vpc.from_lookup(self, "ImportedVpc", vpc_id=vpc_id)
-# api_gw.from_rest_api_id("ApiGatewayRestApiId")
+# 1. Pass resource across stacks with constructor
+If the AWS CDK determines that the resource is in the same environment, but in a different stack, 
+it automatically synthesizes AWS CloudFormation exports in the producing stack and an Fn::ImportValue in the 
+consuming stack to transfer that information from one stack to the other
+Referencing a resource from one stack in a different stack creates a dependency between the two stacks. 
+This makes sure that they're deployed in the right order. After the stacks are deployed, this dependency is concrete. 
+After that, removing the use of the shared resource from the consuming stack can cause an unexpected deployment failure. 
 
-# 2. Using: CF outputs:
+Resolving dependency  deadlocks: https://docs.aws.amazon.com/cdk/v2/guide/resources.html
+
+# 2. Using lookups
+# ec2.Vpc.from_lookup(self, "DefaultVpc", is_default=True)
+# ec2.Vpc.from_lookup(self, "ImportedVpc", vpc_id=vpc_id)
+# ec2.Vpc.from_vpc_attributes(self, "MyVpc", vpc_id="vpc-1234567890abcdef")
+# cdk.importVpc(self, "VpcId", "vpc-12345678")  
+
+# ec2.Vpc.from_lookup(self, "PublicVpc", tags={"aws-cdk:subnet-type": "Public"})
+AWS CDK automatically adds the following tags to all VPCs it creates.
+    - Name – The name of the VPC.
+    - aws-cdk:subnet-name – The name of the subnet.
+    - aws-cdk:subnet-type – The type of the subnet: Public, Private, or Isolated.
+
+# api_gw.from_rest_api_id("ApiGatewayRestApiId")
+# s3.Bucket.from_bucket_name(self, "MyBucket", "amzn-s3-demo-bucket1") (must be same account) 
+# s3.Bucket.from_bucket_arn(self, "MyBucket", "arn:aws:s3:::amzn-s3-demo-bucket1") (can be another account)
+
+Physical names: bucket = s3.Bucket(self, "MyBucket", bucket_name=core.PhysicalName.GENERATE_IF_NEEDED)
+
+# 3. Using: CF outputs manually:
 # cdk.CfnOutput(self,"APIGW-URL", value=api_gw.url, export_name="APIGW-URL") # Fn.importValue(exportName)
 
-# 3. Using CF Parameters:
+# 4. Using CF Parameters:
 # vpc_id_param = cfn.CfnParameter(self, "VpcIdParam", type="String", description="The VPC ID") # -> stack1
 # vpc_id = core.Fn.ref("VpcIdParam") # -> stack2
 
-# 4. Use SystemsMgr ParamStore or SecretManager to store & share ARNs:
+# 5. Use SystemsMgr ParamStore or SecretManager to store & share ARNs:
 import aws_cdk.aws_ssm as ssm
 ssm.StringParameter(self, "MyVpcId", parameter_name="/my/vpc/id", string_value="vpc-xxx")  # -> stack1
 vpc_id = ssm.StringParameter.value_for_string_parameter(self, "/my/vpc/id") # -> stack2
 vpc = ec2.Vpc.from_lookup(self, "ImportedVpc", vpc_id=vpc_id)
 
 --------------------------------------------------------------------------------------------------------
+Tokens & Lazy Values
+https://docs.aws.amazon.com/cdk/v2/guide/tokens.html
+
+Tokens:
+my_bucket = s3.Bucket(self, "myBucket")
+my_bucket_name = my_bucket.bucket_name
+print(f"myBucketName: {my_bucket_name}") # Print the current value for the S3 bucket name at synthesis
+
+LazyValues:
+You can construct tokens representing synth-time lazy values using static methods on the Lazy class, 
+such as Lazy.string and Lazy.number. These methods accept an object whose produce property is a function 
+that accepts a context argument and returns the final value when called.
+
+class Producer:
+    def __init__(self, func):
+        self.produce = func
+
+actual_value = None
+          
+AutoScalingGroup(self, "Group", 
+    desired_capacity=Lazy.number_value(Producer(lambda context: actual_value))
+)   
+# At some later point
+actual_value = 10
+
+--------------------------------------------------------------------------------------------------------
 https://docs.aws.amazon.com/cdk/v2/guide/tagging.html
 
-Tags.of(myConstruct).add('key', 'value');
-Tags.of(myConstruct).remove('key');
+Tags.of(SCOPE).add() applies a new tag to the given construct and all of its children.
+Tags.of(SCOPE).remove() removes a tag from the given construct and any of its children, 
+                        including tags a child construct may have applied to itself
+
 Tags.of(stack).add('Department', 'Finance');
+Tags.of(myConstruct).remove('key');
+
+If you are using Stage constructs, apply the tag at the Stage level or below. 
+Tags are not applied across Stage boundaries.
+
+Tags.of(my_construct).add("tagname", "value",
+    apply_to_launched_instances=False,
+    include_resource_types=["AWS::Xxx::Yyy"],
+    exclude_resource_types=["AWS::Xxx::Zzz"],
+    priority=100)
 
 --------------------------------------------------------------------------------------------------------
 https://docs.aws.amazon.com/cdk/v2/guide/aspects.html
@@ -97,11 +185,6 @@ CDK Pipelines:
 https://docs.aws.amazon.com/cdk/v2/guide/cdk_pipeline.html
 https://catalog.us-east-1.prod.workshops.aws/workshops/5195ab7c-5ded-4ee2-a1c5-775300717f42/en-US/cicd/cdk-pipelines
 https://catalog.us-east-1.prod.workshops.aws/workshops/10141411-0192-4021-afa8-2436f3c66bd8/en-US/3000-python-workshop/600-advanced-topics/700-pipelines
-
---------------------------------------------------------------------------------------------------------
-
-Workshop: Building CI/CD pipelines for Lambda canary deployments using AWS CDK
-https://catalog.us-east-1.prod.workshops.aws/workshops/5195ab7c-5ded-4ee2-a1c5-775300717f42/en-US/cicd/cdk-pipelines/pipeline
 
 --------------------------------------------------------------------------------------------------------
 

@@ -9,6 +9,8 @@ def test_lambda_stack():
     app = cdk.App()
     stack = LambdaStack(app, "TestStack")
     template = Template.from_stack(stack)
+
+    template.resource_count_is("AWS::Lambda::Function", 1)
     
     template.has_resource_properties("AWS::Lambda::Function", {
         "Runtime": Match.exact("python3.13"),
@@ -18,11 +20,38 @@ def test_lambda_stack():
     })
 
     template.has_resource_properties("AWS::Lambda::Function", {
+        "Runtime": "python3.13",
+        "MemorySize": 256,
+        "Environment": {
+            "Variables": {
+                "ENVIRONMENT": "DEV",
+            }
+        }
+    })
+
+    template.has_resource_properties("AWS::Lambda::Function", {
         "Environment": Match.object_like({
             "Variables": Match.object_like({
                 "ENVIRONMENT": Match.exact("dev")
             })
         })
+    })
+
+    template.has_resource("AWS::Lambda::Version", {
+        "Properties": {
+            "FunctionName": {
+            "Ref": Match.any_value()
+            },
+            "Description": f'Version deployed on {current_date}'
+        },
+        "UpdateReplacePolicy": "Retain",
+        "DeletionPolicy": "Retain",
+    })
+
+    template.has_resource_properties("AWS::Lambda::Function", {
+        "Layers": Match.array_with([
+            Match.string_like_regexp("arn:aws:lambda:.*:.*:layer:.*")
+        ])
     })
     
     template.has_resource_properties("AWS::Lambda::Url", {

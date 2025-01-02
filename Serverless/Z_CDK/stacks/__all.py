@@ -15,17 +15,18 @@ from aws_cdk import (
     aws_dynamodb as ddb,
     aws_sns as sns,
     aws_sns_subscriptions as sns_subs,
-
     aws_s3 as s3,
     aws_s3_notifications as s3n,
     aws_ec2 as ec2,
+    aws_autoscaling as asg,
     aws_ecs as ecs,
     aws_ecs_patterns as ecs_patterns,
     aws_rds as rds,
     aws_elasticache as elasticache,
     aws_cloudfront as cloudfront,
     aws_cloudfront_origins as origins,
-    aws_wafv2 as waf
+    aws_wafv2 as waf,
+    
 )
 from constructs import Construct
 from aws_cdk.aws_cloudfront import ViewerProtocolPolicy
@@ -69,7 +70,8 @@ class CDKPythonStack(Stack):
                                     remote_rule=False
                     ).security_group_id
 
-        # vpc = ec2.Vpc.from_lookup(self, "ImportedVpc", vpc_id=vpc_id)
+        # ec2.Vpc.from_lookup(self, "DefaultVpc", is_default=True)
+        
         # vpc.select_subnets(subnet_type=ec2.SubnetType.PRIVATE_WITH_EGRESS).subnet_ids
         self.vpc = ec2.Vpc(self, 
                         "cdktest-VPC", 
@@ -81,6 +83,24 @@ class CDKPythonStack(Stack):
                         removal_policy=RemovalPolicy.DESTROY,
                     )
 
+        # Network connections - https://docs.aws.amazon.com/cdk/v2/guide/resources.html
+        
+        # fleet1 = asg.AutoScalingGroup( ... )
+        # fleet1.connections.allow_to(ec2.Peer.any_ipv4(), ec2.Port(ec2.PortProps(from_port=443, to_port=443)))
+        # fleet2 = asg.AutoScalingGroup( ... )
+        # fleet1.connections.allow_from(fleet2, ec2.Port.all_traffic())
+
+        # Certain resources have default ports associated with them. Examples include the listener of a load balancer 
+        # on the public port, and the ports on which the database engine accepts connections for instances of 
+        # an Amazon RDS database. In such cases, you can enforce tight network control without having to manually specify 
+        # the port. This example shows how to enable connections from any IPV4 address, and a connection from an 
+        # Auto Scaling group to access a database.
+
+        # listener.connections.allow_default_port_from_any_ipv4("Allow public access")
+        # fleet.connections.allow_to_default_port(rds_database, "Fleet can access database")
+
+
+        # Flow Logs
         # self.vpc.add_flow_log("cdktest-FlowLog",
         #                     destination=ec2.FlowLogDestination.to_cloud_watch_logs(),
         #                     traffic_type=ec2.FlowLogTrafficType.ALL,

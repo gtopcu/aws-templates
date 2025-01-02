@@ -20,10 +20,10 @@ class ApiGatewayLambdaStackL2(Stack):
 
         # Create Lambda function
         self.lambda_fn = _lambda.Function(
-            self, 
-            "LambdaFunction",
+            self,
+            id="LambdaFunction",
             function_name="LambdaFunction",
-            description="LambdaFunction",
+            # description=f"{self.stack_name}-LambdaFunction",
             runtime=_lambda.Runtime.PYTHON_3_13,
             # architecture= _lambda.Architecture.X86_64,
             memory_size=1769,
@@ -39,9 +39,10 @@ class ApiGatewayLambdaStackL2(Stack):
 
         # Create API Gateway
         self.api_gw = apigw.RestApi(
-            self, "API GW API",
-            rest_api_name="API GW API",
-            description="API Gateway with proxy integration to Lambda",
+            self,
+            id="RestApi",
+            rest_api_name="RestApi",
+            description=f"{self.stack_name} - API Gateway with proxy integration to Lambda",
             endpoint_types=[apigw.EndpointType.REGIONAL],
             deploy=True,
 

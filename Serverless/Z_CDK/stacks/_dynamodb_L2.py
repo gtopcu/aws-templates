@@ -69,6 +69,7 @@ class DynamoDBStack(cdk.Stack):
         # self.ddbtable.grant_read_write_data(lambda_fn)
         # self.ddbtable.grant_stream_read(lambda_fn)
         # self.ddbtable.grant_full_access(lambda_fn)
+        # self.ddbtable.grant(lamdba_fn, "dynamodb:CreateBackup")
 
         # self.ddbtable.grant(
         #     lambda_role,

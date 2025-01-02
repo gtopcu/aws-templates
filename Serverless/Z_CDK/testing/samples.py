@@ -58,11 +58,10 @@ def test_lambda_has_env_vars(template):
         })
 
     assert envCapture.as_object() == {
-            "Variables": {
-                "DOWNSTREAM_FUNCTION_NAME": {"Ref": "TestFunctionXXXXX"},
-                "HITS_TABLE_NAME": {"Ref": "HitCounterHitsXXXXXX"},
-                },
-            }
+        "Variables": {
+            "DOWNSTREAM_FUNCTION_NAME": {"Ref": "TestFunctionXXXXX"},
+            },
+        }
 
 def test_lambda_has_layer(template):
     assert template.has_resource_properties("AWS::Lambda::Function", {
@@ -70,6 +69,18 @@ def test_lambda_has_layer(template):
             Match.string_like_regexp("arn:aws:lambda:.*:.*:layer:.*")
         ])
     })
+
+def test_lambda_created(template):
+    assert template.resource_count_is("AWS::ApiGateway::RestApi", 1)
+    # assert template.resource_count_is("AWS::ApiGateway::HttpApi", 1)
+
+def test_api_gateway():
+    template.has_resource_properties(
+        "AWS::ApiGateway::RestApi",
+        {
+            "Name": "RestAPI"
+        }
+    )
 
 def tess_stepfunctions_created(template):
     assert template.resource_count_is("AWS::StepFunctions::StateMachine", 1)
