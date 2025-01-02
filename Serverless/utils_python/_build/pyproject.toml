@@ -8,6 +8,7 @@ packages = [{include = "test_repo_gtopcu"}]
 
 [tool.poetry.dependencies]
 python = "~3.13"
+# pydantic = {extras = ["email"], version = "^2.6.4"}
 
 [tool.poetry.group.dev.dependencies]
 boto3 = "^1.35.90"
@@ -15,6 +16,7 @@ aws-lambda-powertools = {extras = ["aws-sdk"], version = "^3.4.0"}
 pre-commit = "^4.0.1"
 isort = "^5.13.2"
 ruff = "^0.8.4"
+pylint = "^3.3.3"
 pyright = "^1.1.391"
 safety = "^3.2.14"
 pytest = "^8.3.4"

@@ -204,7 +204,7 @@ poetry env info -p
 poetry env list
 poetry env remove {env}
 poetry env use {pythonInstallationDir}
-poetry shell | exit deactivate / activate
+poetry shell | exit -> deactivate / activate
 poetry run (runs from env)
 poetry lock (locks dependencies in pyproject.toml)
 poetry add --group dev "aws-lambda-powertools[aws-sdk]"
