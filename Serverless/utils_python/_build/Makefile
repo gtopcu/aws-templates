@@ -2,8 +2,8 @@
 CURRENT_DIR := $(shell pwd)
 # CURRENT_DIR := $(CURDIR)
 
-.PHONY: help show-dir init deps update build test lint scan clean deploy 
-# env-create env-activate install-dev install 
+.PHONY: help show-dir init deps update build scan check lint test clean deploy
+# env-create env-activate install-dev install
 
 # Default target when just running 'make'
 help:
@@ -16,9 +16,10 @@ help:
 #	@echo "make install      - Install dependencies"
 	@echo "make update       - Update dependencies"
 	@echo "make build        - Build package"
-	@echo "make test         - Run tests"
-	@echo "make lint         - Run linters"
 	@echo "make scan         - Run vulnerability scanner"
+	@echo "make check        - Run pre-commit on all files"
+	@echo "make lint         - Run linters"
+	@echo "make test         - Run tests"
 	@echo "make clean        - Clean up cache files"
 	@echo "make deploy       - Deploy to AWS"
 
@@ -31,7 +32,7 @@ show-dir:
 
 # env-activate:
 #	source $(CURRENT_DIR)/.venv/bin/activate
-#	poetry shell	
+#	poetry shell
 
 init:
 #	curl -sSL https://install.python-poetry.org | python3 -
@@ -59,19 +60,21 @@ update:
 build:
 	poetry build -v
 
-test:
-	pytest -vs --cov
+scan:
+	safety scan --detailed-output --apply-fixes
+
+check:
+	pre-commit run --all-files -v
 
 lint:
-#	pre-commit run --all-files -v
 	isort .
 	ruff check --fix
 	ruff format
 	pylint .
 	pyright .
-	
-scan:
-	safety scan --detailed-output --apply-fixes
+
+test:
+	pytest -vs --cov
 
 clean:
 	find . -type d -name "__pycache__" -exec rm -rf {} +
