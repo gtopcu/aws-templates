@@ -77,6 +77,7 @@ pip install requests-aws4auth
 ----------------------------------------------------------------------------------------------------------------
 
 # https://stackoverflow.com/questions/15031694/installing-python-packages-from-local-file-system-folder-to-virtualenv-with-pip
+# https://www.youtube.com/watch?v=gYYi7varbmE
 
 pip install -v -q  -U -r <requirements.txt> -t <dir> --root <dir> -i <url>(default https://pypi.org/simple)
   --dry-run --no-deps --force-reinstall --require-virtualenv --isolated --no-input --no-cache-dir 
@@ -174,33 +175,64 @@ pipenv shell            -> Spawns a shell within the virtualenv
 uv
 ----------------------------------------------------------------------------------------------------------------
 https://docs.astral.sh/uv/
+https://github.com/astral-sh/uv-pre-commit
+https://www.youtube.com/watch?v=qh98qOND6MI
+https://www.youtube.com/watch?v=xhg1dJHLqSM
+
 curl -LsSf https://astral.sh/uv/install.sh | shX
 brew install uv
 pip install uv
+eval "$(uv generate-shell-completion zsh)"
 
+Workspace: Several projects sharing the same dependencies & lock file - created within a single uv project
 uv --version -v -q --no-cache
-uv init myproject
+uv init --app(default) --lib --package
+uv init myproject --no-workspace (init in an existing project -> will be embedded with shared lock file)
 uv venv --python 3.13
-uv add ruff 
-uv add --script example.py
+uv add requests simplejson
+uv add -r requirements.txt 
+uv add -U -v -q --editable --nosync --reinstall --find-links --no-index --default-index <https://pypi.org/simple>
+uv add --dev ruff 
+uv add --group dev ruff 
+uv add --package mypackage  -> Add the dependency to a specific package in the workspace
+uv add --script example.py  -> Add the dependency to the specified Python script, rather than to a project
 uv remove ruff
-uv sync
+uv sync -U
 uv lock
-uv export
+uv export -U -p <python> --no-python-downloads --no-cache --refresh --all-packages --all-extras 
+uv export --no-dev --only-dev --group dev --nogroup dev --only-group dev --all-groups 
+          --no-hashes --no-header --no-editible --output-file requirements.txt
 uv tree
-uv tool
-uv python install 3.13 3.12
+
+uv python list
+uv python install 3.13.0
+uv python install '>=3.13.2,<3.14.0'
 uv python pin pypy@3.13
-uv pip
-uv build
-uv publish
+
+uv tool dir                   -> Temp tool installation dir (/Users/mac/.local/share/uv/tools)
+uv tool update-shell
+uv tool run ruff check --fix  -> Auto-installs the tool
+uvx ruff check --fix (short)
+uv tool install ruff
+uv tool upgrade ruff
+uv tool uninstall ruff
 
 uv run ruff check --fix
+uv run hello.py
+
 uv tool run/uvx pycowsay 'hello world!'
-uv tool install ruff
-ruff --version
+
+uv pip
 uv pip compile requirements.in --universal --output-file requirements.txt
 uv pip sync requirements.txt
+
+uv build
+uv publish --password=xxx
+
+for publishing, need to add a build system to pyproject.toml:
+[build-system]
+requires=["hatchling"]
+build-backend="hatchling.build"
 
 ----------------------------------------------------------------------------------------------------------------
 POETRY

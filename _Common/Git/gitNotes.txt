@@ -15,7 +15,8 @@ git config --global credential.helper 'store --file ~/.my-credentials'
 
 ```
 git init
-git tag -a 1.2.9 -m "Bump version: 1.2.8 -> 1.2.9"
+git clean -fxfd -> cleans everything in the repo
+git tag -a 1.2.9 -m "Bump version"
 git add README.md
 git rm README.md
 git commit -m "first commit"
