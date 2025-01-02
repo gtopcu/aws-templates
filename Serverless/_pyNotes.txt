@@ -175,13 +175,26 @@ uv
 ----------------------------------------------------------------------------------------------------------------
 https://docs.astral.sh/uv/
 curl -LsSf https://astral.sh/uv/install.sh | shX
+brew install uv
+pip install uv
+
+uv --version -v -q --no-cache
+uv init myproject
+uv venv --python 3.13
+uv add ruff 
+uv add --script example.py
+uv remove ruff
+uv sync
+uv lock
+uv export
+uv tree
+uv tool
 uv python install 3.13 3.12
-uv venv
-uv venv --python 3.13.0
 uv python pin pypy@3.13
-uv init myproject -> cd myproject
-uv add --script example.py requests
-uv add ruff
+uv pip
+uv build
+uv publish
+
 uv run ruff check --fix
 uv tool run/uvx pycowsay 'hello world!'
 uv tool install ruff
