@@ -9,6 +9,7 @@ packages = [{include = "test_repo_gtopcu"}]
 [tool.poetry.dependencies]
 python = "~3.13"
 # pydantic = {extras = ["email"], version = "^2.6.4"}
+# my-package = {path = "../path", develop = true}
 
 [tool.poetry.group.dev.dependencies]
 boto3 = "^1.35.90"

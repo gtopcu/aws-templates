@@ -47,6 +47,10 @@ class myPersonClass:
 # from collections import namedtuple, deque, OrderedDict, defaultdict
 # from collections.abc import Mapping, Sequence, Set, Generator, Callable, Iterable, Iterator, AsyncIterable
 
+# __init__.py
+# __all__ = ["module1", "module2"]
+# dir(module)
+
 import logging
 import os
 import sys
@@ -82,6 +86,8 @@ import sys
 # matrix = np.random.rand(3, 5)
 # matrix = np.dot(10, matrix)
 
+# import os; print(os.getenv("PYTHONPATH"))
+# sys.path.append()
 # os.getenv('DDB_TABLE', 'table1')
 # os.environ.get('DDB_TABLE', 'table1')
 # POSTGRE_IP = os.environ['POSTGRE_IP']
@@ -145,6 +151,7 @@ import sys
 # " ".casefold()
 # " ".strip()
 # "mr. gokhan topcu".title()
+# any(char in string.digits for char in pw)
 
 # myset = {1, 2, 3}
 # myset.add(2)

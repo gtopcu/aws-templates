@@ -11,6 +11,8 @@ python select interpreter: /Users/gtopcu/My Drive/VSCode/.venv
 echo $PATH
 export PATH=$PATH:/opt/homebrew/bin/python3.13
 sudo apt update -y && sudo apt install python3 python3-pip python3-venv -y
+import os; print(os.getenv("PYTHONPATH"))
+sys.path.append()
 
   pip <command> [options]
 
@@ -47,19 +49,22 @@ source .venv/bin/activate
 
 pip install requests
 pip uninstall requests
-
 pip list | freeze | show | search
 pip freeze > requirements.txt
+
 python -m pip install --upgrade pip
-pip install -v python-dotenv -q -U 
-pip3 install -r requirements.txt
-pip install --no-cache-dir --no-input --upgrade -r requirements.txt
-pip install -r requirements-prod.txt -t dist
-pip install -r ./requirements.txt -t ./layers/python/lib/python3.11/site-packages/
-pip install . (must have 'setup.py' or 'pyproject.toml')
-pip install . -e
-pip install package.whl
-pip install package.tar.gz
+pip install -v -q  -U -r <requirements.txt> -t <dir> --root <dir> -i <url>(default https://pypi.org/simple)
+  --dry-run --no-deps --force-reinstall --require-virtualenv --isolated --no-input --no-cache-dir 
+  --disable-pip-version-check --no-clean --compile --no-compile --timeout <sec> --log <path>
+pip install -v -U python-dotenv 
+pip install -r requirements.txt -t dist --no-cache-dir --no-input --upgrade 
+pip install -r requirements.txt -t .venv/python/lib/python3.13/site-packages/
+
+pip install -i https://test.pypi.org/simple/ test-repo-gtopcu
+
+pip install git+https://github.com/sdispater/pendulum.git#develop -> Remote GIT repo
+pip install git+ssh://github.com/sdispater/pendulum.git#develop   -> Remote GIT repo with ssh
+pip install git+file:///my_local_repo/mypackage                   -> Local GIT repo 
 
 pip install SimpleCV==1.2
 pip install SimpleCV==1.*
@@ -67,30 +72,33 @@ pip install SimpleCV>=1.2.0
 pip install SimpleCV<=1.2.0
 
 pip install requests
+pip install requests-aws4auth
 pip install pytest
 pip install boto3
 pip install botocore
 pip install ruff
-pip install aws_lambda_powertools
-pip install requests-aws4auth
+pip install "aws-lambda-powertools[aws-sdk]"
 
 ----------------------------------------------------------------------------------------------------------------
 
 # https://stackoverflow.com/questions/15031694/installing-python-packages-from-local-file-system-folder-to-virtualenv-with-pip
 # https://www.youtube.com/watch?v=gYYi7varbmE
 
-pip install -v -q  -U -r <requirements.txt> -t <dir> --root <dir> -i <url>(default https://pypi.org/simple)
-  --dry-run --no-deps --force-reinstall --require-virtualenv --isolated --no-input --no-cache-dir 
-  --disable-pip-version-check --no-clean --compile --no-compile --timeout <sec> --log <path>
-
-pip install . -e --src <target_dir>
 pip install package.whl
 pip install package.tar.gz
-pip install package --no-index --find-links file:///vscode/package
-pip install -i https://test.pypi.org/simple/ test-repo-gtopcu
+pip install package --no-index --find-links /package
 
-pip install -e .      
-pip install -e /pkg -> Top-level directory where 'setup.py' can be found.
+pip install .           (must have 'setup.py' or 'pyproject.toml')
+pip install . -e        (must have 'setup.py' or 'pyproject.toml')
+pip install -e /pkg     (must have 'setup.py' or 'pyproject.toml')
+pip install . -e --src <target_dir>
+
+setup.py (legacy)
+pip install wheel
+pip install setuptools
+python setup.py bdist_wheel   -> /dist/package.whl (binary compiled distribution)
+python setup.py sdist         -> /dist/package.tar.gz (includes source code, setup.py)
+
 
 ----------------------------------------------------------------------------------------------------------------
 safety - https://docs.safetycli.com/safety-docs/safety-cli/quick-start-guide
@@ -187,11 +195,10 @@ eval "$(uv generate-shell-completion zsh)"
 Workspace: Several projects sharing the same dependencies & lock file - created within a single uv project
 uv --version -v -q --no-cache
 uv init --app(default) --lib --package
-uv init myproject --no-workspace (init in an existing project -> will be embedded with shared lock file)
+uv init myproject --no-workspace (can init in an existing project -> will be embedded with shared lock file)
 uv venv --python 3.13
-uv add requests simplejson
-uv add -r requirements.txt 
 uv add -U -v -q --editable --nosync --reinstall --find-links --no-index --default-index <https://pypi.org/simple>
+uv add -r requirements.txt
 uv add --dev ruff 
 uv add --group dev ruff 
 uv add --package mypackage  -> Add the dependency to a specific package in the workspace
@@ -222,7 +229,7 @@ uv run hello.py
 
 uv tool run/uvx pycowsay 'hello world!'
 
-uv pip
+uv pip install wheel
 uv pip compile requirements.in --universal --output-file requirements.txt
 uv pip sync requirements.txt
 
@@ -252,18 +259,39 @@ poetry env use {pythonInstallationDir}
 poetry shell | exit -> deactivate / activate
 poetry run (runs from env)
 poetry lock (locks dependencies in pyproject.toml)
+
+https://python-poetry.org/docs/cli/#options-4
 poetry add --group dev "aws-lambda-powertools[aws-sdk]"
 poetry add -G dev boto3 botocore
-poetry add requests
-poetry add requests@2.31.0  -> exact version 2.31.0
-poetry add requests^2.31.0  -> latest minor version: 2.x.x  (caret) - poetry default
-poetry add requests~2.31.0  -> latest patch version: 2.31.x (tilda)
+poetry add requests --dry-run -e 
+
+poetry add pendulum==2.0.5    -> Allow only 2.0.5 version
+poetry add pendulum@^2.0.5    -> Allow >=2.0.5, <3.0.0 versions - latest minor version: 2.x.x  (caret) - default
+poetry add pendulum@~2.0.5    -> Allow >=2.0.5, <2.1.0 versions - latest patch version: 2.31.x (tilda)
+poetry add "pendulum>=2.0.5"  -> Allow >=2.0.5 versions, without upper bound
+poetry add pendulum@latest    -> Get the latest version of an already present dependency
+
+poetry add git+https://github.com/sdispater/pendulum.git
+poetry add git+https://github.com/sdispater/pendulum.git#develop
+poetry add git+https://github.com/sdispater/pendulum.git#2.0.5
+poetry add git+https://github.com/myorg/mypackage_with_subdirs.git@main#subdirectory=subdir 
+
+poetry add git+ssh://git@github.com/sdispater/pendulum.git
+poetry add git+ssh://git@github.com:sdispater/pendulum.git#develop
+poetry add git+ssh://git@github.com:sdispater/pendulum.git#2.0.5
+poetry add git+ssh://git@github.com:sdispater/pendulum.git
+
+poetry add ./my-package/ --editable  -> or in pyproject.yaml: my-package = {path = "../path", develop = true}
+poetry add ../my-package/dist/my-package-0.1.0.tar.gz
+poetry add ../my-package/dist/my_package-0.1.0.whl
+
 poetry update -v | <requests>
 poetry remove requests
 poetry show --tree | --all | --nocache
 poetry check
-poetry build (builds /dist with .whl & .tar.gz)
-poetry publish --build (Build and publish in one command)
+poetry build --format wheel | sdist --output dist (.whl & .tar.gz)
+poetry publish --build --repository <pypi> --username <username> --password <password> --dry-run --dist-dir dist
+
 poetry version major | minor | patch -> update project version in pyproject.toml
 poetry export -vvv --with dev --without-hashes -o requirements-dev.txt
 poetry export -vvv --without-hashes -o requirements.txt

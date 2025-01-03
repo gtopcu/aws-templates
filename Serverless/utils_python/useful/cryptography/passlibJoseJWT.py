@@ -1,4 +1,3 @@
-
 # pip install "passlib[bcrypt]"
 # pip install "python-jose[cryptography]"
 # pip install python-multipart
@@ -21,8 +20,8 @@ print(datetime.utcnow())
 # secret_key: str = "secret"
 # encoded: str = jwt.encode({"foo": "bar"}, secret_key, algorithm="HS256")
 
-# try: 
+# try:
 #     token_payload: dict[str, Any] = jwt.decode("XXXXXXXXXXXX")
-#     user = token_payload.get("user")    
+#     user = token_payload.get("user")
 # except JWTError:
 #     raise JWTError("Invalid token")
