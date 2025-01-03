@@ -5,6 +5,7 @@
 # pip -V
 # pip install -U boto3
 
+# TODO
 # Amazon Q: Command + i
 
 # pylint . --rcfile=.pylintrc .
@@ -39,7 +40,9 @@ class myPersonClass:
         Args:
             self: Current instance
         Returns:
-            Name of the person
+            name: The name of the person
+        Raises:
+            ValueError: If name is not a string
         """
         return self.name
 
@@ -88,7 +91,6 @@ import sys
 # matrix = np.dot(10, matrix)
 
 # import os; print(os.getenv("PYTHONPATH"))
-# sys.path.append()
 # os.getenv('DDB_TABLE', 'table1')
 # os.environ.get('DDB_TABLE', 'table1')
 # POSTGRE_IP = os.environ['POSTGRE_IP']
@@ -96,12 +98,15 @@ import sys
 
 # for path in sys.path:
 #     print("Path: " + path)
-# sys.path.append(os.getcwd() + "/.venv/lib/python3.13/site-packages")
-# os.path.join(__file__, 'test.txt')
+# sys.path.append(os.getcwd() + "/.venv/lib/python3.13/site-packages")# os.path.join(__file__, 'test.txt')
+
 # current_dir = os.path.dirname(os.path.abspath(__file__))
 # file_path = os.path.join(current_dir, filename)
 # if not os.path.exists(file_path):
 #     raise FileNotFoundError(f"File not found: {file_path}")
+# os.path.split(os.path.abspath(__file__))[0]
+# os.path.splitext("note.txt") -> txt
+# os.path.basename(__file__)
 # os.getcwd()
 # os.listdir()
 # os.makedirs('test', exist_ok=True)

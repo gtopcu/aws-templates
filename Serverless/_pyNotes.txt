@@ -206,10 +206,10 @@ brew install uv
 pip install uv
 eval "$(uv generate-shell-completion zsh)"
 
-Workspace: Several projects sharing the same dependencies & lock file - created within a single uv project
 uv --version -v -q --no-cache
-uv init --app(default) --lib --package
-uv init myproject --no-workspace (can init in an existing project -> will be embedded with shared lock file)
+https://docs.astral.sh/uv/concepts/projects/init/
+uv init myapp --app(default) --lib --package
+uv init myapp --no-workspace (can init in an existing project -> will be embedded with shared lock file)
 uv venv --python 3.13
 uv add -U -v -q --editable --nosync --reinstall --find-links --no-index --default-index <https://pypi.org/simple>
 uv add -r requirements.txt
@@ -219,11 +219,19 @@ uv add --package mypackage  -> Add the dependency to a specific package in the w
 uv add --script example.py  -> Add the dependency to the specified Python script, rather than to a project
 uv remove ruff
 uv sync -U
-uv lock
-uv export -U -p <python> --no-python-downloads --no-cache --refresh --all-packages --all-extras 
-uv export --no-dev --only-dev --group dev --nogroup dev --only-group dev --all-groups 
-          --no-hashes --no-header --no-editible --output-file requirements.txt
 uv tree
+uv lock
+uv export -U -p <python_ver> --no-python-downloads --no-cache --refresh --all-packages --all-extras 
+uv export --no-dev --only-dev --group dev --nogroup dev --only-group dev --all-groups 
+          --no-hashes --no-header --no-editible 
+uv export --no-dev --no-hashes --no-header --output-file requirements.txt
+uv export --no-hashes --no-header --output-file requirements.txt
+https://docs.astral.sh/uv/pip/compile/#locking-requirements
+uv pip compile pyproject.toml -o requirements.txt
+uv pip compile pyproject.toml requirements-dev.in -o requirements-dev.txt
+uv pip compile requirements.in --universal --output-file requirements.txt
+uv pip sync requirements.txt
+uv pip install wheel
 
 uv python list
 uv python install 3.13.0
@@ -238,14 +246,8 @@ uv tool install ruff
 uv tool upgrade ruff
 uv tool uninstall ruff
 
-uv run ruff check --fix
-uv run hello.py
-
-uv tool run/uvx pycowsay 'hello world!'
-
-uv pip install wheel
-uv pip compile requirements.in --universal --output-file requirements.txt
-uv pip sync requirements.txt
+uv run ruff check --fix     -> runs in current env"
+uv run hello.py             -> runs in current env"
 
 uv build
 uv publish --password=xxx
