@@ -48,9 +48,8 @@ python --version
 python3 -m venv .venv
 source .venv/bin/activate
 
-pip install requests
-pip uninstall requests
-pip list | freeze | show | search
+pip -V -v -q --no-input --no-cache-dir --disable-pip-version-check --log <path> --timeout <sec>
+pip install | download | uninstall | freeze | inspect | list | show | check | config | search | cache | index | wheel | hash
 pip freeze > requirements.txt
 
 python -m pip install --upgrade pip
@@ -58,14 +57,17 @@ pip install -v -q  -U -r <requirements.txt> -t <dir> --root <dir> -i <url>(defau
   --dry-run --no-deps --force-reinstall --require-virtualenv --isolated --no-input --no-cache-dir 
   --disable-pip-version-check --no-clean --compile --no-compile --timeout <sec> --log <path>
 pip install -v -U python-dotenv 
+pip install . -e --src <target_dir>
+pip install requests
+pip uninstall requests
 pip install -r requirements.txt -t dist --no-cache-dir --no-input --upgrade 
 pip install -r requirements.txt -t .venv/python/lib/python3.13/site-packages/
-
-pip install -i https://test.pypi.org/simple/ test-repo-gtopcu
 
 pip install git+https://github.com/sdispater/pendulum.git#develop -> Remote GIT repo
 pip install git+ssh://github.com/sdispater/pendulum.git#develop   -> Remote GIT repo with ssh
 pip install git+file:///my_local_repo/mypackage                   -> Local GIT repo 
+
+pip install -i https://test.pypi.org/simple/ test-repo-gtopcu
 
 pip install SimpleCV==1.2
 pip install SimpleCV==1.*
@@ -80,10 +82,22 @@ pip install botocore
 pip install ruff
 pip install "aws-lambda-powertools[aws-sdk]"
 
+python -m build -v --sdist --wheel --outdir <PATH> /src (default sdist + wheel)
+
+https://www.tldrlegal.com/
+pip install twine
+twine --version
+twine register [-h] [-r REPOSITORY] [--repository-url REPOSITORY_URL] [--attestations] [-s]
+                    [--sign-with SIGN_WITH] [-i IDENTITY] [-u USERNAME] [-p PASSWORD] [--non-interactive]
+                    [-c COMMENT] [--config-file CONFIG_FILE] [--skip-existing] [--cert path] [--client-cert path]
+                    [--verbose] [--disable-progress-bar]
+twine check --strict
+twine upload -r testpypi dist/*
+twine upload dist/*
+
 ----------------------------------------------------------------------------------------------------------------
 
 # https://stackoverflow.com/questions/15031694/installing-python-packages-from-local-file-system-folder-to-virtualenv-with-pip
-# https://www.youtube.com/watch?v=gYYi7varbmE
 
 pip install package.whl
 pip install package.tar.gz
@@ -95,11 +109,10 @@ pip install -e /pkg     (must have 'setup.py' or 'pyproject.toml')
 pip install . -e --src <target_dir>
 
 setup.py (legacy)
-pip install wheel
 pip install setuptools
+pip install wheel
 python setup.py bdist_wheel   -> /dist/package.whl (binary compiled distribution)
 python setup.py sdist         -> /dist/package.tar.gz (includes source code, setup.py)
-
 
 ----------------------------------------------------------------------------------------------------------------
 safety - https://docs.safetycli.com/safety-docs/safety-cli/quick-start-guide
