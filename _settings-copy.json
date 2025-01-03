@@ -1,0 +1,73 @@
+{
+    // "python.linting.flake8Enabled": false,
+    // "python.linting.enabled": false,
+    // "python.linting.mypyEnabled": false,
+    // "python.linting.pylintEnabled": false,
+    // "python.linting.banditEnabled": false,
+    // "python.linting.prospectorEnabled": false,
+    // "python.linting.pylamaEnabled": false,
+    // "python.pythonPath": ".venv/bin/python",
+    // "python.linting.pylintPath": ".venv/bin/pylint",
+
+    // "remote.SSH.defaultExtensions": [
+    //   "amazonwebservices.aws-toolkit-vscode"
+    // ],
+
+    "files.exclude": {
+      "**/.git": false
+    },
+
+    "python.terminal.activateEnvInCurrentTerminal": true,
+    "python.terminal.activateEnvironment": true,
+    "python.terminal.executeInFileDir": true,
+    "python.terminal.focusAfterLaunch": true,
+    "python.terminal.launchArgs": ["source /Users/mac/GoogleDrive/VSCode/.venv/bin/activate"],
+    "python.createEnvironment.trigger": "off",
+    "notebook.lineNumbers": "on",
+
+    "[python]": {
+        "editor.inlineSuggest.enabled": true,
+        "editor.formatOnType": false,
+        "editor.formatOnSave": false,
+        "editor.defaultFormatter": "mikoz.black-py",
+        "editor.codeActionsOnSave": {
+          "source.fixAll": "never",
+          "source.organizeImports": "never",
+        }
+    },
+    
+    "aws.suppressPrompts": {
+      "remoteConnected": true
+    },
+
+    "yaml.customTags": [
+    "!And",
+    "!And sequence",
+    "!If",
+    "!If sequence",
+    "!Not",
+    "!Not sequence",
+    "!Equals",
+    "!Equals sequence",
+    "!Or",
+    "!Or sequence",
+    "!FindInMap",
+    "!FindInMap sequence",
+    "!Base64",
+    "!Join",
+    "!Join sequence",
+    "!Cidr",
+    "!Ref",
+    "!Sub",
+    "!Sub sequence",
+    "!GetAtt",
+    "!GetAZs",
+    "!ImportValue",
+    "!ImportValue sequence",
+    "!Select",
+    "!Select sequence",
+    "!Split",
+    "!Split sequence"
+  ],
+
+}

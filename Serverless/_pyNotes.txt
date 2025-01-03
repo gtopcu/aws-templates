@@ -6,6 +6,7 @@ python -m venv .venv
 source .venv/bin/activate
 source /Users/mac/GoogleDrive/VSCode/.venv/bin/activate
 python select interpreter: /Users/gtopcu/My Drive/VSCode/.venv
+pip -V
 
 #!/usr/bin/env python3
 echo $PATH

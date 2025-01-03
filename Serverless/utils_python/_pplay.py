@@ -2,7 +2,9 @@
 # python -m venv .venv
 # source .venv/bin/activate
 # source /Users/mac/GoogleDrive/VSCode/.venv/bin/activate
+# pip -V
 # pip install -U boto3
+
 
 # Amazon Q: Command + i
 
