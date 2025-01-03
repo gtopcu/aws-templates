@@ -5,7 +5,6 @@
 # pip -V
 # pip install -U boto3
 
-
 # Amazon Q: Command + i
 
 # pylint . --rcfile=.pylintrc .
