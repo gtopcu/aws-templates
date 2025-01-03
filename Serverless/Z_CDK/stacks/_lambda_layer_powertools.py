@@ -15,8 +15,9 @@ class LambdaLayerPowertools(Stack):
         # https://serverlessrepo.aws.amazon.com/applications/eu-west-1/057560766410/aws-lambda-powertools-python-layer
         
         # New in 3.4.0 - get the latest version using SysMgr public params:
-        # aws ssm get-parameter /aws/service/powertools/python/<architecture>/<python_version>/latest
-        
+        # https://github.com/aws-powertools/powertools-lambda-python/releases/tag/v3.4.0
+        # aws ssm get-parameter /aws/service/powertools/python/<architecture>/<python_version>/latest -> "x86_64" or "arm64"
+
         # LocalDev:
         # pip install "aws-lambda-powertools[aws-sdk]"
         # poetry add "aws-lambda-powertools[aws-sdk]" --group dev

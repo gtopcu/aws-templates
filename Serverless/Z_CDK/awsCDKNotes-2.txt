@@ -1,22 +1,78 @@
+--------------------------------------------------------------------------------------------------------
+Workshop: Building CI/CD pipelines for Lambda canary deployments using AWS CDK
+https://catalog.us-east-1.prod.workshops.aws/workshops/5195ab7c-5ded-4ee2-a1c5-775300717f42/en-US/cicd/cdk-pipelines/pipeline
+
+Workshop: AWS CDK Immersion Day Workshop
+https://catalog.us-east-1.prod.workshops.aws/workshops/10141411-0192-4021-afa8-2436f3c66bd8/en-US
+
+--------------------------------------------------------------------------------------------------------
 
 Best practices:
-- Use cdk-nag
+- Use cdk-nag, Policy Validation(CF Guard) and IAM Permission Boundaries
 - Create own constructs & stacks with best practices
 - Combine grouped stacks into stages
 - Do not use CF params(not available at synth), use context variables(cdk.context.json) and environment vars
-- Try to avoid cross-stack resource references (causes deadlocks)
+- Try to avoid cross-stack resource references / dependencies (causes deadlocks, deploys together etc)
 - Tag your resources at stage level - not passed to other stages
 - Use CDK assertions with Pytest
 - Create CW alarms based on metrics
 - Utilize CDK Pipelines & Lambda Canary Deployments
 
 --------------------------------------------------------------------------------------------------------
+Policy Validation & CloudFormation Guard:
+https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk/README.html#policy-validation
+https://docs.aws.amazon.com/cfn-guard/latest/ug/what-is-guard.html
 
-Workshop: Building CI/CD pipelines for Lambda canary deployments using AWS CDK
-https://catalog.us-east-1.prod.workshops.aws/workshops/5195ab7c-5ded-4ee2-a1c5-775300717f42/en-US/cicd/cdk-pipelines/pipeline
+--------------------------------------------------------------------------------------------------------
+IAM Permission Boundaries
+https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
 
-Workshop: AWS CDK Immersion Day Workshop
-https://catalog.us-east-1.prod.workshops.aws/workshops/10141411-0192-4021-afa8-2436f3c66bd8/en-US
+It is possible to apply an IAM permissions boundary to all roles within a specific construct scope. 
+The most common use case would be to apply a permissions boundary at the Stage level:
+
+prod_stage = Stage(app, "ProdStage",
+    permissions_boundary=PermissionsBoundary.from_name("cdk-${Qualifier}-PermissionsBoundary")
+)
+
+--------------------------------------------------------------------------------------------------------
+Stack dependency:
+https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk/README.html#dependencies
+
+Not necessary normally - CloudFormation will correctly infer the dependency relationship between resources 
+based on the property values that are used. If it doesn't, you can manually create the dependency:
+
+    first_stack = FirstStack(self, "FirstStack")
+    second_stack = SecondStack(self, "SecondStack", vpc=first_stack.vpc)
+    second_stack.add_dependency(first_stack)
+
+A stack dependency has the following implications:
+    - Cyclic dependencies are not allowed, so if stackA is using resources from stackB, the reverse is not possible anymore.
+    - Stacks with dependencies between them are treated specially by the CDK toolkit:
+        * If stackA depends on stackB, running cdk deploy stackA will also automatically deploy stackB
+        * stackB’s deployment will be performed before stackA’s deployment
+
+If you want a single object to represent a set of constructs that are not necessarily in the same scope, you can use a 
+DependencyGroup. Below is a single object that represents a dependency on two constructs, constructB and constructC:
+
+    b_and_c = DependencyGroup()
+    b_and_c.add(construct_b)
+    b_and_c.add(construct_c)
+    construct_a.node.add_dependency(b_and_c)
+
+--------------------------------------------------------------------------------------------------------
+https://docs.aws.amazon.com/cdk/v2/guide/stages.html
+
+Stages:
+An AWS Cloud Development Kit (AWS CDK) stage represents a group of one or more CDK stacks 
+that are configured to deploy together. Use stages to deploy the same grouping of stacks 
+to multiple environments, such as development, testing, and production.
+
+class MyAppStage(Stage):
+    def __init__(self, scope: Construct, id: str, **kwargs) -> None:
+        super().__init__(scope, id, **kwargs)
+
+        AppStack(self, "AppStack")
+        DatabaseStack(self, "DatabaseStack")
 
 --------------------------------------------------------------------------------------------------------
 
