@@ -47,11 +47,18 @@ class LambdaStack(Stack):
             runtime=_lambda.Runtime.PYTHON_3_13,
             # architecture= _lambda.Architecture.X86_64,
             memory_size=1769,
-            code=_lambda.Code.from_asset("src"),
+            timeout=Duration.seconds(30),
+            code=_lambda.Code.from_asset("./lambda"),
+            # Includes all files and subdirectories from the directory by default
+            # code=_lambda.Code.from_asset("./lambda", 
+            #     exclude=["*.txt", "test/*", ".env"],  # Exclude patterns
+            #     ignore_mode=_lambda.IgnoreMode.GIT  # Uses .gitignore rules
+            # )
             # code=_lambda.Code.from_asset("build/lambda.zip"),
             # code=_lambda.Code.from_inline("def handler(event, context):\n  print(event)\n  return \"Hello from Lambda!\""),
             handler="mylambda.handler",
-            timeout=Duration.seconds(30),
+            
+            removal_policy=RemovalPolicy.DESTROY,
             # environment={
             #     "QUEUE_URL": queue.queue_url
             # },
@@ -59,7 +66,7 @@ class LambdaStack(Stack):
             # tracing=_lambda.Tracing.ACTIVE,
             # system_log_level_v2= _lambda.SystemLogLevel.V2_INFO,
             # application_log_level_v2= _lambda.ApplicationLogLevel.V2_INFO,
-            logging_format=_lambda.LoggingFormat.JSON, # default: LoggingFormat.TEXT
+            # logging_format=_lambda.LoggingFormat.JSON, # default: LoggingFormat.TEXT
             # log_group=None,
             # log_retention=cdk.aws_logs.RetentionDays.ONE_WEEK,
             # log_retention=None,
@@ -93,7 +100,6 @@ class LambdaStack(Stack):
             #     efs_ap=efs_ap,
             #     mount_path="/mnt/lambda"
             # ),
-            removal_policy=RemovalPolicy.DESTROY,
             # environment={
             #     "LOG_LEVEL": "INFO",
             #     "ENVIRONMENT": "DEV",
