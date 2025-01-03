@@ -52,7 +52,9 @@ class LambdaStack(Stack):
             # Includes all files and subdirectories from the directory by default
             # code=_lambda.Code.from_asset("./lambda", 
             #     exclude=["*.txt", "test/*", ".env"],  # Exclude patterns
-            #     ignore_mode=_lambda.IgnoreMode.GIT  # Uses .gitignore rules
+            #     ignore_mode=_lambda.IgnoreMode.GIT  # Uses .gitignore rules                                    
+            #                         IgnoreMode.DOCKER: Uses .dockerignore rules
+            #                         IgnoreMode.NONE: Includes everything
             # )
             # code=_lambda.Code.from_asset("build/lambda.zip"),
             # code=_lambda.Code.from_inline("def handler(event, context):\n  print(event)\n  return \"Hello from Lambda!\""),
