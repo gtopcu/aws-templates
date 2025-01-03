@@ -47,7 +47,7 @@ class LambdaStack(Stack):
         self._create_deployment_package()
         
         # Create Lambda function
-        lambda_fn = _lambda.Function(
+        self.lambda_fn = _lambda.Function(
             self, "MyLambdaFunction",
             runtime=_lambda.Runtime.PYTHON_3_13,
             handler="handler.lambda_handler",
