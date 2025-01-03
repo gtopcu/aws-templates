@@ -82,7 +82,7 @@ clean:
 	rm -f .coverage
 	rm -rf .pytest_cache
 	rm -rf .ruff_cache
-#	rm -rf $(CURRENT_DIR)/build/*
+# 	rm -rf $(CURRENT_DIR)/build/*
 #	rm -rf cdk.out
 
 deploy:
