@@ -107,6 +107,7 @@ import sys
 # os.path.split(os.path.abspath(__file__))[0]
 # os.path.splitext("note.txt") -> txt
 # os.path.basename(__file__)
+# os.path.expanduser(os.path.join('~', 'myarchive'))
 # os.getcwd()
 # os.listdir()
 # os.makedirs('test', exist_ok=True)
@@ -116,6 +117,16 @@ import sys
 # os.system('clear')
 # print(__name__)
 # print(__file__)
+
+# shutil.copytree("lambda", "build/lambda_package")
+# shutil.rmtree("build/lambda_package")
+# shutil.make_archive("build/lambda", "zip", "build/lambda_package") # zip/tar
+# subprocess.check_call([
+#     "pip",
+#     "install",
+#     "-r", "lambda/requirements.txt",
+#     "-t", "build/lambda_package"
+# ])
 
 # args:list[str] = sys.argv[:2]
 # sys.getsizeof('abc')

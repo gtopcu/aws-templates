@@ -1,7 +1,14 @@
 
-import os, sys, sysconfig, shutil, traceback
+import os, sys, sysconfig, shutil, traceback, subprocess
 from pathlib import Path # PurePath, PosixPath, WindowsPath
 import glob
+
+# subprocess.check_call([
+#     "pip",
+#     "install",
+#     "-r", "lambda/requirements.txt",
+#     "-t", "build/lambda_package"
+# ])
 
 # Setup the environment
 # !pip install -q -U immutabledict sentencepiece 
@@ -92,18 +99,17 @@ def main():
     # shutil.copyfile(src, dst, *, follow_symlinks=True)    # no metadata
     # shutil.copymode()
     # shutil.chown("path", "user", "group")   
+    # shutil.copytree(src, dst) # symlinks=False, ignore=None, copy_function=copy2, ignore_dangling_symlinks=False, dirs_exist_ok=False)
     # shutil.rmtree("os/makedirs")
     # shutil.move("/source", "target")      # same as mv
     # shutil.ignore_patterns(*patterns)     # used in copytree()
-    # shutil.copytree(  src, dst, symlinks=False, ignore=None, copy_function=copy2, 
-    #                   ignore_dangling_symlinks=False, dirs_exist_ok=False)
     # shutil.disk_usage(path)
     # ------------------------------------------------------------------------------------------
     # https://docs.python.org/3/library/shutil.html#shutil.unpack_archive
+    # shutil.make_archive("build/lambda", "zip", "build/lambda_package") # zip/tar
     # shutil.get_archive_formats()
     # shutil.unpack_archive(filename[, extract_dir[, format[, filter]]])
     # ------------------------------------------------------------------------------------------
-    # from shutil import make_archive
     # archive_name = os.path.expanduser(os.path.join('~', 'myarchive'))
     # root_dir = os.path.expanduser(os.path.join('~', '.ssh'))
     # make_archive(archive_name, 'gztar', root_dir)
