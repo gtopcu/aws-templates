@@ -257,7 +257,16 @@ for publishing, need to add a build system to pyproject.toml:
 requires=["hatchling"]
 build-backend="hatchling.build"
 
-----------------------------------------------------------------------------------------------------------------
+# https://docs.astral.sh/uv/pip/dependencies/#using-pyprojecttoml
+# uv add aws-lambda-powertools
+# uv add --dev aws-lambda-powertools --extra aws-sdk
+
+[project.optional-dependencies]
+cli = [
+  "rich",
+  "click",
+]
+---------------------------------------------------------------------------------------------------------------
 POETRY
 ----------------------------------------------------------------------------------------------------------------
 # https://www.youtube.com/watch?v=Ji2XDxmXSOM

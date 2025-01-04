@@ -13,83 +13,36 @@ git config --global credential.helper 'store --file ~/.my-credentials'
 ---
 
 
-```
 git init
-git clean -fxfd -> cleans everything in the repo
+git clean -fxfd -> Deletes all untracked files & directories(including ones in .gitignore) from working directory
 git tag -a 1.2.9 -m "Bump version"
 git add README.md
 git rm README.md
 git commit -m "first commit"
 git branch -M main
-git checkout -b feature-branch-name
+git checkout -b branch
 git switch branch
 git remote add origin git@github.com:gtopcu/aws-templates.git
 git remote add origin https://github.com/gtopcu/python_lambda
 git fetch
 git pull --autostash
 git push -u origin main --force
-git rebase upstream_branch
-git reset --soft HEAD~X       # Change to the number after HEAD~ depending on the commits you want to squash
-git cherry-pick <commit-hash> # Do this multiple times if multiple commits are wanted
-git tag
 git show abc123def456789 
 git status
 git log
 git diff
-```
+git rebase origin main
+git rebase --interactive HEAD~3 -> Interactive Rebase to Rearrange Commits
+git reset --soft HEAD~1         -> Undo the last commit & keep the changes -> staged for a new commit
+git reset HEAD~1                -> Undo the last commit & keep the changes -> unstaged
+git reset --hard HEAD~1         -> Remove the last commit and discard all changes made in that commit
+git revert HEAD                 -> Keep the record of commit history & undo the last commit without removing it from history
+                                   Creates a new commit that reverses the changes made in the last commit
+git restore <file(s)>           -> Discard changes in the working directory
+git reflog                      -> Retrieve lost commit references
+git cherry-pick <commit-hash>   -> Do this multiple times if multiple commits are wanted
 
-
-# Clone a Repository
-git clone <repository_url>
-
-# Stage Changes for Commit
-git add <file(s)>
-
-# Commit Changes
-git commit -m "Commit message"
-
-# Push Changes to the Remote Repository
-git push
-
-# Force Push Changes (use with caution)
-git push --force
-
-# Reset Working Directory to Last Commit
-git reset --hard
-
-# Create a New Branch
-git branch <branch_name>
-
-# Switch to a Different Branch
-git checkout <branch_name>
-
-# Merge Changes from Another Branch
-git merge <branch_name>
-
-# Rebase Changes onto Another Branch (use with caution)
-git rebase <base_branch>
-
-# View Status of Working Directory
-git status
-
-# View Commit History
-git log
-
-# Undo Last Commit (use with caution)
-git reset --soft HEAD^
-
-# Discard Changes in Working Directory
-git restore <file(s)>
-
-# Retrieve Lost Commit References
-git reflog
-
-# Interactive Rebase to Rearrange Commits
-git rebase --interactive HEAD~3
-
-
-
----
+------------------------------------------------------------------------------------------------------------------------
 
 Configure SSH Keys for GitHub
 https://docs.github.com/en/authentication/troubleshooting-ssh/error-permission-denied-publickey

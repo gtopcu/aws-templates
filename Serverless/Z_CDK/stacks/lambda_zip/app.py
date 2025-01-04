@@ -20,7 +20,6 @@ import shutil
 # cdk synth
 # cdk deploy
 
-
 def _create_deployment_package():
     if os.path.exists("build"):
         shutil.rmtree("build")

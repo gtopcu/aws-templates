@@ -65,7 +65,14 @@ class LambdaStack(Stack):
             #     "QUEUE_URL": queue.queue_url
             # },
             # layers=[self.layer_powertools],
-            # tracing=_lambda.Tracing.ACTIVE,
+            # tracing=_lambda.Tracing.ACTIVE, 
+            # Activate ApplicationSignals/SLOs 
+            # adot_instrumentation=_lambda.AdotInstrumentationConfig(
+            #     layer_version=_lambda.AdotLambdaLayerPythonSdkVersion(_lambda.AdotLambdaLayerPythonSdkVersion.LATEST),
+            #     exec_wrapper=_lambda.AdotLambdaExecWrapper.REGULAR_HANDLER
+            # )
+            # Activate LambdaInsights  
+            # insights_version= _lambda.LambdaInsightsVersion.LAST_RECOMMENDED,
             # system_log_level_v2= _lambda.SystemLogLevel.V2_INFO,
             # application_log_level_v2= _lambda.ApplicationLogLevel.V2_INFO,
             # logging_format=_lambda.LoggingFormat.JSON, # default: LoggingFormat.TEXT

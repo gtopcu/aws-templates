@@ -8,22 +8,63 @@ https://catalog.us-east-1.prod.workshops.aws/workshops/10141411-0192-4021-afa8-2
 --------------------------------------------------------------------------------------------------------
 
 Best practices:
-- Use cdk-nag, Policy Validation(CF Guard) and IAM Permission Boundaries
+- Use cf-lint, cdk-nag, Policy Validation(CF Guard) and IAM Permission Boundaries
 - Create own constructs & stacks with best practices
 - Combine grouped stacks into stages
 - Do not use CF params(not available at synth), use context variables(cdk.context.json) and environment vars
 - Try to avoid cross-stack resource references / dependencies (causes deadlocks, deploys together etc)
 - Tag your resources at stage level - not passed to other stages
 - Use CDK assertions with Pytest
-- Create CW alarms based on metrics
 - Utilize CDK Pipelines & Lambda Canary Deployments
+- Create CW alarms based on metrics
+- Use AWS Aplication Signals for lambda with SLOs -  uses AWS Distro for OpenTelemetry (ADOT): 
+https://aws.amazon.com/blogs/aws/track-performance-of-serverless-applications-built-using-aws-lambda-with-application-signals/
+
 
 --------------------------------------------------------------------------------------------------------
-Policy Validation & CloudFormation Guard:
-https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk/README.html#policy-validation
+
+CloudFormation Lint:
+https://github.com/aws-cloudformation/cfn-lint
+
+CloudFormation Guard:
 https://docs.aws.amazon.com/cfn-guard/latest/ug/what-is-guard.html
 
+Policy Validation
+https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk/README.html#policy-validation
+
 --------------------------------------------------------------------------------------------------------
+
+https://github.com/cdklabs/cdk-nag?tab=readme-ov-file
+
+Manage application security and compliance with the AWS Cloud Development Kit and cdk-nag
+https://aws.amazon.com/blogs/devops/manage-application-security-and-compliance-with-the-aws-cloud-development-kit-and-cdk-nag/
+https://github.com/stelligent/cfn_nag#installation
+
+brew install ruby brew-gem
+export PATH=$PATH:/opt/homebrew/lib/ruby/gems/3.4.0/bin
+echo 'export PATH="/opt/homebrew/opt/ruby/bin:$PATH"' >> /Users/mac/.zshrc
+brew gem install cfn-nag
+
+cfn_nag_rules -> show all rules
+cfn_nag_scan --help
+cfn_nag_scan --input-path <CF json/yaml/template> --debug --output-format json 
+                --profile-path <profile_path> --deny-list-path cfn_nag_supress.yaml
+
+cfn_nag_profile.text:
+F1
+F2
+F27
+W3
+W5
+
+GitHub Action:
+- name: Simple test
+  uses: stelligent/cfn_nag@master
+  with:
+    input_path: tests
+
+--------------------------------------------------------------------------------------------------------
+
 IAM Permission Boundaries
 https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
 
@@ -73,37 +114,6 @@ class MyAppStage(Stage):
 
         AppStack(self, "AppStack")
         DatabaseStack(self, "DatabaseStack")
-
---------------------------------------------------------------------------------------------------------
-
-https://github.com/cdklabs/cdk-nag?tab=readme-ov-file
-
-Manage application security and compliance with the AWS Cloud Development Kit and cdk-nag
-https://aws.amazon.com/blogs/devops/manage-application-security-and-compliance-with-the-aws-cloud-development-kit-and-cdk-nag/
-https://github.com/stelligent/cfn_nag#installation
-
-brew install ruby brew-gem
-export PATH=$PATH:/opt/homebrew/lib/ruby/gems/3.4.0/bin
-echo 'export PATH="/opt/homebrew/opt/ruby/bin:$PATH"' >> /Users/mac/.zshrc
-brew gem install cfn-nag
-
-cfn_nag_rules -> show all rules
-cfn_nag_scan --help
-cfn_nag_scan --input-path <CF json/yaml/template> --debug --output-format json 
-                --profile-path <profile_path> --deny-list-path cfn_nag_supress.yaml
-
-cfn_nag_profile.text:
-F1
-F2
-F27
-W3
-W5
-
-GitHub Action:
-- name: Simple test
-  uses: stelligent/cfn_nag@master
-  with:
-    input_path: tests
 
 --------------------------------------------------------------------------------------------------------
 

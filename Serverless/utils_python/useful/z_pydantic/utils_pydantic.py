@@ -15,6 +15,8 @@ pydantic = {extras = ["email"], version = "^2.6.1"}
 DevTools -> debug(my_model)
 https://docs.pydantic.dev/latest/integrations/devtools/
 pip install devtools
+from devtools import debug
+debug(my_model)
 
 OpenAPI/JSON/YAML/CSV/GraphQL/Dict to Pydantic:
 https://docs.pydantic.dev/latest/integrations/datamodel_code_generator/
@@ -165,6 +167,8 @@ try:
     # MyData.model_validate()
     # MyData.model_construct() - no validation
     # my_data.model_rebuild()
+    # devtools.debug(my_model)
+
 except ValidationError as e:
     print("Pydantic validation failed: " + str(e))
     #return {"result": "error", "message": e.errors(include_url=False, include_context=True, include_input=True)}

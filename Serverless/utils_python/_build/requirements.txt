@@ -1,7 +1,7 @@
-"aws-lambda-powertools[parser]"
-"aws-lambda-powertools[tracer,parser,validation]"
-"aws-lambda-powertools[all]"
 "aws-lambda-powertools[aws-sdk]"
+"aws-lambda-powertools[all]"
+"aws-lambda-powertools[parser]"
+"aws-lambda-powertools[tracer,validation]"
 aws-lambda-powertools
 aws-cdk-lib
 boto3
@@ -14,6 +14,7 @@ pipenv
 python-dotenv
 requests
 pydantic
+devtools
 simplejson
 pre-commit
 isort

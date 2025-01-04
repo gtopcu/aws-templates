@@ -52,7 +52,8 @@ class myPersonClass:
 # from collections.abc import Mapping, Sequence, Set, Generator, Callable, Iterable, Iterator, AsyncIterable
 
 # __init__.py
-# __all__ = ["module1", "module2"]
+# __all__ = ("module1", "module2")
+# from .module import func
 # dir(module)
 
 import logging
@@ -81,7 +82,6 @@ import sys
 # age = (date.today() - birthday).days // 365
 # print(age)
 
-
 # import pandas as pd
 # df = pd.DataFrame(list)
 # df.to_csv("output.csv")
@@ -91,10 +91,10 @@ import sys
 # matrix = np.dot(10, matrix)
 
 # import os; print(os.getenv("PYTHONPATH"))
-# os.getenv('DDB_TABLE', 'table1')
-# os.environ.get('DDB_TABLE', 'table1')
-# POSTGRE_IP = os.environ['POSTGRE_IP']
-# POSTGRE_PORT: int = os.environ.setdefault('POSTGRE_PORT', 5432)
+# os.getenv("DDB_TABLE", "table1")
+# os.environ.get("DDB_TABLE", "table1")
+# POSTGRE_IP = os.environ["POSTGRE_IP"]
+# POSTGRE_PORT: int = os.environ.setdefault("POSTGRE_PORT", 5432)
 
 # for path in sys.path:
 #     print("Path: " + path)
@@ -171,7 +171,9 @@ import sys
 # any(char in string.digits for char in pw)
 
 # myset = {1, 2, 3}
+# myset = myset | {3, 4}
 # myset.add(2)
+# myset.discard(1)
 # myset = filter(lambda x: x/2==1, myset)
 # sorted = sorted(myset, reverse=True)
 # print(sorted)
