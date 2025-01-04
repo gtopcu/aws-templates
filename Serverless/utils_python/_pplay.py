@@ -162,7 +162,8 @@ import sys
 
 # name: str = "John"
 # name.join("Doe")
-# print('my name is %s' % name)
+# print("PK_%s" % ID)
+# "request: {}"".format(json.dumps(event))
 # " ".removeprefix("")
 # " ".removesuffix("")
 # ",".join(mylist)
@@ -170,6 +171,7 @@ import sys
 # " ".strip()
 # "mr. gokhan topcu".title()
 # any(char in string.digits for char in pw)
+
 
 # myset = {1, 2, 3}
 # myset = myset | {3, 4}

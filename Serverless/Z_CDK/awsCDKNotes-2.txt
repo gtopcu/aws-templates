@@ -8,11 +8,14 @@ https://catalog.us-east-1.prod.workshops.aws/workshops/10141411-0192-4021-afa8-2
 --------------------------------------------------------------------------------------------------------
 
 Best practices:
+- cdk diff before cdk deploy!
 - Use cf-lint, cdk-nag, Policy Validation(CF Guard) and IAM Permission Boundaries
 - Create own constructs & stacks with best practices
 - Combine grouped stacks into stages
 - Do not use CF params(not available at synth), use context variables(cdk.context.json) and environment vars
-- Try to avoid cross-stack resource references / dependencies (causes deadlocks, deploys together etc)
+- Reset CDK context vars to retrieve latest data from your AWS account
+- Avoid cross-stack resource references / dependencies (causes deadlocks, deploys together etc)
+- Do not include environment details if not absulutely necessary
 - Tag your resources at stage level - not passed to other stages
 - Use CDK assertions with Pytest
 - Utilize CDK Pipelines & Lambda Canary Deployments
