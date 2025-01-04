@@ -1,12 +1,13 @@
+# TODO
+# Amazon Q: Command + i
+# Zoom In: Command+Shift 0
+# Zoom Out: Command -
 
 # python -m venv .venv
 # source .venv/bin/activate
 # source /Users/mac/GoogleDrive/VSCode/.venv/bin/activate
 # pip -V
 # pip install -U boto3
-
-# TODO
-# Amazon Q: Command + i
 
 # pylint . --rcfile=.pylintrc .
 # disable=all disable=invalid-name disable=missing-class-docstring (remove this line to get 

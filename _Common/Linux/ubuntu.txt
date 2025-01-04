@@ -160,6 +160,7 @@ cat/touch/nano/head/tail -n 10
 find . -type f -name "*.pyc" -delete
 find . -type d -name '.venv' -delete
 find . -type d -name "__pycache__" -exec rm -rf {} +
+adb logcat "*:E" | awk '!/minksocket/'
 
 tar -xf file.tar.gz
 
