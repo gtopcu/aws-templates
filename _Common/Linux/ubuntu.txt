@@ -15,6 +15,7 @@ sudo rm -rf /*
 /etc/hosts
 
 which sudo
+sudo !!
 su -
 
 https://askubuntu.com/questions/222348/what-does-sudo-apt-get-update-do/222352#222352

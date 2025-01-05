@@ -323,11 +323,12 @@ Serverless:
 - AppSync: EventsAPI(EventBridge->Appsync Async+WebSockets), cross-account API access with RAM
       
 AI:
-- Bedrock: Nova FMs, ConversationalBuilder, PromptManager-Caching/Flows/Optimizer, BatchInference(50% cheaper), Data Automation,
-           custom intervention using agents, human & LLM-as-judge, model & RAG evaluation, ConverseAPI(LangChain), 
+- Bedrock: Nova FMs, ConversationalBuilder, PromptManager-Caching/Flows/Optimizer, BatchInference(50% cheaper), 
+           ConverseAPI(LangChain), DataAutomation, StructuralDataRetrieval, Rerank API, realtime custom datasource sync,
+           GraphRAG & streaming support, multi-model & multi-agent collaboration, autogenereated query filters,
+           model & RAG evaluation - human & LLM-as-judge, custom intervention using agents, IntelligentPromptRouting, 
            Guardrails up to 85% discount, automatic reasoning checks & multimodal toxicity detection for image content,
-           latency-optimized inference for FMs, Model Distillation, Marketplace, KnowledgeBases Aurora as vector store, 
-           multi-model, GraphRAG & streaming support, multi-agent collaboration, IntelligentPromptRouting, Rerank API,
+           latency-optimized inference for FMs, Model Distillation, Marketplace, KnowledgeBases Aurora as vector store,
 - Other AI: AppStudio, Sagamaker Unified Studio, structured retrieval(Redshift & SageMaker Lakehouse), 
             Sagemaker realtime endpoints scale down to 0 & multi-adapter inference,
             Q developer: code review, inline chat, console/Datadog integration, Q Business new goodies
@@ -352,7 +353,7 @@ Others:
                  Auto-fix: SysMgr now diagnoses and remedies issues to bring nodes to managed state
 - ECS/EKS: ECS deployment history & predictive scaling, enhanced Container Insights, Farget network fault injection experiments,
            EKS AutoMode & Hybrid Nodes, node health monitoring & auto-repair
-- Other: Organizations -> Root User Access Control, ResourceControlPolicies(RCPs), EC2 DeclarativePolicies(VPC block public access)
+- Other: Organizations/RootUser AccessControl, ResourceControlPolicies(RCP), EC2 DeclarativePolicies(VPC block public access),
          MSK Express, Amazon Keyspaces(Cassandra) reduced prices up to 75%, 
          OpenSearch Serverless BinaryVector & PIT Search, ingestion Lambda support for transformation,
          CloudMap SLAs, TimeSyncService, DataTransferTerminals, CleanRooms multi-cloud
