@@ -101,6 +101,11 @@ class StepFunctionsStack(Stack):
         #     )
         # )
 
+        # input:
+        # {
+        #     "input": "your-data-here"
+        # }
+
         process_lambda = None
 
         # Create IAM role for Step Functions

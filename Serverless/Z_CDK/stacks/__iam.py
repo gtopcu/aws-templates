@@ -23,7 +23,7 @@ class IAMStack(Stack):
         #  https://docs.aws.amazon.com/cdk/v2/guide/define-iam-l2.html
 
         # Add this to use the role customization feature
-        iam.Role.customizeRoles(stack);
+        iam.Role.customizeRoles(stack)
 
         # AWS account ID (i.e. '123456789012')
         account_id = iam.AccountRootPrincipal()
@@ -65,6 +65,24 @@ class IAMStack(Stack):
         #     iam.ManagedPolicy.from_aws_managed_policy_name("service-role/AWSLambdaBasicExecutionRole")
         # )
 
+        lambda_role.add_to_policy(
+            iam.PolicyStatement(
+                actions=[
+                    "logs:CreateLogGroup",
+                    "logs:CreateLogStream",
+                    "logs:PutLogEvents",
+                    "logs:CreateLogDelivery",
+                    "logs:GetLogDelivery",
+                    "logs:UpdateLogDelivery",
+                    "logs:DeleteLogDelivery",
+                    "logs:ListLogDeliveries",
+                    "logs:PutResourcePolicy",
+                    "logs:DescribeResourcePolicies",
+                    "logs:DescribeLogGroups"
+                ],
+                resources=["*"]  # You might want to restrict this
+            )
+        )
 
         lambda_fn.add_to_role_policy(iam.PolicyStatement(
             actions=['s3:GetObject', 's3:List*'],
