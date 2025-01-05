@@ -1,0 +1,66 @@
+
+# .github/workflows/deploy-with-approval.yml
+
+# - Go to your repository settings in github
+# - Click on "Environments"
+# - Click "New environment" & name it "production"
+# - Enable "Required reviewers"
+# - Add the people who can approve deployments
+# - The environment: production in the wait-for-approval job triggers the manual approval
+# - The workflow will pause at the wait-for-approval job until someone approves
+# - Approvers will see a "Review deployments" button in the GitHub UI
+
+# To approve a deployment:
+#   - Go to the Actions tab in your repository
+#   - Click on the running workflow
+#   - Click "Review deployments"
+#   - Click "Approve and deploy"
+
+# Adding additional protection:
+# environment:
+#   name: production
+#   url: https://production-url.com # This URL becomes a clickable link
+
+# Once the deployment is complete, GitHub creates a direct link to your deployed application
+# Makes it easy for reviewers to check the deployment & shows up in the GitHub UI under the deployment history
+# The URL is optional - it's purely for convenience and visibility in the GitHub interface
+
+# Useful for scenarios like:
+#   - Preview/staging deployments (e.g., https://preview-123.myapp.com)
+#   - Production deployments to verify the new version
+#   - QA environments that need to be checked after deployment
+#   - Documentation sites that need review
+
+# For example, in a PR preview deployment:
+# environment:
+#   name: preview
+#   url: https://${{ github.head_ref }}.preview.myapp.com  # Dynamic URL based on branch
+
+name: Deploy with Approval
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build step
+        run: echo "Building the application"
+
+  wait-for-approval:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Waiting for approval
+        run: echo "This step will wait for manual approval"
+
+  deploy:
+    needs: wait-for-approval
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy
+        run: echo "Deploying to production"

@@ -1,0 +1,18 @@
+
+https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/what-is.html
+https://aws.amazon.com/blogs/devops/amazon-q-developer-inline-chat/?trk=39c84365-5c2d-4402-8c01-c5a6c3457227&sc_channel=sm
+https://desktop-release.codewhisperer.us-east-1.amazonaws.com/latest/Amazon%20Q.dmg
+
+Code complete: Option + C
+Inline Chat: Command + i
+-> Left arrow to accept autocompletion in the console
+
+q chat  @history to pass your shell history
+        @git to pass information about your current git repository
+        @env to pass your shell environment
+
+/dev - Ask for help implementing a new feature. Q analyzes your project context and suggests an approach with code examples
+
+@workspace - Get answers about your entire codebase, not just the open file. Try "@workspace how is authentication handled?"
+
+/transform Automatically upgrade Java code - ie. move Java 8 projects to Java 17

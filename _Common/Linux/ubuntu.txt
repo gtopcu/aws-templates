@@ -140,6 +140,11 @@ export PATH=$PATH:/usr/local/go/bin
 /var/log 
 /etc/hosts 
 /etc/apt/sources.list
+.zshrc
+.zprofile
+.bashrc
+.bash_profile
+.profile
 
 sudo apt --help
 sudo apt search python3
@@ -158,9 +163,11 @@ ssh -i keypair.pem ec2-user@54.78.7.114
 sudo rm -rf /*
 cat/touch/nano/head/tail -n 10
 
+find . -maxdepth 1 -name "*.txt"
 find . -type f -name "*.pyc" -delete
 find . -type d -name '.venv' -delete
 find . -type d -name "__pycache__" -exec rm -rf {} +
+find . -type f -exec cat {} \;
 
 tar -xf file.tar.gz
 tar -cf . file.tar.gz
@@ -168,6 +175,7 @@ tar -cf . file.tar.gz
 ps auwx | awk '/contains/' | '!/notcontains/'
 
 grep "foo" file.txt      
+ls -l | grep "pattern"
 -v inverts the match 
 -E enables extended regex support (=egrep)
 -e allows multiple patterns
