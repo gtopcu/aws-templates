@@ -1,7 +1,7 @@
 
-# .github/workflows/cdk-pipeline.yml
+# .github/workflows/aws-cdk-pipeline.yml
 
-name: CDK CI/CD
+name: Github CDK Pipeline
 
 on:
   push:
