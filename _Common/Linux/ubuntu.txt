@@ -174,8 +174,8 @@ tar -cf . file.tar.gz
 
 ps auwx | awk '/contains/' | '!/notcontains/'
 
-grep "foo" file.txt      
-ls -l | grep "pattern"
+grep "foo" file.txt   
+ls -l | grep "pattern" -exclude ".git" --exclude --exclude-dir ".venv"
 -v inverts the match 
 -E enables extended regex support (=egrep)
 -e allows multiple patterns
