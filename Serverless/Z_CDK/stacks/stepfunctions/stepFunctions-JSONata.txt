@@ -6,35 +6,41 @@ JSONata & Variables:
 https://www.youtube.com/watch?v=1Bc6jqZhUAw
 https://www.youtube.com/watch?v=kVWxJoO_zc8
 
+Pass-Wait-Success-Wait-Choice-Parallel-Map-DistributedMap
 
-State machine input: $states.context.Execution.Input
+------------------------------------------------------------------------------------------------
+
+JSONPath
+InputPath Parameters ResultPath ResultSelector OutputPath
 
 {"taskToken.$" = "$.Task.Token"}
 {"stateMachineArn.$" = "$$.StateMachine.Id"}
 {"stateMachineInput.$" = "$$.Execution.Input"}
-{"input.$": "$.input"}
 {"stateInput.$" = "$.states.input"}
 {"stateResult.$" = "$.states.result"}
 
-Pass-Wait-Success-Wait-Choice-Parallel-Map-DistributedMap
+Intrinsic Functions: Arrays, JSON, Encode/Decode, Math-String Operations, States.UUID()
 
-!!! JSONata does not require .$ in key name !!!
-!!! Can only use JSONata or JSONPath !!!
-!!! JSONPath also supports variables !!!
-!!! Variables are not available in DistributedMap !!!
+------------------------------------------------------------------------------------------------
 
-JSONPath:
-InputPath
-Parameters
-ResultPath
-ResultSelector
-OutputPath
+JSONata in SF:
+https://try.jsonata.org/
+https://dev.to/ianbrumby/handling-paginated-results-seamlessly-with-aws-step-functions-42po
 
-JSONata Reserved Variables:
+- JSONata does not require .$ in key name
+- Can only use JSONata or JSONPath
+- JSONPath also supports variables
+- Outer variables are not available inside DistributedMap
+- CDK doesn't support JSONata SF using the native fromChainable method - only using ASL and the fromFile method
+
 $.states.input        -> Raw input to the state
 $.states.results      -> Results from the task if successful
 $.states.errorOutput  -> Results from the task if error occured
 $.states.context      -> Context object
+
+$states.context.Task.Token
+$states.context.StateMachine.Id
+$states.context.Execution.Input
 
 {
   "id": "{% "$.states.input.id" %}",
@@ -45,8 +51,46 @@ $.states.context      -> Context object
 {% $exists($.states.input.LastEvaluatedKey) %}
 {% "FullName": "$name & ' ' & $lastname" %}
 
-Intrinsic Functions: Arrays, JSON, Encode/Decode, Math-String Operations, UUID
-States.UUID()
+{
+  "Type": "Pass",
+  "QueryLanguage": "JSONata",
+  "Output": {
+    "item": "{% $item %}"
+  }
+  "Assign": {
+  "results": "{% $states.result.Items %}"
+  # "results": "{% $append($results, $states.result.Items) %}"
+  }
+}
+
+---------------------------------------------------------------------------------------------------------
+
+JSONata:
+
+$count $append $exists 
+$sum $avg $min $max 
+$length $uppercase $lowercase $contains
+$uuid $now() 
+
+$partition    - partition a large array
+$range        - generate an array of values
+$hash         - calculate hash
+$randomSeeded - generate a value between 0 <= n < 1
+$parse        - deserialize JSON strings
+ 
+Account.Order
+Account.Order[OrderID="order103"]
+employees[department = "Engineering"].name
+$sum(Account.Order.Product.(Price * Quantity))
+people^(age).name -> oldest person's name
+people.age^2
+$count(people[age > 30])
+$uppercase(people[0].city)
+people.{ "name": name, "isAdult": age >= 18 }
+employees.{ "name": name, "yearsUntilRetirement": 65 - age }
+{ "peopleMap": people.{ "name": name, "location": city } }
+
+---------------------------------------------------------------------------------------------------------
 
 "$$.StateMachine.Id"
 "$$.StateMachine.Name"
@@ -107,61 +151,6 @@ States.UUID()
 "$.retryJitterStrategyRatePath"
 "$.retryJitterStrategyRateSeconds"
 "$.retryJitterStrategyRateSecondsPath"
-
----------------------------------------------------------------------------------------------------------
-JSONata
----------------------------------------------------------------------------------------------------------
-
-$count $append $exists $now 
-$sum $avg $min $max 
-$length $uppercase $lowercase $contains
-
-$partition    - partition a large array
-$range        - generate an array of values
-$hash         - calculate hash
-$randomSeeded - generate a value between 0 <= n < 1
-$uuid         - generate UUID
-$parse        - deserialize JSON strings
- 
-Account.Order
-Account.Order[OrderID="order103"]
-employees[department = "Engineering"].name
-$sum(Account.Order.Product.(Price * Quantity))
-people^(age).name -> oldest person's name
-people.age^2
-$count(people[age > 30])
-$uppercase(people[0].city)
-people.{ "name": name, "isAdult": age >= 18 }
-employees.{ "name": name, "yearsUntilRetirement": 65 - age }
-{ "peopleMap": people.{ "name": name, "location": city } }
-
-
----------------------------------------------------------------------------------------------------------
-JSONata in StepFunctions
-https://try.jsonata.org/
-https://dev.to/ianbrumby/handling-paginated-results-seamlessly-with-aws-step-functions-42po
-
-CDK does not support JSONata based Step Functions using the native fromChainable method. 
-JSONata is supported using CDK when using ASL and the fromFile method
----------------------------------------------------------------------------------------------------------
-
-input output variables
-
-{
-  "Type": "Pass",
-  "QueryLanguage": "JSONata",
-  "Output": {
-    "item": "{% $item %}"
-  }
-  "Assign": {
-  "results": "{% $states.result.Items %}"
-  # "results": "{% $append($results, $states.result.Items) %}"
-  }
-}
-
-
-
-
 
 
 
