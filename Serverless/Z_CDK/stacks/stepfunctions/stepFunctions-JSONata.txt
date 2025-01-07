@@ -1,18 +1,52 @@
 
+AWS re:Invent 2024 - Building advanced workflows with AWS Step Functions
+https://www.youtube.com/watch?v=gdGgBKJiM2E
 
-Original state machine input: $states.context.Execution.Input
+JSONata & Variables:
+https://www.youtube.com/watch?v=1Bc6jqZhUAw
+https://www.youtube.com/watch?v=kVWxJoO_zc8
+
+
+State machine input: $states.context.Execution.Input
 
 {"taskToken.$" = "$.Task.Token"}
 {"stateMachineArn.$" = "$$.StateMachine.Id"}
 {"stateMachineInput.$" = "$$.Execution.Input"}
+{"input.$": "$.input"}
 {"stateInput.$" = "$.states.input"}
 {"stateResult.$" = "$.states.result"}
 
-Conditions(Choice):
+Pass-Wait-Success-Wait-Choice-Parallel-Map-DistributedMap
+
+!!! JSONata does not require .$ in key name !!!
+!!! Can only use JSONata or JSONPath !!!
+!!! JSONPath also supports variables !!!
+!!! Variables are not available in DistributedMap !!!
+
+JSONPath:
+InputPath
+Parameters
+ResultPath
+ResultSelector
+OutputPath
+
+JSONata Reserved Variables:
+$.states.input        -> Raw input to the state
+$.states.results      -> Results from the task if successful
+$.states.errorOutput  -> Results from the task if error occured
+$.states.context      -> Context object
+
+{
+  "id": "{% "$.states.input.id" %}",
+  "records": "{% "$.states.result.Items" %}"
+}
+
 {% $count($.states.input.Items) = 0 %}
-{% $exists($.states.input.LastEvaluatedKey) = 0 %}
+{% $exists($.states.input.LastEvaluatedKey) %}
 {% "FullName": "$name & ' ' & $lastname" %}
 
+Intrinsic Functions: Arrays, JSON, Encode/Decode, Math-String Operations, UUID
+States.UUID()
 
 "$$.StateMachine.Id"
 "$$.StateMachine.Name"
@@ -113,23 +147,15 @@ JSONata is supported using CDK when using ASL and the fromFile method
 
 input output variables
 
-input:
-{
-    "input": "input data"
-}
-
-"Assign": {
-  "results": "{% $states.result.Items %}"
-}
-"Assign": {
-  "results": "{% $append($results, $states.result.Items) %}"
-}
-
 {
   "Type": "Pass",
   "QueryLanguage": "JSONata",
   "Output": {
     "item": "{% $item %}"
+  }
+  "Assign": {
+  "results": "{% $states.result.Items %}"
+  # "results": "{% $append($results, $states.result.Items) %}"
   }
 }
 
