@@ -7,7 +7,6 @@ Parameters:
   Version:
     Description: Application version number
     Type: String
-
   BucketName:
     Description: S3 bucket name where the source code lives
     Type: String

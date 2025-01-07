@@ -6,3 +6,30 @@ https://aws.amazon.com/solutions/constructs/
 Overriding default attributes - core:
 https://docs.aws.amazon.com/solutions/latest/constructs/core.html
 
+- To explicitly turn off override warnings, run export overrideWarningsEnabled=false
+- To explicitly turn on override warnings, run export overrideWarningsEnabled=true
+- To revert to the default, run unset overrideWarningsEnabled
+
+  const stack = new cdk.Stack();
+
+  const props: CloudFrontToS3Props = {
+    bucketProps: {
+      blockPublicAccess: {
+        blockPublicAcls: false,
+        blockPublicPolicy: true,
+        ignorePublicAcls: false,
+        restrictPublicBuckets: true
+      }
+    }
+  };
+
+  new CloudFrontToS3(stack, 'test-cloudfront-s3', props);
+
+  expect(stack).toHaveResource("AWS::S3::Bucket", {
+    PublicAccessBlockConfiguration: {
+      BlockPublicAcls: false,
+      BlockPublicPolicy: true,
+      IgnorePublicAcls: false,
+      RestrictPublicBuckets: true
+    },
+  });

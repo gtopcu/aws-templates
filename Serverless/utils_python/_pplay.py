@@ -51,6 +51,7 @@ class myPersonClass:
 # from typing import Self, Any, Optional, Final, Literal, NewType, TypeAlias, TypedDict
 # from collections import namedtuple, deque, OrderedDict, defaultdict
 # from collections.abc import Mapping, Sequence, Set, Generator, Callable, Iterable, Iterator, AsyncIterable
+# my_dict: dict[str, Any]
 
 # __init__.py
 # __all__ = ("module1", "module2")
@@ -228,7 +229,7 @@ import sys
 # mylist2 = list[dict[str, Any]]
 # mylist2.append({'a': 1, 'b': 2})
 
-mydict = {'a': 1, 'b': 2, 'c': 3}
+# mydict = {'a': 1, 'b': 2, 'c': 3}
 # d = mydict.get('d', 4)
 # d = mydict.pop('d', 4)
 # i, j = mydict.popitem()

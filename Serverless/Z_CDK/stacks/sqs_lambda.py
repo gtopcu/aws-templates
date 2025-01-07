@@ -79,7 +79,7 @@ class SQSLambdaStack(Stack):
                 300
             ),  # must be at least x6 lambda timeout
             retention_period=Duration.seconds(1209600),  # 14 days max
-            # set maxReceiveCount to at least 5 on the lambda
+            # max_receive_count=5,
             # redrive_allow_policy=None
             # delivery_delay=0,
             # receive_message_wait_time=Duration.seconds(20),

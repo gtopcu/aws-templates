@@ -1,0 +1,55 @@
+
+
+Configure the AWS CLI to use IAM Identity Center token provider credentials with automatic authentication refresh 
+https://docs.aws.amazon.com/cdk/v2/guide/configure-access-sso-example-cli.html
+
+Configure the AWS CLI to use IAM Identity Center token provider credentials with automatic authentication refresh
+https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sso.html
+
+$ aws configure sso
+$ aws sso login --profile my-sso-profile
+
+--------------------------------------------------------------------------------------------------------------
+Step 1: Configure the AWS CLI
+--------------------------------------------------------------------------------------------------------------
+
+$ aws configure sso
+SSO session name (Recommended): my-sso
+SSO start URL [None]: https://my-sso-portal.awsapps.com/start
+SSO region [None]: us-east-1
+SSO registration scopes [sso:account:access]: <ENTER>
+
+There are 2 AWS accounts available to you.
+> DeveloperAccount, developer-account-admin@example.com (123456789011) 
+  ProductionAccount, production-account-admin@example.com (123456789022)
+
+CLI default client Region [None]: us-west-2 <ENTER>>
+CLI default output format [None]: json <ENTER>
+CLI profile name [123456789011_FullAccess]: my-sso-profile <ENTER>
+
+To use this profile, specify the profile name using --profile, as shown:
+$ aws s3 ls --profile my-sso-profile
+
+After completing this step, our config file will look like the following:
+
+[profile my-sso-profile]
+sso_session = my-sso
+sso_account_id = 123456789011
+sso_role_name = fullAccess
+region = us-west-2
+output = json
+			
+[sso-session my-sso]
+sso_region = us-east-1
+sso_start_url = https://my-sso-portal.awsapps.com/start
+sso_registration_scopes = sso:account:access
+We can now use this sso-session and named profile to request security credentials.
+
+--------------------------------------------------------------------------------------------------------------
+Step 2: Step 2: Use the AWS CLI to generate security credentials
+--------------------------------------------------------------------------------------------------------------
+To create/refresh our credentials, use the AWS CLI aws sso login command:
+$ aws sso login --profile my-sso-profile
+
+
+

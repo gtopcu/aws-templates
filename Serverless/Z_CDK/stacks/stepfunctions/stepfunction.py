@@ -16,67 +16,6 @@ class StepFunctionsStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-        # "$$.Execution.Id"
-        # "$$.Execution.Input"
-        # "$$.Execution.Name"
-        # "$$.Execution.RoleArn"
-        # "$$.Execution.StartTime"
-        # "$$.State.Id"
-        # "$$.State.Name"
-        # "$$.State.EnteredTime"
-        # "$$.State.RetryCount"
-        # "$$.StateMachine.Id"
-        # "$$.StateMachine.Name"
-        # "$$.Task.Token"
-        # "$$.Task.Id"
-        # "$$.Task.Name"
-        # "$$.Task.Type"
-        # "$$.Task.StateEnteredTime"
-        # "$$.Task.StateTimeoutInSeconds"
-        # "$$.Task.Host"
-
-        # "$.context"
-        # "$.input"
-        # "$.Payload"
-        # "$.status"
-        # "$.result"
-        # "$.error"
-        # "$.cause"
-        # "$.task"
-        # "$.task.token"
-        # "$.task.id"
-        # "$.task.name"
-        # "$.task.type"
-        # "$.task.stateEnteredTime"
-        # "$.task.stateTimeoutInSeconds"
-        # "$.task.host"
-        # "$.state"
-        # "$.state.name"
-        # "$.state.enteredTime"
-        # "$.state.retryCount"
-        # "$.stateMachine"
-        # "$.stateMachine.id"
-        # "$.stateMachine.name"
-        # "$.stateMachine"
-        # "$.stateMachine.id"
-        # "$.stateMachine.name"
-        # "$.stateEnteredEventDetails"
-        # "$.retryCount"
-        # "$.retryLimit"
-        # "$.retryDelay"
-        # "$.retryInterval"
-        # "$.retryIntervalSeconds"
-        # "$.retryIntervalSecondsPath"
-        # "$.retryBackoff"
-        # "$.retryBackoffRate"
-        # "$.retryMaxDelay"
-        # "$.retryExponentialBackoff"
-        # "$.retryJitterStrategy"
-        # "$.retryJitterStrategyRate"
-        # "$.retryJitterStrategyRatePath"
-        # "$.retryJitterStrategyRateSeconds"
-        # "$.retryJitterStrategyRateSecondsPath"
-
         # sfn.Activity
         # sfn.Condition
         # sfn.Choice
@@ -86,10 +25,12 @@ class StepFunctionsStack(Stack):
         # sfn.DistributedMap
         # sfn.Errors
         # sfn.Fail
-        # sfn.Succeed
+        # sfn.Succeed
         # sfn.Parallel
         # sfn.Pass
         # sfn.State
+
+        process_lambda = None
 
         # log_group = cw.LogGroup(self, "MyLogGroup")
         # definition = sfn.Chain.start(sfn.Pass(self, "Pass"))
@@ -100,13 +41,6 @@ class StepFunctionsStack(Stack):
         #         level=sfn.LogLevel.ALL
         #     )
         # )
-
-        # input:
-        # {
-        #     "input": "your-data-here"
-        # }
-
-        process_lambda = None
 
         # Create IAM role for Step Functions
         sfn_role = iam.Role(
@@ -153,6 +87,8 @@ class StepFunctionsStack(Stack):
         #     state_machine_type="STANDARD"
         # )
         
+        # state_machine = sfn.fromFile(self, "ProcessingStateMachine", "sf.asl")
+
         # ***************************************************************************************
         # 2- Define Step Function within CDK
 

@@ -1,0 +1,16 @@
+Resources:
+ MyVolume:
+   Type: AWS::EC2::Volume
+   Properties: 
+     Size: 100
+     VolumeType: io1
+     Iops: 100
+     AvailabilityZone:
+       Fn::Select:
+         - 0
+         - Fn::GetAZs: us-east-1
+     Tags:
+       - Key: environment
+         Value: test
+   DeletionPolicy: Snapshot
+   UpdateReplacePolicy: Snapshot

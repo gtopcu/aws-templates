@@ -1,0 +1,16 @@
+
+Resources:
+ S3Bucket:
+   Type: "AWS::S3::Bucket"
+   Properties:
+     BucketName: "my-bucket"
+     BucketEncryption:
+       ServerSideEncryptionConfiguration:
+         - ServerSideEncryptionByDefault:
+             SSEAlgorithm: 'aws:kms'
+             KMSMasterKeyID: 'arn:aws:kms:us-east-1:123456789:key/056ea50b-1013-3907-8617-c93e474e400'
+     Tags:
+       - Key: "stage"
+         Value: "prod"
+       - Key: "service"
+         Value: "myService"

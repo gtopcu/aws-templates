@@ -1,0 +1,141 @@
+
+
+Original state machine input: $states.context.Execution.Input
+
+{"taskToken.$" = "$.Task.Token"}
+{"stateMachineArn.$" = "$$.StateMachine.Id"}
+{"stateMachineInput.$" = "$$.Execution.Input"}
+{"stateInput.$" = "$.states.input"}
+{"stateResult.$" = "$.states.result"}
+
+Conditions(Choice):
+{% $count($.states.input.Items) = 0 %}
+{% $exists($.states.input.LastEvaluatedKey) = 0 %}
+{% "FullName": "$name & ' ' & $lastname" %}
+
+
+"$$.StateMachine.Id"
+"$$.StateMachine.Name"
+"$$.Execution.Id"
+"$$.Execution.Input"
+"$$.Execution.Name"
+"$$.Execution.RoleArn"
+"$$.Execution.StartTime"
+"$$.State.Id"
+"$$.State.Name"
+"$$.State.EnteredTime"
+"$$.State.RetryCount"
+"$$.Task.Token"
+"$$.Task.Id"
+"$$.Task.Name"
+"$$.Task.Type"
+"$$.Task.StateEnteredTime"
+"$$.Task.StateTimeoutInSeconds"
+"$$.Task.Host"
+"$.context"
+"$.input"
+"$.Payload"
+"$.status"
+"$.result"
+"$.error"
+"$.cause"
+"$.task"
+"$.task.token"
+"$.task.id"
+"$.task.name"
+"$.task.type"
+"$.task.stateEnteredTime"
+"$.task.stateTimeoutInSeconds"
+"$.task.host"
+"$.state"
+"$.state.name"
+"$.state.enteredTime"
+"$.state.retryCount"
+"$.stateMachine"
+"$.stateMachine.id"
+"$.stateMachine.name"
+"$.stateMachine"
+"$.stateMachine.id"
+"$.stateMachine.name"
+"$.stateEnteredEventDetails"
+"$.retryCount"
+"$.retryLimit"
+"$.retryDelay"
+"$.retryInterval"
+"$.retryIntervalSeconds"
+"$.retryIntervalSecondsPath"
+"$.retryBackoff"
+"$.retryBackoffRate"
+"$.retryMaxDelay"
+"$.retryExponentialBackoff"
+"$.retryJitterStrategy"
+"$.retryJitterStrategyRate"
+"$.retryJitterStrategyRatePath"
+"$.retryJitterStrategyRateSeconds"
+"$.retryJitterStrategyRateSecondsPath"
+
+---------------------------------------------------------------------------------------------------------
+JSONata
+---------------------------------------------------------------------------------------------------------
+
+$count $append $exists $now 
+$sum $avg $min $max 
+$length $uppercase $lowercase $contains
+
+$partition    - partition a large array
+$range        - generate an array of values
+$hash         - calculate hash
+$randomSeeded - generate a value between 0 <= n < 1
+$uuid         - generate UUID
+$parse        - deserialize JSON strings
+ 
+Account.Order
+Account.Order[OrderID="order103"]
+employees[department = "Engineering"].name
+$sum(Account.Order.Product.(Price * Quantity))
+people^(age).name -> oldest person's name
+people.age^2
+$count(people[age > 30])
+$uppercase(people[0].city)
+people.{ "name": name, "isAdult": age >= 18 }
+employees.{ "name": name, "yearsUntilRetirement": 65 - age }
+{ "peopleMap": people.{ "name": name, "location": city } }
+
+
+---------------------------------------------------------------------------------------------------------
+JSONata in StepFunctions
+https://try.jsonata.org/
+https://dev.to/ianbrumby/handling-paginated-results-seamlessly-with-aws-step-functions-42po
+
+CDK does not support JSONata based Step Functions using the native fromChainable method. 
+JSONata is supported using CDK when using ASL and the fromFile method
+---------------------------------------------------------------------------------------------------------
+
+input output variables
+
+input:
+{
+    "input": "input data"
+}
+
+"Assign": {
+  "results": "{% $states.result.Items %}"
+}
+"Assign": {
+  "results": "{% $append($results, $states.result.Items) %}"
+}
+
+{
+  "Type": "Pass",
+  "QueryLanguage": "JSONata",
+  "Output": {
+    "item": "{% $item %}"
+  }
+}
+
+
+
+
+
+
+

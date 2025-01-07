@@ -22,16 +22,19 @@ class CommonStack(cdk.Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
+        # self.account
+        # self.region
         # self.node
         # self.stack_id
         # self.stack_name
-        # self.account
-        # self.region
         # self.environment # aws://account/region
         # Stack.of(lambda_fn)
         # Stack.export_value(123, name="exported_value")  # Create a CloudFormation Export for a string value.
         #                                                 # Returns a string representing of Fn.importValue()
         # path = my_construct.node.path # Stack1/MyBucket
+
+        # from aws_cdk.aws_s3_assets import Asset
+        #api_definition = Asset(self, "ApiDefinitionAsset", path="./openapi/apiDefinition.yaml")  # deploy_time=False bundling=DOCKET
 
         # ------------------------------------------------------------------------------------------
         # Context variables

@@ -23,8 +23,9 @@ class ApigwLambdaStack(Stack):
     def __init__(self, scope: Construct, id: str, **kwargs) -> None:
         super().__init__(scope, id, **kwargs)
 
-        apigw_lambda.ApiGatewayToLambda(
+        self.apigw_lambda.ApiGatewayToLambda(
             self, "ApiGatewayToLambda",
+            # existing_lambda_obj=self.lambda_fn,
             lambda_function_props=_lambda.FunctionProps(
                 runtime=_lambda.Runtime.PYTHON_3_13,
                 code=_lambda.Code.from_asset("lambda"),

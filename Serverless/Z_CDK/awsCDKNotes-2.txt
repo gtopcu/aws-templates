@@ -12,6 +12,7 @@ Best practices:
 - Use cf-lint, cdk-nag, Policy Validation(CF Guard) and IAM Permission Boundaries
 - Create own constructs & stacks with best practices
 - Combine grouped stacks into stages
+- Use grants - i.e. ddb.grantReadWrite(lambda_fn) instead of manually adding roles/policies 
 - Do not use CF params(not available at synth), use context variables(cdk.context.json) and environment vars
 - Reset CDK context vars to retrieve latest data from your AWS account
 - Avoid cross-stack resource references / dependencies (causes deadlocks, deploys together etc)
@@ -28,9 +29,6 @@ https://aws.amazon.com/blogs/aws/track-performance-of-serverless-applications-bu
 
 CloudFormation Lint:
 https://github.com/aws-cloudformation/cfn-lint
-
-CloudFormation Guard:
-https://docs.aws.amazon.com/cfn-guard/latest/ug/what-is-guard.html
 
 Policy Validation
 https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk/README.html#policy-validation
@@ -65,6 +63,24 @@ GitHub Action:
   uses: stelligent/cfn_nag@master
   with:
     input_path: tests
+
+--------------------------------------------------------------------------------------------------------
+
+CloudFormation Guard:
+https://docs.aws.amazon.com/cfn-guard/latest/ug/what-is-guard.html
+
+Can use in Win/Linux/Mac or as Lambda / CF Hook
+
+brew install cloudformation-guard
+curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/aws-cloudformation/cloudformation-guard/main/install-guard.sh | sh
+export PATH=$PATH:/opt/homebrew/lib/.guard/bin
+
+cfn-guard --version
+cfn-guard -Validate
+cfn-guard test
+cfn-guard parse-tree
+cfn-guard rulegen
+cfn-guard completions
 
 --------------------------------------------------------------------------------------------------------
 
@@ -259,6 +275,9 @@ https://catalog.us-east-1.prod.workshops.aws/workshops/10141411-0192-4021-afa8-2
 
 Creating resources directly with CF & Using escape hatches for L1-L2 constructs:
 https://docs.aws.amazon.com/cdk/v2/guide/cfn_layer.html
+
+--------------------------------------------------------------------------------------------------------
+
 
 --------------------------------------------------------------------------------------------------------
 

@@ -1,10 +1,16 @@
 # https://www.w3schools.com/python/python_regex.asp
 import re
 
+# ^abc: Matches any string that starts with "abc". (^ : begins with)
+# abc$: Matches any string that ends with "abc". ($ : ends with)
+# .  : 0 or more
+# +  : 1 or more
+# \d : digits
+# \s : whitespace
+
 REGEX_EMAIL = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
 REGEX_NUMBERS = r"\d+"
 REGEX_NAME = r"^[a-zA-Z]+$"
-
 
 txt = "The rain in Spain"
 x = re.search("^The.*Spain$", txt)

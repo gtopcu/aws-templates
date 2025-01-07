@@ -311,8 +311,8 @@ Serverless:
             zero-ETL integration to OpenSearch & RedShift
 - API GW: Custom domain names for private endpoints
 - Lambda: Python 3.13 & Node 22, snapstart Python & .Net(not free), S3 as failure destination(async/streaming),
-          VSCode-like editor(3MB editable file limit), SAM export, ApplicationSignals & FaultInjectionService support, 
-          Top10 Lambda Metrics in Lambda Dashboard, new metrics for EventSourceMappings
+          VSCode-like editor(up to 3MB editable), SAM export, ApplicationSignals/SLAs & FaultInjectionService support, 
+          Top-10 Lambda Metrics in Lambda Dashboard, new metrics for EventSourceMappings
 - EventBridge: Avg latency down to 130ms from 2.2s, VPC Lattice+PrivateLink VPC access, API dest. proactive OAuth token refresh
 - SFs: Export as SAM/InfrastructureComposer from console, Variables & JSONata support, VPC Lattice+PrivateLink VPC access
 - Kinesis: on-Demand now supports 5x throughtput - 10GB/s for writers 20GB/s for consumers per stream
@@ -323,13 +323,13 @@ Serverless:
 - AppSync: EventsAPI(EventBridge->Appsync Async+WebSockets), cross-account API access with RAM
       
 AI:
-- Bedrock: Nova FMs, ConversationalBuilder, PromptManager-Caching/Flows/Optimizer, BatchInference(50% cheaper), 
-           ConverseAPI(LangChain), DataAutomation, StructuralDataRetrieval, Rerank API, realtime custom datasource sync,
-           GraphRAG & streaming support, multi-model & multi-agent collaboration, autogenereated query filters,
-           model & RAG evaluation - human & LLM-as-judge, custom intervention using agents, IntelligentPromptRouting, 
-           Guardrails up to 85% discount, automatic reasoning checks & multimodal toxicity detection for image content,
-           latency-optimized inference for FMs, Model Distillation, Marketplace, KnowledgeBases Aurora as vector store,
-- Other AI: AppStudio, Sagamaker Unified Studio, structured retrieval(Redshift & SageMaker Lakehouse), 
+- Bedrock: Nova FMs, Marketplace, ConversationalBuilder, PromptManager-Caching/Flows/Optimizer, BatchInference(50% cheaper), 
+           model import, ConverseAPI(LangChain), DataAutomation, Rerank API, GraphRAG & streaming support, cross-region inference, 
+           multi-model & multi-agent collaboration, autogenereated query filters, model & RAG evaluation - human & LLM-as-judge, 
+           custom intervention using agents, IntelligentPromptRouting, latency-optimized inference for FMs, Model Distillation, Guardrails up to 85% discount, automatic reasoning checks & multimodal toxicity detection for image content
+           Knowledge Bases - chat with document, StructuralDataRetrieval(Redshift & SageMakerLakehouse), Aurora as vector store,
+                             web crawler, custom data sources(Salesforce, Confluence, Sharepoint etc) & realtime data sync
+- Other AI: AppStudio, Sagamaker Unified Studio, structured retrieval(Redshift & SageMaker Lakehouse)
             Sagemaker realtime endpoints scale down to 0 & multi-adapter inference,
             Q developer: code review, inline chat, console/Datadog integration, Q Business new goodies
 
