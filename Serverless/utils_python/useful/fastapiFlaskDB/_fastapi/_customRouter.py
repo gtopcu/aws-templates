@@ -1,6 +1,6 @@
 
 # https://www.youtube.com/watch?v=0A_GCXBCNUQ
-
+from typing import Any
 from fastapi import APIRouter, status, HTTPException
 
 router = APIRouter(
@@ -13,6 +13,7 @@ router = APIRouter(
 )
 
 router.get("/")
-def get_users():
+async def get_users() -> None:
+    # await some_async_function()
     raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Not authorized")
 

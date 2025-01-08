@@ -1,11 +1,28 @@
 
-brew install rust
-/opt/homebrew/Cellar/rust/1.83.0_1: 3,552 files, 312.9MB
+https://ohadravid.github.io/posts/2023-03-rusty-python/
+https://pyo3.rs/v0.18.1/#using-rust-from-python
 
-cargo
+brew install rust + cargo
+/opt/homebrew/Cellar/rust/1.83.0_1: 3,552 files, 312.9MB
 
 maturin(build system)
 https://www.maturin.rs/
+
+$ mkdir my_package
+$ cd my_package
+$ python -m venv .env
+$ source .env/bin/activate
+$ pip install maturin
+
+pip install maturin
+maturin init --bindings pyo3
+maturin develop
+
+# added to Cargo.toml
+[profile.release]
+debug = true       # Debug symbols for our profiler.
+lto = true         # Link-time optimization.
+codegen-units = 1  # Slower compilation but faster code. 
 
 
 use pyo3::prelude::*;
@@ -19,4 +36,22 @@ fn hello_from_bin() -> String {
 fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(hello_from_bin, m)?)?;
     Ok(())
+}
+
+#[pyfunction]
+fn find_close_polygons(polygons: Vec<PyObject>, point: PyObject, max_dist: f64) -> PyResult<Vec<PyObject>> {
+    Ok(vec![])
+}
+
+#[pyfunction]
+fn find_close_polygons(polygons: Vec<PyObject>, point: PyObject, max_dist: f64) -> PyResult<Vec<PyObject>> {
+    let mut close_polygons = vec![];
+    
+    for poly in polygons {
+        if norm(poly.center - point) < max_dist {
+            close_polygons.push(poly)
+        }
+    }
+    
+    Ok(close_polygons)
 }

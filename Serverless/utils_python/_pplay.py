@@ -72,6 +72,7 @@ import sys
 # datetime.now(timezone.utc)
 # time.time()
 # time.strftime("%Y-%m-%d %H:%M:%S")
+ # time.perf_counter()
 # datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 # time.strptime("2024-03-24", "%Y-%m-%d")
 # date = datetime.strptime("2024-03-24", "%Y-%m-%d").date()

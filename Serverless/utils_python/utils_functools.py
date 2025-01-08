@@ -2,6 +2,8 @@
 from functools import cache, cached_property, lru_cache, wraps, reduce, partial
 import time
 
+from dataclasses import dataclass
+
 def main() -> None:
     
     # print(factorial(3))
@@ -13,13 +15,30 @@ def main() -> None:
     reduce(lambda x, y: x + y, range(10))
 
 @cache
-# @lru_cache(maxsize=128, typed=False) #maxsize=None 
+# @lru_cache(maxsize=128, typed=False)
 def factorial(n):
     return n * factorial(n-1) if n else 1
 
 @cached_property
 def cached_prop():
     return 10 * 10
+
+@dataclass
+class Dataclass:
+    id: int
+    @cached_property
+    def calculate(self):
+        return self.id * 10
+
+def func_wrapper(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        start = time.perf_counter_ns()
+        print("starting..")
+        val = func(*args, **kwargs)
+        print("ended in:", (time.perf_counter_ns() - start) / 1000000, "ms")
+        return val
+    return wrapper
 
 def func_wrapper_with_args(arg1: int):
     print("Decorator arg: ", arg1)

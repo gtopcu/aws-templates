@@ -1,0 +1,40 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "cwd": "${fileDirname}", 
+            "justMyCode": true
+        }
+    ]
+}
+        // {
+        //     "name": "Debugger: Fast API",
+        //     "type": "debugpy",
+        //     "request": "launch",
+        //     "module": "uvicorn",
+        //     "args": [ "src.main:app", "--reload" ], 
+        //     "justMyCode": true,
+        //     "console": "integratedTerminal",
+        //     //"cwd": "${workspaceFolder}/src",
+        //     //"env": {
+        //     //    "PYTHONPATH": "${workspaceFolder}/src"
+        //     //},
+        //     //"envFile": "${workspaceFolder}/.env",
+        //     "env": {
+        //         "PYTHONPATH": "${workspaceFolder}/src"
+        //     },
+        //     "jinja": false,
+        //     "serverReadyAction": {
+        //         "pattern": "\\bUvicorn running on (http://127.0.0.1:[0-9]+)",
+        //         "uriFormat": "http://localhost:%s",
+        //         "action": "openExternally",
+        //     }
+        // }

@@ -308,7 +308,7 @@ https://www.youtube.com/watch?v=5wokwEtddtc
 Serverless:
 - DynamoDB: Price cut on-demand %50 global tables %67, warm thruhput for tables & indexes(4k WPS & 12k RPS initially), 
             Global Tables Strong Consistency(DSQL), Attribute based access control(RBAC - based on table/user/policy tags)
-            zero-ETL integration to OpenSearch & RedShift
+            zero-ETL integration to OpenSearch & RedShift, PITR now configurable between 1 and 35 days
 - API GW: Custom domain names for private endpoints
 - Lambda: Python 3.13 & Node 22, snapstart Python & .Net(not free), S3 as failure destination(async/streaming),
           VSCode-like editor(up to 3MB editable), SAM export, ApplicationSignals/SLAs & FaultInjectionService support, 

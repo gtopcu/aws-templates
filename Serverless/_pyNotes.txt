@@ -268,7 +268,7 @@ cli = [
 ]
 ---------------------------------------------------------------------------------------------------------------
 POETRY
-----------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------
 # https://www.youtube.com/watch?v=Ji2XDxmXSOM
 
 curl -sSL https://install.python-poetry.org | python3 -
@@ -340,3 +340,15 @@ poetry build-lambda
 /opt/homebrew/bin/python3.12
 /usr/local/bin/python3
 "python.defaultInterpreterPath": "/opt/homebrew/bin/python3.12",
+
+
+---------------------------------------------------------------------------------------------------------------
+Profiling
+https://ohadravid.github.io/posts/2023-03-rusty-python/
+---------------------------------------------------------------------------------------------------------------
+
+cProfile -h
+
+pip install py-spy
+py-spy record --native -o profile.svg -- python measure.py
+profile.svg -> FlameGraph

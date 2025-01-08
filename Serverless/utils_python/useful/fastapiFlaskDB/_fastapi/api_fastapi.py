@@ -1,17 +1,24 @@
 
+# https://www.youtube.com/watch?v=C-bie4ZY_o0
 # https://www.youtube.com/watch?v=iWS9ogMPOI0
 # https://www.youtube.com/watch?v=_Y3uAFVYk5I
 # https://www.youtube.com/watch?v=0A_GCXBCNUQ
 # https://fastapi.tiangolo.com/tutorial/response-model/
 
 # pip install fastapi
+# pip install python-multipart # -> for File/UploadFile
 # pip install "uvicorn[standard]"
 
-# python3 -m venv venv
+# python3 -m venv .venv
 # source venv/bin/activate
 
 # uvicorn api_fastapi:app --reload
 # http://127.0.0.1:8000/docs
+
+"""
+check launch.json for debugging
+
+"""
 
 from datetime import datetime
 import time
@@ -20,7 +27,6 @@ from typing import Any
 from fastapi import FastAPI, Request, status, HTTPException
 from fastapi import File, UploadFile, Body, Path, Query, Cookie, Header
 from fastapi.responses import Response, HTMLResponse, JSONResponse, PlainTextResponse
-
 
 # FileResponse, PlainTextResponse, RedirectResponse,  StreamingResponse
 # from fastjsonschema import validate, exceptions
@@ -32,10 +38,23 @@ from fastapi.responses import Response, HTMLResponse, JSONResponse, PlainTextRes
 # from starlette.exceptions import HTTPException as StarletteHTTPException
 # from fastapi.encoders import jsonable_encoder
 
-from fastapi.middleware.cors import CORSMiddleware
-# from _customRouter import router
 # from fastapi.staticfiles import StaticFiles
+# app.mount("/static", StaticFiles(directory="static"), name="static")
 
+# from _customRouter import router
+# app.include_router(router)
+
+# from fastapi.middleware.cors import CORSMiddleware
+# app.add_middleware( 
+#     CORSMiddleware,
+#     allow_origins=["*"],
+#     allow_credentials=True,
+#     allow_methods=["*"],
+#     allow_headers=["*"],
+# #     expose_headers=["*"],
+# #     max_age=3600,
+# #     # origins=["XXXXXXXXXX"],
+# )
 
 from pydantic import BaseModel, Field
 
@@ -47,22 +66,9 @@ class ToDo(BaseModel):
 # FastAPI is async by default (Flask is not)
 app = FastAPI()
 
-# app.mount("/static", StaticFiles(directory="static"), name="static")
-# app.include_router(router)
-# app.add_exception_handler(HTTPException, exceptionHandler, exc: exc.detail)
-
-app.add_middleware( 
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-#     expose_headers=["*"],
-#     max_age=3600,
-#     # origins=["XXXXXXXXXX"],
-)
-
 items = [ToDo(id=1, title="Buy milk"), ToDo(id=2, title="Buy bread")]
+
+# app.add_exception_handler(HTTPException, exceptionHandler, exc: exc.detail)
 
 # @app.middleware("http")
 # async def add_process_time_header(request: Request, call_next):
@@ -107,8 +113,9 @@ async def root(request: Request) -> Any: # background_tasks: BackgroundTasks
     # request.headers
     # request.auth
     # request.query_params
-    return request.base_url
-    # return {"message": "Hello World"}
+    # await some_async_func()
+    return str(request.base_url)
+    # return {"message": "Hello World"}
     # return RedirectResponse(url="https://www.youtube.com/watch?v=dQw4w9WgXcQ")
     # return JSONResponse(content={"message": "Here's your interdimensional portal."})
     # background_tasks.add_task(write_notification, email, message="some notification")
@@ -149,7 +156,7 @@ async def upload_file(file: UploadFile = File(...)) -> Any:
 
 def main(): 
     import uvicorn 
-    uvicorn.run(app, port=5000, log_level="info", use_colors=True)
+    uvicorn.run(app, port=5000, log_level="info", use_colors=True) #, reload=True)
 
 if __name__ == "__main__":
     main()
