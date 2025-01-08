@@ -86,7 +86,6 @@ class ApiGWHttpLambdaProxyStack(Stack):
             # },
             # layers= [ mylayer ],
             logging_format=_lambda.LoggingFormat.JSON,
-            # role=iam.Role.from_role_arn(self, "cdktest-LambdaFunctionToSqsRole", "XXX"),
             removal_policy=RemovalPolicy.DESTROY,
         )
 
@@ -217,6 +216,8 @@ class ApiGWHttpLambdaProxyStack(Stack):
         # self.api_gw.metric_latency
         
         cdk.CfnOutput(self, "API_Endpoint", value=self.api_gw.api_endpoint)
+        # cdk.CfnOutput(self, "ApiUrl", value=f"https://{api_gw.ref}.execute-api.{self.region}.amazonaws.com/")
+        # cdk.CfnOutput(self, "ApiArn", value=f"arn:aws:execute-api:{self.region}:{self.account}:{apigw.ref}/*/*"
         cdk.CfnOutput(self, "API_URL", value=self.api_gw.url)
         cdk.CfnOutput(self, "API_ID", value=self.api_gw.api_id)
         cdk.CfnOutput(self, "HTTP_API_Name", value=self.api_gw.http_api_name)

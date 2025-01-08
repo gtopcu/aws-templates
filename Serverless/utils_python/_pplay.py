@@ -85,6 +85,11 @@ import sys
 # age = (date.today() - birthday).days // 365
 # print(age)
 
+# import yaml
+# with open(definition_path, 'r') as f:
+#   definition = yaml.safe_load(f)
+# yaml.dump(definition)
+
 # import pandas as pd
 # df = pd.DataFrame(list)
 # df.to_csv("output.csv")

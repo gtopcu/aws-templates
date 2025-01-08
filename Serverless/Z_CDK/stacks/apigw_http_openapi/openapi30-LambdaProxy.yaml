@@ -1,0 +1,55 @@
+# openapi/definition.yaml
+openapi: "3.0.1"
+info:
+  title: "Sample HTTP API"
+  version: "1.0.0"
+paths:
+  /items:
+    get:
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+      x-amazon-apigateway-integration:
+        uri: "${GetItemsFunctionArn}"
+        payloadFormatVersion: "2.0"
+        httpMethod: "POST"
+        type: "aws_proxy"
+    post:
+      responses:
+        "201":
+          description: "201 response"
+          content:
+            application/json:
+              schema:
+                type: object
+      x-amazon-apigateway-integration:
+        uri: "${CreateItemFunctionArn}"
+        payloadFormatVersion: "2.0"
+        httpMethod: "POST"
+        type: "aws_proxy"
+  /items/{id}:
+    get:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                type: object
+      x-amazon-apigateway-integration:
+        uri: "${GetItemFunctionArn}"
+        payloadFormatVersion: "2.0"
+        httpMethod: "POST"
+        type: "aws_proxy"

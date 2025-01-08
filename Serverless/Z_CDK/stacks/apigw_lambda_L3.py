@@ -120,6 +120,8 @@ class ApiGatewayLambdaStackL3(Stack):
         )
 
         # cdk.CfnOutput(self,"APIGW-URL", value=self.api_gw.url, export_name="APIGW-URL") # Fn.importValue(exportName)
+        # cdk.CfnOutput(self, "ApiUrl", value=f"https://{api_gw.ref}.execute-api.{self.region}.amazonaws.com/")
+        # cdk.CfnOutput(self, "ApiArn", value=f"arn:aws:execute-api:{self.region}:{self.account}:{apigw.ref}/*/*"
         # cdk.CfnOutput(self,"APIGW-DomainName", value=self.api_gw.domain_name)
         # cdk.CfnOutput(self,"APIGW-Stage", value=self.api_gw.deployment_stage)        
         # cdk.CfnOutput(self,"LambdaFunctionArn", value=self.lambda_fn.function_arn)
