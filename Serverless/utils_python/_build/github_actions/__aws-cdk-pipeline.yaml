@@ -36,10 +36,12 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        pip install poetry
+        poetry export -f requirements.txt --with dev --output requirements.txt --without-hashes
         pip install -r requirements.txt
-        pip install pre-commit isort ruff pyright pytest coverage
-        npm install -g aws-cdk
-      # pre-commit isort isort black flake8 ruff pytest coverage
+      # cp ./pyproject.toml ./poetry.lock* /tmp/
+      # pip install pre-commit isort black flake8 ruff pyright pytest pytest-env pytest-dotenv pytest-mock pytest-cov coverage
+      # pip install aws-cdk-lib
     
     - name: Run pre-commit
       run: |
