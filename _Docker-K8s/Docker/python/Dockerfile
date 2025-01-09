@@ -36,7 +36,7 @@ CMD ["python", "app.py"]
 
 # -----------------------------------------------------------------
 
-FROM python:3.12
+FROM python:3.13
 RUN apt update -y
 # RUN apt install -y curl
 ARG queue_name

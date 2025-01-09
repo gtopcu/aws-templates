@@ -1,0 +1,31 @@
+
+JSON supports the following data types:
+
+1. String - A sequence of characters enclosed in double quotes.
+Example: "Hello, World!"
+
+2. Number - Can be an integer or a floating-point number.
+Example: 42, 3.14, -5
+
+3. Boolean - Represents true or false.
+Example: true, false
+
+4. Null - Represents an empty or null value.
+Example: null
+
+5. Object - A collection of key-value pairs, where keys are strings and values can be any valid JSON type.
+Enclosed in curly braces {}. Example:
+{
+  "name": "John",
+  "age": 30
+}
+
+6. Array
+An ordered list of values, which can be any JSON type. Enclosed in square brackets []
+Example: [1, "apple", true, null]
+
+Key Notes:
+Keys in JSON objects must be strings
+Values in JSON can be any of the above data types
+JSON does not support special data types like date, undefined, or functions 
+Dates are often represented as strings in ISO 8601 format -> "2023-01-01T12:00:00Z"

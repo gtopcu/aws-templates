@@ -1,5 +1,0 @@
-project_id = "your-project-id"
-region = "us-central1"
-storage_bucket_name = "my-function-code-bucket"
-pubsub_topic_name = "my-trigger-topic"
-function_name = "my-python-processor"

@@ -14,24 +14,26 @@ async def main() -> None:
 
     start = time.perf_counter()
 
-    #batch = asyncio.gather(brew_coffee(), toast_bagel())
-    #result_coffee, result_bagel = await batch
-
     # asyncio.run(main())
-    # asyncio.get_running_loop()
-    # asyncio.get_event_loop()
-    # asyncio.run(brew_coffee())
-    # await asyncio.gather(task(1), task(2))
+    # await asyncio.Future()  # run forever
     # await asyncio.gather(*task_list, return_exceptions=True)
     # await asyncio.sleep(1)
-    # task = asyncio.create_task(task(3))
-    # await asyncio.wait([coffee_task, bagel_task])
-    # await asyncio.wait_for(coffee_task, timeout=10)
+    # task = asyncio.create_task(brew_coffee())
+    # asyncio.run(task)
     # task.done()
     # task.cancel()
     # task.cancelled()
-    # result task.result()
+    # task.result()
     # asyncio.TimeoutError, asyncio.CancelledError
+
+    # asyncio.get_running_loop()
+    # asyncio.get_event_loop()
+    # await asyncio.gather(task(1), task(2))
+    # batch = asyncio.gather(brew_coffee(), toast_bagel())
+    # result_coffee, result_bagel = await batch
+    # await asyncio.wait([coffee_task, bagel_task])
+    # await asyncio.wait_for(coffee_task, timeout=10)
+
     # server = await asyncio.start_server(lambda: None, "127.0.0.1", 8080)
     # addr = server.sockets[0].getsockname()
     # print(f"Serving on {addr}")

@@ -48,7 +48,7 @@ class myPersonClass:
         return self.name
 
 
-# from typing import Self, Any, Optional, Final, Literal, NewType, TypeAlias, TypedDict
+# from typing import Self, Any, Optional, Final, Literal, NewType, TypeAlias, TypedDict, Callable
 # from collections import namedtuple, deque, OrderedDict, defaultdict
 # from collections.abc import Mapping, Sequence, Set, Generator, Callable, Iterable, Iterator, AsyncIterable
 # my_dict: dict[str, Any]
@@ -72,7 +72,7 @@ import sys
 # datetime.now(timezone.utc)
 # time.time()
 # time.strftime("%Y-%m-%d %H:%M:%S")
- # time.perf_counter()
+# time.perf_counter()
 # datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 # time.strptime("2024-03-24", "%Y-%m-%d")
 # date = datetime.strptime("2024-03-24", "%Y-%m-%d").date()
@@ -94,7 +94,8 @@ import sys
 # df = pd.DataFrame(list)
 # df.to_csv("output.csv")
 
-# import numpy as np
+import numpy as np
+# np.ones((3, 5))
 # matrix = np.random.rand(3, 5)
 # matrix = np.dot(10, matrix)
 

@@ -306,7 +306,7 @@ https://theburningmonk.com/2024/11/best-preinvent-2024-serverless-announcements
 https://www.youtube.com/watch?v=5wokwEtddtc
 
 Serverless:
-- DynamoDB: Price cut on-demand %50 global tables %67, warm thruhput for tables & indexes(4k WPS & 12k RPS initially), 
+- DynamoDB: Price cut on-demand %50 global tables %67, warm throughput for tables & indexes(4k WPS & 12k RPS initially), 
             Global Tables Strong Consistency(DSQL), Attribute based access control(RBAC - based on table/user/policy tags)
             zero-ETL integration to OpenSearch & RedShift, PITR now configurable between 1 and 35 days
 - API GW: Custom domain names for private endpoints

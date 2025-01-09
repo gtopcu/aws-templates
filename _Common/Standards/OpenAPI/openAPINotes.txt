@@ -1,0 +1,70 @@
+
+In OpenAPI(formerly Swagger) schemas, the data types are more specific and tailored to describe API payloads than JSON.
+They extend JSON data types and include additional types and formats for more precise API documentation. 
+
+Here’s an overview of the types supported in OpenAPI:
+
+integer - Represents integer numbers.
+Common formats:
+    int32: A 32-bit integer
+    int64: A 64-bit integer (commonly used for long integers)
+Example:
+    type: integer
+    format: int32
+
+number - Represents numeric values, including integers and floating-point numbers
+Common formats:
+    float: Single-precision floating-point
+    double: Double-precision floating-point
+Example:
+    type: number
+    format: double
+
+string - Represents text or character data
+Common formats:
+    byte: Base64-encoded binary data
+    binary: Raw binary data
+    date: A date without time (e.g., 2023-01-01)
+    date-time: A date and time in ISO 8601 format (e.g., 2023-01-01T12:00:00Z)
+    password: A string intended for passwords (hidden in UIs)
+Example:
+    type: string
+    format: date-time
+
+boolean - Represents true or false
+Example:
+    type: boolean
+
+null - Represents a null value
+Example:
+    type: null
+
+object - Represents a collection of key-value pairs, like a JSON object. Can define specific properties and their types
+Example:
+    type: object
+    properties:
+    name:
+        type: string
+    age:
+        type: integer
+
+array - Represents a collection of items. Requires an items field to define the type of elements in the array
+Example:
+    type: array
+    items:
+        type: string
+
+
+Additional Formats
+In OpenAPI, formats extend the basic data types for more specificity. Common formats include:
+
+uuid: Universally Unique Identifier (e.g., 123e4567-e89b-12d3-a456-426614174000)
+email: Email address
+uri: A Uniform Resource Identifier (e.g., https://example.com)
+hostname: A valid domain name (e.g., example.com)
+ipv4: An IPv4 address (e.g., 192.168.1.1)
+ipv6: An IPv6 address (e.g., 2001:0db8:85a3:0000:0000:8a2e:0370:7334)
+
+Key Notes:
+OpenAPI focuses on specifying the type and format for precise API interaction and validation.
+Types like int or float are combinations of the type and format fields - integer with int32 format, or number with float format

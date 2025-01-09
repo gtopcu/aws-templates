@@ -82,10 +82,10 @@ print("Table status:", table.table_status)
 
 # table.query(Limit=37)
 
-response = table.put_item(Item={"id": "1", "name": "Gokhan Topcu", "age": 40, "address": "my address"})
+response = table.put_item(Item={"PK": "1", "name": "Gokhan Topcu", "age": 40, "address": "my address"})
 # print(response)
 
-response = table.get_item(Key={"id": "1", "name": "Gokhan Topcu"})
+response = table.get_item(Key={"PK": "1", "name": "Gokhan Topcu"})
 if record := response.get("Item"):
     print("Record: ", record)
 else:
@@ -97,7 +97,7 @@ else:
 # record = response["Item"]
 # print(record)
 # print(type(record)) #dict
-# print(record["id"])
+# print(record["PK"])
 # print(record["name"])
 # print(record["address"])
 # record = json.loads(record)
@@ -111,7 +111,7 @@ print(person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_u
 # print(record)
 
 person = Person(
-    id="2",
+    PK="2",
     name="Goknur Topcu",
     age=30,
     address="my address2",
@@ -125,9 +125,10 @@ print(person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_u
 #         "statusCode": 201,
 #         "body": { "result": "Created successfully" },
 #    }
-#      
+# 
+# # PK:2KB, SK:1KB, Max:400KB/item -> Apply size limit!     
 # try:
-#     table.put_item(Item=item, ConditionExpression="attribute_not_exists(id)")
+#     table.put_item(Item=item, ConditionExpression="attribute_not_exists(PK)")
 #     successfulItems.append(item)
 # except ClientError as err:
 #     if(err.response['Error']['Code'] == "ConditionalCheckFailedException"):
@@ -138,7 +139,7 @@ print(person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_u
 
 # response = table.update_item(
 #     Key={
-#         "id": "2"
+#         "PK": "2"
 #     },
 #     UpdateExpression="SET age = :age", # SET-ADD-DELETE
 #     ConditionExpression='attribute_not_exists(age)' # Do not update if exists
@@ -149,15 +150,42 @@ print(person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_u
 # )
 # print(response)
 
-# Delete
-# response = table.delete_item(Key={"id": "1"})
+# Idempotency for PutItem/UpdateItem:
+# Use condition expressions for idempotency -> set 'ReturnValuesOnConditionCheckFailure' to 'ALL_OLD'  
+# Use the returned 'error' and 'error.Item' to run any additional logic and choose the appropriate error message
+# https://www.serverlessguru.com/blog/dynamodb-common-mistakes-and-how-to-fix-them
+# response = table.update_item(
+#     Key={
+#         "PK": "2"
+#     },
+#     UpdateExpression="SET age = :age", # SET-ADD-DELETE
+#     ConditionExpression="attribute_exists(#pk) OR (attribute_not_exists(#pk) AND #age <> :age)",
+#     ExpressionAttributeNames={
+#         "#pk": 'PK',
+#         "#age": 'age'
+#     },
+#     ExpressionAttributeValues={
+#         ":age": 31
+#     },
+#     ReturnValues="UPDATED_NEW",
+#     ReturnValuesOnConditionCheckFailure="ALL_OLD"
+# )
+# response.error
+# response.error.Item
 # print(response)
 
-# Scan - 1MB Limit
+
+# Delete
+# response = table.delete_item(Key={"PK": "1"})
+# print(response)
+
+
+# Scan - 1MB Limit -> dynamo can return empty response even though there are matching records!
 # response = table.scan()
 # response = table.scan(
 #     FilterExpression=Key("name").begins_with("G"),
-#     ProjectionExpression="id, age"
+#     ProjectionExpression="PK, age",
+#     Limit=10
 # )
 # for item in response["Items"]:
 #     print(item)
@@ -174,36 +202,39 @@ print(person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_u
 #     # print(person.model_dump(exclude_none=True))
 
 
-# Query - 1MB Limit
+# Query - 1MB Limit -> dynamo can return empty response even though there are matching records!
 # response = table.query(
-#     KeyConditionExpression=Key("id").eq("1"),
+#     KeyConditionExpression=Key("PK").eq("1"),
 #     # FilterExpression=Attr("age").eq(30) & Attr("address").begins_with("my") #& Attr("hobbies").contains("walking"),
 #     # FilterExpression=Attr("age").between(30, 40) & Attr("age").is_in([30, 31, 32]) & Attr("age").exists()
 #     # FilterExpression=Attr("age").gt(30) & Attr("Age").lt(40) & Attr("age").ne(31) & Attr("age").gte(30) & Attr("age").lte(40)
 #     # IndexName="GSI1",
 #     # Limit=10,
-#     # ProjectionExpression="id, name, age",
+#     # ProjectionExpression="PK, name, age",
 #     # ScanIndexForward=False # true = ascending, false = descending
 # )
 # data = response['Items']
 # while "LastEvaluatedKey" in response:
-#     response = table.scan(ExclusiveStartKey=response["LastEvaluatedKey"])
+#     response = table.query(ExclusiveStartKey=response["LastEvaluatedKey"])
 #     data.extend(response['Items'])
 # print(data)
 
 
-# Batch Write - 25 items / 16GB limit
-# BatchWriter: Parallel, non-atomic writes -> handle partial failures!
+# Batch Write/Delete - 25 items / 16GB limit
+# BatchWriter: Parallel, non-atomic writes
+# Records that are not processed will be returned in 'UnprocessedItems' attribute in the response - apply retry!
 # with table.batch_writer() as batch:
 #     for i in range(1, 10):
-#         batch.put_item(Item={"id": str(i)})
+#         batch.put_item(Item={"PK": str(i)})
 #         You can also delete_items in a batch.
-#         batch.delete_item(Key={'id': str(i)})
+#         batch.delete_item(Key={'PK': str(i)})
 
 
-# Batch Get - 100 items / 16GB limit
+# Batch Get - 100 items / 16GB limit (from same/different tables)
+# Records that are not processed will be returned in 'UnprocessedItems' attribute in the response - apply retry!
+# key_list = [ {"PK": "1"}, {"PK": "2"} ]
 # response = ddb.batch_get_item(
-#     RequestItems={"employee": {"Keys": [{"id": "1"}], "ConsistentRead": True}},
+#     RequestItems={"employee": {"Keys": key_list, "ConsistentRead": True}},
 #     ReturnConsumedCapacity="TOTAL",
 # )
 # # print(response)
@@ -217,20 +248,20 @@ print(person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_u
 #     while scan is None or "LastEvaluatedKey" in scan:
 #         if scan is not None and "LastEvaluatedKey" in scan:
 #             scan = table.scan(
-#                 ProjectionExpression="id",
+#                 ProjectionExpression="PK",
 #                 ExclusiveStartKey=scan["LastEvaluatedKey"],
 #             )
 #         else:
-#             scan = table.scan(ProjectionExpression="id")
+#             scan = table.scan(ProjectionExpression="PK")
 
 #         for item in scan["Items"]:
-#             batch.delete_item(Key={"id": item["id"]})
+#             batch.delete_item(Key={"PK": item["PK"]})
 
 
 # Increment Attribute
 # response = table.update_item(
 #     Key={
-#         'id': '777'
+#         'PK': '777'
 #     },
 #     UpdateExpression='SET score.#s = score.#s + :val",
 #     ExpressionAttributeNames={
@@ -243,7 +274,7 @@ print(person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_u
 
 # def update_item_counter():
 #     table.update_item(
-#         Key={'ID': 1000},
+#         Key={'PK': 1000},
 #         UpdateExpression='ADD hits :incr',
 #         ExpressionAttributeValues={':incr': 1}
 #     )
@@ -256,7 +287,7 @@ def write_to_dynamodb_transaction():
             'Put': {
                 'TableName': 'MyTable',
                 'Item': {
-                    'ID': {'S': '1'},
+                    'PK': {'S': '1'},
                     'Name': {'S': 'Item 1'},
                     'Price': {'N': '10'},
                 }
