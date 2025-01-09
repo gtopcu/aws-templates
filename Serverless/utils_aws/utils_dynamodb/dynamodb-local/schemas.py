@@ -38,7 +38,7 @@ getcontext().prec = 2
 # https://pydantic.dev/articles/lambda-intro
 
 class Person(BaseModel):
-    id: str = Field(min_length=1, max_length=50, description="Employee ID")
+    PK: str = Field(min_length=1, max_length=50, description="Employee ID")
     # uuid: UUID = Field(default_factory=uuid4, description="Unique ID", examples=["12345678-1234-1234-1234-123456789012"])
     name: str = Field(min_length=1, max_length=100, description="Full Name")
     age: int | None = Field(default=None, ge=0, le=100, description="Age in years")
