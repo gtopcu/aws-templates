@@ -5,6 +5,44 @@ https://labs.play-with-docker.com/
 https://www.youtube.com/watch?v=bKFMS5C4CG0
 https://devtron.ai/blog/cmd-and-entrypoint-differences/
 
+----------------------------------------------------------------------------------------------------------------
+
+python(Full) - FROM python:3.13
+Largest size (~900MB)
+Contains all standard utilities and development tools
+Good for development, testing, and complex build requirements
+Example: 
+
+python-slim - FROM python:3.13-slim
+Medium size (~180MB)
+Minimal packages needed to run Python
+Good balance between size and functionality
+Best for production when you need some system packages
+
+python-alpine - FROM python:3.13-alpine
+Smallest size (~45MB)
+Based on Alpine Linux
+Very minimal, lacks many standard libraries
+Best for minimal production images
+Can be tricky with packages requiring compilation
+
+python-bullseye(Debian 11) - FROM python:3.13-bullseye
+Similar size to full image
+Based on Debian Bullseye
+Stable Debian release with long-term support
+Good for stability and security updates
+
+python-buster(Debian 10) - FROM python:3.13-buster
+Older Debian version
+Similar to bullseye but older
+
+Recommendation:
+Development: Use python (full)
+Production: Start with python-slim, use alpine if size is critical
+Need stability: Use bullseye or buster
+
+----------------------------------------------------------------------------------------------------------------
+
 https://stackoverflow.com/questions/21553353/what-is-the-difference-between-cmd-and-entrypoint-in-a-dockerfile
 Dockerfile should specify at least one of CMD or ENTRYPOINT commands.
 ENTRYPOINT should be defined when using the container as an executable.

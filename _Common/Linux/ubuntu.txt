@@ -132,10 +132,9 @@ https://sistemdostu.com/haproxy-nedir-nasil-kurulur
 
 ---------------------------------------------------------------------------------------------------
 
-docker run -it --entrypoint /bin/bash
-docker exec -it container_name /bin/bash
+docker ps | image ls 
+docker run -it --entrypoint /bin/bashh
 docker run -it ubuntu bash
-docker attach
 
 export PATH=$PATH:/usr/local/go/bin
 /var/log 
