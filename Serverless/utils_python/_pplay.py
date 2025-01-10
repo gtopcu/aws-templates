@@ -16,7 +16,7 @@
 
 # ruff format .
 # ruff check . --fix
-# ruff check test.py
+# ruff check test.py --config ruff.toml
 # ruff check test.py --fix
 
 """
@@ -67,6 +67,15 @@ import sys
 # load_dotenv()
 # logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
+# for path in sys.path:
+#     print("Path: " + path)
+# sys.path.append(os.getcwd() + "/.venv/lib/python3.13/site-packages")# os.path.join(__file__, 'test.txt')
+
+# Add the parent directory to sys.path
+# current_dir = os.path.dirname(os.path.abspath(__file__))
+# parent_dir = os.path.dirname(os.path.dirname(current_dir))
+# sys.path.append(parent_dir)
+
 # from datetime import datetime, timezone
 # import time
 # datetime.now(timezone.utc)
@@ -94,7 +103,7 @@ import sys
 # df = pd.DataFrame(list)
 # df.to_csv("output.csv")
 
-import numpy as np
+# import numpy as np
 # np.ones((3, 5))
 # matrix = np.random.rand(3, 5)
 # matrix = np.dot(10, matrix)
@@ -104,10 +113,6 @@ import numpy as np
 # os.environ.get("DDB_TABLE", "table1")
 # POSTGRE_IP = os.environ["POSTGRE_IP"]
 # POSTGRE_PORT: int = os.environ.setdefault("POSTGRE_PORT", 5432)
-
-# for path in sys.path:
-#     print("Path: " + path)
-# sys.path.append(os.getcwd() + "/.venv/lib/python3.13/site-packages")# os.path.join(__file__, 'test.txt')
 
 # current_dir = os.path.dirname(os.path.abspath(__file__))
 # file_path = os.path.join(current_dir, filename)

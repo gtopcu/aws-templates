@@ -1,8 +1,11 @@
 
-import os, sys
 import pytest
 from dataclasses import dataclass
 from lambdas import lambda_fn
+
+import os, sys
+import json
+from http import HTTPStatus
 
 # Add the parent directory to sys.path
 # current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -34,12 +37,26 @@ def lambda_context():
 #     # assert os.getenv("AWS_DEFAULT_REGION") == 'us-east-1'
 #     return monkeypatch
 
-# def test_enviroment(set_env):
-#     assert os.getenv("DDB_TABLE_NAME") == 'table-1'
+def test_enviroment():
+    assert os.getenv("DDB_TABLE_NAME") == 'table-1'
 
-def test_lambda_handler():
-    response = lambda_fn.handler({"key": "1"}, lambda_context())
-    response = lambda_fn.handler({"key": "1"}, lambda_context())
-#     # print(response)
-#     # assert response['statusCode'] == 200
-#     # assert response['body'] == 'Hello from Lambda!'
+@pytest.mark.unit
+def test_lambda_handler(event_apigw_lambda):
+
+    event = { "body": json.dumps("Hello to Lambda") }
+    response = lambda_fn.handler(event, lambda_context())
+    assert response['statusCode'] == HTTPStatus.OK
+
+    response = lambda_fn.handler({"zzz":1}, lambda_context())
+    assert response['statusCode'] == HTTPStatus.BAD_REQUEST
+
+    event = json.loads(event_apigw_lambda)
+    # print(event["body"])
+    # body = json.loads(event["body"])
+    response = lambda_fn.handler(event, lambda_context())
+    assert response['statusCode'] == HTTPStatus.OK
+    
+    # assert response['statusCode'] == 200
+    # assert response['body'] == 'Hello from Lambda!'
+
+    

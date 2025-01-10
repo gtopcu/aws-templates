@@ -8,6 +8,7 @@ from http import HTTPStatus
 import boto3
 
 logger = logging.getLogger(__name__)
+# logger.setLevel(logging.INFO)
 # logger.basicConfig( level=logging.INFO,
 #                     format='%(asctime)s %(levelname)s %(message)s',
 #                     datefmt='%Y-%m-%d %H:%M:%S')
@@ -31,15 +32,16 @@ def handler(event: dict, context: dict):
     # logger.info("context: %s, event: %s", context, event)
     logger.debug(f"request_id: {request_id}, context: {context}, event: {event}")
 
-    global ddb_table
-    if ddb_table is None:
-        print("Initializing DDB table..")
-        ddb_table = "table"
     try:
+        global ddb_table
+        if ddb_table is None:
+            print("Initializing DDB table..")
+            # ddb = boto3.resource("dynamodb")
+            # ddb_table = ddb.Table(os.environ["DDB_TABLE_NAME"])
+            ddb_table = os.environ["DDB_TABLE_NAME"]
+    
         if not event:
             raise ValueError("event is empty")
-        if not context:
-            raise ValueError("context is empty")
 
         # method = event["httpMethod"]
         # headers = event["headers"]
@@ -78,7 +80,6 @@ def handler(event: dict, context: dict):
         logger.error(f"request_id: {request_id}\nerror: {str(e)}", exc_info=True)
         return {
             "statusCode": HTTPStatus.INTERNAL_SERVER_ERROR,
-            "body": json.dumps(
-                {"message": f"Error processing the request. request_id: {request_id}"}
+            "body": json.dumps({"message": f"Error processing the request. request_id: {request_id}"}
             ),
         }
