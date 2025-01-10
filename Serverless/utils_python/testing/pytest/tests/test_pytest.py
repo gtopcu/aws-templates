@@ -149,7 +149,6 @@ def test_check_context(lambda_context):
     # assert isinstance(x, MyClass)
     # assert 0, lambda_context  # to show value
 
-# Use the raises helper to assert that some code raises an exception:
 def test_raises():
     with pytest.raises(ValueError):
         raise ValueError("Invalid input")

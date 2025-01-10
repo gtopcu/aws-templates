@@ -24,7 +24,7 @@ https://pypi.org/project/pytest-socket/
 pip install pytest-socket
 pytest tests/unit -vs --disable-socket
 
-pytest tests/unit -vs --cov
+pytest tests/unit -vs --cov --log-cli-level=DEBUG
 pytest tests -c pytest.ini -vs
 
 pip install -U coverage
