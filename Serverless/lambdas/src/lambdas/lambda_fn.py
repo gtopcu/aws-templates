@@ -8,7 +8,7 @@ from http import HTTPStatus
 import boto3
 
 logger = logging.getLogger(__name__)
-# logger.setLevel(logging.INFO)
+logger.setLevel(logging.DEBUG)
 # logger.basicConfig( level=logging.INFO,
 #                     format='%(asctime)s %(levelname)s %(message)s',
 #                     datefmt='%Y-%m-%d %H:%M:%S')
@@ -71,7 +71,7 @@ def handler(event: dict, context: dict):
             "body": json.dumps({"message": "Hello from Lambda!"}),
         }
     except ValueError as e:
-        logger.error(f"request_id: {request_id}\nerror: {str(e)}", exc_info=True)
+        logger.debug(f"request_id: {request_id}\nerror: {str(e)}", exc_info=True)
         return {
             "statusCode": HTTPStatus.BAD_REQUEST,
             "body": json.dumps({"message": f"error: {str(e)}"}),

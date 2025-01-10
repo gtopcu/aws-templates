@@ -19,33 +19,33 @@
 # ruff check test.py --config ruff.toml
 # ruff check test.py --fix
 
-"""
-This better get 10/10!
-https://www.youtube.com/watch?v=RqdhVaX50mc
-"""
+# """
+# This better get 10/10!
+# https://www.youtube.com/watch?v=RqdhVaX50mc
+# """
 # CamelCase(PascalCase) / snake_case
-class myPersonClass:
-    """ This is my nice Person class"""
+# class myPersonClass:
+#     """ This is my nice Person class"""
 
-    def __init__(self, name: str) -> None:
-        self.name = name
+#     def __init__(self, name: str) -> None:
+#         self.name = name
 
-    def get_name(self) -> str:
-        """
-        Returns the name of the person
-        :return: The name of the person
-        :rtype: str
-        """
-        """
-        Returns the name of the person
-        Args:
-            self: Current instance
-        Returns:
-            name: The name of the person
-        Raises:
-            ValueError: If name is not a string
-        """
-        return self.name
+#     def get_name(self) -> str:
+#         """
+#         Returns the name of the person
+#         :return: The name of the person
+#         :rtype: str
+#         """
+#         """
+#         Returns the name of the person
+#         Args:
+#             self: Current instance
+#         Returns:
+#             name: The name of the person
+#         Raises:
+#             ValueError: If name is not a string
+#         """
+#         return self.name
 
 
 # from typing import Self, Any, Optional, Final, Literal, NewType, TypeAlias, TypedDict, Callable
@@ -272,3 +272,9 @@ import sys
 # print(my_list)
 # flattened = [val for sublist in my_list for val in sublist]
 # print(flattened)
+
+# pip install python-json-logger
+# from pythonjsonlogger.json import JsonFormatter
+# json_formatter = JsonFormatter()
+# json_formatter.format(record=None, request=None, response=None, exception=None, extra=None)
+
