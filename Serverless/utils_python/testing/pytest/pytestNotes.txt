@@ -9,8 +9,10 @@
 
 pytest.ini must be at project root dir
 tests should be in /tests folder
+conftest.py should be in /tests folder
 test class names should be test_*.py *_test.py
 test method names should be test_*
+modules should have __init__.py or use sys.path.append()
 
 pytest
 pytest-env
@@ -26,6 +28,7 @@ pytest tests/unit -vs --disable-socket
 
 pytest tests/unit -vs --cov --log-cli-level=DEBUG
 pytest tests -c pytest.ini -vs
+pytest -k "test_lambda" -vs      -> Run specific test
 
 pip install -U coverage
 coverage run -m pytest -vs
@@ -34,6 +37,7 @@ coverage report -m
 ------------------------------------------------------------------------------------
 
 pytest -m unit                  -> Run only unit tests
+pytest -m "not integration"     -> Do not run integration tests
 pytest -m "not slow"            -> Run all tests except slow ones
 pytest -m "unit or integration" -> Run both unit and integration tests
 
