@@ -20,6 +20,7 @@
 # pip install simplejson
 # import simplejson as json
 import json
+from datetime import datetime
 
 import boto3
 import boto3.dynamodb.conditions
@@ -88,6 +89,18 @@ print("Table status:", table.table_status)
 #     KeySchema=[{"AttributeName": "PK","KeyType": "HASH"},{"AttributeName": "SK", "KeyType": "RANGE"}],
 #     AttributeDefinitions=[{"AttributeName": "PK", "AttributeType": "S"}, {"AttributeName": "SK", "AttributeType": "S"}]
 # )
+
+# Add timestamp to the item
+# timestamp = datetime.now(datetime.timezone.utc).isoformat()
+# body = {
+#     "PK": "1",
+#     "name": "Gokhan Topcu",
+# }
+# item = {
+#     **body,
+#     'timestamp': timestamp
+# }
+# table.put_item(Item=item)
 
 response = table.put_item(Item={"PK": "1", "name": "Gokhan Topcu", "age": 40, "address": "my address"})
 # print(response)
