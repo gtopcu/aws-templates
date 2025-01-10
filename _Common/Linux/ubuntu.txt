@@ -165,7 +165,8 @@ cat/touch/nano/head/tail -n 10
 
 find . -maxdepth 1 -name "*.txt"
 find . -type f -name "*.pyc" -delete
-find . -type d -name '.venv' -delete
+find . -type d -name '.venv' -exec rm -rf {} +
+find . -type d -name ".ruff_cache" -exec rm -rf {} +
 find . -type d -name "__pycache__" -exec rm -rf {} +
 find . -type f -exec cat {} \;
 

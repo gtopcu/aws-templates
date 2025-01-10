@@ -31,52 +31,52 @@ coverage = "^7.6.10"
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
-[tool.pyright]
-exclude = [".venv"]
-typeCheckingMode = "basic"
-pythonVersion = "3.13"
-venvPath = "."
-venv = ".venv"
+# [tool.pyright]
+# exclude = [".venv"]
+# typeCheckingMode = "basic"
+# pythonVersion = "3.13"
+# venvPath = "."
+# venv = ".venv"
 
-[tool.ruff]
-# List of enabled rule codes
-select = ["E", "F", "W", "I", "N", "B", "C4", "SIM", "ERA", "PL", "RUF"]
-
-# List of disabled rule codes
-ignore = ["ERA001"]
-
-# Maximum line length for rules like E501
-line-length = 100
-
-# Exclude specific files or directories
-exclude = [
-    ".bzr",
-    ".direnv",
-    ".eggs",
-    ".git",
-    ".git-rewrite",
-    ".hg",
-    ".mypy_cache",
-    ".nox",
-    ".pants.d",
-    ".pytype",
-    ".ruff_cache",
-    ".svn",
-    ".tox",
-    "__pypackages__",
-    "_build",
-    "buck-out",
-    "build",
-    "dist",
-    "node_modules",
-    "venv",
-    ".venv",
-    ".pytest_cache",
-    "__pycache__"
-]
-
-# Per-file ignores for specific rules
-[tool.ruff.per-file-ignores]
-"__init__.py" = ["F401"]    # Ignore `F401` (unused imports) in all `__init__.py` files
-"tests/*" = ["D", "S101"]   # Ignore specific rules for test files
-"tests/*" = ["E402"]        # Ignore `E402` (import violations) in all `tests/` directories
+# [tool.ruff]
+# # List of enabled rule codes
+# select = ["E", "F", "W", "I", "N", "B", "C4", "SIM", "ERA", "PL", "RUF"]
+# 
+# # List of disabled rule codes
+# ignore = ["ERA001"]
+# 
+# # Maximum line length for rules like E501
+# line-length = 100
+# 
+# # Exclude specific files or directories
+# exclude = [
+#     ".bzr",
+#     ".direnv",
+#     ".eggs",
+#     ".git",
+#     ".git-rewrite",
+#     ".hg",
+#     ".mypy_cache",
+#     ".nox",
+#     ".pants.d",
+#     ".pytype",
+#     ".ruff_cache",
+#     ".svn",
+#     ".tox",
+#     "__pypackages__",
+#     "_build",
+#     "buck-out",
+#     "build",
+#     "dist",
+#     "node_modules",
+#     "venv",
+#     ".venv",
+#     ".pytest_cache",
+#     "__pycache__"
+# ]
+# 
+# # Per-file ignores for specific rules
+# [tool.ruff.per-file-ignores]
+# "__init__.py" = ["F401"]    # Ignore `F401` (unused imports) in all `__init__.py` files
+# "tests/*" = ["D", "S101"]   # Ignore specific rules for test files
+# "tests/*" = ["E402"]        # Ignore `E402` (import violations) in all `tests/` directories

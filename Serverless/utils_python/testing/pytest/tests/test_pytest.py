@@ -16,7 +16,6 @@ Each test has a unique instance of the class, but class attributes are shared
 #     if __debug__: # default True
 #         raise AssertionError
 
-
 # --------------------------------------------------------------------------------------------
 # MONKEYPATCH:
 # --------------------------------------------------------------------------------------------
@@ -39,7 +38,7 @@ def aws_env(monkeypatch):
     monkeypatch.setenv('AWS_ACCESS_KEY_ID', 'testing')
     assert monkeypatch.getenv('AWS_DEFAULT_REGION') == 'us-east-1'
 
-    #Context manager that returns a new MonkeyPatch object which undoes any patching done inside the with block upon exit.
+    # Context manager that returns a new MonkeyPatch object which undoes any patching done inside the with block upon exit.
     # Useful in situations where it is desired to undo some patches before the test ends,
     # with monkeypatch.context() as m:
     #     m.setattr(functools, "partial", 3)

@@ -82,6 +82,13 @@ print("Table status:", table.table_status)
 
 # table.query(Limit=37)
 
+# ddb_client.create_table(
+#     TableName="table-1",
+#     BillingMode="PAY_PER_REQUEST",
+#     KeySchema=[{"AttributeName": "PK","KeyType": "HASH"},{"AttributeName": "SK", "KeyType": "RANGE"}],
+#     AttributeDefinitions=[{"AttributeName": "PK", "AttributeType": "S"}, {"AttributeName": "SK", "AttributeType": "S"}]
+# )
+
 response = table.put_item(Item={"PK": "1", "name": "Gokhan Topcu", "age": 40, "address": "my address"})
 # print(response)
 

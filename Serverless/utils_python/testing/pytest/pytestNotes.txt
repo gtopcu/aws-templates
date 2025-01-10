@@ -20,6 +20,10 @@ pytest-cov
 coverage
 moto
 
+https://pypi.org/project/pytest-socket/
+pip install pytest-socket
+pytest tests/unit -vs --disable-socket
+
 pytest tests/unit -vs --cov
 pytest tests -c pytest.ini -vs
 
