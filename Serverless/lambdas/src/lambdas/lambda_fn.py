@@ -22,39 +22,35 @@ logger.setLevel(logging.DEBUG)
 # --payload '{"name": "Alice", "birthday": "1990-01-01", "email": "alice@gmail.com"}' \
 # output.json && cat output.json
 
-ddb_table = None
+# ddb = boto3.resource("dynamodb")
+# ddb_table = ddb.Table(os.environ["DDB_TABLE_NAME"])
+ddb_table_name = os.environ["DDB_TABLE_NAME"]
 
 
 def handler(event: dict, context: dict):
     request_id = context.aws_request_id
 
-    # logger.info("context: ", context, "event: ", event)
-    # logger.info("context: %s, event: %s", context, event)
-    logger.debug(f"request_id: {request_id}, context: {context}, event: {event}")
+    logger.debug(f"request_id: {request_id}, context: {context}")
 
     try:
-        global ddb_table
-        if ddb_table is None:
-            print("Initializing DDB table..")
-            # ddb = boto3.resource("dynamodb")
-            # ddb_table = ddb.Table(os.environ["DDB_TABLE_NAME"])
-            ddb_table = os.environ["DDB_TABLE_NAME"]
-    
         if not event:
             raise ValueError("event is empty")
 
+        logger.debug(f"request_id: {request_id}, event: {repr(event)}")
+
+        # amazonq-ignore-next-line
         # method = event["httpMethod"]
         # headers = event["headers"]
         # raw_path = event["rawPath"]
         # path = event["path"]
-        # pathParameters = event["pathParameters"]
-        # query_string_params = event["queryStringParameters"]
+        # path_params = event["pathParameters"]
+        # query_params = event["queryStringParameters"]
         # request_context = event["requestContext"]
-        # body = event["body"]
-        
+        # body = event["body"]
+
         # Input Validation
         body = event.get("body")
-        
+
         if not body:
             raise ValueError("Request body is empty")
         if isinstance(body, str):
@@ -76,10 +72,12 @@ def handler(event: dict, context: dict):
             "statusCode": HTTPStatus.BAD_REQUEST,
             "body": json.dumps({"message": f"error: {str(e)}"}),
         }
+    # amazonq-ignore-next-line
     except Exception as e:
         logger.error(f"request_id: {request_id}\nerror: {str(e)}", exc_info=True)
         return {
             "statusCode": HTTPStatus.INTERNAL_SERVER_ERROR,
-            "body": json.dumps({"message": f"Error processing the request. request_id: {request_id}"}
+            "body": json.dumps(
+                {"message": f"Error processing the request. request_id: {request_id}"}
             ),
         }
