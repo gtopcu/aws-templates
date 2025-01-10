@@ -211,6 +211,7 @@ print(person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_u
 #     # IndexName="GSI1",
 #     # Limit=10,
 #     # ProjectionExpression="PK, name, age",
+#     # Select='ALL_ATTRIBUTES',
 #     # ScanIndexForward=False # true = ascending, false = descending
 # )
 # data = response['Items']

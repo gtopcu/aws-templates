@@ -4,15 +4,18 @@
 import os
 import boto3
 from boto3.dynamodb.conditions import Key, Attr
+from typing import Self
 
 class UserTable:
     def __init__(self, table):
         self._table = table
 
     @classmethod
-    def init_ddb_table(cls, table_name: str):
+    def init_ddb_table(cls, table_name: str) -> Self:
         # table_name = os.environ.get('DDB_TABLE', 'table-1')
         table = boto3.resource('dynamodb').Table(table_name)
+        if table is None:
+            raise Exception("DDB Table not found: ", table_name)
         return cls(table)
 
     def list_rooms(self):
