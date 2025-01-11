@@ -4,7 +4,7 @@ from datetime import datetime
 import time
 import logging
 
-from http import HTTPStatus
+from http import HTTPStatus, HTTPMethod
 import boto3
 
 logger = logging.getLogger()

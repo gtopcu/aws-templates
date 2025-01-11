@@ -2,7 +2,7 @@ import json
 import os
 import logging
 import boto3
-from http import HTTPStatus
+from http import HTTPStatus, HTTPMethod
 from typing import Any
 from datetime import datetime
 from botocore.exceptions import ClientError
@@ -136,7 +136,7 @@ def lambda_handler(event: dict, context: dict) -> dict:
     try:
         http_method = event.get('httpMethod')
         
-        if http_method == 'POST':
+        if http_method == HTTPMethod.POST:
             # Check if body exists and parse it
             if 'body' not in event:
                 raise ValueError("Missing request body")
@@ -150,7 +150,7 @@ def lambda_handler(event: dict, context: dict) -> dict:
             
             return handle_post_request(body)
             
-        elif http_method == 'GET':
+        elif http_method == HTTPMethod.GET:
             query_params = event.get('queryStringParameters')
             return handle_get_request(query_params)
             

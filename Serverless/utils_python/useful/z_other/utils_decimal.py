@@ -17,10 +17,13 @@ Here are some examples of using the decimal module:
 
 from decimal import Decimal, getcontext, setcontext, ExtendedContext, InvalidOperation, DivisionByZero
 
+setcontext(ExtendedContext)
+getcontext().prec = 3
+
 my_decimal = Decimal(1)
 print(my_decimal / Decimal(3))
 # 0.3333333333333333333333333333
-setcontext(ExtendedContext)
+getcontext().prec = 5
 print(my_decimal / Decimal(3))
 # 0.333333333
 getcontext().prec = 2

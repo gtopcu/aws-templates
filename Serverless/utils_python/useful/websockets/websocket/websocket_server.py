@@ -1,9 +1,14 @@
 
+# https://www.youtube.com/watch?v=pnj3Jbho5Ck
+# pip install websockets
+
+# Websockets(TCP), HTTP long polling
+
 import asyncio
 import json
 import websockets
 from typing import Callable, Final
-from datetime import datetime, UTC
+from datetime import datetime
 
 WS_HOST: str[Final] = "localhost"
 WS_PORT: int[Final] = 8765

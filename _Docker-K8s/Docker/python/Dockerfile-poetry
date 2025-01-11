@@ -1,4 +1,16 @@
 
+
+# Poetry:
+FROM python:3.13-slim 
+WORKDIR /app
+COPY ./pyproject.toml ./poetry.lock* /app/
+RUN pip install --no-cache-dir poetry
+RUN poetry export -f requirements.txt --output requirements.txt --without-hashes
+RUN pip install --no-cache-dir -r requirements.txt
+CMD ["python", "app.py"]
+
+# --------------------------------------------------------------------------------------------------------------
+
 # https://medium.com/@anil.razzu/accessing-packages-of-aws-codeartifact-from-dockerfile-1452fe2d6261
 
 FROM python:3.13-slim-buster
@@ -16,11 +28,11 @@ RUN poetry config http-basic.repository_name aws $TOKEN && poetry install
 COPY ./dob_calculator/ /opt/dob_calculator/
 ENTRYPOINT ["python", "-m", "dob_calculator.calculator"]
 
-#pull packages 
-poetry update
+# pull packages 
+# poetry update
 
-#build packages
-poetry build 
+# build packages
+# poetry build 
 
-#push packages
-poetry publish -r dob_push
+# push packages
+# poetry publish -r dob_push

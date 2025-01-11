@@ -84,12 +84,42 @@ aws s3 mv s3://source_folder/ s3://destination_folder/ --recursive
 aws s3 cp s3://source_folder/ s3://destination_folder/ --recursive
 aws s3 rm s3://source_folder --recursive
 
-BUCKET = gokhantopcu
-PREFIX = myfiles
-aws s3 sync . s3://$BUCKET/$PREFIX/
-aws s3 sync --exclude="*" --include="[0-9]*.jpg" . s3://$BUCKET/$PREFIX/ 
 
-aws s3 sync --delete <dir> s3://<s3path>
+sync:
+- Only copy new or modified files
+- Skip files that already exist and haven't changed
+- Recursively handle all subdirectories
+- Automatically handle large files with multipart uploads
+
+aws s3 sync . s3://<s3path> --delete 
+aws s3 sync --exclude="*" --include="[0-9]*.jpg" . s3://<s3path>
+aws s3 sync . s3://your-bucket-name/optional-prefix
+
+--delete: Delete files in the destination that don't exist in the source
+--exclude "*.tmp": Exclude files matching a pattern
+--include "*.jpg": Include only specific files
+--dryrun: Preview what will be transferred without actually doing it
+--only-show-errors: Reduce output by only showing errors(if there're many files)
+
+Configure S3 CLI settings for better performance
+aws configure set default.s3.max_concurrent_requests 128
+aws configure set default.s3.max_queue_size 10000
+aws configure set default.s3.multipart_threshold 64MB
+aws configure set default.s3.multipart_chunksize 16MB
+
+Run multiple syncs in parallel based on prefixes
+aws s3 sync source/ destination/ --exclude "*" --include "0*" --include "1*" &
+aws s3 sync source/ destination/ --exclude "*" --include "2*" --include "3*" &
+aws s3 sync source/ destination/ --exclude "*" --include "4*" --include "5*" &
+
+AWS DataSync - for Large-Scale Transfers
+- Designed specifically for large-scale transfers
+- Up to 10x faster than standard tools
+- Automatically handles validation and network optimization
+- Maintains file metadata and permissions
+- Better for transfers of hundreds of terabytes and millions of files
+
+-------------------------------------------------------------------------------------------------------------------------
 
 aws s3api create-bucket --bucket $bucket_name --region $region --create-bucket-configuration LocationConstraint=$region
 aws s3api list-objects --bucket <YOUR_BUCKET_NAME> --page-size 5 (default: 1000)

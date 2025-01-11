@@ -4,6 +4,15 @@ import secrets
 import string
 
 
+# secrets.randbelow(100)
+# secrets.randbits(16)
+# secrets.choice(range(1,10))
+# secrets.token_bytes(32)
+# secrets.token_urlsafe(16)
+# secrets.compare_digest(user_input, pwd)
+# secrets.SystemRandom().randint() # uses OS capabilities for best randomness
+
+
 def generate_pw(length: int) -> str:
     """Generate a password of the given length"""
     if length < 8:
