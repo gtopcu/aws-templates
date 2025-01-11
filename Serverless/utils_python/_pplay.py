@@ -95,9 +95,10 @@ import sys
 # print(Path.home())
 # print(Path.cwd())
 
-# from datetime import datetime, timezone
+# from datetime import datetime, timezone, timedelta
 # import time
 # datetime.now(timezone.utc).isoformat()
+# my_date + timedelta(hours=1)
 # time.time()
 # time.strftime("%Y-%m-%d %H:%M:%S")
 # time.perf_counter()
