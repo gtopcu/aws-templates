@@ -17,19 +17,249 @@ https://www.youtube.com/watch?v=yvBR71D0nAQ
 AWS re:Invent 2018: Amazon DynamoDB Deep Dive: Advanced Design Patterns for DynamoDB (DAT401)
 https://www.youtube.com/watch?v=HaEPXoXVf2k
 
-
 https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/SQLtoNoSQL.WriteData.html
 https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Programming.LowLevelAPI.html
+
+
+--------------------------------------------------------------------------------------------------------
+DynamoDB Data Types
+--------------------------------------------------------------------------------------------------------
+
+- Primary key attributes can only be String, Number, or Binary
+- List and Map can be nested up to 32 levels deep
+- Each nested attribute counts toward the item size limit
+
 S – String
 N – Number
 B – Binary
 BOOL – Boolean
 NULL – Null
-M – Map
 L – List
+M – Map
 SS – String Set
 NS – Number Set
 BS – Binary Set
+
+
+1. Scalar Types:
+----------------------------------------------------------------------------------------
+- String: UTF-8 encoded text
+- Number: Positive, negative, or zero (up to 38 digits precision)
+- Binary: Binary data, images, compressed data (must be base64 encoded)
+- Boolean: true or false
+- Null: represents an unknown or undefined state
+
+2. Document Types:
+----------------------------------------------------------------------------------------
+- List: Ordered collection of values, can be different types
+{ "Colors": ["Red", "Blue", "Green"] }
+
+- Map: Unordered collection of name-value pairs
+{
+    "Address": {
+        "Street": "123 Main St",
+        "City": "Seattle",
+        "ZipCode": 98001
+    }
+}
+
+3. Set Types:
+----------------------------------------------------------------------------------------
+- String Set (SS): Collection of unique strings
+{ "Colors": ["Red", "Blue", "Green"] }
+
+- Number Set (NS): Collection of unique numbers
+{ "Scores": [85, 90, 95] }
+
+- Binary Set (BS): Collection of unique binary values
+
+
+----------------------------------------------------------------------------------------
+
+Example of Complex Data Structure:
+{
+    "PersonId": 1001,                     // Number
+    "Name": "John Doe",                   // String
+    "Active": true,                       // Boolean
+    "Addresses": [                        // List
+        {                                 // Map
+            "Street": "Main St",
+            "City": "Seattle",
+            "Type": "current"
+        },
+        {
+            "Street": "9th St",
+            "City": "Dallas",
+            "Type": "previous"
+        }
+    ],
+    "PhoneNumbers": ["555-1234", "555-5678"],  // String Set
+    "Scores": [98, 87, 93],                    // Number Set
+    "ProfileImage": <binary_data>              // Binary
+}
+
+
+--------------------------------------------------------------------------------------------------------
+QUERYING 
+
+- List indexes are zero-based
+- Use ExpressionAttributeNames (#) for reserved words
+- Use ExpressionAttributeValues (:) for value comparisons
+- Nested access uses dot notation for maps and n for lists
+- The contains function works differently for lists vs. sets
+- For large lists/maps, consider denormalization if you frequently query specific elements
+- These queries can be used with various DynamoDB operations like GetItem, Query, or Scan, depending on your access patterns and table structure.
+
+--------------------------------------------------------------------------------------------------------
+
+Querying Lists:
+// Assuming a structure like:
+{
+    "Id": "123",
+    "Colors": ["Red", "Blue", "Green"],
+    "Scores": [85, 90, 95]
+}
+
+// Access by index (0-based)
+{
+    TableName: "MyTable",
+    Key: { "Id": "123" },
+    ProjectionExpression: "Colors[0]"     // Gets "Red"
+}
+
+// Multiple indexes
+{
+    TableName: "MyTable",
+    Key: { "Id": "123" },
+    ProjectionExpression: "Colors[0], Scores[1]"  // Gets "Red" and 90
+}
+
+
+--------------------------------------------------------------------------------------------------------
+Querying Maps:
+
+// Assuming a structure like:
+{
+    "Id": "123",
+    "Address": {
+        "Street": "Main St",
+        "City": "Seattle",
+        "ZipCode": 98001
+    }
+}
+
+// Access map attributes using dot notation
+{
+    TableName: "MyTable",
+    Key: { "Id": "123" },
+    ProjectionExpression: "Address.City"   // Gets "Seattle"
+}
+
+// Multiple map attributes
+{
+    TableName: "MyTable",
+    Key: { "Id": "123" },
+    ProjectionExpression: "Address.Street, Address.City"
+}
+
+
+--------------------------------------------------------------------------------------------------------
+
+3. Complex Nested Structures:
+
+// Assuming a structure like:
+{
+    "Id": "123",
+    "Orders": [
+        {
+            "OrderId": "001",
+            "Items": [
+                {
+                    "ProductId": "P1",
+                    "Quantity": 2
+                }
+            ]
+        }
+    ]
+}
+
+// Access nested elements
+{
+    TableName: "MyTable",
+    Key: { "Id": "123" },
+    ProjectionExpression: "Orders[0].Items[0].ProductId"
+}
+
+--------------------------------------------------------------------------------------------------------
+
+4. Using Expression Attribute Names (for reserved words or special characters):
+
+{
+    TableName: "MyTable",
+    Key: { "Id": "123" },
+    ProjectionExpression: "#ord[0].#itm[0].#pid",
+    ExpressionAttributeNames: {
+        "#ord": "Orders",
+        "#itm": "Items",
+        "#pid": "ProductId"
+    }
+}
+
+--------------------------------------------------------------------------------------------------------
+
+5. Filtering Lists:
+
+// Find items where the first color is "Red"
+{
+    TableName: "MyTable",
+    FilterExpression: "Colors[0] = :color",
+    ExpressionAttributeValues: {
+        ":color": "Red"
+    }
+}
+
+// Check if list contains a value
+{
+    TableName: "MyTable",
+    FilterExpression: "contains(Colors, :color)",
+    ExpressionAttributeValues: {
+        ":color": "Red"
+    }
+}
+
+--------------------------------------------------------------------------------------------------------
+
+6. Querying Sets:
+
+// Assuming a structure with a number set
+{
+    "Id": "123",
+    "Scores": [85, 90, 95]
+}
+
+// Check if set contains a value
+{
+    TableName: "MyTable",
+    FilterExpression: "contains(Scores, :score)",
+    ExpressionAttributeValues: {
+        ":score": 90
+    }
+}
+
+--------------------------------------------------------------------------------------------------------
+
+7. Size Operations:
+
+// Check list/set size
+{
+    TableName: "MyTable",
+    FilterExpression: "size(Colors) = :size",
+    ExpressionAttributeValues: {
+        ":size": 3
+    }
+}
+
+--------------------------------------------------------------------------------------------------------
 
 Accessing lists, maps, sets using ExpressionAttributes
 https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Attributes.html

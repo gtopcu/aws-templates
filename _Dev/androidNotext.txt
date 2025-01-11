@@ -5,10 +5,10 @@ brew install android-platform-tools
 
 adb devices
 adb logcat --clear
-adb logcat -T 10 -f log.txt --regex=EXPR -s ("*:S")
 adb logcat "*:E"
-adb logcat | grep -e 'xxx'
 adb logcat "*:E" | awk '!/minksocket/'
+adb logcat -T 10 -f log.txt --regex=EXPR -s ("*:S")
+adb logcat | grep -e 'xxx'
 adb logcat "*:I"| "*:W" | "*:E" | "*:F" | "*:S"
 adb logcat > logfile.txx
 adb logcat -t 100 (-d) -f logfile.txx

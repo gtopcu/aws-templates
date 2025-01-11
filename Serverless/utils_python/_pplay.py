@@ -62,7 +62,7 @@ import logging
 import os
 import sys
 
-# del len id type sorted reversed enumerate zip filter map reduce 
+# and or any all del len id type sorted reversed enumerate zip filter map reduce 
 # is/not in/not any/all instanceof round floor min max avg pow sum
 # print(str.__name__)
 # import string
