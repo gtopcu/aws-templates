@@ -7,7 +7,6 @@ from typing import Any
 from datetime import datetime
 from botocore.exceptions import ClientError
 
-
 """
 {
     "Version": "2012-10-17",

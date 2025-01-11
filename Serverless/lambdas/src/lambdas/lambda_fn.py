@@ -86,7 +86,7 @@ def handler(event: dict, context: dict):
             "body": json.dumps({"message": "Hello from Lambda!"}),
         }
     except ValueError as e:
-        logger.warning(f"Validation error - request_id: {request_id}\nerror: {str(e)}", exc_info=True)
+        logger.warning(f"Error - request_id: {request_id}\nerror: {str(e)}", exc_info=True)
         return {
             "statusCode": HTTPStatus.BAD_REQUEST,
             "body": json.dumps({"message": f"error: {str(e)}"}),
@@ -95,5 +95,5 @@ def handler(event: dict, context: dict):
         logger.error(f"Internal error - request_id: {request_id}\nerror: {str(e)}", exc_info=True)
         return {
             "statusCode": HTTPStatus.INTERNAL_SERVER_ERROR,
-            "body": json.dumps({"message": f"Error processing the request. request_id: {request_id}"}),
+            "body": json.dumps({"message": f"Internal Error - request_id: {request_id}"}),
         }
