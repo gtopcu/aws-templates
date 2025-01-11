@@ -62,23 +62,36 @@ import logging
 import os
 import sys
 
+# args:list[str] = sys.argv[:2]
+# sys.getsizeof("abc")
+# sys.version
+# sys.version_info
+
 # pip install python-dotenv
 # from dotenv import load_dotenv
 # load_dotenv()
 # logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
+# os.getenv("PYTHONPATH")
 # for path in sys.path:
 #     print("Path: " + path)
-# sys.path.append(os.getcwd() + "/.venv/lib/python3.13/site-packages")# os.path.join(__file__, 'test.txt')
+# sys.path.append(os.getcwd() + "/.venv/lib/python3.13/site-packages")
+# os.path.join(__file__, "test.txt")
 
 # Add the parent directory to sys.path
 # current_dir = os.path.dirname(os.path.abspath(__file__))
 # parent_dir = os.path.dirname(os.path.dirname(current_dir))
 # sys.path.append(parent_dir)
 
+# from pathlib import Path
+# Path(__file__).resolve().parent.is_dir()
+# Path(__file__).absolute().joinpath("..").mkdir(mode=0o777, parents=True, exist_ok=True)
+# print(Path.home())
+# print(Path.cwd())
+
 # from datetime import datetime, timezone
 # import time
-# datetime.now(timezone.utc)
+# datetime.now(timezone.utc).isoformat()
 # time.time()
 # time.strftime("%Y-%m-%d %H:%M:%S")
 # time.perf_counter()
@@ -95,7 +108,7 @@ import sys
 # print(age)
 
 # import yaml
-# with open(definition_path, 'r') as f:
+# with open(definition_path, "r") as f:
 #   definition = yaml.safe_load(f)
 # yaml.dump(definition)
 
@@ -108,7 +121,6 @@ import sys
 # matrix = np.random.rand(3, 5)
 # matrix = np.dot(10, matrix)
 
-# import os; print(os.getenv("PYTHONPATH"))
 # os.getenv("DDB_TABLE", "table1")
 # os.environ.get("DDB_TABLE", "table1")
 # POSTGRE_IP = os.environ["POSTGRE_IP"]
@@ -121,14 +133,14 @@ import sys
 # os.path.split(os.path.abspath(__file__))[0]
 # os.path.splitext("note.txt") -> txt
 # os.path.basename(__file__)
-# os.path.expanduser(os.path.join('~', 'myarchive'))
+# os.path.expanduser(os.path.join("~", "myarchive"))
 # os.getcwd()
 # os.listdir()
-# os.makedirs('test', exist_ok=True)
-# os.rmdir('test')
-# os.chmod('test.txt', 0o777)
-# os.chown(('test.txt', 1000, 1000)
-# os.system('clear')
+# os.makedirs("test", exist_ok=True)
+# os.rmdir("test")
+# os.chmod("test.txt", 0o777)
+# os.chown(("test.txt", 1000, 1000)
+# os.system("clear")
 # print(__name__)
 # print(__file__)
 
@@ -142,35 +154,23 @@ import sys
 #     "-t", "build/lambda_package"
 # ])
 
-# args:list[str] = sys.argv[:2]
-# sys.getsizeof('abc')
-# sys.version
-# sys.version_info
-
-# from pathlib import Path
-# Path.mkdir('test', parents=True, exist_ok=True)
-# print(Path.home())
-# print(Path.cwd())
-# print(Path(__file__))
-# print(Path(__file__).parent.is_dir())
-
 # logger = logging.getLogger(__name__)
-# logger.info('test')
+# logger.info("test")
 
 # exit(1)
 
 # class Cat:
 #     def __new__(cls, name: str) -> None:
-#         print(cls, name, 'new')
+#         print(cls, name, "new")
 #         super().__new__(cls)
 #         isinstance(cls, Cat)
-#         print(cls, name, 'new')
+#         print(cls, name, "new")
 
 #     def __init__(self, name:str) -> Self:
 #         self.name = name
-#         print('init')
+#         print("init")
 
-# mycat = Cat('duman')
+# mycat = Cat("duman")
 # print(mycat.name)
 
 # name: str = "John"
@@ -185,7 +185,6 @@ import sys
 # "mr. gokhan topcu".title()
 # any(char in string.digits for char in pw)
 
-
 # myset = {1, 2, 3}
 # myset = myset | {3, 4}
 # myset.add(2)
@@ -196,7 +195,6 @@ import sys
 
 # for i, j in enumerate(myset, 1):
 #     print(i, j)
-
 
 # Pack-unpack
 # https://www.youtube.com/watch?v=-mS7K2K1IWk
@@ -211,49 +209,49 @@ import sys
 
 # mylist1 = [1, 2, 3]
 # mylist2 = [4, 5, 6]
-# mylist3 = [*mylist1, 'combined', *mylist2]
+# mylist3 = [*mylist1, "combined", *mylist2]
 # print(mylist3)
-
-# my_dict = {'a': 1, 'b': 2, 'c': 3}
 
 # def my_func(**kwargs):
 #     for key, value in kwargs.items():
 #         print(key, value)
+# my_dict = {"a": 1, "b": 2, "c": 3}
 # my_func(**my_dict)
 
 # def my_func2(a: int, b: int, c: int):
 #     print(a, b, c)
 # my_func2(**my_dict)
 
-# my_dict1 = {'a': 1, 'b': 2, 'c': 3}
-# my_dict2 = {'d': 4, 'e': 5, 'f': 3}
+# my_dict1 = {"a": 1, "b": 2, "c": 3}
+# my_dict2 = {"d": 4, "e": 5, "f": 3}
 # combined_dict = {**my_dict1, **my_dict2}
 # print(combined_dict)
+# my_dict3 = { **my_dict1, "timestamp": 1234567890 }
 
 # def my_func3(**kwargs) -> None:
-#     kwargs['a'] = 10
+#     kwargs["a"] = 10
 #     print(kwargs)
-#     if 'b' in kwargs:
-#         print('b exists')
+#     if "b" in kwargs:
+#         print("b exists")
 # my_func3(**combined_dict)
 
 # mylist.extend([4, 5])
 # mylist2 = list[dict[str, Any]]
-# mylist2.append({'a': 1, 'b': 2})
+# mylist2.append({"a": 1, "b": 2})
 
-# mydict = {'a': 1, 'b': 2, 'c': 3}
-# d = mydict.get('d', 4)
-# d = mydict.pop('d', 4)
+# mydict = {"a": 1, "b": 2, "c": 3}
+# d = mydict.get("d", 4)
+# d = mydict.pop("d", 4)
 # i, j = mydict.popitem()
 # mydict.fromkeys(list, 0)
-# mydict.setdefault('d', 4)
-# mydict.update({'d': 4})
+# mydict.setdefault("d", 4)
+# mydict.update({"d": 4})
 # mydict.clear()
 
 # try:
 #     print(1/0)
 # except ZeroDivisionError as e:
-#     print(f'Error during operation: {str(e)}')
+#     print(f"Error during operation: {str(e)}")
 
 # matrix = [(0, 0), (0, 1), (0, 2),
 #           (1, 0), (1, 1), (1, 2),
