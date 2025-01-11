@@ -2,6 +2,7 @@
 https://devtron.ai/blog/cmd-and-entrypoint-differences/
 
 docker pull ubuntu
+# docker run -it ubuntu bash
 
 # --------------------------------------------------------------------
 

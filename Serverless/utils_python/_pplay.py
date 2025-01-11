@@ -62,6 +62,12 @@ import logging
 import os
 import sys
 
+# del len id type sorted reversed enumerate zip filter map reduce 
+# is/not in/not any/all instanceof round floor min max avg pow sum
+# print(str.__name__)
+# import string
+# string.ascii_letters
+
 # args:list[str] = sys.argv[:2]
 # sys.getsizeof("abc")
 # sys.version
@@ -188,7 +194,13 @@ import sys
 # myset = {1, 2, 3}
 # myset = myset | {3, 4}
 # myset.add(2)
+# myset.remove(1)
 # myset.discard(1)
+# myset.difference({1, 2})
+# myset.intersection({1, 2})
+# myset.issubset({1, 2, 3})
+# myset.union({1, 2, 3, 4})
+# myset.update({1, 2, 3, 4})
 # myset = filter(lambda x: x/2==1, myset)
 # sorted = sorted(myset, reverse=True)
 # print(sorted)

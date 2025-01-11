@@ -7,12 +7,14 @@ ll == ls -al
 export PATH=$PATH:/usr/local/go/bin
 
 chown -R hukanege /src/
-sudo chmod +x myscript.sh
-sudo bash myscript.sh
-sudo rm -rf /*
+chmod +x myscript.sh
+bash myscript.sh
+rm -rf /*
 
-/var/log
-/etc/hosts
+/var/log 
+/etc/hosts 
+/etc/apt/sources.list
+cat /etc/os-release 
 
 which sudo
 sudo !!
@@ -20,32 +22,22 @@ su -
 
 https://askubuntu.com/questions/222348/what-does-sudo-apt-get-update-do/222352#222352
 /etc/apt/sources.list
-sudo apt --help
-sudo apt search pypy3
-sudo apt list --installed
-sudo apt list --upgradable
-sudo add-apt-repository ppa:vbernat/haproxy-2.6 -> /etc/apt/sources.list
-
-sudo apt update -y
-sudo apt install --no-install-recommends foo
-sudo apt update && sudo apt upgrade -y
-sudo apt update && sudo apt install foo bar -y
-sudo apt update && sudo apt dist-upgrade foo bar -y
-sudo service ssh --status --status-all --enable --disable --start --full-restart --stop
-sudo apt install systemd -> Install systemd and the systemctl utility
-sudo systemctl enable disable status start stop restart --now ssh
+apt list search show install reinstall remove autoremove update upgrade full-upgrade edit-sources satisfy
+apt --help
+apt search pypy3
+apt list --installed
+apt list --upgradable
+add-apt-repository ppa:vbernat/haproxy-2.6 -> /etc/apt/sources.
+apt update -y
+apt install --no-install-recommends foo
+apt update && sudo apt upgrade -y
+apt update && sudo apt install foo bar -y
+apt update && sudo apt dist-upgrade foo bar -y
+service ssh --status --status-all --enable --disable --start --full-restart --stop
+apt install systemd -> Install systemd and the systemctl utility
+systemctl enable disable status start stop restart --now ssh
 ps auwx | grep nginx
 
-------------------------------------------------------------------------------------------------
-Install Python3 + pip + venv
-------------------------------------------------------------------------------------------------
-sudo apt update -y
-sudo apt install python3 python3-pip python3-venv -y
-
-mkdir my_project
-cd my_project
-python3 -m venv venv
-source venv/bin/activate
 
 ------------------------------------------------------------------------------------------------
 Install OpenSSH - enabled after Ubuntu 18
@@ -140,17 +132,34 @@ export PATH=$PATH:/usr/local/go/bin
 /var/log 
 /etc/hosts 
 /etc/apt/sources.list
+cat /etc/os-release 
 .zshrc
 .zprofile
 .bashrc
 .bash_profile
 .profile
 
+
+--------------------------------------------------------------------------------------------------------
+Installing Python on Ubuntu/Debian:
+--------------------------------------------------------------------------------------------------------
+apt install python-3 python3-pip python3-venv -y
+
+python3-minimal:  Basic Python interpreter (~10MB)
+                  -> Basic interpreter, essential standard lib, core runtime dependencies
+                  -> Not included: pip, venv, dev headers, documentation, IDLE, distuttils, sqlite3, ssl, email, unittest...
+python3:          Standard Python installation (~30MB)
+python3-full:     Complete Python environment (~100MB+)
+                    -> standard lib, pip, debugger(pdb)
+                    -> distutils, idle3(python ide), python3-dev python3-venv
+                    -> tkinter(gui), documentation tools, test fws, build/networking tools, XML/SQLite, SSL/TLS
+
+apt list search show install reinstall remove autoremove update upgrade full-upgrade edit-sources satisfy
 sudo apt --help
 sudo apt search python3
 sudo apt list --installed
 sudo apt list --upgradable
-sudo apt update && sudo apt upgrade -y
+sudo apt update -y && sudo apt upgrade -y
 sudo apt update && sudo apt install foo bar -y
 sudo service ssh --status --status-all --enable --disable --start --full-restart --stop
 sudo systemctl enable disable status start stop restart --now ssh
@@ -208,8 +217,8 @@ cat /dev/null > logfile          -> Clears the content of logfile
 
 ------------------------------------------------------------------------------------------------------------------------
 
-None del len type id any/all is/not in/not sorted reversed isinstance 
-sum min max pow round floor enumerate map filter reduce zip
+del len id type sorted reversed enumerate zip filter map reduce 
+is/not in/not any/all instanceof round floor min max avg pow sum
 
 psycopg
 pip install -r requirements.txt

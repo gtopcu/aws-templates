@@ -11,21 +11,27 @@
 
 # docker run -it ubuntu bash
 
-# FROM debian:12
-# FROM python:3.12
-# FROM python:3.12-slim 
-# FROM python:3.12-alpine
-# FROM python:3.12-bookworm
-# FROM python:3.12-bullseye
+# FROM ubuntu:latest        : 140MB
+# FROM debian:12(Bookworm)
+# FROM python:3.13          : 1.46GB    -> Debian 12(Bookworm)
+# FROM python:3.13-slim:    : 205MB     -> Debian 12(Bookworm)
+# FROM python:3.13-alpine   : 72MB      -> Alpine Linux(no bash, uses musl instead of glibc)
+# FROM python:3.13-bookworm
+# FROM python:3.13-bullseye
 
 # -----------------------------------------------------------------
 
 FROM python:3.13
+WORKDIR /app
+COPY . /app
+RUN pip install --no-cache-dir -r requirements.txt
+CMD ["python", "app.py"]
+
+FROM python:3.13
 ADD app.py /app/app.py
 EXPOSE 8080
-ENTRYPOINT ["python", "/app/application.py"]
-
-# -----------------------------------------------------------------
+ENTRYPOINT ["python", "/app/app.py"]
+# ENTRYPOINT [ "/opt/app/run.sh", "--port", "8080" ]
 
 FROM python:3.13-slim
 WORKDIR /app
@@ -56,8 +62,4 @@ CMD [ "python3", "process.py" ]
 # Shell form: CMD command parameter1 parameter2
 
 # -----------------------------------------------------------------
-
-FROM debian:wheezy
-ENTRYPOINT ["/bin/ping"]
-CMD ["localhost"]
 

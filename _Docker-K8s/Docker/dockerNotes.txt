@@ -5,7 +5,19 @@ https://labs.play-with-docker.com/
 https://www.youtube.com/watch?v=bKFMS5C4CG0
 https://devtron.ai/blog/cmd-and-entrypoint-differences/
 
+/usr/local/bin.
+$HOME/.docker/bin
+brew update && brew upgrade --cask docker.
+
+Uninstall on Mac:
+sudo /Applications/Docker.app/Contents/MacOS/uninstall
+sudo rm -rf ~/Library/Group\ Containers/group.com.docker
+sudo rm -rf ~/Library/Containers/com.docker.docker
+sudo rm -rf ~/.docker
+
 ----------------------------------------------------------------------------------------------------------------
+
+Ubuntu: 140MB
 
 python(Full) - FROM python:3.13
 Largest size (~900MB)
