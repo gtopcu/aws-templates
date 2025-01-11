@@ -106,6 +106,7 @@ response = table.put_item(Item={"PK": "1", "name": "Gokhan Topcu", "age": 40, "a
 # print(response)
 
 response = table.get_item(Key={"PK": "1", "name": "Gokhan Topcu"})
+# if 'Item' not in response:
 if record := response.get("Item"):
     print("Record: ", record)
 else:

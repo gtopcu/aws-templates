@@ -1,0 +1,8 @@
+
+Install Open JRE on Mac:
+https://stackoverflow.com/questions/64788005/java-jdk-for-the-apple-silicon-chips
+brew install openjdk
+$(brew --prefix openjdk)/bin/java --version
+file $(brew --prefix openjdk)/bin/java
+echo 'export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"' >> /Users/mac/.zshrc
+sudo ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk

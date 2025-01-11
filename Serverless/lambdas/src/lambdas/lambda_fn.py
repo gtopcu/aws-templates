@@ -23,7 +23,15 @@ logger.setLevel(logging.INFO)
 # output.json && cat output.json
 
 
-# dynamodb = boto3.resource('dynamodb')
+# dynamodb = boto3.resource(
+#     "dynamodb",
+#     endpoint_url="http://localhost:8000",
+#     region_name=REGION,
+#     aws_access_key_id=ACCESS_KEY_ID,
+#     aws_secret_access_key=ACCESS_KEY_SECRET,
+# )
+
+# dynamodb = boto3.resource("dynamodb')
 # table = dynamodb.Table(os.environ['DDB_TABLE_NAME'])
 ddb_table_name = os.environ["DDB_TABLE_NAME"]
 
@@ -70,6 +78,7 @@ def handler(event: dict, context: dict):
             # "statusCode": HTTPStatus.UNAUTHORIZED,
             # "statusCode": HTTPStatus.FORBIDDEN,
             # "statusCode": HTTPStatus.NOT_FOUND,
+            # "statusCode": HTTPStatus.METHOD_NOT_ALLOWED
             # "statusCode": HTTPStatus.CONTENT_TOO_LARGE,
             # "statusCode": HTTPStatus.TOO_MANY_REQUESTS,
             # "statusCode": HTTPStatus.UNPROCESSABLE_ENTITY,
@@ -77,16 +86,14 @@ def handler(event: dict, context: dict):
             "body": json.dumps({"message": "Hello from Lambda!"}),
         }
     except ValueError as e:
-        logger.warning(f"request_id: {request_id}\nerror: {str(e)}", exc_info=True)
+        logger.warning(f"Validation error - request_id: {request_id}\nerror: {str(e)}", exc_info=True)
         return {
             "statusCode": HTTPStatus.BAD_REQUEST,
             "body": json.dumps({"message": f"error: {str(e)}"}),
         }
     except Exception as e:
-        logger.error(f"request_id: {request_id}\nerror: {str(e)}", exc_info=True)
+        logger.error(f"Internal error - request_id: {request_id}\nerror: {str(e)}", exc_info=True)
         return {
             "statusCode": HTTPStatus.INTERNAL_SERVER_ERROR,
-            "body": json.dumps(
-                {"message": f"Error processing the request. request_id: {request_id}"}
-            ),
+            "body": json.dumps({"message": f"Error processing the request. request_id: {request_id}"}),
         }
