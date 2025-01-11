@@ -21,6 +21,59 @@ https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/SQLtoNoSQL.Writ
 https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Programming.LowLevelAPI.html
 
 
+!!!ENABLE PITR & DELETION PROTECTION!!!
+
+--------------------------------------------------------------------------------------------------------
+Naming Conventions
+--------------------------------------------------------------------------------------------------------
+
+- All names must be UTF-8 encoded
+- Names are case sensitive
+- Attribute names contribute to the item size limit
+
+Table Names:
+Length: 3-255 characters
+Allowed characters:
+- a-z (lowercase)
+- A-Z (uppercase)
+- 0-9 (numbers)
+- _ (underscore)
+- - (dash/hyphen)
+- . (dot)
+
+Attribute Names:
+Length: 
+- Minimum: 1 character
+- Maximum: 64KB
+
+Special restrictions for secondary indexes:
+- Index partition key names: max 255 characters
+- Index sort key names: max 255 characters
+- Projected attribute names: max 255 characters
+
+--------------------------------------------------------------------------------------------------------
+
+ReservedWords -Use #ExpressionAttributeNames, not case-sensitive:
+
+Common: name, data, table, key, hash
+
+1. Common SQL:
+ABORT, ACTION, ADD, ALL, ALTER
+DELETE, DESC, DESCRIBE, DISTINCT, DROP
+FROM, GROUP, HAVING, INSERT, INTO
+SELECT, SET, TABLE, UPDATE, WHERE
+
+2. Data Types and Operations:
+BINARY, BOOLEAN, BY, BYTE
+DECIMAL, DOUBLE, FLOAT, INT, INTEGER
+NUMBER, NUMERIC, STRING, TIMESTAMP
+
+
+3. DynamoDB Specific:
+ATTRIBUTE ATTRIBUTES BATCH CAPACITY CONSUME 
+CONSISTENT GLOBAL HASH INDEX INDEXES KEY KEYS 
+LOCAL RANGE THROUGHPUT
+
 --------------------------------------------------------------------------------------------------------
 DynamoDB Data Types
 --------------------------------------------------------------------------------------------------------

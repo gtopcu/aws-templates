@@ -83,12 +83,16 @@ print("Table status:", table.table_status)
 
 # table.query(Limit=37)
 
-# ddb_client.create_table(
+# table = ddb_client.create_table(
 #     TableName="table-1",
-#     BillingMode="PAY_PER_REQUEST",
 #     KeySchema=[{"AttributeName": "PK","KeyType": "HASH"},{"AttributeName": "SK", "KeyType": "RANGE"}],
-#     AttributeDefinitions=[{"AttributeName": "PK", "AttributeType": "S"}, {"AttributeName": "SK", "AttributeType": "S"}]
+#     AttributeDefinitions=[{"AttributeName": "PK", "AttributeType": "S"}, {"AttributeName": "SK", "AttributeType": "S"}],
+#     # ProvisionedThroughput={"ReadCapacityUnits": 5, "WriteCapacityUnits": 5},
+#     BillingMode="PAY_PER_REQUEST",
 # )
+
+# delete table
+# table.delete()
 
 # Add timestamp to the item
 # timestamp = datetime.now(datetime.timezone.utc).isoformat()
@@ -202,7 +206,13 @@ print(person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_u
 
 
 # Scan - 1MB Limit -> dynamo can return empty response even though there are matching records!
+# 'Count': 23360, 'ScannedCount': 23360, 'LastEvaluatedKey': {'PK': '39001'}
+
 # response = table.scan()
+# scan_kwargs = { 
+#                 "FilterExpression" : "age > :val",
+#                 "ExpressionAttributeValues" : {":val": "40"},
+#             }
 # response = table.scan(
 #     FilterExpression=Key("name").begins_with("G"),
 #     ProjectionExpression="PK, age",
@@ -225,7 +235,7 @@ print(person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_u
 
 # Query - 1MB Limit -> dynamo can return empty response even though there are matching records!
 # response = table.query(
-#     KeyConditionExpression=Key("PK").eq("1"),
+#     KeyConditionExpression=Key("PK").eq("1") & Key("name").begins_with("G"),
 #     # FilterExpression=Attr("age").eq(30) & Attr("address").begins_with("my") #& Attr("hobbies").contains("walking"),
 #     # FilterExpression=Attr("age").between(30, 40) & Attr("age").is_in([30, 31, 32]) & Attr("age").exists()
 #     # FilterExpression=Attr("age").gt(30) & Attr("Age").lt(40) & Attr("age").ne(31) & Attr("age").gte(30) & Attr("age").lte(40)
@@ -233,7 +243,8 @@ print(person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_u
 #     # Limit=10,
 #     # ProjectionExpression="PK, name, age",
 #     # Select='ALL_ATTRIBUTES',
-#     # ScanIndexForward=False # true = ascending, false = descending
+#     # ScanIndexForward=False # true = ascending, false = descending,
+#     # ConsistentRead=True,
 # )
 # data = response['Items']
 # while "LastEvaluatedKey" in response:
@@ -245,6 +256,19 @@ print(person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_u
 # Batch Write/Delete - 25 items / 16GB limit
 # BatchWriter: Parallel, non-atomic writes
 # Records that are not processed will be returned in 'UnprocessedItems' attribute in the response - apply retry!
+
+# "UnprocessedItems": {},
+# response = ddb.batch_write_item(
+#     RequestItems={
+#         "load-test": [
+#             {"PutRequest": {"Item": {"id": str(i), "name": "Gokhan Topcu", "age": 40, "address": "my address"}}}
+#             for i in range(ITEM_COUNT)
+#         ]
+#     }
+# )
+# print(response)
+# print(response["UnprocessedItems"])
+
 # with table.batch_writer() as batch:
 #     for i in range(1, 10):
 #         batch.put_item(Item={"PK": str(i)})
@@ -254,12 +278,15 @@ print(person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_u
 
 # Batch Get - 100 items / 16GB limit (from same/different tables)
 # Records that are not processed will be returned in 'UnprocessedItems' attribute in the response - apply retry!
+
+# "UnprocessedItems": {},
 # key_list = [ {"PK": "1"}, {"PK": "2"} ]
 # response = ddb.batch_get_item(
 #     RequestItems={"employee": {"Keys": key_list, "ConsistentRead": True}},
 #     ReturnConsumedCapacity="TOTAL",
 # )
-# # print(response)
+# print(response)
+# print(response["UnprocessedItems"])
 # if response["Responses"]:
 #     for item in response["Responses"]["employee"]:
 #         print(item)
@@ -303,27 +330,27 @@ print(person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_u
 #
 
 # Transaction write
-def write_to_dynamodb_transaction():
-    items = [
-        {
-            'Put': {
-                'TableName': 'MyTable',
-                'Item': {
-                    'PK': {'S': '1'},
-                    'Name': {'S': 'Item 1'},
-                    'Price': {'N': '10'},
-                }
-            }
-        }
-    ]
-    dynamodb = boto3.client('dynamodb', region_name='us-west-2')
-    try:
-        response = dynamodb.transact_write_items(TransactItems=items)
-        # response = ddb.meta.client.transact_write_items(TransactItems=items)
-        print("Transaction successful:", response)
+# def write_to_dynamodb_transaction():
+#     items = [
+#         {
+#             'Put': {
+#                 'TableName': 'MyTable',
+#                 'Item': {
+#                     'PK': {'S': '1'},
+#                     'Name': {'S': 'Item 1'},
+#                     'Price': {'N': '10'},
+#                 }
+#             }
+#         }
+#     ]
+#     dynamodb = boto3.client('dynamodb', region_name='us-west-2')
+#     try:
+#         response = dynamodb.transact_write_items(TransactItems=items)
+#         # response = ddb.meta.client.transact_write_items(TransactItems=items)
+#         print("Transaction successful:", response)
 
-    except ClientError as e:
-        print(f"Error occurred: {e}")
+#     except ClientError as e:
+#         print(f"Error occurred: {e}")
 
 
 # def write_to_dynamodb_transaction2(order_id: str, customer_id: str):
@@ -382,3 +409,7 @@ def write_to_dynamodb_transaction():
 #         return False
 #
 #
+
+# Run PartiQL:
+# input = { "Statement": "select * from load-test" }
+# response = dynamodb_client.execute_statement(**input)
