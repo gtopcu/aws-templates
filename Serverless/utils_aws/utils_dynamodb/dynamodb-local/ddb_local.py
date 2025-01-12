@@ -20,22 +20,21 @@
 # pip install simplejson
 # import simplejson as json
 import json
-from datetime import datetime
+from datetime import datetime, timezone
+# https://github.com/boto/boto3/issues/665#issuecomment-340260257
+from decimal import Decimal
 
 import boto3
 import boto3.dynamodb.conditions
 import boto3.dynamodb.transform
 import boto3.dynamodb.types
 from boto3 import dynamodb
-from boto3.dynamodb.conditions import Key, Attr
-
+from boto3.dynamodb.conditions import Attr, Key
 # from boto3.dynamodb.table import TableResource, BatchWriter, BatchReader
 # from boto3.session import Session
 from botocore.exceptions import ClientError
-from .schemas import Person
 
-# https://github.com/boto/boto3/issues/665#issuecomment-340260257
-from decimal import Decimal
+from .schemas import Person
 
 REGION = "us-east-1"
 ACCESS_KEY_ID = "xxx"
@@ -60,8 +59,9 @@ ddb = boto3.resource(
 #     # print(table.name)
 
 table: dynamodb.table = ddb.Table("employee")
-print(table)
-print("Table status:", table.table_status)
+# print(table)
+# print("Table status:", table.table_status)
+# print("Created at:", table.creation_date_time)
 
 # table_resource: TableResource = table.TableResource()
 # ddb.meta.client.describe_table(TableName="employee")
@@ -95,7 +95,7 @@ print("Table status:", table.table_status)
 # table.delete()
 
 # Add timestamp to the item
-# timestamp = datetime.now(datetime.timezone.utc).isoformat()
+# timestamp = datetime.now(timezone.utc).isoformat(timespec="seconds")
 # body = {
 #     "PK": "1",
 #     "name": "Gokhan Topcu",
@@ -256,12 +256,11 @@ print(person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_u
 # Batch Write/Delete - 25 items / 16GB limit
 # BatchWriter: Parallel, non-atomic writes
 # Records that are not processed will be returned in 'UnprocessedItems' attribute in the response - apply retry!
-
 # "UnprocessedItems": {},
 # response = ddb.batch_write_item(
 #     RequestItems={
 #         "load-test": [
-#             {"PutRequest": {"Item": {"id": str(i), "name": "Gokhan Topcu", "age": 40, "address": "my address"}}}
+#             {"PutRequest": {"Item": {"PK": str(i), "name": "Gokhan Topcu", "age": 40, "address": "my address"}}}
 #             for i in range(ITEM_COUNT)
 #         ]
 #     }
@@ -272,23 +271,22 @@ print(person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_u
 # with table.batch_writer() as batch:
 #     for i in range(1, 10):
 #         batch.put_item(Item={"PK": str(i)})
-#         You can also delete_items in a batch.
 #         batch.delete_item(Key={'PK': str(i)})
 
 
 # Batch Get - 100 items / 16GB limit (from same/different tables)
 # Records that are not processed will be returned in 'UnprocessedItems' attribute in the response - apply retry!
-
 # "UnprocessedItems": {},
 # key_list = [ {"PK": "1"}, {"PK": "2"} ]
 # response = ddb.batch_get_item(
-#     RequestItems={"employee": {"Keys": key_list, "ConsistentRead": True}},
+#     RequestItems={"employees": {"Keys": key_list}},
+#     # ConsistentRead=True,
 #     ReturnConsumedCapacity="TOTAL",
 # )
 # print(response)
 # print(response["UnprocessedItems"])
 # if response["Responses"]:
-#     for item in response["Responses"]["employee"]:
+#     for item in response["Responses"]["employees"]:
 #         print(item)
 
 # Delete All
@@ -325,7 +323,8 @@ print(person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_u
 #     table.update_item(
 #         Key={'PK': 1000},
 #         UpdateExpression='ADD hits :incr',
-#         ExpressionAttributeValues={':incr': 1}
+#         ExpressionAttributeValues={':incr': 1},
+#         # ReturnValues="UPDATED_NEW",
 #     )
 #
 

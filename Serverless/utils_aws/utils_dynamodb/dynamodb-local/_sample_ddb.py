@@ -2,9 +2,11 @@
 # https://aws.github.io/chalice/tutorials/wschat.html
 
 import os
-import boto3
-from boto3.dynamodb.conditions import Key, Attr
 from typing import Self
+
+import boto3
+from boto3.dynamodb.conditions import Attr, Key
+
 
 class UserTable:
     def __init__(self, table):

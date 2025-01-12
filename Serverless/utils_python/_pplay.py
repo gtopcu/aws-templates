@@ -97,7 +97,7 @@ import sys
 
 # from datetime import datetime, timezone, timedelta
 # import time
-# datetime.now(timezone.utc).isoformat()
+# datetime.now(timezone.utc).isoformat(timespec="seconds")
 # my_date + timedelta(hours=1)
 # time.time()
 # time.strftime("%Y-%m-%d %H:%M:%S")

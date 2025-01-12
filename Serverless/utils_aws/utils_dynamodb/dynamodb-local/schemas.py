@@ -1,33 +1,18 @@
 
-from pydantic import (
-    BaseModel,
-    Field,
-    field_validator,
-    model_validator,
-    field_serializer,
-    computed_field,
-    ValidationInfo,
-    ValidationError,
-    EmailStr,
-    SecretStr,
-    StrictInt,
-    PositiveInt,
-    StringConstraints,
-    HttpUrl,
-    PastDate,
-    FutureDate,
-    PastDatetime,
-    FutureDatetime,
-    #AwareDatetime
-)
-from typing import Literal, Annotated
-from annotated_types import Gt, Ge, Le, Lt
-from uuid import uuid4, UUID
-from datetime import datetime, timezone
 import time
-
+from datetime import datetime, timezone
 # https://github.com/boto/boto3/issues/665#issuecomment-340260257
-from decimal import Decimal, getcontext, setcontext, ExtendedContext
+from decimal import Decimal, ExtendedContext, getcontext, setcontext
+from typing import Annotated, Literal
+from uuid import UUID, uuid4
+
+from annotated_types import Ge, Gt, Le, Lt
+from pydantic import (BaseModel, EmailStr, Field, FutureDate,  # AwareDatetime
+                      FutureDatetime, HttpUrl, PastDate, PastDatetime,
+                      PositiveInt, SecretStr, StrictInt, StringConstraints,
+                      ValidationError, ValidationInfo, computed_field,
+                      field_serializer, field_validator, model_validator)
+
 setcontext(ExtendedContext)
 getcontext().prec = 2
 
@@ -39,7 +24,7 @@ getcontext().prec = 2
 
 class Person(BaseModel):
     PK: str = Field(min_length=1, max_length=50, description="Employee ID")
-    # uuid: UUID = Field(default_factory=uuid4, description="Unique ID", examples=["12345678-1234-1234-1234-123456789012"])
+    # SK: UUID = Field(default_factory=uuid4, description="Unique ID", examples=["12345678-1234-1234-1234-123456789012"])
     name: str = Field(min_length=1, max_length=100, description="Full Name")
     age: int | None = Field(default=None, ge=0, le=100, description="Age in years")
     # birthday: PastDate | None
@@ -51,9 +36,11 @@ class Person(BaseModel):
     hobbies: list[str] | None = None
     # items: list[Item] # 
     # created: datetime = Field(default_factory=datetime.now, description="Record creation timestamp", serialization_alias="creationDate")
-    # created: str = Field(default=str(time.strftime("%Y-%m-%dT%H:%M:%S")), description="Record creation date")
-    # created: str = Field(default=str(datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S")), description="Record creation date")
+    # created: str = Field(default=time.strftime("%Y-%m-%dT%H:%M:%S"), description="Record creation date")
+    # created: str = Field(default=datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S"), description="Record creation date")
+    # created: str = Field(default=datetime.now(timezone.utc).isoformat(timespec="seconds"), description="Record creation date")
     # expiry: int = Field(default=0, description="Record expiry timestamp - dynamo TTL")
+    
 
     # @computed_field
     # @property
