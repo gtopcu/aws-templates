@@ -20,8 +20,11 @@
 # FROM python:3.13-slim:    : 205MB     -> Debian 12(Bookworm)
 # FROM python:3.13-alpine   : 72MB      -> Alpine Linux(no bash, uses musl instead of glibc)
 
+# /usr/local/lib/python3.13/site-packages
 FROM python:3.13-slim
+RUN apt update && apt upgrade -y
 WORKDIR /app
 COPY . /app
+# RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 CMD ["python", "app.py"]

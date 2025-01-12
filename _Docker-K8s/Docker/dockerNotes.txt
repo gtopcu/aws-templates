@@ -94,6 +94,7 @@ docker run --name container_name -v /var/lib/mysql/data -> anonymous volumes ie.
 docker run -d --name wordpress --mount source=sample-volume,target=/var/www/html wordpress
 
 docker run -it ubuntu bash
+docker run -it python:3.13-slim bash
 docker run -it --entrypoint /bin/bash
 docker exec -it container_name /bin/bash
 docker attach container_name

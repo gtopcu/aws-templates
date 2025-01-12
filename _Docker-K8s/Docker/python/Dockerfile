@@ -10,11 +10,16 @@
 # docker run -it --rm --name running-script -v "$PWD":/usr/src/myapp -w /usr/src/myapp python:3 python script.py
 
 # docker run -it ubuntu bash
+# docker run -it debian bash
+# docker run -it python:3.13-slim bash
+
+# shows OS release
+# cat /etc/os-release 
 
 # FROM ubuntu:latest        : 140MB
-# FROM debian:12(Bookworm)
+# FROM debian:12(Bookworm)  : 203MB
 # FROM python:3.13          : 1.46GB    -> Debian 12(Bookworm)
-# FROM python:3.13-slim:    : 205MB     -> Debian 12(Bookworm)
+# FROM python:3.13-slim:    : 205MB     -> Debian 12(Bookworm)apt
 # FROM python:3.13-alpine   : 72MB      -> Alpine Linux(no bash, uses musl instead of glibc)
 # FROM python:3.13-bookworm
 # FROM python:3.13-bullseye
@@ -22,6 +27,8 @@
 # -----------------------------------------------------------------
 
 FROM python:3.13
+RUN apt update && apt upgrade -y
+RUN apt install sudo && apt install nano -y
 WORKDIR /app
 COPY . /app
 RUN pip install --no-cache-dir -r requirements.txt
@@ -29,16 +36,19 @@ CMD ["python", "app.py"]
 # CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
 
 FROM python:3.13
+RUN apt update && apt upgrade -y
 ADD app.py /app/app.py
 EXPOSE 8080
 ENTRYPOINT ["python", "/app/app.py"]
 # ENTRYPOINT [ "/opt/app/run.sh", "--port", "8080" ]
 
+# /usr/local/lib/python3.13/site-packages
 FROM python:3.13-slim
+RUN apt update && apt upgrade -y
 WORKDIR /app
-COPY requirements.txt .
+COPY . /app
+# RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
-COPY . .
 CMD ["python", "app.py"]
 
 # -----------------------------------------------------------------
@@ -57,7 +67,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . /app/
 # ADD http://remotecompressed.gzip /uncompressed
 EXPOSE 8080
-CMD [ "python3", "process.py" ]
+CMD [ "python3", "app.py" ]
 # CMD [ "python", "manage.py", "runserver", "0.0.0.0:8000" ]
 # Exec form: CMD [“executable”, “parameter1”, “parameter2”]
 # Shell form: CMD command parameter1 parameter2

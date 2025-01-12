@@ -47,7 +47,6 @@
 #         """
 #         return self.name
 
-
 # from typing import Self, Any, Optional, Final, Literal, NewType, TypeAlias, TypedDict, Callable
 # from collections import namedtuple, deque, OrderedDict, defaultdict
 # from collections.abc import Mapping, Sequence, Set, Generator, Callable, Iterable, Iterator, AsyncIterable
@@ -68,9 +67,10 @@ import sys
 
 # and or any all del len id type sorted reversed enumerate zip filter map reduce 
 # is/not in/not any/all instanceof round floor min max avg pow sum
+
 # print(str.__name__)
 # import string
-# string.ascii_letters
+# string.digits, string.ascii_letters, string.punctuation, string.ascii_lowercase, string.ascii_uppercase, 
 
 # args:list[str] = sys.argv[:2]
 # sys.getsizeof("abc")
