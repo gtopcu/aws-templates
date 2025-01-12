@@ -77,11 +77,11 @@ test:
 	pytest -vs --cov
 
 clean:
-	find . -type d -name "__pycache__" -exec rm -rf {} +
 	find . -type f -name "*.pyc" -delete
-	rm -f .coverage
-	rm -rf .pytest_cache
-	rm -rf .ruff_cache
+	find . -type d -name "__pycache__" -exec rm -rf {} +
+	find . -type d -name ".ruff_cache" -exec rm -rf {} +
+	find . -type d -name ".pytest_cache" -exec rm -rf {} +
+	find . -type d -name ".coverage" -exec rm -rf {} +
 # 	rm -rf $(CURRENT_DIR)/build/*
 #	rm -rf cdk.out
 
