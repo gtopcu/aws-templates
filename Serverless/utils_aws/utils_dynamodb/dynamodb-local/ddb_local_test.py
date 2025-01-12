@@ -101,13 +101,21 @@ ITEM_COUNT = 25
 # SCAN/QUERY
 
 # 'Count': 23360, 'ScannedCount': 23360, 'LastEvaluatedKey': {'PK': '39001'}
-kwargs = {
+#kwargs = {
     # "KeyConditionExpression"    : Key("id").eq("1"),
     # "FilterExpression"         : Attr("name").begins_with("z"),
     # "FilterExpression"         : Attr("age").gt(40),
     # "FilterExpression"         : "age > :val",
     # "ExpressionAttributeValues" : {":val": "40"},
-}
+#}
+# kwargs = dict(
+#     IndexName="age-index",
+#     KeyConditionExpression=Key("age").eq(40),
+#     FilterExpression=Attr("name").begins_with("G"),
+#     Limit=100,
+#     ProjectionExpression="PK, age",
+#     ConsistentRead=True,
+# )
 
 # response = table.scan(**kwargs,
     # KeyConditionExpression=Key("id").eq("1")

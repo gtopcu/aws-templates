@@ -208,7 +208,7 @@ tail -f /var/log/auth.log        -> Auth log
 
 echo $DESKTOP_SESSION            -> Check current session
 loginctl list-sessions           -> List active sessions
-loginctl terminate-session <id>  -> # Terminate specific session
+loginctl terminate-session <id>  -> Terminate specific session
 logout | exit | Ctrl+D           -> Logout
 pkill -KILL -u username          -> Kill all user processes
 sudo pkill -9 -u username        -> Force logout specific user
@@ -353,6 +353,7 @@ su
 su - (-l)
 su <username>
 whoami
+stat filename
 bash | sh myscript.sh
 
 find . -maxdepth 1 -name "*.txt"

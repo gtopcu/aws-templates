@@ -47,6 +47,12 @@
 #         """
 #         return self.name
 
+# BaseException ->     
+#   Exception -> SystemExit     
+#   StandardError -> ValueError: int("A"), KeyError: dict['key1'], TypeError: str[0]="a",
+#   IndexError, AttributeError, NameError, AssertionError, StopIteration, ArithmeticError,     
+#   ZeroDivisionError, NotImplementedError, RuntimeError, SystemError
+
 # from typing import Self, Any, Optional, Final, Literal, NewType, TypeAlias, TypedDict, Callable
 # from collections import namedtuple, deque, OrderedDict, defaultdict
 # from collections.abc import Mapping, Sequence, Set, Generator, Callable, Iterable, Iterator, AsyncIterable
@@ -84,6 +90,10 @@ import sys
 
 # logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 # traceback.print_exception(type(err), err, err.__traceback__)
+
+# from pprint import pprint
+# bowie = dict(name="David Bowie", age=86)
+# pprint(bowie, indent=4, sort_dicts=False)
 
 # os.getenv("PYTHONPATH")
 # for path in sys.path:

@@ -218,11 +218,16 @@ print(person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_u
 # 'Count': 23360, 'ScannedCount': 23360, 'LastEvaluatedKey': {'PK': '39001'}
 
 # response = table.scan()
-# scan_kwargs = { 
+# kwargs = { 
 #                 "FilterExpression" : "age > :val",
 #                 "ExpressionAttributeValues" : {":val": "40"},
-#             }
-# response = table.scan(**scan_kwargs,
+# }
+# kwargs = dict(
+#     KeyConditionExpression=Key("age").eq(40),
+#     FilterExpression=Attr("name").begins_with("G"),
+#     ConsistentRead=True,
+# )
+# response = table.scan(**kwargs,
 #     FilterExpression=Key("name").begins_with("G"),
 #     ProjectionExpression="PK, age",
 #     ProjectionExpression: "Colors[0], Scores[1]",         # list access by index
@@ -254,12 +259,17 @@ print(person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_u
 
 
 # Query - 1MB Limit -> dynamo can return empty response even though there are matching records!
+# kwargs = dict(
+#     KeyConditionExpression=Key("age").eq(40),
+#     FilterExpression=Attr("name").begins_with("G"),
+#     ConsistentRead=True,
+# )
 # response = table.query(
+#     IndexName="GSI1",
 #     KeyConditionExpression=Key("PK").eq("1") & Key("name").begins_with("G"),
 #     # FilterExpression=Attr("age").eq(30) & Attr("address").begins_with("my") #& Attr("hobbies").contains("walking"),
 #     # FilterExpression=Attr("age").between(30, 40) & Attr("age").is_in([30, 31, 32]) & Attr("age").exists()
 #     # FilterExpression=Attr("age").gt(30) & Attr("Age").lt(40) & Attr("age").ne(31) & Attr("age").gte(30) & Attr("age").lte(40)
-#     # IndexName="GSI1",
 #     # Limit=10,
 #     # ProjectionExpression="PK, name, age",
 #     # Select='ALL_ATTRIBUTES',
@@ -466,6 +476,11 @@ print(person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_u
 #     #"KeyConditionExpression": "id = :id",
 #     #"ExpressionAttributeValues": { ":id": "123"},
 # }
+# kwargs = dict(
+#     KeyConditionExpression=Key("age").eq(40),
+#     FilterExpression=Attr("name").begins_with("G"),
+#     ConsistentRead=True,
+# )
 # response_iterator = paginator.paginate(
 #     TableName=table.name,
 #     **kwargs,
