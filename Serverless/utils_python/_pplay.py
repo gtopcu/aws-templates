@@ -52,6 +52,7 @@
 # from collections.abc import Mapping, Sequence, Set, Generator, Callable, Iterable, Iterator, AsyncIterable
 
 # my_dict: dict[str, Any] 
+# PORT: Final[int] = 80080
 # from typing import Literal, LiteralString
 # MODE = Literal['r', 'rb', 'w', 'wb']
 # SQL = LiteralString('SELECT * FROM students') # to avoid SQL injection
@@ -80,7 +81,9 @@ import sys
 # pip install python-dotenv
 # from dotenv import load_dotenv
 # load_dotenv()
+
 # logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+# traceback.print_exception(type(err), err, err.__traceback__)
 
 # os.getenv("PYTHONPATH")
 # for path in sys.path:
@@ -101,7 +104,7 @@ import sys
 
 # from datetime import datetime, timezone, timedelta
 # import time
-# datetime.now(timezone.utc).isoformat(timespec="seconds")
+# datetime.now(timezone.utc).isoformat(timespec="seconds")
 # my_date + timedelta(hours=1)
 # time.time()
 # time.strftime("%Y-%m-%d %H:%M:%S")

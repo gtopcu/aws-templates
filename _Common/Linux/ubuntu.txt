@@ -333,26 +333,27 @@ apt update && sudo apt install foo bar -y
 service ssh --status --status-all --enable --disable --start --full-restart --stop
 systemctl enable disable status start stop restart --now ssh
 chown -R hukanege /src/
-chmod u+rwx myscript.sh
+chmod u+rwx filename
 chmod u=rwx,g=r,o= filename
 chmod 740 filename
 chmod 755 filename
-bash myscript.sh
 chmod 400 keypair.pem
-chmod u+rwx keypair.pem
 ssh -i keypair.pem ec2-user@54.78.7.114
 sudo rm -rf /*
 cat/touch/nano/head/tail -n 10
 logout | exit | Ctrl+D
 addgroup dev
+delgroup dev
 adduser gtopcu --ingroup dev --verbose
 adduser <user> <group> 
+deluser <user> <group> 
 sudo passwd root
 sudo -i
 su
 su - (-l)
 su <username>
 whoami
+bash | sh myscript.sh
 
 find . -maxdepth 1 -name "*.txt"
 find . -type f -name "*.pyc" -delete

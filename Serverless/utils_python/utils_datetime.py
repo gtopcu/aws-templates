@@ -5,6 +5,7 @@ import time
 # import isodate
 
 # datetime.now(timezone.utc)
+# datetime.now(timezone.utc).isoformat(timespec="seconds") # 2025-01-12T18:03:54+00:00 
 # time.time()
 # time.strftime("%Y-%m-%d %H:%M:%S")
 # datetime.now().strftime("%Y-%m-%d %H:%M:%S")
