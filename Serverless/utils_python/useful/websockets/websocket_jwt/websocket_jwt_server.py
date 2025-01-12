@@ -19,7 +19,7 @@ active_tokens = set()
 
 def generate_jwt_token(username):
     """Generate a JWT token for a user"""
-    expiration = datetime.now(datetime.timezone.utc) + timedelta(hours=1)
+    expiration = datetime.now(timezone.utc) + timedelta(hours=1)
     token = jwt.encode(
         {"username": username, "exp": expiration}, JWT_SECRET, algorithm="HS256"
     )
