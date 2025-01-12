@@ -20,6 +20,8 @@ https://www.youtube.com/watch?v=HaEPXoXVf2k
 https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/SQLtoNoSQL.WriteData.html
 https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Programming.LowLevelAPI.html
 
+Accessing lists, maps, sets using ExpressionAttributes
+https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Attributes.html
 
 !!!ENABLE PITR & DELETION PROTECTION!!!
 
@@ -53,7 +55,7 @@ Special restrictions for secondary indexes:
 
 --------------------------------------------------------------------------------------------------------
 
-ReservedWords -Use #ExpressionAttributeNames, not case-sensitive:
+ReservedWords -> Use #ExpressionAttributeNames, not case-sensitive:
 
 Common: name, data, table, key, hash
 
@@ -67,7 +69,6 @@ SELECT, SET, TABLE, UPDATE, WHERE
 BINARY, BOOLEAN, BY, BYTE
 DECIMAL, DOUBLE, FLOAT, INT, INTEGER
 NUMBER, NUMERIC, STRING, TIMESTAMP
-
 
 3. DynamoDB Specific:
 ATTRIBUTE ATTRIBUTES BATCH CAPACITY CONSUME 
@@ -126,7 +127,6 @@ BS – Binary Set
 
 - Binary Set (BS): Collection of unique binary values
 
-
 ----------------------------------------------------------------------------------------
 
 Example of Complex Data Structure:
@@ -161,7 +161,7 @@ QUERYING
 - Nested access uses dot notation for maps and n for lists
 - The contains function works differently for lists vs. sets
 - For large lists/maps, consider denormalization if you frequently query specific elements
-- These queries can be used with various DynamoDB operations like GetItem, Query, or Scan, depending on your access patterns and table structure.
+- These queries can be used with various DynamoDB operations like GetItem, Query, or Scan
 
 --------------------------------------------------------------------------------------------------------
 
@@ -313,9 +313,6 @@ Querying Maps:
 }
 
 --------------------------------------------------------------------------------------------------------
-
-Accessing lists, maps, sets using ExpressionAttributes
-https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Attributes.html
 
 aws dynamodb create-table
 aws dynamodb describe-table --table-name Music | grep TableStatusaws dynamodb describe-table --table-name Music | grep IndexStatus

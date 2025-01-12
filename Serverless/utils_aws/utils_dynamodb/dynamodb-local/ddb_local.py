@@ -40,6 +40,11 @@ REGION = "us-east-1"
 ACCESS_KEY_ID = "xxx"
 ACCESS_KEY_SECRET = "yyy"
 
+# import botocore.session
+# session = botocore.session.get_session()
+# client = session.create_client('dynamodb', region_name='us-east-1') 
+# session.get_credentials()
+
 # ddb_client = boto3.client(
 #     "dynamodb",
 #     endpoint_url="http://localhost:8000",
@@ -54,34 +59,34 @@ ddb = boto3.resource(
     aws_access_key_id=ACCESS_KEY_ID,
     aws_secret_access_key=ACCESS_KEY_SECRET,
 )
+ddb_client = ddb.meta.client
 
 # for table in ddb.tables.all():
 #     # print(table.name)
 
 table: dynamodb.table = ddb.Table("employee")
-# print(table)
-# print("Table status:", table.table_status)
-# print("Created at:", table.creation_date_time)
 
-# table_resource: TableResource = table.TableResource()
-# ddb.meta.client.describe_table(TableName="employee")
-
-# ddb.meta.client.transact_write_items()
-# ddb.meta.client.transact_get_items()
-# dynamodb.transact_write_items()
-# dynamodb.transact_get_items()
-
-# ddb_client.get_waiter(TableName="employee").wait(TableName="employee", WaiterConfig={"Delay": 1, "MaxAttempts": 10}
-# ddb_client.get_paginator(TableName="employee").paginate(TableName="employee", PaginationConfig={"MaxItems": 10, "PageSize": 10})
-# ddb_client.can_paginate()
-# ddb_client.meta.partition
-# ddb_client.meta.region_name
-# ddb_client.meta.service_model
-# ddb_client.meta.events
-# ddb_client.meta.config
-# ddb_client.meta.endpoint_url
-
-# table.query(Limit=37)
+# ddb                                     # dynamodb.ServiceResource()
+# table                                   # dynamodb.Table(name='load-test')
+# table.name                              # load-test
+# table.table_status                      # ACTIVE
+# table.creation_date_time                # Sun, 12 Jan 2025 09:43:35 GMT
+# ddb.meta                                # ResourceMeta('dynamodb', identifiers=[])
+# ddb.meta.service_name                   # dynamodb
+# client = ddb.meta.client                # Get a low-level client from a resource instance
+# client.list_tables()                    # {'TableNames': ['employee', 'load-test'], ... }
+# client.meta.endpoint_url                # http://localhost:8000
+# client.meta.service_model               # ServiceModel(dynamodb)
+# client.meta.region_name                 # us-east-1
+# client.meta.partition                   # aws
+# client.meta.events                      # Events
+# client.meta.config                      # Config
+# client.meta.config.user_agent()         # Boto3/1.24.12 Python/3.9.12 Linux/5.15.0-46-generic Botocore/1.29.12
+# client.meta.config.connect_timeout      # 60
+# client.meta.config.read_timeout         # 60
+# client.meta.config.max_pool_connections # 10
+# client.meta.config.retries              # {'max_attempts': 3}
+# client.can_paginate("query")              # True
 
 # table = ddb_client.create_table(
 #     TableName="table-1",
@@ -90,9 +95,13 @@ table: dynamodb.table = ddb.Table("employee")
 #     # ProvisionedThroughput={"ReadCapacityUnits": 5, "WriteCapacityUnits": 5},
 #     BillingMode="PAY_PER_REQUEST",
 # )
+# waiter = client.get_waiter('table_exists')
+# waiter.wait(TableName=table.name, WaiterConfig={"Delay": 3, "MaxAttempts": 10})
 
 # delete table
 # table.delete()
+
+# paginator = client.get_paginator("scan") # <botocore.client.DynamoDB.Paginator.Scan>
 
 # Add timestamp to the item
 # timestamp = datetime.now(timezone.utc).isoformat(timespec="seconds")
@@ -199,11 +208,11 @@ print(person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_u
 # response.error.Item
 # print(response)
 
-
 # Delete
 # response = table.delete_item(Key={"PK": "1"})
 # print(response)
 
+# ------------------------------------------------------------------------------------------------------------------------------
 
 # Scan - 1MB Limit -> dynamo can return empty response even though there are matching records!
 # 'Count': 23360, 'ScannedCount': 23360, 'LastEvaluatedKey': {'PK': '39001'}
@@ -213,9 +222,20 @@ print(person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_u
 #                 "FilterExpression" : "age > :val",
 #                 "ExpressionAttributeValues" : {":val": "40"},
 #             }
-# response = table.scan(
+# response = table.scan(**scan_kwargs,
 #     FilterExpression=Key("name").begins_with("G"),
 #     ProjectionExpression="PK, age",
+#     ProjectionExpression: "Colors[0], Scores[1]",         # list access by index
+#     ProjectionExpression: "Address.City",                 # map access by . notation
+#     ProjectionExpression: "Orders[0].Items[0].ProductId", # using both list & map access
+#     ProjectionExpression: "#ord[0].#itm[0].#pid",         # using expression att. names
+#     FilterExpression: "Colors[0] = :color",               # filtering lists
+#     FilterExpression: "contains(Colors, :color)",         # filtering list with "contains"
+#     ExpressionAttributeValues: {":color": "Red"}
+#     FilterExpression: "contains(Scores, :score)",         # filtering a number set
+#     ExpressionAttributeValues: { ":score": 90 }
+#     FilterExpression: "size(Colors) = :size",             # checking list/set size
+#     ExpressionAttributeValues: {":size": 3}
 #     Limit=10
 # )
 # for item in response["Items"]:
@@ -252,6 +272,7 @@ print(person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_u
 #     data.extend(response['Items'])
 # print(data)
 
+# ------------------------------------------------------------------------------------------------------------------------------
 
 # Batch Write/Delete - 25 items / 16GB limit
 # BatchWriter: Parallel, non-atomic writes
@@ -259,7 +280,7 @@ print(person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_u
 # "UnprocessedItems": {},
 # response = ddb.batch_write_item(
 #     RequestItems={
-#         "load-test": [
+#         table.name: [
 #             {"PutRequest": {"Item": {"PK": str(i), "name": "Gokhan Topcu", "age": 40, "address": "my address"}}}
 #             for i in range(ITEM_COUNT)
 #         ]
@@ -279,14 +300,14 @@ print(person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_u
 # "UnprocessedItems": {},
 # key_list = [ {"PK": "1"}, {"PK": "2"} ]
 # response = ddb.batch_get_item(
-#     RequestItems={"employees": {"Keys": key_list}},
+#     RequestItems={table.name: {"Keys": key_list}},
 #     # ConsistentRead=True,
 #     ReturnConsumedCapacity="TOTAL",
 # )
 # print(response)
 # print(response["UnprocessedItems"])
 # if response["Responses"]:
-#     for item in response["Responses"]["employees"]:
+#     for item in response["Responses"][table.name]:
 #         print(item)
 
 # Delete All
@@ -304,6 +325,7 @@ print(person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_u
 #         for item in scan["Items"]:
 #             batch.delete_item(Key={"PK": item["PK"]})
 
+# ------------------------------------------------------------------------------------------------------------------------------
 
 # Increment Attribute
 # response = table.update_item(
@@ -327,6 +349,13 @@ print(person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_u
 #         # ReturnValues="UPDATED_NEW",
 #     )
 #
+
+# ------------------------------------------------------------------------------------------------------------------------------
+
+# client.transact_write_items()
+# client.transact_get_items()
+# ddb.transact_write_items()
+# ddb.transact_get_items()
 
 # Transaction write
 # def write_to_dynamodb_transaction():
@@ -407,8 +436,45 @@ print(person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_u
 #         print(f"Transaction failed: {e}")
 #         return False
 #
-#
+# ------------------------------------------------------------------------------------------------------------------------------
 
 # Run PartiQL:
 # input = { "Statement": "select * from load-test" }
 # response = dynamodb_client.execute_statement(**input)
+
+# ------------------------------------------------------------------------------------------------------------------------------
+# PAGINATION
+# client = ddb.meta.client
+
+# - Paginators automatically handle the LastEvaluatedKey logic
+# - They're more efficient than manual pagination
+# - Use appropriate page sizes to balance memory usage and performance
+# - Consider using parallel scan for very large tables
+# - Always handle potential errors and implement retries when necessary
+# - Monitor your throughput consumption when using pagination
+
+# 1 - Scan with no arguments
+# response_iterator = paginator.paginate(TableName=table.name, PaginationConfig={"MaxItems": 8, "PageSize": 2})
+# for page in response_iterator:
+#     print("**************************************************************")
+#     print(page["Items"])
+
+# 2 - Scan/Query with arguments.
+# paginator = client.get_paginator("scan")    # <botocore.client.DynamoDB.Paginator.Scan>
+# paginator = client.get_paginator("query") # <botocore.client.DynamoDB.Paginator.Query>
+# kwargs = {
+#     #"KeyConditionExpression": "id = :id",
+#     #"ExpressionAttributeValues": { ":id": "123"},
+# }
+# response_iterator = paginator.paginate(
+#     TableName=table.name,
+#     **kwargs,
+#     PaginationConfig={
+#         "PageSize": 2,  # Items per page
+#         "MaxItems": 10  # Total items to retrieve 
+#     })
+# for page in response_iterator:
+#     print("**************************************************************")
+#     print(page["Items"])
+
+# ------------------------------------------------------------------------------------------------------------------------------

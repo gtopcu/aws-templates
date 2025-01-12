@@ -51,7 +51,11 @@
 # from typing import Self, Any, Optional, Final, Literal, NewType, TypeAlias, TypedDict, Callable
 # from collections import namedtuple, deque, OrderedDict, defaultdict
 # from collections.abc import Mapping, Sequence, Set, Generator, Callable, Iterable, Iterator, AsyncIterable
-# my_dict: dict[str, Any]
+
+# my_dict: dict[str, Any] 
+# from typing import Literal, LiteralString
+# MODE = Literal['r', 'rb', 'w', 'wb']
+# SQL = LiteralString('SELECT * FROM students') # to avoid SQL injection
 
 # __init__.py
 # __all__ = ("module1", "module2")

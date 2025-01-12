@@ -26,9 +26,18 @@ def worker(arg):
 
 if __name__ == "__main__":
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
-        executor.map(worker, (1, ))
-        executor.map(worker, (2, ))
-        executor.map(worker, (3, ))
-        # future:Future = executor.submit(worker, (3, ))
-        executor.shutdown(wait=True)
+    # with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
+    #     executor.map(worker, (1, ))
+    #     executor.map(worker, (2, ))
+    #     executor.map(worker, (3, ))
+    #     # future:Future = executor.submit(worker, (3, ))
+    #     executor.shutdown(wait=True)
+
+    # Use with multiple threads/processes
+    workers = 4
+    # with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as executor:
+    #     futures = [
+    #         executor.submit(do_sth, job_no, workers)
+    #         for job_no in range(workers)
+    #     ]
+    #     concurrent.futures.wait(futures)

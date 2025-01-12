@@ -4,6 +4,7 @@ import time
 
 import boto3
 from boto3.dynamodb.conditions import Attr, Key
+import botocore.session
 
 REGION = "us-east-1"
 ACCESS_KEY_ID = "xxx"
@@ -29,8 +30,44 @@ ddb = boto3.resource(
 # )
 
 table = ddb.Table("load-test")
-# print("Table status:", table.table_status)
-# print("Created at:", table.creation_date_time)
+
+# ------------------------------------------------------------------------------------------------------------------------------
+# PAGINATION
+client = ddb.meta.client
+
+# - Paginators automatically handle the LastEvaluatedKey logic
+# - They're more efficient than manual pagination
+# - Use appropriate page sizes to balance memory usage and performance
+# - Consider using parallel scan for very large tables
+# - Always handle potential errors and implement retries when necessary
+# - Monitor your throughput consumption when using pagination
+
+
+# 1 - Scan with no arguments
+# response_iterator = paginator.paginate(TableName=table.name, PaginationConfig={"MaxItems": 8, "PageSize": 2})
+# for page in response_iterator:
+#     print("**************************************************************")
+#     print(page["Items"])
+
+# 2 - Scan/Query with arguments.
+# paginator = client.get_paginator("scan")    # <botocore.client.DynamoDB.Paginator.Scan>
+# paginator = client.get_paginator("query") # <botocore.client.DynamoDB.Paginator.Query>
+# kwargs = {
+#     #"KeyConditionExpression": "id = :id",
+#     #"ExpressionAttributeValues": { ":id": "123"},
+# }
+# response_iterator = paginator.paginate(
+#     TableName=table.name,
+#     **kwargs,
+#     PaginationConfig={
+#         "PageSize": 2,  # Items per page
+#         "MaxItems": 10  # Total items to retrieve 
+#     })
+# for page in response_iterator:
+#     print("**************************************************************")
+#     print(page["Items"])
+
+# ------------------------------------------------------------------------------------------------------------------------------
 
 # delete table
 # table.delete()
@@ -102,7 +139,7 @@ kwargs = {
 # # "UnprocessedItems": {},
 # response = ddb.batch_write_item(
 #     RequestItems={
-#         "load-test": [
+#         table.name: [
 #             {"PutRequest": {"Item": {"id": str(i), "name": "Gokhan Topcu", "age": 40, "address": "my address"} }}
 #             for i in range(1025, 1050, 1)
 #         ]
@@ -113,12 +150,11 @@ kwargs = {
 
 # ------------------------------------------------------------------------------------------------------------------------------
 
-
 # Records that are not processed will be returned in 'UnprocessedItems' attribute in the response - apply retry!
 # "UnprocessedItems": {},
 # key_list = [ {"id": "1"}, {"id": "2"} ]
 # response = ddb.batch_get_item(
-#     RequestItems={"load-test": {"Keys": key_list}},
+#     RequestItems={table.name: {"Keys": key_list}},
 #     # ConsistentRead=True,
 #     ReturnConsumedCapacity="TOTAL",
 # )
