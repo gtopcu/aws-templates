@@ -53,7 +53,8 @@
 #   IndexError, AttributeError, NameError, AssertionError, StopIteration, ArithmeticError,     
 #   ZeroDivisionError, NotImplementedError, RuntimeError, SystemError
 
-# from typing import Self, Any, Optional, Final, Literal, NewType, TypeAlias, TypedDict, Callable
+# from typing import Self, Any, Optional, Final, Literal, NewType, TypeAlias, TypedDict
+# from typing import Awaitable, Callable, Iterable, 
 # from collections import namedtuple, deque, OrderedDict, defaultdict
 # from collections.abc import Mapping, Sequence, Set, Generator, Callable, Iterable, Iterator, AsyncIterable
 
@@ -68,11 +69,19 @@
 # from .module import func
 # dir(module)
 
-import logging
-import os
-import sys
+# import logging
+# import os
+# import sys
+# import json
 
-from typing import Awaitable, Callable, Iterable, 
+# try:
+#     cache = json.load(open("cache.json"))
+# except (json.JSONDecodeError, FileNotFoundError):
+#     cache = {}
+#     raise
+# finally:
+#     json.dump(cache, open("cache.json", "w"))
+
 # and or any all del len id type sorted reversed enumerate zip filter map reduce 
 # is/not in/not any/all instanceof round floor min max avg pow sum
 
