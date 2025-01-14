@@ -72,6 +72,7 @@ import logging
 import os
 import sys
 
+from typing import Awaitable, Callable, Iterable, 
 # and or any all del len id type sorted reversed enumerate zip filter map reduce 
 # is/not in/not any/all instanceof round floor min max avg pow sum
 
