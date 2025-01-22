@@ -311,7 +311,7 @@ Serverless:
             zero-ETL integration to OpenSearch & RedShift, PITR now configurable between 1 and 35 days
 - API GW: Custom domain names for private endpoints
 - Lambda: Python 3.13 & Node 22, snapstart Python & .Net(not free), S3 as failure destination(async/streaming),
-          VSCode-like editor(up to 3MB editable), SAM export, ApplicationSignals/SLAs & FaultInjectionService support, 
+          VSCode-like editor(up to 50MB editable), SAM export, ApplicationSignals/SLAs & FaultInjectionService support, 
           Top-10 Lambda Metrics in Lambda Dashboard, new metrics for EventSourceMappings
 - EventBridge: Avg latency down to 130ms from 2.2s, VPC Lattice+PrivateLink VPC access, API dest. proactive OAuth token refresh
 - SFs: Export as SAM/InfrastructureComposer from console, Variables & JSONata support, VPC Lattice+PrivateLink VPC access
