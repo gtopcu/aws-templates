@@ -16,6 +16,7 @@ q chat  @history to pass your shell history
         @git to pass information about your current git repository
         @env to pass your shell environment
 
+/clean     - Clear current dialog
 /doc       - Generate documentation
 /dev       - Ask for help implementing a new feature
 /test      - Generate unit tests

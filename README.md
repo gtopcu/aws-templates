@@ -353,7 +353,7 @@ Others:
                  Auto-fix: SysMgr now diagnoses and remedies issues to bring nodes to managed state
 - ECS/EKS: ECS deployment history & predictive scaling, enhanced Container Insights, Farget network fault injection experiments,
            EKS AutoMode & Hybrid Nodes, node health monitoring & auto-repair
-- Other: Organizations/RootUser AccessControl, ResourceControlPolicies(RCP), EC2 DeclarativePolicies(VPC block public access),
+- Other: Organizations/RootUser mgmt, ResourceControlPolicies(RCP), EC2 DeclarativePolicies(VPC block public access),
          MSK Express, Amazon Keyspaces(Cassandra) reduced prices up to 75%, 
          OpenSearch Serverless BinaryVector & PIT Search, ingestion Lambda support for transformation,
          CloudMap SLAs, TimeSyncService, DataTransferTerminals, CleanRooms multi-cloud
