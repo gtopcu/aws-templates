@@ -400,6 +400,15 @@ command > /dev/null              -> Discard standard output
 command > /dev/null 2>&1         -> Discard both standard output and errors
 cat /dev/null > logfile          -> Clears the content of logfile
 
+man/tldr - Command info
+lscpu    - CPU info
+lsmod    - Kernel modules
+lshw     - Hardware info
+lspci    - PCI devices
+lsscsi   - SCSI harddrive & disk info
+lsblk    - Block devices
+
+
 
 ------------------------------------------------------------------------------------------------------------------------
 

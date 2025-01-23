@@ -4,9 +4,13 @@ https://aws.amazon.com/blogs/devops/amazon-q-developer-inline-chat/?trk=39c84365
 https://desktop-release.codewhisperer.us-east-1.amazonaws.com/latest/Amazon%20Q.dmg
 https://www.youtube.com/watch?v=xPZClVlvogI
 
+Code:
 Code complete: Option + C
 Inline Chat: Command + i
--> Left arrow to accept autocompletion in the console
+
+Console:
+Tab: Display all options
+Left arrow to accept autocompletion
 
 q chat  @history to pass your shell history
         @git to pass information about your current git repository
