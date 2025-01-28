@@ -318,7 +318,7 @@ Serverless:
 - Kinesis: on-Demand now supports 5x throughtput - 10GB/s for writers 20GB/s for consumers per stream
 - Cognito: New landing page/managed login, pricing tiers (Lite/Essentials/Plus), passkey auth
 - S3: Conditional writes(if-none-match/if-match bucket policy), ExpressOneZone append data, 1M buckets, 
-      AWS Backup S3 cross-region bucket replication, TransferFamily web apps, S3 Metadata & Tables(Apache Iceberg)
+      AWS Backup S3 cross-region bucket replication, TransferFamily web apps, Metadata(S3 tables-Apache Iceberg)
 - Amplify: Amplify AI kit, StorageBrowser for S3, WAF Support(IP filtering, geo-restriction etc)
 - AppSync: EventsAPI(EventBridge->Appsync Async+WebSockets), cross-account API access with RAM
       
