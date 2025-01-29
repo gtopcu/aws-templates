@@ -334,7 +334,7 @@ AI:
             Q developer: code review, inline chat, console/Datadog integration, Q Business new goodies
 
 Others:
-- CloudFormation: Lambda/Guard/ChangeSet/CloudControlAPI(Terraform) hooks, timeline view, github sync
+- CloudFormation: Lambda/Guard/ChangeSet/CloudControlAPI(Terraform) hooks, timeline view, github sync, user notifications
 - CloudFront: ALB support with WAF(preconfig ACLs & SG), VPC origins(egress EC2 in private subnet w/out a public IP/ALB), 
               new access log formats & destinations, gRPC support, Anycast static IPs, origin/header modification using functions
 - CloudWatch: Search all log groups(LogInsights), live logs in VS Code
@@ -357,4 +357,5 @@ Others:
          MSK Express, Amazon Keyspaces(Cassandra) reduced prices up to 75%, CodeBuild test splitting/parallelizm,
          OpenSearch Serverless BinaryVector & PIT Search, ingestion Lambda support for transformation,
          CloudMap SLAs, TimeSyncService, DataTransferTerminals, CleanRooms multi-cloud, 
-         BillingConductor/InvoiceConfiguration/CostCategories/CustomBillingViews
+         BillingConductor/InvoiceConfiguration/CostCategories/CustomBillingViews, Elasticache ServiceQuotas,
+         Console Multi-Session Support
