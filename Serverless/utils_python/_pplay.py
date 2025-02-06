@@ -128,6 +128,7 @@
 # datetime.now(timezone.utc).isoformat(timespec="seconds")
 # my_date + timedelta(hours=1)
 # time.time()
+# time.sleep(2)
 # time.strftime("%Y-%m-%d %H:%M:%S")
 # time.perf_counter()
 # datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -180,8 +181,8 @@
 # print(__file__)
 
 # shutil.copytree("lambda", "build/lambda_package")
-# shutil.rmtree("build/lambda_package")
 # shutil.make_archive("build/lambda", "zip", "build/lambda_package") # zip/tar
+# shutil.rmtree("build/lambda_package")
 # subprocess.check_call([
 #     "pip",
 #     "install",
@@ -195,13 +196,12 @@
 # exit(1)
 
 # class Cat:
-#     def __new__(cls, name: str) -> None:
+#     def __new__(cls, name: str) -> Self:
 #         print(cls, name, "new")
-#         super().__new__(cls)
 #         isinstance(cls, Cat)
-#         print(cls, name, "new")
+#         return super().__new__(cls)
 
-#     def __init__(self, name:str) -> Self:
+#     def __init__(self, name:str) -> None:
 #         self.name = name
 #         print("init")
 
