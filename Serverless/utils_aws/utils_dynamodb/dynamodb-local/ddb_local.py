@@ -265,8 +265,8 @@ print(person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_u
 #     ConsistentRead=True,
 # )
 # response = table.query(
-#     IndexName="GSI1",
-#     KeyConditionExpression=Key("PK").eq("1") & Key("name").begins_with("G"),
+#    IndexName="GSI1",
+#    KeyConditionExpression=Key("PK").eq("1") & Key("name").begins_with("G") # between(1, 3) gt(1) gte(1) lt(1) lte(1)
 #     # FilterExpression=Attr("age").eq(30) & Attr("address").begins_with("my") #& Attr("hobbies").contains("walking"),
 #     # FilterExpression=Attr("age").between(30, 40) & Attr("age").is_in([30, 31, 32]) & Attr("age").exists()
 #     # FilterExpression=Attr("age").gt(30) & Attr("Age").lt(40) & Attr("age").ne(31) & Attr("age").gte(30) & Attr("age").lte(40)
