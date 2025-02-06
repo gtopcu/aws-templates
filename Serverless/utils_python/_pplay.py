@@ -10,7 +10,7 @@
 # pip install -U boto3
 
 # pylint . --rcfile=.pylintrc .
-# disable=all disable=invalid-name disable=missing-class-docstring (remove this line to get 
+# disable=all disable=invalid-name disable=missing-class-docstring (remove this line)
 
 # safety scan --detailed-output --apply-fixes
 
@@ -97,6 +97,7 @@
 # pip install python-dotenv
 # from dotenv import load_dotenv
 # load_dotenv()
+# load_dotenv('.env.dev')
 
 # logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 # traceback.print_exception(type(err), err, err.__traceback__)
