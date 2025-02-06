@@ -329,7 +329,7 @@ AI:
            multi-model & multi-agent collaboration, autogenereated query filters, model & RAG evaluation - human & LLM-as-judge, 
            custom intervention using agents, IntelligentPromptRouting, latency-optimized inference for FMs, Model Distillation, Guardrails up to 85% discount, automatic reasoning checks & multimodal toxicity detection for image content
            Knowledge Bases - chat with document, StructuralDataRetrieval(Redshift & SageMakerLakehouse), Aurora as vector store,
-                             web crawler, custom data sources(Salesforce, Confluence, Sharepoint etc) & realtime data sync
+          web crawler, custom data sources(Salesforce, Confluence, Sharepoint etc) & realtime data sync
 - Other AI: AppStudio, Sagamaker Unified Studio, structured retrieval(Redshift & SageMaker Lakehouse)
             Sagemaker realtime endpoints scale down to 0 & multi-adapter inference,
             Q developer: code review, inline chat, console/Datadog integration, Q Business new goodies
