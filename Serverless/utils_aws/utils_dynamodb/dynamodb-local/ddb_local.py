@@ -219,8 +219,8 @@ print(person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_u
 
 # response = table.scan()
 # kwargs = { 
-#                 "FilterExpression" : "age > :val",
-#                 "ExpressionAttributeValues" : {":val": "40"},
+#            "FilterExpression" : "age > :val",
+#            "ExpressionAttributeValues" : {":val": "40"},
 # }
 # kwargs = dict(
 #     KeyConditionExpression=Key("age").eq(40),
