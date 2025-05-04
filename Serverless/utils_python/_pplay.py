@@ -1,5 +1,5 @@
 # TODO
-# Amazon Q/Copilot: Command + i
+# Amazon Q: Command + i
 # Zoom In: Command+Shift 0
 # Zoom Out: Command -
 
@@ -24,8 +24,11 @@
 # https://www.youtube.com/watch?v=RqdhVaX50mc
 # """
 # CamelCase(PascalCase) / snake_case
-# class myPersonClass:
+# class MyPersonClass:
 #     """ This is my nice Person class"""
+
+#     def __new__(cls, name:str) -> Self:
+#         return MyPersonClass(name)
 
 #     def __init__(self, name: str) -> None:
 #         self.name = name
