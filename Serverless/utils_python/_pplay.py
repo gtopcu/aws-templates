@@ -1,5 +1,5 @@
 # TODO
-# Amazon Q: Command + i
+# Amazon Q/Copilot: Command + i
 # Zoom In: Command+Shift 0
 # Zoom Out: Command -
 
