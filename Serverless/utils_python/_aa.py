@@ -14,9 +14,9 @@ print(time.strftime("%H:%M:%S%z"))
 time.localtime()
 time.perf_counter()
 
-raise Exception("")
-raise RuntimeError("")
-raise SystemError("")
+# raise Exception("")
+# raise RuntimeError("")
+# raise SystemError("")
 
 # id len type isinstance repr
 # iter next  
@@ -31,14 +31,27 @@ my_dict: dict[str, int] = {"one": 1, "two": 2}
 my_set: set[int] = {1, 2, 3}
 my_string: str = "Hello, World!"
 
+def nasty(val=[]):
+    val.append(1)
+
+def not_nasty(val=None):
+    val = [] if val is None else val
+
+my_lambda = lambda x: x * x
+
 if my_string is None or my_list is not None:
     pass # break continue
+
+if 1 == 1:
+    print("1 == 1")
 
 
 def main() -> None:
     print("{}".format(my_string))
     print("so, %s" % my_string)
     print(f"so, {my_string}")
+
+    print(my_lambda(10))
 
     for i in "123456":
         print(i, end="-")
