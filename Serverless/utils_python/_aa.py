@@ -14,11 +14,25 @@ print(time.strftime("%H:%M:%S%z"))
 time.localtime()
 time.perf_counter()
 
+raise Exception("")
+raise RuntimeError("")
+raise SystemError("")
+
+# id len type isinstance repr
+# iter next  
+# any all chr ord 
+# abs round sum min max pow
+# sorted reversed filter map reduce zip 
+# getattr delattr setattr 
+
 my_list: list[int] = [1, 2, 3]
 my_tuple: tuple[int, str] = (1, "Hello")
 my_dict: dict[str, int] = {"one": 1, "two": 2}
 my_set: set[int] = {1, 2, 3}
 my_string: str = "Hello, World!"
+
+if my_string is None or my_list is not None:
+    pass # break continue
 
 
 def main() -> None:
