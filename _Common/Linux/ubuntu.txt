@@ -128,8 +128,4 @@ python3-full:     Complete Python environment (~100MB+)
                     -> standard lib, pip, debugger(pdb)
                     -> distutils, idle3(python ide), python3-dev python3-venv
                     -> tkinter(gui), documentation tools, test fws, build/networking tools, XML/SQLite, SSL/TLS
-
 --------------------------------------------------------------------------------------------------------
-
-
-
