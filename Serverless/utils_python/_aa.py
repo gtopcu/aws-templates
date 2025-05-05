@@ -1,11 +1,24 @@
 
 from typing import Self, Any, Optional, Final, Literal, NewType, TypeAlias, TypedDict
+from typing import Callable, Iterable, Iterator
 from collections import namedtuple, deque, OrderedDict, defaultdict, ChainMap
-from collections.abc import Callable, Iterable, Iterator
+
+
+# When you run a Python file directly, __name__ is set to "__main__"
+# When you import the file as a module, __name__ is set to the module's name
+print(__name__)
+print(__file__)
+print(__package__)
+print(__doc__)
+print(__annotations__)
+print(__builtins__)
 
 class MyClass(Exception):
     def __init__(self, *args):
         super().__init__(*args)
+        print(__class__)
+
+my_class = MyClass("Hello")
 
 import logging
 logger = logging.getLogger(__name__)
@@ -22,17 +35,19 @@ time.perf_counter()
 # raise RuntimeError("")
 # raise SystemError("")
 
-# id len type isinstance repr
-# iter next 
-# any all chr ord 
-# abs round sum min max pow
-# sorted reversed filter map reduce zip enumerate
+# id len type isinstance str repr chr ord dir global nonlocal iter next 
+# is in not and or not any all 
+# if elif else try except finally raise assert break continue pass return yield
+# abs round sum min max pow avg floor ceil
+# sorted reversed map filter reduce zip enumerate
 # getattr delattr setattr 
 
 my_list: list[int] = [1, 2, 3]
 my_tuple: tuple[int, str] = (1, "Hello")
 my_tuple2: tuple[int, ...] = (1, )
 my_dict: dict[str, int] = {"one": 1, "two": 2}
+del my_dict["one"]
+my_dict2: dict[str, int] = dict(one=1, two=2)
 my_set: set[int] = {1, 2, 3}
 my_string: str = "Hello, World!"
 
@@ -42,16 +57,20 @@ print(my_list3)
 my_list4 = list(range(5))
 print(my_list4)
 
+my_lambda = lambda x: x * x
+
+iterator:Iterator = iter(my_list)
+print(next(iterator)) # 1
+
+if my_string is None or my_list is not None or 1 == 1:
+    pass # break continue
+
+
 def nasty(val=[]):
     val.append(1)
 
 def not_nasty(val=None):
     val = [] if val is None else val
-
-my_lambda = lambda x: x * x
-
-if my_string is None or my_list is not None or 1 == 1:
-    pass # break continue
 
 def add_wrapper(func) -> Callable[[int, int], int]:
     def wrapper(*args, **kwargs):
@@ -86,7 +105,7 @@ if __name__ == "__main__":
 # ====================================================================================
 
 import pytest
-from pytest import decorator, fixture, mark, raises
+from pytest import fixture
 from pytest_mock import mocker
 
 @fixture(scope="module")

@@ -9,6 +9,14 @@
 # pip -V
 # pip install -U boto3
 
+# __class__
+# __name__
+# __file__
+# __package__
+# __doc__
+# __annotations__
+# __builtins__
+
 # pylint . --rcfile=.pylintrc .
 # disable=all disable=invalid-name disable=missing-class-docstring (remove this line)
 
@@ -85,8 +93,12 @@
 # finally:
 #     json.dump(cache, open("cache.json", "w"))
 
-# and or any all del len id type sorted reversed enumerate zip filter map reduce 
-# is/not in/not any/all instanceof round floor min max avg pow sum
+# id len type isinstance str repr chr ord dir global nonlocal iter next 
+# is in not and or not any all 
+# if elif else try except finally raise assert break continue pass return yield
+# abs round sum min max pow avg floor ceil
+# sorted reversed map filter reduce zip enumerate
+# getattr delattr setattr 
 
 # print(str.__name__)
 # import string
