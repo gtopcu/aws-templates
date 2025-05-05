@@ -1,5 +1,13 @@
 # TODO
-# Amazon Q/Copilot: Command + i -> @workspace @terminal  /doc /edit /explain /fix /generate /tests
+# Amazon Q: /clean /doc /dev /test /review /transform
+#   @workspace @git @history @env
+#   Inline Chat: Command + i 
+#   Code complete: Option + C
+#   Tab: Display all options
+#   Left arrow to accept autocompletion
+
+# GitHub Copilot: Command + i -> @workspace @terminal  /doc /edit /explain /fix /generate /tests
+
 # Zoom In: Command+Shift 0
 # Zoom Out: Command -
 
