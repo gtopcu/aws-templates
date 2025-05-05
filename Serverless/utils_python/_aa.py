@@ -76,11 +76,16 @@ def add_numbers(a: int, b: int) -> int:
     print(f"Adding {a} and {b}")
     return a + b
 
+# import boto3
+# from botocore.exceptions import ClientError
+# client = boto3.client(service_name="dynamodb", region_name="us-east-1")
 # try:
 #     client.put_item()
 # except botocore.exceptions.ClientError as e:
 #     print(f"Error putting item: {e}")
 #     raise e
+#     err.response["Error"]["Code"]
+#     err.response["Error"]["Message"]
 
 def main() -> None:
     print("{}".format(my_string))

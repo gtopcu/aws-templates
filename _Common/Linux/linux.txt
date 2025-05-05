@@ -8,6 +8,15 @@ https://www.xmind.net/m/WwtB/#
 echo $PATH
 export PATH=$PATH:/usr/local/go/bin
 
+/var/log
+/var/log/auth.log
+/etc/hosts
+/etc/sudoers.d/
+/etc/apt/sources.list
+/etc/os-release 
+/etc/passwd            -> Users
+/etc/group             -> Groups
+
 chmod u+rwx keypair.pem
 chmod 400 ~/ssh/mypair.pem 
 ssh -i ~/ssh/mypair.pem ec2-user@192.168.1.1

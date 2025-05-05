@@ -11,13 +11,14 @@ chmod +x myscript.sh
 bash myscript.sh
 rm -rf /*
 
-/var/log 
-/etc/hosts 
+/var/log
+/var/log/auth.log
+/etc/hosts
 /etc/sudoers.d/
 /etc/apt/sources.list
-cat /etc/os-release 
-cat /etc/passwd            -> List users
-cat /etc/group             -> List groups
+/etc/os-release 
+/etc/passwd            -> Users
+/etc/group             -> Groups
 
 which sudo
 sudo passwd root
@@ -412,28 +413,4 @@ lsblk    - Block devices
 
 ------------------------------------------------------------------------------------------------------------------------
 
-del len id type sorted reversed enumerate zip filter map reduce 
-is/not in/not any/all instanceof round floor min max avg pow sum
 
-psycopg
-pip install -r requirements.txt
-python3 -m venv venv
-source venv/bin/activate
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
-os.getcwd()
-os.listdir()
-os.makedirs(my_dir, exists_ok=True)
-current_dir = os.path.dirname(os.path.abspath(__file__))
-file_path = os.path.join(current_dir, filename)
-danger = [] if danger is None else danger
-[i for i in items if i%2==0]
-[[random.randint(0, 100) for _ in range(size)] for _ in range(size)]
-[[0] * 5]
-A = np.random.rand(size, size) -> np.dot(A, A)
-f"Total time: {end-start:.2f}"
-" ".join(mylist) mytext.strip() b"OxAdkwaF"
-client = boto3.client(service_name="bedrock_runtime")
-from botocore.exceptions import ClientError
-err.response["Error"]["Code"]
-err.response["Error"]["Message"]
