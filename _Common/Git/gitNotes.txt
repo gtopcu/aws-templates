@@ -12,6 +12,19 @@ git config --global credential.helper 'store --file ~/.my-credentials'
 .git-credentials
 ---
 
+Git Fetch
+- Downloads remote content but doesn't integrate it into your working files
+- Updates your remote-tracking branches (like origin/main)
+- Doesn't change your local working branch
+- Safe operation that never modifies your local work
+- Allows you to review changes before merging
+
+Git Pull
+- Combines git fetch and git merge into one command
+- Downloads remote content AND immediately merges it into your current branch
+- Updates your current branch with the changes from the remote
+- Can cause merge conflicts if local and remote changes conflict
+- Effectively runs git fetch followed by git merge origin/current-branch
 
 git init
 git clean -fxfd -> Deletes all untracked files & directories(including ones in .gitignore) from working directory
@@ -25,6 +38,7 @@ git switch branch
 git remote add origin git@github.com:gtopcu/aws-templates.git
 git remote add origin https://github.com/gtopcu/python_lambda
 git fetch
+git merge
 git pull --autostash
 git push -u origin main --force
 git show abc123def456789 
