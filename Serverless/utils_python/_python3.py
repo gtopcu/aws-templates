@@ -18,6 +18,7 @@ from sys import getsizeof
 import random
 import pickle, shelve
 # import jsonpickle
+import json # yaml
 import copy
 # import jwt
 import base64
@@ -27,18 +28,18 @@ import math
 from datetime import datetime, UTC
 import time
 import string
-
-from functools import reduce, partial
 import traceback
+
+from functools import cache, lru_cache, wraps, reduce, partial, total_ordering
+from itertools import chain, islice, tee, count, cycle, repeat
 from operator import add, sub, mul, itemgetter, attrgetter, methodcaller
 
 # psycopg
-# None del len type id any/all is/not in/not sorted reversed isinstance sum min max pow round floor enumerate map filter reduce zip
-# for index, req in enumerate(requests):
-# ImportError RuntimeError
-# self.assertEquals assertLess assertTrue assertIsNone assertIsInstance
 
 # print('?name=%s' % name)
+
+# for index, req in enumerate(requests):
+#     print(f"Request {index}: {req}", file=sys.stderr, flush=True)
 
 # def httpbin(*suffix):
 #     """Returns url for HTTPBIN resource."""
@@ -56,7 +57,7 @@ from operator import add, sub, mul, itemgetter, attrgetter, methodcaller
 # hostname = socket.gethostname()
 # server_ip = socket.gethostbyname(server_ip)
 
-# type MyType = Callable[[str], str]
+# type MyType = Callable[[int, int], str]
 
 # BIG_CONSTANT: int = 10000000
 
@@ -66,16 +67,22 @@ def main() -> None:
     # string.digits
     # string.punctuation
     # string.whitespace
+    # string.ascii_letters
+    # string.ascii_lowercase
+    # string.ascii_uppercase
+    # string.printable
+    # string.hexdigits
+    # string.octdigits
+    # string.capwords
+ 
     # "str".isdigit
-    # ascii_letter = set(string.ascii_letters)
     # ".".join(["1", "2", "3"])
     # "str".index("i")
     # "iii".find("i")
     # "str".casefold()
-    # f"{val.casefold()}"
     # "str ".strip()
     # "str".swapcase()
-    # len(re.findall(r'[a-zA-Z]', text))
+    # re.findall(r'[a-zA-Z]', text)
     
     # my_iterator = iter(my_list) = my_list.__iter__() # list: iterable
     # val = next(my_iterator)                          # my_iterator: iterator raises StopIteration
@@ -124,9 +131,9 @@ def main() -> None:
     # print(list)
     # for i, j in enumerate(list, 1):
     #     print(i, j)
-    # for filtered in filter(lambda x: x % 4 == 0, list):
+    # for filtered in filter(lambda x: x%4==0, list):
     #     print(filtered)
-    # for mapped in map(lambda x: x * x, list):
+    # for mapped in map(lambda x: x*x, list):
     #     print(mapped)
     # iterator = iter(list)
     # while iterator:
@@ -481,78 +488,63 @@ def main() -> None:
     # traceback.print_exception(type(err), err, err.__traceback__)
     # logger.error(traceback.format_exc())
 
-    # BaseException -> 
-    #  Exception -> SystemExit 
-    #               StandardError -> ValueError: int("A"), KeyError: dict['key1'], TypeError: str[0]='a', 
-    #               IndexError, AttributeError, NameError, AssertionError, StopIteration, ArithmeticError, 
-    #               ZeroDivisionError, NotImplementedError, RuntimeError, SystemError
-
-    
-    print("done", end="\n")
-    # vnenv set python interpreter
-    # Control + L, Command + Click
-
-    # atexit.unregister(func_exit)
-    # sys.exit(0) - Raises SystemExit exception, finally & cleanups run
-    # os._exit(0) - Immediate kill, no finals/cleanups run. Only POSIX files are closed
+    # sys.exit(0) - Raises SystemExit exception, runs finally statement & cleanups run
+    # os._exit(0) - Immediate kill, no finally/cleanups run. Only POSIX files are closed
     # exit(1)
     
     # import webbrowser
     # webbrowser.open("http://localhost:8080", new=0, autoraise=False
 
-def __eq__(self, other: Self) -> bool:
-    # return self.name == other.name and self.age == other.age
-    self.__dict__ == other.__dict__
 
+#   @atexit.register
+    atexit.unregister(func_exit)
+    def func_exit() -> None:
+        print("exiting..")
 
-@atexit.register
-def func_exit() -> None:
-    print("exiting..")
+    def outer(val: int, arr: list[int]):
+        def inner():
+            arr[0] = 1      # will modify outer arr
+            nonlocal val    # will modify outer val
+            val *= 2        
 
-def outer(val: int, arr: list[int]):
-    def inner():
-        arr[0] = 1      # will modify outer arr
-        nonlocal val    # will modify outer val
-        val *= 2        
+    def kwargs(**kwargs):
+        print(type(kwargs))
+        print(kwargs)
+        if value := kwargs.get("name"):
+            print("name found =", value)
 
-def kwargs(**kwargs):
-    print(type(kwargs))
-    print(kwargs)
-    if value := kwargs.get("name"):
-        print("name found =", value)
+    # https://docs.python.org/3/tutorial/controlflow.html#more-on-defining-functions
+    def combined_example(pos_only, /, standard, *, kwd_only):
+        print(pos_only, standard, kwd_only)
 
-# https://docs.python.org/3/tutorial/controlflow.html#more-on-defining-functions
-def combined_example(pos_only, /, standard, *, kwd_only):
-    print(pos_only, standard, kwd_only)
+    # name and age mandatory for both
+    def mandatoryArgs(self, /, name: str, age: int): ...
+    def mandatoryKwargs(self, *, name: str, age: int): ...
 
-# name and age mandatory for both
-def mandatoryArgs(self, /, name: str, age: int): ...
-def mandatoryKwargs(self, *, name: str, age: int): ...
+    def input_none(input:str | None=None):
+        print(input)
+        return print("Returning")
 
-def input_none(input:str | None=None):
-    print(input)
-    return print("Returning")
+    def int_or_none(danger: list[dict] = None) -> int | None:
+        danger = [] if danger is None else danger
+        return None
 
-def int_or_none(danger: list[dict] = None) -> int | None:
-    danger = [] if danger is None else danger
-    return None
+    # print("Output: " + str(f(1, 2, 3, a=4, b=5)))
+    # func_wrapper(f)()
+    def func_wrapper(func):
+        def wrapper(*args, **kwargs):
+            start = time.perf_counter_ns()
+            print("starting..")
+            val = func(*args, **kwargs)
+            print("ended in: ", (time.perf_counter_ns() - start) / 1000000, "ms") 
+            return val
+        return wrapper
 
-# print("Output: " + str(f(1, 2, 3, a=4, b=5)))
-# func_wrapper(f)()
-def func_wrapper(func):
-    def wrapper(*args, **kwargs):
-        start = time.perf_counter_ns()
-        print("starting..")
-        val = func(*args, **kwargs)
-        print("ended in: ", (time.perf_counter_ns() - start) / 1000000, "ms") 
-        return val
-    return wrapper
-
-@func_wrapper
-def f(*args: int, **kwargs: int):
-    print(":".join([str(arg) for arg in args]))
-    # print("args:", args, "kwargs: ", kwargs)
-    return sum(args) + sum(kwargs.values())
+    @func_wrapper
+    def f(*args: int, **kwargs: int):
+        print(":".join([str(arg) for arg in args]))
+        # print("args:", args, "kwargs: ", kwargs)
+        return sum(args) + sum(kwargs.values())
 
 # f2(f1)
 # def f1():

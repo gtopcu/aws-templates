@@ -4,7 +4,6 @@ from typing import Callable, Iterable, Iterator
 from collections import namedtuple, deque, OrderedDict, defaultdict, ChainMap
 
 
-
 class MyClass(Exception):
     def __init__(self, *args):
         super().__init__(*args)
@@ -76,6 +75,12 @@ def add_wrapper(func) -> Callable[[int, int], int]:
 def add_numbers(a: int, b: int) -> int: 
     print(f"Adding {a} and {b}")
     return a + b
+
+# try:
+#     client.put_item()
+# except botocore.exceptions.ClientError as e:
+#     print(f"Error putting item: {e}")
+#     raise e
 
 def main() -> None:
     print("{}".format(my_string))
