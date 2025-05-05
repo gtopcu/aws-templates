@@ -4,14 +4,6 @@ from typing import Callable, Iterable, Iterator
 from collections import namedtuple, deque, OrderedDict, defaultdict, ChainMap
 
 
-# When you run a Python file directly, __name__ is set to "__main__"
-# When you import the file as a module, __name__ is set to the module's name
-print(__name__)
-print(__file__)
-print(__package__)
-print(__doc__)
-print(__annotations__)
-print(__builtins__)
 
 class MyClass(Exception):
     def __init__(self, *args):

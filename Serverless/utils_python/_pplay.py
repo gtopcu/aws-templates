@@ -1,14 +1,19 @@
 # TODO
-# Amazon Q: Command + i
+# Amazon Q/Copilot: Command + i -> @workspace @terminal /docs /tests
 # Zoom In: Command+Shift 0
 # Zoom Out: Command -
 
+# Python: Select Interpreter -> Command + Shift + P
 # python -m venv .venv
 # source .venv/bin/activate
 # source /Users/mac/GoogleDrive/VSCode/.venv/bin/activate
 # pip -V
 # pip install -U boto3
 
+# When you run a Python file directly, __name__ is set to "__main__"
+# When you import the file as a module, __name__ is set to the module's name
+# __name__ = "__main__"
+# __all__ = ["my_function", "my_class"]
 # __class__
 # __name__
 # __file__
