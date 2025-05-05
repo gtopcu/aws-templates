@@ -3,7 +3,7 @@ from dataclasses import asdict, astuple, dataclass, field
 from datetime import datetime
 # from pydantic import BaseModel
 from typing import Type
-from uuid import uuid4
+from uuid import uuid4, UUID
 from typing import Any, Optional
 from functools import cached_property
 

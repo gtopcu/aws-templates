@@ -1,5 +1,5 @@
 # TODO
-# Amazon Q/Copilot: Command + i -> @workspace @terminal /docs /tests
+# Amazon Q/Copilot: Command + i -> @workspace @terminal  /doc /edit /explain /fix /generate /tests
 # Zoom In: Command+Shift 0
 # Zoom Out: Command -
 
