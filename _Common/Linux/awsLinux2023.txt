@@ -1,9 +1,20 @@
 
 https://aws.amazon.com/blogs/aws/amazon-linux-2023-a-cloud-optimized-linux-distribution-with-long-term-support/
+https://aws.amazon.com/blogs/compute/python-3-12-runtime-now-available-in-aws-lambda/
+https://www.youtube.com/watch?v=VRqazCsTbZk
 
 Amazon Linux 2 was based on Red Hat Enterprise Linux (RHEL) 7
 Amazon Linux 2023 will use a combination of Fedora and CentOS Stream
 Amazon Linux allows no-reboot kernel security updates
+
+AWS CLI, SELinux, IMDs v2, CW/SystemsMgr/Inspector agents, Perl/Python/Ruby/Java
+rpm -q system-release
+dnf upgrade/update -y (replaces yum)
+dnf upgrade --releasever=2023.2.20231030 (locks system to specific version)
+dnf check-update --releasever=latest --security
+microdnf update -y
+curl-minimal
+gnupg2-minimal
 
 dnf list
 dnf update -y

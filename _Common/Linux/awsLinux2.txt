@@ -2,7 +2,14 @@
 Based on RHEL 7
 AL2 came with Python2.7, AL2023 does not come with Python installed
 
+ssh -i ~/ssh/mypair.pem ec2-user@ip
+
 which yum
+yum update -y
+yum install httpd -y
+service httpd start
+chkconfig httpd on
+chmod 400 ~/ssh/mypair.pem 
 
 ------------------------------------------------------------
 EC2 Bootstrap 1 - Simple website with Apache runs as root

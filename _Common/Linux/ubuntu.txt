@@ -3,28 +3,12 @@ Debian -> Ubuntu
 
 docker run -it ubuntu bash
 
-ll == ls -al
 export PATH=$PATH:/usr/local/go/bin
 
 chown -R hukanege /src/
-chmod +x myscript.sh
+chmod u+x myscript.sh
 bash myscript.sh
 rm -rf /*
-
-/var/log
-/var/log/auth.log
-/etc/hosts
-/etc/sudoers.d/
-/etc/apt/sources.list
-/etc/os-release 
-/etc/passwd            -> Users
-/etc/group             -> Groups
-
-which sudo
-sudo passwd root
-sudo !!
-su -
-sudo -i
 
 ------------------------------------------------------------------------------------
 Updating app sources list:
@@ -49,28 +33,26 @@ apt update && sudo apt dist-upgrade foo bar -y
 service ssh --status --status-all --enable --disable --start --full-restart --stop
 apt install systemd -> Install systemd and the systemctl utility
 systemctl enable disable status start stop restart --now ssh
-ps auwx | grep nginx
-
+ps aux(w) | grep nginx
 
 ------------------------------------------------------------------------------------------------
 Install OpenSSH - enabled after Ubuntu 18
 https://www.youtube.com/watch?v=6vTcH_kMrhU
 ------------------------------------------------------------------------------------------------
-sudo apt update -y && sudo apt upgrade -y
-sudo apt install -y openssh-server
-sudo service status ssh
-sudo service start ssh
-sudo service enable --now ssh
-sudo service disable --now ssh
-sudo ss -tunlp | grep ssh
+apt update -y && sudo apt upgrade -y
+apt install -y openssh-server
+service ssh --status --status-all --enable --disable --start --full-restart --stop --now
+ss -tunlp | grep ssh
 ssh ubuntu@10.0.0.0
 ssh root@10.0.0.0
 
-sudo /etc/init.d/sshd start
-sudo passwd root -> generate password for root
+/etc/init.d/sshd start
+service sshd restart (OpenSSH daemon)
+
+passwd root -> generate password for root
 
 chmod 400 keypair.pem
-ssh -i keypair.pem username@ip_address
+ssh -i keypair.pem ubuntu@ip_address
 
 ssh-keygen
 ssh-copy-id -> to copy public key to the server ~/.ssh
@@ -81,31 +63,30 @@ ssh-copy-id -> to copy public key to the server ~/.ssh
 
 cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 cat ~/.ssh/id_rsa.pub | ssh username@remote_host "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
-sudo nano /etc/ssh/sshd_config
+nano /etc/ssh/sshd_config
 PasswordAuthentication no
 
 ------------------------------------------------------------------------------------------------
 Install UFW
 ------------------------------------------------------------------------------------------------
-sudo apt install --no-install-recommends ufw
-sudo ufw allow ssh
-sudo ufw allow ssh
-sudo ufw deny 22/tcp
-sudo ufw enable
-sudo ufw disable
+apt install --no-install-recommends ufw
+ufw enable
+ufw disable
+ufw allow ssh
+ufw deny 22/tcp
 
 ------------------------------------------------------------------------------------------------
 Install HAProxy
 https://www.youtube.com/watch?v=KJUVzg0fdnQ
 https://sistemdostu.com/haproxy-nedir-nasil-kurulur
 ------------------------------------------------------------------------------------------------
-sudo apt install --no-install-recommends software-properties-common
+apt install --no-install-recommends software-properties-common
 add-apt-repository ppa:vbernat/haproxy-2.6
 apt install haproxy-2.6.\*
-sudo service status | enable haproxy
+service status | enable haproxy
 nano /etc/haproxy/haproxy.cfg
 service restart haproxy
-sudo haproxy -f /etc/haproxy/haproxy.cfg - without restart
+haproxy -f /etc/haproxy/haproxy.cfg - without restart
 
 ------------------------------------------------------------------------------------------------
 Install SSL Cert from Let's Encrypt & Certbot
@@ -134,158 +115,6 @@ https://sistemdostu.com/haproxy-nedir-nasil-kurulur
    ssl_certificate /etc/letsencrypt/live/your_domain/fullchain.pem;
    ssl_certificate_key /etc/letsencrypt/live/your_domain/privkey.pem;
 
-
---------------------------------------------------------------------------------------------------------
-Permissions
-
-File Permission Numbers:
-4 = read
-2 = write
-1 = execute
-7 = full permissions (4+2+1)
-
-d rwx r-- ---
-| ||| ||| |||
-| ||| ||| +++-- Others (no permissions)
-| ||| +++------ Group (read only)
-| +++---------- Owner (read, write, execute)
-+-------------- Directory flag
-
-chmod u=rwx,g=r,o= filename
-chmod 400 file
-chmod 740 file/dir
-chmod 755 file/dir
-
-stat:
-(0755/drwxr-xr-x)  Uid: (    0/    root)   Gid: (    0/    root)
-d means it's a directory
-- would mean regular file
-l would mean symbolic link
-
-For directories, execute(x) permission lets traverse or "cd" into the directory:
-- Allows entering the directory (cd)
-- Allows listing contents if read (r) is also set
-- Required to access files within the directory
-- Needed to use the directory in paths
-
-With execute (x) only:
-# Can:
-   cd directory/
-   ls -l directory/specific-file (if you know the name)
-   access files inside (if you know their names)
-# Cannot:
-   ls directory/ (can't list contents without read permission)
-
-With read (r) but no execute:
-# Can:
-   ls directory (see filenames only)
-# Cannot:
-   cd directory/
-   access files inside
-
-With both read and execute (rx):
-# Can:
-   cd directory/
-   ls directory/
-   access files inside
-   list contents
-   traverse subdirectories
-
---------------------------------------------------------------------------------------------------------
-Users/Groups
-
-User IDs (UID):   0: root
-                  1-999: system users
-                  1000+: regular users
-
-Group IDs (GID):  0: root
-                  1-999: system groups
-                  1000+: regular groups
-
-finger username                  -> Show user info
-last <username>                  -> Show login information
-who | whoami                     -> Show current logged-in users
-tail -f /var/log/auth.log        -> Auth log
-
-echo $DESKTOP_SESSION            -> Check current session
-loginctl list-sessions           -> List active sessions
-loginctl terminate-session <id>  -> Terminate specific session
-logout | exit | Ctrl+D           -> Logout
-pkill -KILL -u username          -> Kill all user processes
-sudo pkill -9 -u username        -> Force logout specific user
-
-su                         -> Switch to root
-su -                       -> Switch to root with environment
-su username                -> Switch to another user
-su - (-l) username         -> Switch with environment (-l or - flag loads user's environment)
-
-sudo passwd root           -> Update root user password
-sudo passwd username       -> Update user password
-sudo passwd -S root        -> Check if root password is locked
-sudo -l                    -> Check sudo privileges
-sudo bash                  -> Access bash using root 
-sudo -u username command   -> Execute single command as another user
-sudo -u username bash      -> Get a shell as another user
-sudo -i                    -> Switch to root shell with environment
-sudo -s                    -> Switch to root shell without environment
-su -s /bin/bash username   -> Switch user with specific shell
-sudo -u username /bin/bash -> Switch with sudo and specific shell
-
-addgroup devs  (--system)
-delgroup devs
-adduser gtopcu --ingroup devs --verbose \
-            --system \
-            --gecos "Full Name,Room,Work,Home" \
-            --shell /bin/bash \
-            --home /home/user \
-            --no-create-home \
-            --disabled-password --disabled-login 
-adduser <user> <group> 
-deluser <user> <group> 
-deluser gtopcu
-
-compgen -u  -> Show all users
-compgen -g  -> Show all groups
-
-cat /etc/passwd                        -> Show all users
-getent passwd <username>               -> More readable
-cut -d: -f1 /etc/passwd                -> Just usernames
-grep -v '/nologin\|/false' /etc/passwd -> System users with login shells
-
-cat /etc/group                         -> Show all groups
-getent group                           -> More readable 
-cut -d: -f1 /etc/group                 -> Just group names
-
-groups                                 -> Show current user's groups
-groups <username>                      -> Show username's groups
-id -Gn <username>                      -> Alternative command
-id <username>                          -> Show detailed group info
-
-getent group <groupname>               -> Show members of group
-grep -i groupname /etc/group           -> Alternative using grep
-getent group sudo                      -> List users in sudo group
-
-awk -F: '$3 < 1000 {print $1}' /etc/passwd   -> System users (UID < 1000)
-awk -F: '$3 >= 1000 {print $1}' /etc/passwd  -> Regular users (UID >= 1000)
-grep "/bash$" /etc/passwd                    -> Users with bash shell
-grep "/nologin$" /etc/passwd                 -> Users with no login shell
-awk -F: '{print $1 " -> " $6}' /etc/passwd   -> Show all user home directories
-
-File/Folder Permissions:
-stat <filename>
-
-Find files owned by user/group
-find /path -user username
-find /path -group groupname
-
-# View sudoers file
-sudo visudo
-
-# Check sudoers.d directory
-ls /etc/sudoers.d/
-sudo cat /etc/sudoers.d/filename
-
-
 --------------------------------------------------------------------------------------------------------
 Installing Python on Ubuntu/Debian:
 --------------------------------------------------------------------------------------------------------
@@ -302,115 +131,5 @@ python3-full:     Complete Python environment (~100MB+)
 
 --------------------------------------------------------------------------------------------------------
 
-docker ps | image ls 
-docker rm -f <container_id>
-docker image rm -f <image_id>
-docker run -it --entrypoint /bin/bashh
-docker run -it ubuntu bash
-
-export PATH=$PATH:/usr/local/go/bin
-/var/log 
-/etc/hosts 
-/etc/sudoers.d/
-tail -f /var/log/auth.log  -> Auth log
-/etc/apt/sources.list
-cat /etc/os-release        -> Show OS details
-cat /etc/passwd            -> List users
-cat /etc/group             -> List groups
-
-.zshrc
-.zprofile
-.bashrc
-.bash_profile
-.profile
-
-apt list search show install reinstall remove autoremove update upgrade full-upgrade edit-sources satisfy
-apt --help
-apt search python3
-apt list --installed
-apt list --upgradable
-apt update -y && sudo apt upgrade -y
-apt update && sudo apt install foo bar -y
-service ssh --status --status-all --enable --disable --start --full-restart --stop
-systemctl enable disable status start stop restart --now ssh
-chown -R hukanege /src/
-chmod u+rwx filename
-chmod u=rwx,g=r,o= filename
-chmod 740 filename
-chmod 755 filename
-chmod 400 keypair.pem
-ssh -i keypair.pem ec2-user@54.78.7.114
-sudo rm -rf /*
-cat/touch/nano/head/tail -n 10
-logout | exit | Ctrl+D
-addgroup dev
-delgroup dev
-adduser gtopcu --ingroup dev --verbose
-adduser <user> <group> 
-deluser <user> <group> 
-sudo passwd root
-sudo -i
-su
-su - (-l)
-su <username>
-whoami
-stat filename
-bash | sh myscript.sh
-
-find . -maxdepth 1 -name "*.txt"
-find . -type f -name "*.pyc" -delete
-find . -type d -name '.venv' -exec rm -rf {} +
-rm -rf ".ruff_cache"
-find . -type d -name "__pycache__" -exec rm -rf {} +
-find . -type d -name ".pytest_cache" -exec rm -rf {} +
-find . -type f -exec cat {} \;
-
-tar -xf file.tar.gz
-tar -cf . file.tar.gz
-
-ps auwx | awk '/contains/' | '!/notcontains/'
-
-grep foo file.txt   
-ls -l | grep "pattern" -exclude ".git" --exclude-dir ".venv"
-
--i makes the search case-insensitive
--v inverts the match 
--E enables extended regex support (=egrep)
--e allows multiple patterns
-
-ps auwx | grep -E "^(?!.*foo).*$"          -> does not contain foo
-               -E "^(?!.*foo)(?!.*bar).*$" -> does not contain foo or bar"
-               -E "^[^0-9]*$"              -> does not contain numbers
-               -E "^[a-zA-Z0-9\s]*$"       -> does not contain special characters
-
-grep gtopcu /etc/passwd
-grep -v "foo" file.txt              -> does not contain foo
-grep -v -e "foo" -e "bar" file.txt  -> does not contain foo or bar"
-grep -v "[0-9]" file.txt            -> does not contain numbers
-                                    -> does not contain special characters
-
-
-curl -X POST --d '{ "input": "data" }' --url https://41823adf93.execute-api.us-east-1.amazonaws.com
-curl -s -o /dev/null -w "%{http_code}\n" example.com
-curl -s -o /dev/null -w "\nStatus: %{http_code}\nTime: %{time_total}s\nSize: %{size_download} bytes\n" example.com
-
-echo '{"name": "John"}' | jq -r '.name' -> John
-
-echo "delete this" > /dev/null   -> Text is discarded
-command > /dev/null              -> Discard standard output
-command > /dev/null 2>&1         -> Discard both standard output and errors
-cat /dev/null > logfile          -> Clears the content of logfile
-
-man/tldr - Command info
-lscpu    - CPU info
-lsmod    - Kernel modules
-lshw     - Hardware info
-lspci    - PCI devices
-lsscsi   - SCSI harddrive & disk info
-lsblk    - Block devices
-
-
-
-------------------------------------------------------------------------------------------------------------------------
 
 

@@ -8,9 +8,16 @@ https://www.xmind.net/m/WwtB/#
 echo $PATH
 export PATH=$PATH:/usr/local/go/bin
 
+.zshrc
+.zprofile
+.bashrc
+.bash_profile
+.profile
+
 /var/log
 /var/log/auth.log
 /etc/hosts
+/etc/route.conf        -> DNS config
 /etc/sudoers.d/
 /etc/apt/sources.list
 /etc/os-release 
@@ -28,7 +35,6 @@ sudo rm -rf /*
 ls -a | grep -i Doc
 
 **************************** Cron ****************************
-
 https://crontab.guru/
 *	any value
 ,	value list separator
@@ -45,6 +51,158 @@ crontab –e
 crontab –u other_username –e
 * 2 0 * 4 /root/backup.sh
 (crontab -l ; echo "*/1 * * * * if (( $(uptime | tail -c 5 | cut -d. -f1  ) < 10 )); then sudo shutdown fi") 2>&1 | grep -v "no crontab" | sort | uniq | crontab -
+
+--------------------------------------------------------------------------------------------------------
+Permissions
+
+File Permission Numbers:
+4 = read
+2 = write
+1 = execute
+7 = full permissions (4+2+1)
+
+d rwx r-- ---
+| ||| ||| |||
+| ||| ||| +++-- Others (no permissions)
+| ||| +++------ Group (read only)
+| +++---------- Owner (read, write, execute)
++-------------- Directory flag
+
+chmod u=rwx,g=r,o= filename
+chmod 400 file
+chmod 740 file/dir
+chmod 755 file/dir
+
+stat:
+(0755/drwxr-xr-x)  Uid: (    0/    root)   Gid: (    0/    root)
+d means it's a directory
+- would mean regular file
+l would mean symbolic link
+
+For directories, execute(x) permission lets traverse or "cd" into the directory:
+- Allows entering the directory (cd)
+- Allows listing contents if read (r) is also set
+- Required to access files within the directory
+- Needed to use the directory in paths
+
+With execute (x) only:
+# Can:
+   cd directory/
+   ls -l directory/specific-file (if you know the name)
+   access files inside (if you know their names)
+# Cannot:
+   ls directory/ (can't list contents without read permission)
+
+With read (r) but no execute:
+# Can:
+   ls directory (see filenames only)
+# Cannot:
+   cd directory/
+   access files inside
+
+With both read and execute (rx):
+# Can:
+   cd directory/
+   ls directory/
+   access files inside
+   list contents
+   traverse subdirectories
+
+--------------------------------------------------------------------------------------------------------
+Users/Groups
+
+User IDs (UID):   0: root
+                  1-999: system users
+                  1000+: regular users
+
+Group IDs (GID):  0: root
+                  1-999: system groups
+                  1000+: regular groups
+
+finger username                  -> Show user info
+last <username>                  -> Show login information
+who | whoami                     -> Show current logged-in users
+tail -f /var/log/auth.log        -> Auth log
+
+echo $DESKTOP_SESSION            -> Check current session
+loginctl list-sessions           -> List active sessions
+loginctl terminate-session <id>  -> Terminate specific session
+logout | exit | Ctrl+D           -> Logout
+pkill -KILL -u username          -> Kill all user processes
+pkill -9 -u username             -> Force logout specific user
+
+which sudo
+sudo !!
+su                         -> Switch to root
+su -                       -> Switch to root with environment
+su username                -> Switch to another user
+su - (-l) username         -> Switch with environment (-l or - flag loads user's environment)
+
+sudo passwd -S root        -> Check if root password is locked
+sudo passwd root           -> Update root user password
+sudo passwd username       -> Update user password
+sudo -l                    -> Check sudo privileges
+sudo bash                  -> Access bash using root 
+sudo -u username command   -> Execute single command as another user
+sudo -u username bash      -> Get a shell as another user
+sudo -i                    -> Switch to root shell with environment
+sudo -s                    -> Switch to root shell without environment
+su -s /bin/bash username   -> Switch user with specific shell
+sudo -u username /bin/bash -> Switch with sudo and specific shell
+
+addgroup devs  (--system)
+delgroup devs
+adduser gtopcu --ingroup devs --verbose \
+            --system \
+            --gecos "Full Name,Room,Work,Home" \
+            --shell /bin/bash \
+            --home /home/user \
+            --no-create-home \
+            --disabled-password --disabled-login 
+adduser <user> <group> 
+deluser <user> <group> 
+deluser gtopcu
+
+compgen -u  -> Show all users
+compgen -g  -> Show all groups
+
+cat /etc/passwd                        -> Show all users
+getent passwd <username>               -> More readable
+cut -d: -f1 /etc/passwd                -> Just usernames
+grep -v '/nologin\|/false' /etc/passwd -> System users with login shells
+
+cat /etc/group                         -> Show all groups
+getent group                           -> More readable 
+cut -d: -f1 /etc/group                 -> Just group names
+
+groups                                 -> Show current user's groups
+groups <username>                      -> Show username's groups
+id -Gn <username>                      -> Alternative command
+id <username>                          -> Show detailed group info
+
+getent group <groupname>               -> Show members of group
+grep -i groupname /etc/group           -> Alternative using grep
+getent group sudo                      -> List users in sudo group
+
+awk -F: '$3 < 1000 {print $1}' /etc/passwd   -> System users (UID < 1000)
+awk -F: '$3 >= 1000 {print $1}' /etc/passwd  -> Regular users (UID >= 1000)
+grep "/bash$" /etc/passwd                    -> Users with bash shell
+grep "/nologin$" /etc/passwd                 -> Users with no login shell
+awk -F: '{print $1 " -> " $6}' /etc/passwd   -> Show all user home directories
+
+File/Folder Permissions:
+stat <filename>
+
+Find files owned by user/group
+find /path -user username
+find /path -group groupname
+
+# View sudoers file
+sudo visudo
+
+# Check sudoers.d directory
+ls /etc/sudoers.d/
+sudo cat /etc/sudoers.d/filename
 
 **************************** General ****************************
 
@@ -71,7 +229,7 @@ mv <source> <target>
 cp <source> <target>
 cp -r ./Green ./White
 cp/COPY --chown=www-data . . 
-ln -s ./Downloads/exec.sh 
+ln -s ./Downloads/exec.sh       -> create symbolic link
 find conten*
 
 chown -R hukanege /Users/hukanege/.aws/ (recursive for dir)
@@ -96,22 +254,6 @@ chmod 040 <filename>:   Allow read by group members
 umask: default roles for new files
 inode: data structure holding file data, has integer number, holds file size, UID, bin data ref etc
 
-**************************** GREP ****************************
-
-https://www.cyberciti.biz/faq/howto-use-grep-command-in-linux-unix/
--i: ignore case
--r: recursive, for directory scan
--c: total count of occurence
-
-grep "for" bash0.sh
-grep -i "FOR" bash0.sh
-zgrep "for" bash0.sh.gzip
-grep -r "$" .
-grep -r -c "$" .
-grep -r -h "$" .
-cat /etc/passwd | grep -i "boo"
-
-
 **************************** System ****************************
 
 uname -a : System Info
@@ -133,18 +275,24 @@ lsblk: list disks, / means root disk
 df -h : free disk space
 df -T : filesystem type of your partitions
 growpart /dev/nvme0n1 1
-
 free -m : free memory
 top: CPU usage
 htop: system monitor (sudo yum install htop -y)
+ps aux: running apps
 vm stat
 echo "CPU Usage: "$[100-$(vmstat 1 2|tail -1|awk '{print $15}')]"%"
-ps aux: running apps
 kill <pid>
-cat /proc/cpuinfo |grep core
+cat /proc/cpuinfo | grep core
 shutdown -h now
 sudo swapoff -a
 sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+
+====== Hardware Info =======
+lscpu    - CPU info
+lsmod    - Kernel modules
+lshw     - Hardware info
+lspci    - PCI devices
+lsscsi   - SCSI harddrive & disk info
 
 ************************** Variables & Env. Variables ****************************
 
@@ -187,74 +335,89 @@ dd if=/dev/urandom of=largefile bs=3145728 count=1 (create large file)
 
 sudo installer -pkg AWSCLIV2.pkg -target /
 
+tar -tf zipped.tar -> list contents
+tar -xf file.tar
+tar -xzf filename.tar.gz
+tar -cf zipped.tar picture.png
+tar -cf . file.tar.gz
+tar -cf ./dir zippeddir.tar
+tar -czf zipped.tar.gz picture.png
+
+gzip filename.tar -> gzip & rename to filename.tar.gz 
+
 zip -rq dist-latest.zip src package.json 
 zip -r9 ../deployment_package.zip .
 zip -g deployment_package.zip lambda_function.py
 zipinfo dist-latest.zip
 unzip filename.zip
-tar -xzf filename.tar.gz
-tar -xf zipped.tar
-tar -cf zipped.tar picture.png
-tar -cf zippeddir.tar directory 
-tar -czf zipped.tar.gz picture.png
-tar -tf zipped.tar: list contents
-gzip filename.tar: gzip & rename to filename.tar.gz 
 
 struct timespec st_atim;  /* time of last access */
 struct timespec st_mtim;  /* time of last modification */
 struct timespec st_ctim;  /* time of last status change */
 
-********************** Amazon Linux 2 *************************
---Amzn Linux2
-yum update -y
-yum install httpd -y
-service httpd start
-chkconfig httpd on
-chmod 400 ~/ssh/mypair.pem 
-ssh -i ~/ssh/mypair.pem ec2-user@ip
+================== stdout/err ==================
 
-********************** Amazon Linux 2023 *************************
-https://aws.amazon.com/blogs/compute/python-3-12-runtime-now-available-in-aws-lambda/
-https://www.youtube.com/watch?v=VRqazCsTbZk
-AWS CLI, SELinux, IMDs v2, CW/SystemsMgr/Inspector agents, Perl/Python/Ruby/Java
-rpm -q system-release
-dnf upgrade/update -y (replaces yum)
-dnf upgrade --releasever=2023.2.20231030 (locks system to specific version)
-dnf check-update --releasever=latest --security
-microdnf update -y
-curl-minimal
-gnupg2-minimal
-dnf install node
+echo "delete this" > /dev/null   -> Text is discarded
+command > /dev/null              -> Discard standard output
+command > /dev/null 2>&1         -> Discard both standard output and errors
+cat /dev/null > logfile          -> Clears the content of logfile
 
-**************************** Network ****************************
+================== find / awk ==================
 
-sudo sysctl network restart
-netstat -all
-netstat -an | grep ":8080 " | grep ESTABLISHED | wc -l
-total_conn=$(netstat -an | grep <port> | wc -l) 
-netstat -tupl
-netstat -r
-whatis ip
-cat /etc/resolv.conf -> DNS config
-ip a
-ip route show
-ip addr
-ip addr show -> list network interfaces
-ip address add 192.0.0.1 dev eth0
-ping 127.0.0.1
-nc 54.78.7.114 22
-ssh -vT git@github.com
-nslookup google.com
-dig google.com
-dig -x google.com: reverse lookup
-host google.com: list nameservers
-whois google.com
-ethtool eth0
-telnet 54.78.7.114:22
-ipconfig -a
+find . -maxdepth 1 -name "*.txt"
+find . -type f -name "*.pyc" -delete
+find . -type d -name '.venv' -exec rm -rf {} +
+rm -rf ".ruff_cache"
+find . -type d -name "__pycache__" -exec rm -rf {} +
+find . -type d -name ".pytest_cache" -exec rm -rf {} +
+find . -type f -exec cat {} \;
+
+ps auwx | awk '/contains/' | '!/notcontains/'
+
+================== grep ==================
+
+https://www.cyberciti.biz/faq/howto-use-grep-command-in-linux-unix/
+-i: ignore case
+-r: recursive, for directory scan
+-c: total count of occurence
+
+grep "for" bash0.sh
+grep -i "FOR" bash0.sh
+zgrep "for" bash0.sh.gzip
+grep -r "$" .
+grep -r -c "$" .
+grep -r -h "$" .
+cat /etc/passwd | grep -i "boo"
+
+grep foo file.txt   
+ls -l | grep "pattern" -exclude ".git" --exclude-dir ".venv"
+
+-i makes the search case-insensitive
+-v inverts the match 
+-E enables extended regex support (=egrep)
+-e allows multiple patterns
+
+ps auwx | grep -E "^(?!.*foo).*$"          -> does not contain foo
+               -E "^(?!.*foo)(?!.*bar).*$" -> does not contain foo or bar"
+               -E "^[^0-9]*$"              -> does not contain numbers
+               -E "^[a-zA-Z0-9\s]*$"       -> does not contain special characters
+
+grep gtopcu /etc/passwd
+grep -v "foo" file.txt              -> does not contain foo
+grep -v -e "foo" -e "bar" file.txt  -> does not contain foo or bar"
+grep -v "[0-9]" file.txt            -> does not contain numbers
+                                    -> does not contain special characters
+
+================== curl/wget ==================
 
 wget <link>
 curl 54.78.7.114:22
+echo '{"name": "John"}' | jq -r '.name' -> John
+
+curl -X POST --d '{ "input": "data" }' --url https://41823adf93.execute-api.us-east-1.amazonaws.com
+curl -s -o /dev/null -w "%{http_code}\n" example.com
+curl -s -o /dev/null -w "\nStatus: %{http_code}\nTime: %{time_total}s\nSize: %{size_download} bytes\n" example.com
+
 curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
 curl --create-dirs "https://packages.sury.org/php/apt.gpg" -o "/etc/apk/trusted.gpg.d/php.gpg"
 
@@ -282,38 +445,46 @@ curl -v POST https://izb9erxhx4.execute-api.us-east-2.amazonaws.com/00_infraops_
 SQL Injection attack:
 curl -v POST https://izb9erxhx4.execute-api.us-east-2.amazonaws.com/00_infraops_donotdelete -F "user='AND 1=1'" 
 
-nano /var/logs 
-sudo nano /etc/hosts
-sudo nano /etc/route.conf -> DNS config
 
-vi (w):q!
+**************************** Hard/Sym Links ****************************
 
-----------------------------------------------------------------
-Install UFW firewall
-----------------------------------------------------------------
-sudo apt install -y ufw
-By default, UFW is set to block all incoming connections
-sudo ufw allow ssh
-sudo ufw allow http
-sudo ufw allow https
-sudo ufw deny 22/tcp
-sudo ufw enable | disable
-
-
-**************************** Other ****************************
-
-#HardLink - only for files in the same fileystem
+# HardLink - only for files in the same fileystem
 ln ~/bin/topprocs.sh tp
 ln /Users/hukanege/Downloads/macKeyboard.png macKeysHard.png
 
-#SymbolicLink - a link to any file/directory
+# SymbolicLink - a link to any file/directory
 ln -s ~/bin/topprocs.sh tps.sh 
 ln -s /Users/hukanege/Downloads/macKeyboard.png macKeysSymb
 
-**************************** Other ****************************
 
-##
-# Host Database
+**************************** Network ****************************
+
+sysctl network restart
+netstat -all
+netstat -an | grep ":8080 " | grep ESTABLISHED | wc -l
+total_conn=$(netstat -an | grep <port> | wc -l) 
+netstat -tupl
+netstat -r
+whatis ip
+cat /etc/resolv.conf -> DNS config
+ip a
+ip route show
+ip addr
+ip addr show -> list network interfaces
+ip address add 192.0.0.1 dev eth0
+ping 127.0.0.1
+nc 54.78.7.114 22
+ssh -vT git@github.com
+nslookup google.com
+dig google.com
+dig -x google.com: reverse lookup
+host google.com: list nameservers
+whois google.com
+ethtool eth0
+telnet 54.78.7.114:22
+ipconfig -a
+
+# /etc/hosts
 #
 # localhost is used to configure the loopback interface
 # when the system is booting.  Do not change this entry.
@@ -326,160 +497,109 @@ ln -s /Users/hukanege/Downloads/macKeyboard.png macKeysSymb
 127.0.0.1 kubernetes.docker.internal
 # End of section
 
-**************************** Network ****************************
 
- 
-1. ifconfig
- - Display network interface information.
-Ifconfig
-2. ip
- - Show/manipulate routing, devices, policy routing, and tunnels.
-ip address show
-3. route
- - Display or manipulate the IP routing table.
-route -n
-4. ping
- - Send ICMP ECHO_REQUEST to network hosts.
-ping google.com
-5. traceroute
- - Print the route packets trace to network host.
-traceroute google.com
-6. netstat
- - Print network connections, routing tables, interface statistics, masquerade connections, 
- and multicast memberships.
-netstat -an
-7. ss
- - Display socket statistics.
-ss -tulpn
-8. hostname
- - Show or set the system's host name.
-Hostname
-9. dig
- - DNS lookup utility.
-dig google.com
-10. nslookup
- - Query Internet name servers interactively.
-nslookup google.com
-11. route
- - Manipulate routing tables.
-route add default gw 192.168.1.1
-12. iptables
- - Administration tool for IPv4 packet filtering and NAT.
-iptables -L
-13. tcpdump
- - Dump traffic on a network.
-tcpdump -i eth0
-14. sshd
- - OpenSSH daemon.
-service sshd restart
-15. telnet
- - User interface to the TELNET protocol.
-telnet google.com 80
-16. scp
- - Secure copy (remote file copy program).
-scp file.txt user@remote:/path/to/destination
-17. wget
- - Non-interactive network downloader.
-wget http://example.com/file.zip
-18. curl
- - Command line tool for transferring data with URL syntax.
-curl http://example.com/api
-19. iptraf
- - Interactive color IP LAN monitor.
-Iptraf
-20. iftop
- - Display bandwidth usage on an interface.
-Iftop
-21. nmap
- - Network exploration tool and security scanner.
-nmap -sP 192.168.1.0/24
-22. lsof
- - List open files.
-lsof -i :80
-23. ethtool
- - Display or change ethernet card settings. 
+ethtool - Display or change ethernet card settings
 ethtool eth0
-24. arp
- - Display or modify the ARP cache.
-arp -a
-25. route
- - Display or modify the IP routing table.
-Route
-26. ss
- - Display socket statistics.
-ss -s
-27. hostnamectl
- - Control the system hostname and related settings.
-hostnamectl status
-28. resolvconf
- - Manage DNS information.
-resolvconf -u
-29. mtr
- - Network diagnostic tool.
-mtr google.com
-30. iwconfig
- - Configure a wireless network interface.
-Iwconfig
-31. nc
- - Arbitrary TCP and UDP connections and listens.
-nc -l 8080
-32. scp
- - Copy files between hosts on a network.
-scp file.txt user@host:/path/to/destination
-33. ssh-keygen
- - Generate, manage, and convert authentication keys
-for ssh.
-ssh-keygen -t rsa
-34. ss
- - Show socket statistics.
-ss -t -a
-35. tcpdump
- - Capture and display packets on a network.
-tcpdump -i eth0 tcp port 80
-36. route
- - Add a new route.
-route add -net 192.168.2.0 netmask 255.255.255.0 gw 192.168.1.1
-37. nmcli
- - Command-line client for NetworkManager.
-nmcli connection show
-38. dig
- - Perform DNS lookups.
-dig +short A google.com
-39. nload
- - Visual representation of incoming and outgoing traffic.
-Nload
-40. iperf
- - Tool for measuring TCP and UDP bandwidth
-performance.
-iperf -c server_ip
-41. fping
- - Quickly ping multiple hosts.
-fping -a -g 192.168.1.1 192.168.1.254
-42. iftop
- - Real-time console-based network bandwidth monitoring tool.
-iftop -n
-43. route
- - Delete a route.
-route del -net 192.168.2.0 netmask
-255.255.255.0
-44. tcpdump
- - Capture and display packets in ASCII.
-tcpdump -A -i eth0
-45. netcat
- - Utility for reading from and writing to network connections.
-nc -zv 192.168.1.1 22
-46. nmtui
- - Text User Interface for controlling NetworkManager.
-Nmtui
-47. ethtool
- - Change the speed/duplex settings of an Ethernet device.
+- Change the speed/duplex settings of an Ethernet device
 ethtool -s eth0 speed 100 duplex full
-48. ss
- - Show listening sockets.
-ss -l
-49. host
- - DNS lookup utility.
+
+ifconfig - Display network interface information
+ifconfig
+
+iftop - Display bandwidth usage on an interface
+iftop -n
+
+host - DNS lookup utility
 host google.com
-50. nmcli
- - List available Wi-Fi networks.
+
+hostname - Show or set the system's host name
+hostname
+
+hostnamectl - Control the system hostname and related settings
+hostnamectl status
+
+ip - Show/manipulate routing, devices, policy routing, and tunnels
+ip address show
+
+iptables- Administration tool for IPv4 packet filtering and NAT
+iptables -L
+
+iptraf - Interactive color IP LAN monitor
+iptraf
+
+route - Display or manipulate the IP routing table
+route -n
+route add default gw 192.168.1.1
+route add -net 192.168.2.0 netmask 255.255.255.0 gw 192.168.1.1
+route del -net 192.168.2.0 netmask 255.255.255.0
+
+ping - Send ICMP ECHO_REQUEST to network hosts
+ping google.com
+
+traceroute - Print the route packets trace to network host
+traceroute google.com
+
+netstat - Show network conn, routing tables, interface stats, masquerade conn and multicast memberships
+netstat -an
+
+ss - Display socket statistics
+ss -tulpn
+
+dig - DNS lookup utility
+dig google.com
+
+nslookup - Query Internet name servers interactively
+nslookup google.com
+
+tcpdump - Capture and display packets on a network in ASCII
+tcpdump -A -i eth0
+tcpdump -i eth0
+tcpdump -i eth0 tcp port 80
+
+telnet - User interface to the TELNET protocol
+telnet google.com 80
+
+scp - Secure copy (remote file copy program)
+scp file.txt user@host:/path/to/destination
+
+nmap - Network exploration tool and security scanner
+nmap -sP 192.168.1.0/24
+
+lsof - List open files
+lsof -i :80
+
+arp - Display or modify the ARP cache
+arp -a
+
+resolvconf - Manage DNS information
+resolvconf -u
+
+mtr - Network diagnostic tool
+mtr google.com
+
+iwconfig - Configure a wireless network interface
+iwconfig
+
+nc - Arbitrary TCP and UDP connections and listens
+nc -l 8080
+
+nmcli - Command-line client for NetworkManager
+nmcli connection show
+ - List available Wi-Fi networks
 nmcli device wifi list
+
+nmtui - Text User Interface for controlling NetworkManager
+nmtui
+
+nload - Visual representation of incoming and outgoing traffic
+nload
+
+iperf - Tool for measuring TCP and UDP bandwidth performance
+iperf -c server_ip
+
+fping - Quickly ping multiple hosts
+fping -a -g 192.168.1.1 192.168.1.254
+
+netcat - Utility for reading from and writing to network connections
+nc -zv 192.168.1.1 22
+
