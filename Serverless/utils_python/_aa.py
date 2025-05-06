@@ -65,8 +65,11 @@ logger.info("Logging is set up.")
 logger.info("INFO", stack_info=True, stacklevel=5)
 logger.error("ERROR", exc_info=True)
 
+# =====================================================================================
 import time
-# time.sleep(1)
+import timeit
+
+time.sleep(1)
 print(time.time()) 
 epoch = time.mktime((2024, 3, 24, 0, 0, 0, 0, 0, -1))
 print(time.localtime())
@@ -79,11 +82,13 @@ time.time_ns()
 time.monotonic()
 time.process_time() 
 time.thread_time()
-# timeit.timeit("x = 1", number=1000)
-# timeit.repeat("x = 1", repeat=3, number=1000)
+timeit.timeit("x = 1", number=1000)
+timeit.repeat("x = 1", repeat=3, number=1000)
 # timeit.Timer("x = 1").timeit(number=1000)
 # timeit.Timer("x = 1").repeat(repeat=3, number=1000)
 # timeit.Timer("x = 1").autorange()
+
+# =====================================================================================
 
 # raise Exception("")
 # raise RuntimeError("")
@@ -112,6 +117,7 @@ print(obj.__dict__)  # Output: {'name': 'Alice', 'age': 30}
 obj.__dict__['name'] = "Bob" # Modifying attributes dynamically
 print(obj.name)  # Output: Bob
 
+# =====================================================================================
 
 my_list: list[int] = [1, 2, 3]
 my_tuple: tuple[int, str] = (1, "Hello")
