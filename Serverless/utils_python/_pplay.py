@@ -1,15 +1,22 @@
+
 # TODO
-# Amazon Q: /clean /doc /dev /test /review /transform
+
+# Zoom In: Command+Shift 0
+# Zoom Out: Command -
+
+# Amazon Q:
 #   @workspace @git @history @env
+#   /clean /doc /dev /test /review /transform
 #   Inline Chat: Command + i 
 #   Code complete: Option + C
 #   Tab: Display all options
 #   Left arrow to accept autocompletion
 
-# GitHub Copilot: Command + i -> @workspace @terminal  /doc /edit /explain /fix /generate /tests
-
-# Zoom In: Command+Shift 0
-# Zoom Out: Command -
+# GitHub Copilot: 
+# @workspace @terminal @github @vscode  
+# /help /clear /search /explain /new /fix /tests /startDebugging
+# Command + i           -> Inline Chat
+# Command + Alt + i     -> Sidebar Command + Shift + P -> GitHub Copilot: Show Commands
 
 # Python: Select Interpreter -> Command + Shift + P
 # python -m venv .venv
