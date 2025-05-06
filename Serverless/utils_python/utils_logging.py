@@ -83,6 +83,10 @@ import traceback
 from inspect import istraceback
 import sys
 
+sys.stdin
+sys.stdout
+sys.stderr
+
 sys.exc_info()
 sys.exception()
 sys.exec_prefix
@@ -90,9 +94,6 @@ sys.executable
 sys.excepthook
 sys.last_traceback
 sys.last_exc
-sys.stdin
-sys.stdout
-sys.stderr
 
 traceback.print_exception(*sys.exc_info(), limit=5, file=sys.stdout)
 traceback.print_exc()

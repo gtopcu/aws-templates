@@ -7,7 +7,7 @@ from collections import namedtuple, deque, OrderedDict, defaultdict, ChainMap
 class MyClass(Exception):
     def __init__(self, *args):
         super().__init__(*args)
-        print(__class__)
+        # print(__class__)
 
 my_class = MyClass("Hello")
 
@@ -15,34 +15,35 @@ import traceback
 from inspect import istraceback
 import sys
 
-sys.exc_info()
-sys.exception()
-sys.exec_prefix
-sys.executable
-sys.excepthook
-sys.last_traceback
-sys.last_exc
 sys.stdin
 sys.stdout
 sys.stderr
 
-traceback.print_exception(*sys.exc_info(), limit=5, file=sys.stdout)
-traceback.print_exc()
-traceback.print_last()
-traceback.print_stack()
-traceback.print_tb(limit=5)
-traceback.extract_tb(limit=5)
-traceback.walk_tb(limit=5)
-traceback.extract_stack()
-traceback.format_exception(limit=5, chain=True)
-traceback.format_exception_only()
-traceback.format_exc()
-traceback.format_stack(limit=5)
-traceback.format_tb(limit=5)
-traceback.format_list()
-traceback.format_stack()
-traceback.format_tb()
-traceback.clear_frames()
+# sys.exc_info()
+# sys.exception()
+# sys.exec_prefix
+# sys.executable
+# sys.excepthook
+# sys.last_traceback
+# sys.last_exc
+
+# traceback.print_exception(*sys.exc_info(), limit=5, file=sys.stdout)
+# traceback.print_exc()
+# traceback.print_last()
+# traceback.print_stack()
+# traceback.print_tb()
+# traceback.extract_tb(limit=5)
+# traceback.walk_tb(limit=5)
+# traceback.extract_stack()
+# traceback.format_exception(limit=5, chain=True)
+# traceback.format_exception_only()
+# traceback.format_exc()
+# traceback.format_stack(limit=5)
+# traceback.format_tb(limit=5)
+# traceback.format_list()
+# traceback.format_stack()
+# traceback.format_tb()
+# traceback.clear_frames()
 
 import logging
 logger = logging.getLogger(__name__)
@@ -65,10 +66,25 @@ logger.info("INFO", stack_info=True, stacklevel=5)
 logger.error("ERROR", exc_info=True)
 
 import time
+# time.sleep(1)
 print(time.time()) 
-print(time.strftime("%H:%M:%S%z"))
-time.localtime()
+epoch = time.mktime((2024, 3, 24, 0, 0, 0, 0, 0, -1))
+print(time.localtime())
+print(time.gmtime())
+print(time.asctime((2024, 3, 24, 0, 0, 0, 0, 0, -1)))
+print(time.strftime("%Y-%m-%d %H:%M:%S%z")) #, time.localtime(epoch))
+print(time.strptime("2024-03-24", "%Y-%m-%d"))
 time.perf_counter()
+time.time_ns()
+time.monotonic()
+time.process_time() 
+time.thread_time()
+# timeit.timeit("x = 1", number=1000)
+# timeit.repeat("x = 1", repeat=3, number=1000)
+# timeit.Timer("x = 1").timeit(number=1000)
+# timeit.Timer("x = 1").repeat(repeat=3, number=1000)
+# timeit.Timer("x = 1").autorange()
+
 
 # raise Exception("")
 # raise RuntimeError("")
@@ -80,6 +96,23 @@ time.perf_counter()
 # abs round sum min max pow avg floor ceil
 # sorted reversed map filter reduce zip enumerate
 # getattr delattr setattr 
+
+# __dict__ :  stores object/class writable attributes as a dictionary - can modify attributes dynamically
+# Instance Attributes: For user-defined objects, __dict__ contains all instance attributes as key-value pairs.
+# Class Attributes: For classes, __dict__ contains class-level attributes and methods
+# It only contains instance attributes, not class attributes
+# Read-Only for Built-in Types: Built-in types like int or list do not have a modifiable __dict__.
+
+class MyClass:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+obj = MyClass("Alice", 30)
+print(obj.__dict__)  # Output: {'name': 'Alice', 'age': 30}
+obj.__dict__['name'] = "Bob" # Modifying attributes dynamically
+print(obj.name)  # Output: Bob
+
 
 my_list: list[int] = [1, 2, 3]
 my_tuple: tuple[int, str] = (1, "Hello")
