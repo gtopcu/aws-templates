@@ -1,15 +1,11 @@
 from datetime import datetime, timedelta, timezone, UTC
 # import datetime
-import time
 # from pytz import timezone
 # import isodate
 
 # datetime.now(timezone.utc)
 # datetime.now(timezone.utc).isoformat(timespec="seconds") # 2025-01-12T18:03:54+00:00 
-# time.time()
-# time.strftime("%Y-%m-%d %H:%M:%S")
 # datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-# time.strptime("2024-03-24", "%Y-%m-%d")
 # date = datetime.strptime("2024-03-24", "%Y-%m-%d").date()
 # date.today()
 # date.day
@@ -24,21 +20,10 @@ DATE_FORMAT : str           = "%Y-%m-%d %H:%M:%S"   # 2024-03-24 14:03:42
 DATE_FORMAT_ISO : str       = "%Y-%m-%dT%H:%M:%S"   # 2024-03-24T14:03:42 #ISO8601 
 DATE_FORMAT_ISO_TZ: str     = "%Y-%m-%dT%H:%M:%S%Z" # 2024-03-24T14:03:42+03
 
-def get_time() -> str:
-    return time.strftime(DATE_FORMAT)
-
-def get_time_iso() -> str:
-    return time.strftime(DATE_FORMAT_ISO)
-
-def get_time_iso_tz() -> str:
-    return time.strftime(DATE_FORMAT_ISO_TZ)
-
-if __name__ == "__main__":
-    print(time.strftime(DATE_FORMAT_ISO_TZ))
-    # print(datetime.now())
-    # date_time = datetime(2024, 11, 8, 12, 15, 00, tzinfo=UTC)
-    # print(datetime.now().isoformat())
-    # print(datetime.strftime(datetime.now(), DATE_FORMAT_ISO_TZ))
+# print(datetime.now())
+# date_time = datetime(2024, 11, 8, 12, 15, 00, tzinfo=UTC)
+# print(datetime.now().isoformat())
+# print(datetime.strftime(datetime.now(), DATE_FORMAT_ISO_TZ))
     
 # datetime(2020, 5, 17, tzinfo=UTC) # hour, minute, second, microsecond, tzone=None
 # datetime.now().replace(days=0, minutes=0, seconds=0, microsecond=0)
@@ -60,16 +45,35 @@ if __name__ == "__main__":
 # print(f"{now:%Y-%m-%dT%H:%M:%SZ}")                    # 2024-03-20T12:59:21Z
 # print(f"{now:%c}")                                    # Wed Mar 20 13:03:06 2024 -> local
 
-# print(time.time())                                    # 1710929397.2372649
-# print(time.time_ns())                                 # 1710929428977893000
-# print(time.gmtime())
-
 # utc = timezone("UTC")
 # loc = utc.localize(datetime.now())
 # print(loc)                                      # 2024-03-20 13:29:21.535102+00:00
 # local_tz = timezone("Europe/Istanbul")          # Europe/Amsterdam, Australia/Sydney, Asia/Tokyo, US/Eastern
 # print(loc.astimezone(local_tz))                 # 2024-03-21 00:34:03.881096+11:00
 
+# ---------------------------------------------------------------------------------------------------
+
+# import time
+# import timeit
+
+# time.sleep(1)
+# print(time.time()) 
+# epoch = time.mktime((2024, 3, 24, 0, 0, 0, 0, 0, -1))
+# print(time.localtime())
+# print(time.gmtime())
+# print(time.asctime((2024, 3, 24, 0, 0, 0, 0, 0, -1)))
+# print(time.strftime("%Y-%m-%d %H:%M:%S%z")) #, time.localtime(epoch))
+# print(time.strptime("2024-03-24", "%Y-%m-%d"))
+# time.perf_counter()
+# time.time_ns()
+# time.monotonic()
+# time.process_time() 
+# time.thread_time()
+# timeit.timeit("x = 1", number=1000)
+# timeit.repeat("x = 1", repeat=3, number=1000)
+# timeit.Timer("x = 1").timeit(number=1000)
+# timeit.Timer("x = 1").repeat(repeat=3, number=1000)
+# timeit.Timer("x = 1").autorange()
 
 # ------------------------------------------------------------------------------------------------------------------------
 
