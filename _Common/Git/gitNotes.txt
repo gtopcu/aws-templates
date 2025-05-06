@@ -5,11 +5,10 @@ which git
 git config --list
 git config --global user.name "S. Gokhan Topcu"
 git config --global user.email "gtopcu@gmail.com"
+.git-credentials
 
 git config --global credential.helper cache
 git config --global credential.helper 'store --file ~/.my-credentials'
-
-.git-credentials
 ---
 
 Git Fetch
@@ -26,7 +25,6 @@ git tag -a 1.2.9 -m "Bump version"
 git add README.md
 git add .
 git rm README.md
-
 git commit -m "commit message"
 git commit -a -m "commit message" -> add + commit 
 git commit --amend                -> Modify the last commit
@@ -41,16 +39,19 @@ git branch -c (copy)   | -C (-f --force) [<oldbranch>] <newbranch>
 git branch -d (delete) | -D (-f --force) -r(remote) -a(all) <newbranch>
 
 file:///C:/Program%20Files/Git/mingw64/share/doc/git-doc/git-checkout.html
-git checkout newbranch (must exist or error)
-git checkout -b (create new) | -B (reset if exists) <newbranch> [<start-point>]   
-git checkout -b main --track | --no-track
-git checkout -b main --track origin/main
-git checkout main | <commit>
+git checkout (-f | --force) newbranch (must exist or error)
+git checkout -b (create new) | -B (reset to start-point if exists) <newbranch> [<start-point>]   
+git checkout -b main --track origin/main | --no-track
 
-git switch branch
+file:///C:/Program%20Files/Git/mingw64/share/doc/git-doc/git-switch.html
+!!THIS COMMAND IS EXPERIMENTAL. THE BEHAVIOR MAY CHANGE!!
+git switch branch --detach HEAD~3
+git switch -c (create new) | -C (reset to start-point  if exists) <new-branch> [<start-point>] 
+Switching branches doesn't require clean index or working tree (i.e. no differences compared to HEAD)
+Operation is aborted if it leads to loss of local changes unless --discard-changes or --merge
+
 git fork
-
-git fetch -> download only, do not merge
+git fetch -> download only, does not merge
 git merge
 git pull --autostash -> fetch + merge
 git push -u origin main --set-upstream origin main --force
@@ -60,7 +61,7 @@ git status
 git log
 git diff
 git rebase origin main
-git rebase --interactive HEAD~3 -> Interactive Rebase to Rearrange Commits
+git rebase --interactive HEAD~3     -> Interactive Rebase to Rearrange Commits
 git reset --soft|mixed|hard HEAD~1  -> Undo the last commit & keep the changes -> staged for a new commit
 git reset HEAD~1                    -> Undo the last commit & keep the changes -> unstaged
 git reset --hard HEAD~1             -> Remove the last commit and discard all changes made in that commit
