@@ -31,27 +31,25 @@ git commit --amend                -> Modify the last commit
 git remote add origin git@github.com:gtopcu/aws-templates.git
 git remote add origin https://github.com/gtopcu/aws-templates.git
 
-file:///C:/Program%20Files/Git/mingw64/share/doc/git-doc/git-branch.html
 git branch newbranch --set-upstream-to=origin/newbranch
 git branch -l (list)                                             
 git branch -m (rename) | -M (-f --force) [<oldbranch>] <newbranch>
 git branch -c (copy)   | -C (-f --force) [<oldbranch>] <newbranch>   
 git branch -d (delete) | -D (-f --force) -r(remote) -a(all) <newbranch>
 
-file:///C:/Program%20Files/Git/mingw64/share/doc/git-doc/git-checkout.html
 git checkout (-f | --force) newbranch (must exist or error)
 git checkout -b (create new) | -B (reset to start-point if exists) <newbranch> [<start-point>]   
 git checkout -b main --track origin/main | --no-track
 
-file:///C:/Program%20Files/Git/mingw64/share/doc/git-doc/git-switch.html
 !!THIS COMMAND IS EXPERIMENTAL. THE BEHAVIOR MAY CHANGE!!
 git switch branch --detach HEAD~3
 git switch -c (create new) | -C (reset to start-point  if exists) <new-branch> [<start-point>] 
 Switching branches doesn't require clean index or working tree (i.e. no differences compared to HEAD)
 Operation is aborted if it leads to loss of local changes unless --discard-changes or --merge
 
-git fork
-git fetch -> download only, does not merge
+git diff main         -> compare current working tree to main
+git diff origin/main  -> compare current working tree to remote
+git fetch             -> download only, does not merge
 git merge
 git pull --autostash -> fetch + merge
 git push -u origin main --set-upstream origin main --force
@@ -59,7 +57,6 @@ git pull-request
 git show abc123def456789 
 git status
 git log
-git diff
 git rebase origin main
 git rebase --interactive HEAD~3     -> Interactive Rebase to Rearrange Commits
 git reset --soft|mixed|hard HEAD~1  -> Undo the last commit & keep the changes -> staged for a new commit
@@ -70,6 +67,7 @@ git revert HEAD                     -> Keep the record of commit history & undo 
 git restore <file(s)>               -> Discard changes in the working directory
 git reflog                          -> Retrieve lost commit references
 git cherry-pick <commit-hash>       -> Do this multiple times if multiple commits are wanted
+git fork
 
 ------------------------------------------------------------------------------------------------------------------------
 
