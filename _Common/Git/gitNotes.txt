@@ -26,8 +26,9 @@ git tag -a 1.2.9 -m "Bump version"
 git add README.md
 git add .
 git rm README.md
+
 git commit -m "commit message"
-git commit -a -m "commit message" -> Commit all tracked changes with a message
+git commit -a -m "commit message" -> add + commit 
 git commit --amend                -> Modify the last commit
 git remote add origin git@github.com:gtopcu/aws-templates.git
 git remote add origin https://github.com/gtopcu/aws-templates.git
