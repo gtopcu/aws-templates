@@ -19,13 +19,6 @@ Git Fetch
 - Safe operation that never modifies your local work
 - Allows you to review changes before merging
 
-Git Pull
-- Combines git fetch and git merge into one command
-- Downloads remote content AND immediately merges it into your current branch
-- Updates your current branch with the changes from the remote
-- Can cause merge conflicts if local and remote changes conflict
-- Effectively runs git fetch followed by git merge origin/current-branch
-
 git init
 git clean -fxfd -> Deletes all untracked files & directories(including ones in .gitignore) from working directory
 git clone https://github.com/hukanege.git
@@ -33,23 +26,25 @@ git tag -a 1.2.9 -m "Bump version"
 git add README.md
 git add .
 git rm README.md
-git commit -m "first commit"
+git commit -m "commit message"
+git commit -a -m "commit message" -> Commit all tracked changes with a message
+git commit --amend                -> Modify the last commit
 git remote add origin git@github.com:gtopcu/aws-templates.git
 git remote add origin https://github.com/gtopcu/aws-templates.git
 
 file:///C:/Program%20Files/Git/mingw64/share/doc/git-doc/git-branch.html
 git branch newbranch --set-upstream-to=origin/newbranch
 git branch -l (list)                                             
-git branch -m (rename) | M(-f --force) [<oldbranch>] <newbranch>
-git branch -c (copy)   | C(-f --force) [<oldbranch>] <newbranch>   
-git branch -d (delete) | D(-f --force) -r(remote) -a(all) <newbranch>
+git branch -m (rename) | -M (-f --force) [<oldbranch>] <newbranch>
+git branch -c (copy)   | -C (-f --force) [<oldbranch>] <newbranch>   
+git branch -d (delete) | -D (-f --force) -r(remote) -a(all) <newbranch>
 
 file:///C:/Program%20Files/Git/mingw64/share/doc/git-doc/git-checkout.html
-git checkout main
-git checkout -b(create new)|-B(reset if exists) <newbranch> [<start-point>]   
+git checkout newbranch (must exist or error)
+git checkout -b (create new) | -B (reset if exists) <newbranch> [<start-point>]   
 git checkout -b main --track | --no-track
 git checkout -b main --track origin/main
-git checkout main / b6d7c45539810e73dbaf4871b05ca2c8c4440a60
+git checkout main | <commit>
 
 git switch branch
 git fork
