@@ -10,7 +10,7 @@ export PATH=$PATH:/usr/local/go/bin
 /var/log
 /var/log/auth.log
 /etc/hosts
-/etc/route.conf        -> DNS config
+/etc/route.conf        
 /etc/sudoers.d/
 /etc/apt/sources.list
 /etc/os-release 
@@ -28,6 +28,7 @@ sudo rm -rf /*
 ls -a | grep -i Doc
 
 **************************** Cron ****************************
+
 https://crontab.guru/
 *	any value
 ,	value list separator

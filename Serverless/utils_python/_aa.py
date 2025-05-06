@@ -11,10 +11,45 @@ class MyClass(Exception):
 
 my_class = MyClass("Hello")
 
+import traceback
+import sys
+traceback.print_exception(*sys.exc_info(), limit=5, file=sys.stdout)
+traceback.print_exc()
+traceback.print_last()
+traceback.print_stack()
+traceback.print_tb(limit=5)
+traceback.extract_tb(limit=5)
+traceback.walk_tb(limit=5)
+traceback.extract_stack()
+traceback.format_exception(limit=5, chain=True)
+traceback.format_exception_only()
+traceback.format_exc()
+traceback.format_stack(limit=5)
+traceback.format_tb(limit=5)
+traceback.format_list()
+traceback.format_stack()
+traceback.format_tb()
+traceback.clear_frames()
+
 import logging
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
+logger.setLevel(logging.DEBUG)
+logging.basicConfig(
+      level=logging.DEBUG, # DEBUG, INFO, WARNING, ERROR, CRITICAL
+      format="%(asctime)s %(levelname)-8s %(message)s %(name)s",
+      datefmt="%Y-%m-%d %H:%M:%S"
+#     filename="app.log",
+#     filemode="w", # overwrite the log file each time the program runs
+#     stream=sys.stdout, # output to console
+#     handlers=[
+#         logging.StreamHandler(), 
+#         logging.FileHandler("app.log", mode="w")], # overwrite the log file each time the program runs
+#         logging.NullHandler(), # no output
+#     ]
+)
 logger.info("Logging is set up.")
+logger.info("INFO", stack_info=True, stacklevel=5)
+logger.error("ERROR", exc_info=True)
 
 import time
 print(time.time()) 
@@ -77,7 +112,7 @@ def add_numbers(a: int, b: int) -> int:
     return a + b
 
 # import boto3
-# from botocore.exceptions import ClientError
+# from botocore.exceptions import ClientError, ConditionCheckFailedException
 # client = boto3.client(service_name="dynamodb", region_name="us-east-1")
 # try:
 #     client.put_item()

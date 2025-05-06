@@ -1,5 +1,5 @@
 
-import os, sys, sysconfig, shutil, traceback, subprocess
+import os, sys, sysconfig, shutil, subprocess
 from pathlib import Path # PurePath, PosixPath, WindowsPath
 import glob
 
@@ -49,12 +49,6 @@ def main():
     # sys.last_type
     # sys.exit(0)
     # exit(1)
-
-    # traceback.print_stack()
-    # print(traceback.format_exc())
-    # traceback.print_exc()
-    # traceback.print_exception(*sys.exc_info(), limit, file)'
-    # traceback.print_stack(limit)
 
     # for dirname, dirpath, filename in os.walk('.'): # /dir
     #     for filename in filename:

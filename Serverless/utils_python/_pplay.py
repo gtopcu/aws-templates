@@ -29,6 +29,7 @@
 # __doc__
 # __annotations__
 # __builtins__
+# __dict__
 
 # pylint . --rcfile=.pylintrc .
 # disable=all disable=invalid-name disable=missing-class-docstring (remove this line)

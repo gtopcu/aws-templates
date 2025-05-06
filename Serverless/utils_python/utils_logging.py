@@ -12,15 +12,57 @@ from datetime import date, datetime, time, timezone
 from inspect import istraceback
 from typing import Dict, List, Tuple, Union
 
+# logger.propagate
+# logger.makeRecord("my_name", logging.INFO, "my_path", 1, "my_message", None, None, "my_module", "my_func")
+# logger.addFilter(logging.Filter("my_filter"))
+# logger.addHandler(logging.FileHandler("log.txt"))
+# logger.addHandler(logging.StreamHandler())
+# logger.addHandler(logging.NullHandler())
+# logger.addHandler(logging.handlers.RotatingFileHandler("log.txt", maxBytes=1024*1024, backupCount=5))
+# logger.addHandler(logging.handlers.TimedRotatingFileHandler("log.txt", when="midnight", interval=1, backupCount=5))
+# logger.addHandler(logging.handlers.WatchedFileHandler("log.txt"))
+# logger.addHandler(logging.handlers.HTTPHandler("localhost", "/log", method="POST"))
+# logger.addHandler(logging.handlers.HTTPServerHandler("localhost", "/log", method="POST"))
+# logger.addHandler(logging.handlers.SMTPHandler("localhost", "from@localhost", ["to@localhost"], "Subject"))
+# logger.addHandler(logging.handlers.SysLogHandler(address="/dev/log"))
+# logger.addHandler(logging.handlers.NTEventLogHandler("Application"))
+# logger.addHandler(logging.handlers.MemoryHandler(capacity=10, target=logger))
+# logger.addHandler(logging.handlers.QueueHandler(queue))
+# logger.addHandler(logging.handlers.QueueListener(queue, logger))
+# logger.addHandler(logging.handlers.BufferingHandler(capacity=10))
+# logger.addHandler(logging.handlers.SocketHandler("localhost", 9999))
+# logger.addHandler(logging.handlers.SocketServerHandler("localhost", 9999))
+# logger.addHandler(logging.handlers.DatagramHandler("localhost", 9999))
+# logger.addHandler(logging.handlers.DatagramServerHandler("localhost", 9999))
+
 # https://docs.python.org/3/library/logging.html#logrecord-attributes
 
-# does nothing if root logger is already configured
-logging.basicConfig(level=logging.DEBUG,
-                    format="%(asctime)s %(levelname)-8s %(message)s %(name)s",
-                    # %(pathname)s %(module)s %(filename)s %(funcName)s %(lineno)d",
-                    # %(process)d %(processName)s %(thread)d %(threadName)s", # %(taskName)s (asyncio taskName)  
-                    datefmt="%Y-%m-%d %H:%M:%S", # handlers=, force=True
-                )
+# logger.name
+# logger.parent
+# logger.manager
+# logger.handlers
+# logger.filters
+# logger.propagate
+# logger.disabled
+# logger.level
+# logger.root
+
+# does nothing if root logger is already configured with handlers
+logging.basicConfig(
+      level=logging.DEBUG, # DEBUG, INFO, WARNING, ERROR, CRITICAL
+      format="%(asctime)s %(levelname)-8s %(message)s %(name)s",
+      datefmt="%Y-%m-%d %H:%M:%S"
+#     filename="app.log",
+#     filemode="w", # overwrite the log file each time the program runs. #default append 'a'
+#     encoding="utf-8"
+#     stream=sys.stdout, # output to console
+#     handlers=[
+#         logging.StreamHandler(), 
+#         logging.FileHandler("app.log", mode="w")], # overwrite the log file each time the program runs
+#         logging.NullHandler(), # no output
+#     ]
+)
+
 x = 10
 logging.debug(f"DEBUG MSG {x}")
 logging.info("INFO MSG %s", x)
@@ -29,27 +71,38 @@ logging.error("ERROR MSG")
 logging.critical("CRITICAL MSG")
 # logging.error(f"Unexpected Error: {e}", exc_info=True)
 
-def get_logger() -> logging.Logger:
-    logging.basicConfig(level=logging.WARN,
-                        format="%(asctime)s %(levelname)-8s %(message)s",
-                        datefmt="%Y-%m-%d %H:%M:%S"
-                    )
-    logger = logging.getLogger(__name__)
-    # logging.info("INFO", stack_info=True, stacklevel=5)
-    # if logger.isEnabledFor(logging.DEBUG):
-    #     logger.debug("Debugger logger created")
-    return logger
+logger = logging.getLogger(__name__)
+logger.info("Logging is set up.")
+logger.info("INFO", stack_info=True, stacklevel=5)
+logger.error("ERROR", exc_info=True)
+# if logger.isEnabledFor(logging.DEBUG):
+#     logger.debug("Debugger logger created")
 
-def get_file_logger() -> logging.Logger:
-    logging.basicConfig(level=logging.ERROR,
-                        format="%(asctime)s %(levelname)-8s %(message)s",
-                        datefmt="%Y-%m-%d %H:%M:%S",
-                        filename="applog.log",
-                        filemode="w", #default append 'a'
-                        encoding="utf-8"   
-                    )
-    logger = logging.getLogger(__name__)
-    return logger
+
+# ================================================================================================
+
+
+import traceback
+import sys
+traceback.print_exception(*sys.exc_info(), limit=5, file=sys.stdout)
+traceback.print_exc()
+traceback.print_last()
+traceback.print_stack()
+traceback.print_tb(limit=5)
+traceback.extract_tb(limit=5)
+traceback.walk_tb(limit=5)
+traceback.extract_stack()
+traceback.format_exception(limit=5, chain=True)
+traceback.format_exception_only()
+traceback.format_exc()
+traceback.format_stack(limit=5)
+traceback.format_tb(limit=5)
+traceback.format_list()
+traceback.format_stack()
+traceback.format_tb()
+traceback.clear_frames()
+
+# ================================================================================================
 
 # skip natural LogRecord attributes
 # http://docs.python.org/library/logging.html#logrecord-attributes
