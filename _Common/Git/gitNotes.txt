@@ -28,33 +28,51 @@ Git Pull
 
 git init
 git clean -fxfd -> Deletes all untracked files & directories(including ones in .gitignore) from working directory
+git clone https://github.com/hukanege.git
 git tag -a 1.2.9 -m "Bump version"
 git add README.md
+git add .
 git rm README.md
 git commit -m "first commit"
-git branch -M main
-git checkout -b branch
-git switch branch
 git remote add origin git@github.com:gtopcu/aws-templates.git
-git remote add origin https://github.com/gtopcu/python_lambda
-git fetch
+git remote add origin https://github.com/gtopcu/aws-templates.git
+
+file:///C:/Program%20Files/Git/mingw64/share/doc/git-doc/git-branch.html
+git branch newbranch --set-upstream-to=origin/newbranch
+git branch -l (list)                                             
+git branch -m (rename) | M(-f --force) [<oldbranch>] <newbranch>
+git branch -c (copy)   | C(-f --force) [<oldbranch>] <newbranch>   
+git branch -d (delete) | D(-f --force) -r(remote) -a(all) <newbranch>
+
+file:///C:/Program%20Files/Git/mingw64/share/doc/git-doc/git-checkout.html
+git checkout main
+git checkout -b(create new)|-B(reset if exists) <newbranch> [<start-point>]   
+git checkout -b main --track | --no-track
+git checkout -b main --track origin/main
+git checkout main / b6d7c45539810e73dbaf4871b05ca2c8c4440a60
+
+git switch branch
+git fork
+
+git fetch -> download only, do not merge
 git merge
-git pull --autostash
-git push -u origin main --force
+git pull --autostash -> fetch + merge
+git push -u origin main --set-upstream origin main --force
+git pull-request
 git show abc123def456789 
 git status
 git log
 git diff
 git rebase origin main
 git rebase --interactive HEAD~3 -> Interactive Rebase to Rearrange Commits
-git reset --soft HEAD~1         -> Undo the last commit & keep the changes -> staged for a new commit
-git reset HEAD~1                -> Undo the last commit & keep the changes -> unstaged
-git reset --hard HEAD~1         -> Remove the last commit and discard all changes made in that commit
-git revert HEAD                 -> Keep the record of commit history & undo the last commit without removing it from history
-                                   Creates a new commit that reverses the changes made in the last commit
-git restore <file(s)>           -> Discard changes in the working directory
-git reflog                      -> Retrieve lost commit references
-git cherry-pick <commit-hash>   -> Do this multiple times if multiple commits are wanted
+git reset --soft|mixed|hard HEAD~1  -> Undo the last commit & keep the changes -> staged for a new commit
+git reset HEAD~1                    -> Undo the last commit & keep the changes -> unstaged
+git reset --hard HEAD~1             -> Remove the last commit and discard all changes made in that commit
+git revert HEAD                     -> Keep the record of commit history & undo the last commit without removing it from history
+                                       Creates a new commit that reverses the changes made in the last commit
+git restore <file(s)>               -> Discard changes in the working directory
+git reflog                          -> Retrieve lost commit references
+git cherry-pick <commit-hash>       -> Do this multiple times if multiple commits are wanted
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -92,37 +110,7 @@ $ pbcopy < /Users/gtopcu/.ssh/id_ed25519.pub
 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPenYHBDr7gp996CswqDf1mj6XuuRGo+Xn+F8dp9yv14 gtopcu@gmail.com
 
 # Add key: https://github.com/settings/keys
-```
 
----
-
-git init
-git status
-git log
-git diff
-git add readme.txt
-git add .
-git commit -am "initial"
-git checkout master / branch / b6d7c45539810e73dbaf4871b05ca2c8c4440a60
-git branch -a
-git branch featureBranch
-git branch -l
-git branch -d featureBranch
-git switch -c bugFixBranch
-git merge featureBranch
-
-git clone https://github.com/hukanege.git
-git remote add <name><url>
-git remote add origin https://github.com/gtopcu/python_lambda
-git branch --set-upstream-to=origin/main
-git push --set-upstream origin main --force
-git push -u origin main
-git fetch <remote><branch> (download only, do not merge) 
-git pull <remote><branch> (fetch + merge)
-git fork
-git pull-request
-git reset --soft/mixed/hard
-git rebase
 
 ---
 

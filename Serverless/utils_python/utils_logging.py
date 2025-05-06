@@ -6,10 +6,8 @@ Source: https://github.com/madzak/python-json-logger
 import json
 import logging
 import re
-import traceback
 from collections import OrderedDict
 from datetime import date, datetime, time, timezone
-from inspect import istraceback
 from typing import Dict, List, Tuple, Union
 
 # logger.propagate
@@ -81,9 +79,21 @@ logger.error("ERROR", exc_info=True)
 
 # ================================================================================================
 
-
 import traceback
+from inspect import istraceback
 import sys
+
+sys.exc_info()
+sys.exception()
+sys.exec_prefix
+sys.executable
+sys.excepthook
+sys.last_traceback
+sys.last_exc
+sys.stdin
+sys.stdout
+sys.stderr
+
 traceback.print_exception(*sys.exc_info(), limit=5, file=sys.stdout)
 traceback.print_exc()
 traceback.print_last()
