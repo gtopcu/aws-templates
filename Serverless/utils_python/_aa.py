@@ -1,8 +1,7 @@
 
 from typing import Self, Any, Optional, Final, Literal, NewType, TypeAlias, TypedDict
-# from typing import Callable, Iterable, Iterator
 from collections import namedtuple, deque, OrderedDict, defaultdict, ChainMap
-from collections.abc import Generator, Callable, Iterable, Iterator, AsyncIterable
+
 
 class MyClass(Exception):
     def __init__(self, *args):
@@ -136,12 +135,28 @@ print(my_list4)
 
 my_lambda = lambda x: x * x
 
+# ----------------------------------------------------------------------------------------
+
+from collections.abc import Generator, Callable, Iterable, Iterator, AsyncIterable
+
 iterator:Iterator = iter(my_list)
 print(next(iterator)) # 1
 
-def iterator_generator_func(input:Iterator[int]) -> Iterator[int]:
+# input can be generic, but return types should be specific
+def iterator_generator_func(input:Iterator[int]) -> Generator[int, None, None]: 
     for i in range(5):
         yield i
+iterator_generator_func((i for i in range(5)))
+iterator_generator_func([*range(5)])
+
+# ----------------------------------------------------------------------------------------
+
+from typing import Protocol, runtime_checkable
+@runtime_checkable
+class MyProtocol(Protocol):
+    def __call__(self, x: int) -> int:
+        pass
+    def some_function(self, x: int) -> int: ...
 
 if my_string is None or my_list is not None or 1 == 1:
     pass # break continue
