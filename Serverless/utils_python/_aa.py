@@ -1,8 +1,8 @@
 
 from typing import Self, Any, Optional, Final, Literal, NewType, TypeAlias, TypedDict
-from typing import Callable, Iterable, Iterator
+# from typing import Callable, Iterable, Iterator
 from collections import namedtuple, deque, OrderedDict, defaultdict, ChainMap
-
+from collections.abc import Generator, Callable, Iterable, Iterator, AsyncIterable
 
 class MyClass(Exception):
     def __init__(self, *args):
@@ -139,9 +139,12 @@ my_lambda = lambda x: x * x
 iterator:Iterator = iter(my_list)
 print(next(iterator)) # 1
 
+def iterator_generator_func(input:Iterator[int]) -> Iterator[int]:
+    for i in range(5):
+        yield i
+
 if my_string is None or my_list is not None or 1 == 1:
     pass # break continue
-
 
 def nasty(val=[]):
     val.append(1)

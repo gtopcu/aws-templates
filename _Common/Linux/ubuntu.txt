@@ -49,7 +49,7 @@ ssh root@10.0.0.0
 /etc/init.d/sshd start
 service sshd restart (OpenSSH daemon)
 
-passwd root -> generate password for root
+sudo passwd root -> generate password for root
 
 chmod 400 keypair.pem
 ssh -i keypair.pem ubuntu@ip_address
