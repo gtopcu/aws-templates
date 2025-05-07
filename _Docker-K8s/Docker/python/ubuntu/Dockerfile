@@ -19,10 +19,10 @@ RUN apt update -y && \
 # RUN apt remove python3 python3-pip python3-venv -y
 WORKDIR /app
 COPY . /app
-RUN python3 -m venv /app/venv
-ENV PATH="/app/venv/bin:$PATH"
+RUN python3 -m venv /app/.venv
+ENV PATH="/app/.venv/bin:$PATH"
 RUN pip3 install --no-cache-dir -r requirements.txt
-CMD ["/app/venv/bin/python3", "app.py"] 
+CMD ["/app/.venv/bin/python3", "app.py"] 
 
 # CMD ["python3", "app.py"]
 # EXPOSE 8080
