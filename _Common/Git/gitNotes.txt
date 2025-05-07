@@ -44,7 +44,7 @@ git checkout -b main --track origin/main | --no-track
 !!THIS COMMAND IS EXPERIMENTAL. THE BEHAVIOR MAY CHANGE!!
 git switch branch --detach HEAD~3
 git switch -c (create new) | -C (reset to start-point  if exists) <new-branch> [<start-point>] 
-Switching branches doesn't require clean index or working tree (i.e. no differences compared to HEAD)
+Switching branches doesn't require clean index - working tree can be different from HEAD
 Operation is aborted if it leads to loss of local changes unless --discard-changes or --merge
 
 git diff main         -> compare current working tree to main
