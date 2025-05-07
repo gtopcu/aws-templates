@@ -2,7 +2,6 @@
 from typing import Self, Any, Optional, Final, Literal, NewType, TypeAlias, TypedDict
 from collections import namedtuple, deque, OrderedDict, defaultdict, ChainMap
 
-
 class MyClass(Exception):
     def __init__(self, *args):
         super().__init__(*args)
@@ -157,6 +156,8 @@ class MyProtocol(Protocol):
     def __call__(self, x: int) -> int:
         pass
     def some_function(self, x: int) -> int: ...
+
+# ----------------------------------------------------------------------------------------
 
 if my_string is None or my_list is not None or 1 == 1:
     pass # break continue
