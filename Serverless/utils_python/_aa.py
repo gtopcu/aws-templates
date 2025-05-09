@@ -92,7 +92,7 @@ timeit.repeat("x = 1", repeat=3, number=1000)
 # raise RuntimeError("")
 # raise SystemError("")
 
-# id len type isinstance str repr chr ord dir global nonlocal iter next 
+# id len type isinstance issubclass str repr chr ord dir global nonlocal iter next 
 # is in not and or not any all 
 # if elif else try except finally raise assert break continue pass return yield
 # abs round sum min max pow avg floor ceil
@@ -139,7 +139,7 @@ my_lambda = lambda x: x * x
 from collections.abc import Generator, Callable, Iterable, Iterator, AsyncIterable
 
 iterator:Iterator = iter(my_list)
-print(next(iterator)) # 1
+print(next(iterator)) # 1 2 3 StopIterationError
 
 # input can be generic, but return types should be specific
 def iterator_generator_func(input:Iterator[int]) -> Generator[int, None, None]: 
