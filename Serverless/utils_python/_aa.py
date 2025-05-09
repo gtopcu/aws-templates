@@ -1,13 +1,39 @@
 
 from typing import Self, Any, Optional, Final, Literal, NewType, TypeAlias, TypedDict
 from collections import namedtuple, deque, OrderedDict, defaultdict, ChainMap
+from abc import ABC, abstractmethod
 
 class MyClass(Exception):
-    def __init__(self, *args):
-        super().__init__(*args)
-        # print(__class__)
+    """ This is my nice Person class"""
+    class_var:Final = 0 # class variable
+
+    def __new__(cls, *args, **kwds) -> Self:
+        # print(f"__new__ called with {args} and {kwds}")
+        return super().__new__(*args, **kwds)
+    
+    def __init__(self, *args, **kwds):
+        super().__init__(*args, **kwds) 
+        self.name = args[0] if args else None
+        class_var = 1           # local variable, does not change class_var
+        MyClass.class_var = 2   # class variable, changes class_var
+        self.class_var = 3      # instance variable, does not change class_var
+        self.instance_var = 0   # class variable and instance variable can have the same name
+        self._private_var = 0
+        self.__private_var = 0
+        # print(__class__)    
+
+    @classmethod
+    def class_method(cls): # can access class variables/methods and static methods
+        cls.class_var = 4
+
+    @staticmethod
+    def static_method():
+        MyClass.class_var = 5
 
 my_class = MyClass("Hello")
+print(my_class.class_var) # 3
+print(MyClass.class_var) # 2
+
 
 import traceback
 from inspect import istraceback
@@ -154,8 +180,12 @@ from typing import Protocol, runtime_checkable
 @runtime_checkable
 class MyProtocol(Protocol):
     def __call__(self, x: int) -> int:
-        pass
+        ...
     def some_function(self, x: int) -> int: ...
+
+class GenProto[T](Protocol):  
+    def meth(self) -> T:  
+        ...
 
 # ----------------------------------------------------------------------------------------
 

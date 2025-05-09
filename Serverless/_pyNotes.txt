@@ -69,7 +69,7 @@ pip install git+file:///my_local_repo/mypackage                   -> Local GIT r
 
 pip install -i https://test.pypi.org/simple/ test-repo-gtopcu
 
-pip install SimpleCV==1.2
+pip install SimpleCV==1.2.0
 pip install SimpleCV==1.*
 pip install SimpleCV>=1.2.0
 pip install SimpleCV<=1.2.0
