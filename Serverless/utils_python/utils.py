@@ -5,11 +5,15 @@ import timeit
 #import profile
 import uuid
 import json
-import jsonpickle
+
 from typing import Any
 import random
 
-import simplejson as json # for decimals
+# import jsonlines # for jsonl files
+# import simdjson # for large json files - https://www.youtube.com/shorts/9tWvDFhBlNU
+# import jsonschema # for json schema validation
+# import jsonpickle # for complex objects
+# import simplejson as json # for decimals
 
 # pip install python-dotenv
 from dotenv import load_dotenv

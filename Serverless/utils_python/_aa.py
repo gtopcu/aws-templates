@@ -212,7 +212,7 @@ def nasty(val=[]):
 def not_nasty(val=None):
     val = [] if val is None else val
 
-def add_wrapper(func) -> Callable[[int, int], int]:
+def decorator(func) -> Callable[[int, int], int]:
     def wrapper(*args, **kwargs):
         print("Before function call")
         result = func(*args, **kwargs)
@@ -220,7 +220,7 @@ def add_wrapper(func) -> Callable[[int, int], int]:
         return result
     return wrapper
 
-@add_wrapper
+@decorator("my_decorator")
 def add_numbers(a: int, b: int) -> int: 
     print(f"Adding {a} and {b}")
     return a + b

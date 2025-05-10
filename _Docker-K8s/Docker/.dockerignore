@@ -1,0 +1,6 @@
+# .env
+.DS_Store
+.git
+.venv
+venv
+pytest_cache
