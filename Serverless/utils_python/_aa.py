@@ -3,13 +3,27 @@ from typing import Self, Any, Optional, Final, Literal, NewType, TypeAlias, Type
 from collections import namedtuple, deque, OrderedDict, defaultdict, ChainMap
 from abc import ABC, abstractmethod
 
+print("================================")
+print(__name__)         # "__main__"
+# print(__all__)        #  = ["my_function", "my_class"]
+# print(__class__)      #  = <class '__main__.MyClass'>
+print(__file__)         # d:\VSCode\aws-templates\Serverless\utils_python\_pplay.py
+print(__package__)      # None
+print(__doc__)          # None
+print(__annotations__)  # {}
+print(__builtins__)     #  = <module 'builtins' (built-in)>
+print(__cached__)       #  None
+# print(__dict__)       # = {'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <_frozen_importlib_external.SourceFileLoader object at 0x7f8c4c2d3a90>, '__spec__': ModuleSpec(name='aws-templates.Serverless.utils_python._pplay', loader=<_frozen_importlib_external.SourceFileLoader object at 0x7f8c4c2d3a90>, origin='aws-templates/Serverless/utils_python/_pplay.py'), '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, '__file__': 'aws-templates/Serverless/utils_python/_pplay.py', '__cached__': None}
+print("================================")
+
 class MyClass(Exception):
     """ This is my nice Person class"""
     class_var:Final = 0 # class variable
 
-    def __new__(cls, *args, **kwds) -> Self:
+    def __new__(cls, *args, **kwargs) -> Self:
         # print(f"__new__ called with {args} and {kwds}")
-        return super().__new__(*args, **kwds)
+        # return super().__new__(*args, **kwargs)
+        pass
     
     def __init__(self, *args, **kwds):
         super().__init__(*args, **kwds) 
@@ -30,9 +44,9 @@ class MyClass(Exception):
     def static_method():
         MyClass.class_var = 5
 
-my_class = MyClass("Hello")
-print(my_class.class_var) # 3
-print(MyClass.class_var) # 2
+# my_class = MyClass("Hello")
+# print(my_class.class_var) # 3
+# print(MyClass.class_var) # 2
 
 
 import traceback

@@ -55,6 +55,15 @@ Need stability: Use bullseye or buster
 
 ----------------------------------------------------------------------------------------------------------------
 
+.dockerignore
+# .env
+.DS_Store
+.git
+.venv
+venv
+pytest_cache
+...
+
 https://stackoverflow.com/questions/21553353/what-is-the-difference-between-cmd-and-entrypoint-in-a-dockerfile
 Dockerfile should specify at least one of CMD or ENTRYPOINT commands.
 ENTRYPOINT should be defined when using the container as an executable.

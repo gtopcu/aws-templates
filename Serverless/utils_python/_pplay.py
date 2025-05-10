@@ -30,7 +30,6 @@
 # __name__ = "__main__"
 # __all__ = ["my_function", "my_class"]
 # __class__
-# __name__
 # __file__
 # __package__
 # __doc__
