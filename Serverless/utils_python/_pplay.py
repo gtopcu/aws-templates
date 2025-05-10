@@ -82,7 +82,7 @@
 # BaseException ->     
 #   Exception -> SystemExit     
 #   StandardError -> ValueError: int("A"), KeyError: dict['key1'], TypeError: str[0]="a",
-#   IndexError, AttributeError, NameError, AssertionError, StopIteration, ArithmeticError,     
+#   IndexError, AttributeError, NameError, AssertionError, StopIterationError, ArithmeticError,     
 #   ZeroDivisionError, NotImplementedError, RuntimeError, SystemError
 
 # from typing import Self, Any, Optional, Final, Literal, NewType, TypeAlias, TypedDict
