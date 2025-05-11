@@ -300,6 +300,9 @@ my_dict = json.loads('{"name": "John", "age": 30, "money": 2.75}', parse_float=D
 print(my_dict)
 print(json.dumps(my_dict, default=str))
 
+# with open("file.json", "r") as f:
+#     data:dict[str, Any] = json.load(f)
+
 # -------------------------------------------------------------------------------------------------
 
 import pytest
