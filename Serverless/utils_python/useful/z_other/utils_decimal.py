@@ -9,6 +9,9 @@ Here are some examples of using the decimal module:
 
 """
 
+# my_dict = json.loads('{"name": "John", "age": 30, "money": 2.75}', parse_float=Decimal)
+# print(json.dumps(my_dict, default=str))
+
 # Saved as Number in DynamoDB
 
 # Supports Decimals:

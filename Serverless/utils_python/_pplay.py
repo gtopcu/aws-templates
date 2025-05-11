@@ -1,5 +1,5 @@
 
-from typing import Self, Any, Optional, Final, Literal, LiteralString, NewType, TypeAlias, TypedDict
+from typing import Self, Any, Optional, Final, Literal, LiteralString, NewType, Type, TypeVar, TypeAlias, TypedDict, Generic
 from collections import namedtuple, deque, OrderedDict, defaultdict, ChainMap
 from collections.abc import Generator, Callable, Iterable, Iterator, AsyncIterable
 from abc import ABC, abstractmethod
@@ -254,12 +254,12 @@ def add_numbers(a: int, b: int) -> int:
 
 # -------------------------------------------------------------------------------------------------
 
-from decimal import Decimal, getcontext, setcontext, ExtendedContext, InvalidOperation, DivisionByZero
-setcontext(ExtendedContext)
-getcontext().prec = 3
+# from decimal import Decimal, getcontext, setcontext, ExtendedContext, InvalidOperation, DivisionByZero
+# setcontext(ExtendedContext)
+# getcontext().prec = 3
 
-my_decimal = Decimal(1)
-print(my_decimal / Decimal(3))
+# my_decimal = Decimal(1)
+# print(my_decimal / Decimal(3))
 
 # -------------------------------------------------------------------------------------------------
 
@@ -289,6 +289,16 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+# -------------------------------------------------------------------------------------------------
+
+import json
+from decimal import Decimal
+# return { statusCode: 200, body: "Hello, World!" }
+print(json.dumps({"statusCode": 200, "body": "Hello, World!"}, sort_keys=True, indent=4, separators=(",", ": "), ensure_ascii=False))
+my_dict = json.loads('{"name": "John", "age": 30, "money": 2.75}', parse_float=Decimal)
+print(my_dict)
+print(json.dumps(my_dict, default=str))
 
 # -------------------------------------------------------------------------------------------------
 

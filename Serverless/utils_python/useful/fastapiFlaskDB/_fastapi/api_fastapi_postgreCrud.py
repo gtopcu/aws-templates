@@ -60,7 +60,7 @@ It auto handles primary keys, nullable fields, default values, and different col
 """
 
 import os
-from typing import Any, Dict, List, Optional, Type, TypeVar, Generic
+from typing import Any, Optional, Type, TypeVar, Generic
 from fastapi import FastAPI, HTTPException, Depends, Query
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, create_model
@@ -168,7 +168,7 @@ def read_root():
     tables = inspector.get_table_names()
     return {"available_tables": tables}
 
-@app.get("/tables/{table_name}", response_model=List[Dict[str, Any]])
+@app.get("/tables/{table_name}", response_model=list[dict[str, Any]])
 def read_all_items(
     table_name: str, 
     db: Session = Depends(get_db),
@@ -194,7 +194,7 @@ def read_all_items(
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error fetching data: {str(e)}")
 
-@app.get("/tables/{table_name}/{item_id}", response_model=Dict[str, Any])
+@app.get("/tables/{table_name}/{item_id}", response_model=dict[str, Any])
 def read_item(table_name: str, item_id: Any, db: Session = Depends(get_db)):
     """Get a specific item by primary key"""
     try:
@@ -231,8 +231,8 @@ def read_item(table_name: str, item_id: Any, db: Session = Depends(get_db)):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error fetching item: {str(e)}")
 
-@app.post("/tables/{table_name}", response_model=Dict[str, Any])
-def create_item(table_name: str, item_data: Dict[str, Any], db: Session = Depends(get_db)):
+@app.post("/tables/{table_name}", response_model=dict[str, Any])
+def create_item(table_name: str, item_data: dict[str, Any], db: Session = Depends(get_db)):
     """Create a new item in the specified table"""
     try:
         _, create_model, _, table = get_table_models(table_name, db)
@@ -262,8 +262,8 @@ def create_item(table_name: str, item_data: Dict[str, Any], db: Session = Depend
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error creating item: {str(e)}")
 
-@app.put("/tables/{table_name}/{item_id}", response_model=Dict[str, Any])
-def update_item(table_name: str, item_id: Any, item_data: Dict[str, Any], db: Session = Depends(get_db)):
+@app.put("/tables/{table_name}/{item_id}", response_model=dict[str, Any])
+def update_item(table_name: str, item_id: Any, item_data: dict[str, Any], db: Session = Depends(get_db)):
     """Update an existing item in the specified table"""
     try:
         _, _, update_model, table = get_table_models(table_name, db)
@@ -321,7 +321,7 @@ def update_item(table_name: str, item_id: Any, item_data: Dict[str, Any], db: Se
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error updating item: {str(e)}")
 
-@app.delete("/tables/{table_name}/{item_id}", response_model=Dict[str, str])
+@app.delete("/tables/{table_name}/{item_id}", response_model=dict[str, str])
 def delete_item(table_name: str, item_id: Any, db: Session = Depends(get_db)):
     """Delete an item from the specified table"""
     try:
@@ -394,8 +394,8 @@ def get_table_schema(table_name: str, db: Session = Depends(get_db)):
 # Create a .env file template
 with open(".env.example", "w") as f:
     f.write("""# Database connection string
-DATABASE_URL=postgresql://user:password@localhost/dbname
-""")
+            DATABASE_URL=postgresql://user:password@localhost/dbname
+            """)
 
 if __name__ == "__main__":
     import uvicorn

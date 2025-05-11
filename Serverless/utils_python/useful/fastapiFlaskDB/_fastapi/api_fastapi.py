@@ -57,7 +57,6 @@ from fastapi.responses import Response, HTMLResponse, JSONResponse, PlainTextRes
 # )
 
 from pydantic import BaseModel, Field
-
 class ToDo(BaseModel):
     id: int = Field(default=0)
     title: str = Field(default="", description="Mr/Mrs/Ms")
@@ -156,7 +155,7 @@ async def upload_file(file: UploadFile = File(...)) -> Any:
 
 def main(): 
     import uvicorn 
-    uvicorn.run(app, port=5000, log_level="info", use_colors=True) #, reload=True)
+    uvicorn.run(app, port=5000, log_level="info", reload=False, access_log=False, use_colors=True) 
 
 if __name__ == "__main__":
     main()
