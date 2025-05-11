@@ -1,8 +1,7 @@
 
 
 # Stripe -> EventBridge / local webhooks
-
-
+# https://www.youtube.com/watch?v=BfeZ6_51RWM
 
 """
 Step 1: Set Up a Stripe Account and Install the Library
@@ -63,7 +62,6 @@ def success():
     customer = stripe.Customer.retrieve(session.customer)
     
     # Here you would typically update your database, send confirmation emails, etc.
-    
     return render_template('success.html', customer=customer)
 
 @app.route('/cancel')

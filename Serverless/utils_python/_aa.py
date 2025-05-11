@@ -212,6 +212,27 @@ def nasty(val=[]):
 def not_nasty(val=None):
     val = [] if val is None else val
 
+import random
+import string
+random_str = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10))
+print("random_str:" + random_str)
+
+# r(default, error if not exists), r+(read/write), w/a(create if not exists), x(create, error if exists)
+# b/t(default)
+with open("test.txt", "r+") as f:
+    f.write("Hello, World!")
+    # f.read()
+    # f.readlines()
+    # f.readline()
+    # f.writelines()
+    # f.flush()
+    # f.truncate(0)
+    # f.seek(0)
+    # f.tell()
+    # f.close()
+    # for line in f:
+    #     print(line.strip())
+
 def decorator(func) -> Callable[[int, int], int]:
     def wrapper(*args, **kwargs):
         print("Before function call")
@@ -220,7 +241,7 @@ def decorator(func) -> Callable[[int, int], int]:
         return result
     return wrapper
 
-@decorator("my_decorator")
+@decorator
 def add_numbers(a: int, b: int) -> int: 
     print(f"Adding {a} and {b}")
     return a + b

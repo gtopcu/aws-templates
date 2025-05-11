@@ -8,6 +8,8 @@ Code:
 Code complete: Option + C
 Inline Chat: Command + i
 
+q cli can generate architectural diagrams
+
 Console:
 Tab: Display all options
 Left arrow to accept autocompletion
