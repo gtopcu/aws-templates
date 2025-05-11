@@ -207,7 +207,7 @@ def main() -> None:
     # print(f"{myfloat:.2f}")
 
     # users: dict[int, str] = { 1: "Joe", 2: "Mary" }
-    # if user := users.get(0): #walrus operator
+    # if user := users.get(0): # walrus operator
     #     print(user)
     # else:
     #     print("Not found!")
@@ -335,7 +335,8 @@ def main() -> None:
     # print(math.pow(2, 100) < float("inf")) # True
     # math.prod(nums[0:10])
 
-    # print(issubclass(Exception, BaseException))
+    # isinstance(object, type)
+    # issubclass(Exception, BaseException)
 
     # kwargs(name=1234)
     # kwargs(**{"name":1234})
@@ -369,6 +370,7 @@ def main() -> None:
 
     # s = "abc"     # Immutable
     # s[0] = "d"    # TypeError
+    # a:int = "abc" # ValueError
     # s += "def"    # OK, but new object
     # print(int("123") + int("123")) # 246
     # print(str(123) + str(123))     # 123123

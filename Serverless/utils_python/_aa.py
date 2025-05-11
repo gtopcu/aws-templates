@@ -1,11 +1,12 @@
 
-from typing import Self, Any, Optional, Final, Literal, NewType, TypeAlias, TypedDict
+from typing import Self, Any, Optional, Final, Literal, LiteralString, NewType, TypeAlias, TypedDict
 from collections import namedtuple, deque, OrderedDict, defaultdict, ChainMap
+from collections.abc import Generator, Callable, Iterable, Iterator, AsyncIterable
 from abc import ABC, abstractmethod
 
 print("================================")
 print(__name__)         # "__main__"
-# print(__all__)        #  = ["my_function", "my_class"]
+# print(__all__)        #  ("module1", "module2")
 # print(__class__)      #  = <class '__main__.MyClass'>
 print(__file__)         # d:\VSCode\aws-templates\Serverless\utils_python\_pplay.py
 print(__package__)      # None
@@ -48,6 +49,7 @@ class MyClass(Exception):
 # print(my_class.class_var) # 3
 # print(MyClass.class_var) # 2
 
+# -------------------------------------------------------------------------------------------------
 
 import traceback
 from inspect import istraceback
@@ -103,7 +105,8 @@ logger.info("Logging is set up.")
 logger.info("INFO", stack_info=True, stacklevel=5)
 logger.error("ERROR", exc_info=True)
 
-# =====================================================================================
+# -------------------------------------------------------------------------------------------------
+
 import time
 import timeit
 
@@ -126,7 +129,7 @@ timeit.repeat("x = 1", repeat=3, number=1000)
 # timeit.Timer("x = 1").repeat(repeat=3, number=1000)
 # timeit.Timer("x = 1").autorange()
 
-# =====================================================================================
+# -------------------------------------------------------------------------------------------------
 
 # raise Exception("")
 # raise RuntimeError("")
@@ -140,10 +143,10 @@ timeit.repeat("x = 1", repeat=3, number=1000)
 # getattr delattr setattr 
 
 # __dict__ :  stores object/class writable attributes as a dictionary - can modify attributes dynamically
-# Instance Attributes: For user-defined objects, __dict__ contains all instance attributes as key-value pairs.
+# Instance Attributes: For user-defined objects, __dict__ contains all instance attributes as key-value pairs
 # Class Attributes: For classes, __dict__ contains class-level attributes and methods
 # It only contains instance attributes, not class attributes
-# Read-Only for Built-in Types: Built-in types like int or list do not have a modifiable __dict__.
+# Read-Only for Built-in Types: Built-in types like int or list do not have a modifiable __dict__
 
 class MyClass:
     def __init__(self, name, age):
@@ -155,7 +158,7 @@ print(obj.__dict__)  # Output: {'name': 'Alice', 'age': 30}
 obj.__dict__['name'] = "Bob" # Modifying attributes dynamically
 print(obj.name)  # Output: Bob
 
-# =====================================================================================
+# -------------------------------------------------------------------------------------------------
 
 my_list: list[int] = [1, 2, 3]
 my_tuple: tuple[int, str] = (1, "Hello")
@@ -174,9 +177,7 @@ print(my_list4)
 
 my_lambda = lambda x: x * x
 
-# ----------------------------------------------------------------------------------------
-
-from collections.abc import Generator, Callable, Iterable, Iterator, AsyncIterable
+# -------------------------------------------------------------------------------------------------
 
 iterator:Iterator = iter(my_list)
 print(next(iterator)) # 1 2 3 StopIterationError
@@ -188,7 +189,7 @@ def iterator_generator_func(input:Iterator[int]) -> Generator[int, None, None]:
 iterator_generator_func((i for i in range(5)))
 iterator_generator_func([*range(5)])
 
-# ----------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------
 
 from typing import Protocol, runtime_checkable
 @runtime_checkable
@@ -201,7 +202,7 @@ class GenProto[T](Protocol):
     def meth(self) -> T:  
         ...
 
-# ----------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------
 
 if my_string is None or my_list is not None or 1 == 1:
     pass # break continue
@@ -219,8 +220,8 @@ print("random_str:" + random_str)
 
 # r(default, error if not exists), r+(read/write), w/a(create if not exists), x(create, error if exists)
 # b/t(default)
-with open("test.txt", "r+") as f:
-    f.write("Hello, World!")
+# with open("test.txt", "r+") as f:
+#     f.write("Hello, World!")
     # f.read()
     # f.readlines()
     # f.readline()
@@ -233,7 +234,8 @@ with open("test.txt", "r+") as f:
     # for line in f:
     #     print(line.strip())
 
-def decorator(func) -> Callable[[int, int], int]:
+# def decorator(func: Callable[..., str]) -> None: ...
+def decorator(func) -> Callable[[int, int], int]: 
     def wrapper(*args, **kwargs):
         print("Before function call")
         result = func(*args, **kwargs)
@@ -245,6 +247,17 @@ def decorator(func) -> Callable[[int, int], int]:
 def add_numbers(a: int, b: int) -> int: 
     print(f"Adding {a} and {b}")
     return a + b
+
+# -------------------------------------------------------------------------------------------------
+
+from decimal import Decimal, getcontext, setcontext, ExtendedContext, InvalidOperation, DivisionByZero
+setcontext(ExtendedContext)
+getcontext().prec = 3
+
+my_decimal = Decimal(1)
+print(my_decimal / Decimal(3))
+
+# -------------------------------------------------------------------------------------------------
 
 # import boto3
 # from botocore.exceptions import ClientError, ConditionCheckFailedException
@@ -259,8 +272,8 @@ def add_numbers(a: int, b: int) -> int:
 
 def main() -> None:
     print("{}".format(my_string))
-    print("so, %s" % my_string)
-    print(f"so, {my_string}")
+    print("PK_%s" % my_string)
+    print(f"PK {my_string}")
 
     print(my_lambda(10))
 
@@ -273,7 +286,7 @@ def main() -> None:
 if __name__ == "__main__":
     main()
 
-# ====================================================================================
+# -------------------------------------------------------------------------------------------------
 
 import pytest
 from pytest import fixture

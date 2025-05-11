@@ -305,6 +305,8 @@ https://aws.amazon.com/blogs/aws/top-announcements-of-aws-reinvent-2024/
 https://theburningmonk.com/2024/11/best-preinvent-2024-serverless-announcements
 https://www.youtube.com/watch?v=5wokwEtddtc
 
+
+# What's new (since the start of re-Invent'24)
 Serverless:
 - DynamoDB: Price cut on-demand %50 global tables %67, warm throughput for tables & indexes(4k WPS & 12k RPS initially), 
             Global Tables Strong Consistency(DSQL), Attribute based access control(RBAC - based on table/user/policy tags)
@@ -316,7 +318,8 @@ Serverless:
 - EventBridge: Avg latency down to 130ms from 2.2s, VPC Lattice+PrivateLink VPC access, API dest. proactive OAuth token refresh,
                event source discovery(console)
 - SFs: Export as SAM/InfrastructureComposer from console, Variables & JSONata support, VPC Lattice+PrivateLink VPC access
-- Kinesis: on-Demand now supports 5x throughtput - 10GB/s for writers 20GB/s for consumers per stream
+- Kinesis: on-Demand now supports 5x throughtput - 10GB/s for writers 20GB/s for consumers per stream, tagging,
+           attribute based access control
 - Cognito: New landing page/managed login, pricing tiers (Lite/Essentials/Plus), passkey auth
 - S3: Conditional writes(if-none-match/if-match bucket policy), ExpressOneZone append data, 1M buckets, 
       AWS Backup S3 cross-region bucket replication, TransferFamily web apps, Metadata(S3 tables-Apache Iceberg)
@@ -335,14 +338,16 @@ AI:
             Q developer: code review, inline chat, console/Datadog integration, Q Business new goodies
 
 Others:
-- CloudFormation: Lambda/Guard/ChangeSet/CloudControlAPI(Terraform) hooks, timeline view, github sync, user notifications
-- CloudFront: ALB support with WAF(preconfig ACLs & SG), VPC origins(egress EC2 in private subnet w/out a public IP/ALB), 
+- CloudFormation: Lambda/Guard/ChangeSet/CloudControlAPI(Terraform) hooks, timeline view, github sync, user notifications,
+                  IaC generator selective resource scanning, stack refactoring
+- CloudFront: SaaS manager, ALB support with WAF(preconfig ACLs & SG), VPC origins(egress EC2 in private subnet w/out a public IP/ALB), 
               new access log formats & destinations, gRPC support, Anycast static IPs, origin/header modification using functions
-- CloudWatch: Search all log groups(LogInsights), live logs in VS Code
+- CloudWatch: Search all log groups(LogInsights), live logs in VS Code, tiered pricing, lambda->kinesis direct logs,
+              network monitor multi-account flow monitors
 - Compute: I8g(IO optimized), I7ie(storage optimized), U7ie(6&8TiB high-memory), P5en, F2(FPGA), TR2 Instances & UltraServers, 
-           EBS time-based snapshot copy(15m-48h), instant start Capacity Blocks, future reservations, zonal shift for autoscaling,
-           EFS cross-account replication & up to 2.5 million IOPS per file system(x10), EC2 bandwith config for EBS & VPC,
-           EC2 Optimized CPU config during autoscaling for licensing
+           EBS time-based snapshot copy(15m-48h), instant start Capacity Blocks, future reservations, provisioned rate for volume init,
+           EFS cross-account replication & up to 2.5 million IOPS per file system(x10),
+           EC2 Optimized CPU config during autoscaling for licensing, zonal shift for autoscaling,  EC2 bandwith config for EBS & VPC
 - Network: VPC block public access, PrivateLink private subnets(VPC endpoints & RAM) and cross-region support,
            SecurityGroup sharing(same account & region), ALB Header Modification, Route53 DNS Resolver Firewall Advanced
 - RDS: Aurora DSQL - Postgre16, no FKs/triggers/extensions/vectors, single-region %99.99% multi-region 99.999% availability, 
@@ -350,13 +355,13 @@ Others:
        CW DatabaseInsights for Aurora, MemoryDB multi-region with 99.999% availability & Valkey, zero-ETL integration to RedShift
        RDS live volume shrink using Blue/Green Deployments
 - SystemManager: Manage EC2 and hybrid nodes across ALL accounts and regions in your AWS Organization
-                 Superhero mode: Instantly spot unmanaged EC2 instances
+                 Superhero mode: Instantly spot unmanaged EC2 instances, JIT node access
                  Auto-fix: SysMgr now diagnoses and remedies issues to bring nodes to managed state
-- ECS/EKS: ECS deployment history & predictive scaling, enhanced Container Insights, Farget network fault injection experiments,
+- ECS/EKS: ECS deployment history, 1-click rollback, predictive scaling, enhanced ContainerInsights, Fargate network fault injection,
            EKS AutoMode & Hybrid Nodes, node health monitoring & auto-repair
 - Other: Organizations/RootUser mgmt, ResourceControlPolicies(RCP), EC2 DeclarativePolicies(VPC block public access),
          MSK Express, Amazon Keyspaces(Cassandra) reduced prices up to 75%, CodeBuild test splitting/parallelizm,
          OpenSearch Serverless BinaryVector & PIT Search, ingestion Lambda support for transformation,
          CloudMap SLAs, TimeSyncService, DataTransferTerminals, CleanRooms multi-cloud, 
-         BillingConductor/InvoiceConfiguration/CostCategories/CustomBillingViews, Elasticache ServiceQuotas,
-         Console Multi-Session Support
+         BillingConductor/InvoiceConfiguration/CostCategories/CustomBillingViews, Elasticache ServiceQuotas & global datastore,
+         Console Multi-Session Support, DMS serverless support for files with an S3 source endpoint

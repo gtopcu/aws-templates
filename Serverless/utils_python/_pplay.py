@@ -28,7 +28,7 @@
 # When you run a Python file directly, __name__ is set to "__main__"
 # When you import the file as a module, __name__ is set to the module's name
 # __name__ = "__main__"
-# __all__ = ["my_function", "my_class"]
+# __all__ = ("module1", "module2")
 # __class__
 # __file__
 # __package__
@@ -225,23 +225,9 @@
 #     "-t", "build/lambda_package"
 # ])
 
-# logger = logging.getLogger(__name__)
-# logger.info("test")
 
 # exit(1)
-
-# class Cat:
-#     def __new__(cls, name: str) -> Self:
-#         print(cls, name, "new")
-#         isinstance(cls, Cat)
-#         return super().__new__(cls)
-
-#     def __init__(self, name:str) -> None:
-#         self.name = name
-#         print("init")
-
-# mycat = Cat("duman")
-# print(mycat.name)
+# sys.exit(0)
 
 # name: str = "John"
 # name.join("Doe")
