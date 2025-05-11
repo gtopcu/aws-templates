@@ -276,7 +276,7 @@ poetry --version
 pip install --upgrade poetry poetry-plugin-export
 poetry config virtualenvs.in-project true
 poetry new myproject  
-poetry init           -> (for existing projects: creates pyproject.toml + poetry.lock)
+poetry init           -> (for existing projects. creates pyproject.toml + poetry.lock)
 poetry install        -> (if pyproject.toml exists, creates venv) --no-root | --sync | --no-interaction
 poetry env info -p
 poetry env list

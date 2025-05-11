@@ -35,7 +35,7 @@ def requests_get(endpoint_url, headers=None, auth=None, timeout: int = 30) -> re
     return response
     # try:
     #     ...
-    # except requests.HTTPError as e:
+    # except requests.exceptions.HTTPError as e:
     #     raise RuntimeError(f"HTTP error: {e}") from e
     # except requests.exceptions.ConnectionError as e:
     #     raise RuntimeError(f"Connection error: {e}") from e
@@ -46,14 +46,14 @@ def requests_get(endpoint_url, headers=None, auth=None, timeout: int = 30) -> re
     #         return response.status_code, response.json()
     #     else:
     #         return json.dumps({"ERROR": "Cat Fact Not Available"})
-    # except requests.exceptions.HTTPError as errh:
-    #     logging.error(errh)
-    # except requests.exceptions.ConnectionError as errc:
-    #     logging.error(errc)
-    # except requests.exceptions.Timeout as errt:
-    #     logging.error(errt)
-    # except requests.exceptions.RequestException as err:
-    #     logging.error(err)
+    # except requests.exceptions.HTTPError as e:
+    #     logging.error(e)
+    # except requests.exceptions.ConnectionError as e:
+    #     logging.error(e)
+    # except requests.exceptions.Timeout as e:
+    #     logging.error(e)
+    # except requests.exceptions.RequestException as e:
+    #     logging.error(e)
 
 def requests_post(endpoint_url, payload, headers=None, auth=None, timeout: int = 30) -> Any:
     # payload = {
@@ -91,9 +91,9 @@ def requests_put(endpoint_url, payload, headers=None, auth=None, timeout: int = 
 
 # async def async_main() -> None:
 #   async with aiohttp.ClientSession() as session:
-#       async with session.get("XXXXXXXXXXXXXXXXXXXXXXX") as resp:
-#           print(resp.status)
-#           print(await resp.text())
+#       async with session.get("XXXXXXXXXXXXXXXXXXXXXXX") as response:
+#           print(response.status)
+#           print(await response.text())
 
 # async def async_aiohttp_get(session: aiohttp.ClientSession, url: str) -> Any:
 #     async with session.get(url) as response:

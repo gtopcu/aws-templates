@@ -18,6 +18,45 @@ pip install fastapi sqlalchemy psycopg2-binary pydantic uvicorn python-dotenv
 
 To run the application:
 uvicorn main:app --reload
+
+### Key Features
+
+1. Automatic API Generation: The app discovers and reflects the schema of any PostgreSQL table at runtime
+2. Complete CRUD Operations:
+   - GET all items (with pagination)
+   - GET a specific item by ID
+   - POST to create new items
+   - PUT to update existing items
+   - DELETE to remove items
+3. Auto Schema Validation: Automatically creates Pydantic models based on table structure
+4. Database-Type Awareness: Handles different column types appropriately
+5. Flexible Configuration: Uses environment variables for database connection
+
+### Endpoints
+- `GET /` - Shows all available tables in the database
+- `GET /tables/{table_name}` - Lists all items in a table (with pagination)
+- `GET /tables/{table_name}/{item_id}` - Retrieves a specific item by its primary key
+- `POST /tables/{table_name}` - Creates a new item in the table
+- `PUT /tables/{table_name}/{item_id}` - Updates an existing item
+- `DELETE /tables/{table_name}/{item_id}` - Deletes an item
+- `GET /tables/{table_name}/schema` - Shows the schema of a specific table
+
+### How to Use
+
+1. Install the required dependencies:
+   pip install fastapi sqlalchemy psycopg2-binary pydantic uvicorn python-dotenv
+
+2. Create a `.env` file with your PostgreSQL connection string:
+   DATABASE_URL=postgresql://user:password@localhost/dbname
+
+3. Run the application:
+   uvicorn main:app --reload
+
+4. Access the interactive API documentation at "http://localhost:8000/docs" or "http://localhost:8000/redoc"
+
+This solution dynamically adapts to your database schema, so you can use it with any PostgreSQL table without modification. 
+It auto handles primary keys, nullable fields, default values, and different column types using SQLAlchemy's reflection capabilities
+
 """
 
 import os

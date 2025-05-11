@@ -1,117 +1,143 @@
 
-# TODO
+from typing import Self, Any, Optional, Final, Literal, LiteralString, NewType, TypeAlias, TypedDict
+from collections import namedtuple, deque, OrderedDict, defaultdict, ChainMap
+from collections.abc import Generator, Callable, Iterable, Iterator, AsyncIterable
+from abc import ABC, abstractmethod
 
-# Zoom In: Command+Shift 0
-# Zoom Out: Command -
 
-# Amazon Q:
-#   @workspace @git @history @env
-#   /clean /doc /dev /test /review /transform
-#   Inline Chat: Command + i 
-#   Code complete: Option + C
-#   Tab: Display all options
-#   Left arrow to accept autocompletion
+# pip freeze | grep -i llama
+# cProfile py-spy flameGraph
 
-# GitHub Copilot: 
-# @workspace @terminal @github @vscode  
-# /help /clear /search /explain /new /fix /tests /startDebugging
-# Command + i           -> Inline Chat
-# Command + Alt + i     -> Sidebar Command + Shift + P -> GitHub Copilot: Show Commands
+print("================================")
+print(__name__)         # "__main__"
+# print(__all__)        #  ("module1", "module2")
+# print(__class__)      #  = <class '__main__.MyClass'>
+print(__file__)         # d:\VSCode\aws-templates\Serverless\utils_python\_pplay.py
+print(__package__)      # None
+print(__doc__)          # None
+print(__annotations__)  # {}
+print(__builtins__)     #  = <module 'builtins' (built-in)>
+print(__cached__)       #  None
+# print(__dict__)       # = {'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <_frozen_importlib_external.SourceFileLoader object at 0x7f8c4c2d3a90>, '__spec__': ModuleSpec(name='aws-templates.Serverless.utils_python._pplay', loader=<_frozen_importlib_external.SourceFileLoader object at 0x7f8c4c2d3a90>, origin='aws-templates/Serverless/utils_python/_pplay.py'), '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, '__file__': 'aws-templates/Serverless/utils_python/_pplay.py', '__cached__': None}
+print("================================")
 
-# Python: Select Interpreter -> Command + Shift + P
-# python -m venv .venv
-# source .venv/bin/activate
-# source /Users/mac/GoogleDrive/VSCode/.venv/bin/activate
-# pip -V
-# pip install -U boto3
+class MyClass(Exception):
+    """ This is my nice Person class"""
+    class_var:Final = 0 # class variable
 
-# When you run a Python file directly, __name__ is set to "__main__"
-# When you import the file as a module, __name__ is set to the module's name
-# __name__ = "__main__"
-# __all__ = ("module1", "module2")
-# __class__
-# __file__
-# __package__
-# __doc__
-# __annotations__
-# __builtins__
-# __dict__
+    def __new__(cls, *args, **kwargs) -> Self:
+        # print(f"__new__ called with {args} and {kwds}")
+        # return super().__new__(*args, **kwargs)
+        pass
+    
+    def __init__(self, *args, **kwds):
+        super().__init__(*args, **kwds) 
+        self.name = args[0] if args else None
+        class_var = 1           # local variable, does not change class_var
+        MyClass.class_var = 2   # class variable, changes class_var
+        self.class_var = 3      # instance variable, does not change class_var
+        self.instance_var = 0   # class variable and instance variable can have the same name
+        self._private_var = 0
+        self.__private_var = 0
+        # print(__class__)    
 
-# pylint . --rcfile=.pylintrc .
-# disable=all disable=invalid-name disable=missing-class-docstring (remove this line)
+    @classmethod
+    def class_method(cls): # can access class variables/methods and static methods
+        cls.class_var = 4
 
-# safety scan --detailed-output --apply-fixes
+    @staticmethod
+    def static_method():
+        MyClass.class_var = 5
 
-# ruff format .
-# ruff check . --fix
-# ruff check test.py --config ruff.toml
-# ruff check test.py --fix
+# my_class = MyClass("Hello")
+# print(my_class.class_var) # 3
+# print(MyClass.class_var) # 2
 
-# """
-# This better get 10/10!
-# https://www.youtube.com/watch?v=RqdhVaX50mc
-# """
-# CamelCase(PascalCase) / snake_case
-# class MyPersonClass:
-#     """ This is my nice Person class"""
+# -------------------------------------------------------------------------------------------------
 
-#     def __new__(cls, name:str) -> Self:
-#         return MyPersonClass(name)
+import traceback
+from inspect import istraceback
+import sys
 
-#     def __init__(self, name: str) -> None:
-#         self.name = name
+sys.stdin
+sys.stdout
+sys.stderr
 
-#     def get_name(self) -> str:
-#         """
-#         Returns the name of the person
-#         :return: The name of the person
-#         :rtype: str
-#         """
-#         """
-#         Returns the name of the person
-#         Args:
-#             self: Current instance
-#         Returns:
-#             name: The name of the person
-#         Raises:
-#             ValueError: If name is not a string
-#         """
-#         return self.name
+# sys.exc_info()
+# sys.exception()
+# sys.exec_prefix
+# sys.executable
+# sys.excepthook
+# sys.last_traceback
+# sys.last_exc
 
-# BaseException ->     
-#   Exception -> SystemExit     
-#   StandardError -> ValueError: int("A"), KeyError: dict['key1'], TypeError: str[0]="a",
-#   IndexError, AttributeError, NameError, AssertionError, StopIterationError, ArithmeticError,     
-#   ZeroDivisionError, NotImplementedError, RuntimeError, SystemError
+# traceback.print_exception(*sys.exc_info(), limit=5, file=sys.stdout)
+# traceback.print_exc()
+# traceback.print_last()
+# traceback.print_stack()
+# traceback.print_tb()
+# traceback.extract_tb(limit=5)
+# traceback.walk_tb(limit=5)
+# traceback.extract_stack()
+# traceback.format_exception(limit=5, chain=True)
+# traceback.format_exception_only()
+# traceback.format_exc()
+# traceback.format_stack(limit=5)
+# traceback.format_tb(limit=5)
+# traceback.format_list()
+# traceback.format_stack()
+# traceback.format_tb()
+# traceback.clear_frames()
 
-# from typing import Self, Any, Optional, Final, Literal, NewType, TypeAlias, TypedDict
-# from typing import Awaitable, Callable, Iterable, 
-# from collections import namedtuple, deque, OrderedDict, defaultdict
-# from collections.abc import Mapping, Sequence, Set, Generator, Callable, Iterable, Iterator, AsyncIterable
+import logging
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+logging.basicConfig(
+      level=logging.DEBUG, # DEBUG, INFO, WARNING, ERROR, CRITICAL
+      format="%(asctime)s %(levelname)-8s %(message)s %(name)s",
+      datefmt="%Y-%m-%d %H:%M:%S"
+#     filename="app.log",
+#     filemode="w", # overwrite the log file each time the program runs
+#     stream=sys.stdout, # output to console
+#     handlers=[
+#         logging.StreamHandler(), 
+#         logging.FileHandler("app.log", mode="w")], # overwrite the log file each time the program runs
+#         logging.NullHandler(), # no output
+#     ]
+)
+logger.info("Logging is set up.")
+logger.info("INFO", stack_info=True, stacklevel=5)
+logger.error("ERROR", exc_info=True)
 
-# my_dict: dict[str, Any] 
-# PORT: Final[int] = 80080
-# from typing import Literal, LiteralString
-# MODE = Literal['r', 'rb', 'w', 'wb']
-# SQL = LiteralString('SELECT * FROM students') # to avoid SQL injection
+# -------------------------------------------------------------------------------------------------
 
-# __init__.py
-# __all__ = ("module1", "module2")
-# from .module import func
-# dir(module)
+import time
+import timeit
 
-# import logging
-# import os
-# import sys
-# import json
+time.sleep(1)
+print(time.time()) 
+epoch = time.mktime((2024, 3, 24, 0, 0, 0, 0, 0, -1))
+print(time.localtime())
+print(time.gmtime())
+print(time.asctime((2024, 3, 24, 0, 0, 0, 0, 0, -1)))
+print(time.strftime("%Y-%m-%d %H:%M:%S%z")) #, time.localtime(epoch))
+print(time.strptime("2024-03-24", "%Y-%m-%d"))
+time.perf_counter()
+time.time_ns()
+time.monotonic()
+time.process_time() 
+time.thread_time()
+timeit.timeit("x = 1", number=1000)
+timeit.repeat("x = 1", repeat=3, number=1000)
+# timeit.Timer("x = 1").timeit(number=1000)
+# timeit.Timer("x = 1").repeat(repeat=3, number=1000)
+# timeit.Timer("x = 1").autorange()
 
-# try:
-#     cache = json.load(open("cache.json"))
-# except (json.JSONDecodeError, FileNotFoundError):
-#     cache = {}
-#     raise
-# finally:
-#     json.dump(cache, open("cache.json", "w"))
+# -------------------------------------------------------------------------------------------------
+
+# raise Exception("")
+# raise RuntimeError("")
+# raise SystemError("")
 
 # id len type isinstance issubclass str repr chr ord dir global nonlocal iter next 
 # is in not and or not any all 
@@ -120,221 +146,186 @@
 # sorted reversed map filter reduce zip enumerate
 # getattr delattr setattr 
 
-# print(str.__name__)
-# import string
-# string.digits, string.ascii_letters, string.punctuation, string.ascii_lowercase, string.ascii_uppercase, 
+# __dict__ :  stores object/class writable attributes as a dictionary - can modify attributes dynamically
+# Instance Attributes: For user-defined objects, __dict__ contains all instance attributes as key-value pairs
+# Class Attributes: For classes, __dict__ contains class-level attributes and methods
+# It only contains instance attributes, not class attributes
+# Read-Only for Built-in Types: Built-in types like int or list do not have a modifiable __dict__
 
-# args:list[str] = sys.argv[:2]
-# sys.getsizeof("abc")
-# sys.version
-# sys.version_info
+class MyClass:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
 
-# pip install python-dotenv
-# from dotenv import load_dotenv
-# load_dotenv()
-# load_dotenv('.env.dev')
+obj = MyClass("Alice", 30)
+print(obj.__dict__)  # Output: {'name': 'Alice', 'age': 30}
+obj.__dict__['name'] = "Bob" # Modifying attributes dynamically
+print(obj.name)  # Output: Bob
 
-# logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
-# traceback.print_exception(type(err), err, err.__traceback__)
+# -------------------------------------------------------------------------------------------------
 
-# from pprint import pprint
-# bowie = dict(name="David Bowie", age=86)
-# pprint(bowie, indent=4, sort_dicts=False)
+my_list: list[int] = [1, 2, 3]
+my_tuple: tuple[int, str] = (1, "Hello")
+my_tuple2: tuple[int, ...] = (1, )
+my_dict: dict[str, Any] = {"one": 1, "two": True, "three": 3.14}
+del my_dict["one"]
+my_dict2: dict[str, int] = dict(one=1, two=2)
+my_set: set[int] = {1, 2, 3}
+my_string: str = "Hello, World!"
 
-# os.getenv("PYTHONPATH")
-# for path in sys.path:
-#     print("Path: " + path)
-# sys.path.append(os.getcwd() + "/.venv/lib/python3.13/site-packages")
-# os.path.join(__file__, "test.txt")
+my_list2 = [i for i in range(0,100,10) if i%5==0]
+my_list3 = [*range(5)]
+print(my_list3)
+my_list4 = list(range(5))
+print(my_list4)
 
-# Add the parent directory to sys.path
-# current_dir = os.path.dirname(os.path.abspath(__file__))
-# parent_dir = os.path.dirname(os.path.dirname(current_dir))
-# sys.path.append(parent_dir)
+my_lambda = lambda x: x * x
 
-# from pathlib import Path
-# Path(__file__).resolve().parent.is_dir()
-# Path(__file__).absolute().joinpath("..").mkdir(mode=0o777, parents=True, exist_ok=True)
-# print(Path.home())
-# print(Path.cwd())
+# -------------------------------------------------------------------------------------------------
 
-# from datetime import datetime, timezone, timedelta
-# import time
-# datetime.now(timezone.utc).isoformat(timespec="seconds")
-# my_date + timedelta(hours=1)
-# time.time()
-# time.sleep(2)
-# time.strftime("%Y-%m-%d %H:%M:%S")
-# time.perf_counter()
-# datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-# time.strptime("2024-03-24", "%Y-%m-%d")
-# date = datetime.strptime("2024-03-24", "%Y-%m-%d").date()
-# date.today()
-# date.day
-# date.month
-# date.year
-# date = datetime.strptime("2024-03-24", "%Y-%m-%d").date()
-# birthday = datetime.strptime("2020-07-24", "%Y-%m-%d").date()
-# age = (date.today() - birthday).days // 365
-# print(age)
+iterator:Iterator = iter(my_list)
+print(next(iterator)) # 1 2 3 StopIterationError
 
-# import yaml
-# with open(definition_path, "r") as f:
-#   definition = yaml.safe_load(f)
-# yaml.dump(definition)
+# input can be generic, but return types should be specific
+def iterator_generator_func(input:Iterator[int]) -> Generator[int, None, None]: 
+    for i in range(5):
+        yield i
+iterator_generator_func((i for i in range(5)))
+iterator_generator_func([*range(5)])
 
-# import pandas as pd
-# df = pd.DataFrame(list)
-# df.to_csv("output.csv")
+# -------------------------------------------------------------------------------------------------
 
-# import numpy as np
-# np.ones((3, 5))
-# matrix = np.random.rand(3, 5)
-# matrix = np.dot(10, matrix)
+from typing import Protocol, runtime_checkable
+@runtime_checkable
+class MyProtocol(Protocol):
+    def __call__(self, x: int) -> int:
+        ...
+    def some_function(self, x: int) -> int: ...
 
-# os.getenv("DDB_TABLE", "table1")
-# os.environ.get("DDB_TABLE", "table1")
-# POSTGRE_IP = os.environ["POSTGRE_IP"]
-# POSTGRE_PORT: int = os.environ.setdefault("POSTGRE_PORT", 5432)
+class GenProto[T](Protocol):  
+    def meth(self) -> T:  
+        ...
 
-# current_dir = os.path.dirname(os.path.abspath(__file__))
-# file_path = os.path.join(current_dir, filename)
-# if not os.path.exists(file_path):
-#     raise FileNotFoundError(f"File not found: {file_path}")
-# os.path.split(os.path.abspath(__file__))[0]
-# os.path.splitext("note.txt") -> txt
-# os.path.basename(__file__)
-# os.path.expanduser(os.path.join("~", "myarchive"))
-# os.getcwd()
-# os.listdir()
-# os.makedirs("test", exist_ok=True)
-# os.rmdir("test")
-# os.chmod("test.txt", 0o777)
-# os.chown(("test.txt", 1000, 1000)
-# os.system("clear")
-# print(__name__)
-# print(__file__)
+# -------------------------------------------------------------------------------------------------
 
-# shutil.copytree("lambda", "build/lambda_package")
-# shutil.make_archive("build/lambda", "zip", "build/lambda_package") # zip/tar
-# shutil.rmtree("build/lambda_package")
-# subprocess.check_call([
-#     "pip",
-#     "install",
-#     "-r", "lambda/requirements.txt",
-#     "-t", "build/lambda_package"
-# ])
+if my_string is None or my_list is not None or 1 == 1:
+    pass # break continue
 
+def nasty(val=[]):
+    val.append(1)
 
-# exit(1)
-# sys.exit(0)
+def not_nasty(val=None):
+    val = [] if val is None else val
 
-# name: str = "John"
-# name.join("Doe")
-# print("PK_%s" % ID)
-# "request: {}"".format(json.dumps(event))
-# " ".removeprefix("")
-# " ".removesuffix("")
-# ",".join(mylist)
-# " ".casefold()
-# " ".strip()
-# "mr. gokhan topcu".title()
-# any(char in string.digits for char in pw)
+import random
+import string
+random_str = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10))
+print("random_str:" + random_str)
 
-# myset = {1, 2, 3}
-# myset = myset | {3, 4}
-# myset.add(2)
-# myset.remove(1)
-# myset.discard(1)
-# myset.difference({1, 2})
-# myset.intersection({1, 2})
-# myset.issubset({1, 2, 3})
-# myset.union({1, 2, 3, 4})
-# myset.update({1, 2, 3, 4})
-# myset = filter(lambda x: x/2==1, myset)
-# sorted = sorted(myset, reverse=True)
-# print(sorted)
+# r(default, error if not exists), r+(read/write), w/a(create if not exists), x(create, error if exists)
+# b/t(default)
+# with open("test.txt", "r+") as f:
+#     f.write("Hello, World!")
+    # f.read()
+    # f.readlines()
+    # f.readline()
+    # f.writelines()
+    # f.flush()
+    # f.truncate(0)
+    # f.seek(0)
+    # f.tell()
+    # f.close()
+    # for line in f:
+    #     print(line.strip())
 
-# for i, j in enumerate(myset, 1):
-#     print(i, j)
+# def decorator(func: Callable[..., str]) -> None: ...
+def decorator(func) -> Callable[[int, int], int]: 
+    def wrapper(*args, **kwargs):
+        print("Before function call")
+        result = func(*args, **kwargs)
+        print("After function call")
+        return result
+    return wrapper
 
-# Pack-unpack
-# https://www.youtube.com/watch?v=-mS7K2K1IWk
+@decorator
+def add_numbers(a: int, b: int) -> int: 
+    print(f"Adding {a} and {b}")
+    return a + b
 
-# mylist = [1, 2, 3]
-# print(*mylist)
-# a, b, c = mylist
-# print(a, b, c)
-# mylist = [1, 2, 3, 4, 5]
-# a, *b, c = mylist
-# print(a, b, c)
+# -------------------------------------------------------------------------------------------------
 
-# mylist1 = [1, 2, 3]
-# mylist2 = [4, 5, 6]
-# mylist3 = [*mylist1, "combined", *mylist2]
-# print(mylist3)
+from decimal import Decimal, getcontext, setcontext, ExtendedContext, InvalidOperation, DivisionByZero
+setcontext(ExtendedContext)
+getcontext().prec = 3
 
-# def my_func(**kwargs):
-#     for key, value in kwargs.items():
-#         print(key, value)
-# my_dict = {"a": 1, "b": 2, "c": 3}
-# my_func(**my_dict)
+my_decimal = Decimal(1)
+print(my_decimal / Decimal(3))
 
-# def my_func2(a: int, b: int, c: int):
-#     print(a, b, c)
-# my_func2(**my_dict)
+# -------------------------------------------------------------------------------------------------
 
-# my_dict1 = {"a": 1, "b": 2, "c": 3}
-# my_dict2 = {"d": 4, "e": 5, "f": 3}
-# combined_dict = {**my_dict1, **my_dict2}
-# print(combined_dict)
-# my_dict3 = { **my_dict1, "timestamp": 1234567890 }
-
-# def my_func3(**kwargs) -> None:
-#     kwargs["a"] = 10
-#     print(kwargs)
-#     if "b" in kwargs:
-#         print("b exists")
-# my_func3(**combined_dict)
-
-# mylist.extend([4, 5])
-# mylist2 = list[dict[str, Any]]
-# mylist2.append({"a": 1, "b": 2})
-
-# mydict = {"a": 1, "b": 2, "c": 3}
-# d = mydict.get("d", 4)
-# d = mydict.pop("d", 4)
-# i, j = mydict.popitem()
-# mydict.fromkeys(list, 0)
-# mydict.setdefault("d", 4)
-# mydict.update({"d": 4})
-# mydict.clear()
-
+# import boto3
+# from botocore.exceptions import ClientError, ConditionCheckFailedException
+# client = boto3.client(service_name="dynamodb", region_name="us-east-1")
 # try:
-#     print(1/0)
-# except ZeroDivisionError as e:
-#     print(f"Error during operation: {str(e)}")
+#     client.put_item()
+# except botocore.exceptions.ClientError as e:
+#     print(f"Error putting item: {e}")
+#     raise e
+#     err.response["Error"]["Code"]
+#     err.response["Error"]["Message"]
 
-# matrix = [(0, 0), (0, 1), (0, 2),
-#           (1, 0), (1, 1), (1, 2),
-#           (2, 0), (2, 1), (2, 2)]
+def main() -> None:
+    print("{}".format(my_string))
+    print("PK_%s" % my_string)
+    print(f"PK {my_string}")
 
-# matrix = [
-#     (x, y)
-#     for x in range(3)
-#     for y in range(3)
-# ]
+    print(my_lambda(10))
 
-# for row, col in matrix:
-#     print(row, col)
+    for i in "123456":
+        print(i, end="-")
+    print("\n")
+        
+    add_numbers(1, 2)
 
-# my_list = [[x, y] for x in range(3) for y in range(3)]
-# print(my_list)
-# flattened = [val for sublist in my_list for val in sublist]
-# print(flattened)
+if __name__ == "__main__":
+    main()
 
-# pip install python-json-logger
-# from pythonjsonlogger.json import JsonFormatter
-# json_formatter = JsonFormatter()
-# json_formatter.format(record=None, request=None, response=None, exception=None, extra=None)
+# -------------------------------------------------------------------------------------------------
+
+import pytest
+from pytest import fixture
+from pytest_mock import mocker
+
+@fixture(scope="module")
+def mock_aws_client(mocker):
+    mock_client = mocker.patch("boto3.client")
+    mock_client.return_value = mocker.Mock()
+    return mock_client
+
+@fixture(scope="module")
+def lambda_context():
+    class LambdaContext:
+        def __init__(self):
+            self.function_name = "test_function"
+            self.function_version = "1.0"
+            self.invoked_function_arn = "arn:aws:lambda:us-east-1:123456789012:function:test_function"
+            self.memory_limit_in_mb = 128
+            self.aws_request_id = "1234567890abcdef"
+            self.log_group_name = "/aws/lambda/test_function"
+            self.log_stream_name = "2023/10/01/[$LATEST]abcdef1234567890abcdef1234567890"
+            self.identity = None
+            self.client_context = None
+    return LambdaContext()
+
+@pytest.mark.parametrize("a, b, expected", [
+    (1, 2, 3),
+    (0, 0, 0),
+    (-1, 1, 0),
+])
+def test_add_numbers():
+    assert add_numbers(-1, 3) == 2
+
+def test_add_numbers_type_error():
+    with pytest.raises(TypeError):
+        add_numbers("5", 3) 
 

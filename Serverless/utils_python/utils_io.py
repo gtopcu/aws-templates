@@ -5,11 +5,11 @@ io — Core tools for working with streams
 https://github.com/python/cpython/blob/3.12/Lib/io.py
 
 There are three main types of I/O: text I/O, binary I/O and raw I/O. A concrete object belonging to 
-any of these categories is called a file object. Other common terms are stream and file-like object.
+any of these categories is called a file object. Other common terms are stream and file-like object
 
 Independent of its category, each concrete stream object will also have various capabilities: 
-it can be read-only, write-only, or read-write. It can also allow arbitrary random access  or only 
-sequential access (for example in the case of a socket or pipe).
+it can be read-only, write-only, or read-write. It can also allow arbitrary random access or only 
+sequential access (for example in the case of a socket or pipe)
 
 """
 import io
