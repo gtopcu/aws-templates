@@ -10,7 +10,7 @@ source venv/bin/activate
 pip install python-dotenv 
 pip install -U langchain-openai
 
-#Deprecated:
+# Deprecated:
 pip install langchain
 pip install openai
 
