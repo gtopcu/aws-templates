@@ -1,5 +1,10 @@
 # Serverless Notes
 
+```sh
+pip freeze | grep -i llama
+ls -al -> ll  
+```
+
 General:
 - Enable CloudTrail management & data events(i.e.S3 put)
 - Enable IAM AccessAdvisor & CloudTrail(90 days default) -> CW/S3 & Insights
