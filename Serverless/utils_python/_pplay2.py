@@ -1,8 +1,9 @@
 
-# TODO
 
 # Zoom In: Command+Shift 0
 # Zoom Out: Command -
+
+# Cursor: Command + K
 
 # Amazon Q:
 #   @workspace @git @history @env
@@ -12,19 +13,29 @@
 #   Tab: Display all options
 #   Left arrow to accept autocompletion
 
-# GitHub Copilot: 
-# @workspace @terminal @github @vscode  
+# GitHub Copilot(Ask/Edit/Agent modes): 
+# @workspace @terminal @github @vscode 
+# #codebase #file #folder #changes #fetch #problems #searchResults #findTestFiles #testFailure
 # /help /clear /search /explain /new /fix /tests /startDebugging
-# Command + i           -> Inline Chat
-# Command + Alt + i     -> Sidebar Command + Shift + P -> GitHub Copilot: Show Commands
 
-# Python: Select Interpreter -> Command + Shift + P
-# python -m venv .venv
-# source .venv/bin/activate
-# source /Users/mac/GoogleDrive/VSCode/.venv/bin/activate
-# pip -V
-# pip install -U boto3
+# Command + i               -> Inline Chat
+# Command + Alt + i         -> Sidebar Chat
+# Command + Alt + Shift + c -> Code Complete
+# Command + Alt + Shift + e -> Explain Code
+# Command + Alt + Shift + t -> Test Code
+# Command + Alt + Shift + f -> Fix Code
+# Command + Alt + Shift + d -> Debug Code
+# Command + Alt + Shift + s -> Search Code
+# Command + Alt + Shift + r -> Refactor Code
+# Command + Alt + Shift + a -> Ask Code
+# Command + Alt + Shift + o -> Open Code
+# Command + Alt + Shift + n -> New Code
+# Command + Alt + Shift + p -> Paste Code
+# Command + Alt + Shift + l -> List Code
+# Command + Alt + Shift + x -> Execute Code
+# Command + Alt + Shift + y -> Copy Code
 
+# TODO
 # When you run a Python file directly, __name__ is set to "__main__"
 # When you import the file as a module, __name__ is set to the module's name
 # __name__ = "__main__"
@@ -332,9 +343,4 @@
 # print(my_list)
 # flattened = [val for sublist in my_list for val in sublist]
 # print(flattened)
-
-# pip install python-json-logger
-# from pythonjsonlogger.json import JsonFormatter
-# json_formatter = JsonFormatter()
-# json_formatter.format(record=None, request=None, response=None, exception=None, extra=None)
 

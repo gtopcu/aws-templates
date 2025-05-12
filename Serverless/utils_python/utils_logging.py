@@ -10,6 +10,11 @@ from collections import OrderedDict
 from datetime import date, datetime, time, timezone
 from typing import Dict, List, Tuple, Union
 
+# pip install python-json-logger
+# from pythonjsonlogger.json import JsonFormatter
+# json_formatter = JsonFormatter()
+# json_formatter.format(record=None, request=None, response=None, exception=None, extra=None)
+
 # logger.propagate
 # logger.makeRecord("my_name", logging.INFO, "my_path", 1, "my_message", None, None, "my_module", "my_func")
 # logger.addFilter(logging.Filter("my_filter"))

@@ -2,11 +2,23 @@
 https://www.youtube.com/watch?v=NMQwzI9hprg - Step-by-Step Python Package Deployment with GitHub Actions(Poetry + PyPI)
 https://github.com/squidfunk/mkdocs-material
 
+pip -V
+
 python -m venv .venv
 source .venv/bin/activate
 source /Users/mac/GoogleDrive/VSCode/.venv/bin/activate
-python select interpreter: /Users/gtopcu/My Drive/VSCode/.venv
-pip -V
+
+Python: Select Interpreter -> Command + Shift + P
+/Users/gtopcu/My Drive/VSCode/.venv 
+
+Windows 
+c:\users\dell\appdata\roaming\python\python313\site-packages\
+C:\Program Files\Python313\libs> 
+C:\Program Files\Python313\Lib> 
+Powershell terminal:
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\Activate.ps1
+deactivate
 
 #!/usr/bin/env python3
 echo $PATH

@@ -1,9 +1,9 @@
 # Serverless Notes
 
-```sh
+````sh
 pip freeze | grep -i llama
 ls -al -> ll  
-```
+````
 
 General:
 - Enable CloudTrail management & data events(i.e.S3 put)
