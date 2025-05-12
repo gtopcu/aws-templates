@@ -1,4 +1,6 @@
 
+# https://platform.openai.com/
+
 import openai
 
 system_prompt = "You are a helpful assistant."

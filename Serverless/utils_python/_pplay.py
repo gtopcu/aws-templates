@@ -8,6 +8,19 @@ from abc import ABC, abstractmethod
 # pip freeze | grep -i llama
 # cProfile py-spy flameGraph
 
+# pip install python-dotenv
+# from dotenv import load_dotenv
+# load_dotenv()
+# load_dotenv('.env.dev')
+
+# Load environment variables from .env file
+# if not load_dotenv():
+#     raise Exception("Failed to load .env file")
+
+# OPEN_API_KEY = os.getenv("OPEN_AI_API_KEY")
+# if not OPEN_API_KEY:
+#     raise Exception("OPEN_API_KEY environment variable not set")
+
 print("================================")
 print(__name__)         # "__main__"
 # print(__all__)        #  ("module1", "module2")

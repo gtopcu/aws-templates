@@ -8,13 +8,19 @@ python3 -m venv venv
 source venv/bin/activate
 
 pip install python-dotenv 
-pip install -U langchain-openai
 
-# Deprecated:
 pip install langchain
-pip install openai
+pip install langchain[llms]
+pip install langchain[all]
+pip install langchain[serverless,all,aws,anthropic,google,pinecone,chromadb,redis,mongodb,faiss,openai,cohere]
+
+or:
+pip install langchain-openai
+pip install langchain-chatgpt
+pip install langchain-chatgpt[all]
 
 pip install pinecone-client
+
 """
 
 import os
@@ -39,6 +45,8 @@ if not load_dotenv(find_dotenv()):
     raise Exception("Failed to load .env file")
 
 OPEN_API_KEY = os.getenv("OPEN_AI_API_KEY")
+if not OPEN_API_KEY:
+    raise Exception("OPEN_API_KEY environment variable not set")
 
 """
 https://platform.openai.com/account/limits

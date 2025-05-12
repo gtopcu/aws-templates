@@ -18,22 +18,24 @@
 # #codebase #file #folder #changes #fetch #problems #searchResults #findTestFiles #testFailure
 # /help /clear /search /explain /new /fix /tests /startDebugging
 
-# Command + i               -> Inline Chat
-# Command + Alt + i         -> Sidebar Chat
-# Command + Alt + Shift + c -> Code Complete
-# Command + Alt + Shift + e -> Explain Code
-# Command + Alt + Shift + t -> Test Code
-# Command + Alt + Shift + f -> Fix Code
-# Command + Alt + Shift + d -> Debug Code
-# Command + Alt + Shift + s -> Search Code
-# Command + Alt + Shift + r -> Refactor Code
-# Command + Alt + Shift + a -> Ask Code
-# Command + Alt + Shift + o -> Open Code
-# Command + Alt + Shift + n -> New Code
-# Command + Alt + Shift + p -> Paste Code
-# Command + Alt + Shift + l -> List Code
-# Command + Alt + Shift + x -> Execute Code
-# Command + Alt + Shift + y -> Copy Code
+# Command + i                  -> Inline Chat
+# Command + Option + i         -> Sidebar Chat
+# Option + ]                   -> Next Suggestion
+# Option + [                   -> Previous Suggestion
+# Command + Option + Shift + c -> Code Complete
+# Command + Option + Shift + e -> Explain Code
+# Command + Option + Shift + t -> Test Code
+# Command + Option + Shift + f -> Fix Code
+# Command + Option + Shift + d -> Debug Code
+# Command + Option + Shift + s -> Search Code
+# Command + Option + Shift + r -> Refactor Code
+# Command + Option + Shift + a -> Ask Code
+# Command + Option + Shift + o -> Open Code
+# Command + Option + Shift + n -> New Code
+# Command + Option + Shift + p -> Paste Code
+# Command + Option + Shift + l -> List Code
+# Command + Option + Shift + x -> Execute Code
+# Command + Option + Shift + y -> Copy Code
 
 # TODO
 # When you run a Python file directly, __name__ is set to "__main__"
@@ -139,11 +141,6 @@
 # sys.getsizeof("abc")
 # sys.version
 # sys.version_info
-
-# pip install python-dotenv
-# from dotenv import load_dotenv
-# load_dotenv()
-# load_dotenv('.env.dev')
 
 # logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 # traceback.print_exception(type(err), err, err.__traceback__)

@@ -4,9 +4,13 @@
 
 import anthropic
 import os
+from dotenv import load_dotenv
 
-# api_key = os.getenv("ANTHROPIC_API_KEY")
+# Load environment variables from .env file
+if not load_dotenv():
+    raise Exception("Failed to load .env file")
 
+api_key = os.getenv("ANTHROPIC_API_KEY")
 if not api_key:
     raise Exception("ANTHROPIC_API_KEY environment variable not set")
 
