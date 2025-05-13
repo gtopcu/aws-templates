@@ -155,6 +155,8 @@ docker exec -it <container-id> sh
 docker exec <container-id> cat /data.txt
 docker debug <container-id> --shell bash/zsh/fish -> https://www.linkedin.com/posts/kaanyagci_still-using-docker-exec-or-hacking-your-activity-7325491366703095808-GQPW
 docker logs -f
+docker inspect
+docker events --filter container=<container-id> --since 30m --until "2025-05-04T18:00:00" --format "{{.json}}"
 docker login -u gtopcu
 docker logout
 docker scan getting-started

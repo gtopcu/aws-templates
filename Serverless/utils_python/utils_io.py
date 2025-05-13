@@ -1,5 +1,7 @@
+
 """
 https://docs.python.org/3/library/io.html
+https://www.youtube.com/watch?v=QFRNb3DxITo
 
 io — Core tools for working with streams
 https://github.com/python/cpython/blob/3.12/Lib/io.py

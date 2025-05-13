@@ -228,11 +228,10 @@ cp <source> <target>
 cp -r ./Green ./White
 cp/COPY --chown=www-data . . 
 ln -s ./Downloads/exec.sh       -> create symbolic link
-find conten*
-
-
 chown -R hukanege /Users/hukanege/.aws/ (recursive for dir)
 chown -R www-data /tmp
+find . -type f -name "*.pyc" -delete
+grep -i -r "for" . | bash0.sh
 
 chmod a+rx <filename>
 chmod ug+x <filename>
@@ -296,7 +295,7 @@ lsscsi   - SCSI harddrive & disk info
 ************************** Variables & Env. Variables ****************************
 
 Variables
-* VARIABLE=123456, ref by $VARIABLE
+* VARIABLE=123456, ref by $VARIABLE`
 
 PATH
 $ echo $PATH
@@ -379,8 +378,7 @@ https://www.cyberciti.biz/faq/howto-use-grep-command-in-linux-unix/
 -r: recursive, for directory scan
 -c: total count of occurence
 
-grep "for" bash0.sh
-grep -i "FOR" bash0.sh
+grep -i "for" bash0.sh
 zgrep "for" bash0.sh.gzip
 grep -r "$" .
 grep -r -c "$" .
