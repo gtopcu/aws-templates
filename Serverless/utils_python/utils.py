@@ -2,7 +2,7 @@
 import os
 import time
 import timeit
-#import profile
+# import profile
 import uuid
 import json
 
@@ -10,10 +10,10 @@ from typing import Any
 import random
 
 # import jsonlines # for jsonl files
-# import simdjson # for large json files - https://www.youtube.com/shorts/9tWvDFhBlNU
 # import jsonschema # for json schema validation
 # import jsonpickle # for complex objects
 # import simplejson as json # for decimals
+# import simdjson # for large json files - https://www.youtube.com/shorts/9tWvDFhBlNU
 
 # pip install python-dotenv
 from dotenv import load_dotenv
@@ -28,7 +28,7 @@ load_dotenv()
 # current_dir = os.path.dirname(os.path.abspath(__file__))
 # file_path = os.path.join(current_dir, filename)
 
-def get_docstring(input1: int) -> list[str]:
+def get_docstring():
     """
     Sample function docstring
 
@@ -51,6 +51,7 @@ def timeit_test() -> None:
     # time.perf_counter_ns()
     # print(f"Total: {(time.time() - start):.3f}s")
     # print(f"Total: {(time.perf_counter() - start) * 1000} ms")
+
 # if __name__ == "__main__":
     # timed: float = timeit.timeit(stmt="sleep(1)", setup="import random", timer=time.perf_counter, number=2, globals=globals())
     # print(f"Total: {timed:.3f}s")
@@ -124,21 +125,22 @@ def json_load(file) -> Any:
         # (object_hook=None, parse_float=None, parse_int=None, parse_constant=None, object_pairs_hook=None)
         return json.load(file)
 
+from decimal import Decimal
 def json_loads(input) -> Any:
-    return json.loads(input)
+    return json.loads(input, parse_float=Decimal)
     # except json.JSONDecodeError:
     #   print("Message is not JSON format")  
     
 def json_dumps(obj: object, formatted: bool) -> str:
     if formatted:
-        return json.dumps(obj, indent=4, sort_keys=True, separators=(". ", " = "))
+        return json.dumps(obj, default=str, indent=4, sort_keys=True, separators=(". ", " = "))
     #allow_nan, default, cls, skip_keys
     return json.dumps(obj) 
 
 def json_dump(obj: object, file, formatted: bool) -> None:
     with open(file, "w", encoding="utf-8") as file:
         if formatted:
-            json.dump(obj, file, indent=4, sort_keys=True, separators=(". ", " = "))
+            json.dump(obj, file, default=str, indent=4, sort_keys=True, separators=(". ", " = "))
         else:
             json.dump(obj, file)
     
@@ -156,3 +158,4 @@ def json_dump(obj: object, file, formatted: bool) -> None:
 #         if not isinstance(doc, Document):
 #             raise Exception('Document type is not correct')
 #         return doc
+

@@ -65,20 +65,42 @@ pytest_cache
 ...
 
 https://stackoverflow.com/questions/21553353/what-is-the-difference-between-cmd-and-entrypoint-in-a-dockerfile
-Dockerfile should specify at least one of CMD or ENTRYPOINT commands.
-ENTRYPOINT should be defined when using the container as an executable.
-CMD should be used as a way of defining default arguments for an ENTRYPOINT 
-command or for executing an ad-hoc command in a container.
-CMD will be overridden when running the container with alternative arguments
+https://www.linkedin.com/posts/kaanyagci_your-dockerfiles-are-broken-because-you-activity-7324362845968637952-hlcF/
 
-ADD vs COPY: Add supports remote URLs, uncompresseses tar, gzip etc
+Dockerfile should specify at least one of CMD or ENTRYPOINT commands
+ENTRYPOINT should be defined when using the container as an executable
+CMD should be used as default arguments for an ENTRYPOINT or for executing an ad-hoc command in a container
+CMD is not a command - It’s just the default argument passed to ENTRYPOINT
+CMD will be overridden when running the container with alternative arguments
+If you don’t define an ENTRYPOINT, Docker decides how to run your CMD based on its format
+Use --entrypoint to override ENTRYPOINT
 
 FROM ubuntu
-CMD ["echo", "Hello World"]
-CMD echo "Hello World" (shell form)
-CMD ["echo", "Hello World"] (exec form)
-ENTRYPOINT echo "Hello World" (shell form)
-ENTRYPOINT ["echo", "Hello World"] (exec form)
+CMD ["python", "app․py"]        -> exec python app․py (exec form)
+CMD python app․py               -> sh -c "python app․py"(shell form)  
+ENTRYPOINT ["python", "app․py"] -> python app.py echo "hello" (exec form)
+ENTRYPOINT python app․py        -> (shell form)  
+
+But here’s where most developers screw up
+If you only define a CMD, you’re handing full control to the docker run user. Say your Dockerfile has:
+
+CMD ["python", "server․py"]
+
+Now someone runs:
+
+docker run my-image echo "hello"
+
+No Python. No server․py. Congrats. You just shipped a useless container. 
+Now try this instead:
+
+ENTRYPOINT ["python", "app.py"]
+-> python app.py echo "hello"
+
+The app runs, user’s args get passed cleanly
+
+----------------------------------------------------------------------------------------------------------------
+
+ADD vs COPY: Add supports remote URLs, uncompresseses tar, gzip etc
 
 Top 8 Docker Best Practices for using Docker in Production
 https://www.youtube.com/watch?v=8vXoMqWgbQQ
