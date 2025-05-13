@@ -10,6 +10,8 @@ chmod u+x myscript.sh
 bash myscript.sh
 rm -rf /*
 
+sh -c "echo Hello, World!"
+
 ------------------------------------------------------------------------------------
 Updating app sources list:
 nano /etc/apt/sources.list  -> Ctrl+O(save) Ctrl+X(exit) Ctrl+K(cut) Ctrl+U(paste)
@@ -20,6 +22,7 @@ deb http://deb.debian.org/debian bullseye-updates main
 ------------------------------------------------------------------------------------
 
 apt list search show install reinstall remove autoremove update upgrade full-upgrade edit-sources satisfy
+apt-get add xclip
 apt --help
 apt search pypy3
 apt list --installed

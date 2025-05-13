@@ -200,17 +200,21 @@ sudo cat /etc/sudoers.d/filename
 
 **************************** General ****************************
 
+man <command>
+
+sh -c "echo Hello, World!"
+apt/yum/dnf update -y & install xclip
+apt-get add xclip
+
 sudo !! - execute previous command with sudo
 sudo su - execute all with sudo
 clear
 history
 pwd
 printenv
-ls -l -a -s
+ld -al -> ll
 ls -a | grep -i Doc
 ls -ltr pythonX-bash.py
-du -a /dir | sort -n -r | head -n 20   -> 20 largest files ascending
-man <command>
 cd ..
 cd ~ (go to /root)
 cd / (go to root)
@@ -225,6 +229,7 @@ cp -r ./Green ./White
 cp/COPY --chown=www-data . . 
 ln -s ./Downloads/exec.sh       -> create symbolic link
 find conten*
+
 
 chown -R hukanege /Users/hukanege/.aws/ (recursive for dir)
 chown -R www-data /tmp
@@ -320,10 +325,9 @@ cat <filename.txt>
 cat hash1 hash2 > hash12
 tail -f <filename.txt> (-n / --lines, -c / --bytes)
 more <filename.txt>
-apt/yum/dnf install xclip
 
-Create large file
-dd if=/dev/urandom of=largefile bs=3145728 count=1 (create large file)
+du -a /dir | sort -n -r | head -n 20                  -> 20 largest files ascending
+dd if=/dev/urandom of=largefile bs=3145728 count=1    -> Create large file
 
 ************************** Tar/Zip ***************************
 
