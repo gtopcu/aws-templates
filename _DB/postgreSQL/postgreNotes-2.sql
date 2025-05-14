@@ -3,7 +3,7 @@
 /* https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-data-types/ */
 
 CREATE TABLE IF NOT EXISTS "person" (
-     id                  INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, /*SERIAL PRIMARY KEY,*/
+     id                  INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, /*SERIAL PRIMARY KEY,*/ 
      contact_id          uuid DEFAULT gen_random_uuid(),
      name                VARCHAR(100) NOT NULL,
      AGE                 INT,
@@ -27,6 +27,54 @@ SELECT "person".*, "employee".title AS emp_title FROM "person"
 JOIN "employee" ON "employee".id = "person".employee_id
 
 SELECT * FROM user WHERE name LIKE '%Jen%'
+
+CREATE TABLE products(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    price DECIMAL(10,2) NOT NULL DEFAULT 0
+);
+
+INSERT INTO products (name, price)
+VALUES
+    ('A', 19.99),
+    ('B', 29.99),
+    ('C', 39.99),
+    ('D', 49.99)
+RETURNING *;
+
+UPDATE customers
+SET contact_name = 'John Doe'
+WHERE id = 1;
+
+CREATE TABLE order_items (
+  order_id INT NOT NULL,
+  product_name VARCHAR(255) NOT NULL,
+  sold_out BOOL NOT NULL,
+  FOREIGN KEY (order_id)
+     REFERENCES orders(order_id) ON DELETE CASCADE ON UPDATE CASCADE,
+  PRIMARY KEY (order_id, item_id)
+);
+
+CREATE TABLE mailing_list (
+    first_name VARCHAR NOT NULL,
+    last_name VARCHAR NOT NULL,
+    CHECK (
+        first_name !~ '\s'
+        AND last_name !~ '\s'
+    )
+);
+
+DROP TABLE IF EXISTS table_name CASCADE;
+ALTER TABLE table_name RENAME TO new_table_name;
+
+ALTER TABLE table_name ADD COLUMN column_name VARCHAR(25) NOT NULL;
+ALTER TABLE table_name DROP COLUMN column_name CASCADE;
+ALTER TABLE table_name RENAME column_name TO new_column_name;
+
+TRUNCATE TABLE table_name1, table_name2 CASCADE;
+TRUNCATE TABLE products RESTART IDENTITY; /* resets PK counter */
+
+
 
 /*
 

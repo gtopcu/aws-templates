@@ -33,17 +33,29 @@ unlogged tables
 version() now() current_database() inet_server_addr() inet_server_port();
 
 id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY
-(SERIAL PRIMARY KEY AUTOINCREMENT)
+SERIAL PRIMARY KEY AUTOINCREMENT
 UNIQUE DEFAULT NOT NULL 
-BOOLEAN CHAR(20) VARCHAR(20) TEXT TEXT[] 
+
+BOOLEAN|BOOL CHAR(20) VARCHAR(20) TEXT TEXT[] 
 SMALLINT INT INT4 BIGINT 
-FLOAT(2)  NUMERIC(10,2) REAL FLOAT8 | DOUBLEPRECISION
-DATE TIME(2) TIMESTAMP TIMESTAMPTZ Interval
-UUID JSON JSONB XML ENUM BYTEA(1GBmax) hstore Array(int/str etc) 
+FLOAT(2) NUMERIC(10,2) DECIMAL(10, 2) REAL FLOAT8|DOUBLEPRECISION
+DATE TIME(2) TIMESTAMP TIMESTAMPTZ INTERVAL
+DATE DEFAULT CURRENT_DATE,
+TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+UUID JSON JSONB XML ENUM BYTEA(1GBmax) hstore(key/value str only) Array(int/str etc) 
 UserDefined/Composite types
-LIMIT FETCH OFFSET AND OR BETWEEN IN LIKE ISNULL  
-UPSERT MERGE COUNT GROUPBY ORDERBY HAVING UNION INTERSECT
-CASE COALESCE NULLIF CAST ANY ALL EXISTS
+
+COUNT DISTINCT ORDER BY 
+AND OR LIMIT OFFSET FETCH IN BETWEEN LIKE IS NULL  
+INNER JOIN LEFT JOIN RIGHT JOIN SELF JOIN FULL OUTER JOIN
+GROUP BY HAVING RETURNING GROUPING SETS CUBE ROLLUP
+UNION INTERSECT EXCEPT 
+UPSERT MERGE  
+ANY ALL EXISTS
+SUM (CASE WHEN rental_rate = 0.99 THEN 1 ELSE 0 END) AS "Economy",
+COALESCE (NULL, 2 , 1)  /* returns first non-null argument */
+CAST ('100' AS INTEGER) CAST ('01-OCT-2015' AS DATE)
+NULLIF (1, 1); -- return NULL /*  returns NULL if argument_1 == argument_2, otherwise argument_1 */
 
 -----------------------------------------------------------------------------------------------------
 
@@ -58,6 +70,7 @@ sudo -u postgres psql
 \c otherdatabase      -> Switch database
 \dt                   -> List all tables under the current database
 \dt schema.*          -> List objects with any name under schema
+\d my_table           -> Show structure of my_table
 \q | exit             -> Exit
 \include ~/script.sql -> Execute the given SQL file
 
@@ -80,12 +93,13 @@ SET timezone = 'America/Los_Angeles';
 
 CREATE DATABASE my_database;
 CREATE SCHEMA my_schema;
-CREATE USER my_user WITH PASSWORD '<password>' IN ROLE my_role
-ALTER USER postgres PASSWORD '<password>';
 
 CREATE ROLE my_role WITH LOGIN;
 GRANT USAGE ON my_schema TO my_role;
 GRANT SELECT, INSERT, UPDATE ON ALL TABLES IN SCHEMA my_schema TO my_role;
+
+CREATE USER my_user WITH PASSWORD '<password>' IN ROLE my_role
+ALTER USER postgres PASSWORD '<password>';
 
 -----------------------------------------------------------------------------------------------------
 

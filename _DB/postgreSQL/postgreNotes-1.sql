@@ -21,12 +21,6 @@ CREATE EXTENSION IF NOT EXISTS vector;
 ALTER TABLE my_vectordb
 ADD COLUMN embedding vector(1024);
 
-CREATE TABLE IF NOT EXISTS events (
-	event_id BIGINT,
-	event_time TIMESTAMPTZ NOT NULL,
-	pr_is_merged BOOL,
-);
-
 SELECT
     time_bucket('1 day', event_time) AS bucket,
     count(*) AS star_count
@@ -37,15 +31,7 @@ WHERE
 GROUP BY bucket
 ORDER BY bucket DESC;
 
-
-CREATE TABLE mailing_list (
-    first_name VARCHAR NOT NULL,
-    last_name VARCHAR NOT NULL,
-    CHECK (
-        first_name !~ '\s'
-        AND last_name !~ '\s'
-    )
-);
+/* ------------------------------------------------------------------------------------------------ */
 
 CREATE OR REPLACE FUNCTION update_updated_at()
 RETURNS TRIGGER AS $$
@@ -59,6 +45,23 @@ CREATE TRIGGER department_updated_at_trigger
 BEFORE UPDATE ON department
 FOR EACH ROW
 EXECUTE FUNCTION update_updated_at();
+
+/* ------------------------------------------------------------------------------------------------ */
+
+CREATE VIEW book_info
+AS SELECT
+    book_id,
+    title,
+    isbn,
+    published_date,
+    name
+FROM
+    books b
+INNER JOIN publishers
+    USING(publisher_id)
+ORDER BY title;
+
+/* ------------------------------------------------------------------------------------------------ */
 
 SELECT 
   (
