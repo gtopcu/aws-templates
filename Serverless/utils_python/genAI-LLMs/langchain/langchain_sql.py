@@ -4,13 +4,14 @@
 
 # from dotenv import load_dotenv
 
+# export OPENAI_API_KEY="your_api_key_here"
+
 # if not load_dotenv():
 #     raise Exception("Failed to load .env file")
 
 # OPEN_API_KEY = os.getenv("OPEN_AI_API_KEY")
 # if not OPEN_API_KEY:
 #     raise Exception("OPEN_API_KEY environment variable not set")
-
 
 # from langchain.llms import OpenAI # deprecated
 from langchain_openai import OpenAI

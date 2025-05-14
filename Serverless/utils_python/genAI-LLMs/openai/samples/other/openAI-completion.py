@@ -1,5 +1,6 @@
 
 # https://platform.openai.com/
+# https://platform.openai.com/docs/
 
 import openai
 

@@ -267,6 +267,32 @@ def add_numbers(a: int, b: int) -> int:
 
 # -------------------------------------------------------------------------------------------------
 
+import asyncio
+from asyncio import TaskGroup, Task, Coroutine, create_task, Future
+
+async def my_func(delay:float) -> Coroutine[Any, Any, dict[str, str]]:
+    asyncio.sleep(delay)
+    return { "result": "success" }
+
+async def main():
+    coro = my_func(5) # does not start until awaited or used within a Task
+    result = await coro
+    print(result)
+
+    task:Task = create_task(my_func(10))
+    task.add_done_callback()
+    task.cancel()
+    task.exception()
+    task.result()
+    async with asyncio.TaskGroup() as group:
+        task1 = group.create_task(my_func(1))
+        task2 = group.create_task(my_func(2))
+    print("Both tasks have completed now.")
+
+asyncio.run(main())
+
+# -------------------------------------------------------------------------------------------------
+
 # from decimal import Decimal, getcontext, setcontext, ExtendedContext, InvalidOperation, DivisionByZero
 # setcontext(ExtendedContext)
 # getcontext().prec = 3

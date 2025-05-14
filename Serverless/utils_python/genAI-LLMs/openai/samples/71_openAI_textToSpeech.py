@@ -1,6 +1,7 @@
 
+# https://platform.openai.com/
+# https://platform.openai.com/docs/
 # https://platform.openai.com/docs/guides/text-to-speech
-
 
 from pathlib import Path
 from openai import OpenAI
