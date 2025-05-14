@@ -83,7 +83,6 @@ from pydantic import (
     SecretStr,
     Base64Str,
     UUID4,
-
 )
 
 # ----------------------------------------------------------------------------------------------------
@@ -96,7 +95,7 @@ getcontext().prec = 2
 
 # https://github.com/pydantic/pydantic/issues/8006
 # Do not use Optional[str] = None, use str | None = None instead
-# model_dump with exclude_defaults=True or exclude_none=Truev
+# model_dump with exclude_defaults=True or exclude_none=True
 
 # VSCode Settings -> Type Checking Mode
 

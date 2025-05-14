@@ -12,7 +12,7 @@ from typing import Optional
 # https://docs.pydantic.dev/latest/integrations/datamodel_code_generator/
 
 class APIGWEvent(BaseModel):
-    body: Optional[str]
+    body: str | None = None
     headers: dict
     multiValueHeaders: dict
     httpMethod: str
@@ -31,7 +31,6 @@ class APIGWEvent(BaseModel):
     #     pass
 
     @pydantic.field_validator('stageVariables')
-    @classmethod
     def check_stage_variables(cls, value):
         if value is None:
             raise ValueError('stageVariables cannot be None')
