@@ -3,28 +3,48 @@
 # https://www.youtube.com/watch?v=dEZKySL3M9c
 # https://www.youtube.com/watch?v=0GVLtTnebNA
 # https://www.youtube.com/watch?v=RIVcqT2OGPA
+# https://www.youtube.com/watch?v=Qb9s3UiMSTA&t=3s
+
+from typing import Any
 
 import asyncio
+from asyncio import TaskGroup, Task, create_task, Future, AbstractEventLoop, TimeoutError, CancelledError
+
 import aiofiles
 import aiohttp
 import aiosqlite
-import time
 
-async def main() -> None:
+# !!EventLoop!!
+# if __name__ == "__main__":
+#     asyncio.run(main())
 
-    start = time.perf_counter()
 
+# async def my_func(delay:float) -> Coroutine[Any, Any, dict[str, str]]:
+#     print(f"Waiting for {delay} seconds")
+#     await asyncio.sleep(delay)
+#     return { "result": f"success - waited for {delay} seconds" }
+
+# async def main():
+#     coro = my_func(1) # does not start until awaited or used within a Task
+#     result = await coro # await waits for coroutine to finish
+#     print(result)
+
+#     task1:Task = create_task(my_func(2))
+#     task2:Task = create_task(my_func(4))
+#     result1 = await task1 # await does not wait with tasks
+#     result2 = await task2 # runs concurrently - like gather()
+#     print(result1, result2) # only prints after both tasks are complete
+
+    # await asyncio.sleep(1)
     # asyncio.run(main())
     # await asyncio.Future()  # run forever
-    # await asyncio.gather(*task_list, return_exceptions=True)
-    # await asyncio.sleep(1)
+    # asyncio.get_running_loop() # get the running event loop, raise exception if there's none
     # task = asyncio.create_task(brew_coffee())
     # asyncio.run(task)
     # task.done()
     # task.cancel()
     # task.cancelled()
     # task.result()
-    # asyncio.TimeoutError, asyncio.CancelledError
 
     # asyncio.get_running_loop()
     # asyncio.get_event_loop()
@@ -42,14 +62,20 @@ async def main() -> None:
     # print(f"Result of toastBagel: {result_bagel}")
     # print(f"Time: {time.perf_counter() - start:.2f}")
 
-#   async with asyncio.TaskGroup as tg:
-#       task1 = tg.create_task(asyncfunc(1))
-#       print(task1)
-#       task2 = tg.create_task(asyncfunc(2))
-#       print(task2)
-#   print("Both tasks have been completed")
+    # await asyncio.gather(*task_list, return_exceptions=True) # runs concurrently
+    # results = await asyncio.gather(task1, task2, return_exceptions=True) # runs concurrently
+    # for result in results:
+    #     print(result)
 
-#   coroutines = [ task1(), task2() ]
+    # coroutines = [task1(), task2()]
+    # await asyncio.gather(*coroutines, return_exceptions=True) # runs concurrently
+    # results:Future = await asyncio.gather(task1, task2, return_exceptions=True) # runs concurrently
+    # for result in results:
+    #     if isinstance(result, Exception):
+    #         raise Exception("Error during async processing:" , result)
+    #     print(result)
+
+#   coroutines = [task1(), task2()]
 #   results = await asyncio.gather(*coroutines, return_exceptions=True)
 #     err = None
 #     for result, coro in zip(results, coroutines):
@@ -60,6 +86,96 @@ async def main() -> None:
 #     if err:
 #         raise RuntimeError("One or more scripts failed.")
 
+
+    # TaskGroup - provides error handling. If one task fails, all others are canceled
+    # Only moves after the TaskGroup with block after all tasks are finished
+    # async with asyncio.TaskGroup() as tg:
+    #     task1 = tg.create_task(my_func(1))
+    #     task2 = tg.create_task(my_func(2))
+    # print("Both tasks have completed now.")
+
+    # tasks = []
+    # async with asyncio.TaskGroup() as tg:
+    #     for i, sleep_time in enumerate([2, 1, 3], 1):
+    #         task = tg.create_task(my_func(sleep_time))
+    #         tasks.append(task)
+    #         print(f"Scheduled task no {i}")
+    
+    # results = [task.result() for task in tasks]
+    # for result in results:
+    #     if isinstance(result, Exception):
+    #         raise Exception("Error during async processing:" , result)
+    #     print(result)
+
+
+# Futures
+# https://www.youtube.com/watch?v=Qb9s3UiMSTA&t=3s
+# async def set_future_result(future, value):
+#     await asyncio.sleep(2)
+#     # Set the result of the future
+#     future.set_result(value)
+#     print(f"Set the future's result to: {value}")
+
+# async def main():
+#     loop:AbstractEventLoop = asyncio.get_running_loop() # get running event loop, raise exception if there's none
+#     future:Future = loop.create_future()
+
+#     # Schedule setting the future's result
+#     asyncio.create_task(set_future_result(future, "Future result is ready!"))
+
+#     # Wait for the future's result
+#     result = await future
+#     print(f"Received the future's result: {result}")
+
+
+# Synchronization
+# shared_resource = 0
+# lock = asyncio.Lock()
+
+# async def main():
+#     global shared_resource    
+#     try:
+#         print("Locking..")
+#         await lock.acquire()
+#         print("Lock acquired")
+#         await asyncio.sleep(2)
+#     finally:
+#         lock.release()
+#         print("Lock released")
+
+#     # auto lock.acquire & release
+#     async with lock:  
+#         print("Lock acquired")
+#         await asyncio.sleep(2)
+#     print("Lock released")
+
+# Semaphore
+# async def access_resource(semaphore, resource_id):
+#     async with semaphore:
+#         # Simulate accessing a limited resource
+#         print(f"Accessing resource with id {resource_id}")
+#         await asyncio.sleep(2)
+#     print(f"Releasing resource with id {resource_id}")
+
+# async def main():
+#     semaphore = asyncio.Semaphore(2) # Allow 2 concurrent access
+#     await asyncio.gather(*(access_resource(semaphore, i) for i in range(5)))
+
+# Event
+# async def waiter(event):
+#     print("Waiting for the event to be set..")
+#     await event.wait() # waits until event.set() is called
+#     print("Event has been set, exiting waiter")
+
+# async def setter(event):
+#     await asyncio.sleep(2)
+#     event.set()
+#     print("Event has been set")
+
+# async def main():
+#     event = asyncio.Event()
+#     await asyncio.gather(waiter(event), setter(event))
+    
     
     # server = await asyncio.start_server(lambda: None, "127.0.0.1", 8080)
     # addr = server.sockets[0].getsockname()
@@ -116,11 +232,6 @@ async def main() -> None:
 
 
 
-
-
-
-if __name__ == "__main__":
-    asyncio.run(main())
 
 
     
