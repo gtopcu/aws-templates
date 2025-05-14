@@ -10,6 +10,9 @@ from annotated_types import Gt, Ge, Le, Lt
 from uuid import uuid4, UUID
 from enum import auto, IntFlag
 
+print(eval("2*2"))
+exec(compile(source="print('hello!')", filename="script.py", mode='eval'))
+
 # pip freeze | grep -i llama
 # cProfile py-spy flameGraph
 
@@ -358,15 +361,15 @@ from enum import auto, IntFlag
 
 # -------------------------------------------------------------------------------------------------
 
-import asyncio # !!EventLoop!!
-from asyncio import TaskGroup, Task, create_task, Future, AbstractEventLoop, TimeoutError, CancelledError
+# import asyncio # !!EventLoop!!
+# from asyncio import TaskGroup, Task, create_task, Future, AbstractEventLoop, TimeoutError, CancelledError
 
-async def my_func(delay:float): # Coroutine[Any, Any, dict[str, str]]:
-    print(f"Waiting for {delay} seconds")
-    await asyncio.sleep(delay)
-    if delay == 4:
-        raise RuntimeError("Input validation failed")
-    return { "result": f"success - waited for {delay} seconds" }
+# async def my_func(delay:float): # Coroutine[Any, Any, dict[str, str]]:
+#     print(f"Waiting for {delay} seconds")
+#     await asyncio.sleep(delay)
+#     if delay == 4:
+#         raise RuntimeError("Input validation failed")
+#     return { "result": f"success - waited for {delay} seconds" }
 
 # async def main():
     # coro = my_func(1) # does not start until awaited or used within a Task
@@ -495,6 +498,6 @@ async def my_func(delay:float): # Coroutine[Any, Any, dict[str, str]]:
 #     await asyncio.gather(waiter(event), setter(event))
     
 
-if __name__ == "__main__":    
-    print("Running..")
-    asyncio.run(main())
+# if __name__ == "__main__":    
+#     print("Running..")
+#     asyncio.run(main())
