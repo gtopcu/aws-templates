@@ -1,16 +1,71 @@
 
 
-docker run --name local-db --env-file ./.env -dp 5432:5432 postgres:latest
+RETURNING / HAVING 
+ANY / ALL / EXISTS
+UNION / INTERSECT / EXCEPT
+TO_CHAR / CAST / CASE / COALESCE / NULLIF
+JSON-JSONB / XML / BYTEA(1GB) 
 
-https://docs.rapidapp.io/blog/streaming-postgresql-changes-to-kafka-with-debezium
-docker run --rm --name debezium \
-  -e BOOTSTRAP_SERVERS=<bootstrap_servers> \
-  -e GROUP_ID=1 \
-  -e CONFIG_STORAGE_TOPIC=connect_configs \
-  -e OFFSET_STORAGE_TOPIC=connect_offsets \
-  -e STATUS_STORAGE_TOPIC=connect_statuses \
-  -e ENABLE_DEBEZIUM_SCRIPTING='true' \
-  -e CONNECT_SASL_MECHANISM=SCRAM-SHA-256 \
-  -e CONNECT_SECURITY_PROTOCOL=SASL_SSL \
-  -e CONNECT_SASL_JAAS_CONFIG='org.apache.kafka.common.security.scram.ScramLoginModule required username="<username>" password="<password>";' \
- -p 8083:8083 debezium/connect:2.7
+------------------------------------------------------------------------------------------------------------------------
+
+SELECT date_trunc('hour', created_at) AS hour, COUNT(*) AS total_users
+FROM users
+GROUP BY hour
+ORDER BY hour;
+
+SELECT typname, typlen 
+FROM pg_type 
+WHERE typname ~ '^timestamp';
+
+CREATE EXTENSION IF NOT EXISTS vector;
+ALTER TABLE my_vectordb
+ADD COLUMN embedding vector(1024);
+
+CREATE TABLE IF NOT EXISTS events (
+	event_id BIGINT,
+	event_time TIMESTAMPTZ NOT NULL,
+	pr_is_merged BOOL,
+);
+
+SELECT
+    time_bucket('1 day', event_time) AS bucket,
+    count(*) AS star_count
+FROM events
+WHERE
+    NOW() - INTERVAL '30 days' <= event_time
+    AND LOWER(repo_name) = 'timescale/timescaledb'
+GROUP BY bucket
+ORDER BY bucket DESC;
+
+
+CREATE TABLE mailing_list (
+    first_name VARCHAR NOT NULL,
+    last_name VARCHAR NOT NULL,
+    CHECK (
+        first_name !~ '\s'
+        AND last_name !~ '\s'
+    )
+);
+
+CREATE OR REPLACE FUNCTION update_updated_at()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updated_at = current_timestamp;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER department_updated_at_trigger
+BEFORE UPDATE ON department
+FOR EACH ROW
+EXECUTE FUNCTION update_updated_at();
+
+SELECT 
+  (
+    SUM (CASE WHEN gender = 1 THEN 1 ELSE 0 END) / NULLIF (
+      SUM (CASE WHEN gender = 2 THEN 1 ELSE 0 END), 
+      0
+    )
+  ) * 100 AS "Male/Female ratio" 
+FROM 
+  members;

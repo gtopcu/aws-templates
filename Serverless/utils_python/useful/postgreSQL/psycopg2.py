@@ -2,6 +2,7 @@
 # https://www.youtube.com/watch?v=miEFm1CyjfM
 # https://www.psycopg.org/docs/cursor.html
 # https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-data-types/
+# https://neon.tech/postgresql/postgresql-python/connect
 
 # pip install psycopg2
 # pip install psycopg2-binary==2.9.9
