@@ -52,6 +52,7 @@ GROUP BY HAVING RETURNING GROUPING SETS CUBE ROLLUP
 UNION INTERSECT EXCEPT 
 UPSERT MERGE  
 ANY ALL EXISTS
+AVG, MIN, MAX, FLOOR, CEIL, ROUND
 SUM (CASE WHEN rental_rate = 0.99 THEN 1 ELSE 0 END) AS "Economy",
 COALESCE (NULL, 2 , 1)  /* returns first non-null argument */
 CAST ('100' AS INTEGER) CAST ('01-OCT-2015' AS DATE)
@@ -66,13 +67,13 @@ psql --dbname $DB_NAME --host $ENDPOINT --username $DB_USER --set sslmode=requir
 
 sudo -u postgres psql
 
-\l                    -> List all databases
-\c otherdatabase      -> Switch database
-\dt                   -> List all tables under the current database
-\dt schema.*          -> List objects with any name under schema
-\d my_table           -> Show structure of my_table
-\q | exit             -> Exit
-\include ~/script.sql -> Execute the given SQL file
+-- \l                    -> List all databases
+-- \c otherdatabase      -> Switch database
+-- \dt                   -> List all tables under the current database
+-- \dt schema.*          -> List objects with any name under schema
+-- \d my_table           -> Show structure of my_table
+-- \q | exit             -> Exit
+-- \include ~/script.sql -> Execute the given SQL file
 
 -----------------------------------------------------------------------------------------------------
 
@@ -96,16 +97,18 @@ CREATE SCHEMA my_schema;
 
 CREATE ROLE my_role WITH LOGIN;
 GRANT USAGE ON my_schema TO my_role;
-GRANT SELECT, INSERT, UPDATE ON ALL TABLES IN SCHEMA my_schema TO my_role;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN DATABASE my_database TO my_role;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA my_schema TO my_role;
+DELETE ROLE my_role;
 
 CREATE USER my_user WITH PASSWORD '<password>' IN ROLE my_role
 ALTER USER postgres PASSWORD '<password>';
+DELETE USER postgres;
 
 -----------------------------------------------------------------------------------------------------
 
 https://neon.tech/postgresql/postgresql-getting-started/load-postgresql-sample-database
 pg_restore -U postgres -d mydatabase D:\sampledb\postgres\data.tar
-
 
 AlloyDB
 SET google_columnar_engine.enable_columnar_scan=off;

@@ -7,6 +7,7 @@ from datetime import datetime, timedelta, timezone, UTC
 # datetime.now(timezone.utc)
 # datetime.now(timezone.utc).isoformat(timespec="seconds") # 2025-01-12T18:03:54+00:00 
 # datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+# datetime.utcnow()
 # date = datetime.strptime("2024-03-24", "%Y-%m-%d").date()
 # date.today()
 # date.day

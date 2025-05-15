@@ -151,16 +151,17 @@ aws ecr get-login --no-include-email --region $AWS_REGION
 
 docker cp
 docker start/stop/kill
-docker exec -it <container-id> sh 
+docker exec -it <container-id> sh -c "python3 app.py"
 docker exec <container-id> cat /data.txt
-docker debug <container-id> --shell bash/zsh/fish -> https://www.linkedin.com/posts/kaanyagci_still-using-docker-exec-or-hacking-your-activity-7325491366703095808-GQPW
 docker logs -f
 docker inspect
+docker debug <container-id> --shell bash/zsh/fish -> https://www.linkedin.com/posts/kaanyagci_still-using-docker-exec-or-hacking-your-activity-7325491366703095808-GQPW
 docker events --filter container=<container-id> --since 30m --until "2025-05-04T18:00:00" --format "{{.json}}"
+docker history
+docker image history
 docker login -u gtopcu
 docker logout
 docker scan getting-started
-docker image history
 
 Docker Volumes (-v bind mount, -mount regular mount)
 https://refine.dev/blog/docker-volumes/#using-a-docker-volume

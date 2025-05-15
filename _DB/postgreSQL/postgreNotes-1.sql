@@ -6,30 +6,17 @@ UNION / INTERSECT / EXCEPT
 TO_CHAR / CAST / CASE / COALESCE / NULLIF
 JSON-JSONB / XML / BYTEA(1GB) 
 
-------------------------------------------------------------------------------------------------------------------------
-
-SELECT date_trunc('hour', created_at) AS hour, COUNT(*) AS total_users
-FROM users
-GROUP BY hour
-ORDER BY hour;
+/* ------------------------------------------------------------------------------------------------ */
 
 SELECT typname, typlen 
 FROM pg_type 
 WHERE typname ~ '^timestamp';
 
+/* ------------------------------------------------------------------------------------------------ */
+
 CREATE EXTENSION IF NOT EXISTS vector;
 ALTER TABLE my_vectordb
 ADD COLUMN embedding vector(1024);
-
-SELECT
-    time_bucket('1 day', event_time) AS bucket,
-    count(*) AS star_count
-FROM events
-WHERE
-    NOW() - INTERVAL '30 days' <= event_time
-    AND LOWER(repo_name) = 'timescale/timescaledb'
-GROUP BY bucket
-ORDER BY bucket DESC;
 
 /* ------------------------------------------------------------------------------------------------ */
 
@@ -62,6 +49,23 @@ INNER JOIN publishers
 ORDER BY title;
 
 /* ------------------------------------------------------------------------------------------------ */
+
+
+SELECT date_trunc('hour', created_at) AS hour, COUNT(*) AS total_users
+FROM users
+GROUP BY hour
+ORDER BY hour;
+
+SELECT
+    time_bucket('1 day', event_time) AS bucket,
+    count(*) AS star_count
+FROM events
+WHERE
+    NOW() - INTERVAL '30 days' <= event_time
+    AND LOWER(repo_name) = 'timescale/timescaledb'
+GROUP BY bucket
+ORDER BY bucket DESC;
+
 
 SELECT 
   (

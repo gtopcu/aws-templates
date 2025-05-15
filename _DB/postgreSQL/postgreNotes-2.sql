@@ -2,23 +2,36 @@
 
 /* https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-data-types/ */
 
-CREATE TABLE IF NOT EXISTS "person" (
+DROP TABLE IF EXISTS table_name CASCADE;
+ALTER TABLE table_name RENAME TO new_table_name;
+
+ALTER TABLE table_name ADD COLUMN column_name VARCHAR(25) NOT NULL;
+ALTER TABLE table_name DROP COLUMN column_name CASCADE;
+ALTER TABLE table_name RENAME column_name TO new_column_name;
+
+TRUNCATE TABLE table_name1, table_name2 CASCADE;
+TRUNCATE TABLE products RESTART IDENTITY; /* resets PK counter */
+
+--my_schema.person
+CREATE TABLE IF NOT EXISTS "my_schema"."person" ( 
      id                  INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, /*SERIAL PRIMARY KEY,*/ 
      contact_id          uuid DEFAULT gen_random_uuid(),
-     name                VARCHAR(100) NOT NULL,
-     AGE                 INT,
+     name                TEXT NOT NULL,
+     department          VARCHAR(200) NOT NULL,
+     age                 INT,
      gender              CHAR(1),
-     money               NUMERIC(10, 2) DEFAULT 0,
+     money               NUMERIC(10, 2) NOT NULL DEFAULT 0,  
+     score               DECIMAL(3, 1)
+     remaining           FLOAT(2), /* = FLOAT8, DOUBLE PRECISION) */
      phones              TEXT [],
      single_digit        REAL,
-     remaining           FLOAT(2), /* = FLOAT8, DOUBLE PRECISION) */
      logo                BYTEA,
      json_data           JSON,
      is_active           BOOLEAN, 
      birth_date          DATE DEFAULT CURRENT_DATE,
      created_at          TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
      create_time         TIME(2), 
-     employee_id         INT,
+     employee_id         SMALLINT, --BIGINT INT4
      CONSTRAINT fk_emp FOREIGN KEY (employee_id) REFERENCES "employee"(id)
 )
 CREATE UNIQUE INDEX indx1 ON "person" (name)
@@ -26,21 +39,20 @@ CREATE UNIQUE INDEX indx1 ON "person" (name)
 SELECT "person".*, "employee".title AS emp_title FROM "person"
 JOIN "employee" ON "employee".id = "person".employee_id
 
-SELECT * FROM user WHERE name LIKE '%Jen%'
+SELECT * FROM user WHERE name LIKE '%Jen%' LIMIT 5;
+DELETE FROM user WHERE id < 100;
 
-CREATE TABLE products(
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    price DECIMAL(10,2) NOT NULL DEFAULT 0
-);
-
-INSERT INTO products (name, price)
-VALUES
-    ('A', 19.99),
-    ('B', 29.99),
-    ('C', 39.99),
-    ('D', 49.99)
+INSERT INTO example.invoice(created, purchaser, amount)
+VALUES (now(), 1, 100.0),
+       (now(), 2, 200.0)
 RETURNING *;
+
+SELECT dep.name, sum(inv.amount) AS spent
+FROM example.department AS dep
+LEFT JOIN example.invoice inv ON dep.id = inv.department_id
+GROUP BY dep.name
+HAVING sum(inv.amount) > 0
+ORDER BY spent DESC;
 
 UPDATE customers
 SET contact_name = 'John Doe'
@@ -48,10 +60,10 @@ WHERE id = 1;
 
 CREATE TABLE order_items (
   order_id INT NOT NULL,
+  item_id INT NOT NULL,
   product_name VARCHAR(255) NOT NULL,
   sold_out BOOL NOT NULL,
-  FOREIGN KEY (order_id)
-     REFERENCES orders(order_id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (order_id) REFERENCES orders(order_id) ON DELETE CASCADE ON UPDATE CASCADE,
   PRIMARY KEY (order_id, item_id)
 );
 
@@ -63,17 +75,6 @@ CREATE TABLE mailing_list (
         AND last_name !~ '\s'
     )
 );
-
-DROP TABLE IF EXISTS table_name CASCADE;
-ALTER TABLE table_name RENAME TO new_table_name;
-
-ALTER TABLE table_name ADD COLUMN column_name VARCHAR(25) NOT NULL;
-ALTER TABLE table_name DROP COLUMN column_name CASCADE;
-ALTER TABLE table_name RENAME column_name TO new_column_name;
-
-TRUNCATE TABLE table_name1, table_name2 CASCADE;
-TRUNCATE TABLE products RESTART IDENTITY; /* resets PK counter */
-
 
 
 /*
