@@ -5,7 +5,7 @@ https://www.youtube.com/watch?v=502XOB0u8OY
 
 
 BaseModel — Pydantic's own super class with many common utilities available via instance methods
-pydantic.dataclasses.dataclass — a wrapper around standard dataclasses which performs validation when a dataclass is initialized
+pydantic.dataclasses.dataclass — wrapper around dataclasses. performs validation when dataclass is initialized
 
 pip install -U pydantic 
 pip install -U email_validator

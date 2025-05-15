@@ -137,7 +137,7 @@ docker create -> create a container without starting it
 doccker run -rm [image] -> create & start a container & remove after it stops
 doccker run -it [image] -> create & start a container in interactive mode
 
-docker stop <the-container-id>
+docker start/stop/kill <the-container-id>
 docker rm <the-container-id>
 docker rm -f <the-container-id>
 docker rm -f $(docker ps -a -q)   : Remove all containers
@@ -147,21 +147,27 @@ docker builder prune -f -a        : Clear image cache
 docker tag getting-started gtopcu/getting-started
 docker push gtopcu/getting-started:tagname
 
-aws ecr get-login --no-include-email --region $AWS_REGION
-
-docker cp
-docker start/stop/kill
-docker exec -it <container-id> sh -c "python3 app.py"
-docker exec <container-id> cat /data.txt
-docker logs -f
-docker inspect
-docker debug <container-id> --shell bash/zsh/fish -> https://www.linkedin.com/posts/kaanyagci_still-using-docker-exec-or-hacking-your-activity-7325491366703095808-GQPW
-docker events --filter container=<container-id> --since 30m --until "2025-05-04T18:00:00" --format "{{.json}}"
-docker history
-docker image history
 docker login -u gtopcu
 docker logout
 docker scan getting-started
+aws ecr get-login --no-include-email --region $AWS_REGION
+
+docker exec -it <container-id> sh -c "python3 app.py"
+docker exec <container-id> cat /data.txt
+docker cp - Pull logs or dump files cleanly. No shell / side effects
+docker update - Update CPU/memory live, without a restart. Contain a broken container that’s burning your node without killing it
+docker logs -f
+docker inspect
+docker debug <container-id> --shell bash/zsh/fish -> https://www.linkedin.com/posts/kaanyagci_still-using-docker-exec-or-hacking-your-activity-7325491366703095808-GQPW
+docker events --filter container=<container-id> --since 30m --until "2025-05-04T18:00:00" --format "{{.json}}" - Real-time event stream from the daemon
+docker history myApp:10 - Inspect every layer of the image. Find the RUN that exploded the image size
+docker diff <container> - See exactly what changed inside the container. Added, modified, and deleted files
+docker top <container> - View running processes, no exec needed. Catch zombies, background jobs, and memory hogs
+docker stats - Live resource usage: CPU, memory, I/O. Spot memory leaks or CPU spikes.
+docker commit <container> debug:snapshot - Freeze current state into a new image. Something’s wrong in prod? Don’t rebuild. Freeze & bring it local & debug
+docker save + docker load - Export and import full image, metadata intact. Pull a prod image locally for a deep inspection
+docker export + docker import - Strip the container down to a raw filesystem, no history. Archive weird states, share minimal reproductions
+
 
 Docker Volumes (-v bind mount, -mount regular mount)
 https://refine.dev/blog/docker-volumes/#using-a-docker-volume

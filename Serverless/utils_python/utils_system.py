@@ -111,7 +111,7 @@ def main():
     # from shutil import make_archive
     # archive_name = os.path.expanduser(os.path.join('~', 'myarchive'))
     # make_archive(archive_name, 'tar', root_dir='tmp/root', base_dir='structure/content')
-
+    # ------------------------------------------------------------------------------------------
 
     # path = Path()                     # .
     # path = Path.home()                # /Users/gtopcu
@@ -152,6 +152,8 @@ def main():
     # Path.match("pattern")
     # Path.glob(Path, pattern="*")
     # Path.rglob(Path, pattern="*")
+
+    # ------------------------------------------------------------------------------------------
 
     # print(glob.glob("?????.py")
     # print(glob.glob("*.py"))

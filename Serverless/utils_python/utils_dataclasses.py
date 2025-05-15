@@ -2,6 +2,7 @@ import dataclasses
 from dataclasses import dataclass, field, asdict, astuple
 from datetime import datetime
 # from pydantic import BaseModel, Field, dataclasses
+# pydantic.dataclasses.dataclass — wrapper around dataclasses. performs validation when dataclass is initialized
 from typing import Type
 from uuid import uuid4, UUID
 from typing import Any, Optional

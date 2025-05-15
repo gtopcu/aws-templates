@@ -42,6 +42,11 @@ JOIN "employee" ON "employee".id = "person".employee_id
 SELECT * FROM user WHERE name LIKE '%Jen%' LIMIT 5;
 DELETE FROM user WHERE id < 100;
 
+SELECT customer_id, SUM (amount)
+FROM payment
+GROUP BY customer_id
+ORDER BY customer_id;
+
 INSERT INTO example.invoice(created, purchaser, amount)
 VALUES (now(), 1, 100.0),
        (now(), 2, 200.0)
