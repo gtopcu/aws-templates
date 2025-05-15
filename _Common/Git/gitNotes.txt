@@ -50,7 +50,7 @@ Operation is aborted if it leads to loss of local changes unless --discard-chang
 git diff main         -> compare current working tree to main
 git diff origin/main  -> compare current working tree to remote
 git fetch             -> download only, does not merge
-git merge
+git merge --no-ff --no-edit otherbranch
 git pull --autostash -> fetch + merge
 git push -u origin main --set-upstream origin main --force
 git pull-request
