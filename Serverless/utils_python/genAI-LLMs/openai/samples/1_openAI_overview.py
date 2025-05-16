@@ -41,7 +41,6 @@
 # In addition to plain text, you can also have the model return structured data in JSON format 
 # This feature is called Structured Outputs.
 
-
 # =================================================================================================
 # Text Generation
 # =================================================================================================
