@@ -17,10 +17,15 @@ tracer = Tracer()
 app = APIGatewayHttpResolver()
 
 # Initialize DynamoDB client
-# dynamodb = boto3.resource("dynamodb")
-dynamodb = None
-# table = dynamodb.Table(os.environ.get("TABLE_NAME", "users"))
-table = None
+dynamodb = boto3.resource("dynamodb")
+# dynamodb = boto3.resource(
+#     "dynamodb",
+#     # endpoint_url="http://localhost:8000",
+#     region_name="us-east-1",
+#     aws_access_key_id="ACCESS_KEY_ID",
+#     aws_secret_access_key="ACCESS_KEY_SECRET",
+# )
+table = dynamodb.Table(os.environ.get("TABLE_NAME", "users"))
 
 
 # ----- API Routes -----
@@ -71,7 +76,8 @@ def list_users():
     response = table.scan(**scan_params)
     users = response.get("Items", [])
     
-    return {"statusCode": 200, "body": users}
+    # return {"statusCode": 200, "body": users}
+    return users
 
 @app.post("/users")
 @tracer.capture_method
@@ -85,7 +91,7 @@ def create_user():
         if not body.get("id") or not body.get("name"):
             return {"statusCode": 400, "body": "Missing required fields: id and name"}
             
-        # Save user to DynamoDB
+        # Set the keys
         item = {
             "id": body["id"],
             "name": body["name"],
@@ -136,7 +142,7 @@ def update_user(id: str):
                 update_expression += f"{key} = :{key}, "
                 expression_attribute_values[f":{key}"] = value
         
-        # Only update if there are fields to be updated
+        # Only do update if there's anything to be updated
         if update_expression != "SET ":
             # Remove trailing comma and space from the expression
             update_expression = update_expression[:-2]

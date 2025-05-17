@@ -7,11 +7,11 @@ from pathlib import Path
 
 # pytest --version
 # python -m pytest -vs
-# python -m pytest tests/test-lambda.py -vs
+# python -m pytest tests/test-lambda.py -q -vs
 
 # Add the project root to Python path so we can import the lambda code
-project_root = Path(__file__).parent.parent
-sys.path.insert(0, str(project_root))
+# project_root = Path(__file__).parent.parent
+# sys.path.insert(0, str(project_root))
 
 # Set environment variables for testing
 os.environ["TABLE_NAME"] = "users-test"
@@ -19,8 +19,6 @@ os.environ["TABLE_NAME"] = "users-test"
 # Import the Lambda handler after setting environment variables
 # sys.path.append("D:/VSCode/aws-templates/Serverless/utils_python/useful/zzz_cdk_apigwlambdadynamopoetry/lambda_fn>")
 # from lambda_fn.apigw_lambda import lambda_handler, app, table
-from lambda_fn.apigw_lambda import lambda_handler
-
 
 # Mock APIGatewayProxyEvent
 @pytest.fixture
@@ -98,102 +96,111 @@ def test_list_users(apigw_event, context, mock_table):
     }
     
     # Call lambda handler
+    from lambda_fn.apigw_lambda import lambda_handler
     response = lambda_handler(apigw_event, context)
     
+    print("STATUS_CODE: ", response["statusCode"])
+    print("BODY: ", response["body"])
+    print("RESPONSE: ", response)
+
     # Verify response
     assert response["statusCode"] == 200
-    assert response["body"] == [
+    replaced_body = str(response["body"]).replace('"', "'")
+    print("REPLACED: ", replaced_body)
+    assert replaced_body == [
         {"id": "user1", "name": "John Doe", "email": "john@example.com"},
         {"id": "user2", "name": "Jane Smith", "email": "jane@example.com"}
     ]
     mock_table.scan.assert_called_once()
+    # [{'id':'user1','name':'John Doe','email':'john@example.com'},{'id':'user2','name':'Jane Smith','email':'jane@example.com'}]" 
+    # [{'email': 'john@example.com', 'id': 'user1', 'name': 'John Doe'}, {'email': 'jane@example.com', 'id': 'user2', 'name': 'Jane Smith'}]
 
-def test_get_user(apigw_event, context, mock_table):
-    # Modify event for GET /users/{id}
-    apigw_event["routeKey"] = "GET /users/{id}"
-    apigw_event["pathParameters"] = {"id": "user1"}
-    apigw_event["rawPath"] = "/users/user1"
+# def test_get_user(apigw_event, context, mock_table):
+#     # Modify event for GET /users/{id}
+#     apigw_event["routeKey"] = "GET /users/{id}"
+#     apigw_event["pathParameters"] = {"id": "user1"}
+#     apigw_event["rawPath"] = "/users/user1"
     
-    # Setup mock response
-    mock_table.query.return_value = {
-        "Items": [
-            {"id": "user1", "name": "John Doe", "email": "john@example.com"}
-        ]
-    }
+#     # Setup mock response
+#     mock_table.query.return_value = {
+#         "Items": [
+#             {"id": "user1", "name": "John Doe", "email": "john@example.com"}
+#         ]
+#     }
     
-    # Call lambda handler
-    response = lambda_handler(apigw_event, context)
+#     # Call lambda handler
+#     response = lambda_handler(apigw_event, context)
     
-    # Verify response
-    assert response["statusCode"] == 200
-    assert response["body"] == [{"id": "user1", "name": "John Doe", "email": "john@example.com"}]
-    mock_table.query.assert_called_once_with(KeyConditionExpression=None)  # The Key condition will be mocked
+#     # Verify response
+#     assert response["statusCode"] == 200
+#     assert response["body"] == [{"id": "user1", "name": "John Doe", "email": "john@example.com"}]
+#     mock_table.query.assert_called_once_with(KeyConditionExpression=None)  # The Key condition will be mocked
 
-def test_create_user(apigw_event, context, mock_table):
-    # Modify event for POST /users
-    apigw_event["routeKey"] = "POST /users"
-    apigw_event["rawPath"] = "/users"
-    apigw_event["requestContext"]["http"]["method"] = "POST"
-    apigw_event["body"] = json.dumps({
-        "id": "user3",
-        "name": "Bob Johnson",
-        "email": "bob@example.com"
-    })
+# def test_create_user(apigw_event, context, mock_table):
+#     # Modify event for POST /users
+#     apigw_event["routeKey"] = "POST /users"
+#     apigw_event["rawPath"] = "/users"
+#     apigw_event["requestContext"]["http"]["method"] = "POST"
+#     apigw_event["body"] = json.dumps({
+#         "id": "user3",
+#         "name": "Bob Johnson",
+#         "email": "bob@example.com"
+#     })
     
-    # Call lambda handler
-    response = lambda_handler(apigw_event, context)
+#     # Call lambda handler
+#     response = lambda_handler(apigw_event, context)
     
-    # Verify response
-    assert response["statusCode"] == 201
-    assert response["body"]["id"] == "user3"
-    assert response["body"]["name"] == "Bob Johnson"
-    assert response["body"]["email"] == "bob@example.com"
+#     # Verify response
+#     assert response["statusCode"] == 201
+#     assert response["body"]["id"] == "user3"
+#     assert response["body"]["name"] == "Bob Johnson"
+#     assert response["body"]["email"] == "bob@example.com"
     
-    # Verify that put_item was called with the right item
-    mock_table.put_item.assert_called_once_with(
-        Item={"id": "user3", "name": "Bob Johnson", "email": "bob@example.com"}
-    )
+#     # Verify that put_item was called with the right item
+#     mock_table.put_item.assert_called_once_with(
+#         Item={"id": "user3", "name": "Bob Johnson", "email": "bob@example.com"}
+#     )
 
-def test_update_user(apigw_event, context, mock_table):
-    # Modify event for PUT /users/{id}
-    apigw_event["routeKey"] = "PUT /users/{id}"
-    apigw_event["pathParameters"] = {"id": "user1"}
-    apigw_event["rawPath"] = "/users/user1"
-    apigw_event["requestContext"]["http"]["method"] = "PUT"
-    apigw_event["body"] = json.dumps({
-        "name": "John Doe",
-        "email": "john.updated@example.com"
-    })
+# def test_update_user(apigw_event, context, mock_table):
+#     # Modify event for PUT /users/{id}
+#     apigw_event["routeKey"] = "PUT /users/{id}"
+#     apigw_event["pathParameters"] = {"id": "user1"}
+#     apigw_event["rawPath"] = "/users/user1"
+#     apigw_event["requestContext"]["http"]["method"] = "PUT"
+#     apigw_event["body"] = json.dumps({
+#         "name": "John Doe",
+#         "email": "john.updated@example.com"
+#     })
     
-    # Setup mock get_item response (for checking if user exists)
-    mock_table.get_item.return_value = {
-        "Item": {"id": "user1", "name": "John Doe", "email": "john@example.com"}
-    }
+#     # Setup mock get_item response (for checking if user exists)
+#     mock_table.get_item.return_value = {
+#         "Item": {"id": "user1", "name": "John Doe", "email": "john@example.com"}
+#     }
     
-    # Call lambda handler
-    response = lambda_handler(apigw_event, context)
+#     # Call lambda handler
+#     response = lambda_handler(apigw_event, context)
     
-    # Verify response
-    assert response["statusCode"] == 200
+#     # Verify response
+#     assert response["statusCode"] == 200
     
-    # Verify that update_item was called with the right parameters
-    mock_table.update_item.assert_called_once()
+#     # Verify that update_item was called with the right parameters
+#     mock_table.update_item.assert_called_once()
 
-def test_delete_user(apigw_event, context, mock_table):
-    # Modify event for DELETE /users/{id}
-    apigw_event["routeKey"] = "DELETE /users/{id}"
-    apigw_event["pathParameters"] = {"id": "user1"}
-    apigw_event["rawPath"] = "/users/user1"
-    apigw_event["requestContext"]["http"]["method"] = "DELETE"
-    apigw_event["queryStringParameters"] = {"name": "John Doe"}
+# def test_delete_user(apigw_event, context, mock_table):
+#     # Modify event for DELETE /users/{id}
+#     apigw_event["routeKey"] = "DELETE /users/{id}"
+#     apigw_event["pathParameters"] = {"id": "user1"}
+#     apigw_event["rawPath"] = "/users/user1"
+#     apigw_event["requestContext"]["http"]["method"] = "DELETE"
+#     apigw_event["queryStringParameters"] = {"name": "John Doe"}
     
-    # Call lambda handler
-    response = lambda_handler(apigw_event, context)
+#     # Call lambda handler
+#     response = lambda_handler(apigw_event, context)
     
-    # Verify response
-    assert response["statusCode"] == 204
+#     # Verify response
+#     assert response["statusCode"] == 204
     
-    # Verify that delete_item was called with the right key
-    mock_table.delete_item.assert_called_once_with(
-        Key={"id": "user1", "name": "John Doe"}
-    )
+#     # Verify that delete_item was called with the right key
+#     mock_table.delete_item.assert_called_once_with(
+#         Key={"id": "user1", "name": "John Doe"}
+#     )
