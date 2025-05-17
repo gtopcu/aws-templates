@@ -2,8 +2,10 @@
 https://www.youtube.com/watch?v=NMQwzI9hprg - Step-by-Step Python Package Deployment with GitHub Actions(Poetry + PyPI)
 https://github.com/squidfunk/mkdocs-material
 
-pip -V
+breq install pipx | pipx ensurepath | brew update && brew upgrade pipx
+pipx - Install CLI applications globally while still isolating them in virtual environments. Manages upgrades and uninstalls 
 
+pip -V
 python -m venv .venv
 source .venv/bin/activate
 source /Users/mac/GoogleDrive/VSCode/.venv/bin/activate
