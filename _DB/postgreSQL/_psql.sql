@@ -6,17 +6,19 @@ https://neon.tech/postgresql/postgresql-getting-started/connect-to-postgresql-da
 Install on Ubuntu/Debian/Redhat/CentOS:
 https://neon.tech/postgresql/postgresql-getting-started/install-postgresql-linux
 
+No FKs/triggers/extensions/vectors, single-region %99.99% multi-region 99.999% availability, 
+
 neonDB timescale crudRestAPI
 */
 
 /* official image. sets the DB password: */
-docker run --name postgres17 -e POSTGRES_PASSWORD=postgres -dp 5432:5432 postgres:17 
+docker run --name postgres17 -e POSTGRES_PASSWORD=postgres -dp 5432:5432 postgres:17
 docker run --name local-db --env-file ./.env -dp 5432:5432 postgres:latest
 
-pg_ctl start stop
-brew services start stop postgresql
 sudo systemctl start stop enable disable postgresql
 sudo service postgresql start stop enable disable
+pg_ctl start stop
+brew services start stop postgresql
 
 chmod +x myscript.sh
 #!/bin/bash
@@ -29,34 +31,6 @@ pg-cron pg-vector pg-ai
 psychopg2 
 transaction logs 
 unlogged tables
-
-version() now() current_database() inet_server_addr() inet_server_port();
-
-id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY
-SERIAL PRIMARY KEY AUTOINCREMENT
-UNIQUE DEFAULT NOT NULL 
-
-BOOLEAN|BOOL CHAR(20) VARCHAR(20) TEXT TEXT[] 
-SMALLINT INT INT4 BIGINT 
-FLOAT(2) NUMERIC(10,2) DECIMAL(10, 2) REAL FLOAT8|DOUBLEPRECISION
-DATE TIME(2) TIMESTAMP TIMESTAMPTZ INTERVAL
-DATE DEFAULT CURRENT_DATE,
-TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
-UUID JSON JSONB XML ENUM BYTEA(1GBmax) hstore(key/value str only) Array(int/str etc) 
-UserDefined/Composite types
-
-COUNT DISTINCT ORDER BY 
-AND OR LIMIT OFFSET FETCH IN BETWEEN LIKE IS NULL  
-INNER JOIN LEFT JOIN RIGHT JOIN SELF JOIN FULL OUTER JOIN
-GROUP BY HAVING RETURNING GROUPING SETS CUBE ROLLUP
-UNION INTERSECT EXCEPT 
-UPSERT MERGE  
-ANY ALL EXISTS
-AVG, MIN, MAX, FLOOR, CEIL, ROUND
-SUM (CASE WHEN rental_rate = 0.99 THEN 1 ELSE 0 END) AS "Economy",
-COALESCE (NULL, 2 , 1)  /* returns first non-null argument */
-CAST ('100' AS INTEGER) CAST ('01-OCT-2015' AS DATE)
-NULLIF (1, 1); -- return NULL /*  returns NULL if argument_1 == argument_2, otherwise argument_1 */
 
 -----------------------------------------------------------------------------------------------------
 
@@ -81,8 +55,7 @@ SELECT version();
 SELECT current_database();
 SELECT inet_server_addr(), inet_server_port();
 SELECT now();
-
-gen_random_uuid()
+SELECT gen_random_uuid()
 date_trunc('hour', created_at) AS hour
 LOWER() HIGHER() SUM()
 NOW() - INTERVAL '30 days'
@@ -99,11 +72,15 @@ CREATE ROLE my_role WITH LOGIN;
 GRANT USAGE ON my_schema TO my_role;
 GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN DATABASE my_database TO my_role;
 GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA my_schema TO my_role;
-DELETE ROLE my_role;
+DROP ROLE my_role;
+pg_database_owner
+pg_maintain
+pg_monitor
+pg_read_all_data | pg_write_all_data
+pg
 
 CREATE USER my_user WITH PASSWORD '<password>' IN ROLE my_role
 ALTER USER postgres PASSWORD '<password>';
-DELETE USER postgres;
 
 -----------------------------------------------------------------------------------------------------
 

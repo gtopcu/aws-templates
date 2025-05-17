@@ -369,4 +369,4 @@ Others:
          OpenSearch Serverless BinaryVector & PIT Search, ingestion Lambda support for transformation,
          CloudMap SLAs, TimeSyncService, DataTransferTerminals, CleanRooms multi-cloud, 
          BillingConductor/InvoiceConfiguration/CostCategories/CustomBillingViews, Elasticache ServiceQuotas & global datastore,
-         Console Multi-Session Support, DMS serverless support for files with an S3 source endpoint
+         Console Multi-Session Support, DMS serverless support for files with an S3 source endpoint, AWS Transform
