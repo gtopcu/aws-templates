@@ -1,0 +1,14 @@
+# AWS CDK Dependencies
+aws-cdk-lib
+constructs
+aws-cdk.aws-apigatewayv2-alpha
+aws-cdk.aws-apigatewayv2-integrations-alpha
+aws-cdk.aws-lambda-python-alpha
+
+# Lambda Dependencies
+boto3
+aws-lambda-powertools
+
+# Development Dependencies
+pytest
+pytest-mock

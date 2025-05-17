@@ -246,6 +246,8 @@
 # ",".join(mylist)
 # " ".casefold()
 # " ".strip()
+# "str".isdigit()
+# "str".isalnum()
 # "mr. gokhan topcu".title()
 # any(char in string.digits for char in pw)
 
