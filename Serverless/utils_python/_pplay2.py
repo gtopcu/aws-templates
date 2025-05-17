@@ -153,6 +153,7 @@
 # for path in sys.path:
 #     print("Path: " + path)
 # sys.path.append(os.getcwd() + "/.venv/lib/python3.13/site-packages")
+# sys.path.insert(0, str(Path(__file__).parent))
 # os.path.join(__file__, "test.txt")
 
 # Add the parent directory to sys.path

@@ -6,9 +6,11 @@ aws-cdk.aws-apigatewayv2-integrations-alpha
 aws-cdk.aws-lambda-python-alpha
 
 # Lambda Dependencies
-boto3
-aws-lambda-powertools
+boto3==1.28.62
+aws-lambda-powertools==2.26.0
+aws_xray_sdk==2.14.0
 
 # Development Dependencies
 pytest
 pytest-mock
+pytest-pythonpath

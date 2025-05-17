@@ -7,6 +7,15 @@
 
 # http://httpbin.org/
 
+pytest --version
+python -m pytest
+python -m pytest tests/test-lambda.py
+
+pytest.ini
+[pytest]
+python_paths = .
+testpaths = tests
+
 pytest.ini must be at project root dir
 tests should be in /tests folder
 conftest.py should be in /tests folder

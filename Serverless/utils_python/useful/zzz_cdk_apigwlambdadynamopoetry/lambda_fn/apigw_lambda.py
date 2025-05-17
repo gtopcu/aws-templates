@@ -17,8 +17,11 @@ tracer = Tracer()
 app = APIGatewayHttpResolver()
 
 # Initialize DynamoDB client
-dynamodb = boto3.resource("dynamodb")
-table = dynamodb.Table(os.environ.get("TABLE_NAME", "users"))
+# dynamodb = boto3.resource("dynamodb")
+dynamodb = None
+# table = dynamodb.Table(os.environ.get("TABLE_NAME", "users"))
+table = None
+
 
 # ----- API Routes -----
 
