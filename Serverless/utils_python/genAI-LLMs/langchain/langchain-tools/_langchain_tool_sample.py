@@ -1,6 +1,5 @@
 
 # pip install langchain-tools
-
 from langchain_tools import tool
 
 class CalculatorTools:
