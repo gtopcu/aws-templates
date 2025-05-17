@@ -20,7 +20,7 @@ app = APIGatewayHttpResolver()
 dynamodb = boto3.resource("dynamodb")
 # dynamodb = boto3.resource(
 #     "dynamodb",
-#     # endpoint_url="http://localhost:8000",
+#     endpoint_url="http://localhost:8000",
 #     region_name="us-east-1",
 #     aws_access_key_id="ACCESS_KEY_ID",
 #     aws_secret_access_key="ACCESS_KEY_SECRET",
@@ -76,8 +76,8 @@ def list_users():
     response = table.scan(**scan_params)
     users = response.get("Items", [])
     
-    # return {"statusCode": 200, "body": users}
-    return users
+    return {"statusCode": 200, "body": users}
+    # return users
 
 @app.post("/users")
 @tracer.capture_method

@@ -1,4 +1,6 @@
 
+import json
+import os
 
 import boto3
 from botocore.exceptions import ClientError
@@ -13,9 +15,10 @@ table = dynamo.Table('table-1')
 # table_resource: boto3.dynamodb.table.TableResource = table.TableResource()
 
 
-def lambda_handler(event, context):
+def lambda_handler(event, context):    
     try:
-        table.put_item(Item=event)
+        item = json.loads(event["body"])
+        table.put_item(Item=item)
         return {
             'statusCode': 201,
             'body': event
