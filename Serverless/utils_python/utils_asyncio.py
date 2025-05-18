@@ -19,6 +19,18 @@ import aiosqlite
 #     asyncio.run(main())
 
 
+# async for is used to iterate over an async iterator (objects that implement __aiter__ and __anext__)
+# It allows processing items that are retrieved asynchronously
+# async def async_generator():
+#     # Example async generator that yields numbers with delays
+#     for i in range(3):
+#         await asyncio.sleep(1)  # Simulating async operation
+#         yield i
+# async def process_async_items():
+#     # Using async for to iterate over async generator
+#     async for number in async_generator():
+#         print(number)
+
 # async def my_func(delay:float) -> Coroutine[Any, Any, dict[str, str]]:
 #     print(f"Waiting for {delay} seconds")
 #     await asyncio.sleep(delay)

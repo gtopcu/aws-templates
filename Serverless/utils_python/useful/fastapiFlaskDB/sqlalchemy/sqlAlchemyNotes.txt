@@ -14,3 +14,20 @@
 3. 𝗮𝗹𝗲𝗺𝗯𝗶𝗰 𝘂𝗽𝗴𝗿𝗮𝗱𝗲 𝗵𝗲𝗮𝗱: Apply all pending migrations to your database
 4. 𝗮𝗹𝗲𝗺𝗯𝗶𝗰 𝗱𝗼𝘄𝗻𝗴𝗿𝗮𝗱𝗲 -𝟭: Roll back the last migration
 5. 𝗮𝗹𝗲𝗺𝗯𝗶𝗰 𝗵𝗶𝘀𝘁𝗼𝗿𝘆: View a list of all migrations
+
+
+Getting table details in the schema:
+    from sqlalchemy import create_engine, inspect
+    db_url = "sqlite:///testdb.sqlite"
+    # "postgresql+psycopg2://usr:pass@localhost/db"
+    engine = create_engine(db_url)
+    inspector = inspect(engine)
+    schema = {}
+
+    for table in inspector.get_table_names():
+        columns = inspector.get_columns(table)
+        # for column in columns:
+        #     print(f"{column['name']} {column['type']}")
+        schema[table] = [column["name"] for column in columns]
+
+    return json.dumps(schema)
