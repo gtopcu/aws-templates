@@ -21,8 +21,8 @@ C:\Program Files\Python313\libs>
 C:\Program Files\Python313\Lib> 
 Powershell terminal:
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-.\Activate.ps1
 deactivate
+.\Activate.ps1
 
 #!/usr/bin/env python3
 echo $PATH
@@ -294,6 +294,8 @@ poetry config virtualenvs.in-project true
 poetry new myproject  
 poetry init           -> (for existing projects. creates pyproject.toml + poetry.lock)
 poetry install        -> (if pyproject.toml exists, creates venv) --no-root | --sync | --no-interaction
+--no-root -> install all in pyproject.toml, but not install the current project as a package into the environment
+--sync    -> syncs the virtual environment with the packages specified in poetry.lock file
 poetry env info -p
 poetry env list
 poetry env remove {env}
