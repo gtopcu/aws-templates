@@ -1,4 +1,3 @@
-
 # https://www.youtube.com/watch?v=aywZrzNaKjs
 # https://python.langchain.com/docs/integrations/chat/openai
 # https://github.com/gkamradt/langchain-tutorials/blob/main/getting_started/Quickstart%20Guide.ipynb
@@ -7,7 +6,7 @@
 python3 -m venv venv
 source venv/bin/activate
 
-pip install python-dotenv 
+pip install python-dotenv
 
 pip install langchain
 pip install langchain[llms]
@@ -33,7 +32,7 @@ from langchain_core.prompts.chat import (
     ChatPromptTemplate,
     HumanMessagePromptTemplate,
     SystemMessagePromptTemplate,
-    PromptTemplate
+    PromptTemplate,
 )
 from langchain_openai import OpenAIEmbeddings
 from langchain.chains import LLMChain
@@ -115,4 +114,3 @@ text-embedding-3-large
 # response: list[str] = doc_result = embeddings.embed_documents([texts])
 # for embedding in response:
 #     print(embedding)
-

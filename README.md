@@ -325,7 +325,8 @@ Serverless:
 - SFs: Export as SAM/InfrastructureComposer from console, Variables & JSONata support, VPC Lattice+PrivateLink VPC access
 - Kinesis: on-Demand now supports 5x throughtput - 10GB/s for writers 20GB/s for consumers per stream, tagging,
            attribute based access control
-- Cognito: New landing page/managed login, pricing tiers (Lite/Essentials/Plus), passkey auth
+- Cognito: New landing page/managed login, pricing tiers (Lite/Essentials/Plus), passkey auth, 
+           refresh key rotation, OIDC prompt parameter
 - S3: Conditional writes(if-none-match/if-match bucket policy), ExpressOneZone append data, 1M buckets, 
       AWS Backup S3 cross-region bucket replication, TransferFamily web apps, Metadata(S3 tables-Apache Iceberg)
 - Amplify: Amplify AI kit, StorageBrowser for S3, WAF Support(IP filtering, geo-restriction etc)
@@ -333,7 +334,7 @@ Serverless:
       
 AI:
 - Bedrock: Nova FMs, Marketplace, ConversationalBuilder, PromptManager-Caching/Flows/Optimizer, BatchInference(50% cheaper), 
-           model import, ConverseAPI(LangChain), DataAutomation, Rerank API, GraphRAG & streaming support, cross-region inference, 
+           model import, ConverseAPI, DataAutomation, Rerank API, GraphRAG & streaming support, cross-region inference, 
            multi-model & multi-agent collaboration, autogenereated query filters, model & RAG evaluation - human & LLM-as-judge, 
            custom intervention using agents, IntelligentPromptRouting, latency-optimized inference for FMs, Model Distillation, Guardrails up to 85% discount, automatic reasoning checks & multimodal toxicity detection for image content
            Knowledge Bases - chat with document, StructuralDataRetrieval(Redshift & SageMakerLakehouse), Aurora as vector store,
@@ -366,7 +367,7 @@ Others:
            EKS AutoMode & Hybrid Nodes, node health monitoring & auto-repair
 - Other: Organizations/RootUser mgmt, ResourceControlPolicies(RCP), EC2 DeclarativePolicies(VPC block public access),
          MSK Express, Amazon Keyspaces(Cassandra) reduced prices up to 75%, 
-         CodeBuild test splitting/parallelizm, CodeBuild remote repo support,
+         CodeBuild test splitting/parallelizm, CodeBuild remote Docker server support,
          OpenSearch Serverless BinaryVector & PIT Search, ingestion Lambda support for transformation,
          CloudMap SLAs, TimeSyncService, DataTransferTerminals, CleanRooms multi-cloud, 
          BillingConductor/InvoiceConfiguration/CostCategories/CustomBillingViews, Elasticache ServiceQuotas & global datastore,

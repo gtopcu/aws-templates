@@ -13,6 +13,7 @@ from enum import auto, IntFlag
 print(eval("2*2"))
 exec(compile(source="print('hello!')", filename="script.py", mode='eval'))
 
+
 # pip freeze | grep -i llama
 # cProfile py-spy flameGraph
 
