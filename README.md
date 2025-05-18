@@ -365,7 +365,8 @@ Others:
 - ECS/EKS: ECS deployment history, 1-click rollback, predictive scaling, enhanced ContainerInsights, Fargate network fault injection,
            EKS AutoMode & Hybrid Nodes, node health monitoring & auto-repair
 - Other: Organizations/RootUser mgmt, ResourceControlPolicies(RCP), EC2 DeclarativePolicies(VPC block public access),
-         MSK Express, Amazon Keyspaces(Cassandra) reduced prices up to 75%, CodeBuild test splitting/parallelizm,
+         MSK Express, Amazon Keyspaces(Cassandra) reduced prices up to 75%, 
+         CodeBuild test splitting/parallelizm, CodeBuild remote repo support,
          OpenSearch Serverless BinaryVector & PIT Search, ingestion Lambda support for transformation,
          CloudMap SLAs, TimeSyncService, DataTransferTerminals, CleanRooms multi-cloud, 
          BillingConductor/InvoiceConfiguration/CostCategories/CustomBillingViews, Elasticache ServiceQuotas & global datastore,

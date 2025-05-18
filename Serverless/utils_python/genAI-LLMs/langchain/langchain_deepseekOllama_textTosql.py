@@ -4,3 +4,7 @@
 
 # ollama pull deepseek-r1:8b #14b
 
+import re
+
+from langchain_ollama.llms import OllamaLLM
+
