@@ -45,9 +45,9 @@ from operator import add, sub, mul, itemgetter, attrgetter, methodcaller
 #     """Returns url for HTTPBIN resource."""
 #     return HTTPBIN_URL + '/'.join(suffix)
 
-# print(dir(random))
+# print(dir(db))
 # from . import database as db
-# from .database import model
+# from .db import model
 # import .database as db
 
 # import psutil

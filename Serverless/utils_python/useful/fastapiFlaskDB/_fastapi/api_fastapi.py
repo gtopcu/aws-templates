@@ -24,9 +24,11 @@ from datetime import datetime
 import time
 from typing import Any
 
-from fastapi import FastAPI, Request, status, HTTPException
-from fastapi import File, UploadFile, Body, Path, Query, Cookie, Header
+from typing import Annotated
+from fastapi import FastAPI, APIRouter, Request, status, HTTPException
 from fastapi.responses import Response, HTMLResponse, JSONResponse, PlainTextResponse
+from fastapi import File, UploadFile, Body, Path, Query, Cookie, Header
+
 
 # FileResponse, PlainTextResponse, RedirectResponse,  StreamingResponse
 # from fastjsonschema import validate, exceptions
@@ -97,7 +99,6 @@ items = [ToDo(id=1, title="Buy milk"), ToDo(id=2, title="Buy bread")]
 #     print(f"OMG! An HTTP error!: {repr(exc)}")
 #     return await http_exception_handler(request, exc)
 
-
 # @app.exception_handler(RequestValidationError)
 # async def validation_exception_handler(request, exc):
 #     print(f"OMG! The client sent invalid data!: {exc}")
@@ -155,7 +156,7 @@ async def upload_file(file: UploadFile = File(...)) -> Any:
 
 def main(): 
     import uvicorn 
-    uvicorn.run(app, port=5000, log_level="info", reload=False, access_log=False, use_colors=True) 
+    uvicorn.run(app, port=8000, log_level="info", reload=False, access_log=False, use_colors=True) 
 
 if __name__ == "__main__":
     main()
