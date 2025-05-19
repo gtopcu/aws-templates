@@ -147,6 +147,11 @@ async def create_item(request: Request, item: ToDo) -> Any:
     items.append(item)
     return item
 
+@app.delete("/items/{item_id}", status_code=status.HTTP_204_NO_CONTENT, tags=["items"])
+async def delete_item(request: Request, item_id: int) -> None:
+    items = [item for item in items if item.id is not item_id]
+    
+
 @app.post("/uploadfile")
 async def upload_file(file: UploadFile = File(...)) -> Any:
     contents = await file.read()

@@ -146,6 +146,8 @@
 # print(str.__name__)
 # import string
 # string.digits, string.ascii_letters, string.punctuation, string.ascii_lowercase, string.ascii_uppercase, 
+# b"\0AxhAu"
+# r"db/data"
 
 # args:list[str] = sys.argv[:2]
 # sys.getsizeof("abc")
@@ -237,6 +239,7 @@
 # shutil.copytree("lambda", "build/lambda_package")
 # shutil.make_archive("build/lambda", "zip", "build/lambda_package") # zip/tar
 # shutil.rmtree("build/lambda_package")
+# subprocess.run(["python", "app.py", "--docs_dir", "/docs")
 # subprocess.check_call([
 #     "pip",
 #     "install",

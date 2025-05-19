@@ -3,6 +3,7 @@ import os, sys, sysconfig, shutil, subprocess
 from pathlib import Path # PurePath, PosixPath, WindowsPath
 import glob
 
+# subprocess.run(["python", "app.py", "--docs_dir", "/docs")
 # subprocess.check_call([
 #     "pip",
 #     "install",

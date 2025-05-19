@@ -1,0 +1,28 @@
+# Vector Databases
+
+Vector databases are specialized database systems designed to store and query vector embeddings efficiently.
+
+## What are Vector Embeddings?
+Vector embeddings are numerical representations of data (text, images, audio) in a high-dimensional space.
+These embeddings capture semantic meaning, allowing for similarity searches.
+
+## Key Features of Vector Databases
+1. **Similarity Search**: Find vectors that are similar to a query vector
+2. **Indexing**: Efficient data structures for fast retrieval
+3. **Scalability**: Handle millions or billions of vectors
+4. **Filtering**: Combine vector search with metadata filtering
+
+## Popular Vector Databases
+- Chroma
+- FAISS
+- Milvus
+- Pinecone
+- Weaviate
+- Qdrant
+
+## Use Cases
+- Semantic search
+- Recommendation systems
+- Image similarity
+- Anomaly detection
+- Retrieval Augmented Generation (RAG)

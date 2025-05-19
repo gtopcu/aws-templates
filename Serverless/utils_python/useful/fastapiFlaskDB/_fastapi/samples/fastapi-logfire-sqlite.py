@@ -49,7 +49,8 @@ import logfire
 # @logfire.instrument()
 # def func(): ...
 
-# uv run logfire projects use
+# logfire auth
+# logfire projects use
 # ===========================================================================================================
 
 # sqlite database URL
