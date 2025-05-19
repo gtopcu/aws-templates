@@ -19,7 +19,7 @@ results = collection.query(
 )
 
 print(results['documents'])
-#print(results['metadatas'])
+print(results['metadatas'])
 
 client = OpenAI()
 
@@ -30,7 +30,9 @@ knowledge and you don't make things up. If you don't know the answer, just say: 
 
 The data:
 """+str(results['documents'])+"""
+"""+str(results['metadata'])+"""
 """
+
 # print(system_prompt)
 
 response = client.chat.completions.create(
