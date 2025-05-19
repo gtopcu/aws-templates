@@ -9,7 +9,6 @@ Machine Learning
 
 Machine learning is a subset of artificial intelligence that focuses on building systems that learn from data.
 
-
 ## Types of Machine Learning
 
 1. **Supervised Learning**: The algorithm learns from labeled training data
@@ -22,7 +21,6 @@ Machine learning is a subset of artificial intelligence that focuses on building
 
 3. **Reinforcement Learning**: The algorithm learns by interacting with an environment
 
-
 ## Common Algorithms
 - Linear Regression
 - Logistic Regression
@@ -31,7 +29,6 @@ Machine learning is a subset of artificial intelligence that focuses on building
 - Support Vector Machines
 - Neural Networks
 - K-means Clustering
-
 
 ## Evaluation Metrics
 - Accuracy
@@ -50,7 +47,6 @@ Vector databases are specialized database systems designed to store and query ve
 ## What are Vector Embeddings?
 Vector embeddings are numerical representations of data (text, images, audio) in a high-dimensional space.
 These embeddings capture semantic meaning, allowing for similarity searches.
-
 
 ## Key Features of Vector Databases
 
