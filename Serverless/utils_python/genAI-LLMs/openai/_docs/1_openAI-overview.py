@@ -9,6 +9,8 @@
 # export OPENAI_API_KEY="your_api_key_here"
 # pip install openai
 
+# from openai import AsyncClient()
+
 # =================================================================================================
 
 # https://platform.openai.com/docs/guides/text?api-mode=responses

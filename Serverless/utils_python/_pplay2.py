@@ -60,6 +60,16 @@
 # ruff check test.py --config ruff.toml
 # ruff check test.py --fix
 
+# import argparse
+# parser = argparse.ArgumentParser()
+# parser = argparse.ArgumentParser(description="sum the integers at the command line")
+# parser.add_argument('integers', metavar='int', nargs='+', type=int,  help='an integer to be summed')  
+# parser.add_argument('--log', default=sys.stdout, type=argparse.FileType('w'),  help='the file where the sum should be written') 
+# parser.add_argument("query_text", type=str, help="The query text.")
+# args = parser.parse_args()
+# query_text = args.query_text
+
+
 # """
 # This better get 10/10!
 # https://www.youtube.com/watch?v=RqdhVaX50mc

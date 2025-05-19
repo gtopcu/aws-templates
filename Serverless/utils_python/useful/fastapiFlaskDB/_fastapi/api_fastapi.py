@@ -156,7 +156,7 @@ async def upload_file(file: UploadFile = File(...)) -> Any:
 
 def main(): 
     import uvicorn 
-    uvicorn.run(app, port=8000, log_level="info", reload=False, access_log=False, use_colors=True) 
+    uvicorn.run(app, port=8000, log_level="debug", reload=False, access_log=False, use_colors=True) 
 
 if __name__ == "__main__":
     main()

@@ -243,6 +243,13 @@ import aiosqlite
         # # Run with: asyncio.run(main())
 
 
+# app = FastAPI(lifespan=lifespan)
+# from contextlib import asynccontextmanager
+# @asynccontextmanager
+# async def lifespan(app: FastAPI):
+#     async with Database.create(db_url) as db:
+#         app.state.db = db
+#         yield
 
 
 

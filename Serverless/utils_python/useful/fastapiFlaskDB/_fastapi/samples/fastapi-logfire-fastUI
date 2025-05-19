@@ -4,7 +4,46 @@
 # pip install -U fastapi uvicorn[standard] fastui pydantic 
 # pip install python-multipart # -> for File/UploadFile
 
-# uvicorn fastapi-fastUI-logfire:app --reload
+# ===========================================================================================================
+# https://logfire-eu.pydantic.dev/gtopcu/starter-project/settings/setup 
+# pip install 'logfire[fastapi,asyncpg]'
+# pip install 'logfire[fastapi,sqlite3,httpx]'
+# poetry add 'logfire[fastapi]'
+
+# import logfire
+# logfire.configure(token='')
+# logfire.instrument_system_metrics()
+# logfire.instrument_starlette()
+# logfire.instrument_fastapi(app, capture_headers=True)
+# logfire.instrument_asgi()
+# logfire.instrument_wsgi()
+# logfire.instrument_sqlalchemy()
+# logfire.instrument_sqlite3()
+# logfire.instrument_asyncpg()
+# logfire.instrument_flask()
+# logfire.instrument_openai()
+# logfire.instrument_anthropic()
+# logfire.instrument_requests()
+# logfire.instrument_aiohttp_client()
+# logfire.instrument_httpx()
+# logfire.instrument_aws_lambda()
+
+# logfire.log_slow_async_callbacks(5)
+# logfire.install_auto_tracing("fastapi", 0, "error")
+
+# logfire.info('Hello, {place}!', place='World')
+# logfire.debug('debug log')
+# with logfire.span('This is a span {a=}', a='data'):
+#         logfire.info('new log 1')
+# logfire.trace('This is a trace log')
+# @logfire.instrument()
+# def func(): ...
+
+# uv run logfire projects use
+# ===========================================================================================================
+
+
+# uvicorn fastapi-logfire-fastUI:app --reload
 # http://127.0.0.1:8000/docs
 
 from typing import Annotated
@@ -22,20 +61,26 @@ from fastui.forms import fastui_form
 # from .db import Database
 # from .page import demo_page
 # from . import images
-# settings = Settings()
 
 class AnimalModel(BaseModel): 
     animal: str
 
 # router = APIRouter()
 app = FastAPI()
-# app = FastAPI(lifespan=lifespan)
 # app.include_router(router, prefix='/api')
+
+# app = FastAPI(lifespan=lifespan)
+# from contextlib import asynccontextmanager
+# @asynccontextmanager
+# async def lifespan(app: FastAPI):
+#     async with Database.create(db_url) as db:
+#         app.state.db = db
+#         yield
 
 # uvicorn fastapi-fastUI-logfire:app --reload
 def main(): 
     import uvicorn 
-    uvicorn.run(app, port=8000, log_level="debug", reload=True, access_log=True, use_colors=True) 
+    uvicorn.run(app, port=8000, log_level="debug", reload=False, access_log=False, use_colors=True) 
 
 if __name__ == "__main__":
     main()
@@ -48,14 +93,6 @@ async def home():
 @app.get('/favicon.ico')
 async def favicon():
     return RedirectResponse(url='https://smokeshow.helpmanual.io/favicon.ico')
-
-# @asynccontextmanager
-# async def lifespan(app: FastAPI):
-#     async with Database.create(settings.pg_dsn, True, settings.create_database) as db:
-#         app.state.db = db
-#         openai = AsyncClient()
-#         app.state.openai = openai
-#         yield
 
 # @app.get('/{path:path}')
 # async def html_landing() -> HTMLResponse:
