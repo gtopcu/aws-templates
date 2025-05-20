@@ -107,10 +107,13 @@
 #   IndexError, AttributeError, NameError, AssertionError, StopIterationError, ArithmeticError,     
 #   ZeroDivisionError, NotImplementedError, RuntimeError, SystemError
 
-# from typing import Self, Any, Optional, Final, Literal, LiteralString, NewType, Type, TypeVar, TypeAlias, TypedDict, Generic
+# from typing import Self, Any, Optional, Final, Annotated, Literal, LiteralString, NewType, Type, TypeVar, TypeAlias, TypedDict, Generic
 # from typing import Awaitable, Callable, Iterable, 
 # from collections import namedtuple, deque, OrderedDict, defaultdict
 # from collections.abc import Mapping, Sequence, Set, Generator, Callable, Iterable, Iterator, AsyncIterable
+
+# def func() -> Literal["A", "B"]: ...
+# output: Annotated[list, my_func]
 
 # my_dict: dict[str, Any] 
 # PORT: Final[int] = 80080

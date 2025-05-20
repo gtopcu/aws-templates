@@ -53,6 +53,3 @@ graph.set_entry_point("prompt_node")
 app = graph.compile()
 new_state = app.invoke({"messages":["What is the weather in london?"]})
 print(new_state["messages"][-1].content)
-
-
-
