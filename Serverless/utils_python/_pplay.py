@@ -209,6 +209,8 @@ from enum import auto, IntFlag
 
 # -------------------------------------------------------------------------------------------------
 
+# from collections.abc import Generator, Callable, Iterable, Iterator, AsyncIterable
+
 # iterator:Iterator = iter(my_list)
 # print(next(iterator)) # 1 2 3 StopIterationError
 
