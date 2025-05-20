@@ -219,6 +219,14 @@ from enum import auto, IntFlag
 # iterator_generator_func((i for i in range(5)))
 # iterator_generator_func([*range(5)])
 
+def generator():
+    yield 1
+    yield 2
+
+print(next(generator))
+print(next(generator))
+print(next(generator))
+
 # -------------------------------------------------------------------------------------------------
 
 # from typing import Protocol, runtime_checkable
