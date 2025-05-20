@@ -1,5 +1,6 @@
+
 import boto3
-import botocore.exceptions.ClientError
+from botocore.exceptions import ClientError
 import json
 
 
@@ -16,7 +17,6 @@ def template_conversion(template_file_path):
     try:
 
         with open(template_file_path) as file:
-
             template = file.read()
 
         bedrock_runtime = boto3.client(region_name="us-east-1",
