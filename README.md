@@ -327,8 +327,8 @@ Serverless:
            attribute based access control
 - Cognito: New landing page/managed login, pricing tiers (Lite/Essentials/Plus), passkey auth, 
            refresh key rotation, OIDC prompt parameter
-- S3: Conditional writes(if-none-match/if-match bucket policy), ExpressOneZone append data, 1M buckets, 
-      AWS Backup S3 cross-region bucket replication, TransferFamily web apps, Metadata(S3 tables-Apache Iceberg)
+- S3: Conditional writes(if-none-match/if-match bucket policy), ExpressOneZone append data, 1M buckets, TransferFamily web apps, 
+      AWS Backup S3 cross-region bucket replication, GeneralPurpose/Directory buckets, Table buckets for ApacheIceberg Metadata(S3 tables)
 - Amplify: Amplify AI kit, StorageBrowser for S3, WAF Support(IP filtering, geo-restriction etc)
 - AppSync: EventsAPI(EventBridge->Appsync Async+WebSockets), cross-account API access with RAM
       
@@ -336,7 +336,8 @@ AI:
 - Bedrock: Nova FMs, Marketplace, ConversationalBuilder, PromptMagr/Caching/Optimizer/Router, Flows, BatchInference(50% cheaper), 
            custom models, ConverseAPI, Rerank API, DataAutomation, cross-region inference, Guardrails up to 85% discount, IntelligentPromptRouting, 
            multi-model & multi-agent collaboration, autogenereated query filters, model & RAG evaluation - human & LLM-as-judge, distillation,
-           custom intervention using agents, latency-optimized inference for FMs, Model Distillation, automatic reasoning checks & multimodal toxicity detection for image content
+           custom intervention using agents, latency-optimized inference for FMs, automatic reasoning checks & multimodal toxicity detection
+           for image content, JPEG/PNG 3.75MB limit
            Knowledge Bases - chat with document, Structred Data Retrieval(Redshift & SageMakerLakehouse), Aurora(Postgre) as vector store,
            web crawler/custom data sources(Salesforce, Confluence, Sharepoint..) & realtime data sync, Kendra GenAI Indexes, GraphRAG(Neptune) 
 - Other AI: AppStudio, Sagamaker Unified Studio, Sagemaker realtime endpoints scale down to 0 & multi-adapter inference,

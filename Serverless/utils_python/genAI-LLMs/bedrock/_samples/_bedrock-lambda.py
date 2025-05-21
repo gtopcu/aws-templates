@@ -1,5 +1,18 @@
+
+
+# pip install -U boto3 botocore python-dotenv
+import os
 import json
 import boto3
+from botocore.config import Config
+from dotenv import load_dotenv
+
+# load_dotenv()
+
+# bedrock = boto3.client(
+#     service_name='bedrock-agent-runtime',
+#     config=Config(region_name=os.environ.get('AWS_REGION', 'us-west-2'))
+# )
 
 client = boto3.client('bedrock-runtime')
 
