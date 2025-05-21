@@ -333,12 +333,12 @@ Serverless:
 - AppSync: EventsAPI(EventBridge->Appsync Async+WebSockets), cross-account API access with RAM
       
 AI:
-- Bedrock: Nova FMs, Marketplace, ConversationalBuilder, PromptManager-Caching/Flows/Optimizer, BatchInference(50% cheaper), 
-           model import, ConverseAPI, DataAutomation, Rerank API, GraphRAG & streaming support, cross-region inference, 
+- Bedrock: Nova FMs, Marketplace, ConversationalBuilder, PromptMagr/Caching/Optimizer/Router, Flows, BatchInference(50% cheaper), 
+           custom models, ConverseAPI, DataAutomation, Rerank API, GraphRAG & streaming support, cross-region inference, 
            multi-model & multi-agent collaboration, autogenereated query filters, model & RAG evaluation - human & LLM-as-judge, 
-           custom intervention using agents, IntelligentPromptRouting, latency-optimized inference for FMs, Model Distillation, Guardrails up to 85% discount, automatic reasoning checks & multimodal toxicity detection for image content
+           custom intervention using agents, IntelligentPromptRouting, latency-optimized inference for FMs, Model Distillation, Guardrails up to 85% discount, automatic reasoning checks & multimodal toxicity detection for image content, distillation
            Knowledge Bases - chat with document, StructuralDataRetrieval(Redshift & SageMakerLakehouse), Aurora as vector store,
-          web crawler, custom data sources(Salesforce, Confluence, Sharepoint etc) & realtime data sync
+           web crawler, custom data sources(Salesforce, Confluence, Sharepoint etc) & realtime data sync, Kendra & Structured Indexes
 - Other AI: AppStudio, Sagamaker Unified Studio, structured retrieval(Redshift & SageMaker Lakehouse)
             Sagemaker realtime endpoints scale down to 0 & multi-adapter inference,
             Q developer: code review, inline chat, console/Datadog integration, Q Business new goodies
@@ -371,4 +371,4 @@ Others:
          OpenSearch Serverless BinaryVector & PIT Search, ingestion Lambda support for transformation,
          CloudMap SLAs, TimeSyncService, DataTransferTerminals, CleanRooms multi-cloud, 
          BillingConductor/InvoiceConfiguration/CostCategories/CustomBillingViews, Elasticache ServiceQuotas & global datastore,
-         Console Multi-Session Support, DMS serverless support for files with an S3 source endpoint, AWS Transform
+         Console Multi-Session Support, DMS serverless support for files with an S3 source endpoint, Transform, Simulearn
