@@ -101,6 +101,7 @@ The app runs, user’s args get passed cleanly
 ----------------------------------------------------------------------------------------------------------------
 
 ADD vs COPY: Add supports remote URLs, uncompresseses tar, gzip etc
+VOLUME
 
 Top 8 Docker Best Practices for using Docker in Production
 https://www.youtube.com/watch?v=8vXoMqWgbQQ
