@@ -364,7 +364,7 @@ Others:
                  Superhero mode: Instantly spot unmanaged EC2 instances, JIT node access
                  Auto-fix: SysMgr now diagnoses and remedies issues to bring nodes to managed state
 - ECS/EKS: ECS deployment history, 1-click rollback, predictive scaling, enhanced ContainerInsights, Fargate network fault injection,
-           EKS AutoMode & Hybrid Nodes, node health monitoring & auto-repair
+           EKS AutoMode & Hybrid Nodes, node health monitoring & auto-repair, ESK Dashboard
 - Other: Organizations/RootUser mgmt, ResourceControlPolicies(RCP), EC2 DeclarativePolicies(VPC block public access),
          MSK Express, Amazon Keyspaces(Cassandra) reduced prices up to 75%, 
          CodeBuild test splitting/parallelizm, CodeBuild remote Docker server support,
