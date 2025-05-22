@@ -101,7 +101,6 @@ The app runs, user’s args get passed cleanly
 ----------------------------------------------------------------------------------------------------------------
 
 ADD vs COPY: Add supports remote URLs, uncompresseses tar, gzip etc
-VOLUME
 
 Top 8 Docker Best Practices for using Docker in Production
 https://www.youtube.com/watch?v=8vXoMqWgbQQ
@@ -172,17 +171,55 @@ docker export + docker import - Strip the container down to a raw filesystem, no
 
 Docker Volumes (-v bind mount, -mount regular mount)
 https://refine.dev/blog/docker-volumes/#using-a-docker-volume
-docker volume create
-docker volume create --name named-volume --driver local
-docker run --name volumetest -itdp 3000:3000 -v named-volume:/etc/myappdata alpine
+-------------------------------------------------------------------------------------------
+
 docker volume -help
 docker volume ls
 docker volume ls -f dangling=true (list volumes not used by any container)
 docker volume rm <volume>
 docker volume inspect <volume>
-
 docker volume prune
 docker exec -it volumetest sh
+
+docker volume create --name named-volume --driver local
+docker run --name volumetest -it -dp 3000:3000 -v named-volume:/etc/myappdata alpine:latest
+
+docker run -v /home/data:/app/data my-python-app:latest               # host_path:container_path
+docker run -v /home/config/:/app/config:ro my-python-app:latest       # :ro for read-only, rw for read-write 
+docker run -v /home/config.json:/app/config.json my-python-app:latest # single file
+docker run -v v $(pwd):/app/workspace my-python-app:latest            # mount current dir
+
+# Using Docker SDK for Python
+import docker
+def mount_with_docker_sdk():
+    client = docker.from_env()
+    container = client.containers.run(
+        "my-python-app:latest",
+        volumes={
+            '/home/user/data': {'bind': '/app/data', 'mode': 'rw'},
+            '/home/user/config.json': {'bind': '/app/config.json', 'mode': 'ro'},
+        },
+        detach=True
+    )
+    return container
+
+VOLUME /app/data: Marks directories expected to contain externally mounted volumes 
+                  Applied during image build - doesn't actually mount anything from the host during build time
+                  If container is run without volume mapping, Docker automatically creates an anonymous volume
+                  Data persists between container restarts but isn't accessible from host
+
+-v flag           Actually connects host directories to container directories. 
+                  Applied during container run
+                  Maps host directories (data is accessible from both host and container)  
+
+COPY /host/source /container/dest   # Copies files INTO image",
+VOLUME /app/data                    # Declares mount point for runtime",
+WORKDIR /app                        # Sets working directory inside container"
+
+Why Dockerfile can't directly mount host directories:
+  1. Build-time vs Runtime: Dockerfiles execute during image BUILD time, but host mounts need to happen at container RUN time
+  2. Portability: Images should be portable across different hosts, but host paths are specific to each machine
+  3. Security: Allowing arbitrary host access during build would be a significant security risk
 
 Binding Mount Points:
 docker run -dp 3000:3000 `
@@ -190,7 +227,10 @@ docker run -dp 3000:3000 `
     node:12-alpine `
     sh -c "yarn install && yarn run dev"
 
+
+
 Networking
+-----------------------------------------------------------------------------------------------
 docker network ls
 docker network rm <network_name>
 
