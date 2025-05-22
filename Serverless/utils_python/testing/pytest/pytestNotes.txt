@@ -83,4 +83,18 @@ pytest -vs
     --showlocals: show local variables in tracebacks
     --durations=10: show 10 slowest tests
 
+------------------------------------------------------------------------------------    
 
+Debugging Pytest tests:
+https://www.youtube.com/watch?v=zL2YTdIj3R8
+
+launch.json:
+{
+    "name": "Pytest",
+    "type": "debugpy",
+    "request": "launch",
+    "module": "pytest",
+    "args": ["${relativeFileDirname}"],
+    //"args": ["${workspaceFolder}/tests"],
+    "justMyCode": True,
+},

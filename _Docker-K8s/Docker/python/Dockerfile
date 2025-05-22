@@ -29,6 +29,7 @@
 FROM python:3.13
 RUN apt update && apt upgrade -y
 RUN apt install sudo && apt install nano -y
+VOLUME [ "/data" ]
 WORKDIR /app
 COPY . /app
 RUN pip install --no-cache-dir -r requirements.txt

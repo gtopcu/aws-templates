@@ -151,8 +151,19 @@ def main():
     # Path.touch(Path, mode = 438, exist_ok = True)
     # Path.owner(Path)
     # Path.match("pattern")
-    # Path.glob(Path, pattern="*")
-    # Path.rglob(Path, pattern="*")
+    # Path.glob("*.py")
+    # Path.rglob(*.py")
+
+    # data:bytes = path.read_bytes()
+    # text: str = data.decode("utf-8", errors="replace")
+    # text = path.read_text("utf-8", errors="replace", newline="\n")
+
+    # from io import TextIOWrapper
+    # with path.open(mode="r", buffering=-1, encoding="utf-8", errors="replace", newline="\n") as file:
+    #     print(file.read(-1))
+
+    # for dirpath, dirnames, filenames in path.parent.walk():
+    #     print(dirpath, dirnames, filenames)
 
     # ------------------------------------------------------------------------------------------
 

@@ -173,6 +173,7 @@ Docker Volumes (-v bind mount, -mount regular mount)
 https://refine.dev/blog/docker-volumes/#using-a-docker-volume
 -------------------------------------------------------------------------------------------
 
+VOLUME [ "/data" ]
 docker volume -help
 docker volume ls
 docker volume ls -f dangling=true (list volumes not used by any container)

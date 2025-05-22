@@ -42,7 +42,7 @@ class ServerlessStack(core.Stack):
             architecture=lambda_.Architecture.ARM_64,
             runtime=lambda_.Runtime.PYTHON_3_13,
             memory_size=1024,
-            timeout=10,
+            timeout=20,
             system_log_level="INFO",
             log_retention=30,
             entry="lambda_fn",  # Directory containing the lambda code
@@ -53,7 +53,7 @@ class ServerlessStack(core.Stack):
                 "TABLE_NAME": users_table.table_name,
             },
         )
-        
+
         # Grant the Lambda function permissions to read/write to the DynamoDB table
         users_table.grant_read_write_data(user_api_lambda)
 
