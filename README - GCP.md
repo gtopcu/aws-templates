@@ -21,20 +21,25 @@ http://labs.google/stitch
 http://firebase.studio
 http://flow.google
 
-IronwoodTPUs Beam MCPsupport
-Gemini2.5Pro Gemini2.5Flash Canvas
-Diffusion Robotics AlphaGo/Zero/Fold3  Imagen4 w/audio Lyria2(music)
+IronwoodTPUs 
+Beam 
+MCP support
+Gemini 2.5 Pro/Flash 
+Gemini Canvas
+Gemini CodeAssist & GithubAgent 
+Gemini Diffusion Robotics 
 Gemini Live DeepThink AgentMode
-Search AIOverview AIMode PersonalCtx Replies TryClothes AgenticCheckout
-Figma->firebase.studio, auto-backend ChromeDevTools-GeminiNano
+AlphaGo/Zero/Fold3
+Veo3 Imagen4 Lyria2(music)
 Gemma3n-2GBram-AIEdge Gemmaverse MedGemma SignGemma DolphinGemma
 unsloth co synthID flow.google
 VertexAI ADK agentBuilderGardenEngine ModelDevService fine-tuning(LLama4) globalendpoint
-Gemini CodeAssist GithubAgent AppDesignCenter CloudHub
-MCPtoolboxForDBs-alloy/postgre
-Firestore-MongoDBcompat DBCenter
+Figma->firebase.studio, auto-backend ChromeDevTools-GeminiNano
+MCPtoolboxForDBs-AlloyDB/Postgre
+Firestore-MongoDBcompatibility 
 BigQuery-AIQueriesGemini-MultimodalTables-VectorSearch-AINotebooks 
+AppDesignCenter CloudHub DBCenter
 CloudWAN CloudRunGPU DNSArmor GKEInferenceGateway
-
+Google Search AIOverview AIMode PersonalCtx Replies TryClothes AgenticCheckout
 # =============================================================================
 
