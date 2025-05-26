@@ -8,7 +8,8 @@
 
 from locust import HttpUser, FastHttpUser, task, between, TaskSet, User
 
-class LoadUser(HttpUser):
+# class LoadUser(HttpUser):
+class LoadUser(FastHttpUser):
     
     wait_time = between(1, 3)
     # each spawned user picks a random task
