@@ -89,31 +89,31 @@ def requests_put(endpoint_url, payload, headers=None, auth=None, timeout: int = 
 # ---------------------------------------------------------------------------------------------------------------------
 # aiohttp - supports concurrency
 
-import logging
-logger = logging.getLogger(__name__)
+# import logging
+# logger = logging.getLogger(__name__)
 
-async def aiohttp_client(api_url:str="http://mockapi.com") -> str:
-    try:
-        async with aiohttp.ClientSession() as session:
-            async with session.get(api_url) as response:
-                response_text = await response.text()
-                logger.debug(f"Response status: {response.status}")
-                logger.debug(f"Response headers: {dict(response.headers)}")
-                logger.debug(f"Response body: {response_text}")
+# async def aiohttp_client(api_url:str="http://mockapi.com") -> str:
+#     try:
+#         async with aiohttp.ClientSession() as session:
+#             async with session.get(api_url) as response:
+#                 response_text = await response.text()
+#                 logger.debug(f"Response status: {response.status}")
+#                 logger.debug(f"Response headers: {dict(response.headers)}")
+#                 logger.debug(f"Response body: {response_text}")
 
-                if response.status != 200:
-                    logger.error(f"Request error: {response_text}")
-                    return {"error": f"API returned status {response.status}"}
+#                 if response.status != 200:
+#                     logger.error(f"Request error calling {api_url}: HTTP Status: {response.status} Response: {response_text}")
+#                     return {"error": f"Request error calling {api_url}: HTTP Status: {response.status} Response: {response_text}"}
 
-                try:
-                    return await response.json()
-                except Exception as e:
-                    logger.error(f"Failed to parse JSON response: {response_text}")
-                    return {"error": f"Invalid JSON response from cloud function: {str(e)}"}
+#                 try:
+#                     return await response.json()
+#                 except Exception as e:
+#                     logger.error(f"Failed to parse JSON response from {api_url}: {response_text}")
+#                     return {"error": f"Invalid JSON response from {api_url}: {str(e)}"}
 
-    except aiohttp.ClientError as e:
-        logger.error(f"Network error calling {api_url}: {str(e)}")
-        return {"error": f"Failed to call API: {str(e)}"}
+#     except aiohttp.ClientError as e:
+#         logger.error(f"Network error calling {api_url}: {str(e)}")
+#         return {"error": f"Network error calling {api_url}: {str(e)}"}
     
 
 # async def async_main() -> None:

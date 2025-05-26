@@ -2,7 +2,12 @@
 # https://www.youtube.com/watch?v=4Jpltb9crPM
 
 # pip install ollama
-# ollama pull llava
+# ollama list
+# ollama serve
+# ollama pull llava 
+# ollama pull llava:13b
+# ollama pull qwen3:8b
+# ollama pull llama4
 
 import ollama
 
