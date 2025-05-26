@@ -5,6 +5,8 @@ from pathlib import Path
 
 import glob
 
+# print(os.listdir())
+
 # for dirpath, dirnames, filenames in os.walk('.'):
 #     for filename in filename:
 #         counter = 0
@@ -31,4 +33,8 @@ path = Path(__file__)
 # for dirpath, dirnames, filenames in path.parent.walk():
 #     print(dirpath, dirnames, filenames)
 
-print(os.listdir())
+# path = Path().cwd()
+# for p in path.iterdir():
+#     print(p.absolute())
+
+
