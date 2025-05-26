@@ -1,9 +1,7 @@
 
 
-
 from openai import OpenAI
 client = OpenAI()
-
 
 # https://platform.openai.com/docs/guides/fine-tuning-best-practices
 # hyperparameter tuning for fine-tuning
