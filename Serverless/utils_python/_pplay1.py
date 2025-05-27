@@ -170,12 +170,9 @@ from enum import auto, IntFlag
 # if elif else try except finally raise assert break continue pass return yield
 # abs round sum min max pow avg floor ceil
 # sorted reversed map filter reduce zip enumerate
-# getattr delattr setattr 
+# getattr delattr setattr delattr
 
 # __dict__ :  stores object/class writable attributes as a dictionary - can modify attributes dynamically
-# Instance Attributes: For user-defined objects, __dict__ contains all instance attributes as key-value pairs
-# Class Attributes: For classes, __dict__ contains class-level attributes and methods
-# It only contains instance attributes, not class attributes
 # Read-Only for Built-in Types: Built-in types like int or list do not have a modifiable __dict__
 
 # class MyClass:
