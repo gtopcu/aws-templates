@@ -25,16 +25,18 @@ chmod +x myscript.sh
 sh myscript.sh
 
 psql -U postgres
+pgAdmin
 pg_ctl 
 pg_restore 
-pg-cron pg-vector pg-ai
+pg-cron 
+pg-vector 
+pg-ai
+pg-analytics
 psychopg2 
 transaction logs 
 unlogged tables
 
 -----------------------------------------------------------------------------------------------------
-
-pgAdmin
 
 psql -U postgres <-h localhost> -> Will ask for password
 psql --dbname $DB_NAME --host $ENDPOINT --username $DB_USER --set sslmode=require -c "SELECT * FROM myschema.mytable" 

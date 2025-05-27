@@ -20,7 +20,6 @@ CREATE TABLE table_name (
 ALTER SEQUENCE table_name_id_seq
 OWNED BY table_name.id;
 
-
 CREATE TABLE weathers(
     id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY
 )

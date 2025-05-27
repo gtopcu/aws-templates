@@ -81,6 +81,14 @@ CREATE TABLE mailing_list (
     )
 );
 
+UPDATE students 
+SET 
+    AVG = (MID1 + MID2) / 2,
+    RESULT = CASE 
+        WHEN (MID1 + MID2) / 2 >= 50 THEN 'PASS' 
+        ELSE 'FAIL' 
+    END;
+
 
 /*
 
