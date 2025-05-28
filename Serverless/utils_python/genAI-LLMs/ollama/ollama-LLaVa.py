@@ -12,6 +12,7 @@
 # ollama pull qwen3:8b
 # ollama push llama4
 
+
 #  create      Create a model from a Modelfile
 #  show        Show information for a model
 #  cp          Copy a model
