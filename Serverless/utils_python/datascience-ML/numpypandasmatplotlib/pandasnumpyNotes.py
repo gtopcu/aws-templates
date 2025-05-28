@@ -182,6 +182,7 @@ df = pd.read_csv("data.csv", sep=';')
 # df[2:4]               # rows 2:4
 # df["genre"]           # genre column
 # df[["A", "B"]]        # columns A and B
+# len(df.ids.unique())       # no of unique items
 # X = df.drop(columns=["genre"]) # drop column and return the rest, does not modify original
 # X = df.dropna()       # drop missing values
 # df = df.sort_values(by="A", ascending=False)
