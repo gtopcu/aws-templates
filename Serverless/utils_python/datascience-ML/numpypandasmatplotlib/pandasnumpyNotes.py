@@ -174,6 +174,7 @@ df = pd.read_csv("data.csv", sep=';')
 # df.show()
 # df.head(2)
 # df.tail(2)
+# df.set_index("id")["title"].to_dict()
 # df["columnName"] | df.columnName
 # df["D"] = df["A"] * 2 / df["B"]
 # df["create_date"] = dt.datetime.now()
