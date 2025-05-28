@@ -1,4 +1,7 @@
 
+
+====================================================================================================
+
 Conda + Libs: https://www.anaconda.com/download
 Sample Data: https://www.kaggle.com/
 
@@ -10,3 +13,10 @@ GUI/FE: Flask, Django, Pyramid, Tornado, CherryPy
 R packages: ggplot2, dplyr, tidyr, readr
 
 Scikit-learn(common algorithms i.e. decision trees, neural networks)
+
+====================================================================================================
+
+Recommendation Systems
+Collaborative Filtering and Content-Based Filtering
+Matrix Factorization Model Training / Tuning
+Kmeans Clustering
