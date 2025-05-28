@@ -1,13 +1,22 @@
 
 # https://www.youtube.com/watch?v=4Jpltb9crPM
+# https://ollama.com/download
 
 # pip install ollama
+# ollama -v | -h | --help
 # ollama list
+# ollama run llava:13b (auto-pull)
+# ollama ps
 # ollama serve
-# ollama pull llava 
-# ollama pull llava:13b
+# ollama stop llama4
 # ollama pull qwen3:8b
-# ollama pull llama4
+# ollama push llama4
+
+#  create      Create a model from a Modelfile
+#  show        Show information for a model
+#  cp          Copy a model
+#  rm          Remove a model
+
 
 import ollama
 
