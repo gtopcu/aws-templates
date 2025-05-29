@@ -29,6 +29,8 @@ npm install -g aws-cdk@8.4.0       # install specific version
 # export CDK_DEFAULT_ACCOUNT=12312312321
 # export CDK_DEFAULT_REGION=us-east-2
 
+NEW!! 29.05.2025
+cdk drift -> Get instant visibility into what's out of sync.
 
 cdk --version
 cdk bootstrap --profile <profile> -> Deploys the CDK Toolkit staging stack; see Bootstrapping
