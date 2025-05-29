@@ -45,6 +45,17 @@ Terminal: cursor | code
 Settings: Cmd+Shift+J or Command Palette(Cmd+Shift+P) > Cursor Settings
 Editor Settings: Command Palette(Cmd+Shift+P) > Preferences: Open Settings (UI)
 
+Context is the foundation that powers all of Cursor’s AI features. Here’s how it works:
+When you open a codebase, we automatically index your code to make it available as context.
+https://docs.cursor.com/context/@-symbols/overview
+
+Use @-symbols to precisely control what context you provide:
+- @files and @folders for specific paths
+- @web for external documentation
+- @git for version control context
+
+Configure rules to customize behavior
+Set up MCP for external context providers
 
 ------------------------------------------------------------------------------------------------------
 Copilot
