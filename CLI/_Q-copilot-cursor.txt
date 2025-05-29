@@ -8,8 +8,8 @@ https://aws.amazon.com/blogs/devops/amazon-q-developer-inline-chat/?trk=39c84365
 https://desktop-release.codewhisperer.us-east-1.amazonaws.com/latest/Amazon%20Q.dmg
 https://www.youtube.com/watch?v=xPZClVlvogI
 
-Code complete: Option + C
-Inline Chat: Command + i
+Option + C: Code complete
+Command + i: Inline Chat: 
 Tab: Display all options
 Left arrow to accept autocompletion
 
@@ -29,10 +29,21 @@ q chat
 @workspace - Get answers about your entire codebase, not just the open file i.e. "@workspace how is authentication handled?"
 @history - pass console history
 
+
 ------------------------------------------------------------------------------------------------------
 Cursor
 ------------------------------------------------------------------------------------------------------
+https://www.cursor.com/
+https://docs.cursor.com/
+https://docs.cursor.com/get-started/introduction
 
+⌘K: Inline Edit
+Tab: Code completion
+⌘I: Open the unified AI interface with Ask, Edit, and Agent modes
+
+Terminal: cursor | code
+Settings: Cmd+Shift+J or Command Palette(Cmd+Shift+P) > Cursor Settings
+Editor Settings: Command Palette(Cmd+Shift+P) > Preferences: Open Settings (UI)
 
 
 ------------------------------------------------------------------------------------------------------
