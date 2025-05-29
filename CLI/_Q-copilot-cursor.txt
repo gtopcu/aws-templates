@@ -1,0 +1,66 @@
+
+------------------------------------------------------------------------------------------------------
+Amazon Q
+------------------------------------------------------------------------------------------------------
+
+https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/what-is.html
+https://aws.amazon.com/blogs/devops/amazon-q-developer-inline-chat/?trk=39c84365-5c2d-4402-8c01-c5a6c3457227&sc_channel=sm
+https://desktop-release.codewhisperer.us-east-1.amazonaws.com/latest/Amazon%20Q.dmg
+https://www.youtube.com/watch?v=xPZClVlvogI
+
+Code complete: Option + C
+Inline Chat: Command + i
+Tab: Display all options
+Left arrow to accept autocompletion
+
+q cli: read/generate images(ie architectural diagrams)
+q update
+q chat  
+
+@workspace @git @history @env
+
+/clean     - Clear current dialog
+/doc       - Generate documentation
+/dev       - Ask for help implementing a new feature
+/test      - Generate unit tests
+/review    - Get recommendations
+/transform - Automatically upgrade Java code - ie. move Java 8 projects to Java 17
+
+@workspace - Get answers about your entire codebase, not just the open file i.e. "@workspace how is authentication handled?"
+@history - pass console history
+
+------------------------------------------------------------------------------------------------------
+Cursor
+------------------------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------------------------
+Copilot
+------------------------------------------------------------------------------------------------------
+
+# GitHub Copilot(Ask/Edit/Agent modes): 
+# @workspace @terminal @github @vscode 
+# #codebase #file #folder #changes #fetch #problems #searchResults #findTestFiles #testFailure
+# /help /clear /search /explain /new /fix /tests /startDebugging
+
+# Command + i                  -> Inline Chat
+# Command + Option + i         -> Sidebar Chat
+# Option + ]                   -> Next Suggestion
+# Option + [                   -> Previous Suggestion
+# Command + Option + Shift + c -> Code Complete
+# Command + Option + Shift + e -> Explain Code
+# Command + Option + Shift + t -> Test Code
+# Command + Option + Shift + f -> Fix Code
+# Command + Option + Shift + d -> Debug Code
+# Command + Option + Shift + s -> Search Code
+# Command + Option + Shift + r -> Refactor Code
+# Command + Option + Shift + a -> Ask Code
+# Command + Option + Shift + o -> Open Code
+# Command + Option + Shift + n -> New Code
+# Command + Option + Shift + p -> Paste Code
+# Command + Option + Shift + l -> List Code
+# Command + Option + Shift + x -> Execute Code
+# Command + Option + Shift + y -> Copy Code
+
+------------------------------------------------------------------------------------------------------

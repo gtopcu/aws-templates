@@ -1,4 +1,27 @@
 
+# TODO
+# Zoom In: Command+Shift 0
+# Zoom Out: Command -
+
+# pylint . --rcfile=.pylintrc .
+# disable=all disable=invalid-name disable=missing-class-docstring (remove this line)
+
+# safety scan --detailed-output --apply-fixes
+
+# ruff format .
+# ruff check . --fix
+# ruff check test.py --config ruff.toml
+# ruff check test.py --fix
+
+# import argparse
+# parser = argparse.ArgumentParser()
+# parser = argparse.ArgumentParser(description="sum the integers at the command line")
+# parser.add_argument('integers', metavar='int', nargs='+', type=int,  help='an integer to be summed')  
+# parser.add_argument('--log', default=sys.stdout, type=argparse.FileType('w'),  help='the file where the sum should be written') 
+# parser.add_argument("query_text", type=str, help="The query text.")
+# args = parser.parse_args()
+# query_text = args.query_text
+
 from typing import Self, Any, Optional, Final, Literal, LiteralString, NewType, Type, TypeVar, TypeAlias, TypedDict, Generic
 from collections import namedtuple, deque, OrderedDict, defaultdict, ChainMap
 from collections.abc import Generator, Callable, Iterable, Iterator, AsyncIterable
@@ -28,6 +51,7 @@ from enum import auto, IntFlag
 # OPEN_API_KEY = os.getenv("OPEN_AI_API_KEY")
 # if not OPEN_API_KEY:
 #     raise Exception("OPEN_API_KEY environment variable not set")
+
 
 # print("================================")
 # print(__name__)         # "__main__"
@@ -115,6 +139,13 @@ from enum import auto, IntFlag
 # sys.stdin
 # sys.stdout
 # sys.stderr
+# sys.version
+# sys.version_info
+
+
+# args:list[str] = sys.argv[:2]
+# sys.getsizeof("abc")
+
 
 # sys.exc_info()
 # sys.exception()
@@ -189,6 +220,13 @@ from enum import auto, IntFlag
 
 # -------------------------------------------------------------------------------------------------
 
+# print(str.__name__)
+# import string
+# string.digits, string.ascii_letters, string.punctuation, string.ascii_lowercase, string.ascii_uppercase, 
+# b"\0AxhAu"
+# r"db/data"
+# u"unicode"
+
 # my_list: list[int] = [1, 2, 3]
 # my_tuple: tuple[int, str] = (1, "Hello")
 # my_tuple2: tuple[int, ...] = (1, )
@@ -200,11 +238,43 @@ from enum import auto, IntFlag
 
 # my_list2 = [i for i in range(0,100,10) if i%5==0]
 # my_list3 = [*range(5)]
-# print(my_list3)
 # my_list4 = list(range(5))
-# print(my_list4)
+# matrix = [(x, y) for x in range(3) for y in range(3)]]
+# flattened = [val for sublist in my_list for val in sublist]
+
+# mylist = [1, 2, 3]
+# print(*mylist)
+# a, b, c = mylist
+# mylist = [1, 2, 3, 4, 5]
+# a, *b, c = mylist
+# mylist3 = [*mylist1, "combined", *mylist2]
+
+# my_dict: dict[str, Any] 
+# my_func(**my_dict))
+# combined_dict = {**my_dict1, **my_dict2}
+# my_dict3 = { **my_dict1, "timestamp": 1234567890 }
 
 # my_lambda = lambda x: x * x
+
+# PORT: Final[int] = 80080
+# def func() -> Literal["A", "B"]: ...
+# MODE = Literal['r', 'rb', 'w', 'wb']
+# SQL = LiteralString('SELECT * FROM students') # to avoid SQL injection
+# output: Annotated[list, my_func]
+
+# import yaml
+# with open(definition_path, "r") as f:
+#   definition = yaml.safe_load(f)
+# yaml.dump(definition)
+
+# import pandas as pd
+# df = pd.DataFrame(list)
+# df.to_csv("output.csv")
+
+# import numpy as np
+# np.ones((3, 5))
+# matrix = np.random.rand(3, 5)
+# matrix = np.dot(10, matrix)
 
 # -------------------------------------------------------------------------------------------------
 
