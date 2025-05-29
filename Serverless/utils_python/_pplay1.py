@@ -42,6 +42,34 @@ from enum import auto, IntFlag
 # print(__dict__)       # = {'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <_frozen_importlib_external.SourceFileLoader object at 0x7f8c4c2d3a90>, '__spec__': ModuleSpec(name='aws-templates.Serverless.utils_python._pplay', loader=<_frozen_importlib_external.SourceFileLoader object at 0x7f8c4c2d3a90>, origin='aws-templates/Serverless/utils_python/_pplay.py'), '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, '__file__': 'aws-templates/Serverless/utils_python/_pplay.py', '__cached__': None}
 # print("================================")
 
+# ================================================================================================================================
+
+# __dict__ :  stores object/class writable attributes as a dictionary - can modify attributes dynamically
+# Read-Only for Built-in Types: Built-in types like int or list do not have a modifiable __dict__
+# class MyClass:
+#     def __init__(self, name, age):
+#         self.name = name
+#         self.age = age
+# obj = MyClass("Alice", 30)
+# print(obj.__dict__)  # Output: {'name': 'Alice', 'age': 30}
+# obj.__dict__['name'] = "Bob" # Modifying attributes dynamically
+# print(obj.name)  # Output: Bob
+
+# -------------------------------------------------------------------------------------------------
+
+# raise Exception("")
+# raise RuntimeError("")
+# raise SystemError("")
+
+# id len type isinstance issubclass str repr chr ord dir global nonlocal iter next 
+# is in not and or not any all 
+# if elif else try except finally raise assert break continue pass return yield
+# abs round sum min max pow avg floor ceil
+# sorted reversed map filter reduce zip enumerate
+# getattr delattr setattr delattr
+
+# ================================================================================================================================
+
 # class MyClass(Exception):
 #     """ This is my nice Person class"""
 #     class_var:Final = 0 # class variable
@@ -161,32 +189,6 @@ from enum import auto, IntFlag
 
 # -------------------------------------------------------------------------------------------------
 
-# raise Exception("")
-# raise RuntimeError("")
-# raise SystemError("")
-
-# id len type isinstance issubclass str repr chr ord dir global nonlocal iter next 
-# is in not and or not any all 
-# if elif else try except finally raise assert break continue pass return yield
-# abs round sum min max pow avg floor ceil
-# sorted reversed map filter reduce zip enumerate
-# getattr delattr setattr delattr
-
-# __dict__ :  stores object/class writable attributes as a dictionary - can modify attributes dynamically
-# Read-Only for Built-in Types: Built-in types like int or list do not have a modifiable __dict__
-
-# class MyClass:
-#     def __init__(self, name, age):
-#         self.name = name
-#         self.age = age
-
-# obj = MyClass("Alice", 30)
-# print(obj.__dict__)  # Output: {'name': 'Alice', 'age': 30}
-# obj.__dict__['name'] = "Bob" # Modifying attributes dynamically
-# print(obj.name)  # Output: Bob
-
-# -------------------------------------------------------------------------------------------------
-
 # my_list: list[int] = [1, 2, 3]
 # my_tuple: tuple[int, str] = (1, "Hello")
 # my_tuple2: tuple[int, ...] = (1, )
@@ -218,13 +220,13 @@ from enum import auto, IntFlag
 # iterator_generator_func((i for i in range(5)))
 # iterator_generator_func([*range(5)])
 
-def generator():
-    yield 1
-    yield 2
+# def generator():
+#     yield 1
+#     yield 2
 
-print(next(generator))
-print(next(generator))
-print(next(generator))
+# print(next(generator))
+# print(next(generator))
+# print(next(generator))
 
 # -------------------------------------------------------------------------------------------------
 
@@ -290,7 +292,6 @@ print(next(generator))
 # from decimal import Decimal, getcontext, setcontext, ExtendedContext, InvalidOperation, DivisionByZero
 # setcontext(ExtendedContext)
 # getcontext().prec = 3
-
 # my_decimal = Decimal(1)
 # print(my_decimal / Decimal(3))
 

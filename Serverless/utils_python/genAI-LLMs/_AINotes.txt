@@ -3,6 +3,20 @@ RFT - Reinforcement Fine Tuning
 Code-based or LLM-based graders / evaluators
 LLM-as-a-judge
 
+====================================================================================================
+
+Conda + Libs: https://www.anaconda.com/download
+Sample Data: https://www.kaggle.com/
+
+Data Exploration and Transformation: numpy, pandas, Intake, Dask, Apache Airflow
+Visualization: Mathplotlib, Bokeh, Plotly, seaborn, Holoviews
+AI & ML: scikit-learn, Tensorflow, Keras, PyTorch, XGBoost
+NLP: NLTK, Gensim, Transformers, PyTorch
+GUI/FE: Flask, Django, Pyramid, Tornado, CherryPy
+R packages: ggplot2, dplyr, tidyr, readr
+
+Scikit-learn(common algorithms i.e. decision trees, neural networks)
+
 =================================================================
 Machine Learning
 =================================================================
@@ -69,3 +83,10 @@ These embeddings capture semantic meaning, allowing for similarity searches.
 - Image similarity
 - Anomaly detection
 - Retrieval Augmented Generation (RAG)
+
+====================================================================================================
+
+Recommendation Systems
+Collaborative Filtering and Content-Based Filtering
+Matrix Factorization Model Training / Tuning
+Kmeans Clustering

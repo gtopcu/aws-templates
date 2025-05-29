@@ -151,7 +151,7 @@ import matplotlib.pyplot as plt
 
 # data:list[str] = requests.get("http://data.csv").content.decode().split("\n")
 
-df = pd.read_csv("data.csv", sep=';')
+# df = pd.read_csv("data.csv", sep=';')
 # df = pd.read_csv("data.csv", index_col = 0, parse_dates=True, delimiter=" ",  sep=';')
 # pd.read_clipboard | pd.read_excel | pd.read_json| pd.read_parquet| pd.read_pickle | pd.read_sql | pd.read_hdf
 # pd.to_csv() | pd.to_numpy| to_clipboard | pd.to_excel | pd.to_json | pd.to_parquet | pd.to_pickle | pd.to_sql | pd.to_hdf

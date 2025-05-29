@@ -4,8 +4,22 @@
 # https://docs.pytest.org/en/stable/how-to/monkeypatch.html
 # https://pytest-mock.readthedocs.io/en/latest/usage.html
 # https://docs.python.org/3/library/unittest.mock.html#patch
-
 # http://httpbin.org/
+
+Debugging Pytest tests:
+https://www.youtube.com/watch?v=zL2YTdIj3R8
+
+launch.json:
+{
+    "name": "Pytest",
+    "type": "debugpy",
+    "request": "launch",
+    "module": "pytest",
+    "args": ["${relativeFileDirname}"],
+    //"args": ["${workspaceFolder}/tests"],
+    "justMyCode": True,
+},
+
 
 pytest --version
 python -m pytest
@@ -84,17 +98,3 @@ pytest -vs
     --durations=10: show 10 slowest tests
 
 ------------------------------------------------------------------------------------    
-
-Debugging Pytest tests:
-https://www.youtube.com/watch?v=zL2YTdIj3R8
-
-launch.json:
-{
-    "name": "Pytest",
-    "type": "debugpy",
-    "request": "launch",
-    "module": "pytest",
-    "args": ["${relativeFileDirname}"],
-    //"args": ["${workspaceFolder}/tests"],
-    "justMyCode": True,
-},
