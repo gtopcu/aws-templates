@@ -327,7 +327,7 @@ Serverless:
            attribute based access control
 - Cognito: New landing page/managed login, pricing tiers (Lite/Essentials/Plus), passkey auth, refresh key rotation, 
            OIDC prompt parameter support
-- S3: Conditional writes(if-none-match/if-match bucket policy), ExpressOneZone append data, 1M buckets, TransferFamily web apps, 
+- S3: Conditional writes(if-none-match/if-match bucket policy), ExpressOneZone append data, DirectoryBuckets, 1M buckets, TransferFamily web apps, 
       AWS Backup S3 cross-region bucket replication, GeneralPurpose/Directory buckets, Table buckets for ApacheIceberg Metadata(S3 tables)
 - Amplify: Amplify AI kit, StorageBrowser for S3, WAF Support(IP filtering, geo-restriction etc)
 - AppSync: EventsAPI(EventBridge->Appsync Async+WebSockets), cross-account API access with RAM
