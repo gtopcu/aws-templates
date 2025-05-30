@@ -33,13 +33,15 @@ sys.path.append()
 
   pip <command> [options]
 
-  pip install \
+# Docker Lambda Layer
+pip install \
     --platform manylinux2014_x86_64 \
-    --target=<your_package_dir> \
     --implementation cp \
-    --python-version 3.13 \
+    --python-version 3.12 \
     --only-binary=:all: \
+    -r requirements.txt  -t /opt/python/
     --upgrade pydantic
+
 
   install                     Install packages.
   download                    Download packages.

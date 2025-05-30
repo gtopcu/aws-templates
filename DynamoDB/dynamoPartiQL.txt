@@ -1,0 +1,11 @@
+
+SELECT * 
+FROM "GLOBAL_CONSTANTS_DATA" 
+WHERE "PK" = 'ConversionFactor' 
+  AND begins_with("SK", 'EMPLOYEE_COMMUTING_LAND')
+  AND scope = 1
+
+
+
+
+

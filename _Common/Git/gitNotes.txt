@@ -21,6 +21,7 @@ Git Fetch
 git init
 git clean -fxfd -> Deletes all untracked files & directories(including ones in .gitignore) from working directory
 git clone https://github.com/hukanege.git
+git clone -b branch_name --single-branch https://github.com/hukanege.git
 git tag -a 1.2.9 -m "Bump version"
 git add README.md
 git add .
