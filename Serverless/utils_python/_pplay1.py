@@ -52,7 +52,6 @@ from enum import auto, IntFlag
 # if not OPEN_API_KEY:
 #     raise Exception("OPEN_API_KEY environment variable not set")
 
-
 # print("================================")
 # print(__name__)         # "__main__"
 # # print(__all__)        #  ("module1", "module2")
@@ -132,21 +131,13 @@ from enum import auto, IntFlag
 
 # -------------------------------------------------------------------------------------------------
 
-# import traceback
-# from inspect import istraceback
-# import sys
-
 # sys.stdin
 # sys.stdout
 # sys.stderr
 # sys.version
 # sys.version_info
-
-
 # args:list[str] = sys.argv[:2]
 # sys.getsizeof("abc")
-
-
 # sys.exc_info()
 # sys.exception()
 # sys.exec_prefix
@@ -155,6 +146,105 @@ from enum import auto, IntFlag
 # sys.last_traceback
 # sys.last_exc
 
+# os.getcwd()
+# os.listdir()
+# os.getenv("DDB_TABLE", "table1")
+# os.environ.get("DDB_TABLE", "table1")
+# os.environ["POSTGRE_IP"]
+# os.environ.setdefault("POSTGRE_PORT", 5432)
+
+# os.path.basename(__file__)
+# current_dir = os.path.dirname(os.path.abspath(__file__))
+# file_path = os.path.join(current_dir, filename)
+# if not os.path.exists(file_path):
+#     raise FileNotFoundError(f"File not found: {file_path}")
+# os.path.split(os.path.abspath(__file__))[0]
+# os.path.splitext("note.txt") -> txt
+# os.path.expanduser(os.path.join("~", "myarchive"))
+# os.makedirs("test", exist_ok=True)
+# os.rmdir("test")
+# os.chmod("test.txt", 0o777)
+# os.chown(("test.txt", 1000, 1000)
+# os.system("clear")
+
+# os.getenv("PYTHONPATH")
+# for path in sys.path:
+#     print("Path: " + path)
+# sys.path.append(os.getcwd() + "/.venv/lib/python3.13/site-packages")
+# sys.path.insert(0, str(Path(__file__).parent))
+# os.path.join(__file__, "test.txt")
+# current_dir = os.path.dirname(os.path.abspath(__file__))
+# parent_dir = os.path.dirname(os.path.dirname(current_dir))
+# sys.path.append(parent_dir)
+
+# shutil.copytree("lambda", "build/lambda_package")
+# shutil.make_archive("build/lambda", "zip", "build/lambda_package") # zip/tar
+# shutil.rmtree("build/lambda_package")
+# subprocess.run(["python", "app.py", "--docs_dir", "/docs")
+# subprocess.check_call([
+#     "pip",
+#     "install",
+#     "-r", "lambda/requirements.txt",
+#     "-t", "build/lambda_package"
+# ])
+# exit(1)
+# sys.exit(0)
+
+# for dirpath, dirnames, filenames in os.walk('.'):
+#     for filename in filename:
+#         counter = 0
+#         # print(os.path.join(dirname, filename))
+#         if filename.endswith(".py"):
+#             with open(os.path.join(dirname, filename), "r") as file:
+#                 text = file.read()
+#                 print(filename, len(text))
+
+# for dirpath, dirnames, filenames in path.parent.walk():
+#     print(dirpath, dirnames, filenames)
+
+# for p in path.iterdir():
+#     print(p.absolute())
+
+# from pathlib import Path
+# Path(__file__).resolve().parent.is_dir()
+# Path(__file__).absolute().joinpath("..").mkdir(mode=0o777, parents=True, exist_ok=True)
+# print(Path.home())
+# print(Path.cwd())
+# path.glob("*.py")
+# path.rglob("*.py")
+# text = path.read_text("utf-8", errors="replace", newline="\n")
+# data:bytes = path.read_bytes()
+# text: str = data.decode("utf-8", errors="replace")
+
+# from io import TextIOWrapper
+# with path.open(mode="r", buffering=-1, encoding="utf-8", errors="replace", newline="\n") as file:
+#     print(file.read(-1))
+
+# -------------------------------------------------------------------------------------------------
+
+# import logging
+# logger = logging.getLogger(__name__)
+# logger.setLevel(logging.DEBUG)
+# logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+# logging.basicConfig(
+#       level=logging.DEBUG, # DEBUG, INFO, WARNING, ERROR, CRITICAL
+#       format="%(asctime)s %(levelname)-8s %(message)s %(name)s",
+#       datefmt="%Y-%m-%d %H:%M:%S"
+#     filename="app.log",
+#     filemode="w", # overwrite the log file each time the program runs
+#     stream=sys.stdout, # output to console
+#     handlers=[
+#         logging.StreamHandler(), 
+#         logging.FileHandler("app.log", mode="w")], # overwrite the log file each time the program runs
+#         logging.NullHandler(), # no output
+#     ]
+# )
+# logger.info("Logging is set up.")
+# logger.info("INFO", stack_info=True, stacklevel=5)
+# logger.error("ERROR", exc_info=True)
+
+# import traceback
+# from inspect import istraceback
 # traceback.print_exception(type(err), err, err.__traceback__)
 # traceback.print_exception(*sys.exc_info(), limit=5, file=sys.stdout)
 # traceback.print_exc()
@@ -174,44 +264,34 @@ from enum import auto, IntFlag
 # traceback.format_tb()
 # traceback.clear_frames()
 
-# import logging
-# logger = logging.getLogger(__name__)
-# logger.setLevel(logging.DEBUG)
-# logging.basicConfig(
-#       level=logging.DEBUG, # DEBUG, INFO, WARNING, ERROR, CRITICAL
-#       format="%(asctime)s %(levelname)-8s %(message)s %(name)s",
-#       datefmt="%Y-%m-%d %H:%M:%S"
-#     filename="app.log",
-#     filemode="w", # overwrite the log file each time the program runs
-#     stream=sys.stdout, # output to console
-#     handlers=[
-#         logging.StreamHandler(), 
-#         logging.FileHandler("app.log", mode="w")], # overwrite the log file each time the program runs
-#         logging.NullHandler(), # no output
-#     ]
-# )
-# logger.info("Logging is set up.")
-# logger.info("INFO", stack_info=True, stacklevel=5)
-# logger.error("ERROR", exc_info=True)
-
 # -------------------------------------------------------------------------------------------------
 
-# import time
-# import timeit
+# from datetime import datetime, timezone, timedelta
+# datetime.now(timezone.utc).isoformat(timespec="seconds")
+# datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+# datetime.strptime("2024-03-24", "%Y-%m-%d").date()
+# date.today()
+# date.day
+# date.month
+# date.year
+# my_date + timedelta(hours=1)
 
+# import time
 # time.sleep(1)
-# print(time.time()) 
-# epoch = time.mktime((2024, 3, 24, 0, 0, 0, 0, 0, -1))
-# print(time.localtime())
-# print(time.gmtime())
-# print(time.asctime((2024, 3, 24, 0, 0, 0, 0, 0, -1)))
-# print(time.strftime("%Y-%m-%d %H:%M:%S%z")) #, time.localtime(epoch))
-# print(time.strptime("2024-03-24", "%Y-%m-%d"))
+# time.time()
 # time.perf_counter()
 # time.time_ns()
+# time.mktime((2024, 3, 24, 0, 0, 0, 0, 0, -1))
+# time.localtime()
+# time.gmtime()
+# time.asctime((2024, 3, 24, 0, 0, 0, 0, 0, -1))
+# time.strftime("%Y-%m-%d %H:%M:%S%z") #, time.localtime(epoch)
+# time.strptime("2024-03-24", "%Y-%m-%d")
 # time.monotonic()
 # time.process_time() 
 # time.thread_time()
+
+# import timeit
 # timeit.timeit("x = 1", number=1000)
 # timeit.repeat("x = 1", repeat=3, number=1000)
 # timeit.Timer("x = 1").timeit(number=1000)
@@ -226,6 +306,69 @@ from enum import auto, IntFlag
 # b"\0AxhAu"
 # r"db/data"
 # u"unicode"
+
+# name: str = "John"
+# name.join("Doe")
+# print("PK_%s" % ID)
+# "request: {}"".format(json.dumps(event))
+# " ".removeprefix("")
+# " ".removesuffix("")
+# ",".join(mylist)
+# " ".casefold()
+# " ".strip()
+# "str".isdigit()
+# "str".isalnum()
+# "mr. gokhan topcu".title()
+# any(char in string.digits for char in pw)
+
+# -------------------------------------------------------------------------------------------------
+
+# my_set = {0, 1, 2} # set()
+# if 0 in my_set | if 0 not in my_set 
+# my_set.add(1)
+# my_set.remove(1)
+# my_set.discard(1)
+# my_set.pop()
+# my_set.update()
+# my_set.union()
+# my_set.copy()
+# my_set.clear()
+# my_set.issubset()
+# my_set.issuperset()
+# my_set.isdisjoint()
+# my_set.difference()
+# my_set.difference_update()
+# my_set.intersection()
+# my_set.intersection_update()
+# my_set.symmetric_difference()
+# my_set.symmetric_difference_update()
+
+# my_list = [0, 1, 2]
+# del my_list[0]
+# my_list.append(3)
+# my_list.extend([4, 5])
+# my_list.insert(0, "A")
+# my_list.pop()
+# my_list.count(0)
+# my_list.remove(0)
+# my_list.copy()
+# my_list.clear()
+# my_list.sort(reverse=True)
+# my_list.reverse()
+
+# my_dict = {}
+# del my_dict["key"]
+# my_dict.get(key="key", default=None)
+# my_dict.pop(key="key", default=None)
+# my_dict.popitem()
+# my_dict.keys()
+# my_dict.values()
+# my_dict.items()
+# my_dict.copy()
+# my_dict.clear()
+# my_dict.fromkeys(my_list)
+# my_dict.setdefault(key="key", default=None)
+# my_dict.update(my_dict)
 
 # my_list: list[int] = [1, 2, 3]
 # my_tuple: tuple[int, str] = (1, "Hello")
@@ -254,6 +397,8 @@ from enum import auto, IntFlag
 # combined_dict = {**my_dict1, **my_dict2}
 # my_dict3 = { **my_dict1, "timestamp": 1234567890 }
 
+# -------------------------------------------------------------------------------------------------
+
 # my_lambda = lambda x: x * x
 
 # PORT: Final[int] = 80080
@@ -261,6 +406,15 @@ from enum import auto, IntFlag
 # MODE = Literal['r', 'rb', 'w', 'wb']
 # SQL = LiteralString('SELECT * FROM students') # to avoid SQL injection
 # output: Annotated[list, my_func]
+
+# try:
+#     print(1/0)
+# except ZeroDivisionError as e:
+#     print(f"Error during operation: {str(e)}")
+
+# from pprint import pprint
+# bowie = dict(name="David Bowie", age=86)
+# pprint(bowie, indent=4, sort_dicts=False)
 
 # import yaml
 # with open(definition_path, "r") as f:
