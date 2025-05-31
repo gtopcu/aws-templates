@@ -1,0 +1,83 @@
+
+-----------------------------------------------------------------------------------------------------------------------------------
+AWS CLI - EBS
+-----------------------------------------------------------------------------------------------------------------------------------
+
+# Create a new EBS volume
+aws ec2 create-volume --volume-type gp3 --size 100 --availability-zone us-east-1a
+
+# Attach EBS volume to EC2 instance
+aws ec2 attach-volume --volume-id vol-1234567890abcdef0 --instance-id i-1234567890abcdef0 --device /dev/sdf
+
+# Detach EBS volume from EC2 instance
+aws ec2 detach-volume --volume-id vol-1234567890abcdef0
+
+# Delete EBS volume
+aws ec2 delete-volume --volume-id vol-1234567890abcdef0
+
+# Describe EBS volumes
+aws ec2 describe-volumes
+
+# Create snapshot of EBS volume
+aws ec2 create-snapshot --volume-id vol-1234567890abcdef0 --description "My snapshot"
+
+# Delete snapshot
+aws ec2 delete-snapshot --snapshot-id snap-1234567890abcdef0
+
+# Modify EBS volume (e.g. increase size)
+aws ec2 modify-volume --volume-id vol-1234567890abcdef0 --size 200
+
+# Copy snapshot to another region
+aws ec2 copy-snapshot --source-region us-east-1 --source-snapshot-id snap-1234567890abcdef0 --destination-region us-west-2
+
+# Enable EBS encryption by default in region
+aws ec2 enable-ebs-encryption-by-default
+
+# Disable EBS encryption by default in region
+aws ec2 disable-ebs-encryption-by-default
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+Adding new EBS Disc To Linux:
+lsblk (list disks, / means root disk)
+file -s  /dev/xvdf (data means initial, no data)
+mkfs -t ext4 /dev/xvdf (create ext4 fs)
+cd / (go to root dir)
+mkdir extmount
+mount /dev/xvdf /filesystem (mount filesystem dir to new disk)
+cd filesystem
+echo "Hello Hukanege" > hello.txt
+df -h
+df -T
+
+Unmounting:
+cd / (go to root dir)
+umount -d /dev/xvdf 
+lsblk (list disks, / means root disk)
+
+Extending/resizing EC2 EBS volume:
+https://medium.com/@hustle.averykang/extend-the-volume-size-of-an-ec2-instance-44c0feedc61b
+
+~$ lsblk
+NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+nvme0n1     259:0    0    50G  0 disk 
+├─nvme0n1p1 259:1    0    10G  0 part /
+├─nvme0n1p2 259:2    0    20G  0 part /mnt/data
+└─nvme0n1p3 259:3    0    20G  0 part /mnt/backup
+
+lsblk
+df -T
+sudo growpart /dev/nvme0n1 1
+
+# For ext2/ext3/ext4 file systems:
+# sudo resize2fs /dev/<partition-name>
+sudo resize2fs /dev/nvme0n1p1
+
+# For XFS file systems:
+sudo xfs_growfs /mnt
+
+df -h
+
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/nvme0n1p1  128G  13G  115G  10% /
+
