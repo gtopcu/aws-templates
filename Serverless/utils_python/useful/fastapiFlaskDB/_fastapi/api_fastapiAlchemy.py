@@ -31,6 +31,7 @@ from starlette.responses import RedirectResponse, HTMLResponse, JSONResponse, Pl
 from sqlalchemy import create_engine, ForeignKey, Column, Integer, Float, String, CHAR, Text, DateTime, Boolean
 # from sqlalchemy import func, sum, min, max, or_, not_
 from sqlalchemy.orm import sessionmaker, Session, declarative_base, Mapped, mapped_column
+# from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 # from sqlalchemy.orm import relationship, backref, joinedload, subqueryload, selectinload, lazyload
 # from sqlalchemy.sql.expression import select, update, union, alias, delete, bindparam, outerjoin
 # from sqlalchemy.sql.functions import concat, count, current_date, current_timestamp, current_time, sysdate
@@ -98,6 +99,12 @@ def get_db():
     finally:
         db.close()
 
+# async def get_db() -> AsyncSession:
+#     db = AsyncSessionLocal()
+#     try:
+#         yield db
+#     finally
+#         db.close()
 
 app = FastAPI()
 
