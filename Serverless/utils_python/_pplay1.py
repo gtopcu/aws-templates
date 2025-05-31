@@ -319,7 +319,7 @@ from enum import auto, IntFlag
 # "str".isdigit()
 # "str".isalnum()
 # "mr. gokhan topcu".title()
-# any(char in string.digits for char in pw)
+# any(char in string.digits for char in "hello")
 
 # -------------------------------------------------------------------------------------------------
 
