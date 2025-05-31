@@ -355,7 +355,8 @@ Others:
 - Compute: I8g(IO optimized), I7ie(storage optimized), U7ie(6&8TiB high-memory), P5en, F2(FPGA), TR2 Instances & UltraServers, 
            EBS time-based snapshot copy(15m-48h), instant start Capacity Blocks, future reservations, provisioned rate for volume init,
            EFS cross-account replication & up to 2.5 million IOPS per file system(x10),
-           EC2 Optimized CPU config during autoscaling for licensing, zonal shift for autoscaling,  EC2 bandwith config for EBS & VPC
+           EC2 Optimized CPU config during autoscaling for licensing, zonal shift for autoscaling,  EC2 bandwith config for EBS & VPC,
+           S3 auto mountpoints at EC2 startup
 - Network: VPC block public access, PrivateLink private subnets(VPC endpoints & RAM) and cross-region support,
            SecurityGroup sharing(same account & region), ALB Header Modification, Route53 DNS Resolver Firewall Advanced
 - RDS: Aurora DSQL - Postgre16, no FKs/triggers/extensions/vectors, single-region %99.99% multi-region 99.999% availability, 
