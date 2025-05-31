@@ -1,5 +1,35 @@
 
-from datetime import datetime, timedelta, timezone, UTC
+
+# ---------------------------------------------------------------------------------------------------
+
+# https://pypi.org/project/python-dateutil/1.4/
+# https://www.geeksforgeeks.org/introduction-to-python-dateutil-package/
+# pip install python-dateutil
+
+# from dateutil import parser
+
+# # Example date strings
+# date_str1 = "2024-09-16"
+# date_str2 = "16th September, 2024"
+# date_str3 = "09/16/2024"
+
+# # Parsing date strings
+# date1 = parser.parse(date_str1)
+# date2 = parser.parse(date_str2)
+# date3 = parser.parse(date_str3)
+
+# # Print parsed dates
+# print("Parsed Date 1:", date1)
+# print("Parsed Date 2:", date2)
+# print("Parsed Date 3:", date3)
+
+# # Calculating the difference between two dates
+# date_diff = date2 - date1
+# print("Difference between Date 2 and Date 1:", date_diff)
+
+# ---------------------------------------------------------------------------------------------------
+
+# from datetime import datetime, timedelta, timezone, UTC
 # import datetime
 # from pytz import timezone
 # import isodate
@@ -18,9 +48,9 @@ from datetime import datetime, timedelta, timezone, UTC
 # age = (date.today() - birthday).days // 365
 # print(age)
 
-DATE_FORMAT : str           = "%Y-%m-%d %H:%M:%S"   # 2024-03-24 14:03:42
-DATE_FORMAT_ISO : str       = "%Y-%m-%dT%H:%M:%S"   # 2024-03-24T14:03:42 #ISO8601 
-DATE_FORMAT_ISO_TZ: str     = "%Y-%m-%dT%H:%M:%S%Z" # 2024-03-24T14:03:42+03
+# DATE_FORMAT : str           = "%Y-%m-%d %H:%M:%S"   # 2024-03-24 14:03:42
+# DATE_FORMAT_ISO : str       = "%Y-%m-%dT%H:%M:%S"   # 2024-03-24T14:03:42 #ISO8601 
+# DATE_FORMAT_ISO_TZ: str     = "%Y-%m-%dT%H:%M:%S%Z" # 2024-03-24T14:03:42+03
 
 # print(datetime.now())
 # date_time = datetime(2024, 11, 8, 12, 15, 00, tzinfo=UTC)
