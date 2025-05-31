@@ -1,4 +1,6 @@
+
 # https://pypi.org/project/requests-aws4auth/
+
 import requests
 from requests_aws4auth import AWS4Auth
 from botocore.session import Session

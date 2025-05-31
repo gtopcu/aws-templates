@@ -15,5 +15,5 @@ Where aws-auth-data.json is:
    "AuthFlow" : "USER_PASSWORD_AUTH",
    "ClientId" : "75........................"
 }
-The user pool client must allow USER_PASSWORD_AUTH for this to work - that's an AWS-side setting.
+The user pool client must allow USER_PASSWORD_AUTH for this to work 
 
