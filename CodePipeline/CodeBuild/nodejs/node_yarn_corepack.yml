@@ -1,0 +1,24 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - npm install -g corepack
+      - corepack enable
+      - corepack prepare yarn@4.0.2 --activate
+
+  pre_build:
+    commands:
+      - yarn install --frozen-lockfile
+
+  build:
+    commands:
+      - yarn build
+      - ls -la
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: 'dist'

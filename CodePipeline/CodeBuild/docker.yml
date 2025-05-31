@@ -1,4 +1,5 @@
-version: 0.2 
+#buildspec.yml
+version: 0.2
 
 env:
   variables:

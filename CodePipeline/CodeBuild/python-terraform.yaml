@@ -1,0 +1,38 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.13
+    commands:
+      - "curl -s https://releases.hashicorp.com/terraform/1.7.0/terraform_1.7.0_linux_amd64.zip -o terraform.zip"
+      - "unzip terraform.zip -d /usr/local/bin"
+      - "chmod 755 /usr/local/bin/terraform"
+
+  pre_build:
+    on-failure: ABORT
+    commands:
+      - echo "Executing pre-build phase"
+      - terraform --version
+      - chmod +x ./post-deployment-appsync.sh
+      - ls -l ./post-deployment-appsync.sh  # Verify the script permissions and existence
+
+  build:
+    on-failure: ABORT
+    commands:
+      - echo "Executing build phase"
+      - cd terraform
+      - terraform init 
+        -backend-config="bucket=${TFSTATE_BUCKET}" 
+        -backend-config="key=${TFSTATE_KEY}" 
+        -backend-config="region=${TFSTATE_REGION}"
+      - terraform validate
+      - terraform plan -var "environment=${ENVIRONMENT}" -var "project_name=${PROJECT_NAME}" -out=tfplan
+
+  post_build:
+    commands:
+      - echo "Executing post-build phase"
+      - terraform apply -auto-approve tfplan
+      - cd ..
+      - ./post-deployment-appsync.sh
+      # Additional post-build steps if needed

@@ -13,7 +13,7 @@ env:
 phases:
   install:
     runtime-versions:
-      python: 3.12
+      python: 3.13
     commands:
       - echo "Starting install phase"
       - pip install --upgrade awscli
