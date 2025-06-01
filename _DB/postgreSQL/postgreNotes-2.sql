@@ -2,6 +2,8 @@
 
 /* https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-data-types/ */
 
+EXPLAIN (SELECT * FROM customers)
+
 DROP TABLE IF EXISTS table_name CASCADE;
 ALTER TABLE table_name RENAME TO new_table_name;
 

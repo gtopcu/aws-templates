@@ -51,16 +51,6 @@ sudo -u postgres psql
 
 -----------------------------------------------------------------------------------------------------
 
-SELECT version();
-SELECT current_database();
-SELECT inet_server_addr(), inet_server_port();
-SELECT now();
-SELECT gen_random_uuid()
-date_trunc('hour', created_at) AS hour
-LOWER() HIGHER() SUM()
-NOW() - INTERVAL '30 days'
-
-timing on
 
 SHOW TIMEZONE;
 SET timezone = 'America/Los_Angeles';

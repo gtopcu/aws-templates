@@ -1,12 +1,44 @@
 
-EXPLAIN (SELECT * FROM customers)
-
 /*
 https://www.sqlekibi.com/2025/05/26/postgresql-performans-iyilestirme-rehberi-autovacuum-indexler-ve-paralel-sorgular/
 
-CREATE UNLOGGED TABLE fast_table 
-SELECT * FROM pg_indexes WHERE tablename = 'my_table';
+B-TREE: Check if equal / sorting
+HASH: Check if equal
+GIN: Full-text search & JSONB
+BRIN: For sparse data in large tables
+SP-GIST
+GIST
 
+CREATE UNLOGGED TABLE fast_table 
+EXPLAIN (SELECT * FROM customers)
+
+SELECT * FROM information_schema.tables;
+SELECT * FROM pg_catalog.pg_settings
+SELECT * FROM pg_catalog.pg_extension
+SELECT * FROM pg_catalog.pg_user
+SELECT * FROM pg_catalog.pg_group
+SELECT * FROM pg_catalog.pg_policies
+SELECT * FROM pg_catalog.pg_roles
+SELECT * FROM pg_catalog.pg_trigger
+SELECT * FROM pg_catalog.pg_views
+SELECT * FROM pg_catalog.pg_matviews
+SELECT * FROM pg_catalog.pg_database
+SELECT * FROM pg_catalog.pg_namespace
+SELECT * FROM pg_catalog.pg_foreign_table
+SELECT * FROM pg_catalog.pg_tablespace
+SELECT * FROM pg_catalog.pg_tables WHERE tablename = 'my_table';
+SELECT * FROM pg_catalog.pg_indexes WHERE tablename = 'my_table';
+
+
+
+-------------------------------------------------------------------------
+SELECT * FROM pg_settings
+-------------------------------------------------------------------------
+max_connections = 1669
+max_parallel_workers = 8
+max_parallel_workers_per_gather = 2
+max_worker_processes = 8
+shared_buffers = 4GB
 autovacuum = on
 autovacuum_vacuum_scale_factor = 0.2
 autovacuum_analyze_scale_factor = 0.1
@@ -18,12 +50,6 @@ autovacuum_vacuum_cost_delay = 20ms
 autovacuum_vacuum_cost_limit = 200
 log_min_duration_statement = 500ms
 
-B-TREE: Check if equal / sorting
-HASH: Check if equal
-GIN: Full-text search & JSONB
-BRIN: For sparse data in large tables
-SP-GIST
-GIST
 
 */
 

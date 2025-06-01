@@ -3,6 +3,17 @@
 https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-serial/
 */
 
+SELECT version();
+SELECT current_database();
+SELECT inet_server_addr(), inet_server_port();
+SELECT now();
+SELECT gen_random_uuid()
+date_trunc('hour', created_at) AS hour
+LOWER() HIGHER() SUM()
+NOW() - INTERVAL '30 days'
+
+timing on
+
 SMALLSERIAL	    2 bytes	    1 to 32,767
 SERIAL	        4 bytes	    1 to 2,147,483,647
 BIGSERIAL	    8 bytes	    1 to 9,223,372,036,854,775,807
