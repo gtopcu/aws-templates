@@ -30,6 +30,14 @@ SELECT * FROM pg_catalog.pg_tables WHERE tablename = 'my_table';
 SELECT * FROM pg_catalog.pg_indexes WHERE tablename = 'my_table';
 
 
+SELECT table_schema, table_name 
+FROM information_schema.tables 
+WHERE table_schema NOT IN ('information_schema', 'pg_catalog')
+# WHERE table_schema = 'public'
+AND table_type = 'BASE TABLE'
+ORDER BY table_schema, table_name;
+
+
 
 -------------------------------------------------------------------------
 SELECT * FROM pg_settings
