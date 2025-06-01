@@ -6,8 +6,6 @@ https://neon.tech/postgresql/postgresql-getting-started/connect-to-postgresql-da
 Install on Ubuntu/Debian/Redhat/CentOS:
 https://neon.tech/postgresql/postgresql-getting-started/install-postgresql-linux
 
-No FKs/triggers/extensions/vectors, single-region %99.99% multi-region 99.999% availability, 
-
 neonDB timescale crudRestAPI
 */
 

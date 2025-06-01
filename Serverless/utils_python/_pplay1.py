@@ -200,17 +200,19 @@ from enum import auto, IntFlag
 #                 text = file.read()
 #                 print(filename, len(text))
 
-# for dirpath, dirnames, filenames in path.parent.walk():
+# for dirpath, dirnames, filenames in Path(__file__).parent.walk():
 #     print(dirpath, dirnames, filenames)
 
-# for p in path.iterdir():
+# for p in Path(__file__).cwd().iterdir():
 #     print(p.absolute())
 
 # from pathlib import Path
-# Path(__file__).resolve().parent.is_dir()
-# Path(__file__).absolute().joinpath("..").mkdir(mode=0o777, parents=True, exist_ok=True)
-# print(Path.home())
-# print(Path.cwd())
+# Path(__file__).cwd()
+# Path(__file__).parent.joinpath("/data.txt")
+# path.home().is_dir()
+# path.resolve()
+# path.absolute()
+# path.mkdir(mode=0o777, parents=True, exist_ok=True)
 # path.glob("*.py")
 # path.rglob("*.py")
 # text = path.read_text("utf-8", errors="replace", newline="\n")
@@ -269,13 +271,13 @@ from enum import auto, IntFlag
 
 # from datetime import datetime, timezone, timedelta
 # datetime.now(timezone.utc).isoformat(timespec="seconds")
-# datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+# datetime.now().strftime("%Y-%m-%d %H:%M:%S%z")
 # datetime.strptime("2024-03-24", "%Y-%m-%d").date()
+# my_date + timedelta(hours=1)
 # date.today()
 # date.day
 # date.month
 # date.year
-# my_date + timedelta(hours=1)
 
 # import time
 # time.sleep(1)
@@ -293,11 +295,11 @@ from enum import auto, IntFlag
 # time.thread_time()
 
 # import timeit
-# timeit.timeit("x = 1", number=1000)
-# timeit.repeat("x = 1", repeat=3, number=1000)
-# timeit.Timer("x = 1").timeit(number=1000)
-# timeit.Timer("x = 1").repeat(repeat=3, number=1000)
-# timeit.Timer("x = 1").autorange()
+# timeit.timeit("x = x**x", number=1000)
+# timeit.repeat("x = x**x", repeat=3, number=1000)
+# timeit.Timer("x = x**x").timeit(number=1000)
+# timeit.Timer("x = x**x").repeat(repeat=3, number=1000)
+# timeit.Timer("x = x**x").autorange()
 
 # -------------------------------------------------------------------------------------------------
 
@@ -376,7 +378,7 @@ from enum import auto, IntFlag
 # my_tuple2: tuple[int, ...] = (1, )
 # my_dict: dict[str, Any] = {"one": 1, "two": True, "three": 3.14}
 # del my_dict["one"]
-# my_dict2: dict[str, int] = dict(one=1, two=2)
+# my_dict2: dict[str, Any] = dict(one=1, two=2)
 # my_set: set[int] = {1, 2, 3}
 # my_string: str = "Hello, World!"
 
@@ -394,9 +396,13 @@ from enum import auto, IntFlag
 # mylist3 = [*mylist1, "combined", *mylist2]
 
 # my_dict: dict[str, Any] 
+# my_dict = dict(name="David Bowie", age=86)
 # my_func(**my_dict))
 # combined_dict = {**my_dict1, **my_dict2}
 # my_dict3 = { **my_dict1, "timestamp": 1234567890 }
+
+# from pprint import pprint
+# pprint(my_dict, indent=4, sort_dicts=False)
 
 # -------------------------------------------------------------------------------------------------
 
@@ -412,10 +418,6 @@ from enum import auto, IntFlag
 #     print(1/0)
 # except ZeroDivisionError as e:
 #     print(f"Error during operation: {str(e)}")
-
-# from pprint import pprint
-# bowie = dict(name="David Bowie", age=86)
-# pprint(bowie, indent=4, sort_dicts=False)
 
 # import yaml
 # with open(definition_path, "r") as f:

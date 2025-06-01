@@ -1,4 +1,31 @@
 
+EXPLAIN (SELECT * FROM customers)
+
+/*
+https://www.sqlekibi.com/2025/05/26/postgresql-performans-iyilestirme-rehberi-autovacuum-indexler-ve-paralel-sorgular/
+
+autovacuum = on
+autovacuum_vacuum_scale_factor = 0.2
+autovacuum_analyze_scale_factor = 0.1
+autovacuum_vacuum_threshold = 50
+autovacuum_analyze_threshold = 50
+autovacuum_max_workers = 3
+autovacuum_naptime = 1min
+autovacuum_vacuum_cost_delay = 20ms
+autovacuum_vacuum_cost_limit = 200
+log_min_duration_statement = 500ms
+
+B-TREE: Check if equal / sorting
+HASH: Check if equal
+GIN: Full-text search & JSONB
+BRIN: For sparse data in large tables
+SP-GIST
+GIST
+
+SELECT * FROM pg_indexes WHERE tablename = 'my_table';
+
+*/
+
 id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY
 SERIAL PRIMARY KEY AUTOINCREMENT
 UNIQUE DEFAULT NOT NULL 

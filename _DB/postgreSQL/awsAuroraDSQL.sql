@@ -1,7 +1,10 @@
 
-
+/*
 https://blog.datachef.co/aurora-dsql-a-new-boring-aws-serverless-postgres-compatible-database
 https://www.youtube.com/watch?v=-oHHwuFDKwE
+
+No FKs/triggers/extensions/vectors, single-region %99.99% multi-region 99.999% availability, 
+*/
 
 export DB_NAME = "postgres"
 export DB_ENDPOINT = localhost
