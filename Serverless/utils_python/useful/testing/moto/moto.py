@@ -64,7 +64,8 @@ def test_s3_upload():
 
 # --------------------------------------------------------------------------------------------------
 
-@pytest.fixture(scope="function")  # scope can be function, class, module, session
+# @pytest.fixture(scope="function")  # scope can be function, class, module, session
+@pytest.fixture
 def aws_credentials():
     """Mocked AWS Credentials for moto."""
     os.environ["AWS_ACCESS_KEY_ID"] = "testing"
@@ -74,13 +75,13 @@ def aws_credentials():
     os.environ["AWS_DEFAULT_REGION"] = "us-east-1"
 
 @pytest.fixture
-def sns_topic(aws_credentials):
+def mock_sns(aws_credentials):
     with mock_aws():
         yield boto3.client("sns").create_topic(Name="mock-topic")
         # os.environ["SNS_ARN"] = sns.get("TopicArn")
 
 @pytest.fixture
-def aws_client(aws_credentials):
+def mock_dynamodb(aws_credentials):
     with mock_aws():
         # yield boto3.client("dynamodb", region_name="us-east-1")
         yield boto3.resource("dynamodb", region_name="us-east-1")

@@ -37,6 +37,20 @@ WHERE table_schema NOT IN ('information_schema', 'pg_catalog')
 AND table_type = 'BASE TABLE'
 ORDER BY table_schema, table_name;
 
+SELECT datname AS database_name
+FROM pg_database
+WHERE datistemplate = false
+ORDER BY datname;
+
+SELECT 
+    datname AS database_name,
+    pg_catalog.pg_get_userbyid(datdba) AS owner,
+    pg_encoding_to_char(encoding) AS encoding,
+    datcollate AS collate,
+    datctype AS ctype
+FROM pg_database
+WHERE datistemplate = false
+ORDER BY datname;
 
 
 -------------------------------------------------------------------------

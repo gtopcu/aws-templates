@@ -311,6 +311,7 @@ from enum import auto, IntFlag
 # r"db/data"
 # u"unicode"
 
+# amount: str = 10_000_000
 # name: str = "John"
 # name.join("Doe")
 # print("PK_%s" % ID)
