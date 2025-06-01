@@ -53,7 +53,8 @@ git diff origin/main  -> compare current working tree to remote
 git fetch             -> download only, does not merge
 git merge --no-ff --no-edit otherbranch
 git pull --autostash -> fetch + merge
-git push -u origin main --set-upstream origin main --force
+git push -u origin main 
+git push --set-upstream origin main --force
 git pull-request
 git show abc123def456789 
 git status
