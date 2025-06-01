@@ -6,7 +6,7 @@ import anthropic
 import os
 from dotenv import load_dotenv
 
-# Load environment variables from .env file
+
 if not load_dotenv():
     raise Exception("Failed to load .env file")
 

@@ -1,5 +1,6 @@
 
 # TODO
+# __init__.py
 # Zoom In: Command+Shift 0
 # Zoom Out: Command -
 

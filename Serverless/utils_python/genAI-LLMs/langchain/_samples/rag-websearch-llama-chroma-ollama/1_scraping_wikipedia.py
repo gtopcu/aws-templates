@@ -15,12 +15,12 @@ load_dotenv()
 
 ###############################   HEADERS (DON'T CHANGE)   #######################################################################################################
 headers = {
-    'Authorization': 'Bearer '+os.getenv('BRIGHTDATA_API_KEY'),
+    'Authorization': 'Bearer '+ os.getenv('BRIGHTDATA_API_KEY'),
     'Content-Type': 'application/json',
 }
 
 headers_status = {
-    'Authorization': 'Bearer '+os.getenv('BRIGHTDATA_API_KEY'),
+    'Authorization': 'Bearer '+ os.getenv('BRIGHTDATA_API_KEY'),
 }
 
 keywords = pd.read_excel("keywords.xlsx")
@@ -31,9 +31,7 @@ keywords = pd.read_excel("keywords.xlsx")
 
 file_exists = os.path.isfile(os.getenv("SNAPSHOT_STORAGE_FILE"))
 
-
 if not file_exists:
-
     params = {
         "dataset_id": "gd_lr9978962kkjr3nx49",
         "include_errors": "true",
@@ -69,8 +67,6 @@ else:
     for f in files:
         os.remove(f)
 
-
-
     f = open(os.getenv("SNAPSHOT_STORAGE_FILE"),"r")
     snapshot_id = f.read()
 
@@ -80,7 +76,6 @@ else:
 
     print("status")
     print(status)
-
 
     snapshot_ready = False
 
@@ -97,7 +92,6 @@ else:
 
     if snapshot_ready:
         print("== > All articles are ready - start writing data to datasets directory")
-
 
         response = requests.get('https://api.brightdata.com/datasets/v3/snapshot/'+snapshot_id, headers=headers)
 
