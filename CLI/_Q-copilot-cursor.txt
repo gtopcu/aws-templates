@@ -29,6 +29,24 @@ q chat
 @workspace - Get answers about your entire codebase, not just the open file i.e. "@workspace how is authentication handled?"
 @history - pass console history
 
+Adding MCP servers:
+Users/user/.aws/amazonq/mcp.json
+{
+ "mcpServers": {
+   "aws labs.aws-documentation-mcp-server": {
+     "command": "docker",
+     "args": [
+       "run",
+       "--rm",
+       "--interactive",
+       "--env",
+       "FASTMCP_LOG_LEVEL=ERROR",
+       "awslabs/aws-documentation-mcp-server:latest"
+     ]
+   },
+   "env": {}
+ }
+}
 
 ------------------------------------------------------------------------------------------------------
 Cursor
