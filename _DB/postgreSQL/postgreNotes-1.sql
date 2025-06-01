@@ -4,6 +4,9 @@ EXPLAIN (SELECT * FROM customers)
 /*
 https://www.sqlekibi.com/2025/05/26/postgresql-performans-iyilestirme-rehberi-autovacuum-indexler-ve-paralel-sorgular/
 
+CREATE UNLOGGED TABLE fast_table 
+SELECT * FROM pg_indexes WHERE tablename = 'my_table';
+
 autovacuum = on
 autovacuum_vacuum_scale_factor = 0.2
 autovacuum_analyze_scale_factor = 0.1
@@ -21,8 +24,6 @@ GIN: Full-text search & JSONB
 BRIN: For sparse data in large tables
 SP-GIST
 GIST
-
-SELECT * FROM pg_indexes WHERE tablename = 'my_table';
 
 */
 
