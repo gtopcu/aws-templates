@@ -74,11 +74,16 @@ def aws_credentials():
     os.environ["AWS_DEFAULT_REGION"] = "us-east-1"
 
 @pytest.fixture
+def sns_topic(aws_credentials):
+    with mock_aws():
+        yield boto3.client("sns").create_topic(Name="mock-topic")
+        # os.environ["SNS_ARN"] = sns.get("TopicArn")
+
+@pytest.fixture
 def aws_client(aws_credentials):
     with mock_aws():
         # yield boto3.client("dynamodb", region_name="us-east-1")
         yield boto3.resource("dynamodb", region_name="us-east-1")
-
 
 @pytest.fixture
 def create_table(aws_client):
