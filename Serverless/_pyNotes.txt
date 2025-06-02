@@ -28,8 +28,26 @@ deactivate
 echo $PATH
 export PATH=$PATH:/opt/homebrew/bin/python3.13
 sudo apt update -y && sudo apt install python3 python3-pip python3-venv -y
-import os; print(os.getenv("PYTHONPATH"))
+
+------------------------------------------------------------------------------------
+
+import os; print(os.getenv("PYTHONPATH"));
 sys.path.append()
+
+export PYTHONPATH="${PYTHONPATH}:/path/to/myproject"
+set PYTHONPATH=%PYTHONPATH%;C:\path\to\myproject
+
+.env
+PYTHONPATH=./src:./lambda-layers/common # Mac
+PYTHONPATH=./src;./lambda-layers/common # Windows
+.vscode/settings.json
+{
+  "python.envFile": "${workspaceFolder}/.env"
+}
+import sys
+print(sys.path)
+
+------------------------------------------------------------------------------------
 
 # Format: ~=X.Y means >= X.Y, == X.*
 package~=1.4.2
