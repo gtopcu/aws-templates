@@ -78,8 +78,18 @@ def aws_credentials():
 @pytest.fixture
 def mock_sns(aws_credentials):
     with mock_aws():
-        yield boto3.client("sns").create_topic(Name="mock-topic")
         # os.environ["SNS_ARN"] = sns.get("TopicArn")
+        yield boto3.client("sns").create_topic(Name="mock-topic")
+
+# from mypy_boto3_cognito_idp import CognitoIdentityProviderClient
+# @pytest.fixture
+# def mock_cognito():
+#     with mock_aws():
+#         cognito_client: CognitoIdentityProviderClient = boto3.client("cognito-idp")
+#         user_pool_id = cognito_client.create_user_pool(PoolName="TestUserPool")["UserPool"]["Id"]
+#         cognito_client.create_group(UserPoolId=user_pool_id, GroupName="admin")
+#         os.environ[USER_POOL_ID] = user_pool_id
+#         yield user_pool_id
 
 @pytest.fixture
 def mock_dynamodb(aws_credentials):

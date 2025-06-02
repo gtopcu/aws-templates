@@ -1,4 +1,14 @@
 
+https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html
+
+Data Protection
+https://aws.amazon.com/blogs/aws/protect-sensitive-data-with-amazon-cloudwatch-logs/
+
+fields @timestamp, @message, unmask(@message)
+| sort @timestamp desc
+| limit 20
+
+
 --------------------------------------------------------------------------------------------------------------
 Lambda
 --------------------------------------------------------------------------------------------------------------

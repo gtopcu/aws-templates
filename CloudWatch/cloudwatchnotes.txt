@@ -1,7 +1,10 @@
 
-Data Protection
-https://aws.amazon.com/blogs/aws/protect-sensitive-data-with-amazon-cloudwatch-logs/
 
-fields @timestamp, @message, unmask(@message)
-| sort @timestamp desc
-| limit 20
+
+Seach in CW Logs:
+https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html#matching-terms-unstructured-log-events
+
+ERROR
+"7e5d596f-3b37-4801-9cae-809675ee1b66"
+"RequestId: 7e5d596f-3b37-4801-9cae-809675ee1b66"
+
