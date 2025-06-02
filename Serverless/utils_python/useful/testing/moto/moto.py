@@ -12,6 +12,7 @@ from moto import mock_aws
 from moto import mock_s3
 from moto import mock_dynamodb
 
+# @moto.mock_aws
 # @moto.mock_dynamodb
 # @moto.mock_s3
 
