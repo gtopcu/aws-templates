@@ -95,7 +95,7 @@ from pydantic import (
 # https://github.com/boto/boto3/issues/665#issuecomment-340260257
 # from decimal import Decimal, getcontext, setcontext, ExtendedContext
 # setcontext(ExtendedContext)
-getcontext().prec = 2
+# getcontext().prec = 2
 # round(Decimal(1.2345), 2)
 
 # https://github.com/pydantic/pydantic/issues/8006
