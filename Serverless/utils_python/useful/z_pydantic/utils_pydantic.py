@@ -87,9 +87,14 @@ from pydantic import (
 
 # ----------------------------------------------------------------------------------------------------
 
+# from pydantic import BaseModel, ConfigDict
+# from pydantic.alias_generators import to_camel, to_pascal, to_snake
+# class ParentModel(BaseModel):
+#     model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
+
 # https://github.com/boto/boto3/issues/665#issuecomment-340260257
-from decimal import Decimal, getcontext, setcontext, ExtendedContext
-setcontext(ExtendedContext)
+# from decimal import Decimal, getcontext, setcontext, ExtendedContext
+# setcontext(ExtendedContext)
 getcontext().prec = 2
 # round(Decimal(1.2345), 2)
 
