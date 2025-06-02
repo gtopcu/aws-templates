@@ -91,6 +91,9 @@ from pydantic import (
 # from pydantic.alias_generators import to_camel, to_pascal, to_snake
 # class ParentModel(BaseModel):
 #     model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
+#     @classmethod
+#     def get_field_names(cls, alias=False) -> list[str]:
+#         return list(cls.schema(alias).get("properties").keys())
 
 # https://github.com/boto/boto3/issues/665#issuecomment-340260257
 # from decimal import Decimal, getcontext, setcontext, ExtendedContext
@@ -106,11 +109,11 @@ from pydantic import (
 
 # ----------------------------------------------------------------------------------------------------
 # Validating JSON fields:
-class Order(BaseModel):
-    order_id: int
-    reason: str
-class OrderModel(BaseModel):
-    body: Json[Order]
+# class Order(BaseModel):
+#     order_id: int
+#     reason: str
+# class OrderModel(BaseModel):
+#     body: Json[Order]
 # {
 #     "body": "{\"order_id\": 12345, \"reason\": \"Changed my mind\"}"
 # }
