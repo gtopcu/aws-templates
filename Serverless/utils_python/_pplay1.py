@@ -32,7 +32,7 @@ from typing import Annotated
 from annotated_types import Gt, Ge, Le, Lt
 
 from uuid import uuid4, UUID
-from enum import auto, IntFlag
+from enum import StrEnum, auto, IntFlag
 
 # print(eval("2*2"))
 # exec(compile(source="print('hello!')", filename="script.py", mode='eval'))
@@ -42,8 +42,7 @@ from enum import auto, IntFlag
 
 # pip install python-dotenv
 # from dotenv import load_dotenv
-# load_dotenv()
-# load_dotenv('.env.dev')
+# load_dotenv('.env')
 
 # Load environment variables from .env file
 # if not load_dotenv():
@@ -311,11 +310,13 @@ from enum import auto, IntFlag
 # r"db/data"
 # u"unicode"
 
+# print("{}".format(my_string))
+# print("PK_%s" % ID)
+# print(f"PK {my_string}")
+
 # amount: str = 10_000_000
 # name: str = "John"
 # name.join("Doe")
-# print("PK_%s" % ID)
-# "request: {}"".format(json.dumps(event))
 # " ".removeprefix("")
 # " ".removesuffix("")
 # ",".join(mylist)
@@ -542,12 +543,6 @@ from enum import auto, IntFlag
 #         print("Error Code: " + f"{err.response['Error']['Code']}")
 #         print("Error Message: " + f"{err.response['Error']['Message']}")
 #         raise err
-
-# -------------------------------------------------------------------------------------------------
-
-# print("{}".format(my_string))
-# print("PK_%s" % my_string)
-# print(f"PK {my_string}")
 
 # -------------------------------------------------------------------------------------------------
 
