@@ -97,7 +97,6 @@ pip install -v -q  -U -r <requirements.txt> -t <dir> --root <dir> -i <url>(defau
   --dry-run --no-deps --force-reinstall --require-virtualenv --isolated --no-input --no-cache-dir 
   --disable-pip-version-check --no-clean --compile --no-compile --timeout <sec> --log <path>
 pip install -v -U python-dotenv 
-pip install . -e --src <target_dir>
 pip install requests
 pip uninstall requests
 pip install -r requirements.txt -t dist --no-cache-dir --no-input --upgrade 
@@ -110,9 +109,10 @@ pip install git+file:///my_local_repo/mypackage                   -> Local GIT r
 pip install -i https://test.pypi.org/simple/ test-repo-gtopcu
 
 pip install SimpleCV==1.2.0
-pip install SimpleCV==1.*
+pip install SimpleCV~=1.2.0
 pip install SimpleCV>=1.2.0
 pip install SimpleCV<=1.2.0
+pip install SimpleCV==1.*
 
 pip install requests
 pip install requests-aws4auth
@@ -143,10 +143,10 @@ pip install package.whl
 pip install package.tar.gz
 pip install package --no-index --find-links /package
 
-pip install .           (must have 'setup.py' or 'pyproject.toml')
-pip install . -e        (must have 'setup.py' or 'pyproject.toml')
+pip install -e .        (must have 'setup.py' or 'pyproject.toml')
+pip install -e .        (must have 'setup.py' or 'pyproject.toml')
 pip install -e /pkg     (must have 'setup.py' or 'pyproject.toml')
-pip install . -e --src <target_dir>
+pip install -e . --src <target_dir>
 
 setup.py (legacy)
 pip install setuptools
