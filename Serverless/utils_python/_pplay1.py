@@ -23,7 +23,7 @@
 # args = parser.parse_args()
 # query_text = args.query_text
 
-from typing import Self, Any, Optional, Final, Literal, LiteralString, NewType, Type, TypeVar, TypeAlias, TypedDict, Generic
+from typing import Self, Any, Optional, Final, Literal, LiteralString, NewType, Type, TypeVar, TypeAlias, TypedDict, Required, NotRequired, ReadOnly, Generic
 from collections import namedtuple, deque, OrderedDict, defaultdict, ChainMap
 from collections.abc import Generator, Callable, Iterable, Iterator, AsyncIterable
 from abc import ABC, abstractmethod
@@ -416,6 +416,21 @@ from enum import StrEnum, auto, IntFlag
 # MODE = Literal['r', 'rb', 'w', 'wb']
 # SQL = LiteralString('SELECT * FROM students') # to avoid SQL injection
 # output: Annotated[list, my_func]
+# my_type: type = dict[str, Any]
+# my_type: Type = int
+# my_type: TypeVar = list[int]
+# my_type: NewType = set[float] 
+# my_type: TypeAlias = str
+
+# class MyStrEnum(StrEnum):
+#     A = "A"
+#     def __str__(self) -> str:
+#         return self.value
+
+# class MyDict(TypedDict):
+#     name: Required[str] = "default"
+#     age: NotRequired[int] = 0
+#     id: ReadOnly[uuid4] = uuid4()
 
 # try:
 #     print(1/0)
