@@ -427,7 +427,7 @@ from enum import StrEnum, auto, IntFlag
 #     def __str__(self) -> str:
 #         return self.value
 
-# class MyDict(TypedDict):
+# class MyDict(TypedDict, total=False):
 #     name: Required[str] = "default"
 #     age: NotRequired[int] = 0
 #     id: ReadOnly[uuid4] = uuid4()

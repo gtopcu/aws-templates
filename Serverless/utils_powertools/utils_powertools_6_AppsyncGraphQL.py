@@ -6,6 +6,23 @@ from aws_lambda_powertools.utilities.data_classes.appsync.scalar_types_utils imp
     aws_time,
     aws_timestamp,
     make_id,
+    aws_uuid,
+    aws_json,
+    aws_email,
+    aws_url,
+    aws_ip,
+    aws_arn,
+    aws_phone,
+    aws_bytes,
+    aws_base64,
+    aws_enum,
+    aws_any,
+    aws_json_string,
+    aws_json_object,
+    aws_json_array,
+    _formatted_time,
+     _formatted_datetime,
+     _formatted_date,
 )
 
 # Scalars: https://docs.aws.amazon.com/appsync/latest/devguide/scalars.html
@@ -17,13 +34,7 @@ my_datetime: str = aws_datetime()  # Scalar: AWSDateTime
 my_epoch_timestamp: int = aws_timestamp()  # Scalar: AWSTimestamp
 
 import sys
-
-if sys.version_info >= (3, 8):
-    from typing import TypedDict
-else:
-    from typing_extensions import TypedDict
-
-from typing import List
+from typing import TypedDict
 
 from aws_lambda_powertools import Logger, Tracer
 from aws_lambda_powertools.event_handler import AppSyncResolver
@@ -45,7 +56,7 @@ class Location(TypedDict, total=False):
 @app.resolver(field_name="listLocations")
 @app.resolver(field_name="locations")
 @tracer.capture_method
-def get_locations(name: str, description: str = "") -> List[Location]:  # match GraphQL Query arguments
+def get_locations(name: str, description: str = "") -> list[Location]:  # match GraphQL Query arguments
     return [{"name": name, "description": description}]
 
 
