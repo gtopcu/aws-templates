@@ -23,16 +23,24 @@
 # args = parser.parse_args()
 # query_text = args.query_text
 
-from typing import Self, Any, Optional, Final, Literal, LiteralString, NewType, Type, TypeVar, TypeAlias, TypedDict, Required, NotRequired, ReadOnly, Generic
-from collections import namedtuple, deque, OrderedDict, defaultdict, ChainMap
-from collections.abc import Generator, Callable, Iterable, Iterator, AsyncIterable
-from abc import ABC, abstractmethod
+from typing import Self, Any, Optional, Final, Literal, LiteralString
+from typing import Hashable, Generic
+from typing import NewType, Type, TypeVar, TypeAlias, TypedDict, Required, NotRequired, ReadOnly
 
 from typing import Annotated
 from annotated_types import Gt, Ge, Le, Lt
 
+from collections import namedtuple, deque, OrderedDict, defaultdict, ChainMap
+from collections.abc import Generator, Callable, Iterable, Iterator, AsyncIterable
+
+from typing import Protocol, runtime_checkable # Python 3.8
+from abc import ABC, abstractmethod
+
 from uuid import uuid4, UUID
 from enum import StrEnum, auto, IntFlag
+
+from itertools import chain, cycle, batched, repeat, combinations, permutations, pairwise, count, compress, accumulate, dropwhile, filterfalse
+from functools import reduce, partial, cmp_to_key, cache, lru_cache, singledispatch, singledispatchmethod
 
 # print(eval("2*2"))
 # exec(compile(source="print('hello!')", filename="script.py", mode='eval'))
