@@ -1,0 +1,2802 @@
+scalar AWSDate
+
+scalar AWSDateTime
+
+scalar AWSJSON
+
+# Units for activity measurements
+enum ActivityUnit {
+	LITRE
+	CUBIC_M
+	CUBIC_FT
+	GALLON
+	BARREL
+	KWH
+	KM
+	MILES
+	TONNE
+	TONNE_KM
+	KG
+	PASS_KM
+	YARD
+}
+
+input AddSupplierInput {
+	supplier_name: String!
+	company_id: String
+	supplier_email: String
+	supplier_category: String
+	impact: String
+	spend: String
+	conversion_factor_identifier: String
+	emission_conversion_factor_used: String
+	energy_conversion_factor_used: String
+	sic_code: String
+	status: String
+	date: AWSDate
+	is_published: Boolean
+	supplier_information: AWSJSON
+	emission_source: EmissionSourceType
+	updated_sic_code: String
+	updated_conversion_factor_identifier: String
+	updated_emission_conversion_factor_used: String
+}
+
+type AddressDetails {
+	firstLine: String!
+	secondLine: String
+	thirdLine: String
+	city: String!
+	postcode: String!
+}
+
+input AddressDetailsInput {
+	firstLine: String!
+	secondLine: String
+	thirdLine: String
+	city: String!
+	postcode: String!
+}
+
+type AggregatedData {
+	totalCo2eEmissionsKg: Float!
+	totalEnergyConsumptionKWh: Float!
+	emissionIntensityKgCo2ePerEmployee: Float!
+	emissionIntensityKgCo2ePerMGbpRevenue: Float!
+	co2eEmissionKgByScope: [RangeForScope!]!
+	co2eEmissionKgByCategory: [RangeForCategory!]!
+	co2eEmissionKgBySupplier: [RangeForSupplier!]!
+	co2eEmissionKgByScope3Supplier: [RangeForScope3Supplier!]!
+	co2eEmissionKgByScope3SicCode: [RangeForSicCode!]!
+	co2eEmissionKgByScope3SubCategory: [RangeForScope3SubCategory!]!
+	spendByScope3SicCode: [RangeForSicCode!]!
+	co2eEmissionKgByFacility: [RangeForFacility!]!
+	co2eEmissionKgByFuelType: [RangeForFuelType!]!
+	energyConsumptionKWhByFacility: [RangeForFacility!]!
+	energyConsumptionKWhByCategory: [RangeForCategory!]!
+	energyConsumptionKWhByScope: [RangeForScope!]!
+	fuelLitresByFuelType: [RangeForFuelType!]!
+	fuelKWhByFuelType: [RangeForFuelType!]!
+	employeeCommuteEmissions: [RangeForEmployeeCommuteEmissions!]!
+	employeeCommuteFuelType: [RangeForVehicleFuelType!]!
+	co2eEmissionsByWasteActivityType: [RangeForWasteActivityType!]!
+	co2eEmissionsByWasteType: [RangeForWasteType!]!
+	wasteDisposalByType: [RangeForWasteDisposalByWeight!]!
+	businessTravelDistanceBySubtype: [RangeForVehicleType!]!
+	businessTravelEmissionBySubtype: [RangeForBusinessTravelSubtype!]!
+	transportDistributionBySupplier: [RangeForSupplier!]!
+	transportDistributionByFacility: [RangeForFacility!]!
+	transportDistributionByLocation: [RangeForLocation!]!
+	employeeCommutingDistanceBySubtypeAndCategory: [RangeForEmployeeCommuteDistance!]!
+	employeeCommutingEmissionBySubtypeAndCategory: [RangeForEmployeeCommuteEmission!]!
+	purchaseGoodsEmissionsBySupplier: [RangeForSupplier!]!
+	purchaseGoodsSpendBySupplier: [RangeForSupplier!]!
+}
+
+# Represents an expense csv upload for a company.
+type BulkDataUploadFileS3Source implements CustomerDataSource {
+	sourceId: String!
+	companyId: String!
+	sourceType: UploadType!
+	associatedFacility: String
+	creationDatetime: AWSDateTime
+	lastProcessedDatetime: AWSDateTime
+	startDate: AWSDate
+	endDate: AWSDate
+	status: DataSourceStatus!
+	processedFileBucketName: String
+	processedFileBucketKey: String!
+	processedFileVersion: Int!
+}
+
+# Bus types for travel
+enum BusType {
+	LOCAL_BUS
+	AVARAGE_LOCAL_BUS
+	COACH_BUS
+}
+
+type CarbonEmissionBySicCode {
+	sic_code: String!
+	emissions: Float!
+}
+
+type CarbonEmissionBySupplier {
+	supplier: String!
+	emissions: Float!
+}
+
+# Cargo types for transport
+enum CargoType {
+	CLASS1
+	CLASS2
+	CLASS3
+	AVERAGE
+	RIGID_TO_7_5T
+	RIGID_TO_17T
+	RIGID_ABOVE_17T
+	ALL_RIGIDS
+	ARTICULATED_BELOW_33T
+	ARTICULATED_ABOVE_33T
+	ALL_ARTICS
+	ALL_HGVS
+	DOMESTIC
+	SHORT_HAUL
+	LONG_HAUL
+	INTERNATIONAL
+	FREIGHT_TRAIN
+	CRUDE_TANKER
+	PRODUCT_TANKER
+	CHEMICAL_TANKER
+	LNG_TANKER
+	LPG_TANKER
+	BULK_CARRIER
+	GENERAL_CARGO
+	CONTAINER_SHIP
+	VEHICLE_TRANSPORT
+	RORO_FERRY
+	LARGE_ROPAX_FERRY
+	REFRIGIRATED_CARGO
+}
+
+# The emission category for an activity or spend
+enum Category {
+	FUEL
+	FUGITIVE_EMISSIONS
+	ELECTRICITY
+	GAS
+	HEAT
+	STEAM
+	SCOPE_3_PURCHASE
+	BUSINESS_TRAVEL
+	BUSINESS_TRAVEL_RAIL
+	BUSINESS_TRAVEL_LAND
+	BUSINESS_TRAVEL_WATER
+	BUSINESS_TRAVEL_AIR
+	EMPLOYEE_COMMUTING
+	EMPLOYEE_COMMUTING_LAND
+	EMPLOYEE_COMMUTING_RAIL
+	EMPLOYEE_COMMUTING_BUS
+	EMPLOYEE_COMMUTING_BIKE
+	EMPLOYEE_COMMUTING_WALK
+	WASTE
+	TRANSPORTATION_AND_DISTRIBUTION
+	RAW_MATERIALS
+	LEASED_ASSETS_UPSTREAM
+}
+
+enum ChatMessageSender {
+	HUMAN
+	AI
+	OTHER
+}
+
+# Chemical groups for emissions
+enum ChemicalGroup {
+	CARBON_DIOXIDE
+	METHANE
+	NITROUS_OXIDE
+	HFC_23
+	HFC_32
+	HFC_41
+	HFC_125
+	HFC_134
+	HFC_134A
+	HFC_143
+	HFC_143A
+	HFC_152A
+	HFC_227EA
+	HFC_236FA
+	HFC_245FA
+	HFC_43_I0MEE
+	PERFLUOROMETHANE_PFC_14
+	PERFLUOROETHANE_PFC_116
+	PERFLUOROPROPANE_PFC_218
+	PERFLUOROCYCLOBUTANE_PFC_318
+	PERFLUOROBUTANE_PFC_3_1_10
+	PERFLUOROPENTANE_PFC_4_1_12
+	PERFLUOROHEXANE_PFC_5_1_14
+	PFC_9_1_18
+	PERFLUOROCYCLOPROPANE
+	SULPHUR_HEXAFLUORIDE_SF6
+	HFC_152
+	HFC_161
+	HFC_236CB
+	HFC_236EA
+	HFC_245CA
+	HFC_365MFC
+	NITROGEN_TRIFLUORIDE
+	R401A
+	R401B
+	R401C
+	R402A
+	R402B
+	R403A
+	R403B
+	R404A
+	R405A
+	R406A
+	R407A
+	R407B
+	R407C
+	R407D
+	R407E
+	R407F
+	R408A
+	R409A
+	R409B
+	R410A
+	R410B
+	R411A
+	R411B
+	R412A
+	R413A
+	R414A
+	R414B
+	R415A
+	R415B
+	R416A
+	R417A
+	R417B
+	R417C
+	R418A
+	R419A
+	R419B
+	R420A
+	R421A
+	R421B
+	R422A
+	R422B
+	R422C
+	R422D
+	R422E
+	R423A
+	R424A
+	R425A
+	R426A
+	R427A
+	R428A
+	R429A
+	R430A
+	R431A
+	R432A
+	R433A
+	R433B
+	R433C
+	R434A
+	R435A
+	R436A
+	R436B
+	R437A
+	R438A
+	R439A
+	R440A
+	R441A
+	R442A
+	R443A
+	R444A
+	R445A
+	R500
+	R501
+	R502
+	R503
+	R504
+	R505
+	R506
+	R507A
+	R508A
+	R508B
+	R509A
+	R510A
+	R511A
+	R512A
+	CFC_11_R11
+	CFC_12_R12
+	CFC_13
+	CFC_113
+	CFC_114
+	CFC_115
+	HALON_1211
+	HALON_1301
+	HALON_2402
+	CARBON_TETRACHLORIDE
+	METHYL_BROMIDE
+	METHYL_CHLOROFORM
+	HCFC_22_R22
+	HCFC_123
+	HCFC_124
+	HCFC_141B
+	HCFC_142B
+	HCFC_225CA
+	HCFC_225CB
+	HCFC_21
+	HFE_125
+	HFE_134
+	HFE_143A
+	HCFE_235DA2
+	HFE_245CB2
+	HFE_245FA2
+	HFE_254CB2
+	HFE_347MCC3
+	HFE_347PCF2
+	HFE_356PCC3
+	HFE_449SL_HFE_7100
+	HFE_569SF2_HFE_7200
+	HFE_43_10PCCC124_H_GALDEN1040X
+	HFE_236CA12_HG_10
+	HFE_338PCC13_HG_01
+	TRIFLUOROMETHYL_SULPHUR_PENTAFLUORIDE
+	PFPMIE
+	DIMETHYLETHER
+	METHYLENE_CHLORIDE
+	METHYL_CHLORIDE
+	R290_PROPANE
+	R600A_ISOBUTANE
+	R600_BUTANE
+	R601_PENTANE
+	R601A_ISOPENTANE
+	R170_ETHANE
+	R1270_PROPENE
+	R1234YF
+	R1234ZE
+}
+
+type Company {
+	companyDetails: CompanyDetails
+	facilities: [Facility!]!
+	# uses subfetcher
+	financialYears: [FinancialYearView!]!
+	# the normal (not admin) users of the company
+	users: [UserDetails]
+}
+
+type CompanyAssignmentDetails {
+	category: Category!
+	facility: String
+	lastUpdated: AWSDate
+	users: [String!]!
+}
+
+input CompanyAssignmentInputDetails {
+	category: Category!
+	facility: String
+	lastUpdated: AWSDate
+	users: [String!]!
+}
+
+type CompanyDetails {
+	companyId: String!
+	companyName: String!
+	subDomain: String!
+	sicCode: String
+	companyNumber: String
+	s3BucketName: String!
+	location: String!
+	adminEmail: String!
+	logoBucketKey: String
+	isOnboarded: Boolean!
+	isActive: Boolean!
+	creationDate: AWSDateTime!
+	personalPreference: PersonalPreference
+	companyAssignments: [CompanyAssignmentDetails]
+	energyCalculationMethod: EnergyCalculationMethod
+	isLeasedFacility: Boolean
+	countryCode: String
+}
+
+input CompanyDetailsInput {
+	companyName: String!
+	sicCode: String!
+	companyNumber: String!
+	location: String!
+	logoBucketKey: String!
+	countryCode: String
+	energyCalculationMethod: EnergyCalculationMethod
+	isLeasedFacility: Boolean
+	companyAssignments: [CompanyAssignmentInputDetails]
+}
+
+# Represents an expense csv upload for a company.
+type CompanyExpensesFileS3Source implements CustomerDataSource {
+	sourceId: String!
+	companyId: String!
+	sourceType: UploadType!
+	associatedFacility: String
+	creationDatetime: AWSDateTime
+	lastProcessedDatetime: AWSDateTime
+	startDate: AWSDate
+	endDate: AWSDate
+	status: DataSourceStatus!
+	rawFileBucketName: String
+	rawFileBucketKey: String!
+	processedFileBucketName: String
+	processedFileBucketKey: String!
+	processedFileVersion: Int!
+}
+
+type CompanyFinancialYearData {
+	doesReimburseExpenses: Boolean!
+	annualRevenueGbp: Float!
+}
+
+input CompanyFinancialYearInput {
+	reportingStartDate: AWSDate!
+	reportingEndDate: AWSDate!
+	annualRevenueGbp: Float!
+	doesReimburseExpenses: Boolean!
+}
+
+type CompanyTasks {
+	tasks: [UploadTask]!
+}
+
+type Conversation {
+	conversationId: String!
+	lastMessageTimestamp: AWSDateTime!
+	events: [ConversationEvent!]!
+}
+
+type ConversationEvent @aws_api_key
+@aws_cognito_user_pools {
+	id: String!
+	timestamp: AWSDateTime!
+	conversationId: String!
+	sender: ChatMessageSender!
+	message: String!
+}
+
+type ConversationSummary {
+	conversationId: String!
+	lastMessageTimestamp: AWSDateTime!
+}
+
+type ConversionFactor {
+	category: Category!
+	scope: Int!
+	vehicleType: String
+	vehicleFuelType: String
+	chemicalGroup: String
+	regulatoryCategory: String
+	transportType: String
+	vehicleSize: String
+	fuelType: String
+	wasteActivityType: String
+	wasteType: String
+	disposalType: String
+	sicCode: String
+	countryCode: String
+	trainType: String
+	waterTravelType: String
+	flightHaul: String
+	flightClass: String
+	totalKgCo2ePerUnit: Float!
+	kgCo2eCo2PerUnit: Float
+	kgCo2eCh4PerUnit: Float
+	kgCo2eN2oPerUnit: Float
+	kgCo2eWttPerUnit: Float
+	kwhEnergyPerUnit: Float
+	unit: StandardUnit!
+	kgco2ePerUnit: Float
+	cargoType: String
+	loadLevel: String
+	shipSize: String
+	source: String
+	type: String
+	materialName: String
+	reference_product: String
+	casNumber: String
+	startDate: String
+	endDate: String
+}
+
+type CountryConversionFactor {
+	conversionFactorIdentifier: String!
+	countryCode: String!
+	startDate: String!
+	endDate: String!
+	totalKgCo2ePerUnit: Float!
+}
+
+input CreateCompanyInput {
+	companyName: String!
+	location: String!
+	adminEmail: String
+	countryCode: String
+	energyCalculationMethod: EnergyCalculationMethod
+	isLeasedFacility: Boolean
+}
+
+input CreateQuestionnaireInput {
+	company_id: String
+	questionnaire_data: AWSJSON!
+	name: String
+	financialYearId: String
+	supplierId: String
+}
+
+# The base interface for all data uploads for a company.
+interface CustomerDataSource {
+	sourceId: String!
+	companyId: String!
+	sourceType: UploadType!
+	associatedFacility: String
+	creationDatetime: AWSDateTime
+	lastProcessedDatetime: AWSDateTime
+	startDate: AWSDate
+	endDate: AWSDate
+	status: DataSourceStatus!
+}
+
+# A summary view of CustomerDataSource. Might be removed if not used in tasks
+type CustomerDataSourceDetails {
+	sourceId: String!
+	sourceType: UploadType!
+	creationDatetime: AWSDateTime!
+	startDate: AWSDate
+	endDate: AWSDate
+	status: DataSourceStatus
+}
+
+type CustomerDataSourceDetails_tasks {
+	sourceId: String!
+	category: Category!
+	creationDatetime: AWSDateTime!
+	startDate: AWSDate
+	endDate: AWSDate
+	status: DataSourceStatus
+}
+
+# A summary view of CustomerDataSource
+type CustomerDataSourceSummary {
+	companyId: String!
+	sourceId: String!
+	status: DataSourceStatus!
+	sourceType: UploadType!
+	startDate: AWSDate
+	endDate: AWSDate
+	creationDatetime: AWSDateTime!
+	originalFileName: String
+	rawFileBucketName: String
+	rawFileBucketKey: String
+	processedFileBucketName: String
+	processedFileBucketKey: String
+	error: String
+}
+
+type CustomerDataSourceSummary_tasks {
+	companyId: String!
+	sourceId: String!
+	status: DataSourceStatus!
+	category: Category!
+	startDate: AWSDate
+	endDate: AWSDate
+	creationDatetime: AWSDateTime!
+	originalFileName: String
+	rawFileBucketName: String
+	rawFileBucketKey: String
+	processedFileBucketName: String
+	processedFileBucketKey: String
+	error: String
+}
+
+type CustomerDataSourceTasks {
+	startDate: AWSDate
+	endDate: AWSDate
+}
+
+interface CustomerDataSource_tasks {
+	sourceId: String!
+	companyId: String!
+	category: Category!
+	associatedFacility: String
+	creationDatetime: AWSDateTime
+	lastProcessedDatetime: AWSDateTime
+	startDate: AWSDate
+	endDate: AWSDate
+	status: DataSourceStatus!
+}
+
+# Status of data items
+enum DataItemStatus {
+	PROCESSED
+	FAILED_PROCESSING
+	NOT_SUPPORTED
+	NO_CONVERSION_FACTOR_FOUND
+	NO_ACTIVITY_OR_SPEND_VALUES
+	ZERO_EMISSION
+}
+
+type DataRequest @aws_api_key
+@aws_cognito_user_pools {
+	supplierId: String!
+	date: AWSDate
+	status: DataRequestStatus
+	id: String
+	questionnaireId: String
+	answers: AWSJSON
+	questionnaire: Questionnaire
+}
+
+type DataRequestCreated {
+	supplierId: String!
+	date: AWSDate
+	status: DataRequestStatus
+	id: String
+	messageid: String
+	questionnaireId: String
+}
+
+input DataRequestFilterInput {
+	supplierId: String
+	date: AWSDate
+	status: DataRequestStatus
+	id: String
+	questionnaireId: String
+	financialYearId: String
+}
+
+input DataRequestInput {
+	supplierId: String!
+	date: AWSDate
+	status: DataRequestStatus
+	questionnaireId: String
+	financialYearId: String
+}
+
+# Data request statuses
+enum DataRequestStatus {
+	AWAITING_REPLY
+	SUBMITTED
+	CLARIFICATION_REQUESTED
+	APPROVED
+	COMPLETE
+}
+
+enum DataSourceStatus {
+	READY_TO_PARSE
+	PARSED
+	READY_TO_PROCESS
+	FORCE_REPROCESS
+	PROCESSED
+	FAILED_PROCESSING
+	FAILED_PARSING
+}
+
+type DateRange {
+	startDate: AWSDate
+	endDate: AWSDate
+}
+
+# Input types for mutation operations if necessary
+input DateRangeInput {
+	startDate: String!
+	endDate: String!
+}
+
+input DeleteQuestionnaireInput {
+	company_id: String
+	questionnaire_id: String!
+}
+
+# Disposal types for waste
+enum DisposalType {
+	RE_USE
+	OPEN_LOOP
+	CLOSED_LOOP
+	COMBUSTION
+	COMPOSTING
+	LANDFILL
+	ANAEROBIC_DIGESTION
+}
+
+# Distribution transport types
+enum DistributionTransportType {
+	VANS
+	HGV
+	HGV_REFRIGERATED
+	FREIGHT_FLIGHTS
+	RAIL
+	SEA_TANKER
+	CARGO_SHIP
+}
+
+type EmissionReportData {
+	leasedItems: [EmissionSummary!]
+	wttItems: [EmissionSummary!]
+}
+
+type EmissionReportsResponse {
+	data: EmissionReportData!
+}
+
+# Emission source types
+enum EmissionSourceType {
+	SIC_SPECIFIC
+	CLIENT_PROVIDED
+	SUPPLIER_PROVIDED
+}
+
+type EmissionSummary {
+	scope: Int!
+	category: String!
+	emissions: [FinancialYearEmission!]!
+}
+
+#Represents an employee commuting form upload for a company.
+type EmployeeCommitingSource implements CustomerDataSource {
+	sourceId: String!
+	companyId: String!
+	sourceType: UploadType!
+	associatedFacility: String
+	creationDatetime: AWSDateTime
+	lastProcessedDatetime: AWSDateTime
+	startDate: AWSDate
+	endDate: AWSDate
+	status: DataSourceStatus!
+	formData: [EmployeeCommutingDetails!]!
+}
+
+type EmployeeCommitingSource_tasks implements CustomerDataSource_tasks {
+	sourceId: String!
+	companyId: String!
+	category: Category!
+	associatedFacility: String
+	creationDatetime: AWSDateTime
+	lastProcessedDatetime: AWSDateTime
+	startDate: AWSDate
+	endDate: AWSDate
+	status: DataSourceStatus!
+	formData: [EmployeeCommutingDetails!]!
+}
+
+type EmployeeCommutingDetails {
+	vehicleType: UnifiedVehicleType
+	vehicleFuelType: VehicleFuelType
+	trainType: TrainType
+	transportType: TransportType!
+	unit: String!
+	amount: Int!
+}
+
+input EmployeeCommutingDetailsInput {
+	vehicleType: UnifiedVehicleType
+	vehicleFuelType: VehicleFuelType
+	trainType: TrainType
+	transportType: TransportType!
+	unit: String!
+	amount: Int!
+}
+
+# The method used for energy calculations
+enum EnergyCalculationMethod {
+	MARKET_BASED
+	LOCATION_BASED
+}
+
+type ErrorDetails {
+	errorType: String!
+	errorMessage: String
+}
+
+input ExpenseFileInput {
+	bucketName: String!
+	bucketKey: String!
+}
+
+type Facility {
+	facilityId: String!
+	facilityName: String!
+	facilityType: FacilityType!
+	addressDetails: AddressDetails!
+	energyCalculationMethod: EnergyCalculationMethod
+	isLeasedFacility: Boolean
+	countryCode: String
+}
+
+input FacilityDetailsInput {
+	facilityName: String!
+	facilityType: FacilityType!
+	addressDetails: AddressDetailsInput!
+	countryCode: String
+	energyCalculationMethod: EnergyCalculationMethod
+	isLeasedFacility: Boolean
+}
+
+type FacilityFinancialYearData {
+	facilityId: String!
+	floorspace: Int!
+	floorspaceUnit: FloorspaceUnit!
+	employeeCount: Int!
+	doesPurchaseElectricity: Boolean!
+	doesPurchaseHeatingFuel: Boolean!
+	doesPurchaseOtherFuel: Boolean!
+	doesOperateVehicles: Boolean!
+	vehicleDetails: [VehicleCount!]
+}
+
+input FacilityFinancialYearInput {
+	floorspace: Int!
+	floorspaceUnit: FloorspaceUnit!
+	employeeCount: Int!
+	doesPurchaseElectricity: Boolean!
+	doesPurchaseHeatingFuel: Boolean!
+	doesPurchaseOtherFuel: Boolean!
+	uploadFacilityHeatingLater: Boolean
+	# not used by backend.
+	uploadFacilityOtherFuelsLater: Boolean
+	# not used by backend.
+	uploadVehicleDetailsLater: Boolean
+	# not used by backend.
+	doesOperateVehicles: Boolean!
+	vehicleDetails: [VehicleCountInput!]
+}
+
+input FacilityFinancialYearInputWithId {
+	facilityId: String!
+	details: FacilityFinancialYearInput!
+}
+
+input FacilityInput {
+	facilityName: String!
+	facilityType: FacilityType!
+	addressDetails: AddressDetailsInput!
+	facilityFYDetails: FacilityFinancialYearInput!
+	initialDataUpload: InitialFacilityDataUploads!
+	countryCode: String
+	energyCalculationMethod: EnergyCalculationMethod
+	isLeasedFacility: Boolean
+}
+
+# Task types specific to company and facility
+type FacilityTasks {
+	facility: ID!
+	tasks: [Task]!
+}
+
+# Types of facilities
+enum FacilityType {
+	HEAD_OFFICE
+	OFFICE
+	FACTORY
+	WAREHOUSE
+}
+
+type FinancialYear {
+	financialYearId: String!
+	reportingStartDate: AWSDate!
+	reportingEndDate: AWSDate!
+	isClosed: Boolean!
+	companyData: CompanyFinancialYearData!
+	facilityData: [FacilityFinancialYearData!]!
+}
+
+type FinancialYearEmission {
+	financialYearId: String!
+	emission: Float!
+}
+
+input FinancialYearInput {
+	companyFYDetails: CompanyFinancialYearInput!
+	facilityFYDetails: [FacilityFinancialYearInputWithId!]!
+}
+
+type FinancialYearView {
+	financialYearId: String!
+	reportingStartDate: AWSDate!
+	reportingEndDate: AWSDate!
+	isClosed: Boolean!
+}
+
+# Flight class categories
+enum FlightClass {
+	AVERAGE
+	ECONOMY_CLASS
+	PREMIUM_ECONOMY_CLASS
+	BUSINESS_CLASS
+	FIRST_CLASS
+}
+
+# Flight haul categories
+enum FlightHaul {
+	UK_DOMESTIC
+	UK_SHORT_HAUL
+	UK_LONG_HAUL
+	NON_UK_INTERNATIONAL
+}
+
+# Units for floorspace measurements
+enum FloorspaceUnit {
+	SQM
+	SQFT
+}
+
+# The type of a fuel related activity
+enum FuelActivityType {
+	ENERGY
+	OTHER_FACILITY
+	VEHICLE
+}
+
+type FuelExpenseDetails {
+	fuelType: FuelType!
+	fuelQuantity: Float!
+	fuelUnit: FuelUnit!
+}
+
+input FuelExpenseDetailsInput {
+	fuelType: FuelType!
+	fuelQuantity: Float!
+	fuelUnit: FuelUnit!
+}
+
+# Represents a fuel form upload for a company.
+type FuelFormUploadSource implements CustomerDataSource {
+	sourceId: String!
+	companyId: String!
+	sourceType: UploadType!
+	associatedFacility: String
+	creationDatetime: AWSDateTime
+	lastProcessedDatetime: AWSDateTime
+	startDate: AWSDate
+	endDate: AWSDate
+	status: DataSourceStatus!
+	formData: [FuelExpenseDetails!]!
+}
+
+# Represents a fuel form upload for a company.
+type FuelFormUploadSource_tasks implements CustomerDataSource_tasks {
+	sourceId: String!
+	companyId: String!
+	category: Category!
+	associatedFacility: String
+	creationDatetime: AWSDateTime
+	lastProcessedDatetime: AWSDateTime
+	startDate: AWSDate
+	endDate: AWSDate
+	status: DataSourceStatus!
+	formData: [FuelExpenseDetails!]!
+}
+
+# The type of fuel
+enum FuelType {
+	PETROL
+	DIESEL
+	BURNING_OIL
+	LNG
+	LPG
+	NAT_GAS
+	NAT_GAS_100_MINERAL_BLEND
+	OTHER_PETROLEUM
+	PROPANE
+	BUTANE
+	CNG
+	AVIATION_SPIRIT
+	AVIATION_TURBINE_FUEL
+	DIESEL_100_MINERAL_BLEND
+	FUEL_OIL
+	GAS_OIL
+	LUBRICANTS
+	NAPHTHA
+	PETROL_100_MINERAL_BLEND
+	PROC_FUEL_OILS_RESIDUAL_OIL
+	PROC_FUEL_OILS_DISTILLATE_OIL
+	REFINERY_MISC
+	WASTE_OILS
+	MARINE_GAS_OIL
+	MARINE_FUEL_OIL
+	COAL_INDUSTRIAL
+	COAL_ELECTRICITY_GENERATION
+	COAL_ELECTRICITY_GENERATION_HOME_PROD
+	COAL_DOMESTIC
+	COKING_COAL
+	PETROLEUM_COKE
+	BIOGAS
+}
+
+# Units for fuel measurements
+enum FuelUnit {
+	LITRE
+	CUBIC_M
+	CUBIC_FT
+	GALLON
+	BARREL
+	TONNE
+	KG
+}
+
+# Fugitive emissions types
+enum FugitiveEmissionsType {
+	KYOTO_PROTOCOL_PRODUCTS
+	BLENDS
+	MONTREAL_PROTOCOL_PRODUCTS
+	FLUORINATED_ETHERS
+	OTHER_PRODUCTS
+	UNKNOWN
+}
+
+# Fugitive emissions type mapping
+enum FugitiveEmissionsTypeMapping {
+	KYOTO_PROTOCOL_PRODUCTS
+	BLENDS
+	MONTREAL_PROTOCOL_PRODUCTS
+	FLUORINATED_ETHERS
+	OTHER_PRODUCTS
+	UNKNOWN
+}
+
+# Fugitive emissions unit types
+enum FugitiveEmissionsUnitType {
+	INCLUDING_ONLY_KYOTO
+	INCLUDING_ONLY_NON_KYOTO
+	TOTAL_INCLUDING_ONLY_NON_KYOTO
+}
+
+type GenericResponse @aws_api_key
+@aws_cognito_user_pools {
+	message: ResponseMessage!
+	success: Boolean!
+	errorDetails: ErrorDetails
+}
+
+input InitialCompanyDataUploads {
+	initialExpenseFile: ExpenseFileInput
+}
+
+input InitialFacilityDataUploads {
+	# form data for heating fuel purchases -> will go into expenseSource
+	initialHeatingFuelPurchases: [FuelExpenseDetailsInput!]
+	# form data for other facility-related fuel purchases -> will go into expenseSource
+	initialOtherFuelPurchases: [FuelExpenseDetailsInput!]
+	# form data for vehicle fuel purchases -> will go into expenseSource
+	initialVehicleFuelPurchases: [FuelExpenseDetailsInput!]
+	initialUtilityBills: [UtilityBillInput!]
+}
+
+enum IntensityRatioPreference {
+	EMPLOYEE_COUNT
+	REVENUE
+	FLOORSPACE
+}
+
+# Priority levels
+enum Level {
+	HIGH
+	MEDIUM
+	LOW
+	NONE
+}
+
+# Load levels for transport
+enum LoadLevel {
+	LADEN_O
+	LADEN_50
+	LADEN_100
+	LADEN_AVERAGE
+	WITH_RF
+	WITHOUT_RF
+}
+
+type LocationProcessedItems {
+	companyId: String
+	sourceId: String
+	lineItemNumber: Int
+	sourceType: UploadType
+	associatedFacility: String
+	supplier: String
+	spendName: String
+	spendDescription: String
+	category: Category
+	fuelType: String
+	vehicleType: String
+	vehicleFuelType: String
+	regulatoryCategory: String
+	unitConversionFactorUsed: String
+	scope: Int
+	conversionFactorIdentifier: String
+	emissionConversionFactorUsed: String
+	kgco2EPerUnit: String
+	kgCo2ETotalValue: String
+	energyConversionFactorUsed: String
+	kwhValue: String
+	wttConversionFactorUsed: String
+	kgCo2EWttValue: String
+	kgCo2ECo2Value: String
+	kgCo2ECh4Value: String
+	kgCo2EN2OValue: String
+	startDate: String
+	endDate: String
+	status: DataSourceStatus
+	sicCode: String
+	subCategory: String
+	wasteActivityType: String
+	wasteType: String
+	disposalType: String
+	supplierId: String
+	customEmissionFactor: String
+	customMeasurement: String
+	customMeasurementUnit: String
+	originalSpendValue: String
+	originalSpendUnit: String
+	convertedSpendValue: String
+	convertedSpendUnit: String
+	originalActivityValue: String
+	originalActivityUnit: ActivityUnit
+	convertedActivityValue: String
+	convertedActivityUnit: ActivityUnit
+	quantity: String
+	materialName: String
+	countryCode: String
+	chemicalGroup: String
+	referenceProduct: String
+	casNumber: String
+	transportType: String
+}
+
+type LocationProcessedItemsResponse {
+	data: [LocationProcessedItems!]!
+}
+
+# Represents a single log entry
+type LogEntry {
+	timestamp: String!
+	message: String!
+}
+
+# Represents logs from a specific log group, with optional error handling
+type LogGroupLogs {
+	logGroupName: String!
+	logs: [LogEntry]
+	# List of log entries (can be empty if no logs match)
+	error: String
+}
+
+input NewConversationEvent {
+	id: String!
+	timestamp: AWSDateTime!
+	conversationId: String!
+	sender: ChatMessageSender!
+	message: String!
+}
+
+type NewReductionAction {
+	reductionDataId: String
+	companyId: String
+	financialYearId: String
+	name: String
+	category: String
+	status: String
+	emissionReduction: String
+	currentUnitsProcesses: String
+	currentResourceUsagePerUnit: String
+	currentTotalUsage: String
+	currentEmissionsPerUnit: String
+	newUnitsProcesses: String
+	newResourceUsagePerUnit: String
+	newTotalUsage: String
+	newEmissionsPerUnit: String
+	scope: String
+	startDate: String
+	endDate: String
+	currentUnitType: String
+	currentUsageUnit: String
+	newUnitType: String
+	newUsageUnit: String
+}
+
+type NewReductionActionCommitmentSummary {
+	byGroup: [NewReductionActionCommitmentsForGroup!]!
+}
+
+type NewReductionActionCommitmentsForGroup {
+	group: String!
+	total: Int!
+	committed: Int!
+	inProgress: Int!
+	done: Int!
+}
+
+type NewReductionActionSubtask {
+	name: String
+	description: String
+	weblinks: [String]
+	typename: String
+}
+
+type Notification @aws_api_key
+@aws_cognito_user_pools {
+	companyId: String!
+	notificationId: String!
+	notificationType: NotificationType!
+	notificationStatus: NotificationStatus!
+	creationDatetime: AWSDateTime!
+	facilityId: String
+	sourceId: String
+	fileName: String
+	message: String
+	category: String
+	userName: String
+}
+
+type NotificationPage {
+	notifications: [Notification!]!
+	# cursor is null when no more data available
+	cursor: String
+}
+
+enum NotificationStatus {
+	READ
+	UNREAD
+}
+
+enum NotificationType {
+	DATA_AGGREGATION_COMPLETE
+	DATA_AGGREGATION_FAILED
+	PROCESSING_STARTED
+	PROCESSING_COMPLETE
+	PROCESSING_FAILED
+	REDUCTION_RECOMMENDATIONS_GENERATION_COMPLETE
+	REDUCTION_RECOMMENDATIONS_GENERATION_FAILED
+	REDUCTION_NARRATIVE_GENERATION_COMPLETE
+	REDUCTION_NARRATIVE_GENERATION_FAILED
+	ALERT
+	INFO
+	REGULATORY_UPDATE
+}
+
+input OnboardingInput {
+	companyNumber: String!
+	sicCode: String!
+	logoBucketKey: String
+	companyFYDetails: CompanyFinancialYearInput!
+	initialDataUploads: InitialCompanyDataUploads!
+	users: [UserDetailsInput!]
+	facilities: [FacilityInput!]
+}
+
+# Personal preference categories
+enum PersonalPreference {
+	Employee
+	Students
+}
+
+type ProcessProgress @aws_api_key
+@aws_cognito_user_pools {
+	sourceId: String!
+	progress: Float!
+	completedSteps: Int!
+	totalSteps: Int!
+	status: Status!
+	companyId: String
+	message: String
+}
+
+type ProcessedCustomerDataItem {
+	companyId: String!
+	sourceId: String!
+	lineItemNumber: Int!
+	sourceType: String!
+	associatedFacility: String
+	supplier: String
+	spendName: String
+	category: Category
+	fuelType: FuelType
+	vehicleType: UnifiedVehicleType
+	vehicleFuelType: VehicleFuelType
+	regulatoryCategory: RegulatoryCategory
+	# originalValue: Float
+	# originalUnit: StandardUnit
+	unitConversionFactorUsed: Float
+	# convertedValue: Float
+	# convertedUnit: StandardUnit
+	originalActivityValue: Float
+	originalActivityUnit: String
+	convertedActivityValue: Float
+	convertedActivityUnit: String
+	originalSpendValue: Float
+	originalSpendUnit: String
+	convertedSpendValue: Float
+	convertedSpendUnit: String
+	quantity: Float
+	scope: Int
+	conversionFactorIdentifier: String
+	emissionConversionFactorUsed: Float
+	kgco2ePerUnit: Float
+	kgCo2eTotalValue: Float
+	energyConversionFactorUsed: Float
+	kwhValue: Float
+	wttConversionFactorUsed: Float
+	kgCo2eWttValue: Float
+	startDate: AWSDate!
+	endDate: AWSDate!
+	sicCode: String
+	subCategory: SubCategory
+	wasteActivityType: WasteActivityType
+	wasteType: WasteType
+	disposalType: DisposalType
+	#newly added fields
+	custom_emission_factor: Float
+	custom_measurement: Float
+	custom_measurement_unit: String
+}
+
+input ProcessedCustomerDataItemInput {
+	companyId: String!
+	sourceId: String!
+	lineItemNumber: Int!
+	sourceType: String!
+	associatedFacility: String
+	supplier: String
+	spendName: String
+	spendDescription: String
+	category: Category
+	fuelType: FuelType
+	vehicleType: UnifiedVehicleType
+	vehicleFuelType: UnifiedFuelType
+	regulatoryCategory: RegulatoryCategory
+	# originalValue: Float
+	# originalUnit: StandardUnit
+	unitConversionFactorUsed: Float
+	# convertedValue: Float
+	# convertedUnit: StandardUnit
+	originalActivityValue: Float
+	originalActivityUnit: StandardUnit
+	convertedActivityValue: Float
+	convertedActivityUnit: StandardUnit
+	originalSpendValue: Float
+	originalSpendUnit: StandardUnit
+	convertedSpendValue: Float
+	convertedSpendUnit: StandardUnit
+	quantity: Float
+	scope: Int
+	conversionFactorIdentifier: String
+	emissionConversionFactorUsed: Float
+	kgco2ePerUnit: Float
+	kgCo2eTotalValue: Float
+	energyConversionFactorUsed: Float
+	kwhValue: Float
+	wttConversionFactorUsed: Float
+	kgCo2eWttValue: Float
+	startDate: AWSDate!
+	endDate: AWSDate!
+	sicCode: String
+	subCategory: SubCategory
+	wasteActivityType: WasteActivityType
+	wasteType: WasteType
+	disposalType: DisposalType
+	status: String
+	#newly added fields
+	custom_emission_factor: Float
+	custom_measurement: Float
+	custom_measurement_unit: String
+}
+
+type ProcessedCustomerDataItemsResponse {
+	total: Int!
+	data: [ProcessedCustomerDataView!]!
+}
+
+type ProcessedCustomerDataView {
+	id: String
+	companyId: String
+	sourceId: String
+	sourceType: String!
+	associatedFacility: String
+	supplier: String
+	category: Category!
+	fuelType: String
+	vehicleType: String
+	vehicleFuelType: String
+	unitConversionFactorUsed: Float
+	scope: Int!
+	conversionFactorIdentifier: String
+	emissionConversionFactorUsed: Float
+	kgCo2eTotalValue: Float
+	energyConversionFactorUsed: Float
+	kWhValue: Float
+	wttConversionFactorUsed: Float
+	kgCo2eWttValue: Float
+	kgCo2eCo2Value: Float
+	kgCo2eCh4Value: Float
+	kgCo2eN2oValue: Float
+	startDate: AWSDate!
+	endDate: AWSDate!
+	status: String
+	sicCode: String
+	subCategory: String
+	transportType: String
+	kgco2ePerUnit: Float
+	wasteActivityType: String
+	wasteType: String
+	disposalType: String
+	spendName: String
+	countryCode: String
+	supplierId: String
+	customEmissionFactor: Float
+	customMeasurement: Float
+	customMeasurementUnit: String
+	originalSpendValue: Float
+	originalSpendUnit: String
+	convertedSpendValue: Float
+	convertedSpendUnit: String
+	originalActivityValue: Float
+	originalActivityUnit: String
+	convertedActivityValue: Float
+	convertedActivityUnit: String
+	quantity: Float
+	regulatoryCategory: String
+	chemicalGroup: String
+	spendDescription: String
+	materialName: String
+	referenceProduct: String
+	casNumber: String
+	lineItemNumber: Float
+}
+
+# Input filter type with added sorting, grouping, and filtering options
+input ProcessedDataFilter {
+	limit: Int!
+	skip: Int
+	sourceType: UploadType
+	startDate: AWSDate
+	endDate: AWSDate
+	supplierName: String
+	category: Category
+	uploadType: UploadType
+	fuelType: FuelType
+	fuelUnit: FuelUnit
+	vehicleType: UnifiedVehicleType
+	vehicleFuelType: VehicleFuelType
+	regulatoryCategory: RegulatoryCategory
+	transportType: TransportType
+	spendUnit: SpendUnit
+	activityUnit: ActivityUnit
+	sortOrder: SortOrder
+	# Example: ASC or DESC
+	sortField: String
+	# Field to sort by, e.g., "startDate", "endDate"
+	groupBy: String
+	# Field to group by, e.g., "supplier"
+	associatedFacility: String
+	wasteType: WasteType
+	disposalType: DisposalType
+	supplierId: String
+	spendDescription: String
+}
+
+type Questionnaire @aws_api_key
+@aws_cognito_user_pools {
+	questionnaireId: String!
+	questionnaireData: AWSJSON!
+	createdAt: AWSDateTime!
+	updatedAt: AWSDateTime!
+	name: String
+	financialYearId: String
+	supplierId: String
+}
+
+type RangeForBusinessTravelSubtype {
+	category: Category!
+	total: Float!
+	data: [ValueForRange!]!
+}
+
+type RangeForCategory {
+	category: Category!
+	total: Float!
+	data: [ValueForRange!]!
+	byFacility: [ValueForFacility!]!
+}
+
+type RangeForEmployeeCommuteDistance {
+	category: Category!
+	total: Float!
+	data: [ValueForRange!]!
+}
+
+type RangeForEmployeeCommuteEmission {
+	category: Category!
+	total: Float!
+	data: [ValueForRange!]!
+}
+
+type RangeForEmployeeCommuteEmissions {
+	category: Category
+	total: Float!
+	data: [ValueForRange!]!
+}
+
+type RangeForFacility {
+	# facility id, or None for unassigned data
+	facilityId: String
+	total: Float!
+	data: [ValueForRange!]!
+}
+
+type RangeForFuelType {
+	fuelType: FuelType
+	total: Float!
+	data: [ValueForRange!]!
+	byFacility: [ValueForFacility!]!
+}
+
+type RangeForLocation {
+	countryCode: String!
+	total: Float!
+	data: [ValueForRange!]!
+}
+
+type RangeForScope {
+	scope: Int!
+	total: Float!
+	data: [ValueForRange!]!
+	byFacility: [ValueForFacility!]!
+}
+
+type RangeForScope3SubCategory {
+	subCategory: SubCategory!
+	total: Float!
+	data: [ValueForRange!]!
+}
+
+type RangeForScope3Supplier {
+	# supplier name, or None for unassigned data
+	supplier: String
+	total: Float!
+	data: [ValueForRange!]!
+}
+
+type RangeForSicCode {
+	# sicCode, or None for unassigned data
+	sicCode: String
+	total: Float!
+	data: [ValueForRange!]!
+}
+
+type RangeForSupplier {
+	# supplier name, or None for unassigned data
+	supplier: String
+	total: Float!
+	data: [ValueForRange!]!
+	byFacility: [ValueForFacility!]!
+}
+
+type RangeForVehicleFuelType {
+	vehicleFuelType: VehicleFuelType
+	total: Float!
+	data: [ValueForRange!]!
+}
+
+type RangeForVehicleType {
+	vehicleType: String!
+	total: Float!
+	data: [ValueForRange!]!
+}
+
+type RangeForWasteActivityType {
+	wasteActivityType: WasteActivityType!
+	total: Float!
+	data: [ValueForRange!]!
+}
+
+type RangeForWasteDisposalByWeight {
+	disposalType: DisposalType
+	total: Float!
+	data: [ValueForRange!]!
+}
+
+type RangeForWasteType {
+	wasteType: WasteType!
+	total: Float!
+	data: [ValueForRange!]!
+}
+
+input RawDataItemInput {
+	activity_value: Float
+	activity_unit: ActivityUnit
+	spend_value: Float
+	spend_unit: SpendUnit
+	spend_date: AWSDate
+	category: String!
+	activity_start_date: AWSDate!
+	activity_end_date: AWSDate!
+	company_id: String!
+	source_id: String!
+	line_item_number: String!
+	source_type: UploadType!
+	# Optional fields
+	scope: Int
+	vehicle_type: UnifiedVehicleType
+	vehicle_fuel_type: VehicleFuelType
+	regulatory_category: RegulatoryCategory
+	chemical_group: ChemicalGroup
+	transport_type: TransportType
+	fuel_type: FuelType
+	waste_activity_type: WasteActivityType
+	waste_type: WasteType
+	disposal_type: DisposalType
+	sic_code: String
+	country_code: String
+	train_type: TrainType
+	water_travel_type: WaterTravelType
+	flight_haul: FlightHaul
+	flight_class: FlightClass
+	total_kg_co2e_per_unit: Float
+	kg_co2e_co2_per_unit: Float
+	kg_co2e_ch4_per_unit: Float
+	kg_co2e_n2o_per_unit: Float
+	kg_co2e_wtt_per_unit: Float
+	kwh_energy_per_unit: Float
+	kgco2e_per_unit: Float
+	cargo_type: CargoType
+	load_level: LoadLevel
+	ship_size: TransportAndDistributionShipSize
+	source: String
+	zero_emission: Boolean
+	vehicle_size: VehicleSize
+	material_name: String
+	reference_product: String
+	cas_number: String
+	#newly added fields
+	custom_emission_factor: Float
+	custom_measurement: Float
+	custom_measurement_unit: String
+}
+
+# Status of raw data items
+enum RawDataItemStatus {
+	READY_TO_PROCESS
+	PROCESSED
+	FORCE_REPROCESS
+	FAILED_PROCESSING
+	NO_CONVERSION_FACTOR_FOUND
+	NO_ACTIVITY_OR_SPEND_VALUES
+	ZERO_EMISSION
+}
+
+type RecommendedReductionAction {
+	actionId: String!
+	reasoning: String!
+}
+
+type RecommendedReductionActions {
+	# generationDatetime will be null if no generation has been done.
+	generationDatetime: AWSDateTime
+	actions: [RecommendedReductionAction!]!
+}
+
+type ReductionAction {
+	actionId: String!
+	group: ReductionActionGroup!
+	name: String!
+	description: String
+	keyFact: String
+	impact: ReductionActionLevel!
+	difficultyToImplement: ReductionActionLevel!
+	costToImplement: ReductionActionLevel!
+	potentialCostSaving: Boolean!
+	subtasks: [ReductionActionSubtask!]!
+	currentStatus: ReductionCommitmentStatus!
+	# by default UNCOMMITTED
+	commitmentHistory: [ReductionCommitmentHistory!]!
+	# the email of the user the commitment is assigned to
+	assignedUser: String
+}
+
+type ReductionActionCommitmentSummary {
+	byGroup: [ReductionActionCommitmentsForGroup!]!
+}
+
+type ReductionActionCommitmentsForGroup {
+	group: ReductionActionGroup!
+	total: Int!
+	committed: Int!
+	inProgress: Int!
+	done: Int!
+}
+
+enum ReductionActionGroup {
+	TRAVEL_AND_TRANSPORT
+	FACILITIES
+	EQUIPMENT
+	PURCHASED_GOODS_AND_SERVICES
+	WASTE
+}
+
+enum ReductionActionLevel {
+	HIGH
+	MEDIUM
+	LOW
+	NONE
+}
+
+type ReductionActionSubtask {
+	name: String!
+	description: String
+	weblinks: [String!]!
+}
+
+type ReductionCommitmentHistory {
+	status: ReductionCommitmentStatus!
+	changeDatetime: AWSDateTime!
+}
+
+enum ReductionCommitmentStatus {
+	UNCOMMITTED
+	COMMITTED
+	IN_PROGRESS
+	DONE
+}
+
+# Regulatory categories for emissions
+enum RegulatoryCategory {
+	KYOTO_PROTOCOL_PRODUCTS
+	BLENDS
+	MONTREAL_PROTOCOL_PRODUCTS
+	FLUORINATED_ETHERS
+	OTHER_PRODUCTS
+}
+
+type RemainingTasks {
+	companyTasks: [UploadTask]!
+	facilityTasks: [FacilityTasks]!
+}
+
+type Report {
+	reductionNarrative: String!
+	generatedReductionNarrative: String
+	methodology: String!
+	reportBucketKey: String
+	lastUpdatedDatetime: AWSDateTime!
+	reportFinalised: Boolean!
+	preferences: ReportPreferences
+}
+
+input ReportDetails {
+	reductionNarrative: String!
+	methodology: String!
+	draftReportBucketKey: String
+}
+
+type ReportPreferences {
+	intensityRatioChoice: IntensityRatioPreference!
+}
+
+input ReportPreferencesInput {
+	intensityRatioChoice: IntensityRatioPreference!
+}
+
+enum ReportType {
+	LEASED
+	WTT
+}
+
+enum ResponseMessage {
+	CREATED
+	ONBOARDING_COMPLETED
+	UPDATED
+	DELETED
+	PROCESSING
+	PROCESSED
+	FAILED
+	NOT_IMPLEMENTED
+	REQUESTED
+}
+
+type RiskLevelData @aws_api_key
+@aws_cognito_user_pools {
+	scopeCategory: String
+	co2eValue: Float
+	emissionsPercentage: Float
+	riskLevel: String
+}
+
+type RiskLevelOutput @aws_api_key
+@aws_cognito_user_pools {
+	Data: [RiskLevelData]
+}
+
+type ScopeEmissionData {
+	name: String!
+	total: Float!
+	status: [StatusEmissionData!]!
+}
+
+type SicConversionFactors {
+	sicCode: String!
+	conversionFactors: [CountryConversionFactor!]!
+}
+
+# Sorting order for queries
+enum SortOrder {
+	ASC
+	DESC
+}
+
+# The type of the source of the data item
+enum SourceType {
+	EXPENSE_FILE
+	MANUAL_DATA_LOAD
+	UTILITY_BILL
+	FUEL_HEATING
+	FUEL_OTHER
+	FUEL_VEHICLE
+	SCOPE_3_PURCHASES
+	EMPLOYEE_COMMUTING
+	BUSINESS_TRAVEL
+}
+
+# Units for spend measurements
+enum SpendUnit {
+	GBP
+	EUR
+	USD
+}
+
+enum StandardUnit {
+	LITRE
+	KWH
+	KM
+	GBP
+	TONNE
+	YARD
+}
+
+# Task status
+enum Status {
+	NOT_STARTED
+	IN_PROGRESS
+	DONE
+	NONE
+}
+
+type StatusEmissionData {
+	name: String!
+	value: Float!
+}
+
+# The emission subcategory for an activity or spend
+enum SubCategory {
+	PURCHASED_GOODS
+	CAPITAL_GOODS
+	FUEL_AND_ENERGY
+	T_AND_D
+	WASTE
+	BUSINESS_TRAVEL
+	COMMUTING
+}
+
+type Supplier {
+	supplier: String!
+	sic_codes: [String]
+}
+
+type SupplierData @aws_api_key
+@aws_cognito_user_pools {
+	supplier_name: String!
+	id: String
+	company_id: String
+	supplier_email: String
+	supplier_category: String
+	impact: Float
+	spend: Float
+	conversion_factor_identifier: String
+	emission_conversion_factor_used: Float
+	energy_conversion_factor_used: String
+	sic_code: String
+	status: String
+	date: AWSDate
+	is_published: Boolean
+	supplier_information: AWSJSON
+	emission_source: EmissionSourceType
+	sic_codes: [String]
+	updated_sic_code: String
+	updated_conversion_factor_identifier: String
+	updated_emission_conversion_factor_used: Float
+	emissions: Float
+}
+
+type TargetEmissionsData {
+	companyId: String
+	scope1ReductionGoalPercent: Float
+	scope1StartingEmissions: Float
+	scope1TargetEmissions: Float
+	scope2ReductionGoalPercent: Float
+	scope2StartingEmissions: Float
+	scope2TargetEmissions: Float
+	scope3ReductionGoalPercent: Float
+	scope3StartingEmissions: Float
+	scope3TargetEmissions: Float
+	startingYear: Int
+	targetYear: Int
+	totalReductionGoalPercent: Float
+	totalStartingEmissions: Float
+	totalTargetEmissions: Float
+	allScope: Boolean
+}
+
+# category: Category
+# status: DataSourceStatus
+# associatedFacility: ID
+union Task = UploadTask | UploadedDataVerificationTaskDetails 
+
+# Types of train tickets
+enum TrainTicketType {
+	NATIONAL_RAIL
+	INTERNATIONAL_RAIL
+	LIGHT_RAIL_AND_TRAM
+	LONDON_UNDERGROUND
+}
+
+enum TrainType {
+	NATIONAL_RAIL
+	INTERNATIONAL_RAIL
+	LIGHT_RAIL_AND_TRAM
+	LONDON_UNDERGROUND
+}
+
+# Ship sizes for transport and distribution
+enum TransportAndDistributionShipSize {
+	DWT_200_MORE
+	DWT_120_199
+	DWT_100_199
+	DWT_80_119
+	DWT_60_MORE
+	DWT_60_99
+	DWT_60_79
+	DWT_35_59
+	DWT_20_59
+	DWT_20_MORE
+	DWT_10_MORE
+	DWT_10_59
+	DWT_10_34
+	DWT_10_19
+	DWT_5_9
+	DWT_0_9
+	DWT_0_4
+	DWT_M3_200_MORE
+	DWT_M3_0_199
+	DWT_M3_50_MORE
+	DWT_M3_0_49
+	AVERAGE
+	DWT_ALL
+	DWT_10_TEU_100
+	DWT_5_9_TEU_100
+	DWT_0_4_TEU_100
+	TEU_8_MORE
+	TEU_5_8
+	TEU_3_5
+	TEU_2_3
+	TEU_1_2
+	TEU_0_1
+	CEU_4_MORE
+	CEU_0_4
+	LM_2_MORE
+	LM_0_2
+}
+
+# Transport type for travel activity
+enum TransportType {
+	CAR
+	BUS
+	RAIL
+	BIKE
+	WALK
+	WATER
+	AIR
+	MOTORBIKE
+	TAXI
+	FERRY
+}
+
+# Unified fuel type for activities
+enum UnifiedFuelType {
+	PETROL
+	DIESEL
+	BURNING_OIL
+	LNG
+	LPG
+	NAT_GAS
+	NAT_GAS_100_MINERAL_BLEND
+	OTHER_PETROLEUM
+	PROPANE
+	BUTANE
+	CNG
+	AVIATION_SPIRIT
+	AVIATION_TURBINE_FUEL
+	DIESEL_100_MINERAL_BLEND
+	FUEL_OIL
+	GAS_OIL
+	LUBRICANTS
+	NAPHTHA
+	PETROL_100_MINERAL_BLEND
+	PROC_FUEL_OILS_RESIDUAL_OIL
+	PROC_FUEL_OILS_DISTILLATE_OIL
+	REFINERY_MISC
+	WASTE_OILS
+	MARINE_GAS_OIL
+	MARINE_FUEL_OIL
+	COAL_INDUSTRIAL
+	COAL_ELECTRICITY_GENERATION
+	COAL_ELECTRICITY_GENERATION_HOME_PROD
+	COAL_DOMESTIC
+	COKING_COAL
+	PETROLEUM_COKE
+	BIOGAS
+	UNKNOWN
+	ELECTRIC
+	PLUG_IN_HYBRID
+	HYBRID
+	COKING_OIL
+}
+
+# The vehicle type of a vehicle related activity, such as travel
+enum UnifiedVehicleType {
+	UNKNOWN
+	SMALL_CAR
+	MEDIUM_CAR
+	LARGE_CAR
+	AVERAGE_CAR
+	MINI
+	SUPERMINI
+	LOWER_MEDIUM
+	UPPER_MEDIUM
+	LUXURY
+	EXECUTIVE
+	SPORTS
+	SUV_4X4
+	MPV
+	MOTO_SMALL
+	MOTO_MEDIUM
+	MOTO_LARGE
+	MOTO_AVERAGE
+	REGULAR_TAXI
+	BLACK_CAB_TAXI
+	LOCAL_BUS
+	AVARAGE_LOCAL_BUS
+	COACH_BUS
+	LOCAL_LONDON_BUS
+	NON_LONDON_BUS
+	VANS
+	HGV
+	HGV_REFRIGERATED
+	FREIGHT_FLIGHTS
+	RAIL
+	SEA_TANKER
+	MOTORBIKE
+	NATIONAL_RAIL
+	INTERNATIONAL_RAIL
+	LIGHT_RAIL_AND_TRAM
+	LONDON_UNDERGROUND
+	CARGO_SHIP
+}
+
+input UpdateDataRequestInput {
+	questionnaireId: String
+	answers: AWSJSON
+	status: DataRequestStatus
+}
+
+input UpdateQuestionnaireInput {
+	company_id: String
+	questionnaire_id: String!
+	questionnaire_data: AWSJSON
+	name: String
+}
+
+input UpdateSupplierInput {
+	id: String!
+	supplier_email: String
+	supplier_name: String
+	#   supplier_category: [String]
+	status: String
+	impact: String
+	spend: String
+	conversion_factor_identifier: String
+	emission_conversion_factor_used: Float
+	energy_conversion_factor_used: String
+	sic_code: String
+	date: AWSDate
+	is_published: Boolean
+	supplier_information: AWSJSON
+	emission_source: EmissionSourceType
+	updated_sic_code: String
+	updated_conversion_factor_identifier: String
+	updated_emission_conversion_factor_used: String
+}
+
+type UploadTask {
+	category: Category!
+	partiallyProcessed: Boolean!
+	submittedData: [CustomerDataSourceTasks]!
+	gapsInData: [DateRange]!
+}
+
+enum UploadType {
+	EXPENSE_FILE
+	MANUAL_DATA_LOAD
+	UTILITY_BILL
+	FUEL_HEATING
+	FUEL_OTHER
+	FUEL_VEHICLE
+	SCOPE_3_PURCHASES
+	EMPLOYEE_COMMUTING
+	BUSINESS_TRAVEL
+}
+
+type UploadedDataVerificationTaskDetails {
+	category: Category!
+}
+
+type UserDetails {
+	email: String!
+	position: String!
+}
+
+input UserDetailsInput {
+	email: String
+	position: String
+}
+
+# A line item from a utility bill. Must match UtilityBillExtractedLineItemInput
+type UtilityBillExtractedLineItem {
+	supplierName: String
+	associatedFacility: String
+	supplyAddress: String
+	# for user reference. Not used for any calculations.
+	activityValue: Float
+	# this may be null initially but the user must provide this value on update
+	activityUnit: String
+	# this may be null initially but the user must provide this value on update
+	activitySubtype: String
+	activityStartDate: AWSDate!
+	activityEndDate: AWSDate!
+	category: String
+	# this may be null initially but the user must provide this value on update
+	spendValue: Float
+	spendUnit: String
+	spendName: String
+	spendDescription: String
+	spendDate: AWSDate
+	# is this on the bills? Will it be the same per line item?
+	confirmedByUser: Boolean!
+	zeroEmission: Boolean!
+}
+
+# The input type for a line item from a utility bill. Must match UtilityBillExtractedLineItem
+input UtilityBillExtractedLineItemInput {
+	supplierName: String
+	associatedFacility: String
+	supplyAddress: String
+	# for user reference. Not used for any calculations.
+	activityValue: Float!
+	activityUnit: String!
+	category: Category!
+	activitySubtype: String
+	activityStartDate: AWSDate!
+	activityEndDate: AWSDate!
+	spendValue: Float
+	spendUnit: String
+	spendName: String
+	spendDescription: String
+	spendDate: AWSDate
+	# Must be confirmed by user. This should only be returned true.
+	confirmedByUser: Boolean!
+	zeroEmission: Boolean!
+}
+
+input UtilityBillInput {
+	originalFileName: String!
+	bucketName: String!
+	bucketKey: String!
+}
+
+# Represents a utility bill upload for a company.
+type UtilityBillS3Source implements CustomerDataSource {
+	sourceId: String!
+	companyId: String!
+	sourceType: UploadType!
+	associatedFacility: String
+	creationDatetime: AWSDateTime
+	lastProcessedDatetime: AWSDateTime
+	startDate: AWSDate
+	endDate: AWSDate
+	status: DataSourceStatus!
+	originalFileName: String
+	rawFileBucketName: String
+	rawFileBucketKey: String!
+	processingTimeMs: Int
+	extractedData: [UtilityBillExtractedLineItem!]!
+}
+
+# Represents a utility bill upload for a company.
+type UtilityBillS3Source_tasks implements CustomerDataSource_tasks {
+	sourceId: String!
+	companyId: String!
+	category: Category!
+	associatedFacility: String
+	creationDatetime: AWSDateTime
+	lastProcessedDatetime: AWSDateTime
+	startDate: AWSDate
+	endDate: AWSDate
+	status: DataSourceStatus!
+	originalFileName: String
+	rawFileBucketName: String
+	rawFileBucketKey: String!
+	processingTimeMs: Int
+	extractedData: [UtilityBillExtractedLineItem!]!
+}
+
+type ValueForFacility {
+	# facility id, or None for unassigned data
+	facilityId: String
+	value: Float!
+}
+
+type ValueForRange {
+	value: Float!
+	month: Int
+	year: Int
+}
+
+type VehicleCount {
+	vehicleFuelType: VehicleFuelType!
+	count: Int!
+}
+
+input VehicleCountInput {
+	vehicleFuelType: VehicleFuelType!
+	count: Int!
+}
+
+# The fuel type of a vehicle related activity, such as travel
+enum VehicleFuelType {
+	DIESEL
+	PETROL
+	HYBRID
+	PLUG_IN_HYBRID
+	ELECTRIC
+	UNKNOWN
+	CNG
+	LPG
+}
+
+# Vehicle size categories
+enum VehicleSize {
+	SMALL
+	MEDIUM
+	LARGE
+	AVERAGE
+}
+
+# Waste activity types
+enum WasteActivityType {
+	CONSTRUCTION
+	OTHER
+	REFUSE
+	ELECTRICAL_ITEMS
+	METAL
+	PLASTIC
+	PAPER
+}
+
+type WasteDetails_tasks {
+	wasteType: WasteType!
+	wasteQuantity: Float!
+}
+
+type WasteFormUploadSource implements CustomerDataSource_tasks {
+	sourceId: String!
+	companyId: String!
+	category: Category!
+	associatedFacility: String
+	creationDatetime: AWSDateTime
+	lastProcessedDatetime: AWSDateTime
+	startDate: AWSDate
+	endDate: AWSDate
+	status: DataSourceStatus!
+	formData: [WasteDetails_tasks!]!
+}
+
+# Waste types
+enum WasteType {
+	AGGREGATES
+	AVERAGE_CONSTRUCTION
+	ASBESTOS
+	BRICKS
+	CONCRETE
+	INSULATION
+	METALS
+	SOILS
+	MINERAL_OIL
+	PLASTERBOARD
+	TYRES
+	WOOD
+	BOOKS
+	GLASS
+	CLOTHING
+	HOUSEHOLD_RESIDUAL
+	ORGANIC_FOOD_AND_DRINK
+	ORGANIC_GARDEN
+	ORGANIC_MIXED_FOOD_AND_GARDEN
+	COMMERCIAL_AND_INDUSTRIAL
+	WEEE_FRIDGES_AND_FREEZERS
+	WEEE_LARGE
+	WEEE_MIXED
+	WEEE_SMALL
+	BATTERIES
+	METAL_ALUMINIUM_CANS_AND_FOIL
+	METAL_MIXED_CANS
+	METAL_SCRAP
+	METAL_STEEL_CANS
+	PLASTICS_AVERAGE_PLASTICS
+	PLASTICS_AVERAGE_PLASTIC_FILM
+	PLASTICS_AVERAGE_PLASTIC_RIGID
+	PLASTICS_HDPE
+	PLASTICS_LDPE_AND_LLDPE
+	PLASTICS_PET
+	PLASTICS_PP
+	PLASTICS_PS
+	PLASTICS_PVC
+	PAPER_BOARD
+	PAPER_MIXED
+	PAPER_PAPER
+	MIXED_RECYCLING
+}
+
+# Types of water travel
+enum WaterTravelType {
+	FOOT_PASSENGER
+	CAR_PASSENGER
+	AVERAGE
+}
+
+type YearlyEmissionReduction {
+	year: Int!
+	totalEmissionReduction: Float!
+	scopes: [ScopeEmissionData!]!
+}
+
+# Yes/No options
+enum YesNo {
+	YES
+	NO
+	NONE
+}
+
+type Mutation {
+	#  @aws_api_key @aws_cognito_user_pools
+	# create a basic company with an admin user
+	createCompany(companyDetails: CreateCompanyInput): CompanyDetails!
+		@aws_cognito_user_pools
+	# complete onboarding for an already-created company
+	completeOnboarding(companyId: String!, data: OnboardingInput): GenericResponse
+		@aws_cognito_user_pools
+@aws_api_key
+	# delete an existing company
+	deleteCompany(companyId: String!, hardDelete: Boolean): GenericResponse
+		@aws_cognito_user_pools
+	# update an existing company
+	updateCompanyDetails(companyId: String, companyDetails: CompanyDetailsInput!): GenericResponse!
+		@aws_cognito_user_pools
+	# create a new facility
+	createFacility(companyId: String, facilityDetails: FacilityDetailsInput!): Facility!
+		@aws_cognito_user_pools
+	# update an existing facility
+	updateFacility(companyId: String, facilityId: String!, facilityDetails: FacilityDetailsInput!): GenericResponse!
+		@aws_cognito_user_pools
+	# update the normal users for a company
+	updateUsers(companyId: String, users: [UserDetailsInput!]!): GenericResponse!
+		@aws_cognito_user_pools
+	# update the admin user for a company. Can only be used with companyId in params.
+	updateAdminUser(companyId: String!, adminUserEmail: String!): GenericResponse!
+		@aws_cognito_user_pools
+	# add a new financial year for a company. Returns the created financial year.
+	createFinancialYear(companyId: String, financialYearDetails: FinancialYearInput!): FinancialYear!
+		@aws_cognito_user_pools
+	# add an existing, open financial year.
+	updateFinancialYear(companyId: String, financialYearId: String!, financialYearDetails: FinancialYearInput!): FinancialYear!
+		@aws_cognito_user_pools
+	# close a financial year. Once closed, a financial year cannot be updated, and the associated aggregation data will remain locked.
+	closeFinancialYear(companyId: String, financialYearId: String!): GenericResponse!
+		@aws_cognito_user_pools
+	# update the details of a non-finalised report.
+	updateFinancialYearReportDetails(
+		companyId: String,
+		financialYearId: String!,
+		reportDetails: ReportDetails!,
+		preferences: ReportPreferencesInput!
+	): GenericResponse!
+		@aws_cognito_user_pools
+	# finalise a report. Once finalised, a report cannot be updated.
+	finaliseFinancialYearReport(companyId: String, financialYearId: String!, bucketKey: String!): GenericResponse!
+		@aws_cognito_user_pools
+	# request the generation of recommended reduction actions.
+	requestRecommendedActionsGeneration(companyId: String, financialYearId: String!): GenericResponse!
+		@aws_cognito_user_pools
+	# create new reduction actions
+	createNewReductionActions(
+		companyId: String!,
+		financialYearId: String!,
+		name: String!,
+		category: String!,
+		status: String!,
+		scope: String!,
+		startDate: AWSDate!,
+		endDate: AWSDate,
+		emissionReduction: String!,
+		currentUnitsProcesses: String!,
+		currentResourceUsagePerUnit: String!,
+		currentTotalUsage: String!,
+		currentEmissionsPerUnit: String!,
+		currentUnitType: String!,
+		currentUsageUnit: String!,
+		newUnitsProcesses: String!,
+		newResourceUsagePerUnit: String!,
+		newTotalUsage: String!,
+		newEmissionsPerUnit: String!,
+		newUnitType: String!,
+		newUsageUnit: String!
+	): GenericResponse!
+		@aws_cognito_user_pools
+	#update NewReductionAction
+	updateNewReductionAction(
+		id: String!,
+		companyId: String!,
+		financialYearId: String!,
+		name: String!,
+		category: String!,
+		status: String!,
+		scope: String!,
+		startDate: AWSDate!,
+		endDate: AWSDate,
+		emissionReduction: String!,
+		currentUnitsProcesses: String!,
+		currentResourceUsagePerUnit: String!,
+		currentTotalUsage: String!,
+		currentEmissionsPerUnit: String!,
+		currentUnitType: String!,
+		currentUsageUnit: String!,
+		newUnitsProcesses: String!,
+		newResourceUsagePerUnit: String!,
+		newTotalUsage: String!,
+		newEmissionsPerUnit: String!,
+		newUnitType: String!,
+		newUsageUnit: String!
+	): GenericResponse!
+		@aws_cognito_user_pools
+	# delete NewReductionAction
+	deleteNewReductionAction(reductionId: String!): GenericResponse!
+		@aws_cognito_user_pools
+	# create or update target emission_reduction
+	createOrUpdateTargetEmissionsData(
+		companyId: String!,
+		scope1ReductionGoalPercent: Float,
+		scope1StartingEmissions: Float,
+		scope1TargetEmissions: Float,
+		scope2ReductionGoalPercent: Float,
+		scope2StartingEmissions: Float,
+		scope2TargetEmissions: Float,
+		scope3ReductionGoalPercent: Float,
+		scope3StartingEmissions: Float,
+		scope3TargetEmissions: Float,
+		startingYear: Int,
+		targetYear: Int,
+		totalReductionGoalPercent: Float,
+		totalStartingEmissions: Float,
+		totalTargetEmissions: Float,
+		allScope: Boolean
+	): GenericResponse!
+		@aws_cognito_user_pools
+	# request the generation of a reduction narrative.
+	requestReductionNarrativeGeneration(companyId: String, financialYearId: String!): GenericResponse!
+		@aws_cognito_user_pools
+	# create a record for fuel form data. Input company name takes precedence -> returns uuid
+	addFuelFormUpload(
+		companyId: String,
+		startDate: AWSDate!,
+		endDate: AWSDate,
+		fuelExpenseDetails: [FuelExpenseDetailsInput!]!,
+		associatedFacility: String!,
+		uploadType: UploadType!
+	): String!
+		@aws_cognito_user_pools
+	# create a record for employee commuting form data. Input company name takes precedence -> returns uuid
+	addEmployeeCommutingData(
+		companyId: String,
+		startDate: AWSDate!,
+		endDate: AWSDate,
+		employeeCommutingDetails: [EmployeeCommutingDetailsInput!]!,
+		associatedFacility: String!,
+		uploadType: UploadType!
+	): String!
+		@aws_cognito_user_pools
+	# create a record for an uploaded expense file. Input company name takes precedence -> returns uuid
+	addCompanyExpenseFile(
+		companyId: String,
+		startDate: AWSDate!,
+		endDate: AWSDate,
+		bucketName: String,
+		bucketKey: String!,
+		associatedFacility: String
+	): String!
+		@aws_cognito_user_pools
+	# create a record for a bulk data upload file. Input company name takes precedence -> returns uuid
+	addBulkDataUploadFile(
+		companyId: String,
+		startDate: AWSDate!,
+		endDate: AWSDate,
+		bucketName: String,
+		bucketKey: String!,
+		associatedFacility: String
+	): String!
+		@aws_cognito_user_pools
+	# create a record for an uploaded utility bill. Input company name takes precedence -> returns uuid
+	addCompanyUtilityBill(
+		companyId: String,
+		originalFileName: String!,
+		bucketName: String,
+		bucketKey: String!,
+		associatedFacility: String
+	): String!
+		@aws_cognito_user_pools
+	# update an uploaded expense file with the processed file details and mark it ready to process. Company name is taken from token if not provided.
+	updateCompanyExpenseFile(
+		companyId: String!,
+		sourceId: String!,
+		processedFileBucketName: String,
+		processedFileBucketKey: String!,
+		version: Int
+	): GenericResponse
+		@aws_cognito_user_pools
+	# update extracted data on a utility bill source (companyId is optional for testing). If updatedLineItems is provided, it will replace all existing line items.
+	updateUtilityBillExtractedData(
+		companyId: String,
+		sourceId: String!,
+		newStartDate: AWSDate,
+		newEndDate: AWSDate,
+		updatedLineItems: [UtilityBillExtractedLineItemInput!]
+	): GenericResponse
+		@aws_cognito_user_pools
+	# endpoint for processing an expense source file. The companyId is optional (has been deprecated in favour of an event driven design)
+	processExpenseSource(sourceId: String!, companyId: String): GenericResponse
+		@aws_cognito_user_pools
+	# delete a data source
+	deleteCustomerDataSource(companyId: String, sourceId: String!): GenericResponse!
+		@aws_cognito_user_pools
+	# add manual data and onboard a non-onboarded company.
+	# The sheet_id is an optional value (linking to a public google sheet)
+	# if sheetId is not provided, the default sheet will be used.
+	addTestData(companyId: String!, sheetId: String): GenericResponse
+		@aws_cognito_user_pools
+	# create a notification for a company. Only used internally.
+	createNotification(
+		companyId: String!,
+		notificationType: NotificationType!,
+		facilityId: String,
+		sourceId: String,
+		fileName: String,
+		message: String
+	): Notification!
+		@aws_cognito_user_pools
+	# mark a notification as read
+	markNotificationAsRead(companyId: String, notificationId: String!): GenericResponse!
+		@aws_cognito_user_pools
+	# delete a notification
+	deleteNotification(companyId: String, notificationId: String!): GenericResponse!
+		@aws_cognito_user_pools
+	# update commitment. Commitment status of UNCOMMITTED removes a commitment.
+	updateReductionActionCommitment(
+		companyId: String,
+		actionId: String!,
+		commitmentStatus: ReductionCommitmentStatus!,
+		assignedUser: String
+	): String
+		@aws_cognito_user_pools
+	# Chatbot - User side operations
+	deleteConversation(conversationId: String!): GenericResponse!
+		@aws_cognito_user_pools
+	# Publish a message to the chatbot. ConversationId can be provided. For a new conversation, provide null and a new conversationId will be returned.
+	userPublishMessage(message: String!, conversationId: String): String!
+		@aws_cognito_user_pools
+	# Chatbot - Agent side operations
+	aiPublishMessage(event: NewConversationEvent): ConversationEvent!
+		@aws_cognito_user_pools
+@aws_api_key
+	# Trigger for process aggregate data
+	startAggregatedData(financialYearId: String, companyId: String!): GenericResponse!
+		@aws_cognito_user_pools
+	updateSupplierData(supplier_data: UpdateSupplierInput!): SupplierData!
+		@aws_cognito_user_pools
+	addSupplierData(supplier_data: AddSupplierInput!): SupplierData!
+		@aws_cognito_user_pools
+	createDataRequest(data_request: DataRequestInput!): DataRequestCreated!
+		@aws_cognito_user_pools
+	updateDataRequestStatus(dataRequestId: String, supplierId: String!, status: DataRequestStatus!): DataRequest!
+		@aws_api_key
+@aws_cognito_user_pools
+	updateDataRequest(dataRequestId: String!, updateRequest: UpdateDataRequestInput!): DataRequest!
+		@aws_api_key
+@aws_cognito_user_pools
+	AddProcessedDataItem(rawDataItems: [RawDataItemInput!]!): AWSJSON!
+		@aws_cognito_user_pools
+	itemProcessProgress(
+		sourceId: String!,
+		progress: Float!,
+		completedSteps: Int!,
+		totalSteps: Int!,
+		status: Status!,
+		companyId: String,
+		message: String
+	): ProcessProgress!
+		@aws_cognito_user_pools
+	updateProcessedDataItem(companyId: String!, data: ProcessedCustomerDataItemInput!): ProcessedCustomerDataItem!
+		@aws_cognito_user_pools
+	# @aws_cognito_user_pools
+	createQuestionnaire(questionnaireDetails: CreateQuestionnaireInput!): Questionnaire
+		@aws_cognito_user_pools
+	updateQuestionnaire(questionnaireDetails: UpdateQuestionnaireInput!): Questionnaire
+		@aws_cognito_user_pools
+	deleteQuestionnaire(questionnaireDetails: DeleteQuestionnaireInput!): Boolean
+		@aws_cognito_user_pools
+}
+
+type Query {
+	# fetch all details of a company. Order of input preference is companyId -> subDomain -> companyName -> User Token
+	getCompany(companyId: String, subDomain: String, companyName: String): Company!
+		@aws_cognito_user_pools
+@aws_api_key
+	# fetch basic company details. Location is an optional filter (location filter not yet implemented)
+	getCompanies(location: String): [CompanyDetails!]!
+		@aws_cognito_user_pools
+	# fetch all details of a specific financial year
+	getFinancialYear(companyId: String, financialYearId: String!): FinancialYear!
+		@aws_cognito_user_pools
+	# fetch the report for a given financial year
+	getFinancialYearReport(companyId: String, financialYearId: String!): Report!
+		@aws_cognito_user_pools
+	# get all company data sources by sourceType
+	getAllCompaniesDataSourceSummaries(sourceType: UploadType): [CustomerDataSourceSummary!]!
+		@aws_cognito_user_pools
+	# get suppliers and their sic codes
+	getAllSuppliers: [Supplier!]!
+		@aws_cognito_user_pools
+	getConversionFactorBySic(sicCodes: [String!]!): [SicConversionFactors!]!
+		@aws_cognito_user_pools
+	getConversionFactors(rawDataItems: [RawDataItemInput!]!): AWSJSON!
+		@aws_cognito_user_pools
+	findConversionFactors(search_term: String, country_code: String): AWSJSON!
+		@aws_cognito_user_pools
+	# fetch the company's tasks and date ranges of missing data, as well as current uploads per task.
+	# if reportingEndDate is not provided, the current date will be used by default
+	getCustomerDataTasks(companyId: ID, financialYearId: ID!): RemainingTasks
+		@aws_cognito_user_pools
+	# get customer data source ids and their statuses (companyId is optional)
+	# If associatedFacility is not provided, only customer data sources with no associatedFacility will be supplied
+	getCustomerDataSourceSummariesByType(companyId: String, associatedFacility: String, sourceType: UploadType!): [CustomerDataSourceSummary!]!
+		@aws_cognito_user_pools
+	# fetch a particular customer data source by id (companyId is optional)
+	getCustomerDataSource(companyId: String, sourceId: String!): CustomerDataSource!
+		@aws_cognito_user_pools
+	# get aggregated information regarding company data for a financial year (companyId is optional)
+	getAggregatedData(companyId: String, financialYearId: String!): AggregatedData!
+		@aws_cognito_user_pools
+	# get notifications for a company. The limit is the number of records to retrieve, and the cursor is an offset
+	getNotifications(
+		companyId: String,
+		limit: Int,
+		cursor: String,
+		sortOrder: SortOrder
+	): NotificationPage!
+		@aws_cognito_user_pools
+	# get reduction actions
+	getReductionActions(companyId: String): [ReductionAction!]!
+		@aws_cognito_user_pools
+	# get reduction actions new
+	getNewReductionActions(companyId: String, financialYearId: String): [NewReductionAction]!
+		@aws_cognito_user_pools
+	# get reduction action summary
+	getReductionCommitmentSummary(companyId: String): ReductionActionCommitmentSummary!
+		@aws_cognito_user_pools
+	# get new reduction action summary
+	getNewReductionCommitmentSummary(companyId: String): NewReductionActionCommitmentSummary!
+		@aws_cognito_user_pools
+	# get TargetEmissionsData
+	getTargetEmissionsData(companyId: String!): [TargetEmissionsData]!
+		@aws_cognito_user_pools
+	# get getYearlyEmissionReductionData
+	getYearlyEmissionReductionData(companyId: String!): [YearlyEmissionReduction]
+		@aws_cognito_user_pools
+	# fetch the latest recommended reduction actions, if they have been generated.
+	getRecommendedReductionActions(companyId: String, financialYearId: String!): RecommendedReductionActions!
+		@aws_cognito_user_pools
+	# get processed data items
+	getProcessedDataItems(companyId: String, processedDataFilter: ProcessedDataFilter): ProcessedCustomerDataItemsResponse!
+		@aws_cognito_user_pools
+	getLocationProcessedItems(companyId: String): LocationProcessedItemsResponse!
+		@aws_cognito_user_pools
+	getEmissionReports(companyId: String, reportTypes: [ReportType!]): EmissionReportsResponse!
+		@aws_cognito_user_pools
+	# Chatbot - User side fetch operations
+	getConversation(conversationId: String): Conversation!
+		@aws_cognito_user_pools
+	listConversations: [ConversationSummary!]!
+		@aws_cognito_user_pools
+	getPermutationsByCategory: AWSJSON!
+		@aws_cognito_user_pools
+	getVerifiedSuppliers(supplier_names: [String!]!, company_id: String): [SupplierData]
+		@aws_cognito_user_pools
+	getCompanyAllSuppliers(company_id: String): [SupplierData]
+		@aws_cognito_user_pools
+	getSupplier(supplier_id: String!): SupplierData
+		@aws_api_key
+@aws_cognito_user_pools
+	getDataRequests(filters: DataRequestFilterInput): [DataRequest]
+		@aws_cognito_user_pools
+	getDataRequest(dataRequestId: String!): DataRequest!
+		@aws_api_key
+@aws_cognito_user_pools
+	getCarbonEmissionBySupplier(companyId: String): [CarbonEmissionBySupplier!]!
+		@aws_cognito_user_pools
+	getCarbonEmissionBySicCode(companyId: String): [CarbonEmissionBySicCode!]!
+		@aws_cognito_user_pools
+	#Node Based Queries
+	getCloudWatchLogs(
+		logGroupNames: [String!]!,
+		# Array of log group names (required, non-empty)
+logStreamName: String,
+		# Optional filter for a specific log stream
+startTime: String,
+		# Optional start time (e.g., milliseconds since epoch)
+endTime: String,
+		# Optional end time
+filterPattern: String,
+		# Optional CloudWatch filter pattern
+limit: Int,
+		# Optional limit on logs per log group
+descending: Boolean
+	): [LogGroupLogs]
+	# Returns an array of log group results
+	getQuestionnaire(supplierId: String, financialYearId: String!): Questionnaire
+		@aws_api_key
+@aws_cognito_user_pools
+	listQuestionnaires(company_id: String): [Questionnaire]
+		@aws_cognito_user_pools
+	getQuestionnaires(supplier_id: String): [Questionnaire]
+		@aws_cognito_user_pools
+}
+
+type Subscription @aws_api_key
+@aws_cognito_user_pools {
+	newNotification(companyId: String!, notificationType: NotificationType): Notification
+		@aws_subscribe(mutations: ["createNotification"])
+	onConversationEvents(conversationId: ID!): ConversationEvent
+		@aws_subscribe(mutations: ["aiPublishMessage"])
+	onItemProcessed(companyId: String!): ProcessProgress
+		@aws_subscribe(mutations: ["itemProcessProgress"])
+}
+
+schema {
+	query: Query
+	mutation: Mutation
+	subscription: Subscription
+}
