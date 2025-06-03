@@ -66,7 +66,7 @@ def lambda_handler(event: dict, context: LambdaContext) -> dict:
     return app.resolve(event, context)
 
 
-
+# -----------------------------------------------------------------------------------------------------------
 
 # from typing import Optional
 # from uuid import uuid4
