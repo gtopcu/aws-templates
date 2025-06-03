@@ -91,9 +91,16 @@ from pydantic import (
 # from pydantic.alias_generators import to_camel, to_pascal, to_snake
 # class ParentModel(BaseModel):
 #     model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
+#     model_config = ConfigDict(
+#        json_encoders={
+#           date: lambda v: v.isoformat(),  # Serialize date to ISO string (e.g., "2012-01-01")
+#           Decimal: lambda v: str(v),  # Serialize Decimal to string (e.g., "14.63804")
+#           Enum: lambda v: v.value  # Serialize Enum to its value (e.g., "RAW_MATERIALS")
+#        }
+#     )
 #     @classmethod
 #     def get_field_names(cls, alias=False) -> list[str]:
-#         return list(cls.schema(alias).get("properties").keys())
+#       return list(cls.schema(alias).get("properties").keys())
 
 # https://github.com/boto/boto3/issues/665#issuecomment-340260257
 # from decimal import Decimal, getcontext, setcontext, ExtendedContext

@@ -430,6 +430,13 @@ from functools import reduce, partial, cmp_to_key, cache, lru_cache, singledispa
 # my_type: NewType = set[float] 
 # my_type: TypeAlias = str
 
+# def __add__(self, other):
+#     if type(self) is not type(other):
+#                 raise ValueError("Must be same type!")
+    
+# if not all(isinstance(agg, cls) for agg in aggregators):
+#   raise ValueError(f"All aggregators must be of type {cls.__name__}")
+
 # class MyStrEnum(StrEnum):
 #     A = "A"
 #     def __str__(self) -> str:
