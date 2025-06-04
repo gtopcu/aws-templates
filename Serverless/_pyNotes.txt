@@ -30,6 +30,13 @@ export PATH=$PATH:/opt/homebrew/bin/python3.13
 sudo apt update -y && sudo apt install python3 python3-pip python3-venv -y
 
 ------------------------------------------------------------------------------------
+PYTHONPATH
+------------------------------------------------------------------------------------
+
+1. The current directory where your script is running
+2. Directories listed in PYTHONPATH
+3. Standard library directories
+4. Site-packages directories (where pip installs packages)
 
 import os; print(os.getenv("PYTHONPATH"));
 sys.path.append()
