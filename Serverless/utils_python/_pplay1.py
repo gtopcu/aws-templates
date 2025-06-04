@@ -42,6 +42,8 @@ from enum import StrEnum, auto, IntFlag
 from itertools import chain, cycle, batched, repeat, combinations, permutations, pairwise, count, compress, accumulate, dropwhile, filterfalse
 from functools import reduce, partial, cmp_to_key, cache, lru_cache, singledispatch, singledispatchmethod
 
+from contextlib import AbstractContextManager
+
 # print(eval("2*2"))
 # exec(compile(source="print('hello!')", filename="script.py", mode='eval'))
 
