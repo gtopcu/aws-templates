@@ -26,13 +26,15 @@ psql -U postgres
 pgAdmin
 pg_ctl 
 pg_restore 
-pg-cron 
+pg-cron
 pg-vector 
 pg-ai
 pg-analytics
 psychopg2 
 transaction logs 
 unlogged tables
+
+CREATE EXTENSION IF NOT EXISTS "uuid-oss
 
 -----------------------------------------------------------------------------------------------------
 
