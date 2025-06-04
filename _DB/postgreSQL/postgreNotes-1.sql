@@ -2,6 +2,8 @@
 /*
 https://www.sqlekibi.com/2025/05/26/postgresql-performans-iyilestirme-rehberi-autovacuum-indexler-ve-paralel-sorgular/
 
+Case-insensitive search: ILIKE or citext
+
 B-TREE: Check if equal / sorting
 HASH: Check if equal
 GIN: Full-text search & JSONB
