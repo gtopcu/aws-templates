@@ -23,26 +23,24 @@
 # args = parser.parse_args()
 # query_text = args.query_text
 
-from typing import Self, Any, Optional, Final, Literal, LiteralString
-from typing import Hashable, Generic
-from typing import NewType, Type, TypeVar, TypeAlias, TypedDict, Required, NotRequired, ReadOnly
+from typing import Self, Any, Optional, Final, Literal, LiteralString, Hashable, Generic
+from typing import Type, NewType, TypeVar, TypeAlias, TypedDict, Required, NotRequired, ReadOnly
 
 from typing import Annotated
 from annotated_types import Gt, Ge, Le, Lt
 
-from collections import namedtuple, deque, OrderedDict, defaultdict, ChainMap
+from collections import defaultdict, OrderedDict, deque, namedtuple, ChainMap
 from collections.abc import Generator, Callable, Iterable, Iterator, AsyncIterable
 
 from typing import Protocol, runtime_checkable # Python 3.8
 from abc import ABC, abstractmethod
 
 from uuid import uuid4, UUID
-from enum import StrEnum, auto, IntFlag
+from enum import StrEnum, IntFlag, auto
 
 from itertools import chain, cycle, batched, repeat, combinations, permutations, pairwise, count, compress, accumulate, dropwhile, filterfalse
-from functools import reduce, partial, cmp_to_key, cache, lru_cache, singledispatch, singledispatchmethod
+from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispatch, singledispatchmethod
 
-from contextlib import AbstractContextManager
 
 # print(eval("2*2"))
 # exec(compile(source="print('hello!')", filename="script.py", mode='eval'))
@@ -339,7 +337,12 @@ from contextlib import AbstractContextManager
 
 # -------------------------------------------------------------------------------------------------
 
-# my_set = {0, 1, 2} # set()
+# my_tuple: tuple[int, ...] = (1, ) + (2, 3)
+# my_tuple: tuple[int, str] = (1, "Hello")
+# my_tuple.index(1)
+# my_tuple.count(1)
+
+# my_set: set[int] = {0, 1, 2} | { 3, 4 } # set()
 # if 0 in my_set | if 0 not in my_set 
 # my_set.add(1)
 # my_set.remove(1)
@@ -359,7 +362,7 @@ from contextlib import AbstractContextManager
 # my_set.symmetric_difference()
 # my_set.symmetric_difference_update()
 
-# my_list = [0, 1, 2]
+# my_list: list[int] = [0, 1, 2] + [3, 4]
 # del my_list[0]
 # my_list.append(3)
 # my_list.extend([4, 5])
@@ -372,8 +375,9 @@ from contextlib import AbstractContextManager
 # my_list.sort(reverse=True)
 # my_list.reverse()
 
-# my_dict = {}
-# del my_dict["key"]
+# my_dict: dict[int, Any] = { 0:"A", 1:"B" } | { 2:"C" }
+# my_dict2 = dict(one=1, two=2)
+# del my_dict[0]
 # my_dict.get(key="key", default=None)
 # my_dict.pop(key="key", default=None)
 # my_dict.popitem()
@@ -385,15 +389,6 @@ from contextlib import AbstractContextManager
 # my_dict.fromkeys(my_list)
 # my_dict.setdefault(key="key", default=None)
 # my_dict.update(my_dict)
-
-# my_list: list[int] = [1, 2, 3]
-# my_tuple: tuple[int, str] = (1, "Hello")
-# my_tuple2: tuple[int, ...] = (1, )
-# my_dict: dict[str, Any] = {"one": 1, "two": True, "three": 3.14}
-# del my_dict["one"]
-# my_dict2: dict[str, Any] = dict(one=1, two=2)
-# my_set: set[int] = {1, 2, 3}
-# my_string: str = "Hello, World!"
 
 # my_list2 = [i for i in range(0,100,10) if i%5==0]
 # my_list3 = [*range(5)]
@@ -490,9 +485,20 @@ from contextlib import AbstractContextManager
 # print(next(generator))
 # print(next(generator))
 
+# from contextlib import contextmanager, asynccontextmanager, AbstractContextManager
+# @contextmanager  
+# def some_generator(my_list:list):    
+#     try:  
+#         yield my_list.pop()
+#     finally:  
+#         print("Done")
+# with some_generator([1,2,3]) as my_list:
+#     print(my_list)
+
 # -------------------------------------------------------------------------------------------------
 
 # from typing import Protocol, runtime_checkable
+
 # @runtime_checkable
 # class MyProtocol(Protocol):
 #     def __call__(self, x: int) -> int:
