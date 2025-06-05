@@ -15,10 +15,8 @@
 # ruff check test.py --fix
 
 # import argparse
-# parser = argparse.ArgumentParser()
 # parser = argparse.ArgumentParser(description="sum the integers at the command line")
-# parser.add_argument('integers', metavar='int', nargs='+', type=int,  help='an integer to be summed')  
-# parser.add_argument('--log', default=sys.stdout, type=argparse.FileType('w'),  help='the file where the sum should be written') 
+# parser.add_argument('--log', default=sys.stdout, type=argparse.FileType('w'),  help='log output config, default=sys.stdout') 
 # parser.add_argument("query_text", type=str, help="The query text.")
 # args = parser.parse_args()
 # query_text = args.query_text
@@ -177,6 +175,7 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 # os.system("clear")
 
 # os.getenv("PYTHONPATH")
+# print(sys.path)
 # for path in sys.path:
 #     print("Path: " + path)
 # sys.path.append(os.getcwd() + "/.venv/lib/python3.13/site-packages")
