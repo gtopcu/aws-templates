@@ -413,12 +413,14 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 
 # -------------------------------------------------------------------------------------------------
 
-# my_lambda = lambda x: x * x
-
-# PORT: Final[int] = 80080
 # def func() -> Literal["A", "B"]: ...
+# def opt_func(val: int | None = None) -> int | None:
+#     return val or 0
+
+# my_lambda = lambda x: x * x
+# PORT: Final[int] = 80080
 # MODE = Literal['r', 'rb', 'w', 'wb']
-# SQL = LiteralString('SELECT * FROM students') # to avoid SQL injection
+# SQL = LiteralString('SELECT * FROM students')
 # output: Annotated[list, my_func]
 # my_type: type = dict[str, Any]
 # my_type: Type = int
@@ -430,6 +432,7 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 #     if type(self) is not type(other):
 #                 raise ValueError("Must be same type!")
     
+# has_date = "start_date" in kwargs and "end_date" in kwargs
 # if not all(isinstance(agg, cls) for agg in aggregators):
 #   raise ValueError(f"All aggregators must be of type {cls.__name__}")
 
@@ -445,6 +448,7 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 
 # try:
 #     print(1/0)
+#     return []
 # except ZeroDivisionError as e:
 #     print(f"Error during operation: {str(e)}")
 
