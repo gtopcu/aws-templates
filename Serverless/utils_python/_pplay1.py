@@ -413,8 +413,8 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 
 # -------------------------------------------------------------------------------------------------
 
-import sys
-print(sys.path)
+# import sys
+# print(sys.path)
 
 # def func() -> Literal["A", "B"]: ...
 # def opt_func(val: int | None = None) -> int | None:
