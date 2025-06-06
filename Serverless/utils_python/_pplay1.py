@@ -413,9 +413,12 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 
 # -------------------------------------------------------------------------------------------------
 
+import sys
+print(sys.path)
+
 # def func() -> Literal["A", "B"]: ...
 # def opt_func(val: int | None = None) -> int | None:
-#     return val or 0
+#     return val or None
 
 # my_lambda = lambda x: x * x
 # PORT: Final[int] = 80080
@@ -445,6 +448,10 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 #     name: Required[str] = "default"
 #     age: NotRequired[int] = 0
 #     id: ReadOnly[uuid4] = uuid4()
+
+# match record.event_name:
+#     case DynamoDBRecordEventName.INSERT:
+#     default: None
 
 # try:
 #     print(1/0)
@@ -495,6 +502,7 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 #         yield my_list.pop()
 #     finally:  
 #         print("Done")
+
 # with some_generator([1,2,3]) as my_list:
 #     print(my_list)
 
