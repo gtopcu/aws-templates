@@ -15,11 +15,11 @@ tracer = Tracer()
 logger = Logger()
 
 
-
 def record_handler(record: DynamoDBRecord):
     match record.event_name:
         case DynamoDBRecordEventName.INSERT:
             # handle_insert_event(record.dynamodb.new_image)
+            # source_id = new_image.get('source_id')
         case DynamoDBRecordEventName.MODIFY:
             # handle_modify_event(record.dynamodb.old_image, record.dynamodb.new_image)
         case DynamoDBRecordEventName.REMOVE:
