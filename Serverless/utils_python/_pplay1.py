@@ -320,6 +320,7 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 # print("{}".format(my_string))
 # print("PK_%s" % ID)
 # print(f"PK {my_string}")
+# "Elapsed Time: {total_time:.2f}s"
 
 # amount: str = 10_000_000
 # name: str = "John"
