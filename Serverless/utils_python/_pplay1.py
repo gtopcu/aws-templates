@@ -325,6 +325,7 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 # amount: str = 10_000_000
 # name: str = "John"
 # name.join("Doe")
+# " ".encode(encoding="utf-8")
 # " ".removeprefix("")
 # " ".removesuffix("")
 # ",".join(mylist)
