@@ -481,8 +481,6 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 
 # -------------------------------------------------------------------------------------------------
 
-# from collections.abc import Generator, Callable, Iterable, Iterator, AsyncIterable
-
 # iterator:Iterator = iter(my_list)
 # print(next(iterator)) # 1 2 3 StopIterationError
 
@@ -495,11 +493,8 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 
 # def generator():
 #     yield 1
-#     yield 2
-
 # print(next(generator))
-# print(next(generator))
-# print(next(generator))
+# print(next(generator)) # StopIteration
 
 # from contextlib import contextmanager, asynccontextmanager, AbstractContextManager
 # @contextmanager  
@@ -656,7 +651,7 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 
 # import asyncio # !!EventLoop!!
 # from asyncio import TaskGroup, Task, create_task, Future, AbstractEventLoop, TimeoutError, CancelledError
-
+ 
 # async def my_func(delay:float): # Coroutine[Any, Any, dict[str, str]]:
 #     print(f"Waiting for {delay} seconds")
 #     await asyncio.sleep(delay)
