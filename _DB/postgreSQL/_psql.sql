@@ -25,7 +25,8 @@ sh myscript.sh
 psql -U postgres
 pgAdmin
 pg_ctl 
-pg_restore 
+pg_restore
+pgBouncer(conn.mgr)
 pg-cron
 pg-vector 
 pg-ai

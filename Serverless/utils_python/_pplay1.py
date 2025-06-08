@@ -40,8 +40,11 @@ from enum import StrEnum, IntFlag, auto
 from itertools import chain, cycle, batched, repeat, combinations, permutations, pairwise, count, compress, accumulate, dropwhile, filterfalse
 from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispatch, singledispatchmethod
 
-
 # print(eval("2*2"))
+# func = eval("lambda x: x**x")
+# result = func(2)
+# exec("def func(x): return x+2")
+# print(func(2))
 # exec(compile(source="print('hello!')", filename="script.py", mode='eval'))
 
 # pip freeze | grep -i llama
