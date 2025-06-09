@@ -396,6 +396,7 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 # my_dict.setdefault(key="key", default=None)
 # my_dict.update(my_dict)
 
+# for _ in iter(my_list)
 # my_list2 = [i for i in range(0,100,10) if i%5==0]
 # my_list3 = [*range(5)]
 # my_list4 = list(range(5))

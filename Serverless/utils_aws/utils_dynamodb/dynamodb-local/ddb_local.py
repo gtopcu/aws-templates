@@ -175,7 +175,7 @@ print(person.model_dump_json(exclude_none=True, exclude_defaults=True, exclude_u
 #     Key={
 #         "PK": "2"
 #     },
-#     UpdateExpression="SET age = :age", # SET-ADD-DELETE
+#     UpdateExpression="SET age = :age", # SET-ADD-DELETE #"SET status = :status REMOVE address"
 #     ConditionExpression='attribute_not_exists(age)' # Do not update if exists
 #     ExpressionAttributeValues={
 #         ":age": 31
