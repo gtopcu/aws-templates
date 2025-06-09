@@ -442,8 +442,9 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 # def __add__(self, other):
 #     if type(self) is not type(other):
 #                 raise ValueError("Must be same type!")
-    
-# has_date = "start_date" in kwargs and "end_date" in kwargs
+
+# if a==b and b==c or b==d
+# if has_date = "start_date" in kwargs and "end_date" in kwargs
 # if not all(isinstance(agg, cls) for agg in aggregators):
 #   raise ValueError(f"All aggregators must be of type {cls.__name__}")
 
