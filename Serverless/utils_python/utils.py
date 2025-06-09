@@ -9,9 +9,10 @@ import json
 from typing import Any
 import random
 
+# import orjson # fast json
 # import jsonlines # for jsonl files
 # import jsonschema # for json schema validation
-# import jsonpickle # for complex objects
+# import jsonpickle # for json pickles
 # import simplejson as json # for decimals
 # import simdjson # for large json files - https://www.youtube.com/shorts/9tWvDFhBlNU
 
