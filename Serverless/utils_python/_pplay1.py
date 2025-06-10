@@ -441,7 +441,7 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 
 # def __add__(self, other):
 #     if type(self) is not type(other):
-#                 raise ValueError("Must be same type!")
+#         raise ValueError("Must be same type!")
 
 # if a==b and b==c or b==d
 # if has_date = "start_date" in kwargs and "end_date" in kwargs
@@ -588,8 +588,8 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 #         item = json.loads(event["body"])
 #         table.put_item(Item=item)
 #         return {
-#             'statusCode': 201,
-#             'body': event
+#             'statusCode': 201 | 202 | 204,
+#             'body': json.dumps("Created | Accepted | NoContent")
 #         }
 #     except ClientError as err:
 #         # print(str(err))
