@@ -18,8 +18,21 @@ from moto import mock_aws
 # from mypy_boto3_s3 import S3ServiceResource
 # from mypy_boto3_s3.service_resource import ServiceResourceBucketsCollection
 
+# https://pypi.org/project/mypy-boto3-dynamodb/
 # pip install mypy_boto3_dynamodb
 # from mypy_boto3_dynamodb import DynamoDBClient, DynamoDBServiceResource
+# from mypy_boto3_dynamodb.waiter import TableExistsWaiter, TableNotExistsWaiter
+# from mypy_boto3_dynamodb.paginator import (
+#     ListBackupsPaginator,
+#     ListTablesPaginator,
+#     ListTagsOfResourcePaginator,
+#     QueryPaginator,
+#     ScanPaginator,
+# )
+# from boto3.session import Session
+# from mypy_boto3_dynamodb import DynamoDBServiceResource
+# resource: DynamoDBServiceResource = Session().resource("dynamodb")
+# ddb_table = resource.Table("my-table")
 
 # pip install mypy_boto3_cognito_idp
 from mypy_boto3_cognito_idp import CognitoIdentityProviderClient
