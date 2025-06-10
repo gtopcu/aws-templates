@@ -10,7 +10,8 @@ import pytest
 import moto
 from moto import mock_aws
 
-from boto3.cognito_idp import CognitoIdentityProviderClient
+# pip install mypy_boto3_cognito_idp
+from mypy_boto3_cognito_idp import CognitoIdentityProviderClient
 
 # from .lambda import lambda_handler
 
