@@ -10,11 +10,22 @@ import pytest
 import moto
 from moto import mock_aws
 
+#-----------------------------------------------------------------------------------------------------------
+# https://pypi.org/project/mypy-boto3/
+
+# https://pypi.org/project/mypy-boto3-s3/
+# pip install mypy_boto3_s3
+# from mypy_boto3_s3 import S3ServiceResource
+# from mypy_boto3_s3.service_resource import ServiceResourceBucketsCollection
+
+# pip install mypy_boto3_dynamodb
+# from mypy_boto3_dynamodb import DynamoDBClient, DynamoDBServiceResource
+
 # pip install mypy_boto3_cognito_idp
 from mypy_boto3_cognito_idp import CognitoIdentityProviderClient
+#-----------------------------------------------------------------------------------------------------------
 
 # from .lambda import lambda_handler
-
 
 USER_POOL_ID = "xxxxxxx"
 FILE_PATH = os.path.dirname(os.path.realpath(__file__))
