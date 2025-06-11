@@ -1,49 +1,52 @@
+
 import os
-from collections.abc import Iterable
-from functools import lru_cache
+from typing import Iterable
+from functools import lru_cache, partial
+from datetime import datetime
 
 from aws_lambda_powertools import Logger
+import boto3
 from boto3.dynamodb.conditions import Key, Attr
 from botocore.exceptions import ClientError
 from mypy_boto3_dynamodb.service_resource import Table
 from mypy_boto3_dynamodb.type_defs import QueryOutputTableTypeDef
 
-from secr.domain.model.company import Company, Facility
-from secr.domain.model.user import User, UserRole
-from secr.repository.company_repository import ICompanyRepository
-from secr.repository.dynamodb.dd_client import get_ddb_resource
 
-from datetime import datetime
-
-
-ENV_DATA_TABLE = "COMPANY_DATA_TABLE"
-
+ENV_DDB_TABLE = "companies"
 PARTITION_KEY = "PK"
 SORT_KEY = "SK"
 
-# the keys are designed so that we may be able to save/retrieve them together in the future.
-# i.e. using beginsWith(COMPANY_SORT_KEY). We would need to then instantiate them based on sortkey using a case switch.
-COMPANY_SORT_KEY = "Company"
+COMPANY_SORT_KEY_PREFIX = "Company"
 FACILITY_SORT_KEY_PREFIX = "CompanyFacility:"
 USER_SORT_KEY_PREFIX = "CompanyUser:"
 
 logger = Logger()
 
+class Company:
+    company_id: str
+    company_name: str
 
-class DDCompanyRepository(ICompanyRepository):
+class Facility: ...
+class User: ...
+
+from enum import StrEnum
+class UserRole(StrEnum):
+    ADMIN = "Admin"
+
+
+class DDB_Company():
     __table: Table
 
     def __init__(self):
-        ddb = get_ddb_resource()
-        self.__table = ddb.Table(os.getenv(ENV_DATA_TABLE))
+        ddb = boto3.resource("dynamodb")
+        self.__table = ddb.Table(os.getenv(ENV_DDB_TABLE))
 
-    def initialise_company(self, company: Company) -> None:
+    def create_company(self, company: Company) -> None:
         """
-        Persists the initial company details to the database.
-        If the company already exists, throw an exception
+        Creates a new company. Throws an exception if the company already exists
         """
         logger.info(
-            f"Attempting to initialise company. id={company.company_id} name={company.company_name}"
+            f"Creating company. id={company.company_id} name={company.company_name}"
         )
         try:
             self.__table.put_item(
@@ -52,7 +55,7 @@ class DDCompanyRepository(ICompanyRepository):
             )
         except ClientError as e:
             if e.response["Error"]["Code"] == "ConditionalCheckFailedException":
-                msg = f"Company id={company.company_id} already exists!"
+                msg = f"Company id={company.company_id} already exists"
                 logger.exception(msg)
                 raise Exception(msg)
             else:
@@ -60,14 +63,14 @@ class DDCompanyRepository(ICompanyRepository):
                 raise
         else:
             logger.info(
-                f"Company saved. id={company.company_id} name={company.company_name}"
+                f"Company created. id={company.company_id} name={company.company_name}"
             )
 
     def update_company(self, company: Company) -> None:
         """
-        Updates a company in the database
+        Updates an existing company. Throws an exception if the company does not exist
         """
-        logger.info(f"Attempting to update company. id={company.company_id}")
+        logger.info(f"Updating company with id={company.company_id}")
         try:
             self.__table.put_item(
                 Item=(_company_to_dict(company)),
@@ -123,17 +126,15 @@ class DDCompanyRepository(ICompanyRepository):
     #             ),
     #         )
 
-    def get_full_company(
-        self, company_id: str
-    ) -> tuple[Company, Iterable[Facility], Iterable[User]]:
+    def get_company_by_id(self, company_id: str) -> tuple[Company, Iterable[Facility], Iterable[User]]:
         start_time = datetime.now()
-        logger.info(f"Getting full company information for {company_id}.")
+        logger.info(f"Getting company with id: {company_id}")
 
         try:
             # query_start = datetime.now()
             result: QueryOutputTableTypeDef = self.__table.query(
                 KeyConditionExpression=Key(PARTITION_KEY).eq(company_id)
-                & Key(SORT_KEY).begins_with(COMPANY_SORT_KEY)
+                                     & Key(SORT_KEY).begins_with(COMPANY_SORT_KEY_PREFIX)
             )
             items = result["Items"]
 
@@ -144,7 +145,7 @@ class DDCompanyRepository(ICompanyRepository):
             for item in items:
                 sort_key = item.get(SORT_KEY)
 
-                if sort_key == COMPANY_SORT_KEY:
+                if sort_key == COMPANY_SORT_KEY_PREFIX:
                     company = _company_from_dict(item)
                 elif sort_key.startswith(FACILITY_SORT_KEY_PREFIX):
                     facilities.append(_facility_from_dict(item))
@@ -164,7 +165,7 @@ class DDCompanyRepository(ICompanyRepository):
         else:
             total_time = (datetime.now() - start_time).total_seconds()
             logger.info(f"Total execution time: {total_time} seconds")
-            logger.info(f"Fetched company. id={company_id}.")
+            logger.info(f"Fetched company with id: {company_id}")
             return (company, facilities, users)
 
     def get_company(self, company_id: str) -> Company | None:
@@ -173,7 +174,7 @@ class DDCompanyRepository(ICompanyRepository):
             result = self.__table.get_item(
                 Key={
                     PARTITION_KEY: company_id,
-                    SORT_KEY: COMPANY_SORT_KEY,
+                    SORT_KEY: COMPANY_SORT_KEY_PREFIX,
                 }
             )
         except ClientError as e:
@@ -224,7 +225,7 @@ class DDCompanyRepository(ICompanyRepository):
         try:
             result: QueryOutputTableTypeDef = self.__table.query(
                 IndexName="InvertedIndex",
-                KeyConditionExpression=Key(SORT_KEY).eq(COMPANY_SORT_KEY),
+                KeyConditionExpression=Key(SORT_KEY).eq(COMPANY_SORT_KEY_PREFIX),
             )
         except ClientError as e:
             logger.exception(e)
@@ -240,7 +241,7 @@ class DDCompanyRepository(ICompanyRepository):
         logger.info(f"Attempting to de-activate company. id={company_id}")
         try:
             self.__table.update_item(
-                Key={PARTITION_KEY: company_id, SORT_KEY: COMPANY_SORT_KEY},
+                Key={PARTITION_KEY: company_id, SORT_KEY: COMPANY_SORT_KEY_PREFIX},
                 UpdateExpression="set IsActive=:r",
                 ExpressionAttributeValues={":r": 0},
                 ConditionExpression=f"attribute_exists({PARTITION_KEY})",
@@ -376,7 +377,7 @@ class DDCompanyRepository(ICompanyRepository):
             # x = self.__table
             result: QueryOutputTableTypeDef = self.__table.query(
                 IndexName="InvertedIndex",
-                KeyConditionExpression=Key(SORT_KEY).eq(COMPANY_SORT_KEY),
+                KeyConditionExpression=Key(SORT_KEY).eq(COMPANY_SORT_KEY_PREFIX),
                 FilterExpression=Attr("company_assignments").exists(),
             )
 
@@ -396,7 +397,7 @@ class DDCompanyRepository(ICompanyRepository):
             response = self.__table.get_item(
                 Key={
                     PARTITION_KEY: company_id,
-                    SORT_KEY: COMPANY_SORT_KEY,
+                    SORT_KEY: COMPANY_SORT_KEY_PREFIX,
                 }
             )
             # Check if the item exists
@@ -436,7 +437,7 @@ class DDCompanyRepository(ICompanyRepository):
             update_response = self.__table.update_item(
                 Key={
                     PARTITION_KEY: company_id,
-                    SORT_KEY: COMPANY_SORT_KEY,
+                    SORT_KEY: COMPANY_SORT_KEY_PREFIX,
                 },
                 UpdateExpression=update_expression,
                 ExpressionAttributeValues={":last_updated": new_last_updated},
@@ -477,7 +478,7 @@ def _company_to_dict(company: Company) -> dict:
     company_dict.update(
         {
             PARTITION_KEY: company.company_id,
-            SORT_KEY: COMPANY_SORT_KEY,
+            SORT_KEY: COMPANY_SORT_KEY_PREFIX,
         }
     )
     return company_dict

@@ -30,6 +30,7 @@
 # ---------------------------------------------------------------------------------------------------
 
 # from datetime import datetime, timedelta, timezone, UTC
+
 # import datetime
 # from pytz import timezone
 # import isodate
@@ -60,6 +61,7 @@
 # datetime(2020, 5, 17, tzinfo=UTC) # hour, minute, second, microsecond, tzone=None
 # datetime.now().replace(days=0, minutes=0, seconds=0, microsecond=0)
 # datetime.now() + timedelta(days=1, hours=2)
+# (datetime.now() - start_time).total_seconds()
 # print(datetime.now() > date)
 
 # date = datetime.fromisoformat("2024-02-20T13:55:05")

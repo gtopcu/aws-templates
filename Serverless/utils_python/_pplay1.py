@@ -286,6 +286,7 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 # datetime.now(timezone.utc).isoformat(timespec="seconds")
 # datetime.now().strftime("%Y-%m-%d %H:%M:%S%z")
 # datetime.strptime("2024-03-24", "%Y-%m-%d").date()
+# (datetime.now() - start_time).total_seconds()
 # my_date + timedelta(hours=1)
 # date.today()
 # date.day
