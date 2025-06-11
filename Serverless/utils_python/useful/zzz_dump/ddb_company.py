@@ -126,7 +126,7 @@ class DDB_Company():
     #             ),
     #         )
 
-    def get_company_by_id(self, company_id: str) -> tuple[Company, Iterable[Facility], Iterable[User]]:
+    def get_company_by_id_with_children(self, company_id: str) -> tuple[Company, Iterable[Facility], Iterable[User]]:
         start_time = datetime.now()
         logger.info(f"Getting company with id: {company_id}")
 
@@ -168,8 +168,8 @@ class DDB_Company():
             logger.info(f"Fetched company with id: {company_id}")
             return (company, facilities, users)
 
-    def get_company(self, company_id: str) -> Company | None:
-        logger.info(f"Getting company. id={company_id}")
+    def get_company_by_id(self, company_id: str) -> Company | None:
+        logger.info(f"Getting company with id: {company_id}")
         try:
             result = self.__table.get_item(
                 Key={
@@ -183,13 +183,11 @@ class DDB_Company():
         else:
             if result.get("Item") is None:
                 return None
-            logger.info(f"Fetched company. id={company_id}")
+            logger.info(f"Fetched company with id: {company_id}")
             return _company_from_dict(result["Item"])
 
     def get_company_id_by_company_name(self, company_name: str) -> str:
-        """
-        Finds the relevant company from the DynamoDB database by name.
-        """
+        
         result = self.__table.query(
             KeyConditionExpression=Key("company_name").eq(company_name),
             IndexName="CompanyNameIndex",
