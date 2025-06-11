@@ -43,7 +43,6 @@ from mypy_boto3_cognito_idp import CognitoIdentityProviderClient
 USER_POOL_ID = "xxxxxxx"
 FILE_PATH = os.path.dirname(os.path.realpath(__file__))
 
-
 @pytest.fixture
 def lambda_environment():
     os.environ["AWS_DEFAULT_REGION"] = "eu-west-2"
