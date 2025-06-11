@@ -332,11 +332,12 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 # name: str = "John"
 # name.join("Doe")
 # " ".encode(encoding="utf-8")
-# " ".removeprefix("")
-# " ".removesuffix("")
 # ",".join(mylist)
+# " ".split()
 # " ".casefold()
 # " ".strip()
+# " ".removeprefix("-")
+# " ".removesuffix("-")
 # "str".isdigit()
 # "str".isalnum()
 # "mr. gokhan topcu".title()
@@ -398,7 +399,7 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 # my_dict.update(my_dict)
 
 # for _ in iter(my_list)
-# my_list2 = [i for i in range(0,100,10) if i%5==0]
+# my_list2 = [i for i in range(0,100,10) if not i%5==0]
 # my_list3 = [*range(5)]
 # my_list4 = list(range(5))
 # matrix = [(x, y) for x in range(3) for y in range(3)]]

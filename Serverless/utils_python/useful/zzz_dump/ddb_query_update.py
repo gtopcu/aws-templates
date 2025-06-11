@@ -16,9 +16,7 @@ table = ddb.Table(DDB_TABLE)
 logger = Logger()
 
 def dd_query_update() -> None:
-    """
-    Sample DDB query-update
-    """
+
     try:
         updated_count = 0
         kwargs = {}
