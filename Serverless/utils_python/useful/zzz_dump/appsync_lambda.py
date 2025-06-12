@@ -35,6 +35,42 @@
 # EMAIL_CHARSET = 'UTF-8'
 
 
+# "identity": {
+#     "claims": {
+#         "sub": "e6e252d4-60b1-7013-3a41-92bffafb6541",
+#         "cognito:groups": [
+#             "admin"
+#         ],
+#         "email_verified": true,
+#         "custom:position": "Admin",
+#         "iss": "https://cognito-idp.eu-west-2.amazonaws.com/eu-west-2_y1bClh7oA",
+#         "cognito:username": "e6e252d4-60b1-7013-3a41-92bffafb6141",
+#         "custom:company_id": "45eeb454-710f-4e5b-aaaf-cf5b29c4c108",
+#         "origin_jti": "326e9478-b1f5-4214-b6f5-741f1b2e12c7",
+#         "cognito:roles": [
+#             "arn:aws:iam::012345678901:role/api-authenticated-role"
+#         ],
+#         "aud": "qvhp5vg1lde5pmt7sue34p1dt",
+#         "event_id": "3eeb2c3a-3523-4b58-bf11-857b28433940",
+#         "token_use": "id",
+#         "auth_time": 1749724451,
+#         "exp": 1749738055,
+#         "iat": 1749734455,
+#         "jti": "c9a5cab6-5fb0-46d3-be3c-8aa3a6c49796",
+#         "email": "gtopcu@gmail.com"
+#     },
+#     "defaultAuthStrategy": "ALLOW",
+#     "groups": [
+#         "admin"
+#     ],
+#     "issuer": "https://cognito-idp.eu-west-2.amazonaws.com/eu-west-2_y1bClh7oA",
+#     "sourceIp": [
+#         "104.28.96.62"
+#     ],
+#     "sub": "e6e252d4-60b1-7013-3a41-92bffafb6541",
+#     "username": "e6e252d4-60b1-7013-3a41-92bffafb6541"
+# },
+
 # class CompanyEventModel(AppSyncResolverEvent):
 #     """
 #     Represents the event model for company-related AppSync requests.
