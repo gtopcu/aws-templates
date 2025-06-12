@@ -19,7 +19,7 @@ class SnsWrapper:
     __sns_client: Client
 
     def __init__(self):
-        self.__sns_client = boto3.client("sns")
+        self.__sns_client:Client = boto3.client("sns")
 
     def publish(self, target: str, request: BaseModel) -> str:
         """

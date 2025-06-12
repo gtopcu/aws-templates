@@ -32,8 +32,10 @@ git commit --amend                -> Modify the last commit
 git remote add origin git@github.com:gtopcu/aws-templates.git
 git remote add origin https://github.com/gtopcu/aws-templates.git
 
+git branch -a 
 git branch newbranch --set-upstream-to=origin/newbranch
-git branch -l (list)                                             
+git branch -l (list)
+git branch -m old-name new-name                                             
 git branch -m (rename) | -M (-f --force) [<oldbranch>] <newbranch>
 git branch -c (copy)   | -C (-f --force) [<oldbranch>] <newbranch>   
 git branch -d (delete) | -D (-f --force) -r(remote) -a(all) <newbranch>
