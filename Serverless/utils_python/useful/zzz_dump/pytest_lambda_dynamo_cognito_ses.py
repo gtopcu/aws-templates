@@ -40,6 +40,7 @@ from mypy_boto3_cognito_idp import CognitoIdentityProviderClient
 #-----------------------------------------------------------------------------------------------------------
 
 # from .lambda import lambda_handler
+def lambda_handler(event, context): ...
 
 USER_POOL_ID = "xxxxxxx"
 FILE_PATH = os.path.dirname(os.path.realpath(__file__))
@@ -76,7 +77,6 @@ def lambda_event():
         "response": {},
     }
 
-
 # @pytest.fixture(scope="module")
 @pytest.fixture
 def lambda_context():
@@ -105,7 +105,6 @@ def lambda_context():
 #         aws_request_id: str = "da658bd3-2d6f-4e7b-8ec2-937234644fdc"
 #     return LambdaContext()
 
-
 @pytest.fixture
 def cognito_context():
     with moto.mock_aws():
@@ -115,7 +114,6 @@ def cognito_context():
         ]["Id"]
         cognito_client.create_group(UserPoolId=user_pool_id, GroupName="admin")
         os.environ[USER_POOL_ID] = user_pool_id
-
         yield user_pool_id
 
 @pytest.fixture()
@@ -128,11 +126,28 @@ def ses_context():
 
 # @mock_aws
 # class TestCompanyService:
-
-#     def test_create_company(self, lambda_environment, lambda_context, cognito_context):
+#     def test_create_company(self, aws_credentials, lambda_context, cognito_context):
 #         event = json.loads(Path(FILE_PATH + "/test/create_company_event.json").read_text())
 #         result: dict = lambda_handler(event, lambda_context)
 
 #         assert result["companyName"] == "Test Company"
 #         assert result["location"] == "here"
 #         assert result["s3BucketName"] == "data-bucket"
+
+@mock_aws
+def test_lambda(aws_credentials, mock_logger, lambda_context, lambda_event):
+
+    with patch(
+        "ddb_company.get_company",
+        return_value="dummy_class",
+    ):
+        # Assert that the response has been generated in result correctly.
+        result = lambda_handler(lambda_event, lambda_context)
+
+        # Check that the logger.info was called with the expected message
+        mock_logger.info.assert_called_with(
+            "### This is a dummy log for assertion ###"
+        )
+
+        # Ensure the event is returned correctly
+        assert result == lambda_event
