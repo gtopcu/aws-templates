@@ -33,9 +33,14 @@ if __name__ == "__main__":
 
 # Patching requests in lambda_handler.file with Timeout 
 # from requests import Timeout
-# with patch("lambda_handler.requests") as mock_requests:
-    # mock_requests.post.side_effect = Timeout
+# with patch("lambda_handler.requests") as mock_requests: # mock_request -> MagicMock
+#     mock_requests.post.side_effect = Timeout
 #     mock_requests.post.json.return_value = "{ 'response': 'success' }"
+
+# @patch("lambda_module.handler")
+# def test_func(mock_handler): # mock_handler -> MagicMock
+#     mock_handler.side_effect = KeyError
+#     mock_handler.return_value = "{ "response": "success" }"
 
 # with patch("lambda_module.logger") as logger:
 #     yield logger

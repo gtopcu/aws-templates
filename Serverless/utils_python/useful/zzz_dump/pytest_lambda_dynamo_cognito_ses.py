@@ -132,8 +132,10 @@ def ses_context():
         yield
 
 # @patch("lambda_module.handler")
-# def test_func(mock_handler):
+# def test_func(mock_handler): # mock_handler -> MagicMock
 #     print("Test func")
+#     mock_handler.side_effect = KeyError
+#     mock_handler.return_value = "{ "response": "success" }"
 
 # @mock_aws
 # class TestCompanyService:
