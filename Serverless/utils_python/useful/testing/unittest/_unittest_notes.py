@@ -33,10 +33,12 @@ if __name__ == "__main__":
 
 # Patching requests in lambda_handler.file with Timeout 
 # from requests import Timeout
-with patch("lambda_handler.requests") as mock_requests:
+# with patch("lambda_handler.requests") as mock_requests:
     # mock_requests.post.side_effect = Timeout
-    mock_requests.post.json.return_value = "{ 'response': 'success' }"
+#     mock_requests.post.json.return_value = "{ 'response': 'success' }"
 
+# with patch("lambda_module.logger") as logger:
+#     yield logger
 
 # Patch only in __main__ local scope
 # with patch("__main__.is_weekday"):

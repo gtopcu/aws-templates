@@ -22,9 +22,10 @@ Each test has a unique instance of the class, but class attributes are shared
 # https://docs.pytest.org/en/stable/how-to/monkeypatch.html
 # https://pytest-with-eric.com/mocking/pytest-monkeypatch/
 
-@pytest.fixture(scope="class")
+@pytest.fixture(scope="class", autouse=False)
 def aws_env(monkeypatch):
     """
+    setattr("requests.get", lambda x: MockResponse())
     setattr(obj, name, value): Set an attribute on an object for the duration of the test
     delattr(obj, name): Delete an attribute from an object
     setitem(mapping, name, value): Set a key-value pair in a dictionary
@@ -38,20 +39,18 @@ def aws_env(monkeypatch):
     monkeypatch.setenv('AWS_ACCESS_KEY_ID', 'testing')
     assert monkeypatch.getenv('AWS_DEFAULT_REGION') == 'us-east-1'
 
-    # Context manager that returns a new MonkeyPatch object which undoes any patching done inside the with block upon exit.
-    # Useful in situations where it is desired to undo some patches before the test ends,
-    # with monkeypatch.context() as m:
-    #     m.setattr(functools, "partial", 3)
+# Context manager that returns a new MonkeyPatch object which undoes any patching done inside the with block upon exit.
+# Useful in situations where it is desired to undo some patches before the test ends,
+# with monkeypatch.context() as mp:
+#     mp.setattr(functools, "partial", 3)
 
 # Patching objects/functions using monkeypatch:
-
 # from pathlib import Path
 
 # def get_ssh_path():
 #     return Path.home() / ".ssh"
 
 # def test_get_ssh_path(monkeypatch):
-
 #     def mockreturn():
 #         return Path("/tmp")
 
@@ -65,22 +64,14 @@ def aws_env(monkeypatch):
 
 # Patching function/API responses using monkeypatch:
 
-# import requests
-
 # def get_cat_fact():
 #     response = requests.get("https://meowfacts.herokuapp.com/")
 #     return response.json()
-
-# if __name__ == "__main__":
-#     print(get_cat_fact())
-
-# # with monkeypatch:
 
 # class MockResponse:
 #     @staticmethod
 #     def json():
 #         return {"data": ["Cats can jump up to six times their length."]}
-
 
 # def test_get_cat_fact(monkeypatch):
 #     monkeypatch.setattr("requests.get", lambda x: MockResponse())
