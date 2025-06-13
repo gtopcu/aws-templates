@@ -1,4 +1,6 @@
 
+# https://realpython.com/python-mock-library/
+# https://docs.pytest.org/en/stable/how-to/monkeypatch.html
 # https://www.youtube.com/watch?v=-F6wVOlsEAM
 # https://www.youtube.com/watch?v=WFRljVPHrkE
 
@@ -7,6 +9,9 @@ import requests
 import unittest
 from unittest.mock import Mock, patch
 
+# You can use patch() as either a decorator or a context manager, giving you control over the scope in which the object will be mocked
+with patch:
+    pass
 
 def get_userdata(user_id):
     response = requests.get(f"http://api.example.com/{user_id}")

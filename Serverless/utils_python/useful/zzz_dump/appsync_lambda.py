@@ -94,62 +94,6 @@
 #         return self.identity.get("claims", {}).get("family_name")
 
 
-# @tracer.capture_method
-# def get_supplier_details(supplier_id: str) -> SupplierData | None:
-#     """
-#     Retrieves supplier details by ID.
-
-#     Args:
-#         supplier_id: The ID of the supplier.
-
-#     Returns:
-#         SupplierData object if found, None otherwise.
-#     """
-#     try:
-#         repository = get_supplier_data_item_repository()
-#         supplier = repository.get_supplier_by_id(supplier_id)
-#         return supplier
-#     except Exception as e:
-#         logger.exception(f"Error retrieving supplier with ID: {supplier_id}")
-#         return None
-
-
-
-
-# @tracer.capture_method
-# def send_email(sender: str, recipient: list[str], subject: str, body_text: str, body_html: str) -> dict | str:
-#     """
-#     Sends an email using AWS SES.
-
-#     Args:
-#         sender: The sender's email address.
-#         recipient: A list of recipient email addresses.
-#         subject: The subject of the email.
-#         body_text: The plain text body of the email.
-#         body_html: The HTML body of the email.
-
-#     Returns:
-#         The SES response if successful, an error message otherwise.
-#     """
-#     try:
-#         response = ses_client.send_email(
-#             Source=sender,
-#             Destination={'ToAddresses': recipient},
-#             Message={
-#                 'Subject': {'Data': subject, 'Charset': EMAIL_CHARSET},
-#                 'Body': {
-#                     'Text': {'Data': body_text, 'Charset': EMAIL_CHARSET},
-#                     'Html': {'Data': body_html, 'Charset': EMAIL_CHARSET},
-#                 },
-#             },
-#         )
-#         logger.info(f"Email sent! Message ID: {response['MessageId']}")
-#         return response
-#     except ClientError as e:
-#         error_message = f"Error sending email: {e.response['Error']['Message']}"
-#         logger.error(error_message)
-#         return error_message
-
 
 # @app.resolver(type_name="Mutation", field_name="createDataRequest")
 # @tracer.capture_method

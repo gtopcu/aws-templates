@@ -4,7 +4,7 @@ import os
 from dataclasses import dataclass
 from pathlib import Path
 from unittest import mock
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 import boto3
 import pytest
@@ -151,3 +151,35 @@ def test_lambda(aws_credentials, mock_logger, lambda_context, lambda_event):
 
         # Ensure the event is returned correctly
         assert result == lambda_event
+
+
+# cognito appsync
+# @pytest.fixture
+# def mock_event():
+#     return {
+#         "identity": {
+#             "claims": {
+#                 "custom:company_id": "test-company-id",
+#                 "email": "test@example.com",
+#                 "given_name": "Test",
+#                 "family_name": "User"
+#             }
+#         }
+#     }
+
+# @pytest.fixture
+# def mock_context():
+#     return Mock()
+
+# @patch('lambda_module.send_email')
+# def test_update_status_success(mock_send_email, mock_event, mock_context):
+#     mock_send_email.return_value = mock_supplier
+#     # Setup
+#     mock_supplier = Mock(
+#         id="supplier-1",
+#         supplier_email="supplier@test.com",
+#         supplier_name="Test Supplier",
+#         company_id="test-company-id"
+#     )
+#     assert mock_send_email.called
+    
