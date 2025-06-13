@@ -8,6 +8,8 @@
 import unittest
 from unittest.mock import Mock, MagicMock, patch, ANY, AsyncMock, 
 
+# MagicMock -> implements most magic(dunder) methods like __len__, __getitem__, etc.
+
 if __name__ == "__main__":
     val = ANY
     unittest.main()
@@ -122,7 +124,7 @@ if __name__ == "__main__":
 
 
 ###########################################################################################################################
-# MagicMock
+# MagicMock -> implements most magic(dunder) methods like __len__, __getitem__, etc.
 
 # magic_mock = MagicMock()
 # magic_mock.configure_mock(return_value=3, side_effect=KeyError)
