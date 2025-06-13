@@ -42,6 +42,10 @@ from mypy_boto3_cognito_idp import CognitoIdentityProviderClient
 USER_POOL_ID = "xxxxxxx"
 FILE_PATH = os.path.dirname(os.path.realpath(__file__))
 
+# @pytest.fixture(autouse=True)
+# def no_requests(monkeypatch):
+#     """Remove requests.sessions.Session.request for all tests."""
+#     monkeypatch.delattr("requests.sessions.Session.request")
 
 # https://docs.pytest.org/en/stable/how-to/monkeypatch.html
 @pytest.fixture(scope="class", autouse=False)
@@ -66,7 +70,6 @@ def aws_env(monkeypatch):
 
 @pytest.fixture
 def aws_credentials():
-    """Mocked AWS Credentials for moto."""
     # os.environ["AWS_DEFAULT_REGION"] = "eu-west-2"
     # os.environ["AWS_ACCESS_KEY_ID"] = "test"
     # os.environ["AWS_SECRET_ACCESS_KEY"] = "test"

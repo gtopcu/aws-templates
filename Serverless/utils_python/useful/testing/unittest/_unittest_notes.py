@@ -28,7 +28,7 @@ if __name__ == "__main__":
 # @patch("requests.get", return_value=Mock(status_code=200, json=lambda: {"name": "John"}))
 # @patch("lambda_handler.requests.get", return_value=Mock(status_code=200, json=lambda: {"name": "John"})) # patch requests in lambda_handler.py
 # @patch.object(requests, "get", side_effect=requests.exceptions.Timeout) # partial patching
-# def test_api(self):
+# def test_api(self, mock_requests):
 #   response = requests.get("http://localhost/api")
 
 # Patching requests in lambda_handler.file with Timeout 
@@ -75,6 +75,20 @@ if __name__ == "__main__":
 # json.loads.assert_called_with("{"key": "value"}")           # assert_called_with(*args, **kwargs)
 # json.loads.assert_called_once_with("{"key": "value"}"")      # assert_called_once_with(*args, **kwargs): 
 # json.loads.assert_not_called()
+
+# self.assertEqual(userdata["name"], "John")
+# self.assertEqual(userdata, response_dict)
+# self.assertAlmostEqual
+# self.assertTrue
+# self.assertFalse
+# self.assertGreater
+# self.assertRegex
+# self.assertRaises
+# self.assertIs
+# self.assertIsNone
+# self.assertCountEqual
+# self.assertIn
+# self.fail("failed the test!")
 
 # # Number of times you called loads():
 # json.loads.call_count   
@@ -126,7 +140,19 @@ if __name__ == "__main__":
 # magic_mock.assert_called_with       # (*args, **kwargs)
 # magic_mock.assert_called_once_with  # (*args, **kwargs)
 
-
+# self.assertEqual(userdata["name"], "John")
+# self.assertEqual(userdata, response_dict)
+# self.assertAlmostEqual
+# self.assertTrue
+# self.assertFalse
+# self.assertGreater
+# self.assertRegex
+# self.assertRaises
+# self.assertIs
+# self.assertIsNone
+# self.assertCountEqual
+# self.assertIn
+# self.fail("failed the test!")
 
 
 

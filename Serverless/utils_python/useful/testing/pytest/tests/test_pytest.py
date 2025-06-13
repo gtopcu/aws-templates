@@ -22,6 +22,12 @@ Each test has a unique instance of the class, but class attributes are shared
 # https://docs.pytest.org/en/stable/how-to/monkeypatch.html
 # https://pytest-with-eric.com/mocking/pytest-monkeypatch/
 
+# @pytest.fixture(autouse=True)
+# def no_requests(monkeypatch):
+#     """Remove requests.sessions.Session.request for all tests."""
+#     monkeypatch.delattr("requests.sessions.Session.request")
+
+
 @pytest.fixture(scope="class", autouse=False)
 def aws_env(monkeypatch):
     """
@@ -132,7 +138,7 @@ def aws_env(monkeypatch):
 def lambda_context():
     return "Context initialized"
  
-def test_check_context(lambda_context):
+def (lambda_context):
     print("Context:", lambda_context)
     assert lambda_context == "Context initialized"
     # assert lambda_context == ["a", "b", "c", "d", "e", "f", "g"]
@@ -140,9 +146,17 @@ def test_check_context(lambda_context):
     # assert isinstance(x, MyClass)
     # assert 0, lambda_context  # to show value
 
+# Verifies ValueError is raised with the given error detail
 def test_raises():
-    with pytest.raises(ValueError):
-        raise ValueError("Invalid input")
+    with pytest.raises(ValueError, match="Unsupported mail type"):
+        pass
+        # raise
+        # raise ValueError("Invalid input")
+
+def test_raises2():
+    with pytest.raises(ZeroDivisionError) as exc_info:
+        result = 1 / 0
+        assert "division by zero" in str(exc_info.value)
 
 def test_usageerror():
     pytest.UsageError("usage error")

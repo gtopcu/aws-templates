@@ -2,60 +2,46 @@ import os
 from functools import lru_cache
 
 import boto3
+from botocore.exceptions import ClientError
 from aws_lambda_powertools import logging
-
 
 logger = logging.Logger()
 
-# TODO 
-# read this from sysmgr parameter store
-SENDER_EMAIL = "support@app.com"
+DEFAULT_SENDER_EMAIL = "support@climatise.com"
+EMAIL_CHARSET = 'UTF-8'
 
-class EmailRequest:
-    source_id: str
-    company_id: str
+session = boto3.Session()
+ses_client = session.client('ses', region_name='eu-west-2')
 
+def send_email(sender: str, recipient: list[str], subject: str, body_text: str, body_html: str) -> dict | str:
+    """
+    Sends an email using AWS SES.
 
-def send_email(email_request: EmailRequest) -> None:
+    Args:
+        sender: The sender's email address.
+        recipient: A list of recipient email addresses.
+        subject: The subject of the email.
+        body_text: The plain text body of the email.
+        body_html: The HTML body of the email.
 
-    # cc_emails = cognitoHandler().get_moderator_user_emails()
-    cc_emails = ["gtopcu@mgmail.com"]
-
-    if not cc_emails:
-        logger.error("No admin users found")
-        return
-
-    res = get_ses_client().send_email(
-        Source=SENDER_EMAIL,
-        Destination={
-            "CcAddresses": cc_emails,
-        },
-        Message={
-            "Body": {
-                "Html": {
-                    "Charset": "UTF-8",
-                    "Data": f"""
-    The following file has been uploaded for company {email_request.company_id}:
-        SourceId:    {email_request.source_id}
-        S3 Location: <a class="ulink" href="{get_s3_link(email_request.bucket_key)}" target="_blank">{email_request.bucket_key}</a>
-
-    Note: The S3 location is within the data bucket: {os.environ['DATA_BUCKET_NAME']}
-    """,
+    Returns:
+        The SES response if successful, an error message otherwise.
+    """
+    try:
+        response = ses_client.send_email(
+            Source=sender,
+            Destination={'ToAddresses': recipient},
+            Message={
+                'Subject': {'Data': subject, 'Charset': EMAIL_CHARSET},
+                'Body': {
+                    'Text': {'Data': body_text, 'Charset': EMAIL_CHARSET},
+                    'Html': {'Data': body_html, 'Charset': EMAIL_CHARSET},
                 },
             },
-            "Subject": {
-                "Charset": "UTF-8",
-                "Data": f"New file upload notification: {email_request.company_id}:{email_request.source_id}",
-            },
-        },
-    )
-    logger.info(f"Sent email: {res}")
-
-
-def get_s3_link(bucket_key: str) -> str:
-    return f"""https://eu-west-2.console.aws.amazon.com/s3/object/{os.environ['DATA_BUCKET_NAME']}?region=eu-west-2&bucketType=general&prefix={bucket_key}"""
-
-
-@lru_cache
-def get_ses_client():
-    return boto3.client("ses")
+        )
+        logger.info(f"Email sent! Message ID: {response['MessageId']}")
+        return response
+    except ClientError as e:
+        error_message = f"Error sending email: {e.response['Error']['Message']}"
+        logger.error(error_message)
+        return error_message
