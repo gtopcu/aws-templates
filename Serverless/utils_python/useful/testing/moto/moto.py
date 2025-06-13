@@ -81,10 +81,18 @@ def mock_sns(aws_credentials):
         # os.environ["SNS_ARN"] = sns.get("TopicArn")
         yield boto3.client("sns").create_topic(Name="mock-topic")
 
-# from mypy_boto3_cognito_idp import CognitoIdentityProviderClient
+@pytest.fixture
+def mock_ses():
+    with mock_aws():
+        from mypy_boto3_ses import Client
+        ses_client:Client = boto3.client("ses")
+        ses_client.verify_email_identity(EmailAddress="test@test.com")
+        yield
+
 # @pytest.fixture
 # def mock_cognito():
 #     with mock_aws():
+#         from mypy_boto3_cognito_idp import CognitoIdentityProviderClient
 #         cognito_client: CognitoIdentityProviderClient = boto3.client("cognito-idp")
 #         user_pool_id = cognito_client.create_user_pool(PoolName="TestUserPool")["UserPool"]["Id"]
 #         cognito_client.create_group(UserPoolId=user_pool_id, GroupName="admin")
