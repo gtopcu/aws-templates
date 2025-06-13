@@ -35,8 +35,9 @@ from moto import mock_aws
 # resource: DynamoDBServiceResource = Session().resource("dynamodb")
 # ddb_table = resource.Table("my-table")
 
-# pip install mypy_boto3_cognito_idp
-from mypy_boto3_cognito_idp import CognitoIdentityProviderClient
+# from mypy_boto3_ses import Client, SESClient
+# from mypy_boto3_cognito_idp import CognitoIdentityProviderClient
+
 #-----------------------------------------------------------------------------------------------------------
 
 USER_POOL_ID = "xxxxxxx"
@@ -113,6 +114,7 @@ def lambda_context():
 @pytest.fixture
 def cognito_context():
     with moto.mock_aws():
+        from mypy_boto3_cognito_idp import CognitoIdentityProviderClient
         cognito_client: CognitoIdentityProviderClient = boto3.client("cognito-idp")
         user_pool_id = cognito_client.create_user_pool(PoolName="TestUserPool")[
             "UserPool"
@@ -124,10 +126,14 @@ def cognito_context():
 @pytest.fixture()
 def ses_context():
     with mock_aws():
-        ses_client = boto3.client("ses", region_name="eu-west-2")
+        from mypy_boto3_ses import Client
+        ses_client:Client = boto3.client("ses")
         ses_client.verify_email_identity(EmailAddress="support@app.com")
         yield
 
+# @patch("lambda_module.handler")
+# def test_func(mock_handler):
+#     print("Test func")
 
 # @mock_aws
 # class TestCompanyService:
