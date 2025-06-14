@@ -27,19 +27,35 @@ def aws_credentials():
 
 @mock_dynamodb
 def test_dynamodb():
-    # Set up the mock DynamoDB environment
     dynamodb = boto3.resource("dynamodb", region_name="us-east-1")
     table_name = "my-test-table"
     dynamodb.create_table(
         TableName=table_name,
-        KeySchema=[{"AttributeName": "id", "KeyType": "HASH"}],
-        AttributeDefinitions=[{"AttributeName": "id", "AttributeType": "S"}],
+        BillingMode="PAY_PER_REQUEST",
+        KeySchema=[{"AttributeName": "PK","KeyType": "HASH"},{"AttributeName": "SK", "KeyType": "RANGE"}],
+        AttributeDefinitions=[{"AttributeName": "PK", "AttributeType": "S"}, {"AttributeName": "SK", "AttributeType": "S"}]
     )
     table = dynamodb.Table(table_name)
     table.put_item(Item={"id": "1", "name": "John Doe"})
     response = table.get_item(Key={"id": "1"})
     assert response["Item"]["name"] == "John Doe"
 
+@pytest.fixture(autouse=True)
+def mock_ddb():
+    with mock_aws():
+        dynamodb = boto3.resource("dynamodb", region_name="us-east-1")
+        table_name = "my-test-table"
+        dynamodb.create_table(
+            TableName=table_name,
+            BillingMode="PAY_PER_REQUEST",
+            KeySchema=[{"AttributeName": "PK","KeyType": "HASH"},{"AttributeName": "SK", "KeyType": "RANGE"}],
+            AttributeDefinitions=[{"AttributeName": "PK", "AttributeType": "S"}, {"AttributeName": "SK", "AttributeType": "S"}]
+        )
+        table = dynamodb.Table(table_name)
+        table.put_item(Item={"id": "1", "name": "John Doe"})
+        response = table.get_item(Key={"id": "1"})
+        assert response["Item"]["name"] == "John Doe"
+        yield
 
 @mock_s3
 def test_s3_upload():
