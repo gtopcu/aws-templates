@@ -1,28 +1,14 @@
+
 # from datetime import date, datetime
 # import boto3
 # from botocore.exceptions import ClientError
 
 # from aws_lambda_powertools import Logger, Tracer
 # from aws_lambda_powertools.event_handler import AppSyncResolver
-# from aws_lambda_powertools.logging import correlation_paths
 # from aws_lambda_powertools.utilities.data_classes import AppSyncResolverEvent
 # from aws_lambda_powertools.utilities.typing import LambdaContext
+# from aws_lambda_powertools.logging import correlation_paths
 
-# from generate_email_body import generate_email_body
-# from secr.domain.model.enums import DataRequestStatus
-# from secr.domain.model.supplier import DataRequest,  SupplierData
-# from secr.repository.aurora.supplier_data_repository.supplier_data_repository import (
-#     get_supplier_data_item_repository,
-# )
-# from secr.repository.aurora.supplier_data_repository.supplier_data_request_repository import (
-#     get_supplier_data_request_repository,
-# )
-# from secr.repository.dynamodb.dd_company_repository import get_company_repository
-# from secr.repository.dynamodb.dd_questionnaire_repository import (
-#     get_questionnaire_repository,
-# )
-
-# # Initialize AWS services and utilities outside the handler
 # session = boto3.Session()
 # ses_client = session.client('ses', region_name='eu-west-2')
 
@@ -31,9 +17,8 @@
 # app = AppSyncResolver()
 
 # # Constants for email configuration
-# DEFAULT_SENDER_EMAIL = "support@climatise.com"
+# DEFAULT_SENDER_EMAIL = "support@app.com"
 # EMAIL_CHARSET = 'UTF-8'
-
 
 # "identity": {
 #     "claims": {
@@ -43,10 +28,10 @@
 #         ],
 #         "email_verified": true,
 #         "custom:position": "Admin",
-#         "iss": "https://cognito-idp.eu-west-2.amazonaws.com/eu-west-2_y1bClh7oA",
-#         "cognito:username": "e6e252d4-60b1-7013-3a41-92bffafb6141",
-#         "custom:company_id": "45eeb454-710f-4e5b-aaaf-cf5b29c4c108",
-#         "origin_jti": "326e9478-b1f5-4214-b6f5-741f1b2e12c7",
+#         "iss": "https://cognito-idp.eu-west-2.amazonaws.com/eu-west-2_b1bClh7oA",
+#         "cognito:username": "e6e25sd4-60b1-7013-3a41-92bffafb6141",
+#         "custom:company_id": "45beb454-710f-4e5b-aaaf-cf5b29c4c108",
+#         "origin_jti": "326e9178-b1f5-4214-b6f5-741f1b2e12c7",
 #         "cognito:roles": [
 #             "arn:aws:iam::012345678901:role/api-authenticated-role"
 #         ],
@@ -63,7 +48,7 @@
 #     "groups": [
 #         "admin"
 #     ],
-#     "issuer": "https://cognito-idp.eu-west-2.amazonaws.com/eu-west-2_y1bClh7oA",
+#     "issuer": "https://cognito-idp.eu-west-2.amazonaws.com/eu-west-2_y1gClh7oA",
 #     "sourceIp": [
 #         "104.28.96.62"
 #     ],
@@ -72,23 +57,18 @@
 # },
 
 # class CompanyEventModel(AppSyncResolverEvent):
-#     """
-#     Represents the event model for company-related AppSync requests.
-#     Provides easy access to company-specific claims from the identity context.
-#     """
-
+#     @property
+#     def country_viewer(self) -> str:
+#         return self.request_headers.get("cloudfront-viewer-country", "")
 #     @property
 #     def company_id(self) -> str | None:
 #         return self.identity.get("claims", {}).get("custom:company_id")
-
 #     @property
 #     def email(self) -> str | None:
 #         return self.identity.get("claims", {}).get("email")
-
 #     @property
 #     def given_name(self) -> str | None:
 #         return self.identity.get("claims", {}).get("given_name")
-
 #     @property
 #     def family_name(self) -> str | None:
 #         return self.identity.get("claims", {}).get("family_name")
@@ -461,18 +441,7 @@
 # @logger.inject_lambda_context(correlation_id_path=correlation_paths.APPSYNC_RESOLVER)
 # @tracer.capture_lambda_handler
 # def lambda_handler(event: dict, context: LambdaContext) -> dict:
-#     """
-#     Lambda handler function.
-
-#     Args:
-#         event: The event dictionary.
-#         context: The Lambda context object.
-
-#     Returns:
-#         The result of the AppSync resolver.
-#     """
 #     identity = event.get("identity")
-
 #     if identity and identity.get("claims"):
 #         claims = identity.get("claims")
 #         company_id = claims.get("custom:company_id")
