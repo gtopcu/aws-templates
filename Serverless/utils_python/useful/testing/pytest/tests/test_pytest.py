@@ -1,5 +1,9 @@
 
+from dataclasses import dataclass
 import pytest
+
+import requests
+# from requests import Response, Timeout
 
 """
 https://docs.pytest.org/en/8.0.x/
@@ -31,7 +35,10 @@ Each test has a unique instance of the class, but class attributes are shared
 @pytest.fixture(scope="class", autouse=False)
 def aws_env(monkeypatch):
     """
-    setattr("requests.get", lambda x: MockResponse())
+    setattr(requests, "get", lambda x: MockResponse(x))
+    setattr("requests.get", "{'mock_key': 'mock_response'}")
+    delattr("requests.get", "{'mock_key': 'mock_response'}")
+    
     setattr(obj, name, value): Set an attribute on an object for the duration of the test
     delattr(obj, name): Delete an attribute from an object
     setitem(mapping, name, value): Set a key-value pair in a dictionary
@@ -45,73 +52,62 @@ def aws_env(monkeypatch):
     monkeypatch.setenv('AWS_ACCESS_KEY_ID', 'testing')
     assert monkeypatch.getenv('AWS_DEFAULT_REGION') == 'us-east-1'
 
-# Context manager that returns a new MonkeyPatch object which undoes any patching done inside the with block upon exit.
-# Useful in situations where it is desired to undo some patches before the test ends,
-# with monkeypatch.context() as mp:
-#     mp.setattr(functools, "partial", 3)
+import functools
+from functools import partial
+from pytest import MonkeyPatch
+
+with MonkeyPatch.context() as mp:
+    mp.setattr(functools, "partial", 3)
 
 # Patching objects/functions using monkeypatch:
-# from pathlib import Path
+from pathlib import Path
 
-# def get_ssh_path():
-#     return Path.home() / ".ssh"
+def get_ssh_path():
+    return Path.home() / ".ssh"
 
-# def test_get_ssh_path(monkeypatch):
-#     def mockreturn():
-#         return Path("/tmp")
+def test_get_ssh_path(monkeypatch):
+    def mock_return():
+        return Path("/tmp")
+    monkeypatch.setattr(Path, "home", mock_return)
 
-#     monkeypatch.setattr(Path, "home", mockreturn)
-#     assert get_ssh_path() == Path("/tmp/.ssh")
-
-#     # Optional: reset the monkeypatch if needed for rest of the test
-#     monkeypatch.delattr(Path, "home")
+    monkeypatch.setattr(Path, "home", lambda: Path("/tmp"))
+    monkeypatch.setattr(Path, "home", Path("/tmp"))
+    
+    assert get_ssh_path() == Path("/tmp/.ssh")
+    # monkeypatch.delattr(Path, "home")
 
 # --------------------------------------------------------------------------------------------
 
-# Patching function/API responses using monkeypatch:
+# Patching Requests
+from pytest import MonkeyPatch
 
-# def get_cat_fact():
-#     response = requests.get("https://meowfacts.herokuapp.com/")
-#     return response.json()
+with MonkeyPatch.context() as mp:
+    mp.setattr("requests.get", "{'mock_key': 'mock_response'}")
+    mp.setattr(requests, "get", lambda x: MockResponse(x))
+    mp.delattr(requests, "get")
 
-# class MockResponse:
-#     @staticmethod
-#     def json():
-#         return {"data": ["Cats can jump up to six times their length."]}
+# Blocking all HTTP requests - define in conftest.py file and use autouse=True
+# mp.delattr("requests.sessions.Session.request") 
+ 
+ 
+# Patching with  mock class
+def get_json(url):
+    response = requests.get(url)
+    return response.json()
 
-# def test_get_cat_fact(monkeypatch):
-#     monkeypatch.setattr("requests.get", lambda x: MockResponse())
-#     assert get_cat_fact() == {"data": ["Cats can jump up to six times their length."]}
+class MockResponse:
+    @staticmethod
+    def json():
+        return {"mock_key": "mock_response"}
 
+def test_get_json(monkeypatch):
+    # Any args may be passed - mock_get() will always return the mocked object
+    def mock_get(*args, **kwargs):
+        return MockResponse()
+    monkeypatch.setattr(requests, "get", mock_get)
 
-# If you need to mock the MeowFacts API across multiple tests, you can move the logic into a reusable fixture:
-
-# @pytest.fixture
-# def mock_meowfacts_api(monkeypatch):
-#     class MockResponse:
-#         @staticmethod
-#         def json():
-#             return {"data": ["Cats sleep 70% of their lives."]}
-
-#     def mock_get(*args, **kwargs):
-#         return MockResponse()
-
-#     monkeypatch.setattr("requests.get", mock_get)
-
-# def test_get_cat_fact(mock_meowfacts_api):
-#     result = get_cat_fact()
-#     assert result == {"data": ["Cats sleep 70% of their lives."]}
-
-
-# To block all HTTP requests using the requests library, you can define a global patch in a conftest.py file.
-# The autouse=True fixture automatically applies to all tests, ensuring that no test makes actual HTTP calls
-# Use monkeypatch.context() to limit the scope of a patch to a specific block of code
-
-# @pytest.fixture(autouse=True)
-# def no_requests(monkeypatch):
-#     """Disable all HTTP requests by removing requests.sessions.Session.request."""
-#     monkeypatch.delattr("requests.sessions.Session.request")
-
+    result = get_json("https://fakeurl")
+    assert result["mock_key"] == "mock_response"
 
 # --------------------------------------------------------------------------------------------
 
@@ -138,9 +134,26 @@ def aws_env(monkeypatch):
 def lambda_context():
     return "Context initialized"
  
-def (lambda_context):
+@pytest.fixture
+def lambda_context():
+    @dataclass
+    class LambdaContext:
+        function_name: str = "test"
+        function_version:str = "$LATEST"
+        invoked_function_arn: str = "arn:aws:lambda:eu-west-1:123456789012:function:test"
+        memory_limit_in_mb: int = 128
+        aws_request_id: str = "da658bd3-2d6f-4e7b-8ec2-937234644fdc"
+        log_group_name = "/aws/lambda/test"
+        log_stream_name = "2024/01/01/[$LATEST]123456789"
+
+        def get_remaining_time_in_millis(self):
+            return 30000
+            
+    return LambdaContext()
+
+def test_context(lambda_context):
     print("Context:", lambda_context)
-    assert lambda_context == "Context initialized"
+    # assert lambda_context == "Context initialized"
     # assert lambda_context == ["a", "b", "c", "d", "e", "f", "g"]
     # assert hasattr(x, "check")
     # assert isinstance(x, MyClass)
@@ -148,42 +161,24 @@ def (lambda_context):
 
 # Verifies ValueError is raised with the given error detail
 def test_raises():
-    with pytest.raises(ValueError, match="Unsupported mail type"):
-        pass
-        # raise
+    with pytest.raises(ValueError, match="Unsupported type"):
+        raise
         # raise ValueError("Invalid input")
 
-def test_raises2():
-    with pytest.raises(ZeroDivisionError) as exc_info:
-        result = 1 / 0
-        assert "division by zero" in str(exc_info.value)
-
-def test_usageerror():
-    pytest.UsageError("usage error")
-
-def test_skip():
-    pytest.skip("skipping this test")
+    # with pytest.raises(ZeroDivisionError) as exc_info:
+    #     result = 1 / 0
+    #     assert "division by zero" in str(exc_info.value)
 
 @pytest.mark.unit
+@pytest.mark.slow
+@pytest.mark.integration
 def test_unit():
     pass
 
-@pytest.mark.slow
-@pytest.mark.integration
-def test_integration():
-    pass
+@pytest.mark.parametrize("value", ["foo", "bar", "baz"])
+def test_param(value: str):
+    print(value)
 
-@pytest.mark.xfail(reason="always xfail")
-def test_xpass():
-    pass
-
-def test_fail():
-    pytest.fail("failing this test")
-
-def test_xfail():
-    pytest.xfail("xfailing this test")
-
-# Testing the add function with various sets of parameters
 @pytest.mark.parametrize("a, b, expected", [
     (1, 2, 3),
     (4, 5, 9),
@@ -194,18 +189,18 @@ def test_xfail():
 def test_add(a, b, expected):
     assert (a + b) == expected
 
-# @pytest.mark.parametrize(
-#     "value", ["foo", "bar", "baz"]
-# )
-# def test_dynamo_put(create_table, value):
-#     dynamo_put("string", value)
-#     dynamodb = boto3.resource('dynamodb')
-#     table = dynamodb.Table("string")
-#     response = table.get_item(
-#         Key={
-#             'string': value,
-#             'mykey': 'foo'
-#         }
-#     )
-#     print(response)
-#     assert response["Item"]["string"] == value    
+def test_usageerror():
+    pytest.UsageError("usage error")
+
+def test_skip():
+    pytest.skip("skipping this test")
+
+@pytest.mark.xfail(reason="always xfail")
+def test_xpass():
+    pass
+
+def test_fail():
+    pytest.fail("failing this test")
+
+def test_xfail():
+    pytest.xfail("xfailing this test")
