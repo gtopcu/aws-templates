@@ -10,24 +10,13 @@ fields @timestamp, @message, unmask(@message)
 
 
 --------------------------------------------------------------------------------------------------------------
-Lambda
+Lambda - /aws/lambda/
 --------------------------------------------------------------------------------------------------------------
 
 # Latest logs
 fields @timestamp, @message, @logStream, @log
 | sort @timestamp desc
 | limit 10000
-
-# Most expensive calls
-filter @type = "REPORT"
-| fields @requestId, @billedDuration
-| sort by @billedDuration desc
-
-# GroupBy DurationInMS
-filter type = "platform.report" or @type = "REPORT"
-| fields @timestamp as Timestamp, coalesce(@requestId, record.requestId) as RequestId, @logStream as LogStream, coalesce(@duration, record.metrics.durationMs) as DurationInMS, coalesce(@billedDuration, record.metrics.billedDurationMs) as BilledDurationInMS, coalesce(@memorySize/1000000, record.metrics.memorySizeMB) as MemorySetInMB, coalesce(@maxMemoryUsed/1000000, record.metrics.maxMemoryUsedMB) as MemoryUsedInMB
-| sort Timestamp desc
-| head 9
 
 # Filter
 filter @requestId = "7e5d596f-3b37-4801-9cae-809675ee1b66"
@@ -39,13 +28,33 @@ fields @timestamp, @message
     | sort @timestamp desc
     | limit 1000
 
+# GroupBy DurationInMS
+filter type = "platform.report" or @type = "REPORT"
+| fields @timestamp as Timestamp, coalesce(@requestId, record.requestId) as RequestId, @logStream as LogStream, coalesce(@duration, record.metrics.durationMs) as DurationInMS, coalesce(@billedDuration, record.metrics.billedDurationMs) as BilledDurationInMS, coalesce(@memorySize/1000000, record.metrics.memorySizeMB) as MemorySetInMB, coalesce(@maxMemoryUsed/1000000, record.metrics.maxMemoryUsedMB) as MemoryUsedInMB
+| sort Timestamp desc
+| head 9
+
 # Durations in 5 min intervals
 filter @type = "REPORT"
 | stats avg(@duration), max(@duration), min(@duration) by bin(5m)
 
+# Most expensive calls
+filter @type = "REPORT"
+| fields @requestId, @billedDuration
+| sort by @billedDuration desc
+
+# Overprovisioned memory
+filter @type = "REPORT"
+| stats max(@memorySize / 1000 / 1000) as provisionedMemoryMB,
+min(@maxMemoryUsed / 1000 / 1000) as smallestMemoryRequestMB,
+avg(@maxMemoryUsed / 1000 / 1000) as avgMemoryUsedMB,
+max(@maxMemoryUsed / 1000 / 1000) as maxMemoryUsedMB,
+provisionedMemoryMB - maxMemoryUsedMB as overProvisionedMB
+
+
 
 --------------------------------------------------------------------------------------------------------------
-AppSync 
+AppSync - /aws/appsync/
 --------------------------------------------------------------------------------------------------------------
 
 # Top10 by latency
