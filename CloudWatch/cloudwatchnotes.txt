@@ -8,3 +8,6 @@ ERROR
 "7e5d596f-3b37-4801-9cae-809675ee1b66"
 "RequestId: 7e5d596f-3b37-4801-9cae-809675ee1b66"
 
+aws logs get-log-events --log-group-name /aws/lambda/function-name --log-stream-name stream-name
+aws logs filter-log-events --log-group-name /aws/lambda/function-name --filter-pattern "ERROR"
+
