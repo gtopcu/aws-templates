@@ -1,0 +1,103 @@
+query MyQuery {
+  getCompany(
+    companyId: "00f15a59-a6af-4c35-af74-a7aa233ab703"
+    companyName: ""
+    subDomain: ""
+  ) {
+    companyDetails {
+      companyId
+      companyName
+      companyNumber
+      countryCode
+      creationDate
+      subDomain
+      sicCode
+      s3BucketName
+      personalPreference
+      logoBucketKey
+      adminEmail
+      energyCalculationMethod
+      isActive
+      location
+      isOnboarded
+    }
+    facilities {
+      energyCalculationMethod
+      ownershipStatus
+      countryCode
+      facilityName
+      facilityId
+      facilityType
+    }
+    financialYears {
+      financialYearId
+      isClosed
+      reportingEndDate
+      reportingStartDate
+    }
+    users {
+      email
+      position
+    }
+  }
+}
+
+
+{
+  "data": {
+    "getCompany": {
+      "companyDetails": {
+        "companyId": "00f15a59-a6af-4c35-af74-a7aa233ab703",
+        "companyName": "PGS",
+        "companyNumber": "4362105",
+        "countryCode": "GBR",
+        "creationDate": "2025-03-20T12:19:23.575Z",
+        "subDomain": "pgs",
+        "sicCode": "58210",
+        "s3BucketName": "dev-secr-customer-data-bucket",
+        "personalPreference": null,
+        "logoBucketKey": "",
+        "adminEmail": "hi+pgs@etie.uk",
+        "energyCalculationMethod": "LOCATION_BASED",
+        "isActive": true,
+        "location": "London",
+        "isOnboarded": true
+      },
+      "facilities": [
+        {
+          "energyCalculationMethod": null,
+          "ownershipStatus": "LEASED_OWNED_COMPANY_USE",
+          "countryCode": "USA",
+          "facilityName": "Office",
+          "facilityId": "651304d4-15d7-4d5d-a615-d560993dcbc9",
+          "facilityType": "OFFICE"
+        },
+        {
+          "energyCalculationMethod": null,
+          "ownershipStatus": "LEASED_OWNED_COMPANY_USE",
+          "countryCode": "DEU",
+          "facilityName": "Warehouse",
+          "facilityId": "8acdbe47-4424-4884-95e7-2c76d78ac293",
+          "facilityType": "OFFICE"
+        },
+        {
+          "energyCalculationMethod": null,
+          "ownershipStatus": "LEASED_OWNED_COMPANY_USE",
+          "countryCode": "GBR",
+          "facilityName": "Climatise",
+          "facilityId": "e40e0a2d-aede-458f-a546-be361f2bb343",
+          "facilityType": "HEAD_OFFICE"
+        }
+      ],
+      "financialYears": [
+        {
+          "financialYearId": "fdd30f0e-4d79-4770-9984-740c11229e82",
+          "isClosed": false,
+          "reportingEndDate": "2024-03-31",
+          "reportingStartDate": "2023-04-01"
+        }
+      ],
+      "users": []
+    }
+  }
+}
