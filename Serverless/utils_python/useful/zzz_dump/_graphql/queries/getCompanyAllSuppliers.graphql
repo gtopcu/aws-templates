@@ -1,0 +1,25 @@
+query MyQuery {
+  getCompanyAllSuppliers(company_id: "00f15a59-a6af-4c35-af74-a7aa233ab703") {
+    company_id
+    conversion_factor_identifier
+    date
+    emission_source
+    emission_conversion_factor_used
+    emissions
+    energy_conversion_factor_used
+    id
+    impact
+    is_published
+    spend
+    sic_codes
+    sic_code
+    status
+    supplier_category
+    supplier_email
+    supplier_information
+    supplier_name
+    updated_conversion_factor_identifier
+    updated_emission_conversion_factor_used
+    updated_sic_code
+  }
+}

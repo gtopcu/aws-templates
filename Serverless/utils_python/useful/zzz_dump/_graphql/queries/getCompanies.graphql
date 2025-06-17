@@ -1,3 +1,7 @@
+
+https://lvxhxfomebhqnjrfrqvocgtot4.appsync-api.eu-west-2.amazonaws.com/graphql
+wss://lvxhxfomebhqnjrfrqvocgtot4.appsync-realtime-api.eu-west-2.amazonaws.com/graphql
+
 query MyQuery {
   getCompanies(location: "London") {
     sicCode
