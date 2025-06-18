@@ -107,7 +107,8 @@ https://www.youtube.com/watch?v=8vXoMqWgbQQ
 
 sudo apt install docker.io -y
 
-docker info
+docker info - Check docker daemon
+
 docker --version
 docker ps
 docker image ls
