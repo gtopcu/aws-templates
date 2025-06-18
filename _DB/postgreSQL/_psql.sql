@@ -34,18 +34,21 @@ pg-vector
 pg-ai
 pg-analytics
 
+CREATE EXTENSION IF NOT EXISTS "uuid-oss
+
+-----------------------------------------------------------------------------------------------------
 pg_trgm - similarity(fuzzy search)
 CREATE EXTENSION pg_trgm;
+SET pg_trgm.similarity_threshold = 0.3;
 SELECT similarity('hello', 'hullo');  -> returns a float between 0 and 1, 1 == exact match
+SELECT 'hello' % 'hullo';  -- true if similarity > threshold
+-----------------------------------------------------------------------------------------------------
 SELECT * FROM users
 WHERE similarity(name, 'john') > 0.4
 ORDER BY similarity(name, 'john') DESC;
-
+-----------------------------------------------------------------------------------------------------
 transaction logs 
 unlogged tables
-
-CREATE EXTENSION IF NOT EXISTS "uuid-oss
-
 -----------------------------------------------------------------------------------------------------
 
 psql -U postgres <-h localhost> -> Will ask for password
