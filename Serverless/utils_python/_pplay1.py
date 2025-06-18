@@ -419,6 +419,7 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 # my_func(**my_dict))
 # combined_dict = {**my_dict1, **my_dict2}
 # my_dict3 = { **my_dict1, "timestamp": 1234567890 }
+# kwargs = {k: v for k, v in kwargs.items() if v is not None}
 
 # from pprint import pprint
 # pprint(my_dict, indent=4, sort_dicts=False)
@@ -440,9 +441,13 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 # output: Annotated[list, my_func]
 # my_type: type = dict[str, Any]
 # my_type: Type = int
-# my_type: TypeVar = list[int]
 # my_type: NewType = set[float] 
 # my_type: TypeAlias = str
+# my_type: TypeVar = list[int]
+
+# T = TypeVar("T", bound="MyClass")
+from numbers import Number
+# T = TypeVar("T", bound=Number)
 
 # def __add__(self, other):
 #     if type(self) is not type(other):
