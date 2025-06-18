@@ -9,7 +9,7 @@ from psycopg.sql import SQL, Identifier, Literal, Composed
 from sshtunnel import SSHTunnelForwarder
 
 SSH_USERNAME = "ec2-user"
-DB_CONNECT_TIMEOUT_SEC = 5
+DB_CONNECT_TIMEOUT_SEC = 10
 
 class DBCredentials:
     def __init__(self, host, port, dbname, user, password, tunnel=None):

@@ -1,0 +1,29 @@
+version: 0.2
+
+phases:
+  install:
+    on-failure: ABORT
+    runtime-versions:
+      python: 3.12
+    commands:
+      # Install dependencies
+      - pip install uv
+      - uv venv
+      - source .venv/bin/activate
+      - uv pip install -r requirements-dev.txt
+
+  build:
+    commands:
+      - source .venv/bin/activate
+      - bash run_python_tests.sh
+
+reports:
+  pytest_reports:
+    files:
+      - pytest_report.xml
+    base-directory: pytest_reports/
+    file-format: JUNITXML
+
+cache:
+  paths:
+    - '/root/.cache/pip/**/*'

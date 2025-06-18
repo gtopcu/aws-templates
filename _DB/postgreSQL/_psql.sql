@@ -22,6 +22,8 @@ chmod +x myscript.sh
 #!/bin/bash
 sh myscript.sh
 
+psychopg2 
+
 psql -U postgres
 pgAdmin
 pg_ctl 
@@ -31,7 +33,8 @@ pg-cron
 pg-vector 
 pg-ai
 pg-analytics
-psychopg2 
+pg_trgm - similarity(fuzzy search) -> SELECT similarity('hello', 'hullo');  -> returns a float between 0 and 1, 1 == exact match
+
 transaction logs 
 unlogged tables
 
