@@ -107,12 +107,17 @@ https://www.youtube.com/watch?v=8vXoMqWgbQQ
 
 sudo apt install docker.io -y
 
-docker info - Check docker daemon
-
+docker info
 docker --version
 docker ps
 docker image ls
 docker history myApp:10
+
+docker run -it ubuntu bash
+docker run -it python:3.13-slim bash
+docker run -it --entrypoint /bin/bash
+docker exec -it container_name /bin/bash
+docker attach container_name
 
 docker build -t container_name .
 docker run --name container_name -dp 80:80
@@ -120,17 +125,14 @@ docker run --rm --it --name container_name
 docker run --name container_name -e GROUP_ID=1 
 docker run --name local-db --env-file ./.env -dp 5432:5432 postgres:latest
 
+docker build --platform=linux/x86_64 -t my_container .
+docker run --rm -v ./.build:/opt my_container
+
 docker run -d --name container_name -v named-volume:/data ubuntu
 docker run --name container_name -v mysql-data:/var/lib/mysql/data -> named volume
 docker run --name container_name -v /home/mount/data:/var/lib/mysql/data -> host volume
 docker run --name container_name -v /var/lib/mysql/data -> anonymous volumes ie. /var/lib/docker/volumes/random-hash/_data auto created on host
 docker run -d --name wordpress --mount source=sample-volume,target=/var/www/html wordpress
-
-docker run -it ubuntu bash
-docker run -it python:3.13-slim bash
-docker run -it --entrypoint /bin/bash
-docker exec -it container_name /bin/bash
-docker attach container_name
 
 nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://127.0.0.1:2375 --storage-driver=overlay2 &
 timeout 15 sh -c "until docker info; do echo .; sleep 1; done"
