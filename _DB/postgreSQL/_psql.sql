@@ -33,7 +33,13 @@ pg-cron
 pg-vector 
 pg-ai
 pg-analytics
-pg_trgm - similarity(fuzzy search) -> SELECT similarity('hello', 'hullo');  -> returns a float between 0 and 1, 1 == exact match
+
+pg_trgm - similarity(fuzzy search)
+CREATE EXTENSION pg_trgm;
+SELECT similarity('hello', 'hullo');  -> returns a float between 0 and 1, 1 == exact match
+SELECT * FROM users
+WHERE similarity(name, 'john') > 0.4
+ORDER BY similarity(name, 'john') DESC;
 
 transaction logs 
 unlogged tables
