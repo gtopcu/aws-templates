@@ -5,9 +5,6 @@ from aws_lambda_powertools import logging
 
 logger = logging.Logger()
 
-# TODO
-# read this from sysmgr paramstore
-# Load environment variables
 SENDER_EMAIL = os.environ.get("SENDER_EMAIL", "support@app.com")
 
 def lambda_handler(event, context):
