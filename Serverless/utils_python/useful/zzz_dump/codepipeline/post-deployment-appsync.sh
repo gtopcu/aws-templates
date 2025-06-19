@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # wait for the AppSync API to be deployed
-sleep 30
+sleep 15
 
 # Set the AWS region
 REGION="eu-west-2"  # Replace with your desired region
