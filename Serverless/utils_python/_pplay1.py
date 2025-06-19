@@ -94,6 +94,7 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 # raise Exception("")
 # raise RuntimeError("")
 # raise SystemError("")
+# raise ImportError("")
 
 # id len type isinstance issubclass str repr chr ord dir global nonlocal iter next 
 # is in not and or not any all 
