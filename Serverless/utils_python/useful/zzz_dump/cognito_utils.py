@@ -17,7 +17,6 @@ class User:
     email: str
     position: str
 
-
 class CognitoUserRepository():
     __session: boto3.Session
     __cognito_client: CognitoIdentityProviderClient

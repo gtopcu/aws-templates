@@ -10,7 +10,6 @@ logger = logging.Logger()
 # Load environment variables
 SENDER_EMAIL = os.environ.get("SENDER_EMAIL", "support@app.com")
 
-
 def lambda_handler(event, context):
     """Handles Cognito Custom Message trigger for MFA emails."""
     logger.info(f"Received event: {json.dumps(event)}")
@@ -23,7 +22,6 @@ def lambda_handler(event, context):
         return handle_cognito_otp_email(event)
 
     return event  # Return unchanged for other events
-
 
 def handle_cognito_otp_email(event):
     """Handles Cognito MFA verification email."""
