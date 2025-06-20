@@ -85,7 +85,7 @@ app = AppSyncResolver()
 #     "sub": "e6e252d4-60b1-7013-3a41-92bffafb6541",
 #     "username": "e6e252d4-60b1-7013-3a41-92bffafb6541"
 # },
-``
+
 
 class CustomEventModel(AppSyncResolverEvent):
     @property
@@ -146,7 +146,7 @@ def get_locations(name: str, description: str = "") -> list[Location]:  # match 
     return [{"name": name, "description": description}]
 
 
-@logger.inject_lambda_context(correlation_id_path=correlation_paths.APPSYNC_RESOLVER)
+@logger.inject_lambda_context(correlation_id_path=correlation_paths.APPSYNC_RESOLVER, log_event=False)
 @tracer.capture_lambda_handler
 def lambda_handler(event, context:LambdaContext) -> dict:
     identity = event.get("identity")
@@ -265,9 +265,7 @@ def lambda_handler(event, context:LambdaContext) -> dict:
 #         return notification_page.model_dump(mode="json", by_alias=True)
 
 
-# @logger.inject_lambda_context(
-#     correlation_id_path=correlation_paths.APPSYNC_RESOLVER, log_event=True
-# )
+# @logger.inject_lambda_context(correlation_id_path=correlation_paths.APPSYNC_RESOLVER, log_event=False)
 # @tracer.capture_lambda_handler
 # def lambda_handler(event: dict, context: LambdaContext) -> dict:
 #     return app.resolve(event, context, data_model=CompanyEventModel)

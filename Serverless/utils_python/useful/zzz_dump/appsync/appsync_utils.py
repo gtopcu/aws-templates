@@ -2,6 +2,7 @@
 import os
 import requests
 from requests import Response, Timeout
+from pydantic import BaseModel
 
 from aws_lambda_powertools import Logger, Tracer
 
@@ -47,3 +48,39 @@ def execute_gql(query: str, variables: dict | None = None) -> dict:
 
     logger.info(f"Query successful. Response: {response.request.body}. ")
     return response.json()
+
+notification_mutation = """
+mutation NotificationQuery($companyId: String!, $notificationType: NotificationType!, $facilityId: String, $sourceId: String, $fileName: String, $message: String) {
+    createNotification(companyId: $companyId, notificationType: $notificationType, facilityId: $facilityId, sourceId: $sourceId, fileName: $fileName, message: $message) {
+        companyId
+        notificationId
+        notificationType
+        notificationStatus
+        creationDatetime
+        facilityId
+        sourceId
+        fileName
+        message
+    }
+}
+"""
+
+class NotificationRequest(BaseModel):
+    company_id: str
+    notification_type: str
+    facility_id: str | None = None
+    source_id: str | None = None
+    file_name: str | None = None
+    message: str | None = None
+
+def send_notification(request: NotificationRequest) -> dict:
+    variables = {
+        "companyId": request.company_id,
+        "notificationType": request.notification_type,
+        "facilityId": request.facility_id,
+        "sourceId": request.source_id,
+        "fileName": request.file_name,
+        "message": request.message,
+    }
+    return execute_gql(query=notification_mutation, variables=variables)
+

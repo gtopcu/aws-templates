@@ -438,7 +438,7 @@
 #         raise
 
 
-# @logger.inject_lambda_context(correlation_id_path=correlation_paths.APPSYNC_RESOLVER)
+# @logger.inject_lambda_context(correlation_id_path=correlation_paths.APPSYNC_RESOLVER, log_event=False)
 # @tracer.capture_lambda_handler
 # def lambda_handler(event: dict, context: LambdaContext) -> dict:
 #     identity = event.get("identity")
