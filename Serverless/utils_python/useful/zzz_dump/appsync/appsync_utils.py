@@ -44,11 +44,7 @@ def execute_gql(query: str, variables: dict | None = None) -> dict:
     :return: The json response from the query call.
     """
     api_url = os.environ[ENV_APPSYNC_ENDPOINT_URL]
-    if not api_url:
-        raise Exception("APPSYNC_ENDPOINT_URL env not set")
     api_key = os.environ[ENV_APPSYNC_API_KEY]
-    if not api_key:
-        raise Exception("APPSYNC_API_KEY env not set")
     
     request_body_json = {"query": query, "variables": variables}
     
@@ -73,38 +69,36 @@ def execute_gql(query: str, variables: dict | None = None) -> dict:
     logger.info(f"Query successful. Response: {response.request.body}. ")
     return response.json()
 
-notification_mutation = """
-mutation NotificationQuery($companyId: String!, $notificationType: NotificationType!, $facilityId: String, $sourceId: String, $fileName: String, $message: String) {
-    createNotification(companyId: $companyId, notificationType: $notificationType, facilityId: $facilityId, sourceId: $sourceId, fileName: $fileName, message: $message) {
-        companyId
-        notificationId
-        notificationType
-        notificationStatus
-        creationDatetime
-        facilityId
-        sourceId
-        fileName
-        message
-    }
-}
-"""
 
-class NotificationRequest(BaseModel):
-    company_id: str
-    notification_type: str
-    facility_id: str | None = None
-    source_id: str | None = None
-    file_name: str | None = None
-    message: str | None = None
+def send_message_event(
+    _id: str,
+    timestamp: str,
+    conversation_id: str,
+    sender: str,
+    message: str,
+):
+    query = """
+        mutation aiPublishMessage($event: NewConversationEvent!) {
+            aiPublishMessage(event: $event) {
+                id
+                timestamp
+                conversationId
+                sender
+                message
+            }
+        }
+    """
 
-def send_notification(request: NotificationRequest) -> dict:
     variables = {
-        "companyId": request.company_id,
-        "notificationType": request.notification_type,
-        "facilityId": request.facility_id,
-        "sourceId": request.source_id,
-        "fileName": request.file_name,
-        "message": request.message,
+        "event": {
+            "id": _id,
+            "timestamp": timestamp,
+            "conversationId": conversation_id,
+            "sender": sender,
+            "message": message,
+        }
     }
-    return execute_gql(query=notification_mutation, variables=variables)
+
+    execute_gql(query=query, variables=variables)
+
 
