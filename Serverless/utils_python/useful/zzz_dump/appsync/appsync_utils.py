@@ -3,8 +3,12 @@ import os
 import requests
 from requests import Response, Timeout
 
+from aws_lambda_powertools import Logger, Tracer
+
 ENV_APPSYNC_API_KEY = "APPSYNC_API_KEY"
 ENV_APPSYNC_ENDPOINT_URL = "APPSYNC_ENDPOINT_URL"
+
+logger = Logger(service="GraphQLService")
 
 def execute_gql(query: str, variables: dict | None = None) -> dict:
     """
@@ -14,18 +18,26 @@ def execute_gql(query: str, variables: dict | None = None) -> dict:
     :param variables: The associated variables values for the query.
     :return: The json response from the query call.
     """
+    api_url = os.environ[ENV_APPSYNC_ENDPOINT_URL]
+    request_body_json = {"query": query, "variables": variables}
+    
+    logger.info(f"Sending GraphQL request to: {api_url} Query: {request_body_json}")
     response = requests.post(
-        os.environ[ENV_APPSYNC_ENDPOINT_URL],
-        json={"query": query, "variables": variables},
+        api_url,
+        json=request_body_json,
         headers={
             "Content-Type": "application/graphql",
             "x-api-key": os.environ[ENV_APPSYNC_API_KEY],
         },
     )
-    print(response.json())
+    logger.info("GraphQL Response: ", response.json())
     if response.status_code != 200 or response.json().get("errors") is not None:
-        raise Exception(
-            f"The following query failed: {response.request.body}. "
+        e = Exception(
+            f"Query failed: {response.request.body}. "
             f"Response: {response.json()}"
         )
+        logger.exception(e)
+        raise e
+
+    logger.info(f"Query successful. Response: {response.request.body}. ")
     return response.json()
