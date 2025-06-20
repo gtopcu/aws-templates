@@ -452,3 +452,14 @@
 #             cognito_user=cognito_user,
 #         )
 #     return app.resolve(event, context, data_model=CompanyEventModel)
+
+# def _return_failure(exception: Exception):
+#     logger.exception(exception)
+#     return {
+#         "message": "FAILED",
+#         "success": False,
+#         "errorDetails": {
+#             "errorType": type(exception).__name__,
+#             "errorMessage": str(exception),
+#         },
+#     }

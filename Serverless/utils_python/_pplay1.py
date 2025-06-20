@@ -166,9 +166,12 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 # os.environ["POSTGRE_IP"]
 # os.environ.setdefault("POSTGRE_PORT", 5432)
 
-# os.path.basename(__file__)
+# os.path.basename(__file__)  # _pplay1.py
+# os.path.abspath(__file__)   # D:\VSCode\aws-templates\Serverless\utils_python\_pplay1.py
+# os.path.realpath(__file__)  # D:\VSCode\aws-templates\Serverless\utils_python\_pplay1.py
+# os.path.dirname(__file__)   # D:\VSCode\aws-templates\Serverless\utils_python
+
 # current_dir = os.path.dirname(os.path.abspath(__file__))
-# file_path = os.path.dirname(os.path.realpath(__file__))
 # file_path = os.path.join(current_dir, filename)
 # if not os.path.exists(file_path):
 #     raise FileNotFoundError(f"File not found: {file_path}")

@@ -162,6 +162,17 @@ def lambda_handler(event, context:LambdaContext) -> dict:
     return app.resolve(event, context, data_model=CustomEventModel)
 
 
+# def _return_failure(exception: Exception):
+#     logger.exception(exception)
+#     return {
+#         "message": "FAILED",
+#         "success": False,
+#         "errorDetails": {
+#             "errorType": type(exception).__name__,
+#             "errorMessage": str(exception),
+#         },
+#     }
+
 # -----------------------------------------------------------------------------------------------------------
 
 # from uuid import uuid4
