@@ -5,8 +5,8 @@ from requests import Response, Timeout
 
 from aws_lambda_powertools import Logger, Tracer
 
-ENV_APPSYNC_API_KEY = "APPSYNC_API_KEY"
 ENV_APPSYNC_ENDPOINT_URL = "APPSYNC_ENDPOINT_URL"
+ENV_APPSYNC_API_KEY = "APPSYNC_API_KEY"
 
 logger = Logger(service="GraphQLService")
 
@@ -19,6 +19,12 @@ def execute_gql(query: str, variables: dict | None = None) -> dict:
     :return: The json response from the query call.
     """
     api_url = os.environ[ENV_APPSYNC_ENDPOINT_URL]
+    if not api_url:
+        raise Exception("APPSYNC_ENDPOINT_URL env not set")
+    api_key = os.environ[ENV_APPSYNC_API_KEY]
+    if not api_key:
+        raise Exception("APPSYNC_API_KEY env not set")
+    
     request_body_json = {"query": query, "variables": variables}
     
     logger.info(f"Sending GraphQL request to: {api_url} Query: {request_body_json}")
@@ -27,7 +33,7 @@ def execute_gql(query: str, variables: dict | None = None) -> dict:
         json=request_body_json,
         headers={
             "Content-Type": "application/graphql",
-            "x-api-key": os.environ[ENV_APPSYNC_API_KEY],
+            "x-api-key": api_key,
         },
     )
     logger.info("GraphQL Response: ", response.json())
