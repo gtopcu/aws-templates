@@ -7,7 +7,10 @@ from datetime import datetime
 from aws_lambda_powertools import Logger
 import boto3
 from boto3.dynamodb.conditions import Key, Attr
+from boto3.dynamodb.conditions import Equals, NotEquals, And, Or, Not, GreaterThan, GreaterThanEquals, LessThan, LessThanEquals 
+from boto3.dynamodb.conditions import BeginsWith, Between, Contains, In, Size, AttributeExists, AttributeNotExists, AttributeType
 from botocore.exceptions import ClientError
+
 from mypy_boto3_dynamodb.service_resource import Table
 from mypy_boto3_dynamodb.type_defs import QueryOutputTableTypeDef
 
@@ -39,7 +42,7 @@ class DDB_Company():
 
     def __init__(self):
         ddb = boto3.resource("dynamodb")
-        self.__table = ddb.Table(os.getenv(ENV_DDB_TABLE))
+        self.__table = ddb.Table(os.environ[ENV_DDB_TABLE])
 
     def create_company(self, company: Company) -> None:
         """
@@ -515,10 +518,3 @@ def _user_to_dict(user: User) -> dict:
 def _user_from_dict(user_dict: dict) -> User:
     return User(**user_dict)
 
-
-@lru_cache
-def get_company_repository() -> ICompanyRepository:
-    """
-    Always use this to fetch an instance of repository. It is cached.
-    """
-    return DDCompanyRepository()
