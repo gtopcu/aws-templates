@@ -134,3 +134,69 @@ type Query {
 ------------------------------------------------------------------------------------------------------------------------------------------
 Best Practices
 
+The fundamental rule: Types are for data going out (responses), Inputs are for data coming in (arguments). 
+This separation ensures type safety and clear API contracts.
+
+1. Separate Input and Output Types
+
+# Good - separate types
+type User { ... }
+input CreateUserInput { ... }
+
+# Avoid - reusing types as inputs
+# This limits flexibility and can cause issues
+
+2. Use Descriptive Names
+
+input CreateUserInput { ... }
+input UpdateUserInput { ... }
+input UserFilterInput { ... }
+
+3. Make Inputs Flexible
+
+input UpdateUserInput {
+    name: String      # Optional for partial updates
+    email: String     # Optional for partial updates
+}
+
+------------------------------------------------------------------------------------------------------------------------------------------
+Graphene Example
+
+import graphene
+from graphene import ObjectType, String, ID, List, InputObjectType, Mutation
+
+# Types (Output)
+class UserType(ObjectType):
+    id = ID(required=True)
+    name = String(required=True)
+    email = String(required=True)
+    posts = List(lambda: PostType)
+
+class PostType(ObjectType):
+    id = ID(required=True)
+    title = String(required=True)
+    content = String(required=True)
+    author = graphene.Field(UserType)
+
+# Inputs
+class CreateUserInput(InputObjectType):
+    name = String(required=True)
+    email = String(required=True)
+    password = String(required=True)
+
+class UpdateUserInput(InputObjectType):
+    name = String()
+    email = String()
+
+# Mutations using inputs
+class CreateUser(Mutation):
+    class Arguments:
+        input = CreateUserInput(required=True)
+    
+    user = graphene.Field(UserType)
+    
+    def mutate(self, info, input):
+        # Create user logic here
+        user = create_user_in_db(input)
+        return CreateUser(user=user)
+
