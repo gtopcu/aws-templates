@@ -13,6 +13,11 @@ Types
 
 # Types can reference each other circularly
 
+enum NotificationType {
+  PROCESSING_COMPLETE
+  PROCESSING_FAILED
+}
+
 # Types can implement Interface
 interface BaseUser {
     name: String!
