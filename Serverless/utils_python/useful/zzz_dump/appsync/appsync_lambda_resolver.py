@@ -9,6 +9,15 @@
 # from aws_lambda_powertools.utilities.typing import LambdaContext
 # from aws_lambda_powertools.logging import correlation_paths
 
+from aws_lambda_powertools.utilities.data_classes.appsync.scalar_types_utils import (
+    aws_datetime,
+    aws_date,
+    aws_time,
+    aws_timestamp,
+    
+)
+
+
 # session = boto3.Session()
 # ses_client = session.client('ses', region_name='eu-west-2')
 

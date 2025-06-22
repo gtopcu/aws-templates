@@ -1,7 +1,10 @@
 
-scalar AWSJSON
 scalar AWSDate
+scalar AWSTime
 scalar AWSDateTime
+scalar AWSJSON
+scalar AWSUUID
+
 Data: [ItemData!]!
 
 ------------------------------------------------------------------------------------------------------------------------------------------
