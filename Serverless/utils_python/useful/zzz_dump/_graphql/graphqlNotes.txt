@@ -2,13 +2,11 @@
 scalar AWSJSON
 scalar AWSDate
 scalar AWSDateTime
-
 Data: [ItemData!]!
 
 ------------------------------------------------------------------------------------------------------------------------------------------
 Type vs Input
 ------------------------------------------------------------------------------------------------------------------------------------------
-
 Types are used for data that flows out of your API (responses). Defines the structure of data returned by queries and mutations
 Inputs are used for data that flows into your API (arguments/variables)
 
