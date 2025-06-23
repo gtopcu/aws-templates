@@ -1,193 +1,85 @@
+# [pytest]
+# pythonpath = "D:\VSCode2\infra\lambdas\resolvers\supplier_data_request"
+# pytest test_class.py::test_method
+# addopts = -p no:warnings
+# pythonpath = "./lambda-layers/secr-py-core-domain/python"
 
-/*
-https://www.sqlekibi.com/2025/05/26/postgresql-performans-iyilestirme-rehberi-autovacuum-indexler-ve-paralel-sorgular/
+# PYTHONPATH=./infra/lambda-layers/secr-py-core-domain/python/secr
+# PYTHONPATH=D:\VSCode2\infra\lambda-layers\secr-py-core-domain\python\secr
+# set PYTHONPATH=%PYTHONPATH%;D:\VSCode2\infra\lambda-layers\secr-py-core-domain\python\secr
+# import os; print(os.getenv("PYTHONPATH"));
+# $env:PATH
+# $env:PYTHONPATH
 
-Case-insensitive search: ILIKE or citext
+# ruff format .
+# ruff check . --fix
+# ruff check test.py --config ruff.toml
+# ruff check test.py --fix
 
-B-TREE: Check if equal / sorting
-HASH: Check if equal
-GIN: Full-text search & JSONB
-BRIN: For sparse data in large tables
-SP-GIST
-GIST
+# docker info
+# PreferencesUI -> workbench.editor.enablePreview  
 
-CREATE UNLOGGED TABLE fast_table 
-EXPLAIN (SELECT * FROM customers)
+# .gitignore
+# secr
 
-SELECT * FROM information_schema.tables;
-SELECT * FROM pg_catalog.pg_settings
-SELECT * FROM pg_catalog.pg_extension
-SELECT * FROM pg_catalog.pg_user
-SELECT * FROM pg_catalog.pg_group
-SELECT * FROM pg_catalog.pg_policies
-SELECT * FROM pg_catalog.pg_roles
-SELECT * FROM pg_catalog.pg_trigger
-SELECT * FROM pg_catalog.pg_views
-SELECT * FROM pg_catalog.pg_matviews
-SELECT * FROM pg_catalog.pg_database
-SELECT * FROM pg_catalog.pg_namespace
-SELECT * FROM pg_catalog.pg_foreign_table
-SELECT * FROM pg_catalog.pg_tablespace
-SELECT * FROM pg_catalog.pg_tables WHERE tablename = 'my_table';
-SELECT * FROM pg_catalog.pg_indexes WHERE tablename = 'my_table';
+# Seach ignore
+# secr/*, schema.graphql, schema copy.graphql, loading_scripts/*, loading-scripts/*, tests/*, test/*, test*,  local_tests/, *.csv
 
+# git pull | docker
+# git branch -a 
+# git checkout -b new-branch
+# git branch -m old-name new-name
 
-SELECT table_schema, table_name 
-FROM information_schema.tables 
-WHERE table_schema NOT IN ('information_schema', 'pg_catalog')
-# WHERE table_schema = 'public'
-AND table_type = 'BASE TABLE'
-ORDER BY table_schema, table_name;
+# Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+# .\.venv\Scripts\Activate.ps1
+# D:\VSCode2\infra\.venv\Scripts\Activate.ps1
+# pip -V
+# deactivate
 
-SELECT datname AS database_name
-FROM pg_database
-WHERE datistemplate = false
-ORDER BY datname;
+# Remove-Item -Path "D:\VSCode2\infra\.venv\Lib\site-packages" -Recurse -Force
 
-SELECT 
-    datname AS database_name,
-    pg_catalog.pg_get_userbyid(datdba) AS owner,
-    pg_encoding_to_char(encoding) AS encoding,
-    datcollate AS collate,
-    datctype AS ctype
-FROM pg_database
-WHERE datistemplate = false
-ORDER BY datname;
+# Copy-Item -Path "D:\VSCode2\infra\lambda-layers\secr-py-core-domain\python\secr" -Destination "D:\VSCode2\infra\.venv\Lib\site-packages" -Recurse -Force
+# Copy-Item -Path "D:\VSCode2\infra\lambdas" -Destination "D:\VSCode2\infra\.venv\Lib\site-packages" -Recurse -Force
 
+# Remove-Item -Path "D:\VSCode2\infra\.venv\Lib\site-packages\secr" -Recurse -Force
+# Remove-Item -Path "D:\VSCode2\infra\.venv\Lib\site-packages\lambdas" -Recurse -Force
 
--------------------------------------------------------------------------
-SELECT * FROM pg_settings
--------------------------------------------------------------------------
-max_connections = 1669
-max_parallel_workers = 8
-max_parallel_workers_per_gather = 2
-max_worker_processes = 8
-shared_buffers = 4GB
-autovacuum = on
-autovacuum_vacuum_scale_factor = 0.2
-autovacuum_analyze_scale_factor = 0.1
-autovacuum_vacuum_threshold = 50
-autovacuum_analyze_threshold = 50
-autovacuum_max_workers = 3
-autovacuum_naptime = 1min
-autovacuum_vacuum_cost_delay = 20ms
-autovacuum_vacuum_cost_limit = 200
-log_min_duration_statement = 500ms
+# import os; 
+# print(os.getenv("PYTHONPATH"));
+# sys.path.append(os.getenv("PYTHONPATH"));
 
+# import sys
+# sys.path.append("infra/secr-py-core-domain/python/secr")
+# print(sys.path)
 
-*/
+# os.environ["AWS_ACCESS_KEY_ID"]=""
+# os.environ["AWS_SECRET_ACCESS_KEY"]=""
+# os.environ["AWS_SESSION_TOKEN"]=""
 
-id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY
-SERIAL PRIMARY KEY AUTOINCREMENT
-UNIQUE DEFAULT NOT NULL 
+#    Create a `.env` file with necessary environment variables:
+#    ```
+#    AWS_DEFAULT_REGION=eu-west-2
 
-BOOLEAN|BOOL CHAR(20) VARCHAR(20) TEXT TEXT[] 
-SMALLINT INT INT4 BIGINT 
-FLOAT(2) NUMERIC(10,2) DECIMAL(10, 2) REAL FLOAT8|DOUBLEPRECISION
-DATE TIME(2) TIMESTAMP TIMESTAMPTZ INTERVAL
-DATE DEFAULT CURRENT_DATE,
-TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
-UUID JSON JSONB(enables query) 
-XML ENUM BYTEA(1GBmax) 
-hstore(key/value str only) 
-Array(int/str etc) 
-UserDefined/Composite types
+#    RDS_PASSWORD_ARN="arn:aws:secretsmanager:eu-west-2:092241524551:secret:rds!cluster-56371737-ad2b-405e-ab00-ef1f31d885ac-aGssFX"
+#    RDS_HOST_URL="127.0.0.1"
+#    RDS_PORT=3307
+#    RDS_DBNAME="secr_data"
+#    ENV_DATA_TABLE = "CUSTOMER_DATA_SOURCE_TABLE"
 
-COUNT DISTINCT ORDER BY 
-AND OR LIMIT OFFSET FETCH IN BETWEEN LIKE IS NULL  
-INNER JOIN LEFT JOIN RIGHT JOIN SELF JOIN FULL OUTER JOIN
-GROUP BY HAVING RETURNING GROUPING SETS CUBE ROLLUP
-UNION INTERSECT EXCEPT 
-UPSERT MERGE  
-ANY ALL EXISTS
-AVG, MIN, MAX, FLOOR, CEIL, ROUND
-SUM (CASE WHEN rental_rate = 0.99 THEN 1 ELSE 0 END) AS "Economy",
-COALESCE (NULL, 2 , 1)  /* returns first non-null argument */
-TO_CHAR CAST ('100' AS INTEGER) CAST ('01-OCT-2015' AS DATE)
-NULLIF (1, 1); -- return NULL /*  returns NULL if argument_1 == argument_2, otherwise argument_1 */
-
-/* ------------------------------------------------------------------------------------------------ */
-
-SELECT 'User ID: ' || user_id::text FROM users;
-WHERE price::text LIKE '99%';
-SELECT CAST(field AS text);
-3.14159::numeric(5,2),  -- 3.14 (5 digits total, 2 decimal)
-'1234.56'::money,       -- $1,234.56
-42::float,              -- 42.0
-'42'::bigint;           -- 42 as big integer
-'{1,2,3}'::integer[]
-now()::date as today,           -- Just the date part
-now()::time as current_time,    -- Just the time part
-'2023-12-25'::timestamp,        -- Convert string to timestamp
-extract(epoch from now())::integer; -- Unix timestamp as integer
-
-/* ------------------------------------------------------------------------------------------------ */
-
-SELECT typname, typlen 
-FROM pg_type 
-WHERE typname ~ '^timestamp';
-
-/* ------------------------------------------------------------------------------------------------ */
-
-CREATE EXTENSION IF NOT EXISTS vector;
-ALTER TABLE my_vectordb
-ADD COLUMN embedding vector(1024);
-
-/* ------------------------------------------------------------------------------------------------ */
-
-CREATE OR REPLACE FUNCTION update_updated_at()
-RETURNS TRIGGER AS $$
-BEGIN
-    NEW.updated_at = current_timestamp;
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER department_updated_at_trigger
-BEFORE UPDATE ON department
-FOR EACH ROW
-EXECUTE FUNCTION update_updated_at();
-
-/* ------------------------------------------------------------------------------------------------ */
-
-CREATE VIEW book_info
-AS SELECT
-    book_id,
-    title,
-    isbn,
-    published_date,
-    name
-FROM
-    books b
-INNER JOIN publishers
-    USING(publisher_id)
-ORDER BY title;
-
-/* ------------------------------------------------------------------------------------------------ */
+#    COMPANY_DATA_TABLE="COMPANY_DATA"
+#    DATA_BUCKET_NAME="dev-secr-customer-data-bucket"
+#    DS_AGGREGATION_DATA_TABLE="DS_AGGREGATION_TABLE"
+#    SEND_NOTIFICATION_SNS_ARN="arn:aws:sns:eu-west-2:092241524551:send_notification"
+   
+#    CUSTOMER_DATA_SOURCE_TABLE = "CUSTOMER_DATA_SRC_DATA"
+#    DS_AGGREGATION_DATA_TABLE = "DS_AGGREGATION_TABLE"
+#    QUESTIONNAIRES_TABLE = "QUESTIONNAIRES"
 
 
-SELECT date_trunc('hour', created_at) AS hour, COUNT(*) AS total_users
-FROM users
-GROUP BY hour
-ORDER BY hour;
-
-SELECT
-    time_bucket('1 day', event_time) AS bucket,
-    count(*) AS star_count
-FROM events
-WHERE
-    NOW() - INTERVAL '30 days' <= event_time
-    AND LOWER(repo_name) = 'timescale/timescaledb'
-GROUP BY bucket
-ORDER BY bucket DESC;
-
-
-SELECT 
-  (
-    SUM (CASE WHEN gender = 1 THEN 1 ELSE 0 END) / NULLIF (
-      SUM (CASE WHEN gender = 2 THEN 1 ELSE 0 END), 
-      0
-    )
-  ) * 100 AS "Male/Female ratio" 
-FROM 
-  members;
+# ssh -N -L 3307:secr-db.cluster-c7brgyzxb8l0.eu-west-2.rds.amazonaws.com:5432 ec2-user@ec2-18-169-210-161.eu-west-2.compute.amazonaws.com
+# aws secretsmanager get-secret-value --secret-id secr/rds/credentials --query SecretString --output text | jq -r '.password'
+# Host: 127.0.0.1
+# Port: 3307
+# Username: postgres
+# Password: Retrieve from AWS Secrets Manager
+# Database: secr_data
