@@ -1,3 +1,6 @@
+HTTP 101 - Switching Protocols
+wss://lvxhxfomebhqnjrfrqvocgtot4.appsync-realtime-api.eu-west-2.amazonaws.com/graphql
+
 type Subscription @aws_api_key @aws_cognito_user_pools {
   newNotification(
     companyId: String!
