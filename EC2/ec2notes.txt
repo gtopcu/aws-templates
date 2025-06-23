@@ -10,9 +10,8 @@ Adding a KeyPair to an existing instance:
 1. If you don't already have a key pair, create one(.pem)
 2. Connect to your instance using your current access method (SSH or EC2 Instance Connect)
 3. Add the new public key to the authorized_keys file:
-
-    Open the ~/.ssh/authorized_keys file:
-    sudo nano ~/.ssh/authorized_keys
+    Open the ~/.ssh/authorized_keys file: 
+        sudo nano ~/.ssh/authorized_keys
     Add the public key on a new line
     Save and exit (Ctrl+O, Enter, Ctrl+X)
-    Test the new key by connecting with it in a new session
+4. Test the new key by connecting with it in a new session
