@@ -34,7 +34,7 @@ from annotated_types import Gt, Ge, Le, Lt
 from typing import Protocol, runtime_checkable # Python 3.8
 from abc import ABC, abstractmethod
 
-from uuid import uuid4, UUID # str(uuid4())
+from uuid import uuid4, UUID #str(uuid4())
 from enum import StrEnum, IntFlag, auto
 
 from itertools import chain, cycle, batched, repeat, combinations, permutations, pairwise, count, compress, accumulate, dropwhile, filterfalse
