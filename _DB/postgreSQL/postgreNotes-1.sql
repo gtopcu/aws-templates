@@ -106,6 +106,20 @@ COALESCE (NULL, 2 , 1)  /* returns first non-null argument */
 TO_CHAR CAST ('100' AS INTEGER) CAST ('01-OCT-2015' AS DATE)
 NULLIF (1, 1); -- return NULL /*  returns NULL if argument_1 == argument_2, otherwise argument_1 */
 
+/* ------------------------------------------------------------------------------------------------ */
+
+SELECT 'User ID: ' || user_id::text FROM users;
+WHERE price::text LIKE '99%';
+SELECT CAST(field AS text);
+3.14159::numeric(5,2),  -- 3.14 (5 digits total, 2 decimal)
+'1234.56'::money,       -- $1,234.56
+42::float,              -- 42.0
+'42'::bigint;           -- 42 as big integer
+'{1,2,3}'::integer[]
+now()::date as today,           -- Just the date part
+now()::time as current_time,    -- Just the time part
+'2023-12-25'::timestamp,        -- Convert string to timestamp
+extract(epoch from now())::integer; -- Unix timestamp as integer
 
 /* ------------------------------------------------------------------------------------------------ */
 
