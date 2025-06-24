@@ -2,6 +2,9 @@ import os
 import boto3
 import json
 
+from sqlalchemy import create_engine
+from sqlalchemy.sql import text
+
 # Constants for environment variable names
 RDS_HOST_ENV = "RDS_HOST_URL"
 RDS_PORT_ENV = "RDS_PORT"
@@ -52,14 +55,39 @@ def test_db_connection():
 
 if __name__ == "__main__":
     cluster_info = {
-        "reader_endpoint": "secr-db.cluster-ro-c7brgyzxb8l0.eu-west-2.rds.amazonaws.com",
-        "port": 5432,
+        #"reader_endpoint": "secr-db.cluster-ro-c7brgyzxb8l0.eu-west-2.rds.amazonaws.com",
+        #"port": 5432,
+        "reader_endpoint": "127.0.0.1",
+        "port": 3307,
         "database_name": "secr_data",
         "master_user_secret_arn": "arn:aws:secretsmanager:eu-west-2:092241524551:secret:rds!cluster-56371737-ad2b-405e-ab00-ef1f31d885ac-aGssFX",
     }
 
+    # Test getting credentials
+    # print(get_credentials_from_secret("arn:aws:secretsmanager:eu-west-2:092241524551:secret:rds!cluster-56371737-ad2b-405e-ab00-ef1f31d885ac-aGssFX"))
+
     # Set environment variables from cluster info
-    set_env_variables_from_cluster_info(cluster_info)
+    # set_env_variables_from_cluster_info(cluster_info)
 
     # Test the database connection
-    test_db_connection()
+    # test_db_connection()
+
+    
+    # Enable SSH Tunnel (add your PC's public key to bastion host's .ssh/authorized_hosts file first):
+    # ssh -N -L 3307:secr-db.cluster-c7brgyzxb8l0.eu-west-2.rds.amazonaws.com:5432 ec2-user@ec2-18-169-210-161.eu-west-2.compute.amazonaws.com
+
+    # Create SQLAlchemy engine
+    engine = create_engine(
+        f"postgresql+psycopg://postgres:PW@localhost:3307/secr_data"#,
+        #connect_args={"options": creds.options},
+    )
+    try:
+        with engine.connect() as connection:
+            result = connection.execute(
+                text("SELECT * from secr_data.processed_data_item LIMIT 1")
+            )
+            print(result.fetchone())
+            print("Database connection test successful!")
+    except Exception as e:
+        print(f"Database connection test failed: {e}")
+        raise

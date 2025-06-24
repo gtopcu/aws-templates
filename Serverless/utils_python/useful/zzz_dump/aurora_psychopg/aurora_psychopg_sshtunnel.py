@@ -79,3 +79,7 @@ def get_aurora_db_connection(db_creds: DBCredentials, use_tunnel: bool) -> psyco
     except Exception as e:
         print(f"An unexpected error occurred during Aurora database connection: {e}")
         return None
+    
+
+if __name__ == "__main__":
+    credentials = DBCredentials("secr-db.cluster-c7brgyzxb8l0.eu-west-2.rds.amazonaws.com", 5432, "secr_data", "postgres", ">PZKnfsoA3s:HwPXw2ve*8D>[U>[")
