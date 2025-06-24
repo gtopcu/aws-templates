@@ -28,7 +28,6 @@ DATA_BUCKET_NAME_ENV = "DATA_BUCKET_NAME"
 
 PARTITION_KEY = "PK"
 SORT_KEY = "SK"
-
 PARTITION_KEY_VALUE = "ConversionFactor"
 
 logger = Logger()
