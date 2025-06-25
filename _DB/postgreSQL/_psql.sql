@@ -27,6 +27,7 @@ psychopg2
 psql -U postgres
 pgAdmin
 pg_ctl 
+pg_dump
 pg_restore
 pgBouncer(conn.mgr)
 pg-cron
