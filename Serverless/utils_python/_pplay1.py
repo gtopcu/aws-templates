@@ -332,6 +332,7 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 # u"unicode"
 
 # print("{}".format(my_string))
+# print("SELECT * FROM {table_name}".format(table_name=my_table))
 # print("PK_%s" % ID)
 # print(f"PK {my_string}")
 # "Elapsed Time: {total_time:.2f}s"
