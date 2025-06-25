@@ -343,7 +343,7 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 # ",".join(mylist)
 # " ".split()
 # " ".casefold()
-# " ".strip()
+# "".strip("\n```")
 # " ".removeprefix("-")
 # " ".removesuffix("-")
 # "str".isdigit()
@@ -452,7 +452,7 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 # my_type: TypeVar = list[int]
 
 # T = TypeVar("T", bound="MyClass")
-from numbers import Number
+# from numbers import Number
 # T = TypeVar("T", bound=Number)
 
 # def __add__(self, other):
@@ -469,6 +469,7 @@ from numbers import Number
 #     A = "A"
 #     def __str__(self) -> str:
 #         return self.value
+# MyEnum.__members__
 
 # class MyDict(TypedDict, total=False):
 #     name: Required[str] = "default"
