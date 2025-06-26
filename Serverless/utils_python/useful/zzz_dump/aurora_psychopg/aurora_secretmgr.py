@@ -12,7 +12,19 @@ RDS_DBNAME_ENV = "RDS_DBNAME"
 PASSWORD_SECRET_ENV = "RDS_PASSWORD_ARN"
 
 # Initialize boto3 clients
+rds_client = boto3.client("rds")
 secrets_manager_client = boto3.client("secretsmanager", region_name="eu-west-2")
+
+
+def get_rds_cluster_info(cluster_id):
+    response = rds_client.describe_db_clusters(DBClusterIdentifier=cluster_id)
+    cluster = response["DBClusters"][0]
+    return {
+        "reader_endpoint": cluster["ReaderEndpoint"],
+        "port": cluster["Port"],
+        "database_name": cluster["DatabaseName"],
+        "master_user_secret_arn": cluster["MasterUserSecret"]["SecretArn"],
+    }
 
 
 def set_env_variables_from_cluster_info(cluster_info):
