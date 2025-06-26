@@ -609,7 +609,9 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 
 # -------------------------------------------------------------------------------------------------
 
-# kwargs.update({"ExclusiveStartKey": response["LastEvaluatedKey"]})
+# kwargs = {}
+# if "LastEvaluatedKey" in response:
+#     kwargs.update({"ExclusiveStartKey": response["LastEvaluatedKey"]})
 
 # import boto3
 # from botocore.exceptions import ClientError, ConditionCheckFailedException
