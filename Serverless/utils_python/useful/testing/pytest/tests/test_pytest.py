@@ -68,19 +68,17 @@ def get_ssh_path():
 def test_get_ssh_path(monkeypatch):
     def mock_return():
         return Path("/tmp")
+    
     monkeypatch.setattr(Path, "home", mock_return)
-
     monkeypatch.setattr(Path, "home", lambda: Path("/tmp"))
     monkeypatch.setattr(Path, "home", Path("/tmp"))
     
     assert get_ssh_path() == Path("/tmp/.ssh")
     # monkeypatch.delattr(Path, "home")
 
-# --------------------------------------------------------------------------------------------
 
 # Patching Requests
 from pytest import MonkeyPatch
-
 with MonkeyPatch.context() as mp:
     mp.setattr("requests.get", "{'mock_key': 'mock_response'}")
     mp.setattr(requests, "get", lambda x: MockResponse(x))
@@ -88,7 +86,6 @@ with MonkeyPatch.context() as mp:
 
 # Blocking all HTTP requests - define in conftest.py file and use autouse=True
 # mp.delattr("requests.sessions.Session.request") 
- 
  
 # Patching with  mock class
 def get_json(url):
