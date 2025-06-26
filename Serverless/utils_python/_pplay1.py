@@ -409,7 +409,7 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 # my_dict.update(my_dict)
 
 # for _ in iter(my_list)
-# my_list2 = [i for i in range(0,100,10) if not i%5==0]
+# my_list2 = [i for i in range(0,100,10) if not i%5==0 ]
 # my_list3 = [*range(5)]
 # my_list4 = list(range(5))
 # matrix = [(x, y) for x in range(3) for y in range(3)]]
@@ -592,6 +592,8 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 
 # -------------------------------------------------------------------------------------------------
 
+# from pydantic import BaseModel, ConfigDict, Field, ValidationError
+
 # from decimal import Decimal, getcontext, setcontext, ExtendedContext, InvalidOperation, DivisionByZero
 # setcontext(ExtendedContext)
 # getcontext().prec = 3
@@ -601,6 +603,9 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 # -------------------------------------------------------------------------------------------------
 
 # import boto3
+
+# kwargs.update({"ExclusiveStartKey": response["LastEvaluatedKey"]})
+
 # from botocore.exceptions import ClientError, ConditionCheckFailedException
 # client = boto3.client(service_name="dynamodb", region_name="us-east-1")
 # def lambda_handler(event, context):    
