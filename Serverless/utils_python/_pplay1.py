@@ -76,7 +76,6 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 # print(__members__)      # Enum members
 # print("================================")
 
-
 # ================================================================================================================================
 
 # __dict__ :  stores object/class writable attributes as a dictionary - can modify attributes dynamically
@@ -92,18 +91,25 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 
 # -------------------------------------------------------------------------------------------------
 
-# raise Exception("")
-# raise RuntimeError("")
-# raise SystemError("")
-# raise ImportError("")
-# raise NotImplementedError
-
 # id len type isinstance issubclass str repr chr ord dir global nonlocal iter next 
 # is in not and or not any all 
 # if elif else try except finally raise assert break continue pass return yield
 # abs round sum min max pow avg floor ceil
 # sorted reversed map filter reduce zip enumerate
 # getattr delattr setattr delattr
+
+# -------------------------------------------------------------------------------------------------
+
+# raise Exception("")
+# raise RuntimeError("")
+# raise SystemError("")
+# raise ImportError("")
+# raise NotImplementedError
+
+# except ZeroDivisionError:
+#   logger.error("Division by zero attempted") # no traceback
+#   logger.error("Something went wrong", exc_info=True) # includes traceback
+#   logger.exception("Division by zero with traceback") # includes traceback
 
 # ================================================================================================================================
 
