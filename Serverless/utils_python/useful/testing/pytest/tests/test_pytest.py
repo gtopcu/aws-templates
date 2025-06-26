@@ -113,6 +113,8 @@ def test_get_json(monkeypatch):
 
 # https://pytest-mock.readthedocs.io/en/latest/usage.html
 # https://docs.python.org/3/library/unittest.mock.html#patch
+# from pytest_mock import mocker
+
 # def test_foo(mocker):
 #     mocker.patch('os.remove')
 #     mocker.patch.object(os, 'listdir', autospec=True)
@@ -120,6 +122,11 @@ def test_get_json(monkeypatch):
 #                 sqs_queue.sqs_client, 'delete_message',
 #                 side_effect=ClientError({'Error': {}}, 'DeleteMessage')
 #             )
+#
+# def mock_aws_client(mocker):
+#     mock_client = mocker.patch("boto3.client")
+#     mock_client.return_value = mocker.Mock()
+#     return mock_client
 
 # --------------------------------------------------------------------------------------------
 
