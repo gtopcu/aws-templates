@@ -270,6 +270,7 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 # logger.info("Logging is set up.")
 # logger.info("INFO", stack_info=True, stacklevel=5)
 # logger.error("ERROR", exc_info=True)
+# logger.exception(e)
 
 # import traceback
 # from inspect import istraceback
@@ -631,7 +632,8 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 #             'body': json.dumps("Created | Accepted | NoContent")
 #         }
 #     except ClientError as err:
-#         # print(str(err))
+#         logger.error(f"Error: {e}", exc_info=True)
+#         logger.exception(e)
 #         print("Error Code: " + f"{err.response['Error']['Code']}")
 #         print("Error Message: " + f"{err.response['Error']['Message']}")
 #         raise err
