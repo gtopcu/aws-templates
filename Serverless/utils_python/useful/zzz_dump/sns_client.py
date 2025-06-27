@@ -15,7 +15,7 @@ class SnsWrapper:
     def __init__(self):
         self.__sns_client = sns_client
 
-    def publish(self, target: str, request: BaseModel) -> str:
+    def publish(self, topic_arn: str, request: BaseModel) -> str:
         """
         Publishes the request to the SNS topic with the target arn.
         Request must be a Pydantic model which will be serialized to the message.
@@ -24,15 +24,15 @@ class SnsWrapper:
         """
         try:
             response = self.__sns_client.publish(
-                TargetArn=target,
+                TargetArn=topic_arn,
                 Message=json.dumps({"default": request.model_dump_json()}),
                 MessageStructure="json",
             )
         except Exception:
-            logger.exception(f"Couldn't publish message to topic arn: {target}")
+            logger.exception(f"Couldn't publish message to topic arn: {topic_arn}")
             raise
         else:
             logger.info(
-                f"Published message {response['MessageId']} to topic arn: {target}"
+                f"Published message {response['MessageId']} to topic arn: {topic_arn}"
             )
             return response["MessageId"]
