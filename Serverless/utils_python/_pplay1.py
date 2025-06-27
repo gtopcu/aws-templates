@@ -566,6 +566,8 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 # def not_nasty(val=None):
 #     val = [] if val is None else val
 
+# float('inf')
+
 # import random
 # import string
 # random_str = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10))
