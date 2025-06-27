@@ -604,6 +604,8 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 # -------------------------------------------------------------------------------------------------
 
 # from pydantic import BaseModel, ConfigDict, Field, ValidationError
+# cls.model_fields.get("id").get_default()
+# typename: str = Field("DataSource", alias="__typename")) # must be serialised as __typename for graphql
 
 # from decimal import Decimal, getcontext, setcontext, ExtendedContext, InvalidOperation, DivisionByZero
 # setcontext(ExtendedContext)
