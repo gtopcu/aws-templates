@@ -454,11 +454,15 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 # MODE = Literal['r', 'rb', 'w', 'wb']
 # SQL = LiteralString('SELECT * FROM students')
 # output: Annotated[list, my_func]
+
 # my_type: type = dict[str, Any]
 # my_type: Type = int
 # my_type: NewType = set[float] 
 # my_type: TypeAlias = str
 # my_type: TypeVar = list[int]
+
+# from typing import get_args
+# get_args(dict[str, int]) -> (str, int) 
 
 # T = TypeVar("T", bound="MyClass")
 # from numbers import Number

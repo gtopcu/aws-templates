@@ -41,3 +41,17 @@ class S3Utils:
                 Body=cached_data,  
                 ContentType="application/json",
             )
+
+def s3_stream(bucket_name: str, bucket_key: str):
+    from aws_lambda_powertools.utilities.streaming import S3Object
+    from aws_lambda_powertools.utilities.streaming.transformations import CsvTransform
+    
+    s3_obj = S3Object(bucket=bucket_name, key=bucket_key, is_csv=True, is_gzip=True) # streamable S3 object
+    # line: bytes = s3_obj.readline()
+    # print(line)
+
+    # csv_reader = s3_obj.transform(CsvTransform(encoding="utf-8-sig"), in_place=True)
+    csv_reader = s3_obj.transform(CsvTransform(encoding="utf-8", newline="\r\n"))
+    for row in csv_reader:
+        print(row)
+    
