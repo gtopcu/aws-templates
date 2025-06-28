@@ -16,7 +16,7 @@ Lambda - /aws/lambda/
 # Latest logs
 fields @timestamp, @message, @logStream, @log
 | sort @timestamp desc
-| limit 10000
+| limit 1000
 
 # Filter
 filter @requestId = "7e5d596f-3b37-4801-9cae-809675ee1b66"
@@ -28,6 +28,12 @@ fields @timestamp, @message
     | sort @timestamp desc
     | limit 1000
 
+# Filter slowest by ms
+filter @type = "REPORT"
+| fields @requestId, @billedDuration
+| filter @billedDuration > 1000
+| sort by @billedDuration desc
+
 # GroupBy DurationInMS
 filter type = "platform.report" or @type = "REPORT"
 | fields @timestamp as Timestamp, coalesce(@requestId, record.requestId) as RequestId, @logStream as LogStream, coalesce(@duration, record.metrics.durationMs) as DurationInMS, coalesce(@billedDuration, record.metrics.billedDurationMs) as BilledDurationInMS, coalesce(@memorySize/1000000, record.metrics.memorySizeMB) as MemorySetInMB, coalesce(@maxMemoryUsed/1000000, record.metrics.maxMemoryUsedMB) as MemoryUsedInMB
@@ -37,11 +43,6 @@ filter type = "platform.report" or @type = "REPORT"
 # Durations in 5 min intervals
 filter @type = "REPORT"
 | stats avg(@duration), max(@duration), min(@duration) by bin(5m)
-
-# Most expensive calls
-filter @type = "REPORT"
-| fields @requestId, @billedDuration
-| sort by @billedDuration desc
 
 # Overprovisioned memory
 filter @type = "REPORT"
@@ -57,8 +58,9 @@ provisionedMemoryMB - maxMemoryUsedMB as overProvisionedMB
 AppSync - /aws/appsync/
 --------------------------------------------------------------------------------------------------------------
 
-# Top10 by latency
+# Slowest API calls
 fields resolverArn, duration
 | filter logType = "Tracing"
+| filter @billedDuration > 1000
 | sort duration desc
-| limit 10
+| limit 100
