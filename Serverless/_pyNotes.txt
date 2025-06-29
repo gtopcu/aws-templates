@@ -393,6 +393,7 @@ poetry build-lambda
 "python.defaultInterpreterPath": "/opt/homebrew/bin/python3.12",
 
 
+
 ---------------------------------------------------------------------------------------------------------------
 Profiling
 https://ohadravid.github.io/posts/2023-03-rusty-python/
