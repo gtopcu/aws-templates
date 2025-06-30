@@ -62,6 +62,7 @@ import matplotlib.pyplot as plt
 # plt.show()
 
 # print(np.array((2, 2), dtype=np.int64))
+# np.nan
 # np.empty(2, 2)
 # np.zeros((2,2), np.int32)
 # np.ones((3, 3), np.float32)   # 3 x 3 matrix consisting of 1s with float32 data type
@@ -98,46 +99,6 @@ import matplotlib.pyplot as plt
 # print(np.median(speed))
 # print(stats.mode(speed))
 
-
-# ----------------------------------------------------------------------------------------------------
-# Pandas - Series
-# print(pd.__version__)
-
-# series = pd.Series(np.random.randn(4), name="PD Series")
-# series.index = ["2020", "2021", "2022", "2023"]
-# print(series["2020"])
-# series["2020"] = 0.09012
-# print("2020" in series)
-# print(series)
-# print(series.abs())
-# print(series * 100)
-# print(series.describe())
-# series.dtype 
-# series.dtypes
-# series.items
-# series.keys
-# series.values
-# series.at
-# series.loc 
-# series.iloc
-# series.array
-# series.count
-# series.is_monotonic_increasing
-
-# series.copy()
-# series.add()
-# series.any()
-# series.mean()
-# series.median()
-# series.searchsorted()
-# series.to_excel("series.xlsx")
-# series.to_csv("series.csv")
-# series.to_numpy()
-# series.to_sql()
-# series.to_json()
-# series.to_numpy()
-# series.to_frame()
-# series.to_dict()
 
 # ------------------------------------------------------------------------------------------------
 # Pandas - DataFrame
@@ -177,23 +138,26 @@ import matplotlib.pyplot as plt
 # df.set_index("id")["title"].to_dict()
 # df["columnName"] | df.columnName
 # df["D"] = df["A"] * 2 / df["B"]
-# df["create_date"] = dt.datetime.now()
+# df["create_date"] = datetime.now()
 # df["salary"] = df["salary"] + 1_000_000
-# df["salary"] = df["salary"].apply(lambda x: x * 2)
+# df['country'].isin([np.nan,'',' '])]
 # df[2:4]               # rows 2:4
-# df["genre"]           # genre column
 # df[["A", "B"]]        # columns A and B
 # len(df.ids.unique())       # no of unique items
-# X = df.drop(columns=["genre"]) # drop column and return the rest, does not modify original
-# X = df.dropna()       # drop missing values
+# df.rename(columns={'country': 'country_code'}, inplace=True)
+# df = df.drop(columns=["genre"]) # drop column and return the rest, does not modify original
+# df = df.dropna()       # drop missing values, does not modify original
 # df = df.sort_values(by="A", ascending=False)
 # df.sort_index(axis=1, ascending=False, inplace=True)
+
+# df["row"] = df["row"].apply(lambda x: x * 2)
+# df.apply(lambda row: row["A"] * 2, axis=1)
+# df.map()
 
 # df.all() df.any() df.median() df.max() df.min() df.count() df.abs() df.map(), df.first()
 # df.keys() df.values() df.items() df.assign() df.reset_index()
 # df.filter() | df.select()
 # df.agg(["min", "max", "mean"])["A"].values
-# df.apply(lambda row: row["A"] * 2, axis=1)
 
 # for idx, row in df.iterrows():
 # df.at[0, "A"] = 0
@@ -247,3 +211,43 @@ import matplotlib.pyplot as plt
 # df.groupby(["emp_no", "name"])["salary"].max().reset_index()
 # df
 
+
+# ----------------------------------------------------------------------------------------------------
+# Pandas - Series
+# print(pd.__version__)
+
+# series = pd.Series(np.random.randn(4), name="PD Series")
+# series.index = ["2020", "2021", "2022", "2023"]
+# print(series["2020"])
+# series["2020"] = 0.09012
+# print("2020" in series)
+# print(series)
+# print(series.abs())
+# print(series * 100)
+# print(series.describe())
+# series.dtype 
+# series.dtypes
+# series.items
+# series.keys
+# series.values
+# series.at
+# series.loc 
+# series.iloc
+# series.array
+# series.count
+# series.is_monotonic_increasing
+
+# series.copy()
+# series.add()
+# series.any()
+# series.mean()
+# series.median()
+# series.searchsorted()
+# series.to_excel("series.xlsx")
+# series.to_csv("series.csv")
+# series.to_numpy()
+# series.to_sql()
+# series.to_json()
+# series.to_numpy()
+# series.to_frame()
+# series.to_dict()
