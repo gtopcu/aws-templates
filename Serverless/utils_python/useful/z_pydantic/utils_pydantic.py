@@ -42,13 +42,13 @@ https://pydantic.dev/articles/lambda-intro
 
 from datetime import datetime, timezone
 import time
-from typing import Any, Optional, TypedDict, Self
+from typing import Self, Any, Optional, TypedDict
 # from typing import Dict, List, Tuple
 from typing import Literal, Annotated
 from annotated_types import Gt, Ge, Le, Lt
 # from typing_extensions import Annotated, Gt, Ge, Le, Lt
 from uuid import uuid4, UUID
-from enum import auto, IntFlag
+from enum import StrEnum, IntFlag, auto
 import re
 
 from pydantic import (
@@ -127,6 +127,7 @@ from pydantic import (
 # ----------------------------------------------------------------------------------------------------
 
 class Person(BaseModel):
+    # typename: str = Field("DataSource", alias="__typename")) # must be serialised as __typename for graphql
     my: ellipsis = ... # type is EllipsisType, and the singleton value is Ellipsis
     required_ellipsis: str = Field(..., description="For internal use only")
     id: str = Field(min_length=1, max_length=50, description="Employee ID")
@@ -173,17 +174,17 @@ class Person(BaseModel):
     # def serialize_money(self, money: Decimal) -> str:
     #     return str(money)
 
-
 try: 
-    my_data = Person(id="1", name="John", age=30, email="john@example.com")# , url_alias="example.com") 
-    print(my_data.model_dump_json(exclude_none=True)) # https://github.com/pydantic/pydantic/issues/8006
-    # my_data.model_dump()
-    my_data.model_dump(mode="json") # or python
-    # MyData.model_validate_json()
-    # MyData.model_validate_strings()
-    # MyData.model_validate()
-    # MyData.model_construct() - no validation
+    my_model = Person(id="1", name="John", age=30, email="john@example.com")# , url_alias="example.com") 
+    # print(my_model.model_dump_json(exclude_none=True)) # https://github.com/pydantic/pydantic/issues/8006
+    my_model.model_dump(mode="json", exclude_none=True, by_alias=True) # or python
+    # copy = my_model.model_copy()
+    # Person.model_validate_json()
+    # Person.model_validate_strings()
+    # Person.model_validate()
+    # Person.model_construct() - no validation
     # my_data.model_rebuild()
+    # my_model.model_fields.get("id").get_default()
     # devtools.debug(my_model)
 
 except ValidationError as e:
