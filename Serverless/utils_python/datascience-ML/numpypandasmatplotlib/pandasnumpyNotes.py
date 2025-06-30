@@ -113,9 +113,10 @@ import matplotlib.pyplot as plt
 # data:list[str] = requests.get("http://data.csv").content.decode().split("\n")
 
 df = pd.read_csv("data.csv", sep=';')
-# df = pd.read_csv("data.csv", index_col = 0, parse_dates=True, delimiter=" ",  sep=';')
+# df = pd.read_csv("data.csv", index_col=0, parse_dates=True, delimiter=" ",  sep=';')
 # pd.read_clipboard | pd.read_excel | pd.read_json| pd.read_parquet| pd.read_pickle | pd.read_sql | pd.read_hdf
 # pd.to_csv() | pd.to_numpy| to_clipboard | pd.to_excel | pd.to_json | pd.to_parquet | pd.to_pickle | pd.to_sql | pd.to_hdf
+# df.to_csv(output_file_path, index=False)
 
 # df = pd.DataFrame(np.random.randn(4, 3), columns=["A", "B", "C"], index=["a", "b", "c", "d"])
 # df = pd.DateFrame(iterable)
@@ -129,16 +130,19 @@ df = pd.read_csv("data.csv", sep=';')
 # df.columns = ["column1", "column2"]
 
 # df.describe()
-# df.set_index("id", inplace=True)
 # df.show()
 # df.head(2)
 # df.tail(2)
-# df.set_index("id")["title"].to_dict()
+# df.set_index("id", inplace=True)
+
+# for idx, row in df.iterrows():
+
 # df["columnName"] | df.columnName
 # df["D"] = df["A"] * 2 / df["B"]
 # df["create_date"] = datetime.now()
 # df["salary"] = df["salary"] + 1_000_000
 # df['country'].isin([np.nan,'',' '])]
+# ["title"].to_dict()
 # df[2:4]               # rows 2:4
 # df["start_date"].astype(str)
 # df[["A", "B"]]        # columns A and B
@@ -159,7 +163,6 @@ df = pd.read_csv("data.csv", sep=';')
 # df.filter() | df.select()
 # df.agg(["min", "max", "mean"])["A"].values
 
-# for idx, row in df.iterrows():
 # df.at[0, "A"] = 0
 # df.iloc[0]          # First row
 # df.iloc[0:2]        # first two rows
