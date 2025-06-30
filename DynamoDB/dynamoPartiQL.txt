@@ -5,7 +5,10 @@ WHERE "PK" = 'ConversionFactor'
   AND begins_with("SK", 'EMPLOYEE_COMMUTING_LAND')
   AND scope = 1
 
-
-
-
-
+UPDATE "COMPANY_DATA"
+SET ownership_status = CASE 
+    WHEN ownership_status = '0' THEN 'A'
+    WHEN ownership_status = '1' THEN 'B'
+    ELSE 'C'
+END
+WHERE ownership_status IN ('0', '1') OR ownership_status IS NULL OR ownership_status NOT IN ('0', '1')
