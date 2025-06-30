@@ -14,7 +14,7 @@ from pydantic.alias_generators import to_camel, to_pascal, to_snake
 # Model.model_dump(mode='json', exclude_none=True)
 
 class ParentModel(BaseModel):
-    model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
+    model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True, extra='allow')
 
     @classmethod
     def get_field_names(cls, alias=False) -> list[str]:
@@ -22,7 +22,7 @@ class ParentModel(BaseModel):
 
 
 class ViewModel(BaseModel):
-    model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
+    model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True, extra='allow')
 
     @classmethod
     def get_field_names(cls, alias=False) -> list[str]:
