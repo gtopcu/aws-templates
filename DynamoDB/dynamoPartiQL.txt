@@ -12,3 +12,64 @@ SET ownership_status = CASE
     ELSE 'C'
 END
 WHERE ownership_status IN ('0', '1') OR ownership_status IS NULL OR ownership_status NOT IN ('0', '1')
+
+
+# Same thing using boto3
+import boto3
+from boto3.dynamodb.conditions import Key, Attr
+
+def update_boto3():
+    dynamodb = boto3.resource('dynamodb')
+    table = dynamodb.Table('COMPANY_DATA')
+
+    response = table.scan()
+    items = response['Items']
+    while 'LastEvaluatedKey' in response:
+        response = table.scan(ExclusiveStartKey=response['LastEvaluatedKey'])
+        items.extend(response['Items'])
+
+    for item in items:
+        current_status = item.get('ownership_status')
+
+        if current_status == '0':
+            new_status = 'A'
+        elif current_status == '1':
+            new_status = 'B'
+        else:
+            new_status = 'C'
+        
+        table.update_item(
+            Key={'id': item['id']},  
+            UpdateExpression='SET ownership_status = :new_status',
+            ExpressionAttributeValues={':new_status': new_status}
+        )
+        
+        print(f"Updated item {item['id']}: {current_status} -> {new_status}")
+
+
+# Same thing using boto3-PartiQL
+import boto3
+def update_partiql():
+    dynamodb = boto3.client('dynamodb')
+    
+    response = dynamodb.scan(TableName='COMPANY_DATA')
+    items = response['Items']
+    
+    for item in items:
+        key_value = item['id']['S']  
+        
+        # Update using PartiQL
+        dynamodb.execute_statement(
+            Statement="""
+                UPDATE "COMPANY_DATA" 
+                SET ownership_status = CASE 
+                    WHEN ownership_status = '0' THEN 'A'
+                    WHEN ownership_status = '1' THEN 'B'
+                    ELSE 'C'
+                END
+                WHERE id = ?
+            """,
+            Parameters=[{'S': key_value}]
+        )
+
+update_with_partiql()
