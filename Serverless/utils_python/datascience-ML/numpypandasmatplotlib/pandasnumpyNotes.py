@@ -112,7 +112,7 @@ import matplotlib.pyplot as plt
 
 # data:list[str] = requests.get("http://data.csv").content.decode().split("\n")
 
-# df = pd.read_csv("data.csv", sep=';')
+df = pd.read_csv("data.csv", sep=';')
 # df = pd.read_csv("data.csv", index_col = 0, parse_dates=True, delimiter=" ",  sep=';')
 # pd.read_clipboard | pd.read_excel | pd.read_json| pd.read_parquet| pd.read_pickle | pd.read_sql | pd.read_hdf
 # pd.to_csv() | pd.to_numpy| to_clipboard | pd.to_excel | pd.to_json | pd.to_parquet | pd.to_pickle | pd.to_sql | pd.to_hdf
@@ -131,8 +131,6 @@ import matplotlib.pyplot as plt
 # df.describe()
 # df.set_index("id", inplace=True)
 # df.show()
-
-# df.show()
 # df.head(2)
 # df.tail(2)
 # df.set_index("id")["title"].to_dict()
@@ -142,6 +140,7 @@ import matplotlib.pyplot as plt
 # df["salary"] = df["salary"] + 1_000_000
 # df['country'].isin([np.nan,'',' '])]
 # df[2:4]               # rows 2:4
+# df["start_date"].astype(str)
 # df[["A", "B"]]        # columns A and B
 # len(df.ids.unique())       # no of unique items
 # df.rename(columns={'country': 'country_code'}, inplace=True)
@@ -149,6 +148,7 @@ import matplotlib.pyplot as plt
 # df = df.dropna()       # drop missing values, does not modify original
 # df = df.sort_values(by="A", ascending=False)
 # df.sort_index(axis=1, ascending=False, inplace=True)
+# df.to_csv(output_file_path, index=False)
 
 # df["row"] = df["row"].apply(lambda x: x * 2)
 # df.apply(lambda row: row["A"] * 2, axis=1)
