@@ -14,16 +14,18 @@ from pydantic.alias_generators import to_camel, to_pascal, to_snake
 # Model.model_dump(mode='json', exclude_none=True)
 
 class ParentModel(BaseModel):
-    model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True, extra='allow')
+    model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True, extra='ignore') # ignore, forbid
 
     @classmethod
     def get_field_names(cls, alias=False) -> list[str]:
         return list(cls.model_json_schema(alias).get("properties").keys())
 
 
-class ViewModel(BaseModel):
-    model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True, extra='allow')
+class MyModel(ParentModel):
+    name: str
+    company_id: str = Field(frozen=True)
 
-    @classmethod
-    def get_field_names(cls, alias=False) -> list[str]:
-        return list(cls.model_json_schema(alias).get("properties").keys())
+if __name__ == "__main__":
+    kwargs = { "name":"gokhan", "age": 40 }
+    model = MyModel(**kwargs)
+    print(model)
