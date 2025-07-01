@@ -14,11 +14,11 @@ from pydantic.alias_generators import to_camel, to_pascal, to_snake
 # Model.model_dump(mode='json', exclude_none=True)
 
 class ParentModel(BaseModel):
-    model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True, extra='ignore') # default forbid, allow, ignore
+    model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True, extra='allow') # default forbid, allow, ignore
 
     @classmethod
     def get_field_names(cls, alias=False) -> list[str]:
-        return list(cls.model_json_schema(alias).get("properties").keys())
+        return list(cls.model_json_schema(by_alias=alias).get("properties").keys())
 
 
 class MyModel(ParentModel):
