@@ -7,12 +7,13 @@ scalar AWSUUID
 
 Data: [ItemData!]!
 
-------------------------------------------------------------------------------------------------------------------------------------------
-Type vs Input
-------------------------------------------------------------------------------------------------------------------------------------------
-Types are used for data that flows out of your API (responses). Defines the structure of data returned by queries and mutations
-Inputs are used for data that flows into your API (arguments/variables)
+type, input, enum, interface, union
 
+union Task = UploadTask | VerificationTask
+type MyTask extends MyInterface
+
+Types:  Used for data that flows out of your API (responses). Defines the structure of data returned by queries and mutations
+Inputs: Used for data that flows into your API (arguments/variables)
 
 ------------------------------------------------------------------------------------------------------------------------------------------
 Types
@@ -62,6 +63,7 @@ Inputs
 ------------------------------------------------------------------------------------------------------------------------------------------
 
 # Inputs CANNOT have circular references
+
 # Inputs can only have:
 input CreateUserInput {
     name: String!          # Scalars only
