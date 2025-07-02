@@ -17,7 +17,7 @@ import psycopg2.extras
 #     user="XXXXXXXX",
 #     password="XXXXXXXX")
 
-# engine = create_engine(f"postgresql+psycopg2://{user}:{password}@{host}:{port}/{dbname}")
+# engine = create_engine(f"postgresql+psycopg://postgres:PWD@localhost:5432/my_database")
 with psycopg2.connect(host="localhost", database="XXX", user="XXX", password="XXX", port=5432) as conn:
     with conn.cursor() as cur:
         cur.execute("""SELECT * FROM user""")
