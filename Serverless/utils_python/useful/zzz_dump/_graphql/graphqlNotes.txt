@@ -16,9 +16,7 @@ Types:  Used for data that flows out of your API (responses). Defines the struct
 Inputs: Used for data that flows into your API (arguments/variables)
 
 ------------------------------------------------------------------------------------------------------------------------------------------
-Types
-
-# Types can reference each other circularly
+Type - can have circular dependencies
 
 enum NotificationType {
   PROCESSING_COMPLETE
@@ -59,10 +57,7 @@ query GetUser($userId: ID!) {
 }
 
 ------------------------------------------------------------------------------------------------------------------------------------------
-Inputs
-------------------------------------------------------------------------------------------------------------------------------------------
-
-# Inputs CANNOT have circular references
+Input - CANNOT have circular references
 
 # Inputs can only have:
 input CreateUserInput {
