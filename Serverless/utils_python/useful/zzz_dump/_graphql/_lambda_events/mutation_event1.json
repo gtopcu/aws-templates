@@ -1,0 +1,47 @@
+{
+  "typeName": "Mutation",
+  "fieldName": "addCompanyExpenseFile",
+  "arguments": {
+    "companyId": "376d41ab-bafa-4eab-a03f-19968da396e2",
+    "startDate": "2023-11-01",
+    "bucketName": "test-bucket",
+    "bucketKey": "eon_bill_2023NOV.pdf"
+  },
+  "selectionSetList": [
+  ],
+  "identity": {
+    "claims": {
+      "sub": "192879fc-a240-4bf1-ab5a-d6a00f3063f9",
+      "email_verified": true,
+      "iss": "https://cognito-idp.us-west-2.amazonaws.com/us-west-xxxxxxxxxxx",
+      "phone_number_verified": false,
+      "cognito:username": "gtopcu",
+      "aud": "7471s60os7h0uu77i1tk27sp9n",
+      "event_id": "bc334ed8-a938-4474-b644-9547e304e606",
+      "token_use": "id",
+      "auth_time": 1599154213,
+      "custom:company_name": "hukanege",
+      "custom:company_id": "1afe7d22-49eb-4d4d-94c7-5c8668356714",
+      "phone_number": "+19999999999",
+      "exp": 1599157813,
+      "iat": 1599154213,
+      "email": "gtopcu@gmail.com"
+    },
+    "defaultAuthStrategy": "ALLOW",
+    "groups": null,
+    "issuer": "https://cognito-idp.us-west-2.amazonaws.com/us-west-xxxxxxxxxxx",
+    "sourceIp": [
+      "1.1.1.1"
+    ],
+    "sub": "192879fc-a240-4bf1-ab5a-d6a00f3063f9",
+    "username": "jdoe"
+  },
+  "request": {
+    "headers": {
+      "x-amzn-trace-id": "Root=1-60488877-0b0c4e6727ab2a1c545babd0",
+      "x-forwarded-for": "127.0.0.1",
+      "cloudfront-viewer-country": "NL",
+      "x-api-key": ""
+    }
+  }
+}

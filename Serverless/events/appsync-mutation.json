@@ -25,7 +25,7 @@
         "accept-encoding": "gzip, deflate, br",
         "referer": "https://eu-west-1.console.aws.amazon.com/",
         "content-type": "application/json",
-        "x-api-key": "da2-vsqnxwyzgzf4nh6kvoaidtvs7y",
+        "x-api-key": "",
         "sec-fetch-mode": "cors",
         "x-amz-cf-id": "0kxqijFPsbGSWJ1u3Z_sUS4Wu2hRoG_2T77aJPuoh_Q4bXAB3x0a3g==",
         "x-amzn-trace-id": "Root=1-63fef2cf-6d566e9f4a35b99e6212388e",

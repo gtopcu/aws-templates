@@ -14,7 +14,7 @@
             "via": "2.0 9fce949f3749407c8e6a75087e168b47.cloudfront.net (CloudFront)",
             "cloudfront-forwarded-proto": "https",
             "origin": "https://eu-west-1.console.aws.amazon.com",
-            "x-api-key": "da1-c33ullkbkze3jg5hf5ddgcs4fq",
+            "x-api-key": "",
             "content-type": "application/json",
             "x-amzn-trace-id": "Root=1-606eb2f2-1babc433453a332c43fb4494",
             "x-amz-cf-id": "SJw16ZOPuMZMINx5Xcxa9pB84oMPSGCzNOfrbJLvd80sPa0waCXzYQ==",

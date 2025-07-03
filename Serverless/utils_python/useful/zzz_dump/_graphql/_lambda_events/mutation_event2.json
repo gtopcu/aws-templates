@@ -47,7 +47,7 @@
       "event_id": "bc334ed8-a938-4474-b644-9547e304e606",
       "token_use": "id",
       "auth_time": 1599154213,
-      "custom:company_name": "Muj's Dev House",
+      "custom:company_name": "hukanege",
       "custom:company_id": "1afe7d22-49eb-4d4d-94c7-5c8668356714",
       "phone_number": "+19999999999",
       "exp": 1599157813,
@@ -68,7 +68,7 @@
       "x-amzn-trace-id": "Root=1-60488877-0b0c4e6727ab2a1c545babd0",
       "x-forwarded-for": "127.0.0.1",
       "cloudfront-viewer-country": "NL",
-      "x-api-key": "da1-c33ullkbkze3jg5hf5ddgcs4fq"
+      "x-api-key": ""
     }
   }
 }
