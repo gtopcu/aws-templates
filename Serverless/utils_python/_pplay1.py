@@ -40,6 +40,15 @@ from enum import StrEnum, IntFlag, auto
 from itertools import chain, cycle, batched, repeat, combinations, permutations, pairwise, count, compress, accumulate, dropwhile, filterfalse
 from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispatch, singledispatchmethod
 
+# import sys
+# import pkg_resources
+# import requests
+
+# print(f"Using requests version: {requests.__version__}")
+# print(f"Requests location: {requests.__file__}")
+# installed_packages = [str(d) for d in pkg_resources.working_set] # # List all installed packages and their versions
+# print("Installed packages:", installed_packages)
+
 # print(eval("2*2"))
 # func = eval("lambda x: x**x")
 # result = func(2)
