@@ -1,0 +1,53 @@
+
+Layer Resolution Order
+When a Python library is present in multiple Lambda layers attached to the same function, AWS Lambda uses a specific resolution order to determine which version gets loaded:
+Lambda layers are processed in the order they appear in your function configuration, with later layers taking precedence over earlier ones. The resolution follows this hierarchy:
+
+- Function deployment package (highest priority)
+- Layers (in reverse order - last layer listed has highest priority among layers)
+- Runtime (lowest priority)
+
+Example - if your Lambda function has layers configured like this:
+layers = [
+    "arn:aws:lambda:region:account:layer:layer-a:1",  # Contains requests==2.25.1
+    "arn:aws:lambda:region:account:layer:layer-b:2",  # Contains requests==2.28.0
+    "arn:aws:lambda:region:account:layer:layer-c:3"   # Contains requests==2.30.0
+]
+
+The function will use requests==2.30.0 from layer-c because it's the last layer in the list
+
+File Path Resolution
+Each layer extracts to /opt in the Lambda execution environment. If multiple layers contain the same library, the files from later layers will overwrite files from earlier layers in the same path.
+
+
+Best Practices
+
+import sys
+import pkg_resources
+
+def lambda_handler(event, context):
+    # You can check which version is actually loaded
+    import requests
+    print(f"Using requests version: {requests.__version__}")
+    
+    # Or check the package location
+    print(f"Requests location: {requests.__file__}")
+    
+    # List all installed packages and their versions
+    installed_packages = [str(d) for d in pkg_resources.working_set]
+    print("Installed packages:", installed_packages)
+    
+    return {
+        'statusCode': 200,
+        'body': f'Using requests {requests.__version__}'
+    }
+    
+
+Recommendations
+
+- Avoid version conflicts by ensuring layers don't contain overlapping libraries with different versions
+- Use layer versioning strategically - put more specific/newer versions in layers that appear later in the list
+- Test thoroughly since the behavior might not always be intuitive
+- Consider using a single layer for related dependencies to avoid conflicts
+
+The key point is that the last layer listed wins when there are conflicts between layers.
