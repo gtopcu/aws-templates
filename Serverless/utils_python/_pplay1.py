@@ -34,20 +34,12 @@ from annotated_types import Gt, Ge, Le, Lt
 from typing import Protocol, runtime_checkable, get_protocol_members # Python 3.8
 from abc import ABC, abstractmethod
 
-from uuid import uuid4, UUID #str(uuid4())
+from uuid import uuid4, UUID # str(uuid4()) uuid.UUID(val)
 from enum import StrEnum, IntFlag, auto
 
 from itertools import chain, cycle, batched, repeat, combinations, permutations, pairwise, count, compress, accumulate, dropwhile, filterfalse
 from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispatch, singledispatchmethod
 
-# import sys
-# import pkg_resources
-# import requests
-
-# print(f"Using requests version: {requests.__version__}")
-# print(f"Requests location: {requests.__file__}")
-# installed_packages = [str(d) for d in pkg_resources.working_set] # # List all installed packages and their versions
-# print("Installed packages:", installed_packages)
 
 # print(eval("2*2"))
 # func = eval("lambda x: x**x")
@@ -73,6 +65,7 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 
 # print("================================")
 # print(__name__)         # "__main__"
+# print(__version__)      # requests.__version__
 # # print(__all__)        #  ("module1", "module2")
 # # print(__class__)      #  = <class '__main__.MyClass'>
 # print(__file__)         # d:\VSCode\aws-templates\Serverless\utils_python\_pplay.py
@@ -97,6 +90,12 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 # print(obj.__dict__)  # Output: {'name': 'Alice', 'age': 30}
 # obj.__dict__['name'] = "Bob" # Modifying attributes dynamically
 # print(obj.name)  # Output: Bob
+
+# print(f"Using requests version: {requests.__version__}")
+# print(f"Requests location: {requests.__file__}")
+# import pkg_resources
+# installed_packages = [str(d) for d in pkg_resources.working_set] # # List all installed packages and their versions
+# print("Installed packages:", installed_packages)
 
 # -------------------------------------------------------------------------------------------------
 

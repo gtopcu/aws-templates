@@ -1,0 +1,87 @@
+{
+  "arguments": {
+    "companyId": "31a2274f-50c9-44a9-be8b-d6cee28d435c",
+    "financialYearId": "71ba5c2a-9df2-4035-9e91-8e2cba0442d5"
+  },
+  "identity": {
+    "claims": {
+      "sub": "1556762e-2b50-4254-aa8e-75240cd98e0a",
+      "email_verified": true,
+      "iss": "https://cognito-idp.eu-west-2.amazonaws.com/eu-west-2_Y0F1OJgn8",
+      "cognito:username": "mujsso",
+      "origin_jti": "2689d2ad-6fa8-44ec-a7d1-ddc45af8b910",
+      "aud": "7rvh6u3mbau2do8ob52feh664v",
+      "event_id": "85b5c14a-4660-4e95-b040-c7a5f180d67d",
+      "token_use": "id",
+      "auth_time": 1702315265,
+      "custom:company_name": "hukanege",
+      "custom:company_id": "638e5be0-41d5-410b-8f47-3402b918a70d",
+      "exp": 1703479349,
+      "iat": 1703475749,
+      "jti": "a1fc7198-2f89-4b6f-ac09-6ec3de6eba6b",
+      "email": "gtopcu@gmail.com"
+    },
+    "defaultAuthStrategy": "ALLOW",
+    "groups": null,
+    "issuer": "https://cognito-idp.eu-west-2.amazonaws.com/eu-west-2_Y0F1OJgn8",
+    "sourceIp": [
+      "88.98.208.244"
+    ],
+    "sub": "1556762e-2b50-4254-aa8e-75240cd98e0a",
+    "username": "1556762e-2b50-4254-aa8e-75240cd98e0a"
+  },
+  "source": null,
+  "request": {
+    "headers": {
+      "x-forwarded-for": "88.98.208.244, 70.132.38.113",
+      "sec-ch-ua-mobile": "?0",
+      "cloudfront-viewer-country": "GB",
+      "cloudfront-is-tablet-viewer": "false",
+      "dnt": "1",
+      "x-amzn-requestid": "f6554d32-5a79-4256-aefe-863efa1a3b75",
+      "via": "2.0 07b994ddf00f39c9e5b18a963a695fd4.cloudfront.net (CloudFront)",
+      "cloudfront-forwarded-proto": "https",
+      "origin": "https://eu-west-2.console.aws.amazon.com",
+      "content-length": "1999",
+      "x-forwarded-proto": "https",
+      "accept-language": "en,en-GB;q=0.9,en-US;q=0.8",
+      "host": "tdndri4v3zf7veahecdhavi4dq.appsync-api.eu-west-2.amazonaws.com",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+      "cloudfront-is-mobile-viewer": "false",
+      "accept": "application/json, text/plain, */*",
+      "cloudfront-viewer-asn": "56478",
+      "cloudfront-is-smarttv-viewer": "false",
+      "x-amzn-appsync-is-vpce-request": "false",
+      "accept-encoding": "gzip, deflate, br",
+      "referer": "https://eu-west-2.console.aws.amazon.com/",
+      "x-amzn-remote-ip": "88.98.208.244",
+      "content-type": "application/json",
+      "sec-fetch-mode": "cors",
+      "x-amzn-trace-id": "Root=1-6588fcbc-0ea7fe105fe5a7a1438b2f80",
+      "x-amz-cf-id": "FrmKapYpU5HgjRYRsyzRIhDlFL0kB3qEtT_hjb3YjdQhMndAO1dLyQ==",
+      "authorization": "eyJraWQiOiJCVWpUSVJxU0s1TWs3dXZkOVoyVllZSmt1cDJZWlUwWk5KRlRaaHJacmE0PSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiIxNTU2NzYyZS0yYjUwLTQyNTQtYWE4ZS03NTI0MGNkOThlMGEiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiaXNzIjoiaHR0cHM6XC9cL2NvZ25pdG8taWRwLmV1LXdlc3QtMi5hbWF6b25hd3MuY29tXC9ldS13ZXN0LTJfWTBGMU9KZ244IiwiY29nbml0bzp1c2VybmFtZSI6IjE1NTY3NjJlLTJiNTAtNDI1NC1hYThlLTc1MjQwY2Q5OGUwYSIsIm9yaWdpbl9qdGkiOiIyNjg5ZDJhZC02ZmE4LTQ0ZWMtYTdkMS1kZGM0NWFmOGI5MTAiLCJhdWQiOiI3cnZoNnUzbWJhdTJkbzhvYjUyZmVoNjY0diIsImV2ZW50X2lkIjoiODViNWMxNGEtNDY2MC00ZTk1LWIwNDAtYzdhNWYxODBkNjdkIiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE3MDIzMTUyNjUsImN1c3RvbTpDb21wYW55SWQiOiJNdWoncyBEZXYgSG91c2UiLCJleHAiOjE3MDM0NzkzNDksImlhdCI6MTcwMzQ3NTc0OSwianRpIjoiYTFmYzcxOTgtMmY4OS00YjZmLWFjMDktNmVjM2RlNmViYTZiIiwiZW1haWwiOiJtdWpAc2Vjci50ZWNoIn0.busLDkXLXk-9b7rVnPtbS5y-4RJlYZkzk0vDHiU0lSDLTtQOmhIvxiKS5KxaRkMfgb-e_2ou0wbjTJ_OXNWGsJWvqZ-k4bLTRnB9unpqZ2eKITzLc1142VsTgwnT6tgtppfgLb45Cs8I3z00CfX64BZGM1MnSMj6j91Cotnw4Tkd-qn2lWx6yx9JbgojRAsO7naTwgchTqox5VuKe9iUIG54v2ePCxMSMDofYMsWTPWEO5mEic5I7WuHzUEnAmgzA8hoFTyYlC0H1wQVugyUfEa7IKiEr8LdooTWo4fgcKW408hxa2E4gxUdV8-tS1ZGQCqUvy8lUp2GtD6qAoQZ3A",
+      "sec-fetch-dest": "empty",
+      "x-amz-user-agent": "AWS-Console-AppSync/",
+      "sec-ch-ua-platform": "\"macOS\"",
+      "cloudfront-is-desktop-viewer": "true",
+      "sec-fetch-site": "cross-site",
+      "sec-ch-ua": "\"Not_A Brand\";v=\"8\", \"Chromium\";v=\"120\", \"Google Chrome\";v=\"120\"",
+      "x-forwarded-port": "443"
+    },
+    "domainName": null
+  },
+  "prev": null,
+  "info": {
+    "selectionSetList": [
+      "companyTasks",
+      "facilityTasks",
+      "facilityTasks/facility",
+      "facilityTasks/tasks"
+    ],
+    "selectionSetGraphQL": "{\n  companyTasks {\n    __typename\n    ... on UploadTaskDetails {\n      partiallyProcessed\n      uploadTaskType\n      submittedData {\n        sourceId\n        status\n        startDate\n        sourceType\n        endDate\n        creationDatetime\n      }\n      gapsInData {\n        startDate\n        endDate\n      }\n    }\n  }\n  facilityTasks {\n    facility\n    tasks {\n      ... on UploadTaskDetails {\n        partiallyProcessed\n        uploadTaskType\n        submittedData {\n          sourceId\n          status\n          startDate\n          sourceType\n          endDate\n          creationDatetime\n        }\n        gapsInData {\n          startDate\n          endDate\n        }\n      }\n    }\n  }\n}",
+    "fieldName": "getCustomerDataTasks",
+    "parentTypeName": "Query",
+    "variables": {}
+  },
+  "stash": {}
+}
