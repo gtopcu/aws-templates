@@ -459,7 +459,6 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 #     return val or None
 
 # for _ in range(10,0,-1)
-
 # def func(self, _) -> Iterable[str]: ...
 
 # my_lambda = lambda x: x * x
