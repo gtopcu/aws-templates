@@ -74,7 +74,7 @@ https://docs.aws.amazon.com/cli/latest/userguide/cli-services-s3-commands.html
 aws s3 ls
 aws s3 mb s3://mybucket
 aws s3 rb s3://mybucket
-aws s3 rm s3://mybucket" --recursive -> Remove all objects from the bucket(does not delete older versions/delete markers)
+aws s3 rm s3://mybucket --recursive -> Remove all objects from the bucket(does not delete older versions/delete markers)
 
 (s3 cp & sync -> multipart, s3api copy is not multipart)
 aws s3 cp <file> s3://<s3path> --storage-class [CLASS] 
