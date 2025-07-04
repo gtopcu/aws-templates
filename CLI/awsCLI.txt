@@ -72,8 +72,9 @@ https://docs.aws.amazon.com/cli/latest/userguide/cli-services-s3-commands.html
 ------------------------------------------------------------------------------------
 
 aws s3 ls
-aws s3 mb s3://gokhantopcu-clitest
-aws s3 rb s3://gokhantopcu-clitest
+aws s3 mb s3://mybucket
+aws s3 rb s3://mybucket
+aws s3 rm s3://mybucket" --recursive -> Remove all objects from the bucket(does not delete older versions/delete markers)
 
 (s3 cp & sync -> multipart, s3api copy is not multipart)
 aws s3 cp <file> s3://<s3path> --storage-class [CLASS] 
@@ -152,6 +153,17 @@ aws s3api upload-part \
 
 curl -X GET https://[bucketname].s3.amazonaws.com
 curl -X DELETE https://[bucketname].s3-ap-southeast-2.amazonaws.com
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+# List empty buckets
+for bucket in $(aws s3 ls | awk '{print $3}'); do
+  count=$(aws s3 ls s3://$bucket --recursive | wc -l)
+  if [ $count -eq 0 ]; then
+    echo "$bucket"
+  fi
+done
 
 
 ------------------------------------------------------------------------------------

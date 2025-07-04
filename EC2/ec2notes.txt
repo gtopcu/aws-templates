@@ -1,12 +1,6 @@
 
 
-user-data
-meta-data
-192.164.192.164
-
-
 Adding a KeyPair to an existing instance:
-
 1. If you don't already have a key pair, create one(.pem)
 2. Connect to your instance using your current access method (SSH or EC2 Instance Connect)
 3. Add the new public key to the authorized_keys file:
@@ -15,3 +9,21 @@ Adding a KeyPair to an existing instance:
     Add the public key on a new line
     Save and exit (Ctrl+O, Enter, Ctrl+X)
 4. Test the new key by connecting with it in a new session
+
+
+------------------------------------------------------------------------------------
+EC2:
+https://docs.aws.amazon.com/cli/latest/userguide/cli-services-ec2.html
+------------------------------------------------------------------------------------
+
+aws ec2 describe-instances
+aws ec2 stop-instances --instance-ids i-0744af96f9e05dfe5
+aws ec2 create-snapshot
+aws ec2 run-instances --cli-input-json file://ec2runinst.json
+
+Display EC2 user & metada:
+------------------------------------------------------------
+curl http://169.254.169.254/latest/user-data
+curl http://169.254.169.254/latest/meta-data
+curl http://169.254.169.254/latest/meta-data/local-hostname
+curl http://169.254.169.254/latest/meta-data/public-ipv4
