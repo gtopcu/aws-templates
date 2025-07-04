@@ -460,6 +460,7 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 
 # for _ in range(10,0,-1)
 # def func(self, _) -> Iterable[str]: ...
+# name, _, age = ("John", "dont need this", 30)
 
 # my_lambda = lambda x: x * x
 # PORT: Final[int] = 80080
