@@ -9,6 +9,9 @@
 # from aws_lambda_powertools.utilities.typing import LambdaContext
 # from aws_lambda_powertools.logging import correlation_paths
 
+# Appsync expects ISO 5601 format
+# aws_datetime appends "Z" automatically so use it instead of datetime.isoformat(timezone.utc) + "Z"
+# datetime.isoformat() may not always append "Z" at the end for UTC timezone
 from aws_lambda_powertools.utilities.data_classes.appsync.scalar_types_utils import (
     aws_datetime,
     aws_date,

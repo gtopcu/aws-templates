@@ -458,6 +458,10 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 # def opt_func(val: int | None = None) -> int | None:
 #     return val or None
 
+# for _ in range(10,0,-1)
+
+# def func(self, _) -> Iterable[str]: ...
+
 # my_lambda = lambda x: x * x
 # PORT: Final[int] = 80080
 # MODE = Literal['r', 'rb', 'w', 'wb']

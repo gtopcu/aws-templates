@@ -10,6 +10,7 @@
 # just like using sqlite3
 import psycopg2
 import psycopg2.extras
+from psycopg.rows import dict_row
 
 # conn = psycopg2.connect(
 #     host="localhost",
@@ -18,7 +19,7 @@ import psycopg2.extras
 #     password="XXXXXXXX")
 
 # engine = create_engine(f"postgresql+psycopg://postgres:PWD@localhost:5432/my_database")
-with psycopg2.connect(host="localhost", database="XXX", user="XXX", password="XXX", port=5432) as conn:
+with psycopg2.connect(host="localhost", database="XXX", user="XXX", password="XXX", port=5432, connect_timeout=10, row_factory=dict_row) as conn:
     with conn.cursor() as cur:
         cur.execute("""SELECT * FROM user""")
         records = cur.fetchall()
