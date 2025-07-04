@@ -1,7 +1,7 @@
 # https://docs.powertools.aws.dev/lambda/python/2.29.1/core/event_handler/appsync/
 
 
-# Appsync expects ISO 5601 format
+# Appsync expects to return dates in ISO 5601 format
 # aws_datetime appends "Z" automatically so use it instead of datetime.isoformat(timezone.utc) + "Z"
 # datetime.isoformat() may not always append "Z" at the end for UTC timezone
 from aws_lambda_powertools.utilities.data_classes.appsync.scalar_types_utils import (
