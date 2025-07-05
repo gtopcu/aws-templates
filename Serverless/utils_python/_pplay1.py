@@ -184,9 +184,9 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 # os.environ.setdefault("POSTGRE_PORT", 5432)
 
 # os.path.basename(__file__)  # _pplay1.py
+# os.path.dirname(__file__)   # D:\VSCode\aws-templates\Serverless\utils_python
 # os.path.abspath(__file__)   # D:\VSCode\aws-templates\Serverless\utils_python\_pplay1.py
 # os.path.realpath(__file__)  # D:\VSCode\aws-templates\Serverless\utils_python\_pplay1.py
-# os.path.dirname(__file__)   # D:\VSCode\aws-templates\Serverless\utils_python
 
 # current_dir = os.path.dirname(os.path.abspath(__file__))
 # file_path = os.path.join(current_dir, filename)
