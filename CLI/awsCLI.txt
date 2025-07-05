@@ -85,16 +85,15 @@ aws s3 mv s3://source_folder/ s3://destination_folder/ --recursive
 aws s3 cp s3://source_folder/ s3://destination_folder/ --recursive
 aws s3 rm s3://source_folder --recursive
 
-
 sync:
 - Only copy new or modified files
 - Skip files that already exist and haven't changed
 - Recursively handle all subdirectories
 - Automatically handle large files with multipart uploads
 
-aws s3 sync . s3://<s3path> --delete 
-aws s3 sync --exclude="*" --include="[0-9]*.jpg" . s3://<s3path>
-aws s3 sync . s3://your-bucket-name/optional-prefix
+aws s3 sync . s3://mybucket/myfolder
+aws s3 sync . s3://mybucket/myfolder --delete 
+aws s3 sync . s3://mybucket/myfolder --exclude="*" --include="[0-9]*.jpg"
 
 --delete: Delete files in the destination that don't exist in the source
 --exclude "*.tmp": Exclude files matching a pattern
