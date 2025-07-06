@@ -14,14 +14,11 @@ def main() -> None:
     
     reduce(lambda x, y: x + y, range(10))
 
-@cache
+@cache #cachetools provides TTL too
 # @lru_cache(maxsize=128, typed=False)
 def factorial(n):
     return n * factorial(n-1) if n else 1
 
-@cached_property
-def cached_prop():
-    return 10 * 10
 
 @dataclass
 class Dataclass:
@@ -30,6 +27,13 @@ class Dataclass:
     def calculate(self):
         return self.id * 10
 
+# @functools.wraps copies these from the original function:
+# __name__ - function name
+# __doc__ - docstring
+# __module__ - module name
+# __qualname__ - qualified name
+# __annotations__ - type hints
+# __wrapped__ - reference to the original function
 def func_wrapper(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
