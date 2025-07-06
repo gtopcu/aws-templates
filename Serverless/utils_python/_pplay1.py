@@ -69,13 +69,13 @@ from numbers import Number # isinstance(x, Number)
 # print("================================")
 # print(__name__)         # "__main__", "module/func name(inside func)"
 # print(__version__)      # requests.__version__
-# # print(__class__)      #  = <class '__main__.MyClass'>
+# print(__class__)      #  = <class '__main__.MyClass'>
 # print(__file__)         # d:\VSCode\aws-templates\Serverless\utils_python\_pplay.py
 # print(__package__)      # None
 # print(__doc__)          # """module/func docstring"""
 # print(__dict__)         # = {'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <_frozen_importlib_external.SourceFileLoader object at 0x7f8c4c2d3a90>, '__spec__': ModuleSpec(name='aws-templates.Serverless.utils_python._pplay', loader=<_frozen_importlib_external.SourceFileLoader object at 0x7f8c4c2d3a90>, origin='aws-templates/Serverless/utils_python/_pplay.py'), '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, '__file__': 'aws-templates/Serverless/utils_python/_pplay.py', '__cached__': None}
 # print(__members__)      # Enum members
-# # print(__all__)        #  ("module1", "module2")
+# print(__all__)        #  ("module1", "module2")
 # print(__annotations__)  # {}
 # print(__builtins__)     #  = <module 'builtins' (built-in)>
 # print(__cached__)       #  None
@@ -353,8 +353,8 @@ from numbers import Number # isinstance(x, Number)
 
 # print("{}".format(my_string))
 # print("SELECT * FROM {table_name}".format(table_name=my_table))
-# print("PK_%s" % ID)
-# print(f"PK {my_string}")
+# print("PK_%s" % cust_id)
+# print(f"PK: {cust_id}")
 # "Elapsed Time: {total_time:.2f}s"
 
 # amount: str = 10_000_000
@@ -627,7 +627,7 @@ from numbers import Number # isinstance(x, Number)
 # cls.model_fields.get("id").get_default()
 # typename: str = Field("DataSource", alias="__typename")) # must be serialised as __typename for graphql
 
-# from decimal import Decimal, getcontext, setcontext, ExtendedContext, InvalidOperation, DivisionByZero
+# from decimal import Decimal, getcontext, setcontext
 # setcontext(ExtendedContext)
 # getcontext().prec = 3
 # my_decimal = Decimal(1)
@@ -642,9 +642,11 @@ from numbers import Number # isinstance(x, Number)
 
 # -------------------------------------------------------------------------------------------------
 
-# kwargs = {}
-# if "LastEvaluatedKey" in response:
+# kwargs = { "Limit": 10 }
+# while "LastEvaluatedKey" in response:
+#     table.scan(**kwargs)
 #     kwargs.update({"ExclusiveStartKey": response["LastEvaluatedKey"]})
+#     kwargs[ExclusiveStartKey] = response["LastEvaluatedKey"]
 
 # import boto3
 # from botocore.exceptions import ClientError, ConditionCheckFailedException
