@@ -30,21 +30,32 @@ type Mutation {
         isActive: Boolean
     ) @aws_cognito_user_pools @aws_api_key
 }
-
 type Subscription @aws_api_key @aws_cognito_user_pools {
 	newNotification(companyId: String!, notificationType: NotificationType): Notification
 		@aws_subscribe(mutations: ["createNotification"])
 	onConversationEvents(conversationId: ID!): ConversationEvent
 		@aws_subscribe(mutations: ["aiPublishMessage"])
-	onItemProcessed(companyId: String!): ProcessProgress
-		@aws_subscribe(mutations: ["itemProcessProgress"])
 }
-
 schema {
 	query: Query
 	mutation: Mutation
 	subscription: Subscription
 }
+
+type GenericResponse @aws_api_key @aws_cognito_user_pools {
+  message: ResponseMessage!
+  success: Boolean!
+  errorDetails: ErrorDetails
+}
+enum ResponseMessage {
+  CREATED
+  PROCESSED
+  FAILED
+}
+type ErrorDetails {
+  errorType: String!
+  errorMessage: String
+
 
 ------------------------------------------------------------------------------------------------------------------------------------------
 
