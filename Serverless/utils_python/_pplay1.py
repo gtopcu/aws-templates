@@ -26,7 +26,7 @@ from typing import Callable, Iterable, Iterator, AsyncIterable, Generator, Hasha
 from typing import Type, NewType, TypeVar, TypeAlias, TypedDict, Required, NotRequired, ReadOnly
 from typing import get_args, get_origin, get_type_hints, get_overloads
 
-from collections import defaultdict, OrderedDict, deque, namedtuple, ChainMap
+from collections import defaultdict, OrderedDict, deque, ChainMap, namedtuple
 
 from typing import Annotated
 from annotated_types import Gt, Ge, Le, Lt

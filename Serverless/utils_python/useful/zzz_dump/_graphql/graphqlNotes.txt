@@ -1,10 +1,14 @@
 
+scalar AWSDateTime
 scalar AWSDate
 scalar AWSTime
-scalar AWSDateTime
 scalar AWSJSON
 scalar AWSUUID
 
+String
+Int!
+Float
+Boolean
 Data: [ItemData!]!
 
 type, input, enum, interface, union
