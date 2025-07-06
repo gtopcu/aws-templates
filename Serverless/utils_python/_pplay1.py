@@ -37,8 +37,8 @@ from abc import ABC, abstractmethod
 from uuid import uuid4, UUID # str(uuid4()) uuid.UUID(val)
 from enum import StrEnum, IntFlag, auto
 
-from itertools import chain, cycle, batched, repeat, combinations, permutations, pairwise, count, compress, accumulate, dropwhile, filterfalse
 from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispatch, singledispatchmethod
+from itertools import chain, cycle, batched, repeat, combinations, permutations, pairwise, count, compress, accumulate, dropwhile, filterfalse
 
 
 # print(eval("2*2"))
@@ -66,16 +66,16 @@ from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispa
 # print("================================")
 # print(__name__)         # "__main__"
 # print(__version__)      # requests.__version__
-# # print(__all__)        #  ("module1", "module2")
 # # print(__class__)      #  = <class '__main__.MyClass'>
 # print(__file__)         # d:\VSCode\aws-templates\Serverless\utils_python\_pplay.py
 # print(__package__)      # None
-# print(__doc__)          # None
+# print(__doc__)          # """module/func docstring"""
+# print(__dict__)         # = {'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <_frozen_importlib_external.SourceFileLoader object at 0x7f8c4c2d3a90>, '__spec__': ModuleSpec(name='aws-templates.Serverless.utils_python._pplay', loader=<_frozen_importlib_external.SourceFileLoader object at 0x7f8c4c2d3a90>, origin='aws-templates/Serverless/utils_python/_pplay.py'), '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, '__file__': 'aws-templates/Serverless/utils_python/_pplay.py', '__cached__': None}
+# print(__members__)      # Enum members
+# # print(__all__)        #  ("module1", "module2")
 # print(__annotations__)  # {}
 # print(__builtins__)     #  = <module 'builtins' (built-in)>
 # print(__cached__)       #  None
-# print(__dict__)         # = {'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <_frozen_importlib_external.SourceFileLoader object at 0x7f8c4c2d3a90>, '__spec__': ModuleSpec(name='aws-templates.Serverless.utils_python._pplay', loader=<_frozen_importlib_external.SourceFileLoader object at 0x7f8c4c2d3a90>, origin='aws-templates/Serverless/utils_python/_pplay.py'), '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, '__file__': 'aws-templates/Serverless/utils_python/_pplay.py', '__cached__': None}
-# print(__members__)      # Enum members
 # print("================================")
 
 # ================================================================================================================================
