@@ -64,7 +64,7 @@ from itertools import chain, cycle, batched, repeat, combinations, permutations,
 #     raise Exception("OPEN_API_KEY environment variable not set")
 
 # print("================================")
-# print(__name__)         # "__main__"
+# print(__name__)         # "__main__", "module/func name(inside func)"
 # print(__version__)      # requests.__version__
 # # print(__class__)      #  = <class '__main__.MyClass'>
 # print(__file__)         # d:\VSCode\aws-templates\Serverless\utils_python\_pplay.py
