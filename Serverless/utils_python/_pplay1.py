@@ -40,6 +40,9 @@ from enum import StrEnum, IntFlag, auto
 from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispatch, singledispatchmethod
 from itertools import chain, cycle, batched, repeat, combinations, permutations, pairwise, count, compress, accumulate, dropwhile, filterfalse
 
+from decimal import Decimal, getcontext
+from numbers import Number # isinstance(x, Number)
+
 
 # print(eval("2*2"))
 # func = eval("lambda x: x**x")
