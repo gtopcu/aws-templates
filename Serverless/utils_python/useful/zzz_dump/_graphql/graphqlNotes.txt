@@ -19,6 +19,35 @@ type MyTask extends MyInterface
 Types:  Used for data that flows out of your API (responses). Defines the structure of data returned by queries and mutations
 Inputs: Used for data that flows into your API (arguments/variables)
 
+type Query {
+        getCompany(
+        companyId: String
+        subDomain: String
+        companyName: String
+  ): Company! @aws_cognito_user_pools @aws_api_key
+
+  # fetch basic company details. Location is an optional filter
+  getCompanies(location: String): [CompanyDetails!]! @aws_cognito_user_pools @aws_api_key
+}
+type Mutation {
+	createCompany(companyDetails: CreateCompanyInput): CompanyDetails! @aws_cognito_user_pools @aws_api_key
+}
+
+type Subscription @aws_api_key @aws_cognito_user_pools {
+	newNotification(companyId: String!, notificationType: NotificationType): Notification
+		@aws_subscribe(mutations: ["createNotification"])
+	onConversationEvents(conversationId: ID!): ConversationEvent
+		@aws_subscribe(mutations: ["aiPublishMessage"])
+	onItemProcessed(companyId: String!): ProcessProgress
+		@aws_subscribe(mutations: ["itemProcessProgress"])
+}
+
+schema {
+	query: Query
+	mutation: Mutation
+	subscription: Subscription
+}
+
 ------------------------------------------------------------------------------------------------------------------------------------------
 Type - can have circular dependencies
 
