@@ -19,11 +19,16 @@ type MyTask extends MyInterface
 Types:  Used for data that flows out of your API (responses). Defines the structure of data returned by queries and mutations
 Inputs: Used for data that flows into your API (arguments/variables)
 
+
 type Query {
-  getCompany(companyId: String): Company! @aws_cognito_user_pools @aws_api_key
+  getCompany(companyId: String!, companyId: Int): Company! @aws_cognito_user_pools @aws_api_key
 }
 type Mutation {
-	createCompany(companyDetails: CreateCompanyInput): CompanyDetails! @aws_cognito_user_pools @aws_api_key
+	createCompany(companyId: Int, companyDetails: CreateCompanyInput): CompanyDetails! @aws_cognito_user_pools @aws_api_key
+    createUser(
+        name: String!
+        isActive: Boolean
+    ) @aws_cognito_user_pools @aws_api_key
 }
 
 type Subscription @aws_api_key @aws_cognito_user_pools {
@@ -42,6 +47,24 @@ schema {
 }
 
 ------------------------------------------------------------------------------------------------------------------------------------------
+
+query GetUser($userId: ID!) {
+    user(id: $userId) {
+        id
+        name
+        posts {
+            title
+        }
+    }
+}
+mutation CreateUser($input: CreateUserInput!) {
+    createUser(input: $input) {
+        id
+        name
+    }
+}
+
+------------------------------------------------------------------------------------------------------------------------------------------
 Type - can have circular dependencies
 
 enum NotificationType {
@@ -53,7 +76,7 @@ enum NotificationType {
 interface BaseUser {
     name: String!
 }
-type User extends BaseUser{ ... }
+type User extends BaseUser { ... }
 
 # Types can have:
 type User {
@@ -70,18 +93,6 @@ type User {
     createdAt: String!
 }
 
-query GetUser($userId: ID!) {
-    user(id: $userId) {
-        id
-        name
-        email
-        posts {
-            id
-            title
-        }
-    }
-}
-
 ------------------------------------------------------------------------------------------------------------------------------------------
 Input - CANNOT have circular references
 
@@ -96,14 +107,6 @@ input CreateUserInput {
     name: String!
     email: String!
     password: String!
-}
-
-mutation CreateUser($input: CreateUserInput!) {
-    createUser(input: $input) {
-        id
-        name
-        email
-    }
 }
 
 ------------------------------------------------------------------------------------------------------------------------------------------
