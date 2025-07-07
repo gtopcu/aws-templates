@@ -19,6 +19,7 @@ type MyTask extends MyInterface
 Types:  Used for data that flows out of your API (responses). Defines the structure of data returned by queries and mutations
 Inputs: Used for data that flows into your API (arguments/variables)
 
+------------------------------------------------------------------------------------------------------------------------------------------
 
 type Query {
   getCompany(companyId: String!, companyId: Int): Company! @aws_cognito_user_pools @aws_api_key
@@ -56,9 +57,7 @@ type ErrorDetails {
   errorType: String!
   errorMessage: String
 
-
 ------------------------------------------------------------------------------------------------------------------------------------------
-
 query GetUser($userId: ID!) {
     user(id: $userId) {
         id
@@ -132,7 +131,6 @@ type User {
     createdAt: String!
     updatedAt: String!
 }
-
 type Post {
     id: ID!
     title: String!
@@ -147,12 +145,10 @@ input CreateUserInput {
     email: String!
     password: String!
 }
-
 input UpdateUserInput {
     name: String
     email: String
 }
-
 input CreatePostInput {
     title: String!
     content: String!

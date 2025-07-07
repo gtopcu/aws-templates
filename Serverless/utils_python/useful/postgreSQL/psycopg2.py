@@ -19,12 +19,19 @@ from psycopg.rows import dict_row
 #     password="XXXXXXXX")
 
 # engine = create_engine(f"postgresql+psycopg://postgres:PWD@localhost:5432/my_database")
-with psycopg2.connect(host="localhost", database="XXX", user="XXX", password="XXX", port=5432, connect_timeout=10, row_factory=dict_row) as conn:
+with psycopg2.connect(host="localhost", database="XXX", user="XXX", password="XXX", port=5432, connect_timeout=10) as conn: # row_factory=dict_row
     with conn.cursor() as cur:
         cur.execute("""SELECT * FROM user""")
         records = cur.fetchall()
         for record in records:
             print(record)
+
+# from psycopg.sql import SQL, Identifier, Literal
+# query = SQL("DELETE FROM {} WHERE id = %s").format(
+#             Identifier("my_db", self.__table_name)
+#         )
+# with conn.cursor() as cur:
+#         cur.execute(query, (cf_id,))
 
 # cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 # cur.execute("SELECT * FROM user")
