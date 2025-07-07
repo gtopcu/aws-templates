@@ -50,6 +50,7 @@ from annotated_types import Gt, Ge, Le, Lt
 from uuid import uuid4, UUID
 from enum import StrEnum, IntFlag, auto
 import re
+from decimal import Decimal
 
 from pydantic import (
     BaseModel,
@@ -87,21 +88,6 @@ from pydantic import (
 
 # ----------------------------------------------------------------------------------------------------
 
-# from pydantic import BaseModel, ConfigDict
-# from pydantic.alias_generators import to_camel, to_pascal, to_snake
-# class ParentModel(BaseModel):
-#     model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
-#     model_config = ConfigDict(
-#        json_encoders={
-#           date: lambda v: v.isoformat(),  # Serialize date to ISO string (e.g., "2012-01-01")
-#           Decimal: lambda v: str(v),  # Serialize Decimal to string (e.g., "14.63804")
-#           Enum: lambda v: v.value  # Serialize Enum to its value (e.g., "RAW_MATERIALS")
-#        }
-#     )
-#     @classmethod
-#     def get_field_names(cls, alias=False) -> list[str]:
-#       return list(cls.schema(alias).get("properties").keys())
-
 # https://github.com/boto/boto3/issues/665#issuecomment-340260257
 # from decimal import Decimal, getcontext, setcontext, ExtendedContext
 # setcontext(ExtendedContext)
@@ -126,6 +112,21 @@ from pydantic import (
 # }
 # ----------------------------------------------------------------------------------------------------
 
+# from pydantic import BaseModel, ConfigDict
+# from pydantic.alias_generators import to_camel, to_pascal, to_snake
+# class ParentModel(BaseModel):
+#     model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
+#     model_config = ConfigDict(
+#        json_encoders={
+#           date: lambda v: v.isoformat(),  # Serialize date to ISO string (e.g., "2012-01-01")
+#           Decimal: lambda v: str(v),  # Serialize Decimal to string (e.g., "14.63804")
+#           Enum: lambda v: v.value  # Serialize Enum to its value (e.g., "RAW_MATERIALS")
+#        }
+#     )
+#     @classmethod
+#     def get_field_names(cls, alias=False) -> list[str]:
+#       return list(cls.schema(alias).get("properties").keys())
+
 class Person(BaseModel):
     # typename: str = Field("DataSource", alias="__typename")) # must be serialised as __typename for graphql
     my: ellipsis = ... # type is EllipsisType, and the singleton value is Ellipsis
@@ -146,6 +147,17 @@ class Person(BaseModel):
     # created: str = Field(default=str(time.strftime("%Y-%m-%dT%H:%M:%S")), description="Record creation date")
     # created: str = Field(default=str(datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S")), description="Record creation date")
     # expiry: int = Field(default=0, description="Record expiry timestamp - dynamo TTL")
+
+    # @classmethod
+    # def __pydantic_init_subclass__(cls, **kwargs: Any) -> None:
+    #     """
+    #     This is intended to behave just like __init_subclass__, but is called by ModelMetaclass only after the class is actually fully initialized. 
+    #     attributes like model_fields will be present when this is called
+    #     """
+    #     super().__pydantic_init_subclass__(**kwargs)
+    #     field_names = list(cls.schema(alias).get("properties").keys())
+    #     field_value = cls.model_fields.get("name").get_default()
+    #     enum_value = typing.get_args(cls.model_fields.get("source_type").annotation)
 
     # @computed_field
     # @property
@@ -173,6 +185,7 @@ class Person(BaseModel):
     # @field_serializer("money", when_used="json")
     # def serialize_money(self, money: Decimal) -> str:
     #     return str(money)
+
 
 try: 
     my_model = Person(id="1", name="John", age=30, email="john@example.com")# , url_alias="example.com") 

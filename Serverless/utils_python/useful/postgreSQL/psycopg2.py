@@ -4,19 +4,21 @@
 # https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-data-types/
 # https://neon.tech/postgresql/postgresql-python/connect
 
-# pip install psycopg2
-# pip install psycopg2-binary==2.9.9
+# pip install psycopg2==2.9.10
+# pip install psycopg2-binary==2.9.10
 
-# just like using sqlite3
 import psycopg2
-import psycopg2.extras
-from psycopg.rows import dict_row
+from psycopg2.extras import DictCursor, DictRow, DictConnection, DateTimeRange
+# from psycopg.rows import dict_row
 
 # conn = psycopg2.connect(
 #     host="localhost",
+#     port=5432, 
 #     database="XXXXXXXX",
 #     user="XXXXXXXX",
-#     password="XXXXXXXX")
+#     password="XXXXXXXX",
+#     connect_timeout=10
+# )
 
 # engine = create_engine(f"postgresql+psycopg://postgres:PWD@localhost:5432/my_database")
 with psycopg2.connect(host="localhost", database="XXX", user="XXX", password="XXX", port=5432, connect_timeout=10) as conn: # row_factory=dict_row
@@ -34,6 +36,7 @@ with psycopg2.connect(host="localhost", database="XXX", user="XXX", password="XX
 #         cur.execute(query, (cf_id,))
 
 # cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+
 # cur.execute("SELECT * FROM user")
 # records = cur.fetchall() # list[DictRow]
 # for record in records:
