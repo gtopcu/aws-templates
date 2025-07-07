@@ -115,7 +115,7 @@ from pydantic import (
 # from pydantic import BaseModel, ConfigDict
 # from pydantic.alias_generators import to_camel, to_pascal, to_snake
 # class ParentModel(BaseModel):
-#     model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
+#     model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True, strict=False, extra='forbid') # allow, ignore
 #     model_config = ConfigDict(
 #        json_encoders={
 #           date: lambda v: v.isoformat(),  # Serialize date to ISO string (e.g., "2012-01-01")
