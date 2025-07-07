@@ -127,6 +127,7 @@ from pydantic import (
 #     def get_field_names(cls, alias=False) -> list[str]:
 #       return list(cls.schema(alias).get("properties").keys())
 
+
 class Person(BaseModel):
     # typename: str = Field("DataSource", alias="__typename")) # must be serialised as __typename for graphql
     my: ellipsis = ... # type is EllipsisType, and the singleton value is Ellipsis
