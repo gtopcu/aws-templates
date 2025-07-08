@@ -261,6 +261,7 @@ from numbers import Number # isinstance(x, Number)
 # path.resolve()
 # path.absolute()
 # path.mkdir(mode=0o777, parents=True, exist_ok=True)
+# path.walk()
 # path.glob("*.py")
 # path.rglob("*.py")
 # text = path.read_text("utf-8", errors="replace", newline="\n")
@@ -495,14 +496,8 @@ from numbers import Number # isinstance(x, Number)
 # from numbers import Number
 # T = TypeVar("T", bound=Number)
 
-# def __add__(self, other):
-#     if type(self) is not type(other):
-#         raise ValueError("Must be same type!")
-
 # if a==b and b==c or b==d
 # if has_date = "start_date" in kwargs and "end_date" in kwargs
-# if not all(isinstance(agg, cls) for agg in aggregators):
-#   raise ValueError(f"All aggregators must be of type {cls.__name__}")
 # return not True
 
 # class MyStrEnum(StrEnum):
@@ -518,6 +513,7 @@ from numbers import Number # isinstance(x, Number)
 
 # match record.event_name:
 #     case DynamoDBRecordEventName.INSERT:
+#     case _:
 #     default: None
 
 # try:
