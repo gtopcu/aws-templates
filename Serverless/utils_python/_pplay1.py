@@ -112,6 +112,8 @@ from numbers import Number # isinstance(x, Number)
 # all(isinstance(my_cls, cls) for my_cls in classes)
 # sum(item.value for item in items)
 # functools.reduce(lambda a, i: a + i, my_list[1:], my_list[0])
+# partial = functools.partial(my_func, 1, 2)
+# partial(3) # calls my_func(1, 2, 3)
 
 # fib = [0, 1]
 # while fib[-1] + fib[-2] < 100:
