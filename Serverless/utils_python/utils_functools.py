@@ -19,7 +19,6 @@ def main() -> None:
 def factorial(n):
     return n * factorial(n-1) if n else 1
 
-
 @dataclass
 class Dataclass:
     id: int
@@ -34,7 +33,26 @@ class Dataclass:
 # __qualname__ - qualified name
 # __annotations__ - type hints
 # __wrapped__ - reference to the original function
-def func_wrapper(func):
+import functools
+def my_decorator(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        print(f"Calling {func.__name__}")
+        return func(*args, **kwargs)
+    return wrapper
+
+@my_decorator
+def greet(name):
+    """Greets someone by name."""
+    return f"Hello, {name}!"
+
+print(greet.__name__)    # Output: "greet"
+print(greet.__doc__)     # Output: "Greets someone by name."
+
+
+# ----------------------------------------------------------------------------------------------------------------------------------------
+
+def my_decorator(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
         start = time.perf_counter_ns()
@@ -44,7 +62,7 @@ def func_wrapper(func):
         return val
     return wrapper
 
-def func_wrapper_with_args(arg1: int):
+def my_decorator_with_args(arg1: int):
     print("Decorator arg: ", arg1)
     def func_wrapper(func):
         @wraps(func)
@@ -57,13 +75,14 @@ def func_wrapper_with_args(arg1: int):
         return wrapper
     return func_wrapper
 
-# @func_wrapper
-@func_wrapper_with_args(100)
+@my_decorator_with_args(100)
 def function(*args, **kwargs):
     """Docstring"""
     print(":".join([str(arg) for arg in args]))
     # print("args:", args, "kwargs: ", kwargs)
     return sum(args) + sum(kwargs.values())
+
+# ----------------------------------------------------------------------------------------------------------------------------------------
 
 
 # https://www.geeksforgeeks.org/partial-functions-python/

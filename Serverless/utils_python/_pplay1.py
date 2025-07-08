@@ -106,8 +106,11 @@ from numbers import Number # isinstance(x, Number)
 # is in not and or not any all 
 # if elif else try except finally raise assert break continue pass return yield
 # abs round sum min max pow avg floor ceil
-# sorted reversed map filter reduce zip enumerate
+# sorted reversed map filter zip enumerate
 # getattr delattr setattr delattr
+
+# all(isinstance(my_cls, cls) for my_cls in classes)
+# functools.reduce(lambda a, i: a + i, my_list[1:], my_list[0])
 
 # -------------------------------------------------------------------------------------------------
 
@@ -126,7 +129,7 @@ from numbers import Number # isinstance(x, Number)
 
 # class MyClass(Exception):
 #     """ This is my nice Person class"""
-#     class_var:Final = 0 # class variable
+#     class_var = 0 # class variable
 
 #     def __new__(cls, *args, **kwargs) -> Self:
 #         # print(f"__new__ called with {args} and {kwds}")
@@ -154,7 +157,13 @@ from numbers import Number # isinstance(x, Number)
 
 #     @staticmethod
 #     def static_method():
+#         self.__class__(class_var=5)
 #         MyClass.class_var = 5
+
+#    def __add__(self, other):
+#        if type(self) is not type(other):
+#            raise ValueError(f"Must be the same class to add: {self.__class__} and {other.__class__}")
+#        return self.__class__(self.class_var + other.class_var)
 
 # my_class = MyClass("Hello")
 # print(my_class.class_var) # 3
