@@ -37,7 +37,7 @@ from abc import ABC, abstractmethod
 from uuid import uuid4, UUID # str(uuid4()) uuid.UUID(val)
 from enum import StrEnum, IntFlag, auto
 
-from functools import reduce, partial, cache, lru_cache, cmp_to_key, singledispatch, singledispatchmethod
+from functools import reduce, partial, cache, lru_cache
 from itertools import chain, cycle, batched, repeat, combinations, permutations, pairwise, count, compress, accumulate, dropwhile, filterfalse
 
 from decimal import Decimal, getcontext
@@ -110,6 +110,7 @@ from numbers import Number # isinstance(x, Number)
 # getattr delattr setattr delattr
 
 # all(isinstance(my_cls, cls) for my_cls in classes)
+# sum(item.value for item in items)
 # functools.reduce(lambda a, i: a + i, my_list[1:], my_list[0])
 
 # -------------------------------------------------------------------------------------------------
@@ -160,7 +161,8 @@ from numbers import Number # isinstance(x, Number)
 #         self.__class__(class_var=5)
 #         MyClass.class_var = 5
 
-#    def __add__(self, other):
+#   __radd__ : reverse add (other + self.value i.e. 3 + number)
+#    def __add__(self, other): 
 #        if type(self) is not type(other):
 #            raise ValueError(f"Must be the same class to add: {self.__class__} and {other.__class__}")
 #        return self.__class__(self.class_var + other.class_var)
