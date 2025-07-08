@@ -148,6 +148,14 @@ from numbers import Number # isinstance(x, Number)
 #         self.__private_var = 0
 #         # print(__class__)    
 
+#     Human-readable. Called by print() & str()
+#     def __str__(self):
+#         return f"{self.name} ({self.age} years old)"  # -> print(str(person)) Alice (30 years old) -> uses __str__
+
+#     Developer-friendly. Can re-create the object. Used by the interpreter & debugge  
+#     def __repr__(self):
+#         return f"Person('{self.name}', {self.age})"   # print(repr(person)) # Person('Alice', 30) -> uses __repr__
+
 #     @property
 #     def private_var(self):
 #         return self.__private_var
