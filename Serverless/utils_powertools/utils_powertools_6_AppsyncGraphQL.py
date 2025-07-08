@@ -96,6 +96,9 @@ class CustomEventModel(AppSyncResolverEvent):
     def country_viewer(self) -> str:
         return self.request_headers.get("cloudfront-viewer-country", "")
     @property
+    def query_selection_set(self) -> set[str]:
+        return set(i for i in self.info.selection_set_list)
+    @property
     def company_id(self) -> str | None:
         return self.identity.get("claims", {}).get("custom:company_id")
     @property
