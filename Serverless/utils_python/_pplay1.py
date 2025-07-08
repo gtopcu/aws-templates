@@ -113,6 +113,12 @@ from numbers import Number # isinstance(x, Number)
 # sum(item.value for item in items)
 # functools.reduce(lambda a, i: a + i, my_list[1:], my_list[0])
 
+# fib = [0, 1]
+# while fib[-1] + fib[-2] < 100:
+#     fib.append(fib[-1] + fib[-2])
+# print(fib[::-1])
+# print(list(filter(lambda x: x%3==0, fib)))
+
 # -------------------------------------------------------------------------------------------------
 
 # raise Exception("")
