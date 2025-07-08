@@ -179,6 +179,13 @@ from numbers import Number # isinstance(x, Number)
 # print(my_class.class_var) # 3
 # print(MyClass.class_var) # 2
 
+# Class variables are shared(same object) among all instances. Can access by MyClass._var or self._var
+# class MyClass:
+#     _var = 0
+#     def __init__(self):
+#         self._var = 0
+
+
 # -------------------------------------------------------------------------------------------------
 # import tqdm (loading..)
 
