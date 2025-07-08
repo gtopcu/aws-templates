@@ -656,12 +656,15 @@ from numbers import Number # isinstance(x, Number)
 # -------------------------------------------------------------------------------------------------
 
 # kwargs = { "Limit": 10 }
-# while "LastEvaluatedKey" in response:
+# while True:
 #     table.scan(**kwargs)
-#     kwargs.update({"ExclusiveStartKey": response["LastEvaluatedKey"]})
-#     kwargs[ExclusiveStartKey] = response["LastEvaluatedKey"]
+#     if "LastEvaluatedKey" in response:
+#       kwargs.update({"ExclusiveStartKey": response["LastEvaluatedKey"]})
+#       kwargs[ExclusiveStartKey] = response["LastEvaluatedKey"]
+#     else:
+#        break
 
-# import boto3
+# import boto3, botoconfig, session
 # from botocore.exceptions import ClientError, ConditionCheckFailedException
 # client = boto3.client(service_name="dynamodb", region_name="us-east-1")
 # def lambda_handler(event, context):    
