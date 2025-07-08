@@ -130,9 +130,10 @@ from numbers import Number # isinstance(x, Number)
 
 # class MyClass(Exception):
 #     """ This is my nice Person class"""
-#     class_var = 0 # class variable
+#     _var = 0 # class variable - shared between all classes. self._var | cls._var | MyClass._var
 
-#     def __new__(cls, *args, **kwargs) -> Self:
+#     # creates & returns a new instance, called before __init__
+#     def __new__(cls, *args, **kwargs) -> Self: 
 #         # print(f"__new__ called with {args} and {kwds}")
 #         # return super().__new__(*args, **kwargs)
 #         pass
@@ -140,50 +141,34 @@ from numbers import Number # isinstance(x, Number)
 #     def __init__(self, *args, **kwds):
 #         super().__init__(*args, **kwds) 
 #         self.name = args[0] if args else None
-#         class_var = 1           # local variable, does not change class_var
-#         MyClass.class_var = 2   # class variable, changes class_var
-#         self.class_var = 3      # instance variable, does not change class_var
-#         self.instance_var = 0   # class variable and instance variable can have the same name
-#         self._private_var = 0
-#         self.__private_var = 0
-#         # print(__class__)    
+#         self.instance_var = "InstanceVar"
 
-#     Human-readable. Called by print() & str()
+#     # human-readable. Called by print() & str()
 #     def __str__(self):
 #         return f"{self.name} ({self.age} years old)"  # -> print(str(person)) Alice (30 years old) -> uses __str__
 
-#     Developer-friendly. Can re-create the object. Used by the interpreter & debugge  
+#     # developer-friendly. Can re-create the object. Used by the interpreter & debugge  
 #     def __repr__(self):
 #         return f"Person('{self.name}', {self.age})"   # print(repr(person)) # Person('Alice', 30) -> uses __repr__
 
 #     @property
 #     def private_var(self):
-#         return self.__private_var
+#         return self.instance_var
 
 #     @classmethod
 #     def class_method(cls): # can access class variables/methods and static methods
-#         cls.class_var = 4
+#         cls._var = 4
 
 #     @staticmethod
 #     def static_method():
 #         self.__class__(class_var=5)
 #         MyClass.class_var = 5
 
-#   __radd__ : reverse add (other + self.value i.e. 3 + number)
+#    # __radd__ : reverse add (other + self.value i.e. 3 + number)
 #    def __add__(self, other): 
 #        if type(self) is not type(other):
 #            raise ValueError(f"Must be the same class to add: {self.__class__} and {other.__class__}")
 #        return self.__class__(self.class_var + other.class_var)
-
-# my_class = MyClass("Hello")
-# print(my_class.class_var) # 3
-# print(MyClass.class_var) # 2
-
-# Class variables are shared(same object) among all instances. Can access by MyClass._var or self._var
-# class MyClass:
-#     _var = 0
-#     def __init__(self):
-#         self._var = 0
 
 
 # -------------------------------------------------------------------------------------------------
