@@ -448,7 +448,7 @@ from numbers import Number # isinstance(x, Number)
 # my_dict.update(my_dict)
 
 # for _ in iter(my_list)
-# my_list2 = [i for i in range(0,100,10) if not i%5==0 ]
+# my_list2 = [i for i in range(0,100,10) if not i%5==0]
 # my_list3 = [*range(5)]
 # my_list4 = list(range(5))
 # matrix = [(x, y) for x in range(3) for y in range(3)]]
@@ -459,7 +459,7 @@ from numbers import Number # isinstance(x, Number)
 # a, b, c = mylist
 # mylist = [1, 2, 3, 4, 5]
 # a, *b, c = mylist
-# mylist3 = [*mylist1, "combined", *mylist2]
+# mylist3 = [*mylist1, *mylist2]
 
 # my_dict: dict[str, Any] 
 # my_dict = dict(name="David Bowie", age=86)
