@@ -1,9 +1,5 @@
 # https://docs.powertools.aws.dev/lambda/python/2.29.1/core/event_handler/appsync/
 
-
-# Appsync expects to return dates in ISO 5601 format
-# aws_datetime appends "Z" automatically so use it instead of datetime.isoformat(timezone.utc) + "Z"
-# datetime.isoformat() may not always append "Z" at the end for UTC timezone
 from aws_lambda_powertools.utilities.data_classes.appsync.scalar_types_utils import (
     make_id,
     aws_date,
@@ -34,6 +30,19 @@ my_date: str = aws_date()  # Scalar: AWSDate
 my_timestamp: str = aws_time()  # Scalar: AWSTime
 my_datetime: str = aws_datetime()  # Scalar: AWSDateTime
 my_epoch_timestamp: int = aws_timestamp()  # Scalar: AWSTimestamp
+
+# AWSDateTime
+# Appsync expects dates to be returned in ISO 5601 format
+# aws_datetime appends "Z" automatically so use it instead of datetime.isoformat(timezone.utc) + "Z"
+# datetime.isoformat() may not always append "Z" at the end for UTC timezone
+
+# AWSJSON
+# Represents JSON data as a string in the GraphQL schema & # the actual JSON data is serialized as a string when sent over the wire
+# When returned, AppSync will serialize it back to JSON string for the client
+# To the lambda resolver, AWSJSON comes as a Python dict/list, not a string:
+# preferences = event['arguments']['preferences']
+# if isinstance(preferences, dict):
+#     preferences['lastUpdated'] = '2024-01-01'
 
 import boto3
 from botocore.exceptions import ClientError
