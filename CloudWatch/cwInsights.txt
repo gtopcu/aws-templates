@@ -8,7 +8,6 @@ fields @timestamp, @message, unmask(@message)
 | sort @timestamp desc
 | limit 20
 
-
 --------------------------------------------------------------------------------------------------------------
 Lambda - /aws/lambda/
 --------------------------------------------------------------------------------------------------------------
@@ -22,6 +21,7 @@ fields @timestamp, @message, @log, @logStream
 fields @timestamp, @message, @log, @logStream
     | filter @log not like /customer-service/
     | filter @message like /9b06814f-0df9-4b33-8232-7767ef8cd9f3/  
+    | filter @message not like /Failed to send entity to Daemon/
     | filter @message like /ERROR/ or @message like /Exception/ or @message like /timeout/
     | sort @timestamp desc
     | limit 1000
