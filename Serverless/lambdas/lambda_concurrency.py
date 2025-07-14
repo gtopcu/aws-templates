@@ -1,5 +1,7 @@
 
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
+import boto3
+
 
 # Monitor concurrency usage
 def check_concurrency_metrics():
@@ -9,11 +11,20 @@ def check_concurrency_metrics():
         Namespace='AWS/Lambda',
         MetricName='ConcurrentExecutions',
         Dimensions=[],
-        StartTime=datetime.utcnow() - timedelta(minutes=5),
-        EndTime=datetime.utcnow(),
+        StartTime=datetime.now(timezone.utc) - timedelta(minutes=5),
+        EndTime=datetime.now(timezone.utc),
         Period=300,
         Statistics=['Maximum']
     )
     
     return response['Datapoints']
 
+
+# Set reserved concurrency for critical functions
+def set_reserved_concurrency(function_name, reserved_concurrency):
+    lambda_client = boto3.client('lambda')
+    
+    lambda_client.put_reserved_concurrency_setting(
+        FunctionName=function_name,
+        ReservedConcurrencyLimit=reserved_concurrency
+    )
