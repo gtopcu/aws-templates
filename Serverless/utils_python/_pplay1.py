@@ -334,7 +334,7 @@ from numbers import Number # isinstance(x, Number)
 # datetime.strptime("2024-03-24", "%Y-%m-%d").date()
 # datetime.strptime(date_str[:10], "%Y-%m-%d").date()
 # (datetime.now() - start_time).total_seconds()
-# my_date + timedelta(hours=1)
+# other_date = my_date + timedelta(hours=1, minutes=20)
 # date.toisoformat/fromisoformat
 # date.today()
 # date.day
@@ -655,7 +655,7 @@ from numbers import Number # isinstance(x, Number)
 
 # -------------------------------------------------------------------------------------------------
 
-# kwargs = { "Limit": 10 }
+# kwargs = { "Limit": 10, "ScanIndexForward": False }
 # while True:
 #     response = table.scan(**kwargs)
 #     count = response["Count"]
@@ -679,9 +679,9 @@ from numbers import Number # isinstance(x, Number)
 #     except ClientError as err:
 #         logger.error(f"Error: {e}", exc_info=True)
 #         logger.exception(e)
-#         print("Error Code: " + f"{err.response['Error']['Code']}")
-#         print("Error Message: " + f"{err.response['Error']['Message']}")
-#         raise err
+#         logger.error("Error Code: " + f"{err.response['Error']['Code']}")
+#         logger.error("Error Message: " + f"{err.response['Error']['Message']}")
+#         raise
 
 # -------------------------------------------------------------------------------------------------
 
