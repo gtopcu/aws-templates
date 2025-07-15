@@ -106,18 +106,20 @@ from numbers import Number # isinstance(x, Number)
 # abs round sum min max pow avg floor ceil
 # sorted reversed map filter zip enumerate
 # getattr delattr setattr delattr
+# / // & % **
 
 # all(isinstance(my_cls, cls) for my_cls in classes)
 # sum(item.value for item in items)
+# filter(lambda x: x%3==0, list)
 # functools.reduce(lambda a, i: a + i, my_list[1:], my_list[0])
 # partial = functools.partial(my_func, 1, 2)
 # partial(3) # calls my_func(1, 2, 3)
+# @functools.wraps -> preserves __name__, __doc__ etc
 
 # fib = [0, 1]
 # while fib[-1] + fib[-2] < 100:
 #     fib.append(fib[-1] + fib[-2])
 # print(fib[::-1])
-# print(list(filter(lambda x: x%3==0, fib)))
 
 # -------------------------------------------------------------------------------------------------
 
@@ -195,6 +197,7 @@ from numbers import Number # isinstance(x, Number)
 # sys.last_traceback
 # sys.last_exc
 
+# os.curdir
 # os.cpu_count
 # os.getcwd()
 # os.listdir()
