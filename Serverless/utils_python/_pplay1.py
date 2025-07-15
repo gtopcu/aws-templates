@@ -661,7 +661,8 @@ from numbers import Number # isinstance(x, Number)
 
 # kwargs = { "Limit": 10 }
 # while True:
-#     table.scan(**kwargs)
+#     response = table.scan(**kwargs)
+#     count = response["Count"]
 #     if "LastEvaluatedKey" in response:
 #       kwargs.update({"ExclusiveStartKey": response["LastEvaluatedKey"]})
 #       kwargs[ExclusiveStartKey] = response["LastEvaluatedKey"]
