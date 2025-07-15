@@ -146,8 +146,8 @@ from numbers import Number # isinstance(x, Number)
 #         # return super().__new__(*args, **kwargs)
 #         pass
     
-#     def __init__(self, *args, **kwds):
-#         super().__init__(*args, **kwds) 
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs) 
 #         self.name = args[0] if args else None
 #         self.instance_var = "InstanceVar"
 
