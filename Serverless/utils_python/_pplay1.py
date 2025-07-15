@@ -129,6 +129,7 @@ from numbers import Number # isinstance(x, Number)
 # raise ImportError("")
 # raise NotImplementedError
 
+# try / else
 # except ZeroDivisionError:
 #   logger.error("Division by zero attempted") # no traceback
 #   logger.error("Something went wrong", exc_info=True) # includes traceback
