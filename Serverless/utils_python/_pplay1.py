@@ -183,6 +183,14 @@ from numbers import Number # isinstance(x, Number)
 # -------------------------------------------------------------------------------------------------
 # import tqdm (loading..)
 
+# print(sys.path)
+# os.getenv("PYTHONPATH")
+# for path in sys.path:
+#     print("Path: " + path)
+# sys.path.append(os.getcwd() + "/.venv/lib/python3.13/site-packages")
+# sys.path.insert(0, str(Path(__file__).parent))
+# sys.path.append(parent_dir)
+
 # sys.stdin
 # sys.stdout
 # sys.stderr
@@ -213,6 +221,8 @@ from numbers import Number # isinstance(x, Number)
 # os.path.realpath(__file__)  # D:\VSCode\aws-templates\Serverless\utils_python\_pplay1.py
 
 # current_dir = os.path.dirname(os.path.abspath(__file__))
+# parent_dir = os.path.dirname(os.path.dirname(current_dir))
+# os.path.join(__file__, "test.txt")
 # file_path = os.path.join(current_dir, filename)
 # if not os.path.exists(file_path):
 #     raise FileNotFoundError(f"File not found: {file_path}")
@@ -224,17 +234,6 @@ from numbers import Number # isinstance(x, Number)
 # os.chmod("test.txt", 0o777)
 # os.chown(("test.txt", 1000, 1000)
 # os.system("clear")
-
-# os.getenv("PYTHONPATH")
-# print(sys.path)
-# for path in sys.path:
-#     print("Path: " + path)
-# sys.path.append(os.getcwd() + "/.venv/lib/python3.13/site-packages")
-# sys.path.insert(0, str(Path(__file__).parent))
-# os.path.join(__file__, "test.txt")
-# current_dir = os.path.dirname(os.path.abspath(__file__))
-# parent_dir = os.path.dirname(os.path.dirname(current_dir))
-# sys.path.append(parent_dir)
 
 # shutil.copytree("lambda", "build/lambda_package")
 # shutil.make_archive("build/lambda", "zip", "build/lambda_package") # zip/tar
@@ -475,9 +474,6 @@ from numbers import Number # isinstance(x, Number)
 
 # -------------------------------------------------------------------------------------------------
 
-
-# import sys
-# print(sys.path)
 
 # def func() -> Literal["A", "B"]: ...
 # def opt_func(val: int | None = None) -> int | None:
