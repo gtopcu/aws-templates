@@ -67,18 +67,19 @@ from numbers import Number # isinstance(x, Number)
 #     raise Exception("OPEN_API_KEY environment variable not set")
 
 # print("================================")
-# print(__name__)         # "__main__", "module/func name(inside func)"
-# print(__class__)        #  = <class '__main__.MyClass'>
-# print(__version__)      # requests.__version__
-# print(__file__)         # requests.__file__ d:\VSCode\aws-templates\Serverless\utils_python\_pplay.py
-# print(__package__)      # None
-# print(__doc__)          # """module/func docstring"""
-# print(__dict__)         # = {'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <_frozen_importlib_external.SourceFileLoader object at 0x7f8c4c2d3a90>, '__spec__': ModuleSpec(name='aws-templates.Serverless.utils_python._pplay', loader=<_frozen_importlib_external.SourceFileLoader object at 0x7f8c4c2d3a90>, origin='aws-templates/Serverless/utils_python/_pplay.py'), '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, '__file__': 'aws-templates/Serverless/utils_python/_pplay.py', '__cached__': None}
-# print(__members__)      # Enum members
-# print(__all__)          #  ("module1", "module2")
-# print(__annotations__)  # {}
-# print(__builtins__)     #  = <module 'builtins' (built-in)>
-# print(__cached__)       #  None
+# print(__name__)           # "__main__", "module/func name(inside func)"
+# print(__class__)          #  = <class '__main__.MyClass'>
+# print(__version__)        # requests.__version__
+# print(__file__)           # requests.__file__ d:\VSCode\aws-templates\Serverless\utils_python\_pplay.py
+# print(__package__)        # None
+# print(__doc__)            # """module/func docstring"""
+# print(__dict__)           # = {'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <_frozen_importlib_external.SourceFileLoader object at 0x7f8c4c2d3a90>, '__spec__': ModuleSpec(name='aws-templates.Serverless.utils_python._pplay', loader=<_frozen_importlib_external.SourceFileLoader object at 0x7f8c4c2d3a90>, origin='aws-templates/Serverless/utils_python/_pplay.py'), '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, '__file__': 'aws-templates/Serverless/utils_python/_pplay.py', '__cached__': None}
+# print(__members__)        # Enum members
+# print(__all__)            #  ("module1", "module2")
+# print(__annotations__)    # {}
+# print(__builtins__)       #  = <module 'builtins' (built-in)>
+# print(__cached__)         #  None
+# print(err.__traceback__)  # Last exception traceback - use in except
 # print("================================")
 
 # ================================================================================================================================
@@ -306,25 +307,9 @@ from numbers import Number # isinstance(x, Number)
 # logger.exception(e)
 
 # import traceback
-# from inspect import istraceback
 # traceback.print_exception(type(err), err, err.__traceback__)
 # traceback.print_exception(*sys.exc_info(), limit=5, file=sys.stdout)
 # traceback.print_exc()
-# traceback.print_last()
-# traceback.print_stack()
-# traceback.print_tb()
-# traceback.extract_tb(limit=5)
-# traceback.walk_tb(limit=5)
-# traceback.extract_stack()
-# traceback.format_exception(limit=5, chain=True)
-# traceback.format_exception_only()
-# traceback.format_exc()
-# traceback.format_stack(limit=5)
-# traceback.format_tb(limit=5)
-# traceback.format_list()
-# traceback.format_stack()
-# traceback.format_tb()
-# traceback.clear_frames()
 
 # -------------------------------------------------------------------------------------------------
 
