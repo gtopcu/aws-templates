@@ -43,7 +43,6 @@ from itertools import chain, cycle, batched, repeat, combinations, permutations,
 from decimal import Decimal, getcontext
 from numbers import Number # isinstance(x, Number)
 
-
 # print(eval("2*2"))
 # func = eval("lambda x: x**x")
 # result = func(2)
