@@ -103,7 +103,7 @@ from numbers import Number # isinstance(x, Number)
 
 # id len type isinstance issubclass str repr chr ord dir global nonlocal iter next 
 # is in not and or not any all 
-# if elif else try except finally raise assert break continue pass return yield
+# if elif try/except/else finally raise assert break continue pass return yield
 # abs round sum min max pow avg floor ceil
 # sorted reversed map filter zip enumerate
 # getattr delattr setattr delattr
@@ -130,7 +130,6 @@ from numbers import Number # isinstance(x, Number)
 # raise ImportError("")
 # raise NotImplementedError
 
-# try / else
 # except ZeroDivisionError:
 #   logger.error("Division by zero attempted") # no traceback
 #   logger.error("Something went wrong", exc_info=True) # includes traceback
