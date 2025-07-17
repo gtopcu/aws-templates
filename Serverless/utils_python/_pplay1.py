@@ -457,7 +457,6 @@ from numbers import Number # isinstance(x, Number)
 
 # -------------------------------------------------------------------------------------------------
 
-
 # def func() -> Literal["A", "B"]: ...
 # def opt_func(val: int | None = None) -> int | None:
 #     return val or None
@@ -481,9 +480,9 @@ from numbers import Number # isinstance(x, Number)
 # from typing import get_args
 # get_args(dict[str, int]) -> (str, int) 
 
-# T = TypeVar("T", bound="MyClass")
 # from numbers import Number
 # T = TypeVar("T", bound=Number)
+# T = TypeVar("T", bound="MyClass")
 
 # if a==b and b==c or b==d
 # if has_date = "start_date" in kwargs and "end_date" in kwargs
