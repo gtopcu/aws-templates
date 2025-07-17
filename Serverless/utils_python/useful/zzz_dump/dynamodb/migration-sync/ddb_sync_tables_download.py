@@ -89,7 +89,6 @@ def batch_write_items(dynamodb_resource, table_name, items):
             writer.put_item(Item=item)
 
 
-
 def download(path: str):
     source_session = boto3.Session(**SOURCE_AWS)
     source_dynamodb = source_session.resource('dynamodb')
