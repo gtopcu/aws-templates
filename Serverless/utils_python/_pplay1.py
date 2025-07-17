@@ -637,13 +637,13 @@ from numbers import Number # isinstance(x, Number)
 
 # -------------------------------------------------------------------------------------------------
 
-# kwargs = { "Limit": 10, "ScanIndexForward": False }
+# kwargs = { "Limit": 10, "ScanIndexForward": False } # false for ISO8601 gets the latest to oldest
 # while True:
 #     response = table.scan(**kwargs)
 #     count = response["Count"]
 #     if "LastEvaluatedKey" in response:
 #       kwargs.update({"ExclusiveStartKey": response["LastEvaluatedKey"]})
-#       kwargs[ExclusiveStartKey] = response["LastEvaluatedKey"]
+#       kwargs["ExclusiveStartKey"] = response["LastEvaluatedKey"]
 #     else:
 #        break
 

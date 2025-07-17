@@ -7,20 +7,23 @@ from itertools import islice
 
 # AWS credentials for source and target accounts
 SOURCE_AWS = {
-    'aws_access_key_id': 'SOURCE_ACCESS_KEY',
-    'aws_secret_access_key': 'SOURCE_SECRET_KEY',
-    'region_name': 'us-east-1'
+    'region_name': 'eu-west-2',
+    'aws_access_key_id': 'ASIARK6QF65DXCPT25NN',
+    'aws_secret_access_key': 'MwF0251daOQllCIRIQRcuxdIdDhpwTomG+sbDzxG',
+    'aws_session_token': 'IQoJb3JpZ2luX2VjEFwaCWV1LXdlc3QtMiJHMEUCIQDtntlHcSxTUhS0KIw9o9Om8+lUTitnuv+GsGKQ+J44YgIgR19jswPPRhLJWwScqK2WLQEtPolmX4cbZRP4v8+SKYYq6gIIdRAAGgwwOTIyNDE1MjQ1NTEiDEpL0HiT+yu6pEiy2CrHAgJNEx5ABqKeL3i1axhB1Jo0i6I8hzkiKSSkXxgugNlM1UkrwC5WKG94KQwrSXLZhK6XN68g1F9mH9hQ5VMVRvtfM1+fgpZCTzRbJMj3WEYdjMzsNMYsjgkJpIuHC7tKRFrvaiN4rUFOJ2PPgpIDYBfqfSqjHkqWyImvXgsjtt2EW3dNusxmL8A9HewUl6rmzwWnfTUZ/fHl9YkAVrPYb5J42cewtzUOGmZb/ZelzCk++Oo11t30ksbOXFFVTrWY3vvZl9THIR4x6DxcAHv+Ki+wT4DhXf9ruJlhLwpyC+MyRAo78QmuYqenmSFon8fZZZzCZzfXXETpTbySMbqeVGv4VN1WRI/V9pqjaZTlkgDzEeXJqqWe6IqMjZ5OGD5BrPFCYzkt20uoeY8P+UbeJpgEAUKdYX2BbTt8r9miwyuSZQVlK0AxeDCmz+PDBjqnASEYk0oTiRmwWOTg1NqNyF7JxIWOvrjA19v7EiECz3xTcm3Lye5lHrJyUixXU9OzP9nqErkVCUuCzD+myPkuXaQNuIX7tWu+1xJzbShokcsywe9CqiCfMVQH1usKIHkHhHLNZZS59ZEJwtAq2ECkwla8TrtPzEY0VuzioRtqztbKbN1AMlhF5LOc3SzVGbVo/BK1u/6drEWUXqQdhFwQ5zquAFSSNEsG',
 }
 
 TARGET_AWS = {
-    'aws_access_key_id': 'TARGET_ACCESS_KEY',
-    'aws_secret_access_key': 'TARGET_SECRET_KEY',
-    'region_name': 'us-east-1'
+    'region_name': 'eu-west-2',
+    'aws_access_key_id': 'ASIARK6QF65DXCPT25NN',
+    'aws_secret_access_key': 'MwF0251daOQllCIRIQRcuxdIdDhpwTomG+sbDzxG',
+    'aws_session_token': 'IQoJb3JpZ2luX2VjEFwaCWV1LXdlc3QtMiJHMEUCIQDtntlHcSxTUhS0KIw9o9Om8+lUTitnuv+GsGKQ+J44YgIgR19jswPPRhLJWwScqK2WLQEtPolmX4cbZRP4v8+SKYYq6gIIdRAAGgwwOTIyNDE1MjQ1NTEiDEpL0HiT+yu6pEiy2CrHAgJNEx5ABqKeL3i1axhB1Jo0i6I8hzkiKSSkXxgugNlM1UkrwC5WKG94KQwrSXLZhK6XN68g1F9mH9hQ5VMVRvtfM1+fgpZCTzRbJMj3WEYdjMzsNMYsjgkJpIuHC7tKRFrvaiN4rUFOJ2PPgpIDYBfqfSqjHkqWyImvXgsjtt2EW3dNusxmL8A9HewUl6rmzwWnfTUZ/fHl9YkAVrPYb5J42cewtzUOGmZb/ZelzCk++Oo11t30ksbOXFFVTrWY3vvZl9THIR4x6DxcAHv+Ki+wT4DhXf9ruJlhLwpyC+MyRAo78QmuYqenmSFon8fZZZzCZzfXXETpTbySMbqeVGv4VN1WRI/V9pqjaZTlkgDzEeXJqqWe6IqMjZ5OGD5BrPFCYzkt20uoeY8P+UbeJpgEAUKdYX2BbTt8r9miwyuSZQVlK0AxeDCmz+PDBjqnASEYk0oTiRmwWOTg1NqNyF7JxIWOvrjA19v7EiECz3xTcm3Lye5lHrJyUixXU9OzP9nqErkVCUuCzD+myPkuXaQNuIX7tWu+1xJzbShokcsywe9CqiCfMVQH1usKIHkHhHLNZZS59ZEJwtAq2ECkwla8TrtPzEY0VuzioRtqztbKbN1AMlhF5LOc3SzVGbVo/BK1u/6drEWUXqQdhFwQ5zquAFSSNEsG',
 }
 
+
 # DynamoDB table names
-SOURCE_TABLE_NAME = 'YourSourceTable'
-TARGET_TABLE_NAME = 'YourTargetTable'
+SOURCE_TABLE_NAME = 'GLOBAL_CONSTANTS_DATA'
+TARGET_TABLE_NAME = 'test_table1'
 
 # Keys used as primary and sort keys
 PK_NAME = 'PK'
