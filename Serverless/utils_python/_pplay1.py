@@ -395,7 +395,7 @@ from numbers import Number # isinstance(x, Number)
 # my_set.issubset()
 # my_set.issuperset()
 # my_set.isdisjoint()
-# my_set.difference()
+# my_set.difference() # set1-set2
 # my_set.difference_update()
 # my_set.intersection()
 # my_set.intersection_update()
@@ -630,7 +630,7 @@ from numbers import Number # isinstance(x, Number)
 
 # return { statusCode: 200, body: "Hello, World!" }
 # print(json.dumps({"statusCode": 200, "body": "Hello, World!"}, sort_keys=True, indent=4, separators=(",", ": "), ensure_ascii=False))
-# print(json.dumps(my_dict, default=str))
+# print(json.dumps(my_dict, default=str)) # JSONEncoder: isinstance(self, Decimal)
 # with open("file.json", "r") as f:
 #     data:dict[str, Any] = json.load(f)
 
