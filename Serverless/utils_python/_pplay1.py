@@ -38,7 +38,7 @@ from uuid import uuid4, UUID # str(uuid4()) uuid.UUID(val)
 from enum import StrEnum, IntFlag, auto
 
 from functools import reduce, partial, cache, lru_cache
-from itertools import chain, cycle, batched, repeat, combinations, permutations, pairwise, count, compress, accumulate, dropwhile, filterfalse
+from itertools import chain, cycle, batched, repeat, islice, combinations, permutations, pairwise, count, compress, accumulate, dropwhile, filterfalse
 
 from decimal import Decimal, getcontext
 from numbers import Number # isinstance(x, Number)
