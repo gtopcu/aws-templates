@@ -103,6 +103,7 @@ from numbers import Number # isinstance(x, Number)
 # id len type isinstance issubclass str repr chr ord dir global nonlocal iter next 
 # is in not and or not any all 
 # if elif try/except/else finally raise assert break continue pass return yield
+# match/case/case _/default
 # abs round sum min max pow avg floor ceil
 # sorted reversed map filter zip enumerate
 # getattr delattr setattr delattr
@@ -502,12 +503,6 @@ from numbers import Number # isinstance(x, Number)
 #     case DynamoDBRecordEventName.INSERT:
 #     case _:
 #     default: None
-
-# try:
-#     print(1/0)
-#     return []
-# except ZeroDivisionError as e:
-#     print(f"Error during operation: {str(e)}")
 
 # import yaml
 # with open(definition_path, "r") as f:
