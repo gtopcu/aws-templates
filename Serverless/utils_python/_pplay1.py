@@ -621,11 +621,19 @@ from numbers import Number # isinstance(x, Number)
 # getcontext().prec = 3
 # my_decimal = Decimal(1)
 # print(my_decimal / Decimal(3))
-# my_dict = json.loads('{"name": "John", "age": 30, "money": 2.75}', parse_float=Decimal)
 
 # return { statusCode: 200, body: "Hello, World!" }
-# print(json.dumps({"statusCode": 200, "body": "Hello, World!"}, sort_keys=True, indent=4, separators=(",", ": "), ensure_ascii=False))
-# print(json.dumps(my_dict, default=str)) # JSONEncoder: isinstance(self, Decimal)
+
+# my_dict = json.loads('{"name": "John", "age": 30, "money": 2.75}', parse_float=Decimal)
+# json.dumps({"statusCode": 200, "body": "Hello, World!"}, sort_keys=True, indent=4, separators=(",", ": "), ensure_ascii=False)
+
+# print(json.dumps(my_dict, default=str)) # JSONEncoder
+# json.dumps(my_dict, default=decimal_serializer)
+# def decimal_serializer(obj):
+#     if isinstance(obj, Decimal):
+#         return str(obj)  
+#     raise TypeError(f"Type {type(obj)} is not JSON serializable")
+
 # with open("file.json", "r") as f:
 #     data:dict[str, Any] = json.load(f)
 
@@ -641,7 +649,7 @@ from numbers import Number # isinstance(x, Number)
 #     else:
 #        break
 
-# import boto3, botoconfig, session
+# import boto3, botoconfig, Session
 # from botocore.exceptions import ClientError, ConditionCheckFailedException
 # client = boto3.client(service_name="dynamodb", region_name="us-east-1")
 # def lambda_handler(event, context):    
