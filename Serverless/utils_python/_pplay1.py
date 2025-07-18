@@ -130,9 +130,8 @@ from numbers import Number # isinstance(x, Number)
 # raise NotImplementedError
 
 # except ZeroDivisionError:
-#   logger.error("Division by zero attempted") # no traceback
-#   logger.error("Something went wrong", exc_info=True) # includes traceback
-#   logger.exception("Division by zero with traceback") # includes traceback
+# logger.error("Error", exc_info=True | exc_info=e)
+# logger.exception("Error with traceback")
 
 # ================================================================================================================================
 
