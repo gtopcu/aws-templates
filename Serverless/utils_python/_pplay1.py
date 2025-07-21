@@ -635,7 +635,9 @@ import json
 #         return str(obj)  
 #     raise TypeError(f"Type {type(obj)} is not JSON serializable")
 
-str = json.dumps("hi")
+my_dict = {'hi': 5}
+print(my_dict)
+str = json.dumps(my_dict)
 print(str)
 
 # with open("file.json", "r") as f:
@@ -643,7 +645,7 @@ print(str)
 
 # -------------------------------------------------------------------------------------------------
 
-# kwargs = { "Limit": 10, "ScanIndexForward": False } # false for ISO8601 gets the latest to oldest
+# kwargs = { "Limit": 10, "ScanIndexForward": False } # gets the latest to oldest. index: A, B(str-ISO8601)
 # while True:
 #     response = table.scan(**kwargs)
 #     count = response["Count"]
