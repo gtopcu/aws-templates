@@ -635,7 +635,8 @@ import json
 #         return str(obj)  
 #     raise TypeError(f"Type {type(obj)} is not JSON serializable")
 
-
+str = json.dumps("hi")
+print(str)
 
 # with open("file.json", "r") as f:
 #     data:dict[str, Any] = json.load(f)
