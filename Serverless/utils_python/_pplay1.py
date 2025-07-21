@@ -609,7 +609,6 @@ from numbers import Number # isinstance(x, Number)
 #     return a + b
 
 # -------------------------------------------------------------------------------------------------
-import json
 
 # from dataclasses import dataclass, Field, asdict, astuple, make_dataclass, is_dataclass, replace
 # from pydantic import BaseModel, ConfigDict, Field, ValidationError
@@ -625,23 +624,48 @@ import json
 
 # return { statusCode: 200, body: "Hello, World!" }
 
+# -------------------------------------------------------------------------------------------------
+
+# with open("file.json", "r") as f:
+#     data:dict[str, Any] = json.load(f)  # json.dump(f)
+
 # my_dict = json.loads('{"name": "John", "age": 30, "money": 2.75}', parse_float=Decimal)
 # json.dumps({"statusCode": 200, "body": "Hello, World!"}, sort_keys=True, indent=4, separators=(",", ": "), ensure_ascii=False)
+# json.dumps(my_dict, default=str)
 
-# print(json.dumps(my_dict, default=str)) # JSONEncoder
+# raises TypeError
+# json.dumps({"key": "value"})    # {"key": "value"}
+# json.dumps([1, 2, 3, "hello"])  # [1, 2, 3, "hello"]
+# json.dumps("string")            # "string"
+# json.dumps(3.14)                # 3.14
+# json.dumps(True)                # true
+# json.dumps(None)                # null
+
 # json.dumps(my_dict, default=decimal_serializer)
 # def decimal_serializer(obj):
 #     if isinstance(obj, Decimal):
 #         return str(obj)  
 #     raise TypeError(f"Type {type(obj)} is not JSON serializable")
 
-my_dict = {'hi': 5}
-print(my_dict)
-str = json.dumps(my_dict)
-print(str)
+# from datetime import datetime
+# data = {"timestamp": datetime.now(), "message": "Hello"}
 
-# with open("file.json", "r") as f:
-#     data:dict[str, Any] = json.load(f)
+# # Using JSONEncoder
+# class DateTimeEncoder(json.JSONEncoder):
+#     def default(self, obj):
+#         if isinstance(obj, datetime):
+#             return obj.isoformat()
+#         return super().default(obj)
+
+# json_string = json.dumps(data, cls=DateTimeEncoder)
+
+# # Alternative: using default parameter
+# def datetime_serializer(obj):
+#     if isinstance(obj, datetime):
+#         return obj.isoformat()
+#     raise TypeError(f"Object {obj} is not JSON serializable")
+
+# json_string = json.dumps(data, default=datetime_serializer)
 
 # -------------------------------------------------------------------------------------------------
 
