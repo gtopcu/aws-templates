@@ -488,11 +488,12 @@ from numbers import Number # isinstance(x, Number)
 # if has_date = "start_date" in kwargs and "end_date" in kwargs
 # return not True
 
+# enum.value
+# MyEnum.__members__
 # class MyStrEnum(StrEnum):
 #     A = "A"
 #     def __str__(self) -> str:
 #         return self.value
-# MyEnum.__members__
 
 # class MyDict(TypedDict, total=False):
 #     name: Required[str] = "default"
@@ -669,19 +670,25 @@ from numbers import Number # isinstance(x, Number)
 
 # -------------------------------------------------------------------------------------------------
 
+# import boto3, botoconfig, Session
+# from botocore.exceptions import ClientError, ConditionCheckFailedException
+# from boto3.dynamodb.conditions import Key, Attr
+# from mypy_boto3_dynamodb.service_resource import Table
+
+# client = boto3.client(service_name="dynamodb", region_name="us-east-1")
+
 # kwargs = { "Limit": 10, "ScanIndexForward": False } # gets the latest to oldest. index: A, B(str-ISO8601)
 # while True:
 #     response = table.scan(**kwargs)
 #     count = response["Count"]
+#     items = response["Items"] | response.get("Items", []) | response.get("Item")  
 #     if "LastEvaluatedKey" in response:
 #       kwargs.update({"ExclusiveStartKey": response["LastEvaluatedKey"]})
 #       kwargs["ExclusiveStartKey"] = response["LastEvaluatedKey"]
+#       items.extend(response.get("Items", []))
 #     else:
 #        break
 
-# import boto3, botoconfig, Session
-# from botocore.exceptions import ClientError, ConditionCheckFailedException
-# client = boto3.client(service_name="dynamodb", region_name="us-east-1")
 # def lambda_handler(event, context):    
 #     try:
 #         item = json.loads(event["body"])
@@ -703,7 +710,7 @@ from numbers import Number # isinstance(x, Number)
 # from pytest import fixture
 # from pytest_mock import mocker
 
-# @fixture(scope="module")
+# @fixture
 # def mock_aws_client(mocker):
 #     mock_client = mocker.patch("boto3.client")
 #     mock_client.return_value = mocker.Mock()
