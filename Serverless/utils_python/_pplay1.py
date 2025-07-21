@@ -1,4 +1,3 @@
-
 # TODO
 # __init__.py
 # Zoom In: Command+Shift 0
@@ -674,18 +673,18 @@ from numbers import Number # isinstance(x, Number)
 # from botocore.exceptions import ClientError, ConditionCheckFailedException
 # from boto3.dynamodb.conditions import Key, Attr
 # from mypy_boto3_dynamodb.service_resource import Table
-
+# client = boto3.resource("dynamodb")
 # client = boto3.client(service_name="dynamodb", region_name="us-east-1")
 
 # kwargs = { "Limit": 10, "ScanIndexForward": False } # gets the latest to oldest. index: A, B(str-ISO8601)
 # while True:
 #     response = table.scan(**kwargs)
 #     count = response["Count"]
-#     items = response["Items"] | response.get("Items", []) | response.get("Item")  
+#     response["Items"] | response.get("Items", []) | response.get("Item")  
+#     items.extend(response.get("Items", []))
 #     if "LastEvaluatedKey" in response:
 #       kwargs.update({"ExclusiveStartKey": response["LastEvaluatedKey"]})
 #       kwargs["ExclusiveStartKey"] = response["LastEvaluatedKey"]
-#       items.extend(response.get("Items", []))
 #     else:
 #        break
 
