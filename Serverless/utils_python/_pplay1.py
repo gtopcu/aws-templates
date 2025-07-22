@@ -3,6 +3,9 @@
 # Zoom In: Command+Shift 0
 # Zoom Out: Command -
 
+# python --version
+# pip -V
+
 # pylint . --rcfile=.pylintrc .
 # disable=all disable=invalid-name disable=missing-class-docstring (remove this line)
 
