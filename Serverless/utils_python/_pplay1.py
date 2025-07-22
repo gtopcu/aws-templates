@@ -615,6 +615,8 @@ from numbers import Number # isinstance(x, Number)
 
 # from dataclasses import dataclass, Field, asdict, astuple, make_dataclass, is_dataclass, replace
 # from pydantic import BaseModel, ConfigDict, Field, ValidationError
+# cf.model_dump_json(by_alias=True, exclude_none=True)
+# cf.model_validate()
 # new_item = item.model_copy()
 # cls.model_fields.get("id").get_default()
 # typename: str = Field("DataSource", alias="__typename")) # must be serialised as __typename for graphql

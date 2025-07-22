@@ -6,26 +6,27 @@ from itertools import islice
 
 # Adds missing items from table1 on source_aws to table2 on target_aws accounts
 
-# AWS credentials for source and target accounts
+{
+    # "region": "eu-west-2",
+    # "access_key": "",
+    # "secret_key": "",
+    # "session_token": "",
+}
 SOURCE_AWS = {
     'region_name': 'eu-west-2',
-    'aws_access_key_id': '',
-    'aws_secret_access_key': '',
-    'aws_session_token': '',
+    'aws_access_key_id': 'ASIARK6QF65DWD4QZ67O',
+    'aws_secret_access_key': 'PcRNjI9QFVL6zvlkzrGX6Ucixact/iCQdUXQ2onT',
+    'aws_session_token': 'IQoJb3JpZ2luX2VjENH//////////wEaCWV1LXdlc3QtMiJGMEQCICR9+KfoAQ2NLBdCNW3sy1jQIZ+eyHuo+8F1AhoE8gQDAiB+1SXgXofNc8d4fRueSVr5R6vtybR7kmivrEfxuHSOXCrzAgjq//////////8BEAAaDDA5MjI0MTUyNDU1MSIMkAQBjjsWP9Dv54N8KscCDDq838jwp5h3JU0FmsqY2gVeU+4USPbO8uSCisv4edr17QnOGwabQ9g+clLTQ/9cCqlaBe0kOHZmR3Zd0ZPV/xtyYZdlGG/u2b5nEg69qdNpNNYelKoVnevxZFCF66D1Q457juZLf/csR0rU+fEpQiji2I/rtVocIqEHHMs0qQsceH4b8vHtDlpRnKw3CMFjr75gz1KRFUuHangSBiYZT6Etw4ukH/Q54VX3Gvdrn5mMLRz3oopuq4ccuY/Ai18X21S/z1xxapuRxuEi5wJjnoV2SuY4D7DcaWT+R5z2Ak3eYGbxTZesyJjv+WDDG70/TAPccC72I6TW5pHAFL0QdOKeo4vkvVZWL/Kz1e8OiLXmKfwwe1d/eRAXo5qDzg5wnSlBJzMFo37Lm1Ewn4bKKDV/fOF9hJXPry6vg/TMvZZuZmTC+uM3MO6a/cMGOqgBwCrF5+0vQku9RPw8G9dCRVsV5RZ6SUGjVXpwPXQC5jInQ6VutDmfroSjFWNRJLzC22dY35HQUzFQdTYtarokeTYcMSRBcf7N7m+IrdJrBnWpwACtr+USjpr/IgLWlDW+855aporzmrhAbtLRALCbDiox2D2ZYpz3JSrIwDf1S8lqXODntCivb9gZVpq13b6yowLFHd9Ky+TtcBxpiFz5MOkEdgM8KyYN',
 }
-
 TARGET_AWS = {
     'region_name': 'eu-west-2',
-    'aws_access_key_id': '',
-    'aws_secret_access_key': '',
-    'aws_session_token': '',
+    'aws_access_key_id': 'ASIAVRUVQHZFDLEJZ6E6',
+    'aws_secret_access_key': 'pWZ+7kwKy3i0qz64JaOYik/PIfX2VVhXyLrIfpiW',
+    'aws_session_token': 'IQoJb3JpZ2luX2VjENH//////////wEaCWV1LXdlc3QtMiJHMEUCIG/mdTGWcQS6FQrhRDUyoqb+y0sWzzEcHgcfpsRNC4nfAiEArb7V46r1+0dGmtjUHLGCPWiVj+uyn7bJ5xblLzTm2mMq8wII6v//////////ARAAGgwzODE0OTE4ODc2OTAiDD5deGenAsqJTh/sJirHAvuEz1ZhZme1IueI+s8plD4K2nQmJte+I6U3CgZcXKWHVYhr7bTwXo54FM9uNOt3N77uCxz2XcbOmb6GbPbaoHGHagF1w9uJesDFuKiw+zTGYq2HHKMqlIZqB7AbipDX5hNT50rSj6bsQdfziU8B5Rzgi+e6ttApty0TqZ515hOdkhlMSmJzJJdff9mlsFym6LukbuczichWpYTrqZNwmxgnTsD7ZAGrIlXjN2XkXXRqtj1XW/yY9fgOJYbfpwQojIZ14SVvMw0W2p0TG/qwJ/n+YM5lJea407dwt+RKmClI2zJoP4wCLyaxXJFgMvDw+rdJhWpSMpdsv9/S2IFZ3pNwkusJpPkua7+jUKD/BsoMD/jsSxY+bFZPikEYE9RklFfgpnbVfGyVAS7Gy4ou3pEmLNm4iyJv2q9prqx4MG7lKEaIlH3jkjCam/3DBjqnAcH6F9PGJWdt/oXgIWh95ecEruC//0nWNC9TKbGxVwzExGLMEG71nInzjqPmI0WWHcIKb5fZUN+B7ZO+vTbP7X6R9ioxYTxM/3QWKEptLO2PJDvPW/UCeDOsvekjOw3IzXehYQg5AxCQ+sCFW4WSCzrSZWFNGkCc6jl2vli4nsqACCjqB30EKdBpDkibnabSYC1woShG4X+v1j8JpEOka493y/TZK9L5',
 }
 
-
-# DynamoDB table names
-# SOURCE_TABLE_NAME = 'COMPANY_DATA'
 SOURCE_TABLE_NAME = 'GLOBAL_CONSTANTS_DATA'
-TARGET_TABLE_NAME = 'test_table1'
+TARGET_TABLE_NAME = 'GLOBAL_CONSTANTS_DATA'
 
 # Keys used as primary and sort keys
 PK_NAME = 'PK'
@@ -108,8 +109,8 @@ def sync():
     source_session = boto3.Session(**SOURCE_AWS)
     target_session = boto3.Session(**TARGET_AWS)
 
-    source_dynamodb = source_session.resource('dynamodb')
-    target_dynamodb = target_session.resource('dynamodb')
+    source_dynamodb = source_session.resource("dynamodb")
+    target_dynamodb = target_session.resource("dynamodb")
 
     print("🔍 Scanning source table...")
     source_keys = get_all_keys(source_dynamodb, SOURCE_TABLE_NAME)
