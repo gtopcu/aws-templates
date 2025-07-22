@@ -632,6 +632,7 @@ from numbers import Number # isinstance(x, Number)
 # -------------------------------------------------------------------------------------------------
 
 # import orjson
+# orjson.loads(body)
 
 # with open("file.json", "r") as f:
 #     data:dict[str, Any] = json.load(f)  # json.dump(f)
