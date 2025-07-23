@@ -491,6 +491,7 @@ from numbers import Number # isinstance(x, Number)
 # if has_date = "start_date" in kwargs and "end_date" in kwargs
 # return not True
 
+# enum.name
 # enum.value
 # MyEnum.__members__
 # class MyStrEnum(StrEnum):
