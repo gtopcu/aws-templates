@@ -473,6 +473,7 @@ from numbers import Number # isinstance(x, Number)
 # SQL = LiteralString('SELECT * FROM students')
 # output: Annotated[list, my_func]
 
+# def generics(cls: type[T], **kwargs) -> T:
 # my_type: type = dict[str, Any]
 # my_type: Type = int
 # my_type: NewType = set[float] 
