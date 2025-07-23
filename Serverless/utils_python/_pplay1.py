@@ -359,8 +359,8 @@ from numbers import Number # isinstance(x, Number)
 
 # print("{}".format(my_string))
 # print("SELECT * FROM {table_name}".format(table_name=my_table))
-# print("PK_%s" % cust_id)
-# print(f"PK: {cust_id}")
+# print("PK_%s" % id)
+# print(f"PK_{id}")
 # "Elapsed Time: {total_time:.2f}s"
 
 # amount: str = 10_000_000
@@ -569,10 +569,7 @@ from numbers import Number # isinstance(x, Number)
 # if my_string is None or my_list is not None or 1 == 1:
 #     pass # break continue
 
-# def nasty(val=[]):
-#     val.append(1)
-
-# def not_nasty(val=None):
+# def not_nasty(val: list[str] | None = None):
 #     val = [] if val is None else val
 
 # float('inf')
