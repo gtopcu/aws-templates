@@ -103,7 +103,7 @@ from numbers import Number # isinstance(x, Number)
 # -------------------------------------------------------------------------------------------------
 
 # id len type isinstance issubclass str repr chr ord dir global nonlocal iter next 
-# is in not and or not any all 
+# is in not and or not any all | is None is not None
 # if elif try/except/else finally raise assert break continue pass return yield
 # match/case/case _/default
 # abs round sum min max pow avg floor ceil
