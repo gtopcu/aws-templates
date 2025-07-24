@@ -630,7 +630,7 @@ from numbers import Number # isinstance(x, Number)
 
 # -------------------------------------------------------------------------------------------------
 
-import orjson
+# import orjson
 # orjson.loads(body)
 
 # with open("file.json", "r") as f:
@@ -648,15 +648,6 @@ import orjson
 # json.dumps(True)                # true
 # json.dumps(None)                # null
 
-# json.dumps(my_dict, default=decimal_serializer)
-# def decimal_serializer(obj):
-#     if isinstance(obj, Decimal):
-#         return str(obj)  
-#     raise TypeError(f"Type {type(obj)} is not JSON serializable")
-
-# from datetime import datetime
-# data = {"timestamp": datetime.now(), "message": "Hello"}
-
 # # Using JSONEncoder
 # class DateTimeEncoder(json.JSONEncoder):
 #     def default(self, obj):
@@ -667,12 +658,18 @@ import orjson
 # json_string = json.dumps(data, cls=DateTimeEncoder)
 
 # # Alternative: using default parameter
+# json_string = json.dumps(data, default=datetime_serializer)
 # def datetime_serializer(obj):
 #     if isinstance(obj, datetime):
 #         return obj.isoformat()
 #     raise TypeError(f"Object {obj} is not JSON serializable")
 
-# json_string = json.dumps(data, default=datetime_serializer)
+# For Decimals:
+# json.dumps(my_dict, default=decimal_serializer)
+# def decimal_serializer(obj):
+#     if isinstance(obj, Decimal):
+#         return str(obj)  
+#     raise TypeError(f"Type {type(obj)} is not JSON serializable")
 
 # -------------------------------------------------------------------------------------------------
 
