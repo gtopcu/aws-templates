@@ -39,7 +39,7 @@ from abc import ABC, abstractmethod
 from uuid import uuid4, UUID # str(uuid4()) uuid.UUID(val)
 from enum import StrEnum, IntFlag, auto
 
-from functools import reduce, partial, cache, lru_cache
+from functools import reduce, partial, cache, lru_cache, cached_property # cachetools(TTL)
 from itertools import chain, cycle, batched, repeat, islice, combinations, permutations, pairwise, count, compress, accumulate, dropwhile, filterfalse
 
 from decimal import Decimal, getcontext
@@ -494,7 +494,8 @@ from numbers import Number # isinstance(x, Number)
 
 # enum.name
 # enum.value
-# MyEnum.__members__
+# MyEnum.__members__ 
+# MyEnum[enum_str]
 # class MyStrEnum(StrEnum):
 #     A = "A"
 #     def __str__(self) -> str:
@@ -542,7 +543,8 @@ from numbers import Number # isinstance(x, Number)
 # print(next(generator)) # StopIteration
 
 # from contextlib import contextmanager, asynccontextmanager, AbstractContextManager
-# @contextmanager  
+# @contextmanager -> enter() exit()
+#  
 # def some_generator(my_list:list):    
 #     try:  
 #         yield my_list.pop()
