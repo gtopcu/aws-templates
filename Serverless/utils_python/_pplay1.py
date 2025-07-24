@@ -118,6 +118,7 @@ from numbers import Number # isinstance(x, Number)
 # partial = functools.partial(my_func, 1, 2)
 # partial(3) # calls my_func(1, 2, 3)
 # @functools.wraps -> preserves __name__, __doc__ etc
+# @functools.cache | lru_cache | cached_attribute(access via obj.argument)
 
 # fib = [0, 1]
 # while fib[-1] + fib[-2] < 100:
