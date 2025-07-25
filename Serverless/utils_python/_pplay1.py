@@ -820,6 +820,7 @@ from numbers import Number # isinstance(x, Number)
     #         raise Exception("Error during async processing:" , result)
     #     print(result)
 
+
 # Futures
 # https://www.youtube.com/watch?v=Qb9s3UiMSTA&t=3s
 # async def set_future_result(future, value):
