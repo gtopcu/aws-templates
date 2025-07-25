@@ -349,7 +349,6 @@ from numbers import Number # isinstance(x, Number)
 # timeit.Timer("x = x**x").repeat(repeat=3, number=1000)
 # timeit.Timer("x = x**x").autorange()
 
-
 # -------------------------------------------------------------------------------------------------
 
 # print(str.__name__)
