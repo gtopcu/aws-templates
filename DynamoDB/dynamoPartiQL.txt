@@ -1,4 +1,22 @@
 
+------------------------------------------------------------------------------------------------------------------------
+
+SELECT * FROM "CUSTOMER_DATA_SRC_DATA"
+WHERE "status" = 'READY_TO_PROCESS'
+  AND "creation_datetime" > '2025-07-24T15:00:00Z'
+
+UPDATE "CUSTOMER_DATA_SRC_DATA"
+SET "status" = 'FORCE_REPROCESS'
+WHERE "PK" = '7756a33b-97fc-425b-980a-e6cc1e2e93b2'
+  AND "SK" = 'DataSource:1424aaef-9963-4bc1-bc58-a7bc670f42e8'
+
+UPDATE "CUSTOMER_DATA_SRC_DATA"
+SET "status" = 'FORCE_REPROCESS'
+WHERE "status" = 'READY_TO_PROCESS'
+  AND "creation_datetime" > '2025-07-24T15:00:00Z'
+  
+------------------------------------------------------------------------------------------------------------------------
+
 SELECT * 
 FROM "GLOBAL_CONSTANTS_DATA" 
 WHERE "PK" = 'ConversionFactor' 
