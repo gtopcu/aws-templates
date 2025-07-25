@@ -599,6 +599,7 @@ from numbers import Number # isinstance(x, Number)
     # for line in f:
     #     print(line.strip())
 
+# def my_func() -> Callable[[ConversionFactor], bool]: ...
 # def decorator(func: Callable[..., str]) -> None: ...
 # def decorator(func) -> Callable[[int, int], int]: 
 #     def wrapper(*args, **kwargs):
