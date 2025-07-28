@@ -566,8 +566,7 @@ from numbers import Number # isinstance(x, Number)
 #     def some_function(self, x: int) -> int: ...
 
 # class GenProto[T](Protocol):  
-#     def meth(self) -> T:  
-#         ...
+#     def meth(self) -> T:  ...
 
 # -------------------------------------------------------------------------------------------------
 
