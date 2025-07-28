@@ -236,6 +236,7 @@ from numbers import Number # isinstance(x, Number)
 # os.chmod("test.txt", 0o777)
 # os.chown(("test.txt", 1000, 1000)
 # os.system("clear")
+# os._exit(1)
 
 # shutil.copytree("lambda", "build/lambda_package")
 # shutil.make_archive("build/lambda", "zip", "build/lambda_package") # zip/tar
