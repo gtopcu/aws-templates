@@ -568,6 +568,7 @@ from numbers import Number # isinstance(x, Number)
 # class GenProto[T](Protocol):  
 #     def meth(self) -> T:  
 #         ...
+
 # -------------------------------------------------------------------------------------------------
 
 # if my_string is None or my_list is not None or 1 == 1:
