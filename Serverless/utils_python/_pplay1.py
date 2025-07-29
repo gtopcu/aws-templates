@@ -576,7 +576,7 @@ from numbers import Number # isinstance(x, Number)
 # def not_nasty(val: list[str] | None = None):
 #     val = [] if val is None else val
 
-# float('inf')
+# float('inf') #inf
 
 # import random
 # import string
