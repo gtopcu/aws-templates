@@ -360,6 +360,7 @@ from numbers import Number # isinstance(x, Number)
 # u"unicode"
 
 # print("{}".format(my_string))
+# ("{0} {1}"").format(id, name)
 # print("SELECT * FROM {table_name}".format(table_name=my_table))
 # print("PK_%s" % id)
 # print(f"PK_{id}")
@@ -613,7 +614,6 @@ from numbers import Number # isinstance(x, Number)
 # def add_numbers(a: int, b: int) -> int: 
 #     print(f"Adding {a} and {b}")
 #     return a + b
-
 
 # -------------------------------------------------------------------------------------------------
 
