@@ -499,7 +499,7 @@ from numbers import Number # isinstance(x, Number)
 # MyEnum.__members__ 
 # MyEnum[enum_str]
 # class MyStrEnum(StrEnum):
-#     A = "A"
+#     ASC = "ASCENDING"
 #     def __str__(self) -> str:
 #         return self.value
 
