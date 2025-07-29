@@ -378,7 +378,7 @@ from numbers import Number # isinstance(x, Number)
 # " ".removesuffix("-")
 # "str".isdigit()
 # "str".isalnum()
-# "mr. gokhan topcu".title()
+# "mr. s gokhan topcu".title()
 # any(char in string.digits for char in "hello")
 
 # -------------------------------------------------------------------------------------------------
