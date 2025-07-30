@@ -12,6 +12,7 @@ Boolean
 Data: [ItemData!]!
 
 type, input, enum, interface, union
+__typename: Appsync requires explicit __typename when using interaface or union
 
 union Task = UploadTask | VerificationTask
 type MyTask extends MyInterface
