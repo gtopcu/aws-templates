@@ -104,6 +104,7 @@ def download(path: str):
 
     print("🔍 Done!")
 
+
 def sync():
     # Create separate sessions for source and target
     source_session = boto3.Session(**SOURCE_AWS)
