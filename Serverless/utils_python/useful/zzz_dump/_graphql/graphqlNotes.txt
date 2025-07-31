@@ -1,10 +1,11 @@
 
-scalar AWSDateTime
+scalar AWSDateTime  -> ISO8601 + "Z"
 scalar AWSDate
 scalar AWSTime
-scalar AWSJSON
+scalar AWSJSON      -> Automatic serialization to str, do not use with json.dumps()
 scalar AWSUUID
 
+ID
 String
 Int!
 Float
@@ -12,7 +13,11 @@ Boolean
 Data: [ItemData!]!
 
 type, input, enum, interface, union
-__typename: Appsync requires explicit __typename when using interaface or union - not needed if returning a simple type or single structure/type
+
+__typename: Appsync requires explicit __typename when using interaface or union - usually not needed for:
+- Simple object types without unions or interfaces
+- Mutations where you know the exact return type
+- Queries returning scalar values or well-defined object types
 
 union Task = UploadTask | VerificationTask
 type MyTask extends MyInterface

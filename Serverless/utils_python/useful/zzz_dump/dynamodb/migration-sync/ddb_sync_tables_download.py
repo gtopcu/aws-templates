@@ -36,7 +36,6 @@ SK_NAME = 'SK'
 BATCH_GET_SIZE = 100
 BATCH_WRITE_SIZE = 25
 
-
 def chunked(iterable, size):
     """Yield successive chunks from iterable."""
     it = iter(iterable)
