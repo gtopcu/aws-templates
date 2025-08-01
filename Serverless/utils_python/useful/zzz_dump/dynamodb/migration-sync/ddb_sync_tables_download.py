@@ -136,7 +136,6 @@ def sync():
 
     print("✅ Sync complete!")
 
-
 def main():
     # download("D:\\output.json)
     sync()         
