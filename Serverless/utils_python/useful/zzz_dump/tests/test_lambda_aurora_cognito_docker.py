@@ -7,26 +7,9 @@ import boto3
 import moto
 from mypy_boto3_cognito_idp import CognitoIdentityProviderClient
 
-from lambdas.resolvers.processed_customer_data_service.lambda_module import lambda_handler
-from secr.repository.aurora.tests_data.repo_fixtures import AuroraDBRepoFixture
-from secr.repository.dynamodb.table_mocks import mock_data_src_repo
-from secr.repository.aurora.docker_postgres import DockerAuroraMock
-from secr.repository.aurora.processed_customer_data.processed_customer_data_repository import (
-    get_processed_data_item_repository,
-)
-from secr.repository.aurora.tests_data.processed_data_objects import (
-    get_fuel_item,
-)
-from secr.domain.model.processed_customer_data_item import ProcessedCustomerDataItem
-from secr.domain.model.enums import (
-    Category,
-    FuelType,
-    SourceType,
-    DataItemStatus,
-)
 from decimal import Decimal
 from datetime import date
-from secr.domain.model.standard_unit import StandardUnit
+
 
 FILE_PATH = os.path.dirname(os.path.realpath(__file__))
 
