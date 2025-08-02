@@ -49,9 +49,7 @@ def cognito_context():
             "UserPool"
         ]["Id"]
         cognito_client.create_group(UserPoolId=user_pool_id, GroupName="admin")
-
         os.environ["USER_POOL_ID"] = user_pool_id
-
         yield user_pool_id
 
 
