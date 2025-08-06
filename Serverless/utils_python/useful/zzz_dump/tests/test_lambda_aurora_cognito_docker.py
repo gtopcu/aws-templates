@@ -100,8 +100,6 @@ class TestprocessedDataFilter:
         mock_data_src_repo()  # Mock data source repository for DynamoDB interactions
         company_id = "24039d42-f9e4-4b16-a089-42fe4d88565d"
 
-
-
         data_item = ProcessedCustomerDataItem(
             company_id=company_id,
             source_id="5fd5303c-cc43-493f-abed-beb2016f54eb",
